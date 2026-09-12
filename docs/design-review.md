@@ -41,3 +41,21 @@ deploy the container using the team's configured deployment access.
 - Settings are submitted as a form so one click starts one requested run.
 - Advice validation is in Learning, with pending/unavailable states retained.
 - Full evidence and limitations remain available in expandable sections.
+
+
+## Seven-slide judge presentation
+
+Joel's commits `f51135c` and `377c86c` are integrated into `konsta-demo-hackathon`.
+`make present` serves the extended judge presentation at http://localhost:2734/;
+Joel's four-slide version remains at http://localhost:2732/.
+
+The extended deck uses the shared `product.css` identity and `ui.brand()` wordmark,
+with composition in `silta/static/demo-slides-head.html`. It uses a large interactive
+CAD hero, a drawing-to-CAD comparison, full-width collision and repair viewports,
+large measured memory/eval comparisons and a prominent QR. All seven slides have
+a consistent header, evidence footer and page number. The local CAM measurement
+panel was preserved in the redesigned workbench's inspection accordion.
+
+Run `.venv/bin/marimo check notebooks/demo_slides.py notebooks/workbench.py` after
+editing. Restart presenter servers when changing imported viewer Python/JavaScript;
+a notebook reload alone can retain the earlier imported module.

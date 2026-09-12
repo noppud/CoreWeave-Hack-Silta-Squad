@@ -75,3 +75,7 @@ Makefile
 *.log
 tmp/
 temp/
+
+# Browser rehearsal artifacts
+.playwright-cli/
+output/

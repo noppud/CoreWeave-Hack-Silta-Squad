@@ -10,80 +10,75 @@ td:last-child{min-width:300px}pre{background:#e5edf3;padding:16px;overflow:auto}
 code{font-size:.9em}blockquote{border-left:4px solid #075e9b;padding-left:16px}
 </style><nav><a href="slides.html">Open slides</a>
 <a href="http://localhost:2732/" target="silta-demo">Open interactive demo</a></nav>
-<main><h1>Silta CNC: three-minute judge demo</h1>
+<main><h1>SILTA CAD: three-minute judge demo</h1>
 <h2>Start and preload</h2>
 <p>From the repository root, run:</p>
 <pre><code class="language-sh">make present
 </code></pre>
 <p>Open these before the timer starts:</p>
 <ul>
-<li><strong>Slides:</strong> http://localhost:8010/slides.html — five slides, arrow-key navigation and Fullscreen. Reload any previously opened deck tab.</li>
+<li><strong>Main presentation:</strong> http://localhost:2734/ — seven native marimo slides with interactive CAD, collision playback, memory and evals. Wait for the CAD slides to load, then return to the title.</li>
+<li><strong>Backup HTML deck:</strong> http://localhost:8010/slides.html — five static slides.</li>
 <li><strong>Pitch guide:</strong> http://localhost:8010/guide.html — this script rendered as a browser page, rebuilt by <code>make present</code>.</li>
-<li><strong>Presenter notebook:</strong> http://localhost:2732 — wait for CAD and both runs to finish, then leave <strong>1 · The part</strong> selected.</li>
+<li><strong>Joel’s demo notebook:</strong> http://localhost:2732 — his four native slides: part, failure, repair and next-run evidence.</li>
 <li><strong>Eval evidence:</strong> http://localhost:8010/evals.html — measured policy comparison, every fixture outcome, raw JSON and source hashes.</li>
 <li><strong>Interactive eval notebook:</strong> http://localhost:2733 — preloads the policy comparison; keep for Q&amp;A.</li>
 <li><strong>Optional W&amp;B evidence tab:</strong> https://wandb.ai/silta/coreweave-hack-silta-squad/runs/c3cxveft — use Charts for recorded metrics; confirm it opens with the presenter's account before using it on stage.</li>
 </ul>
-<p>The launcher returns when all three servers respond and leaves them running. Repeating <code>make present</code> safely reuses them. The notebooks need the project's installed <code>.venv</code>, but their fixture workflows require no inference key or network. The slides embed their drawing and QR code and work offline. The QR opens the public product, which needs internet.</p>
+<p>The launcher returns when all four servers respond and leaves them running. Repeating <code>make present</code> safely reuses them. The notebooks need the project's installed <code>.venv</code>, but their fixture workflows require no inference key or network. The slideshow uses local drawing and viewer assets and a generated QR code; its fixture runs work offline. The backup HTML deck embeds its drawing and QR code. The QR opens the public product, which needs internet.</p>
 <p>The presenter notebook deliberately fixes the candidate proposals for reproducibility. CAD, checks, compilation, simulation and memory storage run for real. It creates fresh isolated memory for each presentation session, so another judge's warm run cannot erase your failure story. It constructs a new controller and storage adapter for the second run to prove disk recall.</p>
-<h2>Run of show</h2>
+<h2>Run of show: one tab, seven slides</h2>
+<p>Use the bottom-right arrows to advance, or the keyboard arrows when the CAD canvas is not focused. The top-right fullscreen button enlarges the presentation. Stay in the marimo tab for the entire timed pitch.</p>
 <table>
 <thead>
 <tr>
 <th>Time</th>
-<th>Screen and action</th>
+<th>Slide and action</th>
 <th>Say</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>0:00–0:15</td>
-<td>Slide 1</td>
-<td>“Silta turns a part drawing and the shop's available tools into a machining plan. The target stays fixed while the system repairs the process.”</td>
+<td>0:00–0:20</td>
+<td><strong>1 · Same part. Better plan.</strong></td>
+<td>“Silta turns a part drawing and the shop's available tools into a checked machining plan. This repeatable demo uses scripted proposals with real CAD, checks, simulation and memory. The workbench also supports live inference.”</td>
 </tr>
 <tr>
-<td>0:15–0:30</td>
-<td>Slide 2</td>
-<td>“Checks and simulation give the planner concrete failure evidence. Memory retains the attempt and a passing recipe. Every reused recipe must be verified again.”</td>
+<td>0:20–0:40</td>
+<td><strong>2 · Fix the target. Change the process.</strong>, drag the CAD once</td>
+<td>“The part stays fixed. The planner repairs how we machine it, using the available tools and fixtures.”</td>
 </tr>
 <tr>
-<td>0:30–0:45</td>
-<td>Notebook, <strong>1 · The part</strong>. Drag once.</td>
-<td>“For this repeatable demo, candidate plans are scripted. The CAD, checks, simulation and memory run here. Our full workbench also supports live inference.”</td>
+<td>0:40–1:15</td>
+<td><strong>3 · Reach is fixed. Clearance isn’t.</strong>, press <strong>Play</strong></td>
+<td>“The first tool was too short. The longer tool reaches, but its traverse hits the clamp. Playback stops at the collision, and that measurement becomes repair feedback.”</td>
 </tr>
 <tr>
-<td>0:45–1:15</td>
-<td><strong>2 · The collision</strong>, press <strong>Play</strong></td>
-<td>“The first tool was too short. The longer tool reaches, but its traverse hits the clamp. The simulator records where that happened.”</td>
+<td>1:15–1:40</td>
+<td><strong>4 · A safer traverse. The same part.</strong></td>
+<td>“Raising clearance to fifteen millimeters fixes the traverse. The revised plan passes fresh checks and simulation without changing the part.”</td>
 </tr>
 <tr>
-<td>1:15–1:30</td>
-<td><strong>3 · The repair</strong></td>
-<td>“Raising clearance fixes the process. The repaired plan passes the same checks and a fresh simulation.”</td>
+<td>1:40–2:10</td>
+<td><strong>5 · The next run starts with evidence.</strong>, point to the table</td>
+<td>“A new controller recalls the passing recipe from disk. Three attempts become one, but verification still runs. This is recipe reuse, not model training.”</td>
 </tr>
 <tr>
-<td>1:30–1:45</td>
-<td><strong>4 · Memory</strong>, point to comparison</td>
-<td>“A new controller recalls the passing recipe from disk: three attempts become one, with fresh verification.”</td>
+<td>2:10–2:45</td>
+<td><strong>6 · Catch the collision earlier.</strong></td>
+<td>“We also evaluate our checks on twelve fixed plans. Both policies match every expected outcome, including correct rejections. The revised clamp check catches the collision earlier: four development simulations become three. Regression results stay unchanged. These are validator evals, not a model-quality benchmark.”</td>
 </tr>
 <tr>
-<td>1:45–2:20</td>
-<td>Slide 3: eval table</td>
-<td>“We also test the checks on twelve existing fixtures: eight development and four regression cases. Both policies match every expected outcome, including correct rejections. The revised clamp check catches the collision before simulation: four development simulations become three. Regression results stay unchanged. These are validator evals with fixed plans, not a model-quality benchmark.”</td>
-</tr>
-<tr>
-<td>2:20–2:40</td>
-<td>Slide 4: memory</td>
-<td>“Memory improves this repeated job by reusing evidence. That is separate from the policy improvement. We are reusing a verified recipe, not training model weights.”</td>
-</tr>
-<tr>
-<td>2:40–3:00</td>
-<td>Slide 5: QR</td>
-<td>“Marimo lets you inspect the part and checks. W&amp;B records live-run metrics. Scan this to try the product. We also have the case-by-case eval report ready for questions.”</td>
+<td>2:45–3:00</td>
+<td><strong>7 · Don’t just watch. Inspect it.</strong>, leave QR visible</td>
+<td>“Marimo makes the running notebook the presentation. You can inspect the part, checks and memory. W&amp;B records experiments and evaluations. Scan this to try the product.”</td>
 </tr>
 </tbody>
 </table>
-<p>The schedule includes time for clicks and collision playback. At <strong>2:40</strong>, move to slide 5 even if a detail remains open. Keep the W&amp;B and interactive eval notebooks for Q&amp;A so network latency does not consume the pitch.</p>
+<p>At <strong>2:45</strong>, move to the QR slide even if a detail remains open. Keep the case-by-case report, W&amp;B and interactive eval notebook for Q&amp;A. The QR opens the public product, not the local presentation.</p>
+<h2>Editing and sharing the slideshow</h2>
+<p>Edit <code>notebooks/demo_slides.py</code>. Its native marimo layout is saved in <code>notebooks/layouts/demo_slides.slides.json</code>, with presentation styling in <code>silta/static/demo-slides-head.html</code>. Keep these files together in the repository. Open a fresh browser session after changing the notebook to load the updated code. <code>make present</code> reuses an already running server.</p>
+<p>The CAD viewer uses the existing anywidget implementation, with slide-specific controls beside the model. The opening slide now uses a large interactive CAD model; the drawing is shown beside CAD on slide 2. Joel’s shared <code>silta/static/product.css</code> provides the off-white, black and red identity. The target starts in an isometric view; collision playback starts at zero; the repaired plan starts at its completed position. Mouse dragging remains interactive. Memory values come from the notebook's freshly executed fixture runs; eval values come from <code>demo/evals.json</code>.</p>
 <h2>Eval evidence and reproduction</h2>
 <p>The current presentation snapshot replays the existing corpus under <code>policy-v0</code> and <code>policy-v1</code>: development matches <strong>8/8 → 8/8</strong>, simulations <strong>4 → 3</strong>; regression matches <strong>4/4 → 4/4</strong>, simulations <strong>2 → 2</strong>. Zero false accepts and false rejects were observed under either policy. Twelve synthetic fixtures do not establish general reliability. The four regression cases remain in the <code>fixtures/holdout</code> directory, but retained lineage says an earlier fix used <code>holdout_03_valid_complex</code>. Treat them as regression coverage, not a blind holdout.</p>
 <p>To refresh the measured report and embed it in the deck:</p>
@@ -91,7 +86,7 @@ code{font-size:.9em}blockquote{border-left:4px solid #075e9b;padding-left:16px}
 .venv/bin/python scripts/build_demo_slides.py
 make present
 </code></pre>
-<p><code>demo/evals.json</code> retains every outcome, the measurement timestamp, and hashes of the fixture and Python source files. The deck reads this file when built; it never invents scores or reruns inference on stage.</p>
+<p><code>demo/evals.json</code> retains every outcome, the measurement timestamp, and hashes of the fixture and Python source files. The native slideshow reads this file when its notebook session starts; the backup deck reads it when built. Neither reruns inference for these scores.</p>
 <h2>What to leave out of the timed path</h2>
 <ul>
 <li>Do not start an unconstrained model run or provision a sandbox during the three minutes. They are available from the full workbench but have variable latency.</li>
@@ -102,21 +97,24 @@ make present
 </ul>
 <h2>Recovery lines</h2>
 <ul>
-<li><strong>Animation or WebGL fails:</strong> open <strong>Inspect the measured checks</strong> and continue from the recorded collision values. All results come from the same executed fixture.</li>
-<li><strong>Notebook says “kernel not found” or “Reconnect to app”:</strong> reload the page or open http://localhost:2732/ in a new tab. Wait for the CAD to appear and leave <strong>1 · The part</strong> selected. An old tab can retain a disconnected session even while the server is healthy.</li>
-<li><strong>Notebook was not preloaded:</strong> leave slide 2 up while it prepares. If it takes more than ten seconds, continue with slides 3 and 4's measured comparisons and offer the live product.</li>
+<li><strong>Animation or WebGL fails:</strong> continue to the memory and eval tables. Use the backup notebook at http://localhost:2732/ or the case-by-case report at http://localhost:8010/evals.html for further evidence.</li>
+<li><strong>Notebook says “kernel not found” or “Reconnect to app”:</strong> reload the page or open http://localhost:2734/ in a new tab. Wait for the CAD to appear and return to the title. An old tab can retain a disconnected session even while the server is healthy.</li>
+<li><strong>Notebook was not preloaded:</strong> use the backup HTML deck at http://localhost:8010/slides.html. It includes static eval and memory comparisons while Python prepares.</li>
 <li><strong>W&amp;B tab asks for login:</strong> skip it immediately. Do not log in on stage.</li>
 <li><strong>Wi-Fi fails:</strong> the local slides and presenter notebook still work. The public QR becomes useful when connectivity returns.</li>
 <li><strong>A real live run fails:</strong> say “The system did not find a passing plan within its budget.” Keep that evidence visible. The reproducible presenter notebook remains a separate, explicitly labeled demonstration.</li>
 </ul>
 <h2>Files</h2>
 <ul>
-<li><code>demo/slides.html</code>: editable, self-contained browser deck.</li>
-<li><code>notebooks/demo.py</code>: focused interactive demonstration.</li>
+<li><code>notebooks/demo_slides.py</code>: main seven-slide interactive presentation.</li>
+<li><code>notebooks/layouts/demo_slides.slides.json</code>: native marimo slides layout.</li>
+<li><code>silta/static/demo-slides-head.html</code>: presentation styling.</li>
+<li><code>demo/slides.html</code>: self-contained backup browser deck.</li>
+<li><code>notebooks/demo.py</code>: Joel’s four-slide native marimo demonstration.</li>
 <li><code>silta/demo.py</code>: preparation of the actual cold and warm fixture runs.</li>
 <li><code>scripts/start_presenter.sh</code> and <code>scripts/start_presenter.py</code>: start or reuse all three local presentation servers.</li>
 <li><code>scripts/build_demo_evals.py</code>: refresh the offline eval report and raw evidence.</li>
 <li><code>scripts/build_demo_slides.py</code>: rebuilds the deck from the repository drawing and QR URL.</li>
 <li><code>scripts/demo_memory.py</code>: terminal-only reproduction of the three-attempt versus one-attempt result.</li>
 </ul>
-<p>Browser rehearsal verified all four notebook steps: collision playback stopped at <code>s0005</code>, the repair opened at playhead 1.0, and the memory comparison displayed Cold <code>3 / 2 / 2</code> versus Warm <code>1 / 0 / 1</code> for attempts / planner calls / fresh simulations. Both browser slides were visually checked. The opening slide and notebook step 1 were left selected.</p></main></html>
+<p>The fixture workflow has been verified: collision playback stopped at <code>s0005</code>, the repair opened at playhead 1.0, and the memory comparison displayed Cold <code>3 / 2 / 2</code> versus Warm <code>1 / 0 / 1</code> for attempts / planner calls / fresh simulations. The native seven-slide presentation was also visually checked at presentation viewport sizes, including CAD interaction, collision playback, completed repair, memory comparison, evals and QR.</p></main></html>

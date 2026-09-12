@@ -47,6 +47,7 @@ COPY --from=builder --chown=silta:silta /app/.venv /app/.venv
 # Copy application code
 COPY --chown=silta:silta silta/ ./silta/
 COPY --chown=silta:silta notebooks/ ./notebooks/
+COPY --chown=silta:silta demo/ ./demo/
 # The frozen evaluation corpus and the promotion records are read at runtime by
 # notebooks/evaluations.py, so they are part of the application, not documentation.
 COPY --chown=silta:silta fixtures/ ./fixtures/
@@ -85,4 +86,4 @@ LABEL org.opencontainers.image.source="https://github.com/finata/silta-squad" \
 # --host 0.0.0.0 accepts external connections (Cloud Run requires this)
 # --port $PORT uses Cloud Run's assigned port
 # --headless disables browser launch and editor UI
-CMD ["sh", "-c", "exec marimo run notebooks/workbench.py --host 0.0.0.0 --port $PORT --headless"]
+CMD ["sh", "-c", "exec uvicorn silta.web:app --host 0.0.0.0 --port $PORT --workers 1"]

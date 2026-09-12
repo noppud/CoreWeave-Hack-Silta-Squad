@@ -36,6 +36,7 @@ from silta.domain import (
     stable_hash,
     utc_now,
 )
+from silta.measurements import measurement_for
 from silta.memory import LearningMemory
 from silta.policy import Policy, get_policy
 from silta.simulation import simulate
@@ -405,6 +406,9 @@ class JobController:
                             )
                             if trajectory
                             else None,
+                            "measurements": measurement_for(
+                                attempt, trajectory, request.shop
+                            ).model_dump(mode="json"),
                         },
                         attempt_id,
                     )
@@ -578,17 +582,29 @@ class JobController:
                                     attempt_id,
                                 )
 
-                                # Generate new plan (TODO: incorporate instruction)
+                                # Repair a rejected optimization, otherwise improve the incumbent.
+                                latest = outcome.attempts[-1]
+                                base_attempt = (
+                                    latest
+                                    if latest.disposition is not Disposition.PASSED
+                                    else next(
+                                        a
+                                        for a in outcome.attempts
+                                        if a.attempt_id == incumbent.attempt_id
+                                    )
+                                )
                                 try:
                                     remaining = request.budget.max_model_calls - calls_used
                                     with self._telemetry.span("optimize_plan", attempt=index):
                                         result = await self._propose(
                                             request,
                                             policy,
-                                            previous_plan,
-                                            failures,
+                                            base_attempt.plan,
+                                            base_attempt.blocking_failures,
                                             index,
                                             remaining,
+                                            memory_recall,
+                                            planning_instruction=decision.planning_instruction,
                                         )
                                     plan, source, usage, diff, fallback_reason = result
                                     if fallback_reason:
@@ -723,9 +739,7 @@ class JobController:
                                     attempt_id=attempt_id,
                                     job_id=job_id,
                                     index=index,
-                                    parent_attempt_id=outcome.attempts[-1].attempt_id
-                                    if outcome.attempts
-                                    else None,
+                                    parent_attempt_id=base_attempt.attempt_id,
                                     policy_version=policy.version,
                                     origin=request.origin,  # type: ignore[arg-type]
                                     plan=plan,
@@ -757,6 +771,9 @@ class JobController:
                                         "simulation": simulation_opt.status.value
                                         if simulation_opt
                                         else None,
+                                        "measurements": measurement_for(
+                                            attempt_opt, trajectory_opt, request.shop
+                                        ).model_dump(mode="json"),
                                     },
                                     attempt_id,
                                 )
@@ -851,7 +868,16 @@ class JobController:
             )
 
     async def _propose(
-        self, request, policy: Policy, previous, failures, index, remaining, memory_recall=None
+        self,
+        request,
+        policy: Policy,
+        previous,
+        failures,
+        index,
+        remaining,
+        memory_recall=None,
+        *,
+        planning_instruction=None,
     ):
         from silta.planner import PlanRequest, propose_plan
 
@@ -867,6 +893,14 @@ class JobController:
             memory_observations=memory_recall.observations if memory_recall else (),
             call_timeout_s=request.budget.call_timeout_s,
             max_output_tokens=request.budget.max_output_tokens,
+            max_model_calls=max(0, remaining),
+            planning_instruction=planning_instruction,
+            measurements=tuple(
+                measurement_for(
+                    a, self.outcomes[request.job_id].trajectories.get(a.attempt_id), request.shop
+                )
+                for a in self.outcomes[request.job_id].attempts[-5:]
+            ),
         )
         provider = self._provider if remaining > 0 else None
         planner = self._planner or propose_plan
@@ -970,6 +1004,18 @@ def _simulation_checks(simulation: SimulationResult) -> list[CheckResult]:
                 )
             )
     if not results:
+        if not simulation.passed:
+            return [
+                CheckResult(
+                    check_id="simulation_incomplete",
+                    stage=CheckStage.SIMULATION,
+                    status=CheckStatus.FAIL,
+                    severity=Severity.BLOCKING,
+                    message=f"Simulation did not verify this plan: {simulation.status.value}.",
+                    repair_hint="Inspect the simulator limitation; do not treat missing "
+                    "measurements as a pass or change the target to satisfy it.",
+                )
+            ]
         results.append(
             CheckResult(
                 check_id="simulation_pass",

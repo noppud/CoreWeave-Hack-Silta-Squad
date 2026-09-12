@@ -323,6 +323,34 @@ def _(
         )
         if selected.plan:
             _details["Plan JSON"] = mo.json(selected.plan.model_dump(mode="json"))
+            from silta.measurements import measurement_for as _measurement_for
+
+            _measurement = _measurement_for(
+                selected, outcome.trajectories.get(selected.attempt_id), DEMO_SHOP
+            )
+            _details["CAM measurements for the repair agent"] = mo.vstack(
+                [
+                    mo.Html(
+                        ui.section(
+                            "CAM measurements",
+                            (
+                                "Estimated machining",
+                                f"{_measurement.estimated_machining_seconds:.1f} s"
+                                if _measurement.estimated_machining_seconds is not None
+                                else "Not compiled",
+                            ),
+                            ("Simulation", _measurement.simulation_status or "Not run"),
+                            (
+                                "Material removal",
+                                "Measured"
+                                if _measurement.material_removal_measured
+                                else "Not measured",
+                            ),
+                        )
+                    ),
+                    mo.json(_measurement.model_dump(mode="json")),
+                ]
+            )
     _details["Part and tools"] = mo.Html(ui.spec_panel(spec, DEMO_SHOP))
     _downloads = []
     if selected:

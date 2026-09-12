@@ -154,3 +154,12 @@ Tests use a fake provider and require no credentials or network. GitHub Actions 
 Use short branches and small commits. Integrate a working path early, then improve it. Keep credentials in a local `.env` file; commit only placeholder configuration. Record the distinction between hackathon work and anything that already existed.
 
 Current official event pages confirm **September 12–13, 2026** and Sunday **1 PM** submissions. Plan for **September 13 at 1 PM Pacific**, targeting 12:15 PM. The live handbook still has stale June date headings; [the rules ledger](docs/hackathon.md) records the discrepancy and remaining authenticated submission gates.
+
+
+### Judge presentation
+
+[Interactive slideshow](https://silta-cdswwreljq-uc.a.run.app/slides/) ·
+[Three-minute pitch guide](https://silta-cdswwreljq-uc.a.run.app/presentation/guide.html) ·
+[Eval evidence](https://silta-cdswwreljq-uc.a.run.app/presentation/evals.html)
+
+For local rehearsal, run `make present` and open http://localhost:2734/.

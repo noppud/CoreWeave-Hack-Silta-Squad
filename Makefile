@@ -43,6 +43,6 @@ eval-offline:
 notebook:
 	uv run --with marimo marimo edit
 
-# Five browser slides, pitch guide, presenter notebook and eval notebook.
+# Seven interactive marimo slides, pitch guide, backup deck and detail notebooks.
 present:
 	bash scripts/start_presenter.sh

@@ -17,6 +17,21 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SERVICES = (
     (
+        "Slideshow",
+        "http://127.0.0.1:2734/",
+        "Silta CNC · Interactive slides",
+        [
+            str(ROOT / ".venv/bin/marimo"),
+            "run",
+            str(ROOT / "notebooks/demo_slides.py"),
+            "--host",
+            "127.0.0.1",
+            "--port",
+            "2734",
+            "--headless",
+        ],
+    ),
+    (
         "Slides",
         "http://127.0.0.1:8010/slides.html",
         "Silta CNC · Three-minute demo",
@@ -150,7 +165,8 @@ def launch(services=SERVICES):
                     process.kill()
                     process.wait()
         raise
-    print("\nReady. Preload the demo and eval notebooks before presenting:", flush=True)
+    print("\nReady. Open the interactive slideshow and wait for CAD before presenting:", flush=True)
+    print("Interactive slideshow: http://localhost:2734")
     print("Slides:   http://localhost:8010/slides.html")
     print("Notebook: http://localhost:2732")
     print("Pitch guide: http://localhost:8010/guide.html")

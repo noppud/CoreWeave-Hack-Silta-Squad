@@ -39,3 +39,20 @@ The implementation is live only when a fresh browser session can:
 - Follow working sponsor evidence links or view scrubbed embedded evidence where sponsor access is restricted.
 
 Record results against the deployed revision, not only localhost. A successful container build, HTTP 200, static landing page, or replay-only site is insufficient. If Cloud Run cannot pass the CAD/WebSocket spike within its timebox, deploy the same container to a suitable GCP VM or another container host; retain the live-URL requirement.
+
+
+## Public presentation routes
+
+The container now starts `uvicorn silta.web:app` with one worker. The existing
+workbench remains at `/`; the seven-slide judge presentation is at `/slides/`,
+Joel's four-slide notebook is at `/demo/`, and the generated pitch/eval reports
+are served from an explicit allowlist under `/presentation/`. Interactive batch
+evaluation is not mounted publicly. `/health` reports the deployed source commit.
+All presentation links use hosted routes in this configuration.
+
+- [Live slideshow](https://silta-cdswwreljq-uc.a.run.app/slides/)
+- [Live pitch guide](https://silta-cdswwreljq-uc.a.run.app/presentation/guide.html)
+- [Live eval evidence](https://silta-cdswwreljq-uc.a.run.app/presentation/evals.html)
+
+Deploy an image update to the existing Cloud Run service while retaining its
+runtime identity, secrets, inference model, bucket, and resource settings.

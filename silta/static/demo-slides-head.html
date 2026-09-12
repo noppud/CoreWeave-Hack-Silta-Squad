@@ -1,0 +1,48 @@
+<style>
+/* Presentation composition layered over Joel's shared product.css identity. */
+html, body, #root, #App { background: #f7f7f4 !important; }
+.reveal-viewport { background: #f7f7f4 !important; color: #191919; border: 0 !important; border-radius: 0 !important; }
+.reveal .slides { text-align: left; color: #191919; font-family: 'Helvetica Neue', Helvetica, sans-serif; }
+.reveal .deck-header { height: 58px; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #d8d8d2; }
+.reveal .deck-header .sx-mast { padding:0; }
+.reveal .deck-header .sx-word { font-size:25px; }
+.reveal .deck-edition, .reveal .deck-eyebrow, .reveal .deck-caption, .reveal .deck-tag, .reveal .deck-memory-path { font: 12px/1.5 'SFMono-Regular', Consolas, monospace; letter-spacing:.07em; }
+.reveal .deck-edition { color:#62625d; }
+.reveal .deck-eyebrow { color:#b52e36; margin-bottom:14px; }
+.reveal .deck-title h2 { font-size:48px; line-height:1.02; font-weight:600; letter-spacing:-.045em; margin:0 0 8px; color:#191919; }
+.reveal .deck-title p { font-size:19px; line-height:1.4; color:#62625d; margin:0; }
+.reveal .deck-hero-copy h2 { font-size:79px; line-height:.99; letter-spacing:-.065em; font-weight:600; margin:0 0 26px; color:#191919; }
+.reveal .deck-hero-copy p { font-size:21px; line-height:1.5; color:#62625d; margin:0 0 22px; }
+.reveal .deck-red-rule { width:46px; height:4px; background:#b52e36; margin:28px 0 18px; }
+.reveal .deck-small { color:#62625d; font-size:15px; }
+.reveal .deck-caption { display:flex; justify-content:space-between; gap:12px; padding:12px 0; color:#62625d; }
+.reveal .deck-footer { display:flex; justify-content:space-between; gap:20px; border-top:1px solid #d8d8d2; padding:15px 0 4px; color:#62625d; font-size:12px; line-height:1.4; }
+.reveal .deck-page { font-family:Consolas,monospace; white-space:nowrap; padding-right:60px; color:#b52e36; }
+.reveal .deck-spec { display:flex; flex-direction:column; border-top:1px solid #d8d8d2; padding-top:12px; }
+.reveal .deck-spec strong { font-size:30px; font-weight:500; letter-spacing:-.035em; }
+.reveal .deck-spec span { font-size:16px; color:#62625d; }
+.reveal .deck-big-number { font-size:128px; line-height:1; font-weight:500; letter-spacing:-.07em; color:#191919; }
+.reveal .deck-big-number span { color:#b52e36; padding:0 10px; font-weight:300; font-size:88px; }
+.reveal .deck-number-label { font-size:23px; letter-spacing:-.025em; margin:14px 0 30px; }
+.reveal .deck-body-note { font-size:17px; line-height:1.5; color:#62625d; margin:18px 0; }
+.reveal .deck-memory-path { color:#62625d; line-height:1.8; }
+.reveal .deck-table { width:100%; border-collapse:collapse; font-size:19px; }
+.reveal .deck-table th { font-size:12px; text-transform:uppercase; letter-spacing:.03em; color:#62625d; font-weight:400; }
+.reveal .deck-table td, .reveal .deck-table th { text-align:left; padding:17px 10px; border-bottom:1px solid #d8d8d2; }
+.reveal .deck-table td:first-child,.reveal .deck-table th:first-child { padding-left:0; }
+.reveal .deck-tag { display:inline-block; padding:6px 9px; border:1px solid #d8d8d2; color:#62625d; }
+.reveal .deck-alert { color:#b52e36; }
+.reveal .deck-pass { color:#216440; }
+.reveal a { color:#191919; text-decoration:none; border-bottom:1px solid #b52e36; }
+.reveal .deck-links { display:flex; flex-wrap:wrap; gap:20px; font-size:14px; margin-top:24px; }
+.reveal .deck-qr { width:330px; height:330px; padding:20px; background:#fff; border:1px solid #d8d8d2; }
+.reveal .deck-qr svg { width:100%; height:100%; }
+.reveal .deck-qr-link { display:inline-block; font-size:19px; letter-spacing:.04em; margin-top:22px; }
+.reveal .controls { color:#b52e36 !important; }
+.reveal .progress { color:#b52e36 !important; height:3px; }
+/* Size the actual marimo vstack, not just its outer style wrapper. */
+.reveal .output div:has(> .deck-header) { height:620px; justify-content:space-between !important; }
+.reveal .mo-slide-content, .reveal .mo-slide-content div { min-width:0; }
+.reveal .deck-table td, .reveal .deck-table th { padding-top:13px; padding-bottom:13px; }
+.reveal .deck-body-note { margin:12px 0; }
+</style>
