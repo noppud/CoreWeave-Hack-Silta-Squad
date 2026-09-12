@@ -1,0 +1,70 @@
+{
+  "fixture_id": "dev_06_excessive_depth",
+  "split": "development",
+  "description": "Feature depth exceeds stock thickness, would break through bottom",
+  "spec": {
+    "schema_version": "1",
+    "spec_id": "dev-06-spec",
+    "revision": 1,
+    "units": "mm",
+    "material": "6061-T6 aluminium",
+    "stock_x_mm": 80.0,
+    "stock_y_mm": 60.0,
+    "stock_z_mm": 15.0,
+    "confirmed_at": "2026-09-12T10:00:00Z",
+    "features": [
+      {
+        "feature_id": "pocket_through",
+        "kind": "pocket_rect_rounded",
+        "x_min_mm": 20.0,
+        "x_max_mm": 60.0,
+        "y_min_mm": 20.0,
+        "y_max_mm": 40.0,
+        "corner_radius_mm": 3.0,
+        "depth_mm": 18.0,
+        "drawing_refs": ["A1"]
+      }
+    ]
+  },
+  "shop": {
+    "schema_version": "1",
+    "shop_id": "shop-3axis-01",
+    "display_name": "Three-axis mill",
+    "envelope_x_mm": 400.0,
+    "envelope_y_mm": 300.0,
+    "envelope_z_mm": 250.0,
+    "max_feed_mm_min": 4000.0,
+    "max_spindle_rpm": 12000.0,
+    "tools": [
+      {
+        "tool_id": "EM6-L",
+        "kind": "end_mill",
+        "diameter_mm": 6.0,
+        "cutting_length_mm": 25.0,
+        "stickout_mm": 40.0,
+        "shank_diameter_mm": 6.0,
+        "holder_diameter_mm": 26.0,
+        "center_cutting": true,
+        "allowed_operations": ["pocket_raster"],
+        "feed_mm_min": 700.0,
+        "spindle_rpm": 6500.0
+      }
+    ],
+    "fixtures": [],
+    "home_x_mm": 40.0,
+    "home_y_mm": -20.0,
+    "home_z_mm": 25.0,
+    "min_fixture_clearance_mm": 3.0,
+    "rapid_feed_mm_min": 8000.0
+  },
+  "seed_plan": null,
+  "expectation": {
+    "disposition": "schema_invalid",
+    "blocking_check_ids": [],
+    "geometry": {
+      "stock_z_mm": 15.0,
+      "feature_depth_mm": 18.0,
+      "notes": "Feature would break through the stock bottom; PartSpec validation should reject this during confirmation"
+    }
+  }
+}

@@ -1,0 +1,162 @@
+<script>
+/* marimo renders its sliders, dropdowns, buttons and accordions inside shadow
+   roots, and re-declares its theme variables on each `:host`. A `:host`
+   declaration beats an inherited one, so page CSS alone leaves those widgets in
+   marimo's stock palette while the rest of the page is a cyanotype print.
+
+   This adopts one stylesheet into every shadow root — the ones that already
+   exist, and every one created afterwards — restating the same variables. The
+   values fall back to literals so a shadow root built before the page theme
+   loads still gets the right colours, and every declaration is !important
+   because adopted sheets are ordered before a shadow root's own <style>.
+   Values must stay in step with the `:root` block in silta/ui.py. */
+(function () {
+  var CSS = [
+    ':host, :root, .dark, [data-theme="dark"] {',
+    '  --background: var(--field, #0E3550) !important;',
+    '  --foreground: var(--white, #EFF6FA) !important;',
+    '  --card: var(--field-3, #134462) !important;',
+    '  --card-foreground: var(--white, #EFF6FA) !important;',
+    '  --popover: var(--field-2, #0A2B41) !important;',
+    '  --popover-foreground: var(--white, #EFF6FA) !important;',
+    '  --primary: var(--line, #6FA3C2) !important;',
+    '  --primary-foreground: var(--field-2, #0A2B41) !important;',
+    '  --secondary: var(--field-3, #134462) !important;',
+    '  --secondary-foreground: var(--white, #EFF6FA) !important;',
+    '  --muted: var(--field-2, #0A2B41) !important;',
+    '  --muted-foreground: var(--dim, #9CC0D6) !important;',
+    '  --accent: #1B5478 !important;',
+    '  --accent-foreground: var(--white, #EFF6FA) !important;',
+    '  --border: var(--line-2, #2F5F80) !important;',
+    '  --input: var(--line-2, #2F5F80) !important;',
+    '  --ring: var(--line, #6FA3C2) !important;',
+    '  --link: #8FC4DE !important;',
+    '  --link-visited: #B9CBD8 !important;',
+    '  --destructive: var(--stamp, #F2634B) !important;',
+    '  --destructive-hover: #D9533D !important;',
+    '  --destructive-border: #94402F !important;',
+    '  --destructive-foreground: var(--field-2, #0A2B41) !important;',
+    '  --error: var(--stamp, #F2634B) !important;',
+    '  --error-foreground: var(--field-2, #0A2B41) !important;',
+    '  --success: var(--approve, #5CC894) !important;',
+    '  --success-hover: #4BB683 !important;',
+    '  --success-border: #3B7C5E !important;',
+    '  --success-foreground: var(--field-2, #0A2B41) !important;',
+    '  --action: var(--hold, #E8B24A) !important;',
+    '  --action-hover: #D9A33C !important;',
+    '  --action-border: #A67C2E !important;',
+    '  --action-foreground: var(--field-2, #0A2B41) !important;',
+    '  --radius: 2px !important;',
+    '  --text-font: "Jost", system-ui, sans-serif !important;',
+    '  --heading-font: "Jost", system-ui, sans-serif !important;',
+    '  --monospace-font: "DM Mono", ui-monospace, monospace !important;',
+    '}',
+
+    /* marimo ships a Tailwind v4 build whose colour utilities are compiled to
+       literal values, so the variables above never reach them. These restate
+       the handful of utilities its widgets actually use. The primary action is
+       struck in paper white, the colour the drawing itself is made of. */
+    '.bg-background { background-color: var(--field, #0E3550) !important; }',
+    '.bg-card { background-color: var(--field-3, #134462) !important; }',
+    '.bg-popover { background-color: var(--field-2, #0A2B41) !important; }',
+    '.bg-muted { background-color: var(--field-2, #0A2B41) !important; }',
+    '.bg-primary { background-color: var(--line, #6FA3C2) !important; }',
+    '.bg-secondary, .hover\\:bg-secondary\\/80:hover {',
+    '  background-color: var(--field-3, #134462) !important;',
+    '}',
+    '.bg-secondary:hover { background-color: var(--line-2, #2F5F80) !important; }',
+    '.bg-success, .hover\\:bg-success-hover:hover {',
+    '  background-color: var(--white, #EFF6FA) !important;',
+    '}',
+    '.bg-success:hover { background-color: var(--line, #6FA3C2) !important; }',
+    '.bg-destructive, .bg-error { background-color: var(--stamp, #F2634B) !important; }',
+    '.bg-action { background-color: var(--hold, #E8B24A) !important; }',
+
+    '.text-foreground, .text-secondary-foreground, .text-card-foreground,',
+    '.text-popover-foreground { color: var(--white, #EFF6FA) !important; }',
+    '.text-muted-foreground { color: var(--dim, #9CC0D6) !important; }',
+    '.text-success-foreground, .text-primary-foreground,',
+    '.text-destructive-foreground, .text-action-foreground {',
+    '  color: var(--field, #0E3550) !important;',
+    '}',
+
+    '.border-input, .border-border, .border-secondary {',
+    '  border-color: var(--line-2, #2F5F80) !important;',
+    '}',
+    '.border-success-border { border-color: var(--white, #EFF6FA) !important; }',
+    '.border-destructive-border { border-color: #94402F !important; }',
+
+    /* Square the widgets off; a drawing has no rounded corners. */
+    '.rounded-md, .rounded-lg, .rounded-sm, .rounded { border-radius: 2px !important; }'
+  ].join('\n');
+
+  var sheet = null;
+  try {
+    sheet = new CSSStyleSheet();
+    sheet.replaceSync(CSS);
+  } catch (e) {
+    return; // Constructable stylesheets unavailable; leave marimo's own theme.
+  }
+
+  /* A component typically assigns its own `adoptedStyleSheets` after its root
+     is created, which drops anything added earlier, and re-renders can remove
+     an appended <style>. So this re-asserts both every time it sweeps. */
+  function adopt(root) {
+    if (!root) return;
+    try {
+      if (root.adoptedStyleSheets.indexOf(sheet) === -1) {
+        root.adoptedStyleSheets = root.adoptedStyleSheets.concat([sheet]);
+      }
+    } catch (e) {
+      /* A frozen list: the <style> below still carries the theme. */
+    }
+    try {
+      var tag = root.__siltaStyle;
+      if (!tag || tag.parentNode !== root) {
+        tag = document.createElement('style');
+        tag.textContent = CSS;
+        root.appendChild(tag);
+        root.__siltaStyle = tag;
+      }
+    } catch (e) {
+      /* Closed root: nothing more to do. */
+    }
+  }
+
+  // Catch every shadow root created from here on, including marimo's widgets.
+  var attach = Element.prototype.attachShadow;
+  Element.prototype.attachShadow = function (init) {
+    var root = attach.call(this, init);
+    adopt(root);
+    return root;
+  };
+
+  // Catch the ones that already exist.
+  function sweep(node) {
+    var all = node.querySelectorAll('*');
+    for (var i = 0; i < all.length; i++) {
+      if (all[i].shadowRoot) {
+        adopt(all[i].shadowRoot);
+        sweep(all[i].shadowRoot);
+      }
+    }
+  }
+  function start() {
+    sweep(document);
+    new MutationObserver(function () { sweep(document); })
+      .observe(document.documentElement, { childList: true, subtree: true });
+    /* Shadow-internal re-renders do not reach the observer above, so give the
+       widgets that mount late a few more passes. */
+    var passes = 0;
+    var timer = setInterval(function () {
+      sweep(document);
+      if (++passes > 20) clearInterval(timer);
+    }, 700);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', start);
+  } else {
+    start();
+  }
+})();
+</script>

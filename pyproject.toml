@@ -4,13 +4,25 @@ version = "0.1.0"
 description = "CoreWeave Hacks team starter with W&B Weave tracing"
 requires-python = ">=3.12,<3.14"
 dependencies = [
+  "anywidget>=0.9,<1",
+  "cadquery>=2.5,<3",
+  "google-cloud-storage>=2.18,<4",
   "httpx>=0.28,<1",
+  "marimo>=0.11,<1",
+  "numpy>=1.26,<3",
+  "pydantic>=2,<3",
   "python-dotenv>=1,<2",
+  "qrcode>=8,<9",
+  "wandb[sandbox]>=0.30,<1",
   "weave>=0.52,<1",
 ]
 
 [dependency-groups]
-dev = ["pytest>=8,<10", "ruff>=0.11,<1"]
+dev = [
+    "pytest>=8,<10",
+    "pytest-asyncio>=0.24,<2",
+    "ruff>=0.11,<1",
+]
 
 [tool.ruff]
 target-version = "py312"
@@ -19,6 +31,20 @@ line-length = 100
 [tool.ruff.lint]
 select = ["E", "F", "I", "B", "UP"]
 
+[tool.ruff.lint.per-file-ignores]
+# A marimo cell renders its final bare expression; that is the notebook format.
+# E501 allowed in HTML template strings where breaking would harm readability.
+"notebooks/*.py" = ["B018", "E501"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["."]
+# The controller and evaluation harness are async; auto mode keeps the tests
+# free of per-test decorators.
+asyncio_mode = "auto"
+
+# The workbench is a cyanotype print: dark ground, white line work. marimo
+# renders its own widgets inside shadow roots that page CSS cannot reach, so its
+# theme has to be set here for sliders, dropdowns and buttons to match the page.
+[tool.marimo.display]
+theme = "dark"

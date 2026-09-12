@@ -1,0 +1,107 @@
+{
+  "fixture_id": "prom_02_distinct_failure",
+  "split": "promotion",
+  "description": "Different fixture collision, same failure family (Gate 3: distinct applicable failure)",
+  "spec": {
+    "schema_version": "1",
+    "spec_id": "prom-02-spec",
+    "revision": 1,
+    "units": "mm",
+    "material": "6061-T6 aluminium",
+    "stock_x_mm": 100.0,
+    "stock_y_mm": 80.0,
+    "stock_z_mm": 25.0,
+    "confirmed_at": "2026-09-12T10:00:00Z",
+    "features": [
+      {
+        "feature_id": "pocket_a",
+        "kind": "pocket_rect_rounded",
+        "x_min_mm": 30.0,
+        "x_max_mm": 70.0,
+        "y_min_mm": 30.0,
+        "y_max_mm": 50.0,
+        "corner_radius_mm": 4.0,
+        "depth_mm": 8.0,
+        "drawing_refs": ["B1"]
+      }
+    ]
+  },
+  "shop": {
+    "schema_version": "1",
+    "shop_id": "shop-3axis-02",
+    "display_name": "Different shop setup",
+    "envelope_x_mm": 400.0,
+    "envelope_y_mm": 300.0,
+    "envelope_z_mm": 250.0,
+    "max_feed_mm_min": 4000.0,
+    "max_spindle_rpm": 12000.0,
+    "tools": [
+      {
+        "tool_id": "EM8-L",
+        "kind": "end_mill",
+        "diameter_mm": 8.0,
+        "cutting_length_mm": 20.0,
+        "stickout_mm": 36.0,
+        "shank_diameter_mm": 8.0,
+        "holder_diameter_mm": 28.0,
+        "center_cutting": true,
+        "allowed_operations": ["pocket_raster"],
+        "feed_mm_min": 800.0,
+        "spindle_rpm": 7000.0
+      }
+    ],
+    "fixtures": [
+      {
+        "fixture_id": "clamp_back",
+        "x_min_mm": 45.0,
+        "x_max_mm": 55.0,
+        "y_min_mm": 70.0,
+        "y_max_mm": 85.0,
+        "z_min_mm": 0.0,
+        "z_max_mm": 10.0
+      }
+    ],
+    "home_x_mm": 50.0,
+    "home_y_mm": -15.0,
+    "home_z_mm": 30.0,
+    "min_fixture_clearance_mm": 3.0,
+    "rapid_feed_mm_min": 8000.0
+  },
+  "seed_plan": {
+    "schema_version": "1",
+    "plan_id": "prom-02-seed",
+    "policy_version": "policy-v0",
+    "spec_design_hash": "",
+    "shop_hash": "",
+    "setups": [
+      {
+        "setup_id": "setup_1",
+        "description": "Top access"
+      }
+    ],
+    "operations": [
+      {
+        "operation_id": "op_pocket_a",
+        "setup_id": "setup_1",
+        "feature_id": "pocket_a",
+        "tool_id": "EM8-L",
+        "kind": "pocket_raster",
+        "stepdown_mm": 2.0,
+        "stepover_mm": 4.0,
+        "entry": "plunge",
+        "feed_mm_min": 800.0,
+        "spindle_rpm": 7000.0
+      }
+    ],
+    "clearance_mm": 4.0
+  },
+  "expectation": {
+    "disposition": "failed_checks",
+    "blocking_check_ids": ["proposed_fixture_clearance"],
+    "geometry": {
+      "clearance_mm": 4.0,
+      "clamp_top_mm": 10.0,
+      "gap_mm": -6.0
+    }
+  }
+}

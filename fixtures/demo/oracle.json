@@ -1,0 +1,160 @@
+{
+  "_comment": "Independent ground truth for fixture-block-01 demonstration.",
+  "_warning": "These are demonstration assumptions, not machining advice.",
+  "_derivation": "Calculated analytically from silta.fixtures.DEMO_SPEC, NOT from silta/cad.py.",
+
+  "spec": {
+    "part_id": "fixture-block-01",
+    "revision": 1,
+    "material": "6061-T6 aluminium",
+    "units": "mm"
+  },
+
+  "stock": {
+    "x_mm": 80.0,
+    "y_mm": 60.0,
+    "z_mm": 20.0,
+    "volume_mm3": 96000.0,
+    "formula": "volume = x * y * z = 80 * 60 * 20"
+  },
+
+  "pocket": {
+    "x_min_mm": 20.0,
+    "x_max_mm": 60.0,
+    "y_min_mm": 20.0,
+    "y_max_mm": 40.0,
+    "width_mm": 40.0,
+    "height_mm": 20.0,
+    "corner_radius_mm": 3.0,
+    "depth_mm": 12.0,
+    "area_mm2": 792.2743338823082,
+    "area_formula": "area = w*h - (4-π)*r² = 40*20 - (4-π)*3² = 800 - 7.726",
+    "volume_mm3": 9507.292006587697,
+    "volume_formula": "volume = area * depth = 792.274 * 12",
+    "drawing_refs": ["A1", "A2", "A3"]
+  },
+
+  "holes": {
+    "count": 4,
+    "locations": [
+      {"x_mm": 10.0, "y_mm": 10.0, "label": "B1"},
+      {"x_mm": 70.0, "y_mm": 10.0, "label": "B2"},
+      {"x_mm": 10.0, "y_mm": 50.0, "label": "B3"},
+      {"x_mm": 70.0, "y_mm": 50.0, "label": "B4"}
+    ],
+    "diameter_mm": 6.0,
+    "radius_mm": 3.0,
+    "cylindrical_depth_mm": 8.0,
+    "drill_point_angle_deg": 118.0,
+    "drill_tip_convention": "CYLINDRICAL_DEPTH",
+    "tip_extra_mm": 1.8025818570826808,
+    "tip_formula": "tip_extra = radius / tan(point_angle/2) = 3 / tan(59°) = 3 / 1.664",
+    "volume_per_hole_mm3": 243.1836048175807,
+    "volume_formula": "volume = π*r²*depth + (π*r²*tip_extra)/3 = 226.195 + 16.989",
+    "total_volume_mm3": 972.7344192703228
+  },
+
+  "part_volume": {
+    "value_mm3": 85519.97357414199,
+    "formula": "part_volume = stock_volume - pocket_volume - 4*hole_volume = 96000 - 9507.292 - 972.734"
+  },
+
+  "coordinate_system": {
+    "origin": "lower-left corner of stock",
+    "x_axis": "along stock width (80mm)",
+    "y_axis": "along stock height (60mm)",
+    "z_axis": "vertical, Z=0 at top face, positive upward"
+  },
+
+  "fixtures": {
+    "clamp_front": {
+      "x_range_mm": [34.0, 46.0],
+      "y_range_mm": [-6.0, 6.0],
+      "z_range_mm": [0.0, 12.0],
+      "z_top_mm": 12.0
+    },
+    "clamp_back": {
+      "x_range_mm": [34.0, 46.0],
+      "y_range_mm": [54.0, 66.0],
+      "z_range_mm": [0.0, 12.0],
+      "z_top_mm": 12.0
+    }
+  },
+
+  "home_position": {
+    "x_mm": 40.0,
+    "y_mm": -20.0,
+    "z_mm": 25.0
+  },
+
+  "shop_constraints": {
+    "min_fixture_clearance_mm": 3.0
+  },
+
+  "tools": {
+    "EM6-S": {
+      "kind": "END_MILL",
+      "diameter_mm": 6.0,
+      "cutting_length_mm": 8.0,
+      "stickout_mm": 22.0,
+      "holder_diameter_mm": 26.0
+    },
+    "EM6-L": {
+      "kind": "END_MILL",
+      "diameter_mm": 6.0,
+      "cutting_length_mm": 18.0,
+      "stickout_mm": 34.0,
+      "holder_diameter_mm": 26.0
+    },
+    "DR6": {
+      "kind": "DRILL",
+      "diameter_mm": 6.0,
+      "cutting_length_mm": 25.0,
+      "point_angle_deg": 118.0
+    }
+  },
+
+  "demonstration_sequence": {
+    "attempt_0": {
+      "description": "Naive seed: short tool, low clearance",
+      "tool": "EM6-S",
+      "clearance_mm": 5.0,
+      "outcome": "REACH_FAILURE",
+      "reason": "Pocket depth (12mm) exceeds tool cutting length (8mm)",
+      "calculation": {
+        "pocket_depth_mm": 12.0,
+        "tool_cutting_length_mm": 8.0,
+        "shortfall_mm": 4.0,
+        "formula": "shortfall = pocket_depth - cutting_length = 12 - 8"
+      }
+    },
+    "attempt_1": {
+      "description": "Reach repaired: long tool, clearance still too low",
+      "tool": "EM6-L",
+      "clearance_mm": 5.0,
+      "outcome": "COLLISION_IN_SIMULATION",
+      "reason": "Traverse height below clamp top during lateral moves",
+      "calculation": {
+        "clamp_top_z_mm": 12.0,
+        "traverse_z_mm": 5.0,
+        "clearance_gap_mm": -7.0,
+        "min_required_clearance_mm": 3.0,
+        "formula": "gap = traverse_z - clamp_top = 5 - 12 = -7 (COLLISION)"
+      }
+    },
+    "attempt_2": {
+      "description": "Valid plan: long tool, adequate clearance",
+      "tool": "EM6-L",
+      "clearance_mm": 15.0,
+      "outcome": "PASS",
+      "reason": "Traverse height clears clamps with minimum safe margin",
+      "calculation": {
+        "clamp_top_z_mm": 12.0,
+        "traverse_z_mm": 15.0,
+        "clearance_gap_mm": 3.0,
+        "min_required_clearance_mm": 3.0,
+        "formula": "gap = traverse_z - clamp_top = 15 - 12 = 3 (PASS)"
+      }
+    }
+  }
+}
