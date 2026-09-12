@@ -55,6 +55,8 @@ Venue: 400 Alabama Street. Registered and approved participants only.
 
 ## Resources
 
+See [Sponsor setup and credits](sponsors.md) for activation steps and the live credit form's additional TypeSafe option.
+
 - [AGI House event page linked by the handbook](https://app.agihouse.org/events/coreweave-hacks-agent-loops-hackathon-with-weights) — confirm it is the current event.
 - [W&B account](https://wandb.ai/authorize) and [Weave quickstart](https://docs.wandb.ai/weave/quickstart).
 - [W&B Inference](https://docs.wandb.ai/inference) and [API reference](https://docs.wandb.ai/inference/api-reference).

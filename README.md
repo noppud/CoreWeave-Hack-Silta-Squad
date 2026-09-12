@@ -9,6 +9,7 @@ Repository: https://github.com/noppud/CoreWeave-Hack-Silta-Squad
 ## Start here
 
 - [Hackathon brief](docs/hackathon.md): handbook requirements, judging, resources, and schedule caveats.
+- [Sponsor setup and credits](docs/sponsors.md): W&B, TypeSafe credit activation, ARIA, MCP, and molab GPU access.
 - [Build plan](docs/plan.md): choose the problem and ship the first complete agent loop.
 - [Submission draft](docs/submission.md): fill this in as we build.
 
@@ -19,10 +20,12 @@ The supplied handbook requires W&B usage and emphasizes agents that improve thro
 Install [uv](https://docs.astral.sh/uv/getting-started/installation/), then:
 
 ```sh
-uv sync --locked
-cp .env.example .env
-# Fill in your W&B API key, team entity, project, and available inference model.
-uv run python -m silta --check
+make setup
+# Add your W&B API key to .env; team is preset to konstav-control-dev.
+make models
+# Set WANDB_INFERENCE_MODEL in .env to one of the returned model IDs.
+make doctor
+make trace
 uv run python -m silta "Draft a practical plan for our hackathon demo"
 ```
 
