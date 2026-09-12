@@ -13,7 +13,7 @@ steps:
         echo "Computing build metadata..."
 
         # Use Cloud Build's COMMIT_SHA if available, else compute from git
-        if [ -n "${COMMIT_SHA:-}" ]; then
+        if [ -n "$COMMIT_SHA" ]; then
           IMAGE_TAG="$COMMIT_SHA"
         else
           IMAGE_TAG=$$(git rev-parse HEAD 2>/dev/null || echo "manual-$$(date +%s)")
