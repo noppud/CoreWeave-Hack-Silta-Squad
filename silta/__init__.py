@@ -1,0 +1,1 @@
+"""Silta Squad hackathon starter."""
