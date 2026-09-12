@@ -29,3 +29,13 @@ wandb/
 .weave/
 artifacts/
 data/local/
+
+# Browser-verification screenshots; evidence lives in docs/evidence/
+.playwright-mcp/
+evaluations-screenshot.png
+*.playwright.png
+viewer-*.png
+workbench-*.png
+
+# Local spool of telemetry that failed to reach W&B
+telemetry_spool/

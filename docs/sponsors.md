@@ -1,6 +1,12 @@
 # Sponsor setup and credits
 
-Checked September 12, 2026 against the saved participant handbook, official sponsor documentation, the live credit form, and the signed-in W&B team page. The handbook's June 6–7 schedule is stale for this workspace; reconfirm event offers onsite.
+Bootstrap account notes below were recorded earlier September 12, 2026. During implementation planning, the live handbook, live credit form and official API/ARIA/marimo docs were checked again. The $100 W&B offer and W&B/TypeSafe form choices remain present. The live handbook still has stale June dates; current event pages establish September 12–13 (see [rules verification](hackathon.md)). Actual balance, live inference and ARIA project access were not re-verified in this planning pass.
+
+## Selected product integrations
+
+The [architecture](architecture.md) assigns CoreWeave/W&B inference to planning when access works, Weave to nested traces/evaluations, W&B Models to experiment metrics, ARIA to analysis of real development runs and a measured policy/check change, and marimo to both the chat workbench and evaluation notebook. These are implementation requirements, not completed integrations. OpenRouter is a capability-tested inference alternative; it does not replace Weave, ARIA or marimo.
+
+Verify early: actual model/schema/vision support, credited balance, team-project ARIA access/Smart features, local notebook+CAD+widget compatibility. No standalone GPU cluster is required. Use molab only if its environment works for this application; availability of a free GPU is not proof of deployment readiness.
 
 ## Tool and credit map
 
@@ -62,10 +68,10 @@ Keep the API key in the client's secret/environment configuration. Once connecte
 
 The handbook also links the optional [Weavify skill](https://github.com/altryne/weavify-skill) and the [MCP/OpenTelemetry example](https://github.com/altryne/mcp-otel). They are resources, not required dependencies. The starter already instruments its loop directly.
 
-## Optional tools after the idea is locked
+## Selected integrations and optional provider
 
 - **ARIA:** use Ask ARIA in the team's actual experiment project to compare baseline and revised results. Confirm Smart features with the organization admin if unavailable. Experiment execution has additional setup; seeing the button is not proof it can run experiments.
-- **marimo:** run `make notebook` for local exploration, or use molab for the hosted/GPU path. The optional editor resolves marimo on demand; if selected for the project, pin it in the project lockfile and commit the notebook as Python source.
+- **marimo:** run `make notebook` for initial exploration. For the selected product, pin marimo in the lockfile and commit workbench/evaluation notebooks as Python. Test molab separately if using hosted compute.
 - **TypeSafe:** obtain base URL, authentication method, model ID, quota/expiry, and one working example from its onsite engineer. Add a provider adapter only after those are known.
 
 ## Ready to build
@@ -75,7 +81,7 @@ The handbook also links the optional [Weavify skill](https://github.com/altryne/
 - [ ] Model catalog fetched; model selected.
 - [ ] Synthetic Weave trace visible in the team project.
 - [ ] One real inference loop succeeded with visible traces.
-- [ ] Optional sponsor access verified for tools chosen by the team.
-- [ ] Idea, measurable evaluation, owners, and track entered in [the build plan](plan.md).
+- [ ] Required ARIA and marimo integration access verified; optional TypeSafe/molab access checked if selected.
+- [ ] Owners and final track confirmed against [the build plan](plan.md).
 
-Then replace the sample loop's task/evaluator and add the product UI. Keep sponsor integrations and submission evidence in place.
+Follow [the implementation tasks](implementation.md) to replace the sample critic with CNC checks and build the workbench. Keep sponsor integration evidence with each completed milestone.
