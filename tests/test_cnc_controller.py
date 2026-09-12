@@ -1,0 +1,377 @@
+"""Controller contract tests use explicit doubles, not live manufacturing evidence."""
+
+import json
+from dataclasses import replace
+from pathlib import Path
+
+import pytest
+
+from silta.cnc.controller import Controller
+from silta.cnc.models import (
+    Artifact,
+    Candidate,
+    CheckResult,
+    JobInputs,
+    PromotionResult,
+    ReusableProposal,
+    SupervisorDecision,
+    Target,
+    VerificationResult,
+)
+
+
+@pytest.fixture
+def inputs(tmp_path):
+    drawing = tmp_path / "drawing.pdf"
+    drawing.write_text("test drawing placeholder")
+    return JobInputs(
+        (Artifact.from_path(drawing),),
+        {"axes": 3},
+        {"T1": {}},
+        {"stock": "test stock"},
+        {"linear_mm": 0.1},
+    )
+
+
+class MainDouble:
+    def __init__(self):
+        self.calls = []
+        self.change_target = False
+
+    def establish_target(self, inputs, workspace):
+        cad = Path(workspace) / "accepted.step"
+        cad.write_text("accepted test geometry")
+        return Target.from_paths({"step": str(cad)}, "test-double acceptance")
+
+    def propose(self, context, previous, feedback, instructions, attempt):
+        self.calls.append((previous, feedback, instructions))
+        nc = Path(context.job_directory) / "workspace" / "candidate.nc"
+        nc.write_text(f"G1 X{attempt}\n")
+        return Candidate.from_paths(
+            f"candidate-{attempt}",
+            "wrong" if self.change_target else context.target.digest,
+            {"nc": str(nc)},
+            {"attempt": attempt},
+        )
+
+
+class ChecksDouble:
+    def __init__(self, failures=()):
+        self.failures = failures
+
+    def run(self, candidate, context):
+        failed = candidate.parameters["attempt"] in self.failures
+        return CheckResult(not failed, ("bad check",) if failed else (), version="checks-v1")
+
+
+class FusionDouble:
+    def __init__(self, outcomes):
+        self.outcomes = iter(outcomes)
+        self.calls = []
+
+    def verify(self, candidate, context):
+        status, seconds = next(self.outcomes)
+        self.calls.append(candidate)
+        evidence = Path(context.job_directory) / "workspace" / "verification.txt"
+        evidence.write_text(f"test evidence {candidate.id} {status}")
+        return VerificationResult(
+            status,
+            status != "unknown",
+            context.input_digest,
+            candidate.digest,
+            "test-verifier-v1",
+            (Artifact.from_path(evidence),),
+            "test internal CAM",
+            ("collision",) if status == "failed" else (),
+            seconds,
+        )
+
+
+class SupervisorDouble:
+    def __init__(self, actions):
+        self.actions = iter(actions)
+        self.calls = []
+
+    def decide(self, context, candidate, verification, history):
+        self.calls.append(candidate)
+        return SupervisorDecision(next(self.actions), "try shorter linking paths")
+
+
+def run(
+    tmp_path,
+    inputs,
+    main=None,
+    checks=None,
+    fusion=None,
+    supervisor=None,
+    learner=None,
+    evaluation=None,
+    max_attempts=5,
+    check_runner_factory=None,
+):
+    return Controller(
+        main or MainDouble(),
+        checks or ChecksDouble(),
+        fusion or FusionDouble([("passed", 100)]),
+        supervisor or SupervisorDouble(["stop"]),
+        learner,
+        evaluation,
+        check_runner_factory,
+    ).run(inputs, tmp_path / "jobs", "job", {"checks": "checks-v1"}, max_attempts)
+
+
+def test_repairs_checks_then_simulation_then_supervisor_and_preserves_best(tmp_path, inputs):
+    main = MainDouble()
+    fusion = FusionDouble([("failed", 0), ("passed", 100), ("passed", 120)])
+    supervisor = SupervisorDouble(["improve", "stop"])
+    result = run(tmp_path, inputs, main, ChecksDouble([1]), fusion, supervisor)
+    assert result.status == "completed"
+    assert result.attempts == 4 and result.simulations == 3
+    assert [x.id for x in supervisor.calls] == ["candidate-3", "candidate-4"]
+    assert main.calls[1][1]["stage"] == "checks"
+    assert main.calls[2][1]["stage"] == "simulation"
+    assert main.calls[3][2] == "try shorter linking paths"
+    assert result.best_candidate.id == "candidate-3"
+    assert result.best_verification.machining_seconds == 100
+    assert Path(result.best_candidate.artifacts["nc"].path).read_text() == "G1 X3\n"
+    result.best_verification.evidence[0].verify()
+    manifest = json.loads(Path(result.manifest_path).read_text())
+    assert manifest["status"] == "completed"
+    assert manifest["input_digest"] == inputs.digest
+
+
+def test_target_change_never_reaches_simulation(tmp_path, inputs):
+    main = MainDouble()
+    main.change_target = True
+    fusion = FusionDouble([])
+    result = run(tmp_path, inputs, main=main, fusion=fusion, max_attempts=2)
+    assert result.status == "incomplete"
+    assert not fusion.calls and result.best_candidate is None
+
+
+@pytest.mark.parametrize("defect", ["unknown", "unfinished", "stale", "no_evidence", "no_metric"])
+def test_unproven_verification_never_reaches_supervisor(tmp_path, inputs, defect):
+    class BadFusion(FusionDouble):
+        def verify(self, candidate, context):
+            result = super().verify(candidate, context)
+            return {
+                "unknown": replace(result, status="unknown"),
+                "unfinished": replace(result, completed=False),
+                "stale": replace(result, candidate_digest="another-candidate"),
+                "no_evidence": replace(result, evidence=()),
+                "no_metric": replace(result, machining_seconds=None),
+            }[defect]
+
+    supervisor = SupervisorDouble([])
+    result = run(tmp_path, inputs, fusion=BadFusion([("passed", 100)]), supervisor=supervisor)
+    assert result.status == "incomplete"
+    assert not supervisor.calls and result.best_candidate is None
+
+
+def test_limit_retains_incumbent_but_never_reports_completed(tmp_path, inputs):
+    result = run(tmp_path, inputs, supervisor=SupervisorDouble(["improve"]), max_attempts=1)
+    assert result.status == "incomplete"
+    assert result.best_candidate is not None
+    assert "limit" in result.reason
+
+
+@pytest.mark.parametrize("promoted", [True, False])
+def test_simulation_learned_checks_apply_to_next_attempt_only(tmp_path, inputs, promoted):
+    observed_checks = []
+    created_runners = []
+
+    class VersionChecks:
+        def __init__(self, ref):
+            self.ref = ref
+
+        def run(self, candidate, context):
+            observed_checks.append((candidate.id, self.ref, dict(context.versions)))
+            failed = self.ref == "checks-v2" and candidate.parameters["attempt"] == 2
+            return CheckResult(
+                not failed, ("learned fixture check",) if failed else (), version=self.ref,
+            )
+
+    def factory(ref):
+        created_runners.append(ref)
+        return VersionChecks(ref)
+
+    class Learner:
+        def propose_checks(self, context, candidate, verification):
+            assert verification.status == "failed"
+            return (
+                ReusableProposal(
+                    "p1",
+                    "checks",
+                    "checks-v1",
+                    "checks-v2",
+                    "check.py",
+                    "prevent fixture collision",
+                ),
+            )
+
+    class Gate:
+        def evaluate(self, proposal, context):
+            context.versions["checks"] = "checks-v2"
+            context.versions["verifier"] = "do-not-adopt-this-unproposed-change"
+            return PromotionResult(
+                proposal.id, promoted, "paired test evaluation", ("weave://test",),
+            )
+
+    fusion = FusionDouble([("failed", 0), ("passed", 100)])
+    main = MainDouble()
+    result = run(
+        tmp_path,
+        inputs,
+        main=main,
+        checks=VersionChecks("checks-v1"),
+        fusion=fusion,
+        learner=Learner(),
+        evaluation=Gate(),
+        check_runner_factory=factory,
+    )
+    assert result.status == "completed"
+    manifest = json.loads(Path(result.manifest_path).read_text())
+    assert manifest["versions"]["checks"] == "checks-v1"
+    expected = "checks-v2" if promoted else "checks-v1"
+    assert manifest["current_versions"] == {"checks": expected}
+    assert created_runners == (["checks-v2"] if promoted else [])
+    assert observed_checks[0][1:] == ("checks-v1", {"checks": "checks-v1"})
+    assert all(row[1:] == (expected, {"checks": expected}) for row in observed_checks[1:])
+    assert result.attempts == (3 if promoted else 2)
+    assert [candidate.id for candidate in fusion.calls] == [
+        "candidate-1", "candidate-3" if promoted else "candidate-2",
+    ]
+    if promoted:
+        assert main.calls[2][1]["stage"] == "checks"
+    candidate_events = [e for e in manifest["events"] if e["event"] == "candidate_created"]
+    assert candidate_events[0]["versions"] == {"checks": "checks-v1"}
+    assert candidate_events[1]["versions"] == {"checks": expected}
+    assert any(e["event"] == "promotion_evaluated" for e in manifest["events"])
+
+
+def test_promoted_main_and_supervisor_prompts_apply_to_subsequent_calls(tmp_path, inputs):
+    pins = {
+        "checks": "checks-v1", "main_prompt": "main-v1",
+        "supervisor_prompt": "supervisor-v1", "verifier": "test-verifier-v1",
+    }
+    main_contexts, supervisor_contexts = [], []
+
+    class Main(MainDouble):
+        def propose(self, context, *args):
+            main_contexts.append(context)
+            return super().propose(context, *args)
+
+    class Supervisor:
+        def decide(self, context, candidate, verification, history):
+            supervisor_contexts.append(context)
+            proposals = tuple(
+                ReusableProposal(kind, kind, old, new, "prompt.md", "shorter paths")
+                for kind, old, new in (
+                    ("main_prompt", "main-v1", "main-v2"),
+                    ("supervisor_prompt", "supervisor-v1", "supervisor-v2"),
+                )
+            ) if len(supervisor_contexts) == 1 else ()
+            return SupervisorDecision(
+                "improve" if proposals else "stop", "try a different toolpath", proposals,
+            )
+
+    class Gate:
+        def evaluate(self, proposal, context):
+            return PromotionResult(proposal.id, True, "paired evaluation passed", ("weave://test",))
+
+    result = Controller(
+        Main(), ChecksDouble(), FusionDouble([("passed", 100), ("passed", 90)]),
+        Supervisor(), evaluation=Gate(),
+    ).run(inputs, tmp_path / "jobs", "job", pins)
+    assert result.status == "completed"
+    expected = {**pins, "main_prompt": "main-v2", "supervisor_prompt": "supervisor-v2"}
+    assert [context.versions for context in main_contexts] == [pins, expected]
+    assert [context.versions for context in supervisor_contexts] == [pins, expected]
+    assert main_contexts[0].target.digest == main_contexts[1].target.digest
+    assert all(context.input_digest == inputs.digest for context in main_contexts)
+    assert pins["main_prompt"] == "main-v1"
+    manifest = json.loads(Path(result.manifest_path).read_text())
+    assert manifest["versions"] == pins
+    assert manifest["current_versions"] == expected
+    decisions = [e for e in manifest["events"] if e["event"] == "supervisor_decision"]
+    assert [e["versions"] for e in decisions] == [pins, expected]
+
+
+@pytest.mark.parametrize("defect", ["missing_evidence", "wrong_base", "verifier_change"])
+def test_invalid_promotion_cannot_change_running_versions(tmp_path, inputs, defect):
+    class Learner:
+        def propose_checks(self, context, candidate, verification):
+            return (ReusableProposal(
+                "proposal", "verifier" if defect == "verifier_change" else "checks",
+                "wrong-base" if defect == "wrong_base" else "checks-v1",
+                "checks-v2", "change.py", "test proposal",
+            ),)
+
+    class Gate:
+        def evaluate(self, proposal, context):
+            return PromotionResult(
+                proposal.id, True, "test gate",
+                () if defect == "missing_evidence" else ("weave://test",),
+            )
+
+    factories = []
+    result = run(
+        tmp_path, inputs, fusion=FusionDouble([("failed", 0)]), learner=Learner(),
+        evaluation=Gate(), check_runner_factory=lambda ref: factories.append(ref),
+    )
+    assert result.status == "incomplete"
+    assert result.attempts == 1
+    assert factories == []
+    manifest = json.loads(Path(result.manifest_path).read_text())
+    assert manifest["current_versions"] == {"checks": "checks-v1"}
+    assert not any(e["event"] == "promoted_change_applied" for e in manifest["events"])
+
+
+def test_adapter_failure_persists_failure_and_best_so_far(tmp_path, inputs):
+    result = run(tmp_path, inputs, supervisor=SupervisorDouble(["improve"]))
+    assert result.status == "incomplete"
+    assert result.best_candidate is not None
+    assert "StopIteration" in result.reason
+    assert json.loads(Path(result.manifest_path).read_text())["status"] == "incomplete"
+
+
+def test_input_mutation_cannot_be_hidden_by_adapter(tmp_path, inputs):
+    class Mutator(MainDouble):
+        def propose(self, context, *args):
+            context.inputs.machine["axes"] = 5
+            return super().propose(context, *args)
+
+    result = run(tmp_path, inputs, main=Mutator())
+    assert result.status == "completed"
+    assert inputs.machine["axes"] == 3
+    manifest = json.loads(Path(result.manifest_path).read_text())
+    assert manifest["inputs"]["machine"]["axes"] == 3
+
+
+def test_duplicate_job_does_not_repeat_external_operations(tmp_path, inputs):
+    run(tmp_path, inputs)
+    main = MainDouble()
+    with pytest.raises(FileExistsError):
+        run(tmp_path, inputs, main=main)
+    assert not main.calls
+
+
+def test_faster_result_with_changed_verification_scope_cannot_replace_incumbent(tmp_path, inputs):
+    class ChangedScope(FusionDouble):
+        def verify(self, candidate, context):
+            result = super().verify(candidate, context)
+            if len(self.calls) > 1:
+                return replace(result, coverage="weaker coverage")
+            return result
+
+    supervisor = SupervisorDouble(["improve"])
+    result = run(
+        tmp_path,
+        inputs,
+        fusion=ChangedScope([("passed", 100), ("passed", 1)]),
+        supervisor=supervisor,
+    )
+    assert result.status == "incomplete"
+    assert result.best_verification.machining_seconds == 100
+    assert len(supervisor.calls) == 1
+    assert "not comparable" in result.reason

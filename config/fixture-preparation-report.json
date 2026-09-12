@@ -1,0 +1,1627 @@
+{
+  "status": "fixture_positioned_contact_review_required",
+  "source": {
+    "path": "/Users/touko/work/helios-one/repos/coreweavehack/research/assets/selected/haas-vise-05-0404.f3d",
+    "sha256": "003fca01f919e859989c74e653045a48dde94aa6175fe56c380e04748330ecd6"
+  },
+  "configuration_sha256": "4806e4e331830f12f7d19789e010abc6bc92b6f7be36568ae9da8116329e1ad8",
+  "fixture": {
+    "path": "/Users/touko/work/helios-one/repos/coreweavehack/.private/fusion-live/fixture-v3/haas-vise-50p8mm-g54.f3d",
+    "sha256": "95089aef15dd1e52bb91f9466723a1c00ed1716b00ed14fdb725a81c98a61936"
+  },
+  "coordinate_frame": "G54 stock top centre; X long edge, Y clamp direction, Z upward",
+  "movable_components": [
+    5,
+    7,
+    8,
+    14,
+    15
+  ],
+  "constraint_changes": [
+    {
+      "kind": "as_built_joint",
+      "name": "Slider 3",
+      "originally_suppressed": false,
+      "now_suppressed": true
+    },
+    {
+      "kind": "rigid_group",
+      "name": "Rigid Group 1",
+      "originally_suppressed": false,
+      "members": [
+        "Component1:1",
+        "Component4:1",
+        "Component2:1",
+        "Component3:1",
+        "Component6:1",
+        "Component9:1",
+        "Component10:1",
+        "Component11:1",
+        "Component12:1",
+        "Component13:1",
+        "Component16:1",
+        "Component17:1"
+      ],
+      "now_suppressed": true
+    },
+    {
+      "kind": "rigid_group",
+      "name": "Rigid Group 2",
+      "originally_suppressed": false,
+      "members": [
+        "Component5:1",
+        "Component7:1",
+        "Component8:1",
+        "Component14:1",
+        "Component15:1"
+      ],
+      "now_suppressed": true
+    }
+  ],
+  "ungrounded_components": [
+    1
+  ],
+  "assembly_mode": "Static fixture copy; source constraints suppressed, geometry unchanged",
+  "grouping_basis": "Actual source RigidGroup2: moving jaw5 and components7,8,14,15; RigidGroup1: fixed base1 and jaw10. Slider3 joins7 to1.",
+  "raw_jaw_shift_mm": -177.80000000000015,
+  "occurrence_transforms_cm": {
+    "1": [
+      0.0,
+      -1.0,
+      0.0,
+      -9.64901791975155,
+      1.0,
+      0.0,
+      0.0,
+      4.665980872039763,
+      0.0,
+      0.0,
+      1.0,
+      -4.260720118891207,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ],
+    "2": [
+      0.0,
+      -1.0,
+      0.0,
+      -9.64901791975155,
+      1.0,
+      0.0,
+      0.0,
+      4.665980872039763,
+      0.0,
+      0.0,
+      1.0,
+      -4.260720118891207,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ],
+    "3": [
+      0.0,
+      -1.0,
+      0.0,
+      -9.64901791975155,
+      1.0,
+      0.0,
+      0.0,
+      4.665980872039763,
+      0.0,
+      0.0,
+      1.0,
+      -4.260720118891207,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ],
+    "4": [
+      0.0,
+      -1.0,
+      0.0,
+      -9.64901791975155,
+      1.0,
+      0.0,
+      0.0,
+      4.665980872039763,
+      0.0,
+      0.0,
+      1.0,
+      -4.260720118891207,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ],
+    "5": [
+      0.0,
+      -1.0,
+      0.0,
+      -9.64901791975155,
+      1.0,
+      0.0,
+      0.0,
+      -13.114019127960251,
+      0.0,
+      0.0,
+      1.0,
+      -4.260720118891207,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ],
+    "6": [
+      0.0,
+      -1.0,
+      0.0,
+      -9.64901791975155,
+      1.0,
+      0.0,
+      0.0,
+      4.665980872039763,
+      0.0,
+      0.0,
+      1.0,
+      -4.260720118891207,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ],
+    "7": [
+      0.0,
+      -1.0,
+      0.0,
+      -9.64901791975155,
+      1.0,
+      0.0,
+      0.0,
+      -13.114019127960251,
+      0.0,
+      0.0,
+      1.0,
+      -4.260720118891207,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ],
+    "8": [
+      0.0,
+      -1.0,
+      0.0,
+      -9.64901791975155,
+      1.0,
+      0.0,
+      0.0,
+      -13.114019127960251,
+      0.0,
+      0.0,
+      1.0,
+      -4.260720118891207,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ],
+    "9": [
+      0.0,
+      -1.0,
+      0.0,
+      -9.64901791975155,
+      1.0,
+      0.0,
+      0.0,
+      4.665980872039763,
+      0.0,
+      0.0,
+      1.0,
+      -4.260720118891207,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ],
+    "10": [
+      0.0,
+      -1.0,
+      0.0,
+      -9.64901791975155,
+      1.0,
+      0.0,
+      0.0,
+      4.665980872039763,
+      0.0,
+      0.0,
+      1.0,
+      -4.260720118891207,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ],
+    "11": [
+      0.0,
+      -1.0,
+      0.0,
+      -9.64901791975155,
+      1.0,
+      0.0,
+      0.0,
+      4.665980872039763,
+      0.0,
+      0.0,
+      1.0,
+      -4.260720118891207,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ],
+    "12": [
+      0.0,
+      -1.0,
+      0.0,
+      -9.64901791975155,
+      1.0,
+      0.0,
+      0.0,
+      4.665980872039763,
+      0.0,
+      0.0,
+      1.0,
+      -4.260720118891207,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ],
+    "13": [
+      0.0,
+      -1.0,
+      0.0,
+      -9.64901791975155,
+      1.0,
+      0.0,
+      0.0,
+      4.665980872039763,
+      0.0,
+      0.0,
+      1.0,
+      -4.260720118891207,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ],
+    "14": [
+      0.0,
+      -1.0,
+      0.0,
+      -9.64901791975155,
+      1.0,
+      0.0,
+      0.0,
+      -13.114019127960251,
+      0.0,
+      0.0,
+      1.0,
+      -4.260720118891207,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ],
+    "15": [
+      0.0,
+      -1.0,
+      0.0,
+      -9.64901791975155,
+      1.0,
+      0.0,
+      0.0,
+      -13.114019127960251,
+      0.0,
+      0.0,
+      1.0,
+      -4.260720118891207,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ],
+    "16": [
+      0.0,
+      -1.0,
+      0.0,
+      -9.64901791975155,
+      1.0,
+      0.0,
+      0.0,
+      4.665980872039763,
+      0.0,
+      0.0,
+      1.0,
+      -4.260720118891207,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ],
+    "17": [
+      0.0,
+      -1.0,
+      0.0,
+      -9.64901791975155,
+      1.0,
+      0.0,
+      0.0,
+      4.665980872039763,
+      0.0,
+      0.0,
+      1.0,
+      -4.260720118891207,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  },
+  "derived_gripping_face_top_raw_mm": 23.17619852434902,
+  "nominal_jaw_opening_mm": 50.8,
+  "derived_vertical_contact_mm": 5.968997335436947,
+  "support_report": {
+    "source_url": "https://www.haastooling.com/p/09-0108",
+    "dimensions_mm": [
+      152.4,
+      12.7,
+      38.1
+    ],
+    "representation": "Conservative solid boxes; vendor drilled holes omitted",
+    "actual_base_top_raw_mm": -20.892798811087925,
+    "derived_clamp_depth_mm": 5.968997335436947,
+    "supports": [
+      {
+        "bounds_mm": [
+          [
+            -76.2,
+            -25.4,
+            -63.5
+          ],
+          [
+            76.2,
+            -12.7,
+            -25.400000000000006
+          ]
+        ],
+        "fixture_overlap": [
+          {
+            "component": 1,
+            "status": "clear",
+            "method": "disjoint bounding boxes",
+            "overlap_mm3": 0
+          },
+          {
+            "component": 2,
+            "status": "clear",
+            "method": "disjoint bounding boxes",
+            "overlap_mm3": 0
+          },
+          {
+            "component": 3,
+            "status": "clear",
+            "method": "disjoint bounding boxes",
+            "overlap_mm3": 0
+          },
+          {
+            "component": 4,
+            "status": "clear",
+            "method": "disjoint bounding boxes",
+            "overlap_mm3": 0
+          },
+          {
+            "component": 5,
+            "status": "clear",
+            "method": "disjoint bounding boxes",
+            "overlap_mm3": 0
+          },
+          {
+            "component": 6,
+            "status": "clear",
+            "method": "disjoint bounding boxes",
+            "overlap_mm3": 0
+          },
+          {
+            "component": 7,
+            "status": "clear",
+            "method": "disjoint bounding boxes",
+            "overlap_mm3": 0
+          },
+          {
+            "component": 8,
+            "status": "clear",
+            "method": "disjoint bounding boxes",
+            "overlap_mm3": 0
+          },
+          {
+            "component": 9,
+            "status": "clear",
+            "method": "disjoint bounding boxes",
+            "overlap_mm3": 0
+          },
+          {
+            "component": 10,
+            "status": "clear",
+            "method": "disjoint bounding boxes",
+            "overlap_mm3": 0
+          },
+          {
+            "component": 11,
+            "status": "clear",
+            "method": "disjoint bounding boxes",
+            "overlap_mm3": 0
+          },
+          {
+            "component": 12,
+            "status": "clear",
+            "method": "disjoint bounding boxes",
+            "overlap_mm3": 0
+          },
+          {
+            "component": 13,
+            "status": "clear",
+            "method": "disjoint bounding boxes",
+            "overlap_mm3": 0
+          },
+          {
+            "component": 14,
+            "status": "clear",
+            "method": "disjoint bounding boxes",
+            "overlap_mm3": 0
+          },
+          {
+            "component": 15,
+            "status": "clear",
+            "method": "disjoint bounding boxes",
+            "overlap_mm3": 0
+          },
+          {
+            "component": 16,
+            "status": "clear",
+            "method": "disjoint bounding boxes",
+            "overlap_mm3": 0
+          },
+          {
+            "component": 17,
+            "status": "clear",
+            "method": "disjoint bounding boxes",
+            "overlap_mm3": 0
+          }
+        ],
+        "slot_envelopes": [
+          {
+            "status": "clear",
+            "method": "disjoint bounding boxes",
+            "overlap_mm3": 0
+          },
+          {
+            "status": "clear",
+            "method": "disjoint bounding boxes",
+            "overlap_mm3": 0
+          }
+        ],
+        "bed_probe_volume_mm3": 193.52864520001037,
+        "bed_material_overlap": {
+          "status": "overlap",
+          "method": "BRep intersection",
+          "overlap_mm3": 118.95203337748656
+        }
+      },
+      {
+        "bounds_mm": [
+          [
+            -76.2,
+            12.7,
+            -63.5
+          ],
+          [
+            76.2,
+            25.4,
+            -25.400000000000006
+          ]
+        ],
+        "fixture_overlap": [
+          {
+            "component": 1,
+            "status": "clear",
+            "method": "disjoint bounding boxes",
+            "overlap_mm3": 0
+          },
+          {
+            "component": 2,
+            "status": "clear",
+            "method": "disjoint bounding boxes",
+            "overlap_mm3": 0
+          },
+          {
+            "component": 3,
+            "status": "clear",
+            "method": "disjoint bounding boxes",
+            "overlap_mm3": 0
+          },
+          {
+            "component": 4,
+            "status": "clear",
+            "method": "disjoint bounding boxes",
+            "overlap_mm3": 0
+          },
+          {
+            "component": 5,
+            "status": "clear",
+            "method": "disjoint bounding boxes",
+            "overlap_mm3": 0
+          },
+          {
+            "component": 6,
+            "status": "clear",
+            "method": "disjoint bounding boxes",
+            "overlap_mm3": 0
+          },
+          {
+            "component": 7,
+            "status": "clear",
+            "method": "disjoint bounding boxes",
+            "overlap_mm3": 0
+          },
+          {
+            "component": 8,
+            "status": "clear",
+            "method": "BRep intersection",
+            "overlap_mm3": 0.0
+          },
+          {
+            "component": 9,
+            "status": "clear",
+            "method": "disjoint bounding boxes",
+            "overlap_mm3": 0
+          },
+          {
+            "component": 10,
+            "status": "clear",
+            "method": "disjoint bounding boxes",
+            "overlap_mm3": 0
+          },
+          {
+            "component": 11,
+            "status": "clear",
+            "method": "disjoint bounding boxes",
+            "overlap_mm3": 0
+          },
+          {
+            "component": 12,
+            "status": "clear",
+            "method": "disjoint bounding boxes",
+            "overlap_mm3": 0
+          },
+          {
+            "component": 13,
+            "status": "clear",
+            "method": "disjoint bounding boxes",
+            "overlap_mm3": 0
+          },
+          {
+            "component": 14,
+            "status": "clear",
+            "method": "disjoint bounding boxes",
+            "overlap_mm3": 0
+          },
+          {
+            "component": 15,
+            "status": "clear",
+            "method": "disjoint bounding boxes",
+            "overlap_mm3": 0
+          },
+          {
+            "component": 16,
+            "status": "clear",
+            "method": "disjoint bounding boxes",
+            "overlap_mm3": 0
+          },
+          {
+            "component": 17,
+            "status": "clear",
+            "method": "disjoint bounding boxes",
+            "overlap_mm3": 0
+          }
+        ],
+        "slot_envelopes": [
+          {
+            "status": "clear",
+            "method": "disjoint bounding boxes",
+            "overlap_mm3": 0
+          },
+          {
+            "status": "clear",
+            "method": "disjoint bounding boxes",
+            "overlap_mm3": 0
+          }
+        ],
+        "bed_probe_volume_mm3": 193.52864520001037,
+        "bed_material_overlap": {
+          "status": "overlap",
+          "method": "BRep intersection",
+          "overlap_mm3": 120.79412937900643
+        }
+      }
+    ],
+    "status": "geometry_inserted_requires_contact_review"
+  },
+  "actual_gripping_faces": {
+    "10": {
+      "face_bounds_mm": [
+        [
+          -75.80630000000001,
+          -25.4,
+          -63.4999999999969
+        ],
+        [
+          75.8063,
+          -25.4,
+          -19.431002664563053
+        ]
+      ],
+      "vertical_stock_overlap_mm": 5.968997335436947,
+      "stock_length_overlap_mm": 151.61260000000001
+    },
+    "5": {
+      "face_bounds_mm": [
+        [
+          -75.80629999999648,
+          25.39999999999999,
+          -63.49999999999997
+        ],
+        [
+          75.80630000000357,
+          25.39999999999999,
+          -19.430999999999976
+        ]
+      ],
+      "vertical_stock_overlap_mm": 5.969000000000024,
+      "stock_length_overlap_mm": 151.61260000000004
+    }
+  },
+  "actual_body_measurements": [
+    {
+      "component": 1,
+      "bounds_mm": [
+        [
+          -93.92128900429982,
+          -107.59399524884131,
+          -136.5250000000001
+        ],
+        [
+          93.92128900430676,
+          322.08930820763726,
+          -63.49999999999997
+        ]
+      ],
+      "stock": {
+        "status": "clear",
+        "method": "disjoint bounding boxes",
+        "overlap_mm3": 0
+      },
+      "slot_envelopes": [
+        {
+          "status": "clear",
+          "method": "disjoint bounding boxes",
+          "overlap_mm3": 0
+        },
+        {
+          "status": "clear",
+          "method": "disjoint bounding boxes",
+          "overlap_mm3": 0
+        }
+      ]
+    },
+    {
+      "component": 2,
+      "bounds_mm": [
+        [
+          39.68750000000352,
+          -58.039000000000065,
+          -49.14900000000003
+        ],
+        [
+          58.73750000000353,
+          -26.28900000000008,
+          -30.09900000000002
+        ]
+      ],
+      "stock": {
+        "status": "clear",
+        "method": "disjoint bounding boxes",
+        "overlap_mm3": 0
+      },
+      "slot_envelopes": [
+        {
+          "status": "clear",
+          "method": "disjoint bounding boxes",
+          "overlap_mm3": 0
+        },
+        {
+          "status": "clear",
+          "method": "disjoint bounding boxes",
+          "overlap_mm3": 0
+        }
+      ]
+    },
+    {
+      "component": 3,
+      "bounds_mm": [
+        [
+          26.628725000003968,
+          -73.25676627960239,
+          -80.13699999999994
+        ],
+        [
+          43.29747500000398,
+          -56.58801627960238,
+          -26.320749999999933
+        ]
+      ],
+      "stock": {
+        "status": "clear",
+        "method": "disjoint bounding boxes",
+        "overlap_mm3": 0
+      },
+      "slot_envelopes": [
+        {
+          "status": "clear",
+          "method": "disjoint bounding boxes",
+          "overlap_mm3": 0
+        },
+        {
+          "status": "clear",
+          "method": "disjoint bounding boxes",
+          "overlap_mm3": 0
+        }
+      ]
+    },
+    {
+      "component": 4,
+      "bounds_mm": [
+        [
+          56.75312500000356,
+          -66.3987662796024,
+          -80.13699999999997
+        ],
+        [
+          73.42187500000357,
+          -49.730016279602395,
+          -26.32074999999995
+        ]
+      ],
+      "stock": {
+        "status": "clear",
+        "method": "disjoint bounding boxes",
+        "overlap_mm3": 0
+      },
+      "slot_envelopes": [
+        {
+          "status": "clear",
+          "method": "disjoint bounding boxes",
+          "overlap_mm3": 0
+        },
+        {
+          "status": "clear",
+          "method": "disjoint bounding boxes",
+          "overlap_mm3": 0
+        }
+      ]
+    },
+    {
+      "component": 5,
+      "bounds_mm": [
+        [
+          -75.80629999999648,
+          25.39999999999999,
+          -63.49999999999997
+        ],
+        [
+          75.80630000000357,
+          43.81499999999999,
+          -19.430999999999976
+        ]
+      ],
+      "stock": {
+        "status": "clear",
+        "method": "disjoint bounding boxes",
+        "overlap_mm3": 0
+      },
+      "slot_envelopes": [
+        {
+          "status": "clear",
+          "method": "disjoint bounding boxes",
+          "overlap_mm3": 0
+        },
+        {
+          "status": "clear",
+          "method": "disjoint bounding boxes",
+          "overlap_mm3": 0
+        }
+      ]
+    },
+    {
+      "component": 6,
+      "bounds_mm": [
+        [
+          -37.90949999999647,
+          312.50255872039764,
+          -117.29719999999999
+        ],
+        [
+          37.90950000000352,
+          320.4400587203976,
+          -74.47836312785711
+        ]
+      ],
+      "stock": {
+        "status": "clear",
+        "method": "disjoint bounding boxes",
+        "overlap_mm3": 0
+      },
+      "slot_envelopes": [
+        {
+          "status": "clear",
+          "method": "disjoint bounding boxes",
+          "overlap_mm3": 0
+        },
+        {
+          "status": "clear",
+          "method": "disjoint bounding boxes",
+          "overlap_mm3": 0
+        }
+      ]
+    },
+    {
+      "component": 7,
+      "bounds_mm": [
+        [
+          -75.8062999999965,
+          43.81499999999999,
+          -73.96493462748639
+        ],
+        [
+          75.80630000000357,
+          145.41500000000008,
+          -25.78099999999999
+        ]
+      ],
+      "stock": {
+        "status": "clear",
+        "method": "disjoint bounding boxes",
+        "overlap_mm3": 0
+      },
+      "slot_envelopes": [
+        {
+          "status": "clear",
+          "method": "disjoint bounding boxes",
+          "overlap_mm3": 0
+        },
+        {
+          "status": "clear",
+          "method": "disjoint bounding boxes",
+          "overlap_mm3": 0
+        }
+      ]
+    },
+    {
+      "component": 8,
+      "bounds_mm": [
+        [
+          -36.51249999999648,
+          -5.344845704559642,
+          -115.29060000000001
+        ],
+        [
+          36.51250000000351,
+          131.6246542954404,
+          -57.88660000000001
+        ]
+      ],
+      "stock": {
+        "status": "clear",
+        "method": "disjoint bounding boxes",
+        "overlap_mm3": 0
+      },
+      "slot_envelopes": [
+        {
+          "status": "clear",
+          "method": "disjoint bounding boxes",
+          "overlap_mm3": 0
+        },
+        {
+          "status": "clear",
+          "method": "disjoint bounding boxes",
+          "overlap_mm3": 0
+        }
+      ]
+    },
+    {
+      "component": 9,
+      "bounds_mm": [
+        [
+          -28.574999999995292,
+          -83.18499999999989,
+          -64.2619999999995
+        ],
+        [
+          28.575000000004707,
+          221.61500000000015,
+          -63.88099999999949
+        ]
+      ],
+      "stock": {
+        "status": "clear",
+        "method": "disjoint bounding boxes",
+        "overlap_mm3": 0
+      },
+      "slot_envelopes": [
+        {
+          "status": "clear",
+          "method": "disjoint bounding boxes",
+          "overlap_mm3": 0
+        },
+        {
+          "status": "clear",
+          "method": "disjoint bounding boxes",
+          "overlap_mm3": 0
+        }
+      ]
+    },
+    {
+      "component": 10,
+      "bounds_mm": [
+        [
+          -75.80630000000012,
+          -43.81499127960233,
+          -63.49999999999696
+        ],
+        [
+          75.8063,
+          -25.4,
+          -19.431002664563035
+        ]
+      ],
+      "stock": {
+        "status": "clear",
+        "method": "disjoint bounding boxes",
+        "overlap_mm3": 0
+      },
+      "slot_envelopes": [
+        {
+          "status": "clear",
+          "method": "disjoint bounding boxes",
+          "overlap_mm3": 0
+        },
+        {
+          "status": "clear",
+          "method": "disjoint bounding boxes",
+          "overlap_mm3": 0
+        }
+      ]
+    },
+    {
+      "component": 11,
+      "bounds_mm": [
+        [
+          -73.42187499999645,
+          -66.3987662796024,
+          -80.13699999999993
+        ],
+        [
+          -56.753124999996444,
+          -49.730016279602395,
+          -26.320749999999915
+        ]
+      ],
+      "stock": {
+        "status": "clear",
+        "method": "disjoint bounding boxes",
+        "overlap_mm3": 0
+      },
+      "slot_envelopes": [
+        {
+          "status": "clear",
+          "method": "disjoint bounding boxes",
+          "overlap_mm3": 0
+        },
+        {
+          "status": "clear",
+          "method": "disjoint bounding boxes",
+          "overlap_mm3": 0
+        }
+      ]
+    },
+    {
+      "component": 12,
+      "bounds_mm": [
+        [
+          -14.22399999999648,
+          -106.46913426061462,
+          -106.29899999999999
+        ],
+        [
+          14.224000000003514,
+          358.6683657393854,
+          -77.85099999999998
+        ]
+      ],
+      "stock": {
+        "status": "clear",
+        "method": "disjoint bounding boxes",
+        "overlap_mm3": 0
+      },
+      "slot_envelopes": [
+        {
+          "status": "clear",
+          "method": "disjoint bounding boxes",
+          "overlap_mm3": 0
+        },
+        {
+          "status": "clear",
+          "method": "disjoint bounding boxes",
+          "overlap_mm3": 0
+        }
+      ]
+    },
+    {
+      "component": 13,
+      "bounds_mm": [
+        [
+          -76.19999999999646,
+          -102.53979127960235,
+          -69.84999999999998
+        ],
+        [
+          76.20000000000351,
+          -43.81499127960237,
+          -25.780999999999974
+        ]
+      ],
+      "stock": {
+        "status": "clear",
+        "method": "disjoint bounding boxes",
+        "overlap_mm3": 0
+      },
+      "slot_envelopes": [
+        {
+          "status": "clear",
+          "method": "disjoint bounding boxes",
+          "overlap_mm3": 0
+        },
+        {
+          "status": "clear",
+          "method": "disjoint bounding boxes",
+          "overlap_mm3": 0
+        }
+      ]
+    },
+    {
+      "component": 14,
+      "bounds_mm": [
+        [
+          39.68750000000354,
+          26.162000000000027,
+          -49.14899999999996
+        ],
+        [
+          58.73750000000355,
+          57.912000000000035,
+          -30.09899999999995
+        ]
+      ],
+      "stock": {
+        "status": "clear",
+        "method": "disjoint bounding boxes",
+        "overlap_mm3": 0
+      },
+      "slot_envelopes": [
+        {
+          "status": "clear",
+          "method": "disjoint bounding boxes",
+          "overlap_mm3": 0
+        },
+        {
+          "status": "clear",
+          "method": "disjoint bounding boxes",
+          "overlap_mm3": 0
+        }
+      ]
+    },
+    {
+      "component": 15,
+      "bounds_mm": [
+        [
+          -58.737499999996494,
+          26.161999999999974,
+          -49.14899999999996
+        ],
+        [
+          -39.68749999999648,
+          57.91199999999996,
+          -30.098999999999947
+        ]
+      ],
+      "stock": {
+        "status": "clear",
+        "method": "disjoint bounding boxes",
+        "overlap_mm3": 0
+      },
+      "slot_envelopes": [
+        {
+          "status": "clear",
+          "method": "disjoint bounding boxes",
+          "overlap_mm3": 0
+        },
+        {
+          "status": "clear",
+          "method": "disjoint bounding boxes",
+          "overlap_mm3": 0
+        }
+      ]
+    },
+    {
+      "component": 16,
+      "bounds_mm": [
+        [
+          -43.29747499999603,
+          -73.25676627960239,
+          -80.13700000000003
+        ],
+        [
+          -26.628724999996017,
+          -56.58801627960238,
+          -26.320750000000057
+        ]
+      ],
+      "stock": {
+        "status": "clear",
+        "method": "disjoint bounding boxes",
+        "overlap_mm3": 0
+      },
+      "slot_envelopes": [
+        {
+          "status": "clear",
+          "method": "disjoint bounding boxes",
+          "overlap_mm3": 0
+        },
+        {
+          "status": "clear",
+          "method": "disjoint bounding boxes",
+          "overlap_mm3": 0
+        }
+      ]
+    },
+    {
+      "component": 17,
+      "bounds_mm": [
+        [
+          -58.737499999996466,
+          -58.03900000000005,
+          -49.149
+        ],
+        [
+          -39.68749999999644,
+          -26.28900000000006,
+          -30.098999999999975
+        ]
+      ],
+      "stock": {
+        "status": "clear",
+        "method": "disjoint bounding boxes",
+        "overlap_mm3": 0
+      },
+      "slot_envelopes": [
+        {
+          "status": "clear",
+          "method": "disjoint bounding boxes",
+          "overlap_mm3": 0
+        },
+        {
+          "status": "clear",
+          "method": "disjoint bounding boxes",
+          "overlap_mm3": 0
+        }
+      ]
+    }
+  ],
+  "potential_support_bed_faces": [
+    {
+      "component": 1,
+      "face_area_mm2": 17904.751617157075,
+      "face_bounds_mm": [
+        [
+          -76.19999999999638,
+          -76.83767881234179,
+          -63.49999999999998
+        ],
+        [
+          -28.638499999996476,
+          322.0893082076373,
+          -63.49999999999998
+        ]
+      ],
+      "required_support_height_mm": 38.09999999999998
+    },
+    {
+      "component": 1,
+      "face_area_mm2": 17904.751617157133,
+      "face_bounds_mm": [
+        [
+          28.63850000000353,
+          -76.83767881234179,
+          -63.5
+        ],
+        [
+          76.20000000000363,
+          322.08930820763726,
+          -63.5
+        ]
+      ],
+      "required_support_height_mm": 38.099999999999994
+    },
+    {
+      "component": 9,
+      "face_area_mm2": 17419.320000000003,
+      "face_bounds_mm": [
+        [
+          -28.574999999995292,
+          -83.18499999999989,
+          -63.88099999999949
+        ],
+        [
+          28.575000000004707,
+          221.61500000000015,
+          -63.88099999999949
+        ]
+      ],
+      "required_support_height_mm": 38.48099999999949
+    },
+    {
+      "component": 9,
+      "face_area_mm2": 17419.320000000003,
+      "face_bounds_mm": [
+        [
+          -28.5749999999953,
+          -83.18499999999989,
+          -64.2619999999995
+        ],
+        [
+          28.575000000004707,
+          221.61500000000015,
+          -64.2619999999995
+        ]
+      ],
+      "required_support_height_mm": 38.86199999999951
+    },
+    {
+      "component": 1,
+      "face_area_mm2": 4003.820294633863,
+      "face_bounds_mm": [
+        [
+          -28.63849999999647,
+          -107.56738562248859,
+          -64.26199999999997
+        ],
+        [
+          28.63850000000353,
+          322.0626985812845,
+          -64.26199999999997
+        ]
+      ],
+      "required_support_height_mm": 38.861999999999966
+    },
+    {
+      "component": 1,
+      "face_area_mm2": 166.09240820711952,
+      "face_bounds_mm": [
+        [
+          -60.718699999996474,
+          -14.058891279602364,
+          -80.54339999999998
+        ],
+        [
+          -40.88129999999648,
+          5.778508720397628,
+          -80.54339999999998
+        ]
+      ],
+      "required_support_height_mm": 55.14339999999998
+    },
+    {
+      "component": 1,
+      "face_area_mm2": 166.09240820711952,
+      "face_bounds_mm": [
+        [
+          40.88130000000355,
+          -14.058891279602364,
+          -80.54339999999999
+        ],
+        [
+          60.71870000000352,
+          5.778508720397628,
+          -80.54339999999999
+        ]
+      ],
+      "required_support_height_mm": 55.1434
+    },
+    {
+      "component": 1,
+      "face_area_mm2": 4146.187513548865,
+      "face_bounds_mm": [
+        [
+          -39.790910132711616,
+          -58.75019127960237,
+          -85.72499999999997
+        ],
+        [
+          -28.495614614710867,
+          321.3131941056832,
+          -85.72499999999997
+        ]
+      ],
+      "required_support_height_mm": 60.32499999999996
+    },
+    {
+      "component": 1,
+      "face_area_mm2": 4146.187513548865,
+      "face_bounds_mm": [
+        [
+          28.49561461471792,
+          -58.75019127960237,
+          -85.72499999999998
+        ],
+        [
+          39.79091013271869,
+          321.3131941056831,
+          -85.72499999999998
+        ]
+      ],
+      "required_support_height_mm": 60.32499999999998
+    },
+    {
+      "component": 1,
+      "face_area_mm2": 8070.795458583057,
+      "face_bounds_mm": [
+        [
+          -76.1999999999964,
+          -106.73849576160158,
+          -87.99829999999997
+        ],
+        [
+          -38.099999999996484,
+          321.2338087203977,
+          -87.99829999999997
+        ]
+      ],
+      "required_support_height_mm": 62.598299999999966
+    },
+    {
+      "component": 1,
+      "face_area_mm2": 8070.795458583099,
+      "face_bounds_mm": [
+        [
+          38.10000000000354,
+          -106.73849576160163,
+          -87.9983
+        ],
+        [
+          76.2000000000036,
+          321.23380872039763,
+          -87.9983
+        ]
+      ],
+      "required_support_height_mm": 62.5983
+    },
+    {
+      "component": 1,
+      "face_area_mm2": 804.7584987546246,
+      "face_bounds_mm": [
+        [
+          -85.86873041486092,
+          -104.29642169446673,
+          -117.38609999999997
+        ],
+        [
+          -61.22517154648258,
+          -0.212581057025929,
+          -117.38609999999997
+        ]
+      ],
+      "required_support_height_mm": 91.9861
+    },
+    {
+      "component": 1,
+      "face_area_mm2": 804.7584987546215,
+      "face_bounds_mm": [
+        [
+          61.22517154648964,
+          -104.29642169446677,
+          -117.38610000000001
+        ],
+        [
+          85.86873041486797,
+          -0.21258105702589347,
+          -117.38610000000001
+        ]
+      ],
+      "required_support_height_mm": 91.98610000000002
+    },
+    {
+      "component": 1,
+      "face_area_mm2": 11372.535098025008,
+      "face_bounds_mm": [
+        [
+          -17.142581285642784,
+          -61.376672565248704,
+          -119.0625
+        ],
+        [
+          17.14258128564982,
+          284.871290006044,
+          -119.0625
+        ]
+      ],
+      "required_support_height_mm": 93.66250000000001
+    },
+    {
+      "component": 1,
+      "face_area_mm2": 37026.011605155596,
+      "face_bounds_mm": [
+        [
+          -92.02769306064647,
+          -105.90650144430683,
+          -121.348564819599
+        ],
+        [
+          91.01228293119311,
+          311.5424985556932,
+          -121.34845470639416
+        ]
+      ],
+      "required_support_height_mm": 95.94845470639416
+    },
+    {
+      "component": 1,
+      "face_area_mm2": 201.23990900682895,
+      "face_bounds_mm": [
+        [
+          -8.003539999996523,
+          -41.34373127960237,
+          -123.82499999999999
+        ],
+        [
+          8.003540000003486,
+          -25.336651279602364,
+          -123.82499999999999
+        ]
+      ],
+      "required_support_height_mm": 98.42499999999998
+    },
+    {
+      "component": 1,
+      "face_area_mm2": 5619.0682222013265,
+      "face_bounds_mm": [
+        [
+          -46.60899999999646,
+          -6.045191279602342,
+          -133.985
+        ],
+        [
+          46.6090000000035,
+          99.3648087203976,
+          -133.985
+        ]
+      ],
+      "required_support_height_mm": 108.585
+    },
+    {
+      "component": 1,
+      "face_area_mm2": 1053.159066025488,
+      "face_bounds_mm": [
+        [
+          -22.22499999999649,
+          24.434808720397623,
+          -136.52499999999998
+        ],
+        [
+          22.22500000000352,
+          68.88480872039764,
+          -136.52499999999998
+        ]
+      ],
+      "required_support_height_mm": 111.12499999999997
+    },
+    {
+      "component": 1,
+      "face_area_mm2": 50046.408652946324,
+      "face_bounds_mm": [
+        [
+          -93.92128900429982,
+          -106.43647650249835,
+          -136.525
+        ],
+        [
+          93.92128900430676,
+          321.9300939432936,
+          -136.525
+        ]
+      ],
+      "required_support_height_mm": 111.125
+    }
+  ],
+  "support_exclusion_xy_mm": [
+    {
+      "x": [
+        -55.6768,
+        -42.72279999999999
+      ],
+      "y": [
+        -8.001,
+        8.001
+      ]
+    },
+    {
+      "x": [
+        42.7482,
+        55.70219999999999
+      ],
+      "y": [
+        -8.001,
+        8.001
+      ]
+    }
+  ],
+  "possible_support_xy_regions_mm": {
+    "x_outside_slots": [
+      [
+        -76.2,
+        -55.6768
+      ],
+      [
+        -42.72279999999999,
+        42.7482
+      ],
+      [
+        55.70219999999999,
+        76.2
+      ]
+    ],
+    "y_outside_slots": [
+      [
+        -25.4,
+        -8.001
+      ],
+      [
+        8.001,
+        25.4
+      ]
+    ]
+  },
+  "remaining": [
+    "Review parallel-to-base contact coverage and fixture overlap before acceptance.",
+    "Parallels use conservative envelopes from vendor dimensions; drilled holes omitted.",
+    "Machine attachment, clamp force and cutting load verification remain unresolved."
+  ],
+  "manufacturing_verified": false,
+  "preview": {
+    "path": "/Users/touko/work/helios-one/repos/coreweavehack/.private/fusion-live/fixture-v3/fixture.png",
+    "sha256": "f830aaa371971ead37687250168f5cb642572f7e1743053ceee93582e4a9c095"
+  }
+}

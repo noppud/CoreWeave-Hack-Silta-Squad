@@ -29,3 +29,6 @@ wandb/
 .weave/
 artifacts/
 data/local/
+.private/
+runs/
+versions/

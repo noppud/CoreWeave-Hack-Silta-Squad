@@ -1,26 +1,18 @@
-.PHONY: setup check doctor models trace demo notebook
+.PHONY: setup check doctor init notebook
 
 setup:
-	python3 scripts/bootstrap.py
 	uv sync --locked
 
 check:
-	uv run ruff check .
-	uv run ruff format --check .
+	uv run ruff check silta tests checks notebooks/cnc_app.py
+	uv run ruff format --check silta/cnc tests/test_cnc*.py tests/test_sandbox.py tests/test_fusion_bridge.py
 	uv run pytest
 
 doctor:
-	uv run python -m silta.setup
+	uv run python -m silta doctor --fusion
 
-models:
-	uv run python -m silta.setup --models
+init:
+	uv run python -m silta init
 
-trace:
-	uv run python -m silta.setup --trace
-
-demo:
-	uv run python -m silta
-
-# Optional sponsor notebook editor; no notebook or GPU allocation is created automatically.
 notebook:
-	uv run --with marimo marimo edit
+	uv run marimo run notebooks/cnc_app.py --host 127.0.0.1 --port 2720

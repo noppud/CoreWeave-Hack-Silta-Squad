@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "version": "1.0",
+  "vendor": "HAAS",
+  "model": "VF-2",
+  "description": "Haas VF-2",
+  "minimumRevision": 45805,
+  "machining": "MILLING",
+  "axis": [
+    {
+      "id": "Y",
+      "rangeMin": -203,
+      "rangeMax": 203,
+      "link": "table"
+    },
+    {
+      "id": "X",
+      "rangeMin": -381,
+      "rangeMax": 381,
+      "link": "table"
+    },
+    {
+      "id": "Z",
+      "rangeMin": -508,
+      "rangeMax": 0,
+      "link": "head"
+    }
+  ],
+  "coolant": "AIR AIR_THROUGH_TOOL FLOOD FLOOD_THROUGH_TOOL THROUGH_TOOL",
+  "posts": [
+    {
+      "id": "default",
+      "file": "haas next generation.cps"
+    }
+  ],
+  "maxNumberOfTools": 100,
+  "toolChangeTime": 15,
+  "thumbnail": "haas vf-2_thumbnail.png",
+  "simulationModel": "haas vf-2.f3d",
+  "sha256": "10d50f8d97b60d3bb037f42e54d925f0b0cb0dae9972bc1cafd2c2f31b9659a6",
+  "filename": "haas vf-2.mch"
+}

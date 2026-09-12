@@ -1,0 +1,126 @@
+{
+  "version": "1",
+  "metadata": {
+    "marimo_version": "0.24.2",
+    "script_metadata_hash": null
+  },
+  "cells": [
+    {
+      "id": "Hbol",
+      "code_hash": "bf02edd48454607b005e1485a78aa414",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "MJUe",
+      "code_hash": "11a37be50232be9f3216820864d3890c",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "vblA",
+      "code_hash": "977e9859f62eef18e3b3575825229266",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<div style='display: flex;flex: 1;flex-direction: column;justify-content: flex-start;align-items: normal;flex-wrap: nowrap;gap: 0.5rem'><span class=\"markdown prose dark:prose-invert contents\"><h1 id=\"silta-from-drawing-to-verified-machining\">Silta \u00b7 From drawing to verified machining</h1></span><span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">Recorded runs, machine evidence and measured improvements.</span></span><div style='display: flex;flex: 1;flex-direction: row;justify-content: space-between;align-items: flex-end;flex-wrap: nowrap;gap: 0.5rem'><marimo-ui-element object-id='vblA-0' random-id='30468ce8-6e28-76d7-b060-e73527b3e5f4'><marimo-text data-initial-value='&quot;/Users/touko/work/helios-one/repos/coreweavehack/runs&quot;' data-label='&quot;&#92;u003cspan class=&#92;&quot;markdown prose dark:prose-invert contents&#92;&quot;&#92;u003e&#92;u003cspan class=&#92;&quot;paragraph&#92;&quot;&#92;u003eJobs directory&#92;u003c/span&#92;u003e&#92;u003c/span&#92;u003e&quot;' data-placeholder='&quot;&quot;' data-kind='&quot;text&quot;' data-full-width='true' data-disabled='false' data-debounce='true'></marimo-text></marimo-ui-element><marimo-ui-element object-id='vblA-1' random-id='2edac158-bf24-2c99-e7a6-109ea37751fd'><marimo-text data-initial-value='&quot;/Users/touko/work/helios-one/repos/coreweavehack/versions&quot;' data-label='&quot;&#92;u003cspan class=&#92;&quot;markdown prose dark:prose-invert contents&#92;&quot;&#92;u003e&#92;u003cspan class=&#92;&quot;paragraph&#92;&quot;&#92;u003eEvaluation versions directory&#92;u003c/span&#92;u003e&#92;u003c/span&#92;u003e&quot;' data-placeholder='&quot;&quot;' data-kind='&quot;text&quot;' data-full-width='true' data-disabled='false' data-debounce='true'></marimo-text></marimo-ui-element><marimo-ui-element object-id='vblA-2' random-id='2e4f5ca2-46c5-cafc-9731-f92ab5b1f565'><marimo-refresh data-initial-value='&quot;&quot;' data-label='null' data-options='[&quot;5s&quot;,&quot;15s&quot;,&quot;1m&quot;]' data-default-interval='&quot;15s&quot;'></marimo-refresh></marimo-ui-element></div></div>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "bkHC",
+      "code_hash": "3c81b8399203c6cca3194ad8b233faf1",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<div style='display: flex;flex: 1;flex-direction: column;justify-content: flex-start;align-items: normal;flex-wrap: nowrap;gap: 0.5rem'><marimo-ui-element object-id='bkHC-0' random-id='127a278a-2bb7-2621-5dc1-71a9a3a8942f'><marimo-dropdown data-initial-value='[]' data-label='&quot;&#92;u003cspan class=&#92;&quot;markdown prose dark:prose-invert contents&#92;&quot;&#92;u003e&#92;u003cspan class=&#92;&quot;paragraph&#92;&quot;&#92;u003eRun&#92;u003c/span&#92;u003e&#92;u003c/span&#92;u003e&quot;' data-options='[]' data-allow-select-none='true' data-searchable='false' data-full-width='true' data-disabled='false'></marimo-dropdown></marimo-ui-element><span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">No recorded runs yet. Start a machining job to populate this view.</span></span></div>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "lEQa",
+      "code_hash": "8762a59b08e3576c1f21dce2a9cbb4c3",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<div style='display: flex;flex: 1;flex-direction: column;justify-content: flex-start;align-items: normal;flex-wrap: nowrap;gap: 0.5rem'><span class=\"markdown prose dark:prose-invert contents\"></span><div style='display: flex;flex: 1;flex-direction: row;justify-content: space-between;align-items: normal;flex-wrap: nowrap;gap: 0.5rem'><marimo-stat data-value='&quot;Not started&quot;' data-label='&quot;Run status&quot;' data-bordered='false' data-target_direction='&quot;increase&quot;'></marimo-stat><marimo-stat data-value='&quot;Waiting for a run&quot;' data-label='&quot;Latest event&quot;' data-bordered='false' data-target_direction='&quot;increase&quot;'></marimo-stat><marimo-stat data-value='&quot;\u2014&quot;' data-label='&quot;Current candidate&quot;' data-bordered='false' data-target_direction='&quot;increase&quot;'></marimo-stat><marimo-stat data-value='&quot;None yet&quot;' data-label='&quot;Best verified candidate&quot;' data-bordered='false' data-target_direction='&quot;increase&quot;'></marimo-stat></div><span class=\"markdown prose dark:prose-invert contents\"></span></div>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "PKri",
+      "code_hash": "b1add3b8c871b57d9fba63b108935c4c",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<div style='display: flex;flex: 1;flex-direction: column;justify-content: flex-start;align-items: normal;flex-wrap: nowrap;gap: 0.5rem'><span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"machining-estimates\">Machining estimates</h2></span><span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">Only completed verification passes are plotted. Missing costs stay missing. Estimates use the recorded machine and costing assumptions.</span></span><div style='display: flex;flex: 1;flex-direction: row;justify-content: space-between;align-items: normal;flex-wrap: nowrap;gap: 0.5rem'><div style='display: flex;flex: 1;flex-direction: column;justify-content: flex-start;align-items: normal;flex-wrap: nowrap;gap: 0.5rem'><span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\"><strong>Machining time \u00b7 seconds</strong></span></span><p style=\"color:#64748b\">No verified machining seconds yet.</p></div><div style='display: flex;flex: 1;flex-direction: column;justify-content: flex-start;align-items: normal;flex-wrap: nowrap;gap: 0.5rem'><span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\"><strong>Estimated cost \u00b7 configured currency</strong></span></span><p style=\"color:#64748b\">No verified estimated cost yet.</p></div></div><span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\"><strong>Best plan verification coverage:</strong> Not available</span></span><span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">No machining attempts recorded.</span></span></div>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Xref",
+      "code_hash": "7c7f5b0140a9982e67730186b1132ef4",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<div style='display: flex;flex: 1;flex-direction: column;justify-content: flex-start;align-items: normal;flex-wrap: nowrap;gap: 0.5rem'><span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"machine-verification-evidence\">Machine verification evidence</h2></span><p>Status: <strong>not run</strong> \u00b7 Completed: False</p><marimo-callout-output data-html='&quot;&#92;u003cspan class=&#92;&quot;markdown prose dark:prose-invert contents&#92;&quot;&#92;u003e&#92;u003cspan class=&#92;&quot;paragraph&#92;&quot;&#92;u003eNo machine recording is attached to this verification. The application will display the actual Fusion recording when available.&#92;u003c/span&#92;u003e&#92;u003c/span&#92;u003e&quot;' data-kind='&quot;neutral&quot;'></marimo-callout-output><span class=\"markdown prose dark:prose-invert contents\"></span><span class=\"markdown prose dark:prose-invert contents\"></span></div>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "SFPL",
+      "code_hash": "f98749193dda297be6923bb178ffe2d2",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<div style='display: flex;flex: 1;flex-direction: column;justify-content: flex-start;align-items: normal;flex-wrap: nowrap;gap: 0.5rem'><span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"inputs-and-deliverables\">Inputs and deliverables</h2></span><marimo-accordion data-labels='[&quot;&#92;u003cspan class=&#92;&quot;markdown prose dark:prose-invert contents&#92;&quot;&#92;u003e&#92;u003cspan class=&#92;&quot;paragraph&#92;&quot;&#92;u003eDrawing, machine, tools and setup&#92;u003c/span&#92;u003e&#92;u003c/span&#92;u003e&quot;,&quot;&#92;u003cspan class=&#92;&quot;markdown prose dark:prose-invert contents&#92;&quot;&#92;u003e&#92;u003cspan class=&#92;&quot;paragraph&#92;&quot;&#92;u003eAccepted fixed target&#92;u003c/span&#92;u003e&#92;u003c/span&#92;u003e&quot;,&quot;&#92;u003cspan class=&#92;&quot;markdown prose dark:prose-invert contents&#92;&quot;&#92;u003e&#92;u003cspan class=&#92;&quot;paragraph&#92;&quot;&#92;u003eBest verified plan&#92;u003c/span&#92;u003e&#92;u003c/span&#92;u003e&quot;,&quot;&#92;u003cspan class=&#92;&quot;markdown prose dark:prose-invert contents&#92;&quot;&#92;u003e&#92;u003cspan class=&#92;&quot;paragraph&#92;&quot;&#92;u003ePinned versions&#92;u003c/span&#92;u003e&#92;u003c/span&#92;u003e&quot;,&quot;&#92;u003cspan class=&#92;&quot;markdown prose dark:prose-invert contents&#92;&quot;&#92;u003e&#92;u003cspan class=&#92;&quot;paragraph&#92;&quot;&#92;u003eArtifact downloads&#92;u003c/span&#92;u003e&#92;u003c/span&#92;u003e&quot;]' data-multiple='false'><div><marimo-json-output data-json-data='{}' data-value-types='&quot;json&quot;'></marimo-json-output></div><div><marimo-json-output data-json-data='{}' data-value-types='&quot;json&quot;'></marimo-json-output></div><div><marimo-json-output data-json-data='{}' data-value-types='&quot;json&quot;'></marimo-json-output></div><div><marimo-json-output data-json-data='{}' data-value-types='&quot;json&quot;'></marimo-json-output></div><div><span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">No artifacts yet.</span></span></div></marimo-accordion></div>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "BYtC",
+      "code_hash": "235d4df524c6c07129b2653ac7b059fc",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<div style='display: flex;flex: 1;flex-direction: column;justify-content: flex-start;align-items: normal;flex-wrap: nowrap;gap: 0.5rem'><span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"learning-and-evaluation\">Learning and evaluation</h2></span><span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">Reusable changes are promoted only after the paired evaluation gate. This run retains its pinned versions.</span></span><span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">No reusable-change evaluation recorded in this run.</span></span><div style='display: flex;flex: 1;flex-direction: column;justify-content: flex-start;align-items: normal;flex-wrap: nowrap;gap: 0.5rem'></div><marimo-accordion data-labels='[&quot;&#92;u003cspan class=&#92;&quot;markdown prose dark:prose-invert contents&#92;&quot;&#92;u003e&#92;u003cspan class=&#92;&quot;paragraph&#92;&quot;&#92;u003eEvaluation scores&#92;u003c/span&#92;u003e&#92;u003c/span&#92;u003e&quot;,&quot;&#92;u003cspan class=&#92;&quot;markdown prose dark:prose-invert contents&#92;&quot;&#92;u003e&#92;u003cspan class=&#92;&quot;paragraph&#92;&quot;&#92;u003eProduction version history&#92;u003c/span&#92;u003e&#92;u003c/span&#92;u003e&quot;,&quot;&#92;u003cspan class=&#92;&quot;markdown prose dark:prose-invert contents&#92;&quot;&#92;u003e&#92;u003cspan class=&#92;&quot;paragraph&#92;&quot;&#92;u003eFull event history&#92;u003c/span&#92;u003e&#92;u003c/span&#92;u003e&quot;]' data-multiple='false'><div><marimo-json-output data-json-data='[]' data-value-types='&quot;json&quot;'></marimo-json-output></div><div><marimo-json-output data-json-data='{}' data-value-types='&quot;json&quot;'></marimo-json-output></div><div><marimo-json-output data-json-data='[]' data-value-types='&quot;json&quot;'></marimo-json-output></div></marimo-accordion></div>"
+          }
+        }
+      ],
+      "console": []
+    }
+  ]
+}

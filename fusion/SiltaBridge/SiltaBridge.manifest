@@ -1,0 +1,10 @@
+{
+  "autodeskProduct": "Fusion360",
+  "type": "addin",
+  "id": "com.silta.fusion.bridge",
+  "author": "Silta",
+  "description": {"": "Local CNC agent bridge; Fusion API work runs on the main thread."},
+  "version": "0.1.0",
+  "runOnStartup": false,
+  "supportedOS": "mac"
+}

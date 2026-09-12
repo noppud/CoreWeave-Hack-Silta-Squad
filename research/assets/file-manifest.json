@@ -1,0 +1,227 @@
+[
+  {
+    "path": "haas-vf-2.mch",
+    "bytes": 48135,
+    "sha256": "10d50f8d97b60d3bb037f42e54d925f0b0cb0dae9972bc1cafd2c2f31b9659a6"
+  },
+  {
+    "path": "download-sources.json",
+    "bytes": 1208,
+    "sha256": "f40c9221343759e6afe41640b0e3af67f351fa83fd98a626a002984c4fedfda5"
+  },
+  {
+    "path": "haas-tooling.json",
+    "bytes": 11824920,
+    "sha256": "1dfa865180402cc7fe94664480af18fda56f654d8baa14c491d14a411f7eea1b"
+  },
+  {
+    "path": "haas-c1-fusion-files.zip",
+    "bytes": 4656556,
+    "sha256": "f0d2b7f55ee4d5ff2ec3a007436d9b73601463e747759f4ff412de524661fdbb"
+  },
+  {
+    "path": "haas-vf2-machine-simulation-guide.pdf",
+    "bytes": 524817,
+    "sha256": "27c5a30dda36e231fd7c9fccce5d17d683e4716dda136c5ae365f06505c456d2"
+  },
+  {
+    "path": "haas-vf-2.f3d",
+    "bytes": 2043982,
+    "sha256": "2e98ff63ad40f59075eb066cd10d21acb02c4c8ff077fd1306a1aa28e72b239a"
+  },
+  {
+    "path": "cam-cnc-mill-resources-2.zip",
+    "bytes": 16272842,
+    "sha256": "1dc410891666c58cace656230035c6ab33e3d5aa15ce5849ee1bdff05d86833a"
+  },
+  {
+    "path": "haas-c1-course-challenge.zip",
+    "bytes": 2821435,
+    "sha256": "110f0a6e6579ff88947fff96c33ce5938dca455f49835f03c8d5946ebed45a1a"
+  },
+  {
+    "path": "haas-holders.json",
+    "bytes": 1760214,
+    "sha256": "543a74334fc100c421cdcdfadcdf8d7dd8953064d84a4e6d539341d0bdc5bd3c"
+  },
+  {
+    "path": "simple-3x-part-cam-challenge.f3d",
+    "bytes": 67949,
+    "sha256": "77c98d8203843e16d3a21726867b2cf27274221e1f9abd189977444e8ab5daaf"
+  },
+  {
+    "path": "haas-vf2-library-entry.json",
+    "bytes": 888,
+    "sha256": "3f52b0a8a535d6d73338e7dac5926e53d0ea2a4f4382082a44c7c1e68fc0c8a9"
+  },
+  {
+    "path": "haas-c1-course-challenge/04_Haas-Course 1-Course-Challenge/Dataset/Precision Machining Caliper - INCH Drawing Rev B.pdf",
+    "bytes": 252142,
+    "sha256": "f41f0545b7499c004bbd6b534c0b0bdcbc4ad0f3a5af73f1c2399043e645ac72"
+  },
+  {
+    "path": "haas-c1-course-challenge/04_Haas-Course 1-Course-Challenge/Dataset/Precision Machining Caliper - INCH.f3d",
+    "bytes": 668831,
+    "sha256": "98b43c1137b00ec9cc58edd34d07e2bec90b33a06dc3c18c6cb24be78ab29668"
+  },
+  {
+    "path": "haas-c1-course-challenge/04_Haas-Course 1-Course-Challenge/Dataset/05-0404 - Vise with Hard Jaws.f3d",
+    "bytes": 1885435,
+    "sha256": "003fca01f919e859989c74e653045a48dde94aa6175fe56c380e04748330ecd6"
+  },
+  {
+    "path": "haas-c1-course-challenge/04_Haas-Course 1-Course-Challenge/Document/221215_S1_Course-Challenge.pdf",
+    "bytes": 127022,
+    "sha256": "9b5393f3eb771f314977618031471ba4dd033c9a5612fa8171ec8512ae9569b5"
+  },
+  {
+    "path": "cam-cnc-mill-resources-2/01_Module Blueprint/Simple Block.f3d",
+    "bytes": 59107,
+    "sha256": "5052e798fc772350612fadac36a36fbf44a156d5dfeb2c6a39956c69c206f05f"
+  },
+  {
+    "path": "cam-cnc-mill-resources-2/01_Module Blueprint/Challenge/Complete Blueprint - Challenge.f3d",
+    "bytes": 71013,
+    "sha256": "a5e80ef9a13bf510931f3a6a47f902976dbe09d5ae8478391b95e4c2f13384cb"
+  },
+  {
+    "path": "cam-cnc-mill-resources-2/01_Module Blueprint/Practice/Standard Drawing Views - Practice.f3d",
+    "bytes": 66294,
+    "sha256": "a2a55b6f94ffc25ea9028a4619916722860b3972b871de1892490d2c53aa9480"
+  },
+  {
+    "path": "cam-cnc-mill-resources-2/02_Module CAD/Engine Assembly - Intro to CAD CAM CNC.f3d",
+    "bytes": 1019646,
+    "sha256": "d76775c0939a3487479442c2f79f143a11d427b658d9764abb97512be2dddcdd"
+  },
+  {
+    "path": "cam-cnc-mill-resources-2/02_Module CAD/Generic Vise w Parallels.f3d",
+    "bytes": 720548,
+    "sha256": "93d043fea288f71a6b5e212f5e2fbd3d90855864cfeb548ee0a2d1037cdbf63b"
+  },
+  {
+    "path": "cam-cnc-mill-resources-2/02_Module CAD/Engine Case RH - Drawing ENG-1008.pdf",
+    "bytes": 120476,
+    "sha256": "f77c656c7bcf3934f3b630bda5692694879ebd052e5da2f4e0c64ce8e6397eec"
+  },
+  {
+    "path": "cam-cnc-mill-resources-2/02_Module CAD/Engine Case RH - No Timeline.f3d",
+    "bytes": 180225,
+    "sha256": "c70530ce67082ba38d2f32b63019fa927f12b6d853cc8b2b8dc00062a1f002d1"
+  },
+  {
+    "path": "cam-cnc-mill-resources-2/02_Module CAD/Soft Jaw.f3d",
+    "bytes": 95355,
+    "sha256": "b4eddbec3bebe32dd0e010b50827763a113f321905122e3aa149ee65bbe10d08"
+  },
+  {
+    "path": "cam-cnc-mill-resources-2/02_Module CAD/Challenge/Soft Jaw Drawing - Challenge.pdf",
+    "bytes": 130405,
+    "sha256": "393e71c04e8e4c08bff8e43e33a31d1590d91a38275a05fca8a57fbc463399c6"
+  },
+  {
+    "path": "cam-cnc-mill-resources-2/02_Module CAD/Practice/Direct Edit Plate - Practice.f3d",
+    "bytes": 51809,
+    "sha256": "eccd27e5f42692fa37e652aeb0eaaacd21775a522280150b6876aad07aeca831"
+  },
+  {
+    "path": "cam-cnc-mill-resources-2/04_Module CAM/EngineCase Setup Sheet - All Ops.pdf",
+    "bytes": 5508765,
+    "sha256": "8e805efd38c2d43cbbb29c4c2c7ee12edd22a33e443f5e8124a26b0b469a496a"
+  },
+  {
+    "path": "cam-cnc-mill-resources-2/04_Module CAM/Engine Case RH - Ready To Program.f3d",
+    "bytes": 2839141,
+    "sha256": "6f08086dc693a39a70c9430337574d98c8392bd9eb457702738bae69b2376cef"
+  },
+  {
+    "path": "cam-cnc-mill-resources-2/04_Module CAM/Challenge/Program and Verify - Challenge.f3d",
+    "bytes": 170096,
+    "sha256": "94dab10322cc7e92a1453bea6e19672e7d3467a1d7c9ba7ffbc98ec6b3dbb414"
+  },
+  {
+    "path": "cam-cnc-mill-resources-2/04_Module CAM/Practice/Collision Check - Practice.f3d",
+    "bytes": 308051,
+    "sha256": "7d44312a83805973960ee045506b7ce04a2f938d057575a3627788ef0375ad0b"
+  },
+  {
+    "path": "selected/starter-holder-unmodified.json",
+    "bytes": 3836,
+    "sha256": "be4685322d44d6e2a4a0e65da9664b4e74ae4114ef192366e06301590473e1b5"
+  },
+  {
+    "path": "selected/engine-case-reference.f3d",
+    "bytes": 180225,
+    "sha256": "c70530ce67082ba38d2f32b63019fa927f12b6d853cc8b2b8dc00062a1f002d1"
+  },
+  {
+    "path": "selected/starter-tools-unmodified.json",
+    "bytes": 33509,
+    "sha256": "9ea66a0dd0b38fbc044773913259aa75d48cc31ade9f22f2c9d89671584ef1e4"
+  },
+  {
+    "path": "selected/generic-vise.f3d",
+    "bytes": 720548,
+    "sha256": "93d043fea288f71a6b5e212f5e2fbd3d90855864cfeb548ee0a2d1037cdbf63b"
+  },
+  {
+    "path": "selected/engine-case-drawing.pdf",
+    "bytes": 120476,
+    "sha256": "f77c656c7bcf3934f3b630bda5692694879ebd052e5da2f4e0c64ce8e6397eec"
+  },
+  {
+    "path": "selected/engine-case-ready-to-program.f3d",
+    "bytes": 2839141,
+    "sha256": "6f08086dc693a39a70c9430337574d98c8392bd9eb457702738bae69b2376cef"
+  },
+  {
+    "path": "selected/haas-vise-05-0404.f3d",
+    "bytes": 1885435,
+    "sha256": "003fca01f919e859989c74e653045a48dde94aa6175fe56c380e04748330ecd6"
+  },
+  {
+    "path": "selected/soft-jaw-drawing.pdf",
+    "bytes": 130405,
+    "sha256": "393e71c04e8e4c08bff8e43e33a31d1590d91a38275a05fca8a57fbc463399c6"
+  },
+  {
+    "path": "selected/caliper-drawing-rev-b.pdf",
+    "bytes": 252142,
+    "sha256": "f41f0545b7499c004bbd6b534c0b0bdcbc4ad0f3a5af73f1c2399043e645ac72"
+  },
+  {
+    "path": "selected/caliper-reference.f3d",
+    "bytes": 668831,
+    "sha256": "98b43c1137b00ec9cc58edd34d07e2bec90b33a06dc3c18c6cb24be78ab29668"
+  },
+  {
+    "path": "haas-c1-fusion-files/0_Fusion files/01_Intro_Blueprints_Fusion Files/Drawing Projections.f3d",
+    "bytes": 138967,
+    "sha256": "317455517c9ca562dfc1d843bed96499769b4cba421dfb5de57ddb3cbb3f6175"
+  },
+  {
+    "path": "haas-c1-fusion-files/0_Fusion files/01_Intro_Blueprints_Fusion Files/Precision Machining Caliper - INCH Drawing.pdf",
+    "bytes": 250275,
+    "sha256": "ee3d1054c38d5c2659c4d5dbf51f7d59e19cfdd4f31366d857e0c4305cebfa0b"
+  },
+  {
+    "path": "haas-c1-fusion-files/0_Fusion files/01_Intro_Blueprints_Fusion Files/Projections Drawing - 3rd Angle.pdf",
+    "bytes": 99299,
+    "sha256": "a44ee364eeb410e40ca276032544991eb45ebbc06ff784e95bb5510faa291f14"
+  },
+  {
+    "path": "haas-c1-fusion-files/0_Fusion files/01_Intro_Blueprints_Fusion Files/123 Block Drawing.pdf",
+    "bytes": 152881,
+    "sha256": "5ab3803a31ffd0872920dc05ac0f72ca3ceadb22d0ef70686d03009d1523f348"
+  },
+  {
+    "path": "haas-c1-fusion-files/0_Fusion files/01_Intro_Blueprints_Fusion Files/Projections Drawing - 1st Angle.pdf",
+    "bytes": 106354,
+    "sha256": "f713ccf726295cfc4ffb33d8a57889a83211bac4e8e1621b33ff495629d622bc"
+  },
+  {
+    "path": "haas-c1-fusion-files/0_Fusion files/02_Creating_CAM setup_Fusion files/Caliper - Piston Programmed.f3d",
+    "bytes": 4064261,
+    "sha256": "72721d1675528adb0cbf8c16e47b6f49e2a8a6c3934a55cae658fed95851637f"
+  }
+]

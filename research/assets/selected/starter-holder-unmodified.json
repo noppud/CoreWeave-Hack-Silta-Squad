@@ -1,0 +1,135 @@
+{
+  "data": [
+    {
+      "description": "CT40 ER32 COLLET CHUCK X 2-1/2\" GAGE LENGTH, TSC",
+      "expressions": {
+        "tool_holderGaugeLength": "2.5 in"
+      },
+      "gaugeLength": 2.5,
+      "guid": "a9962fe4-c289-4a9c-9871-f5a2dc8bbfb8",
+      "product-id": "04-0010",
+      "product-link": "https://www.haascnc.com/haas-tooling/mill_toolholding/er_collet_chucks/04-0010.html",
+      "segments": [
+        {
+          "height": 0.0105511811023622,
+          "lower-diameter": 1.45385826771654,
+          "upper-diameter": 1.53259842519685
+        },
+        {
+          "height": 0.114448818897638,
+          "lower-diameter": 1.53259842519685,
+          "upper-diameter": 1.92913385826772
+        },
+        {
+          "height": 0.0340944881889764,
+          "lower-diameter": 1.92913385826772,
+          "upper-diameter": 1.96850393700787
+        },
+        {
+          "height": 0.785787401574803,
+          "lower-diameter": 1.96850393700787,
+          "upper-diameter": 1.96850393700787
+        },
+        {
+          "height": 0.262204724409449,
+          "lower-diameter": 1.5748031496063,
+          "upper-diameter": 1.5748031496063
+        },
+        {
+          "height": 0.0393700787401575,
+          "lower-diameter": 1.67125984251969,
+          "upper-diameter": 1.75
+        },
+        {
+          "height": 0.385433070866142,
+          "lower-diameter": 1.75,
+          "upper-diameter": 1.75
+        },
+        {
+          "height": 0.118110236220472,
+          "lower-diameter": 1.75,
+          "upper-diameter": 1.98622047244095
+        },
+        {
+          "height": 0.0393700787401575,
+          "lower-diameter": 2.42125984251969,
+          "upper-diameter": 2.5
+        },
+        {
+          "height": 0.12244094488189,
+          "lower-diameter": 2.5,
+          "upper-diameter": 2.5
+        },
+        {
+          "height": 0.0170472440944882,
+          "lower-diameter": 2.5,
+          "upper-diameter": 2.48031496062992
+        },
+        {
+          "height": 0.0571653543307087,
+          "lower-diameter": 2.48031496062992,
+          "upper-diameter": 2.28232283464567
+        },
+        {
+          "height": 0.151968503937008,
+          "lower-diameter": 2.21889763779528,
+          "upper-diameter": 2.21889763779528
+        },
+        {
+          "height": 0.0571653543307087,
+          "lower-diameter": 2.28232283464567,
+          "upper-diameter": 2.48031496062992
+        },
+        {
+          "height": 0.0170472440944882,
+          "lower-diameter": 2.48031496062992,
+          "upper-diameter": 2.5
+        },
+        {
+          "height": 0.123425196850394,
+          "lower-diameter": 2.5,
+          "upper-diameter": 2.5
+        },
+        {
+          "height": 0.0393700787401575,
+          "lower-diameter": 2.5,
+          "upper-diameter": 2.42125984251969
+        },
+        {
+          "height": 0.031496062992126,
+          "lower-diameter": 1.7755905511811,
+          "upper-diameter": 1.71259842519685
+        },
+        {
+          "height": 0.0617716535433071,
+          "lower-diameter": 1.71259842519685,
+          "upper-diameter": 1.71259842519685
+        },
+        {
+          "height": 0.0222834645669291,
+          "lower-diameter": 1.71259842519685,
+          "upper-diameter": 1.73106299212598
+        },
+        {
+          "height": 0.00948818897637795,
+          "lower-diameter": 1.73106299212598,
+          "upper-diameter": 1.75
+        },
+        {
+          "height": 2.65330708661417,
+          "lower-diameter": 1.75,
+          "upper-diameter": 0.976102362204724
+        },
+        {
+          "height": 0.0337007874015748,
+          "lower-diameter": 0.976102362204724,
+          "upper-diameter": 0.898188976377953
+        }
+      ],
+      "type": "holder",
+      "unit": "inches",
+      "vendor": "Haas Automation"
+    }
+  ],
+  "version": 36
+}

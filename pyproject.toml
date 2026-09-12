@@ -4,7 +4,10 @@ version = "0.1.0"
 description = "CoreWeave Hacks team starter with W&B Weave tracing"
 requires-python = ">=3.12,<3.14"
 dependencies = [
+  "cwsandbox==1.14.2",
   "httpx>=0.28,<1",
+  "marimo>=0.24.2",
+  "openai-codex>=0.154.0",
   "python-dotenv>=1,<2",
   "weave>=0.52,<1",
 ]
