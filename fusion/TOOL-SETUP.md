@@ -2,7 +2,10 @@
 
 `prepare_tool_assemblies.py` selects the two enabled, hash-pinned Haas cutters,
 attaches the pinned Haas 04-0010 holder segments, and retains one cutting preset
-per tool. It writes a proposed library, then `apply` imports the versioned library
+per tool. After a configured export is pinned as `tools.library`, preparation
+uses preserved `tools.source_library` and each entry's `source_geometry`; it does
+not reprocess the already assembled export. Reports identify the actual catalog
+path, hash and schema version. It writes a proposed library, then `apply` imports the versioned library
 using `ToolLibrary.createFromJson`, retrieves each `Tool` with `item`, serializes
 it, and checks the complete library's exported values again. It makes no Hub library, setup, or operation changes.
 
@@ -52,4 +55,28 @@ Readback, rather than that example, is the acceptance evidence for this installa
 Live `tools-v1` revealed that passing a library envelope to `Tool.createFromJson`
 produces an unspecified zero-dimension tool rather than an exception. The helper
 rejected that readback. The corrected importer passes the envelope only to
-`ToolLibrary.createFromJson`; its next live run is still required.
+`ToolLibrary.createFromJson`. Subsequent live roundtrip confirmed both enabled
+cutter/holder assemblies; `config/tool-assembly-report.json` records the result.
+
+## Runtime resources
+
+`cam_resources.py` consumes the active, already assembled pinned library. This is
+separate from catalog preparation above. The controller prelude calls
+`load_tools(app, {'inputs': inputs})` and exposes the returned `tools` mapping to
+generated CAM code: `operation_input.tool = tools[1]`. `inventory` is portable
+JSON; actual Tool objects stay inside the single Fusion script invocation.
+`tool_for_number(inputs, 1)` is an optional direct convenience function.
+
+After agent-created operations, the controller calls
+`finalize_nc(app, {'inputs': inputs, 'setup_index': 0})`. It requires the sole
+setup's `silta/controller_setup=v1` attribute, restores the pinned assembly for
+each active operation, and restores its chosen cutting expressions after the
+Fusion tool setter resets the preset. It creates/reuses only an NC program tagged
+`silta/controller_nc=v1`, selects the actual operations, and loads the pinned CPS
+content. It resolves the actual `nc_program_post` parameter's file path and
+checks those bytes against the pinned CPS hash; transient PostConfiguration
+wrapper identity is not evidence of assignment. Missing/unreadable/different
+bound files reject finalization. It never changes machine, fixture, stock, work offset or toolpaths.
+The returned post hash and inventory support subsequent checks; they do not prove
+simulation or manufacturing. The installed `createFromContent` post constructor
+is explicitly marked **not officially supported** in Autodesk's SWIG binding.

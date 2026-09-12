@@ -1,0 +1,341 @@
+{
+  "input_path": "/Users/touko/work/helios-one/repos/coreweavehack/.private/fusion-live/tools-v3/tools-assembled-input.json",
+  "input_sha256": "68aafc149f874730681dcc7bbb1f0b71ad96258fa869cc10dd2dabffdfe8cb9a",
+  "config_sha256": "614eccea438a646a48ad8c8887d29f705cf5e62b343e7c93715d30f8db901bc8",
+  "cutter_source_sha256": "594d776ee9860a762e5975abc4995100463abc34d6a6fae08d678b765f642904",
+  "holder_source_sha256": "be4685322d44d6e2a4a0e65da9664b4e74ae4114ef192366e06301590473e1b5",
+  "status": "fusion_tool_library_roundtrip_passed_not_assigned",
+  "assigned_to_operations": false,
+  "manufacturing_verified": false,
+  "export_path": "/Users/touko/work/helios-one/repos/coreweavehack/.private/fusion-live/tools-v3/tools-assembled-fusion-export.json",
+  "export_sha256": "c160b1ec0ba216fa0fe8d1f69cf21dda5be50d1d2275514fc56001519711d155",
+  "fusion_version": "2705.1.15",
+  "tools": [
+    {
+      "number": 1,
+      "product_id": "03-0086",
+      "diameter_mm": 12.699999999999998,
+      "flute_length_mm": 25.399999999999995,
+      "stickout_below_holder_mm": 33.019999999999996,
+      "holder_gauge_length_mm": 63.5,
+      "assembly_gauge_length_mm": 96.52,
+      "shank_inserted_mm": 43.17999999999999,
+      "holder_segments": [
+        {
+          "height": 0.0105511811023622,
+          "lower-diameter": 1.45385826771654,
+          "upper-diameter": 1.53259842519685
+        },
+        {
+          "height": 0.114448818897638,
+          "lower-diameter": 1.53259842519685,
+          "upper-diameter": 1.92913385826772
+        },
+        {
+          "height": 0.0340944881889764,
+          "lower-diameter": 1.92913385826772,
+          "upper-diameter": 1.96850393700787
+        },
+        {
+          "height": 0.785787401574803,
+          "lower-diameter": 1.96850393700787,
+          "upper-diameter": 1.96850393700787
+        },
+        {
+          "height": 0.262204724409449,
+          "lower-diameter": 1.5748031496063,
+          "upper-diameter": 1.5748031496063
+        },
+        {
+          "height": 0.0393700787401575,
+          "lower-diameter": 1.67125984251969,
+          "upper-diameter": 1.75
+        },
+        {
+          "height": 0.385433070866142,
+          "lower-diameter": 1.75,
+          "upper-diameter": 1.75
+        },
+        {
+          "height": 0.118110236220472,
+          "lower-diameter": 1.75,
+          "upper-diameter": 1.98622047244095
+        },
+        {
+          "height": 0.0393700787401575,
+          "lower-diameter": 2.42125984251969,
+          "upper-diameter": 2.5
+        },
+        {
+          "height": 0.12244094488189,
+          "lower-diameter": 2.5,
+          "upper-diameter": 2.5
+        },
+        {
+          "height": 0.0170472440944882,
+          "lower-diameter": 2.5,
+          "upper-diameter": 2.48031496062992
+        },
+        {
+          "height": 0.0571653543307087,
+          "lower-diameter": 2.48031496062992,
+          "upper-diameter": 2.28232283464567
+        },
+        {
+          "height": 0.151968503937008,
+          "lower-diameter": 2.21889763779528,
+          "upper-diameter": 2.21889763779528
+        },
+        {
+          "height": 0.0571653543307087,
+          "lower-diameter": 2.28232283464567,
+          "upper-diameter": 2.48031496062992
+        },
+        {
+          "height": 0.0170472440944882,
+          "lower-diameter": 2.48031496062992,
+          "upper-diameter": 2.5
+        },
+        {
+          "height": 0.123425196850394,
+          "lower-diameter": 2.5,
+          "upper-diameter": 2.5
+        },
+        {
+          "height": 0.0393700787401575,
+          "lower-diameter": 2.5,
+          "upper-diameter": 2.42125984251969
+        },
+        {
+          "height": 0.031496062992126,
+          "lower-diameter": 1.7755905511811,
+          "upper-diameter": 1.71259842519685
+        },
+        {
+          "height": 0.0617716535433071,
+          "lower-diameter": 1.71259842519685,
+          "upper-diameter": 1.71259842519685
+        },
+        {
+          "height": 0.0222834645669291,
+          "lower-diameter": 1.71259842519685,
+          "upper-diameter": 1.73106299212598
+        },
+        {
+          "height": 0.00948818897637795,
+          "lower-diameter": 1.73106299212598,
+          "upper-diameter": 1.75
+        },
+        {
+          "height": 2.65330708661417,
+          "lower-diameter": 1.75,
+          "upper-diameter": 0.976102362204724
+        },
+        {
+          "height": 0.0337007874015748,
+          "lower-diameter": 0.976102362204724,
+          "upper-diameter": 0.898188976377953
+        }
+      ],
+      "holder_segment_unit": "inches",
+      "spindle_rpm": 6000,
+      "feed_mm_min": 1371.6,
+      "preset_readback": {
+        "description": "Aluminum-Wrought Alloy",
+        "f_n": 0.003,
+        "f_z": 0.003,
+        "guid": "73b44c93-8013-4b0a-824c-f4ba915a18ba",
+        "material": {
+          "category": "all",
+          "query": "",
+          "use-hardness": false
+        },
+        "n": 6000,
+        "n_ramp": 6000,
+        "name": "Silta AL6061 T1 simulation limits",
+        "ramp-angle": 2,
+        "stepdown": 0.5,
+        "stepover": 0.5,
+        "tool-coolant": "flood",
+        "use-stepdown": true,
+        "use-stepover": true,
+        "v_c": 785.3981633974481,
+        "v_f": 54,
+        "v_f_leadIn": 54,
+        "v_f_leadOut": 54,
+        "v_f_plunge": 18,
+        "v_f_ramp": 18,
+        "v_f_transition": 54
+      },
+      "retract_verification": {
+        "status": "deferred_to_operation_and_simulation",
+        "reason": "Fusion omits v_f_retract for these milling tool presets",
+        "required": "Verify actual operation retract feed or rapid motion and clearance"
+      },
+      "maximum_cut_depth_status": "requires_operation_engagement_and_clearance_verification"
+    },
+    {
+      "number": 2,
+      "product_id": "03-0083",
+      "diameter_mm": 6.349999999999999,
+      "flute_length_mm": 19.049999999999997,
+      "stickout_below_holder_mm": 26.669999999999995,
+      "holder_gauge_length_mm": 63.5,
+      "assembly_gauge_length_mm": 90.16999999999997,
+      "shank_inserted_mm": 36.830000000000005,
+      "holder_segments": [
+        {
+          "height": 0.0105511811023622,
+          "lower-diameter": 1.45385826771654,
+          "upper-diameter": 1.53259842519685
+        },
+        {
+          "height": 0.114448818897638,
+          "lower-diameter": 1.53259842519685,
+          "upper-diameter": 1.92913385826772
+        },
+        {
+          "height": 0.0340944881889764,
+          "lower-diameter": 1.92913385826772,
+          "upper-diameter": 1.96850393700787
+        },
+        {
+          "height": 0.785787401574803,
+          "lower-diameter": 1.96850393700787,
+          "upper-diameter": 1.96850393700787
+        },
+        {
+          "height": 0.262204724409449,
+          "lower-diameter": 1.5748031496063,
+          "upper-diameter": 1.5748031496063
+        },
+        {
+          "height": 0.0393700787401575,
+          "lower-diameter": 1.67125984251969,
+          "upper-diameter": 1.75
+        },
+        {
+          "height": 0.385433070866142,
+          "lower-diameter": 1.75,
+          "upper-diameter": 1.75
+        },
+        {
+          "height": 0.118110236220472,
+          "lower-diameter": 1.75,
+          "upper-diameter": 1.98622047244095
+        },
+        {
+          "height": 0.0393700787401575,
+          "lower-diameter": 2.42125984251969,
+          "upper-diameter": 2.5
+        },
+        {
+          "height": 0.12244094488189,
+          "lower-diameter": 2.5,
+          "upper-diameter": 2.5
+        },
+        {
+          "height": 0.0170472440944882,
+          "lower-diameter": 2.5,
+          "upper-diameter": 2.48031496062992
+        },
+        {
+          "height": 0.0571653543307087,
+          "lower-diameter": 2.48031496062992,
+          "upper-diameter": 2.28232283464567
+        },
+        {
+          "height": 0.151968503937008,
+          "lower-diameter": 2.21889763779528,
+          "upper-diameter": 2.21889763779528
+        },
+        {
+          "height": 0.0571653543307087,
+          "lower-diameter": 2.28232283464567,
+          "upper-diameter": 2.48031496062992
+        },
+        {
+          "height": 0.0170472440944882,
+          "lower-diameter": 2.48031496062992,
+          "upper-diameter": 2.5
+        },
+        {
+          "height": 0.123425196850394,
+          "lower-diameter": 2.5,
+          "upper-diameter": 2.5
+        },
+        {
+          "height": 0.0393700787401575,
+          "lower-diameter": 2.5,
+          "upper-diameter": 2.42125984251969
+        },
+        {
+          "height": 0.031496062992126,
+          "lower-diameter": 1.7755905511811,
+          "upper-diameter": 1.71259842519685
+        },
+        {
+          "height": 0.0617716535433071,
+          "lower-diameter": 1.71259842519685,
+          "upper-diameter": 1.71259842519685
+        },
+        {
+          "height": 0.0222834645669291,
+          "lower-diameter": 1.71259842519685,
+          "upper-diameter": 1.73106299212598
+        },
+        {
+          "height": 0.00948818897637795,
+          "lower-diameter": 1.73106299212598,
+          "upper-diameter": 1.75
+        },
+        {
+          "height": 2.65330708661417,
+          "lower-diameter": 1.75,
+          "upper-diameter": 0.976102362204724
+        },
+        {
+          "height": 0.0337007874015748,
+          "lower-diameter": 0.976102362204724,
+          "upper-diameter": 0.898188976377953
+        }
+      ],
+      "holder_segment_unit": "inches",
+      "spindle_rpm": 6000,
+      "feed_mm_min": 685.8,
+      "preset_readback": {
+        "description": "Aluminum-Wrought Alloy",
+        "f_n": 0.0015,
+        "f_z": 0.0015,
+        "guid": "9dbdb400-ef7e-48de-b6af-7cef07dae036",
+        "material": {
+          "category": "all",
+          "query": "",
+          "use-hardness": false
+        },
+        "n": 6000,
+        "n_ramp": 6000,
+        "name": "Silta AL6061 T2 simulation limits",
+        "ramp-angle": 2,
+        "stepdown": 0.25,
+        "stepover": 0.25,
+        "tool-coolant": "flood",
+        "use-stepdown": true,
+        "use-stepover": true,
+        "v_c": 392.69908169872406,
+        "v_f": 27,
+        "v_f_leadIn": 27,
+        "v_f_leadOut": 27,
+        "v_f_plunge": 9,
+        "v_f_ramp": 9,
+        "v_f_transition": 27
+      },
+      "retract_verification": {
+        "status": "deferred_to_operation_and_simulation",
+        "reason": "Fusion omits v_f_retract for these milling tool presets",
+        "required": "Verify actual operation retract feed or rapid motion and clearance"
+      },
+      "maximum_cut_depth_status": "requires_operation_engagement_and_clearance_verification"
+    }
+  ]
+}

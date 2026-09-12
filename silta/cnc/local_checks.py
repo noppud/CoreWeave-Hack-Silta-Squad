@@ -62,16 +62,15 @@ class LocalCheckRunner:
         with tempfile.TemporaryDirectory(prefix="silta-check-") as temporary:
             work = Path(temporary).resolve()
             artifacts = {}
-            total = 0
             for index, (name, artifact) in enumerate(candidate.artifacts.items()):
-                content = Path(artifact.path).read_bytes()
-                if hashlib.sha256(content).hexdigest() != artifact.sha256:
-                    raise ValueError("Candidate artifact changed during preparation")
-                total += len(content)
-                if total > 20_000_000:
-                    raise ValueError("Candidate artifacts exceed limit")
                 copied = work / f"candidate-{index}{Path(artifact.path).suffix}"
-                copied.write_bytes(content)
+                digest = hashlib.sha256()
+                with Path(artifact.path).open("rb") as source, copied.open("wb") as destination:
+                    while chunk := source.read(1024 * 1024):
+                        destination.write(chunk)
+                        digest.update(chunk)
+                if digest.hexdigest() != artifact.sha256:
+                    raise ValueError("Candidate artifact changed during preparation")
                 artifacts[name] = {"path": str(copied), "sha256": artifact.sha256}
             data = {
                 "candidate": {

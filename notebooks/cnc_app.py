@@ -12,6 +12,7 @@ app = marimo.App(width="full", app_title="Silta · CNC loop")
 
 @app.cell
 def _():
+    import hashlib
     import html
     import json
     import math
@@ -20,11 +21,11 @@ def _():
 
     import marimo as mo
 
-    return Path, html, json, math, mo, os
+    return Path, hashlib, html, json, math, mo, os
 
 
 @app.cell
-def _(Path, html, json, math):
+def _(Path, hashlib, html, json, math):
     def read_json(path):
         try:
             data = json.loads(Path(path).read_text())
@@ -56,7 +57,10 @@ def _(Path, html, json, math):
                 row["Candidate"] = event.get("candidate", {}).get("id", "—")
             elif event.get("event") == "checks_completed":
                 result = event.get("result", {})
-                row["Checks"] = "Passed" if result.get("passed") is True else "Failed"
+                row["Checks"] = (
+                    "Passed" if result.get("passed") is True
+                    else "Failed" if result.get("passed") is False else "Unknown"
+                )
                 row["Issues"] = "; ".join(result.get("issues", []))
             elif event.get("event") == "verification_started":
                 row["Verification"] = "Running"
@@ -64,7 +68,9 @@ def _(Path, html, json, math):
                 result = event.get("verification", {})
                 passed = result.get("status") == "passed" and result.get("completed") is True
                 row["Verification"] = (
-                    "Passed" if passed else str(result.get("status", "unknown")).capitalize()
+                    "Passed" if passed
+                    else "Unknown" if result.get("status") == "passed"
+                    else str(result.get("status", "unknown")).capitalize()
                 )
                 row["Issues"] = "; ".join(result.get("issues", []))
                 # Failed/unknown plans never appear as cheap or fast successes.
@@ -81,7 +87,33 @@ def _(Path, html, json, math):
                             and value >= 0
                         ):
                             row[column] = value
+        if manifest.get("status") == "incomplete":
+            for row in attempts.values():
+                if row["Checks"] == "Pending":
+                    row["Checks"] = "Not completed"
+                if row["Verification"] in {"Pending", "Running"}:
+                    row["Verification"] = (
+                        "Interrupted" if row["Verification"] == "Running" else "Not reached"
+                    )
         return [attempts[key] for key in sorted(attempts)]
+
+    def saved_cam_document(candidate):
+        artifact = candidate.get("artifacts", {}).get("fusion_document")
+        if not artifact:
+            return {}, None
+        try:
+            raw = Path(artifact["path"]).read_bytes()
+            if hashlib.sha256(raw).hexdigest() != artifact.get("sha256"):
+                return {}, "Saved Fusion document reference failed its artifact hash check"
+            reference = json.loads(raw)
+            if not isinstance(reference, dict) or not all(
+                isinstance(reference.get(key), str) and reference[key]
+                for key in ("document_name", "version_id", "data_file_id", "project_id")
+            ) or type(reference.get("version_number")) is not int:
+                return {}, "Saved Fusion document reference is incomplete"
+            return reference, None
+        except (OSError, ValueError, KeyError, TypeError) as error:
+            return {}, str(error)
 
     def metric_chart(rows, metric, label, color):
         points = [(row["Attempt"], row[metric]) for row in rows if row[metric] is not None]
@@ -135,7 +167,7 @@ def _(Path, html, json, math):
                 return f"https://wandb.ai/{parts[0]}/{parts[1]}/weave/calls/{parts[3]}"
         return reference if reference.startswith("https://wandb.ai/") else None
 
-    return artifact_paths, attempt_rows, metric_chart, read_json, weave_link
+    return artifact_paths, attempt_rows, metric_chart, read_json, saved_cam_document, weave_link
 
 
 @app.cell
@@ -162,7 +194,8 @@ def _(Path, mo, os):
 
 
 @app.cell
-def _(Path, jobs_root, mo):
+def _(Path, jobs_root, mo, refresh):
+    _refresh_tick = refresh.value
     manifest_files = sorted(
         Path(jobs_root.value).expanduser().glob("*/manifest.json"),
         key=lambda path: path.stat().st_mtime,
@@ -208,6 +241,13 @@ def _(attempt_rows, job_selector, mo, read_json, refresh):
         ),
         {},
     )
+    latest_verification_candidate = next(
+        (event.get("candidate", {}).get("id", "Unknown") for event in reversed(events)
+         if event.get("event") == "candidate_created"
+         and event.get("candidate_digest")
+         and event["candidate_digest"] == latest_verification.get("candidate_digest")),
+        "No bound candidate recorded",
+    )
     best = manifest.get("best_candidate") or {}
     best_verification = manifest.get("best_verification") or {}
     mo.vstack(
@@ -217,16 +257,46 @@ def _(attempt_rows, job_selector, mo, read_json, refresh):
             else mo.md(""),
             mo.hstack(
                 [
-                    mo.stat(label="Run status", value=manifest.get("status", "Not started")),
+                    mo.stat(
+                        label="Recorded run status", value=manifest.get("status", "Not started")
+                    ),
                     mo.stat(label="Latest event", value=current_event.replace("_", " ")),
                     mo.stat(label="Current candidate", value=latest_candidate.get("id", "—")),
                     mo.stat(label="Best verified candidate", value=best.get("id", "None yet")),
                 ]
             ),
             mo.md(str(manifest.get("reason", ""))),
+            mo.md(
+                "Last recorded event: " + str(events[-1].get("at", "Timestamp unavailable"))
+                + (" · Activity is not independently monitored."
+                   if manifest.get("status") == "running" else "")
+            ) if events else mo.md(""),
         ]
     )
-    return best, best_verification, events, latest_verification, manifest, rows
+    return (
+        best, best_verification, events, latest_candidate, latest_verification,
+        latest_verification_candidate, manifest, rows,
+    )
+
+
+@app.cell
+def _(html, latest_candidate, mo, saved_cam_document):
+    _document, _document_error = saved_cam_document(latest_candidate)
+    mo.vstack(
+        [
+            mo.md("## Saved Fusion CAM document"),
+            mo.callout(mo.md(_document_error), kind="danger") if _document_error else mo.md(""),
+            mo.Html(
+                "<p>Candidate <strong>" + html.escape(str(latest_candidate.get("id", "—")))
+                + "</strong>: " + html.escape(_document["document_name"])
+                + " · Version " + str(_document["version_number"]) + "</p>"
+            ) if _document else mo.md("No saved CAM reference recorded for this candidate."),
+            mo.json(_document) if _document else mo.md(""),
+            mo.md("Verification results below identify the candidate they apply to.")
+            if _document else mo.md(""),
+        ]
+    )
+    return
 
 
 @app.cell
@@ -267,7 +337,7 @@ def _(best_verification, metric_chart, mo, rows):
 
 
 @app.cell
-def _(Path, artifact_paths, html, latest_verification, mo):
+def _(Path, artifact_paths, html, latest_verification, latest_verification_candidate, mo):
     _media = [
         Path(path)
         for path in artifact_paths(latest_verification)
@@ -281,6 +351,8 @@ def _(Path, artifact_paths, html, latest_verification, mo):
     mo.vstack(
         [
             mo.md("## Machine verification evidence"),
+            mo.Html("<p>Most recent result · Candidate: <strong>"
+                    + html.escape(str(latest_verification_candidate)) + "</strong></p>"),
             mo.Html(
                 "<p>Status: <strong>"
                 + html.escape(str(latest_verification.get("status", "not run")))

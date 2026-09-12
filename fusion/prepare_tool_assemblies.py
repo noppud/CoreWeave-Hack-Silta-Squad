@@ -62,7 +62,10 @@ def prepare(config_path, output_directory):
     config_path = Path(config_path).resolve(strict=True)
     config = json.loads(config_path.read_text())
     selected = config["tools"]
-    cutters = _pinned(selected["library"])
+    # After live assembly readback, library points to the configured export.
+    # Rebuild from the original catalog, never from already processed presets.
+    source_reference = selected.get("source_library", selected["library"])
+    cutters = _pinned(source_reference)
     holders = _pinned(selected["holder_library"])
     enabled = [entry for entry in selected["entries"] if entry.get("enabled") is True]
     if sorted(e["number"] for e in enabled) != [1, 2]:
@@ -92,7 +95,8 @@ def prepare(config_path, output_directory):
             or holder["unit"] != "inches"
         ):
             raise ValueError("Helper is scoped to selected inch flat end mills and holder")
-        if tool["geometry"] != entry["geometry"]:
+        source_geometry = entry.get("source_geometry", entry["geometry"])
+        if tool["geometry"] != source_geometry:
             raise ValueError("Configured geometry differs from pinned cutter")
         geometry = tool["geometry"]
         stickout = _positive(entry["stickout_below_holder_mm"], "stickout") / 25.4
@@ -151,7 +155,9 @@ def prepare(config_path, output_directory):
         "input_path": str(path),
         "input_sha256": _sha(path),
         "config_sha256": _sha(config_path),
-        "cutter_source_sha256": selected["library"]["sha256"],
+        "cutter_source_path": str(Path(source_reference["path"]).resolve()),
+        "cutter_source_sha256": source_reference["sha256"],
+        "cutter_source_version": cutters["version"],
         "holder_source_sha256": selected["holder_library"]["sha256"],
         "status": "prepared_not_run_in_fusion",
         "assigned_to_operations": False,

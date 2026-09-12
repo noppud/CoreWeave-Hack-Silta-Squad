@@ -6,7 +6,6 @@ conservative mutation alarm, not a machining or full BRep-equivalence proof.
 
 from __future__ import annotations
 
-import hashlib
 import json
 import time
 from collections.abc import Callable
@@ -14,6 +13,7 @@ from dataclasses import asdict
 from pathlib import Path
 from typing import Any, Protocol
 
+from .cam_documents import open_snapshot, save_snapshot
 from .models import (
     Candidate,
     JobContext,
@@ -26,6 +26,31 @@ from .models import (
 )
 
 PROMPTS = Path(__file__).resolve().parents[2] / "prompts"
+
+FUSION_HELPERS = PROMPTS.parent / "fusion"
+_PREPARE_CAM_SCRIPT = f"""
+import runpy
+_setup_helper = runpy.run_path({str(FUSION_HELPERS / 'prepare_cam_setup.py')!r})
+_resources = runpy.run_path({str(FUSION_HELPERS / 'cam_resources.py')!r})
+_prepared = _setup_helper["prepare"](app, payload)
+_loaded = _resources["load_tools"](app, payload)
+result = {{**_prepared, "tools": _loaded["inventory"]}}
+"""
+_CAM_RESOURCE_PRELUDE = f"""
+import adsk.core, adsk.fusion, adsk.cam, runpy
+cam = adsk.cam.CAM.cast(app.activeDocument.products.itemByProductType("CAMProductType"))
+setup = cam.setups.item(payload["setup_index"])
+target_bodies = list(setup.models)
+_resources = runpy.run_path({str(FUSION_HELPERS / 'cam_resources.py')!r})
+tools = _resources["load_tools"](app, payload)["tools"]
+"""
+_FINALIZE_CAM_SCRIPT = f"""
+import runpy
+_setup_helper = runpy.run_path({str(FUSION_HELPERS / 'prepare_cam_setup.py')!r})
+_resources = runpy.run_path({str(FUSION_HELPERS / 'cam_resources.py')!r})
+_setup_helper["prepare"](app, payload)
+result = _resources["finalize_nc"](app, payload)
+"""
 
 # These instructions are outside the mutable prompt versions. Enforcement of
 # verification, geometry, pinned inputs and promotion remains controller code.
@@ -338,23 +363,6 @@ result = {"scope": "accepted_target_only", "setups": _rows,
 """
 )
 
-# Assign the pinned CPS content through a documented API, never a model-selected post.
-_NC_CONFIG_SCRIPT = """import hashlib
-_product = app.activeDocument.products.itemByProductType("CAMProductType")
-_cam = adsk.cam.CAM.cast(_product)
-_index = int(payload["index"])
-_program = _cam.ncPrograms.item(_index) if _cam else None
-if not _program:
-    raise RuntimeError("No configured NC program")
-_post = adsk.cam.PostConfiguration.createFromContent(payload["content"])
-if not _post:
-    raise RuntimeError("Configured CPS cannot be loaded")
-_program.postConfiguration = _post
-result = {"index": _index, "vendor": _post.vendor, "description": _post.description,
-          "sha256": hashlib.sha256(payload["content"].encode()).hexdigest()}
-"""
-
-
 _CUTTING_PARAMETERS_SCRIPT = """
 _product = app.activeDocument.products.itemByProductType("CAMProductType")
 _cam = adsk.cam.CAM.cast(_product)
@@ -495,12 +503,16 @@ class AstraMainAgent(_Roles):
             raise ValueError("Missing trusted Fusion geometry fingerprint")
         return geometry
 
-    def _script(self, source: str, directory: Path, name: str) -> dict:
+    def _script(
+        self, source: str, directory: Path, name: str, arguments: dict | None = None
+    ) -> dict:
         if not source.strip():
             raise ValueError("Astra returned no Fusion source")
         compile(source, name, "exec")
         (directory / f"{name}.py").write_text(source)
-        return self._request("run_script", {"source": source})
+        return self._request(
+            "run_script", {"source": source, **({"arguments": arguments} if arguments else {})}
+        )
 
     def _execute_with_repair(
         self,
@@ -509,6 +521,9 @@ class AstraMainAgent(_Roles):
         directory: Path,
         stage: str,
         before_attempt: Callable[[int], None],
+        *,
+        source_prefix: str = "",
+        script_arguments: dict | None = None,
     ) -> tuple[dict, dict]:
         """Retry only confirmed source errors, after restoring an isolated baseline."""
         for attempt in range(1, self.max_source_attempts + 1):
@@ -518,7 +533,15 @@ class AstraMainAgent(_Roles):
             _save(directory / f"{name}-response.json", reply)
             before_attempt(attempt)
             try:
-                execution = self._script(reply["source"], directory, name)
+                executable = reply["source"]
+                if source_prefix:
+                    # Compile the machining source as its own module so future
+                    # imports and tracebacks remain valid with injected resources.
+                    executable = source_prefix + (
+                        "\nexec(compile(" + repr(executable)
+                        + ", '<silta-machining-plan>', 'exec'), globals())\n"
+                    )
+                execution = self._script(executable, directory, name, script_arguments)
             except Exception as error:
                 confirmed = isinstance(error, FusionScriptError)
                 _save(
@@ -740,23 +763,63 @@ class AstraMainAgent(_Roles):
             raise ValueError("Select an explicit postprocessor before CAM generation")
         directory = Path(context.job_directory) / "workspace" / f"cam-{attempt:04d}"
         directory.mkdir(parents=True, exist_ok=False)
-        source = previous.artifacts.get("f3d") if previous else context.target.artifacts.get("f3d")
+        project_id = context.inputs.machine.get("simulation_model_cloud", {}).get("project_id")
+        cloud = previous.artifacts.get("fusion_document") if previous else None
+        if previous and project_id and cloud is None:
+            raise ValueError("Linked-machine CAM requires its saved Fusion document reference")
+        source = cloud or (
+            previous.artifacts.get("f3d") if previous else context.target.artifacts.get("f3d")
+        )
         if source is None:
-            raise ValueError("Editable frozen Fusion F3D is required")
-        source.verify()
-        self._request("open_cad", {"path": source.path})
+            raise ValueError("Editable frozen Fusion document is required")
+
+        def open_baseline(source_attempt: int) -> dict:
+            source.verify()
+            if cloud:
+                reference = json.loads(Path(source.path).read_text())
+                opened = open_snapshot(self._request, reference)
+                working = save_snapshot(
+                    self._request, reference["project_id"], f"Silta working CAM {attempt}",
+                    previous=reference["data_file_id"], timeout=self.operation_timeout,
+                    receipt=lambda handle: _save(
+                        directory / f"cam-attempt-{source_attempt:02d}-fork-save.json", handle
+                    ),
+                )
+                _save(directory / f"cam-attempt-{source_attempt:02d}-working.json", working)
+                return opened
+            return self._request("open_cad", {"path": source.path})
+
+        open_baseline(1)
+
+        setup_arguments = {"inputs": asdict(context.inputs)}
+
+        def prepare_cam() -> dict:
+            prepared = self._request(
+                "run_script", {"source": _PREPARE_CAM_SCRIPT, "arguments": setup_arguments}
+            )["result"]
+            if type(prepared.get("setup_index")) is not int or not prepared.get("tools"):
+                raise RuntimeError("Deterministic Fusion setup or tool loading failed")
+            setup_arguments["setup_index"] = prepared["setup_index"]
+            return prepared
+
+        prepared = prepare_cam()
+        _save(directory / "cam-setup.json", prepared)
         frozen = json.loads(Path(context.target.artifacts["geometry"].path).read_text())
         before = self._geometry()
         if digest_json(before) != digest_json(frozen):
             raise ValueError("Opened Fusion geometry differs from accepted target")
         prompt = self._prompt("main_prompt", context.versions) + "\nTASK: Propose CAM operations.\n"
         prompt += (
-            "Accepted part bodies carry controller-owned silta/accepted_target_body "
-            "attributes. Never add, delete or edit these attributes. Import fixture/stock "
-            "bodies without target attributes; assign fixtures to setup.fixtures and "
-            "any modeled stock to setup.stockSolids. setup.models must select only "
-            "the tagged accepted part bodies. Every additional design body needs an "
-            "explicit fixture or stock role. Do not move or reshape the part.\n"
+            "The controller has already prepared the machine, fixture, stock, G54, Part "
+            "Position and approved cutter/holder assemblies. Your source receives `cam`, "
+            "`setup`, `target_bodies` and `tools` (a dict keyed by tool number). "
+            "Use tools[number] directly for operation tools. Choose machining strategies, "
+            "operation order, geometry selections, depths, feeds, speeds and linking paths. "
+            "On improvement, edit or replace operations in this setup as needed. "
+            "Do not create setups, import fixtures, load libraries, configure a post or "
+            "create NC programs: deterministic code owns those tasks. Never alter the "
+            "accepted CAD, its attributes, machine, stock, fixture or work coordinate frame. "
+            "Return result={'operation_names': [op.name for op in setup.operations]}.\n"
         )
         prompt += json.dumps(
             {
@@ -767,51 +830,46 @@ class AstraMainAgent(_Roles):
                 "feedback": feedback,
                 "supervisor_instructions": instructions,
                 "installed_api_docs": self.api_docs,
-                "required_script_result": {"nc_program_index": "integer"},
+                "prepared_setup": prepared,
+                "required_script_result": {"operation_names": "list of actual operation names"},
             }
         )
         reply = self._ask(prompt, directory, _SCRIPT_SCHEMA, "cam-source")
 
         def reset_cam(attempt: int) -> None:
             if attempt > 1:
-                source.verify()
-                opened = self._request("open_cad", {"path": source.path})
+                opened = open_baseline(attempt)
+                cam_setup = prepare_cam()
                 actual = self._geometry()
                 _save(
                     directory / f"cam-attempt-{attempt:02d}-baseline.json",
                     {
                         "opened": opened,
+                        "cam_setup": cam_setup,
                         "geometry": actual,
                     },
                 )
                 if digest_json(actual) != digest_json(frozen):
                     raise ValueError("CAM repair baseline differs from accepted target")
 
-        reply, execution = self._execute_with_repair(reply, prompt, directory, "cam", reset_cam)
+        reply, execution = self._execute_with_repair(
+            reply, prompt, directory, "cam", reset_cam,
+            source_prefix=_CAM_RESOURCE_PRELUDE, script_arguments=setup_arguments,
+        )
         after = self._geometry()
         if digest_json(after) != digest_json(frozen):
             raise ValueError("CAM script changed accepted target geometry")
         scope = self._request("run_script", {"source": _CAM_SCOPE_SCRIPT})["result"]
         if scope.get("scope") != "accepted_target_only":
             raise ValueError("Fusion CAM part/fixture scope is unresolved")
-        nc_index = execution.get("result", {}).get("nc_program_index")
-        if type(nc_index) is not int or nc_index < 0:
-            raise ValueError("CAM script did not return a configured NC program index")
-        if not isinstance(postprocessor, dict) or not all(
-            postprocessor.get(key) for key in ("path", "sha256")
-        ):
-            raise ValueError("Postprocessor requires a pinned local CPS path and sha256")
-        post_content = Path(postprocessor["path"]).read_text()
-        if hashlib.sha256(post_content.encode()).hexdigest() != postprocessor["sha256"]:
-            raise ValueError("Configured postprocessor content changed")
         nc = self._request(
-            "run_script",
-            {
-                "source": _NC_CONFIG_SCRIPT,
-                "arguments": {"index": nc_index, "content": post_content},
-            },
+            "run_script", {"source": _FINALIZE_CAM_SCRIPT, "arguments": setup_arguments}
         )["result"]
-        if nc.get("sha256") != postprocessor["sha256"]:
+        _save(directory / "cam-finalization.json", nc)
+        nc_index = nc.get("nc_program_index")
+        if type(nc_index) is not int or nc_index < 0:
+            raise ValueError("Deterministic NC program creation failed")
+        if nc.get("sha256") != postprocessor.get("sha256"):
             raise ValueError("Actual NC postprocessor differs from the configured postprocessor")
         self._request("generate_toolpaths", {"skip_valid": False})
         generated = self._wait("generation_status")
@@ -836,6 +894,14 @@ class AstraMainAgent(_Roles):
             "postprocess", {"program_index": nc_index, "output_directory": str(nc_directory)}
         )
         outputs = self._wait("collect_outputs", {"output_directory": str(nc_directory)})
+        cloud_path = None
+        if project_id:
+            reference = save_snapshot(
+                self._request, project_id, f"Silta CAM {attempt}",
+                timeout=self.operation_timeout,
+                receipt=lambda handle: _save(directory / "candidate-save.json", handle),
+            )
+            cloud_path = _save(directory / "fusion-document.json", reference)
         f3d = directory / "candidate.f3d"
         self._request("export_f3d", {"path": str(f3d)})
         if digest_json(self._geometry()) != digest_json(frozen):
@@ -856,6 +922,8 @@ class AstraMainAgent(_Roles):
             },
         )
         paths = {"f3d": str(f3d), "analysis": str(analysis)}
+        if cloud_path:
+            paths["fusion_document"] = str(cloud_path)
         files = outputs.get("result", {}).get("files", [])
         if not files:
             raise RuntimeError("Fusion produced no posted program files")

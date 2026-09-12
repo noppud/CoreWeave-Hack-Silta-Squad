@@ -363,3 +363,33 @@ def test_binding_resolves_frozen_entity_handles_across_token_changes():
     del handles["original"]
     with pytest.raises(RuntimeError, match="no longer resolves uniquely"):
         inspect({"machine_path": "test.mch", "body_references": first["body_references"]})
+
+
+def test_cloud_candidate_verifies_exact_saved_version_without_local_reimport(case, tmp_path):
+    from dataclasses import replace
+
+    candidate, context = case
+    reference = {"data_file_id": "lineage", "version_id": "exact-version",
+                 "version_number": 1, "project_id": "project"}
+    path = tmp_path / "fusion-document.json"
+    path.write_text(json.dumps(reference))
+    candidate = replace(candidate, artifacts={**candidate.artifacts,
+        "fusion_document": Artifact.from_path(path)})
+    inputs = replace(context.inputs, machine={**context.inputs.machine,
+        "simulation_model_cloud": {"project_id": "project"}})
+    context = replace(context, inputs=inputs, input_digest=inputs.digest)
+
+    class CloudBridge(BridgeDouble):
+        def request(self, action, payload=None):
+            if action == "run_script" and "['open_version']" in payload["source"]:
+                assert payload["arguments"]["reference"] == reference
+                self.actions.append("open-version")
+                return {"result": reference}
+            return super().request(action, payload)
+
+    bridge = CloudBridge()
+    result = FusionUIVerifier(UIDouble(), bridge).verify(candidate, context)
+    assert result.status == "passed"
+    assert "open-version" in bridge.actions and "open_cad" not in bridge.actions
+    binding = next(a for a in result.evidence if Path(a.path).name == "candidate-binding.json")
+    assert json.loads(Path(binding.path).read_text())["opened_document"] == reference

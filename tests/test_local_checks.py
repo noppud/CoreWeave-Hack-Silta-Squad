@@ -1,10 +1,11 @@
 import hashlib
+from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
 
 from silta.cnc.local_checks import LocalCheckRunner
-from silta.cnc.models import Artifact
+from silta.cnc.models import Artifact, Candidate
 
 
 def make(tmp_path, source, timeout=2):
@@ -49,6 +50,32 @@ def check(data):
     return {'passed': True, 'issues': []}
 """,
     )
+    assert runner.run(candidate, context).passed
+
+
+def test_large_cad_is_streamed_and_available_to_actual_check_process(tmp_path, monkeypatch):
+    runner, _, context = make(tmp_path, """
+import hashlib, os
+def check(data):
+    artifact = data['candidate']['artifacts']['f3d']
+    assert os.path.getsize(artifact['path']) == 21 * 1024 * 1024
+    with open(artifact['path'], 'rb') as stream:
+        assert hashlib.file_digest(stream, 'sha256').hexdigest() == artifact['sha256']
+    return {'passed': True, 'issues': []}
+""")
+    archive = tmp_path / "candidate.f3d"
+    with archive.open("wb") as output:
+        for _ in range(21):
+            output.write(b"test-cad" * (1024 * 128))
+    original_read_bytes = Path.read_bytes
+
+    def read_bytes(path):
+        if path.suffix == ".f3d":
+            raise AssertionError("CAD artifacts must not be loaded wholesale")
+        return original_read_bytes(path)
+
+    monkeypatch.setattr(Path, "read_bytes", read_bytes)
+    candidate = Candidate.from_paths("large-cad", "fixed-target", {"f3d": str(archive)})
     assert runner.run(candidate, context).passed
 
 

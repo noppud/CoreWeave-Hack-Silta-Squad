@@ -2,7 +2,7 @@
 
 Drawing/PDF → accepted CAD → CAM → cheap checks → Fusion verification → supervisor → improve or return the best verified plan. Simulation failures also propose better checks; reusable check/prompt changes must pass paired Weave evaluations before promotion.
 
-**Current state:** the controller, Astra role adapters, Fusion add-in, local check runner, evaluation gate and marimo viewer are implemented. Astra subscription execution and Weave trace write/read have passed live smoke tests. A live SDK run repaired a Fusion API error and exported CAD/STEP; independent review then rejected its default steel material against the AL6061 drawing. Live Fusion CAM/verification and the complete learning demonstration remain unverified. Unit tests are not manufacturing validation.
+**Current state:** the controller, Astra role adapters, Fusion add-in, local check runner, evaluation gate and marimo viewer are implemented. Astra subscription execution and Weave trace write/read have passed live smoke tests. The live SDK CAD stage now generates a drawing-matched AL6061 part and passes independent review; actual STEP export retains Aluminum6061 and density2700. The positioned vise/parallels and two cutter/holder assemblies have passed live Fusion export/readback checks. Live Fusion CAM/verification and the complete learning demonstration remain unverified. Unit tests are not manufacturing validation.
 
 ## Run
 
@@ -38,8 +38,8 @@ consent through the SDK's MCP elicitation protocol; it does not edit global app
 permissions. Other app requests and shell/file approval requests remain denied.
 The permission handshake and a subsequent native Fusion screen read have passed
 live tests through the project launcher. Fusion's welcome setup is complete;
-the updated SiltaBridge add-in has started and answered a live ping. CAD/CAM
-generation and completed simulation still require live integration validation.
+the updated SiltaBridge add-in has started and answered a live ping. CAD generation and review have passed live integration. CAM generation and
+completed simulation still require live validation.
 
 The Python launcher owns the autonomous loop. It calls the Codex SDK directly;
 this development conversation is not required to advance a job. Fusion and the

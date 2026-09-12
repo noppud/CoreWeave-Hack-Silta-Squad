@@ -1,18 +1,21 @@
 """Adapter contracts with explicit model/Fusion doubles; no live CAM assertions."""
 
+import ast
 import hashlib
 import json
-from dataclasses import replace
+from dataclasses import asdict, replace
 from pathlib import Path
 
 import pytest
 
 from silta.cnc.agents import (
+    _CAM_RESOURCE_PRELUDE,
     _CAM_SCOPE_SCRIPT,
     _CUTTING_PARAMETERS_SCRIPT,
+    _FINALIZE_CAM_SCRIPT,
     _FRESH_CAD_SCRIPT,
     _GEOMETRY_SCRIPT,
-    _NC_CONFIG_SCRIPT,
+    _PREPARE_CAM_SCRIPT,
     _REGISTER_TARGET_SCRIPT,
     _TARGET_STEP_SCRIPT,
     AstraCheckLearner,
@@ -35,7 +38,22 @@ class ClientDouble:
 
 GEOMETRY = {"method": "test-fingerprint", "bodies": [{"volume_cm3": 12}]}
 CAD_REPLY = {"source": "result = {'dimensions': 'test'}", "explanation": "test", "unresolved": []}
-CAM_REPLY = {"source": "result = {'nc_program_index': 0}", "explanation": "test", "unresolved": []}
+CAM_REPLY = {
+    "source": "result = {'operation_names': ['test pocket']}",
+    "explanation": "test", "unresolved": [],
+}
+PREPARED_SETUP = {"setup_index": 0, "tools": [{"number": 1, "description": "approved test tool"}]}
+
+
+def machining_source(source):
+    """Read the literal agent program from the trusted resource wrapper in doubles."""
+    if not source.startswith(_CAM_RESOURCE_PRELUDE):
+        return source
+    wrapper = ast.parse(source.removeprefix(_CAM_RESOURCE_PRELUDE))
+    compile_call = wrapper.body[0].value.args[0]
+    assert isinstance(compile_call, ast.Call) and compile_call.func.id == "compile"
+    assert ast.literal_eval(compile_call.args[1]) == "<silta-machining-plan>"
+    return ast.literal_eval(compile_call.args[0])
 ACCEPT_REPLY = {
     "accepted": True,
     "unresolved": [],
@@ -54,6 +72,7 @@ ACCEPT_REPLY = {
 class BridgeDouble:
     def __init__(self):
         self.actions = []
+        self.script_calls = []
         self.geometry = GEOMETRY.copy()
         self.change_geometry = False
         self.omit_nc = False
@@ -65,6 +84,9 @@ class BridgeDouble:
         self.actions.append(action)
         if action == "run_script":
             source = payload["source"]
+            self.script_calls.append(json.loads(json.dumps(payload)))
+            if source == _PREPARE_CAM_SCRIPT:
+                return {"result": PREPARED_SETUP.copy()}
             if source == _GEOMETRY_SCRIPT:
                 return {"result": self.geometry.copy()}
             if source == _REGISTER_TARGET_SCRIPT:
@@ -74,15 +96,14 @@ class BridgeDouble:
             if source == _TARGET_STEP_SCRIPT:
                 Path(payload["arguments"]["path"]).write_text("test part-only STEP")
                 return {"result": {"scope": "accepted_target_only"}}
-            if source == _NC_CONFIG_SCRIPT:
+            if source == _FINALIZE_CAM_SCRIPT:
+                post = payload["arguments"]["inputs"]["setup"]["postprocessor"]
                 return {
                     "result": {
-                        "index": 0,
+                        **({} if self.omit_nc else {"nc_program_index": 0}),
                         "vendor": "test",
                         "description": "test",
-                        "sha256": hashlib.sha256(
-                            payload["arguments"]["content"].encode()
-                        ).hexdigest(),
+                        "sha256": hashlib.sha256(Path(post["path"]).read_bytes()).hexdigest(),
                     }
                 }
             if source == _CUTTING_PARAMETERS_SCRIPT:
@@ -99,8 +120,6 @@ class BridgeDouble:
                 }
             if "saveAsImageFile" in source:
                 # Test double extracts literal output path; it never executes generated source.
-                import ast
-
                 tree = ast.parse(source)
                 path = Path(next(
                     node.args[0].value for node in ast.walk(tree)
@@ -109,10 +128,10 @@ class BridgeDouble:
                 ))
                 path.write_bytes(b"test preview placeholder")
                 return {"result": {"saved": True}}
-            if "nc_program_index" in source:
+            if source.startswith(_CAM_RESOURCE_PRELUDE):
                 if self.change_geometry:
                     self.geometry = {"method": "test-fingerprint", "bodies": [{"volume_cm3": 13}]}
-                return {"result": {} if self.omit_nc else {"nc_program_index": 0}}
+                return {"result": {"operation_names": ["test pocket"]}}
             return {"result": {"created": True}}
         if action in {"export_step", "export_f3d"}:
             Path(payload["path"]).write_text("test CAD artifact")
@@ -185,6 +204,21 @@ def test_actual_source_export_and_post_sequence_produces_unverified_candidate(tm
     assert "simulation" not in bridge.actions
     assert bridge.actions.index("generate_toolpaths") < bridge.actions.index("postprocess")
     assert "group operations" in client.calls[-1][0]
+    assert all(
+        name in client.calls[-1][0] for name in ("`cam`", "`setup`", "`tools`", "`target_bodies`")
+    )
+    assert json.dumps(PREPARED_SETUP) in client.calls[-1][0]
+    machining = next(
+        call for call in bridge.script_calls if call["source"].startswith(_CAM_RESOURCE_PRELUDE)
+    )
+    assert machining_source(machining["source"]) == CAM_REPLY["source"]
+    assert machining["arguments"] == {
+        "inputs": json.loads(json.dumps(asdict(context.inputs))), "setup_index": 0,
+    }
+    scripts = [call["source"] for call in bridge.script_calls]
+    assert scripts.index(_PREPARE_CAM_SCRIPT) < scripts.index(machining["source"])
+    assert scripts.index(machining["source"]) < scripts.index(_FINALIZE_CAM_SCRIPT)
+    assert "nc_program_index" not in CAM_REPLY["source"]
 
 
 def test_ambiguous_drawing_never_executes_fusion(tmp_path, inputs):
@@ -264,20 +298,22 @@ def test_geometry_mutation_stops_before_generation(tmp_path, inputs):
     with pytest.raises(ValueError, match="changed accepted target"):
         main.propose(context, None, {}, "", 1)
     assert "generate_toolpaths" not in bridge.actions
+    assert not any(call["source"] == _FINALIZE_CAM_SCRIPT for call in bridge.script_calls)
 
 
-def test_absent_nc_program_never_synthesizes_output(tmp_path, inputs):
+def test_finalizer_missing_nc_program_never_generates_or_posts(tmp_path, inputs):
     main, bridge, _, context = prepare(tmp_path, inputs, [CAM_REPLY])
     bridge.omit_nc = True
-    with pytest.raises(ValueError, match="configured NC program index"):
+    with pytest.raises(ValueError, match="Deterministic NC program creation failed"):
         main.propose(context, None, {}, "", 1)
     assert "postprocess" not in bridge.actions
+    assert "generate_toolpaths" not in bridge.actions
 
 
 def test_changed_postprocessor_fails_before_posting(tmp_path, inputs):
     main, bridge, _, context = prepare(tmp_path, inputs, [CAM_REPLY])
     Path(inputs.setup["postprocessor"]["path"]).write_text("different")
-    with pytest.raises(ValueError, match="postprocessor content changed"):
+    with pytest.raises(ValueError, match="Actual NC postprocessor differs"):
         main.propose(context, None, {}, "", 1)
     assert "postprocess" not in bridge.actions
 
@@ -643,7 +679,13 @@ class ScriptFailureBridge(BridgeDouble):
             if source == _FRESH_CAD_SCRIPT:
                 self.fresh_documents += 1
                 self.steps.append("fresh-cad")
-            if source == self.bad_source:
+            if source == _PREPARE_CAM_SCRIPT:
+                self.steps.append("prepare-setup")
+            if source == _GEOMETRY_SCRIPT:
+                self.steps.append("verify-geometry")
+            if source == _FINALIZE_CAM_SCRIPT:
+                self.steps.append("finalize-nc")
+            if machining_source(source) == self.bad_source:
                 self.failed_executions += 1
                 self.steps.append("source-error")
                 if self.timeout:
@@ -661,7 +703,10 @@ class ScriptFailureBridge(BridgeDouble):
                     ],
                     "result": {"traceback": "Traceback: generated-source.py line 9"},
                 }
-            if source == CAM_REPLY["source"]:
+            if (
+                source.startswith(_CAM_RESOURCE_PRELUDE)
+                and machining_source(source) == CAM_REPLY["source"]
+            ):
                 self.steps.append("repaired-cam")
         return super().request(action, payload, **kwargs)
 
@@ -703,14 +748,69 @@ def test_cam_source_repair_reopens_frozen_candidate_before_executing_replacement
     main, _, client, context = prepare(tmp_path, inputs, [bad, CAM_REPLY])
     bridge = ScriptFailureBridge(bad["source"], partial_cam=True)
     main.bridge = bridge
+    ask = client.ask
+
+    def ask_with_prepared_setup(prompt, **kwargs):
+        # The first model call already sees deterministic setup/tool preparation.
+        assert "prepare-setup" in bridge.steps
+        return ask(prompt, **kwargs)
+
+    client.ask = ask_with_prepared_setup
     candidate = main.propose(context, None, {}, "shorter paths", 1)
     candidate.verify()
     assert bridge.opens == 2 and bridge.failed_executions == 1
-    assert bridge.steps == ["open-frozen", "source-error", "open-frozen", "repaired-cam"]
+    assert bridge.steps == [
+        "open-frozen", "prepare-setup", "verify-geometry", "source-error",
+        "open-frozen", "prepare-setup", "verify-geometry", "repaired-cam",
+        "verify-geometry", "finalize-nc", "verify-geometry",
+    ]
     assert "partially mutated setup" in client.calls[-1][0]
     directory = Path(context.job_directory) / "workspace/cam-0001"
     baseline = json.loads((directory / "cam-attempt-02-baseline.json").read_text())
     assert baseline["geometry"] == GEOMETRY
+    assert baseline["cam_setup"] == PREPARED_SETUP
+    replacement = (directory / "cam-attempt-02.py").read_text()
+    assert machining_source(replacement) == CAM_REPLY["source"]
+
+
+def test_compiled_machining_source_preserves_future_import_and_provided_resources(tmp_path):
+    class ExecutingBridge:
+        def request(self, action, payload):
+            assert action == "run_script"
+            namespace = {"payload": payload["arguments"]}
+            exec(compile(payload["source"], "test-bridge-wrapper", "exec"), namespace)
+            return {"result": namespace["result"]}
+
+    source = (
+        "from __future__ import annotations\n"
+        "selected: FusionTool = tools[payload['tool_number']]\n"
+        "result = {'selected': selected, 'annotation': __annotations__['selected']}\n"
+    )
+    main = AstraMainAgent(ClientDouble([]), ExecutingBridge())
+    _, execution = main._execute_with_repair(
+        dict(CAM_REPLY, source=source), "test task", tmp_path, "cam", lambda _: None,
+        source_prefix="tools = {1: 'approved cutter'}\n",
+        script_arguments={"tool_number": 1},
+    )
+    assert execution["result"] == {"selected": "approved cutter", "annotation": "FusionTool"}
+
+
+@pytest.mark.parametrize("prepared", [{"setup_index": 0, "tools": []}, {"tools": [{"number": 1}]}])
+def test_incomplete_deterministic_setup_stops_before_asking_model(tmp_path, inputs, prepared):
+    main, bridge, client, context = prepare(tmp_path, inputs, [CAM_REPLY])
+    request = bridge.request
+
+    def unavailable(action, payload=None, **kwargs):
+        if action == "run_script" and payload["source"] == _PREPARE_CAM_SCRIPT:
+            return {"result": prepared}
+        return request(action, payload, **kwargs)
+
+    bridge.request = unavailable
+    initial_calls = len(client.calls)
+    with pytest.raises(RuntimeError, match="Deterministic Fusion setup or tool loading failed"):
+        main.propose(context, None, {}, "", 1)
+    assert len(client.calls) == initial_calls
+    assert "generate_toolpaths" not in bridge.actions
 
 
 def test_repeated_confirmed_source_errors_stop_after_three_attempts(tmp_path, inputs):
@@ -838,3 +938,62 @@ def test_target_preview_fits_and_refreshes_before_capture(tmp_path, inputs):
     with pytest.raises(RuntimeError, match="fit/refresh"):
         exec(source, environment)
     assert events == []
+
+
+def test_linked_cam_saves_exact_version_and_forks_before_improvement(tmp_path, inputs):
+    inputs = replace(inputs, machine={**inputs.machine,
+        "simulation_model_cloud": {"project_id": "test-project"}})
+    main, _, client, context = prepare(tmp_path, inputs, [CAM_REPLY, CAM_REPLY])
+
+    class CloudBridge(BridgeDouble):
+        def __init__(self):
+            super().__init__()
+            self.timeline = []
+            self.counter = 0
+            self.reference = None
+
+        def request(self, action, payload=None, **kwargs):
+            payload = payload or {}
+            source = payload.get("source", "")
+            if action == "run_script" and "cam_documents.py" in source:
+                args = payload["arguments"]
+                if "['begin_save']" in source:
+                    self.counter += 1
+                    self.timeline.append(("save", args.get("previous_data_file_id")))
+                    self.reference = {
+                        "data_file_id": f"lineage-{self.counter}",
+                        "version_id": f"urn:adsk.wipprod:fs.file:vf.test{self.counter}?version=1",
+                        "version_number": 1, "project_id": "test-project",
+                        "document_name": args["name"],
+                    }
+                    return {"result": {"doc_name": args["name"]}}
+                if "['save_status']" in source:
+                    return {"result": {"completed": True, "reference": self.reference}}
+                if "['open_version']" in source:
+                    self.timeline.append(("open-version", args["reference"]["version_id"]))
+                    return {"result": args["reference"]}
+                raise AssertionError(source)
+            if source == _PREPARE_CAM_SCRIPT:
+                self.timeline.append(("prepare", None))
+            if source.startswith(_CAM_RESOURCE_PRELUDE):
+                self.timeline.append(("machining", None))
+            return super().request(action, payload, **kwargs)
+
+    bridge = CloudBridge()
+    main.bridge = bridge
+    first = main.propose(context, None, {}, "", 1)
+    frozen_reference = Path(first.artifacts["fusion_document"].path).read_text()
+    first.verify()
+    first_version = json.loads(frozen_reference)
+    bridge.timeline.clear()
+    second = main.propose(context, first, {}, "reduce tool changes", 2)
+    second.verify()
+    assert bridge.timeline == [
+        ("open-version", first_version["version_id"]),
+        ("save", first_version["data_file_id"]),
+        ("prepare", None), ("machining", None), ("save", None),
+    ]
+    assert bridge.actions.count("open_cad") == 1  # Only the initial part-only target.
+    assert Path(first.artifacts["fusion_document"].path).read_text() == frozen_reference
+    assert json.loads(Path(second.artifacts["fusion_document"].path).read_text())[
+        "data_file_id"] != first_version["data_file_id"]

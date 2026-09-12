@@ -61,7 +61,8 @@ def test_unsafe_extra_preset_cannot_survive(prepared):
 
 def test_changed_source_hash_blocks_before_writing(tmp_path):
     config = json.loads(CONFIG.read_text())
-    config["tools"]["library"]["sha256"] = "0" * 64
+    source = config["tools"].get("source_library", config["tools"]["library"])
+    source["sha256"] = "0" * 64
     modified = tmp_path / "config.json"
     modified.write_text(json.dumps(config))
     with pytest.raises(ValueError, match="source changed"):
@@ -165,3 +166,40 @@ def test_live_milling_preset_without_retract_and_with_fn_alias_is_accepted(prepa
     report = verify_readback(expected, actual)
     assert report["retract_verification"]["status"] == "deferred_to_operation_and_simulation"
     assert report["feed_mm_min"] == pytest.approx(1371.6)
+
+
+def test_reprepare_configured_library_uses_original_catalog_without_compounded_changes(tmp_path):
+    configured = json.loads(CONFIG.read_text())
+    source = configured["tools"]["source_library"]
+    catalog = json.loads(Path(source["path"]).read_text())
+    # Recover the initial setup state from its preserved source identity.
+    original = copy.deepcopy(configured)
+    original["tools"]["library"] = original["tools"].pop("source_library")
+    for entry in original["tools"]["entries"]:
+        if "source_geometry" in entry:
+            entry["geometry"] = entry.pop("source_geometry")
+    original_path = tmp_path / "original-config.json"
+    original_path.write_text(json.dumps(original))
+    initial = prepare(original_path, tmp_path / "initial")
+    rebuilt = prepare(CONFIG, tmp_path / "rebuilt")
+    first = json.loads(Path(initial["input_path"]).read_text())
+    second = json.loads(Path(rebuilt["input_path"]).read_text())
+    assert first == second
+    assert second["version"] == catalog["version"]
+    assert rebuilt["cutter_source_sha256"] == source["sha256"]
+    assert rebuilt["cutter_source_path"] == str(Path(source["path"]).resolve())
+    assert rebuilt["cutter_source_version"] == catalog["version"]
+    for tool, expected_feed in zip(second["data"], [1371.6, 685.8], strict=True):
+        preset = tool["start-values"]["presets"][0]
+        assert preset["v_f"] * 25.4 == pytest.approx(expected_feed)
+        assert preset["v_f_plunge"] == pytest.approx(preset["v_f"] / 3)
+        assert preset["n"] == 6000
+
+
+def test_changed_preserved_source_geometry_blocks_repreparation(tmp_path):
+    configured = json.loads(CONFIG.read_text())
+    configured["tools"]["entries"][0]["source_geometry"]["LCF"] = 0.25
+    path = tmp_path / "bad-source-config.json"
+    path.write_text(json.dumps(configured))
+    with pytest.raises(ValueError, match="Configured geometry differs"):
+        prepare(path, tmp_path / "output")

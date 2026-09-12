@@ -17,6 +17,7 @@ from pathlib import Path
 from typing import Protocol
 
 from .agents import _GEOMETRY_SCRIPT, _TARGET_BODY_HELPERS
+from .cam_documents import open_snapshot
 from .models import Artifact, Candidate, JobContext, VerificationResult, digest_json
 
 REQUIRED_COVERAGE = (
@@ -244,12 +245,18 @@ class FusionUIVerifier:
             context.inputs.verify()
             context.target.verify()
             f3d = candidate.artifacts.get("f3d")
-            if not f3d:
-                raise ValueError("Exact candidate F3D is required for UI verification")
+            cloud = candidate.artifacts.get("fusion_document")
+            if not (f3d or cloud):
+                raise ValueError("Exact candidate document is required for UI verification")
+            if context.inputs.machine.get("simulation_model_cloud") and cloud is None:
+                raise ValueError("Linked-machine CAM requires its saved Fusion document reference")
             definition = context.inputs.machine.get("definition", {})
             machine = Artifact(definition["path"], definition["sha256"])
             machine.verify()
-            self._request("open_cad", {"path": f3d.path})
+            opened = (
+                open_snapshot(self._request, json.loads(Path(cloud.path).read_text()))
+                if cloud else self._request("open_cad", {"path": f3d.path})
+            )
             geometry = self._request("run_script", {"source": _GEOMETRY_SCRIPT})["result"]
             frozen = json.loads(Path(context.target.artifacts["geometry"].path).read_text())
             if digest_json(geometry) != digest_json(frozen):
@@ -280,7 +287,9 @@ class FusionUIVerifier:
                     {
                         "candidate_digest": candidate.digest,
                         "input_digest": context.input_digest,
-                        "f3d": asdict(f3d),
+                        "f3d": asdict(f3d) if f3d else None,
+                        "fusion_document": asdict(cloud) if cloud else None,
+                        "opened_document": opened,
                         "geometry": geometry,
                         "binding": binding,
                     },
@@ -289,7 +298,7 @@ class FusionUIVerifier:
             expected_setups = [s["name"] for s in setups]
             prompt = (
                 "Operate ONLY the Autodesk Fusion application using the native computer-use tool. "
-                "The controller just opened the exact candidate F3D and checked its"
+                "The controller just opened the exact candidate document and checked its"
                 " geometry, machine "
                 "and CAM settings. Do not open another document, run scripts, "
                 "regenerate or edit CAM, "

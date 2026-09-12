@@ -1,7 +1,7 @@
-"""Deterministic preflight, executed only by the hosted runner in production.
+"""Deterministic preflight, executed by the configured check runner.
 
 Passing means these limited checks found no issue, never manufacturability proof.
-Input: HostedCheckRunner JSON; analysis is the trusted Fusion inspection artifact.
+Input: check-runner JSON; analysis is the trusted Fusion inspection artifact.
 """
 
 import json
