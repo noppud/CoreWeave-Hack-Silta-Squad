@@ -80,7 +80,9 @@ class LocalStorage:
         for path in prefix_path.rglob("*"):
             if path.is_file():
                 rel = path.relative_to(self.root)
-                results.append(str(rel))
+                # Storage keys use '/' on every OS, like GCS object names.
+                # Windows separators are rejected by _validate_key on recall.
+                results.append(rel.as_posix())
         return sorted(results)
 
 
