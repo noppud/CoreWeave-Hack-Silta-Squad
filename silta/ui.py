@@ -14,6 +14,9 @@ dimension callout between what was measured and what was required.
 
 from __future__ import annotations
 
+from html import escape
+from pathlib import Path
+
 from silta.domain import (
     Attempt,
     CheckResult,
@@ -383,6 +386,9 @@ input[type="range"], input[type="radio"], input[type="checkbox"], progress {
 </style>
 """
 
+# Load shared product styles after the legacy component geometry.
+THEME += "<style>" + (Path(__file__).parent / "static/product.css").read_text() + "</style>"
+
 _DISPOSITION_TONE = {
     Disposition.PASSED: "pass",
     Disposition.FAILED_CHECKS: "fail",
@@ -394,7 +400,11 @@ _DISPOSITION_TONE = {
 }
 
 # The stamp carries the verdict; the precise disposition stays in the grid below.
-_STAMP = {"pass": ("approve", "Approved"), "fail": ("reject", "Rejected"), "warn": ("hold", "Held")}
+_STAMP = {
+    "pass": ("approve", "Passed prototype checks"),
+    "fail": ("reject", "Rejected"),
+    "warn": ("hold", "Review needed"),
+}
 
 _STATE_TONE = {
     JobState.PASSED: "ok",
@@ -422,30 +432,28 @@ def _revision_triangle(number: int) -> str:
 
 
 def masthead(session_id: str, planner: str, commit: str | None) -> str:
-    short = (commit or "uncommitted")[:8]
-    # Amber means "running degraded", so it appears only without an inference key.
-    planner_tone = "flag" if "deterministic" in planner.lower() else ""
-    return f"""{THEME}
-<div class="sx-mast">
-  <h1 class="sx-word">Silta CNC</h1>
-  <p class="sx-tag">
-    A dimensioned drawing becomes a solid model, a machining recipe, a compiled
-    toolpath and a simulated cut. When a <b>real geometric check</b> fails, the
-    measurement that failed goes back to the planner, and the next attempt is
-    measured the same way.
-  </p>
-  <p class="sx-stake">Nothing here passes because a model said it would.</p>
-</div>
-<div class="sx-readout">
-  <div class="sx-cellr"><span class="sx-k">Session</span>
-    <div class="sx-v">{session_id}</div></div>
-  <div class="sx-cellr"><span class="sx-k">Planner</span>
-    <div class="sx-v {planner_tone}">{planner}</div></div>
-  <div class="sx-cellr"><span class="sx-k">Build</span>
-    <div class="sx-v">{short}</div></div>
-  <div class="sx-cellr"><span class="sx-k">Simulator</span>
-    <div class="sx-v">2.5D heightfield, 0.5 mm grid</div></div>
-</div>"""
+    return THEME + brand() + '<p class="sx-tag">Turn a drawing into a checked machining plan.</p>'
+
+
+def brand() -> str:
+    return """<header class="sx-mast"><div class="sx-brand">
+<svg viewBox="0 0 40 40" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2">
+<path d="M5 30V12M35 30V12M5 20H35M5 20L20 9L35 20M12 20V30M28 20V30"/>
+<path d="M5 34H35" stroke="#b52e36"/></svg>
+<h1 class="sx-word">SILTA <span>CAD</span></h1></div></header>"""
+
+
+def check_summary(attempt: Attempt) -> str:
+    failed = len(attempt.blocking_failures)
+    status = (
+        "Passed prototype checks"
+        if attempt.disposition is Disposition.PASSED
+        else sentence(attempt.disposition.value)
+    )
+    return (
+        f'<div class="sx-summary"><b>{escape(status)}</b> · '
+        f"{len(attempt.checks)} checks evaluated · {failed} blocking failures</div>"
+    )
 
 
 def section(title: str, *facts: tuple[str, str]) -> str:
@@ -465,11 +473,11 @@ def run_readout(state: JobState, attempts: int, wall: float, simulations: int) -
     return f"""<div class="sx-readout">
   <div class="sx-cellr"><span class="sx-k">Outcome</span>
     <div class="sx-v {tone}">{label}</div></div>
-  <div class="sx-cellr"><span class="sx-k">Candidates</span>
+  <div class="sx-cellr"><span class="sx-k">Attempts</span>
     <div class="sx-v">{attempts}</div></div>
   <div class="sx-cellr"><span class="sx-k">Simulations</span>
     <div class="sx-v">{simulations}</div></div>
-  <div class="sx-cellr"><span class="sx-k">Wall clock</span>
+  <div class="sx-cellr"><span class="sx-k">Planning time</span>
     <div class="sx-v">{wall:.1f} s</div></div>
 </div>"""
 
@@ -506,7 +514,7 @@ def attempt_card(attempt: Attempt, is_last: bool) -> str:
     if attempt.repair_diff:
         rows = "".join(
             f'<div class="sx-rev-row">{_revision_triangle(n)}'
-            f'<span class="sx-rev-text">{d}</span></div>'
+            f'<span class="sx-rev-text">{escape(d)}</span></div>'
             for n, d in enumerate(attempt.repair_diff, start=1)
         )
         diff = f'<div class="sx-diff">{rows}</div>'
@@ -515,18 +523,15 @@ def attempt_card(attempt: Attempt, is_last: bool) -> str:
     if failure is not None:
         why = (
             f'<div class="sx-why"><span class="id">{failure.check_id}</span> '
-            f"{failure.message}</div>{_dimension_callout(failure)}"
+            f"{escape(failure.message)}</div>{_dimension_callout(failure)}"
         )
     else:
         why = (
-            f'<div class="sx-why">Every blocking check cleared across '
-            f"{len(attempt.checks)} evaluations, and the simulated cut matched the "
-            f"target surface.</div>"
+            f'<div class="sx-why">{escape(sentence(attempt.disposition.value))}. '
+            f"{len(attempt.checks)} checks evaluated.</div>"
         )
 
     rows = [
-        ("Disposition", sentence(attempt.disposition.value), ""),
-        ("Source", sentence(attempt.plan_source), ""),
         ("Tools", tools, ""),
         ("Clearance", clearance, ""),
     ]
@@ -544,18 +549,17 @@ def attempt_card(attempt: Attempt, is_last: bool) -> str:
         ]
         halt = ""
     else:
-        halt = (
-            '<div class="sx-halt">Stopped before simulation. No machine time was spent on it.</div>'
-        )
+        halt = '<div class="sx-halt">Stopped before simulation.</div>'
     grid = (
         '<dl class="sx-meas">'
         + "".join(f'<dt>{k}</dt><dd class="{c}">{v}</dd>' for k, v, c in rows)
         + "</dl>"
     )
 
+    label = "Initial plan" if attempt.index == 0 else f"Revision {attempt.index}"
     return f"""<div class="sx-att {tone}">
   <div class="sx-att-h">
-    <span class="sx-att-n">Attempt <b>{attempt.index:02d}</b></span>
+    <span class="sx-att-n">{label}</span>
     <span class="sx-stamp {stamp_class}">{stamp_word}</span>
   </div>
   {diff}
@@ -649,15 +653,12 @@ def design_guard(spec: PartSpec, attempts: list[Attempt]) -> str:
     hashes = {a.plan.spec_design_hash for a in attempts if a.plan}
     unchanged = hashes == {spec.design_hash}
     tone = "ok" if unchanged else "bad"
-    word = "unchanged across every attempt" if unchanged else "changed, and needs investigating"
-    return (
-        f'<div class="sx-note">The confirmed design hash '
-        f'<span class="sx-mono">{spec.design_hash[:16]}</span> is '
-        f'<span class="sx-v {tone}" style="display:inline">{word}</span>. '
-        "Repair may change tooling, ordering, step parameters and clearances. It "
-        "cannot change a dimension, invent a tool, move a fixture or edit a "
-        "threshold — those need a visible operator edit and a new revision.</div>"
+    word = (
+        "Design unchanged across all plans."
+        if unchanged
+        else "Design could not be confirmed unchanged. Review required."
     )
+    return f'<div class="sx-note"><span class="sx-v {tone}">{word}</span></div>'
 
 
 LIMITATIONS = (

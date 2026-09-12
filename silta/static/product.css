@@ -1,0 +1,58 @@
+/* SILTA CAD: quiet interface, high-contrast geometry. */
+:root {
+  --field: #f7f7f4; --field-2: #ffffff; --field-3: #efefeb;
+  --white: #191919; --line: #333333; --line-2: #d8d8d2; --dim: #62625d;
+  --stamp: #b52e36; --approve: #216440; --hold: #865c12;
+  --text: Arial, Helvetica, sans-serif; --disp: Arial, Helvetica, sans-serif;
+  --mono: ui-monospace, Consolas, monospace;
+}
+html, body { background: var(--field); color: var(--white); }
+body { font-size: 16px; }
+div.m-auto[class*="max-w-full"] { max-width: 1320px !important; border: 0; box-shadow: none; }
+.sx-mast { background: transparent; border: 0; padding: 10px 0 18px; }
+.sx-brand { display: flex; align-items: center; gap: 12px; }
+.sx-brand svg { width: 36px; height: 36px; flex-shrink: 0; }
+.sx-word { font-size: 25px; letter-spacing: -.04em; font-weight: 700; line-height: 1.2; }
+.sx-word span { font-weight: 400; }
+.sx-tag { font-size: 17px; margin: 14px 0 0; font-weight: 400; line-height: 1.4; }
+.sx-h { margin: 20px 0 12px; }
+.sx-h span.t { padding-left: 0; font-size: 22px; letter-spacing: -.025em; }
+.sx-h span.t::before { display: none; }
+.sx-readout { border: 0; border-top: 1px solid var(--line-2); border-bottom: 1px solid var(--line-2); background: transparent; margin: 12px 0; }
+.sx-cellr { padding: 14px 16px; }
+.sx-k { font-size: 12px; font-weight: 400; }
+.sx-v { font-size: 16px; }
+.sx-note { background: transparent; border: 0; padding: 8px 0; font-size: 14px; font-weight: 400; line-height: 1.5; }
+.sx-story { border: 0; background: transparent; padding: 14px 0; }
+.sx-story h2 { font-size: clamp(28px, 3.2vw, 44px); line-height: 1.1; letter-spacing: -.04em; margin-bottom: 12px; }
+.sx-story p { font-size: 17px; line-height: 1.5; margin: 0; max-width: 60ch; }
+.sx-att { background: #fff; padding: 18px; }
+.sx-att-n { font-family: var(--text); }
+.sx-stamp { transform: none; font-family: var(--text); font-size: 12px; letter-spacing: 0; border-width: 1px; }
+.sx-rev { display: none; }
+.sx-diff { border: 0; margin: 8px 0; }
+.sx-why { font-size: 15px; line-height: 1.5; }
+.sx-why .id { display: none; }
+.sx-meas { font-size: 13px; }
+.sx-table th, .sx-table td { padding: 10px; font-size: 13px; }
+.sx-share { background: #fff; }
+.sx-scope { font-size: 12px; color: var(--dim); padding: 12px 0; }
+.sx-summary { font-size: 16px; line-height: 1.5; padding: 12px 0; }
+.sx-summary strong { color: var(--approve); }
+.sx-slide-title { font-size: 38px; letter-spacing: -.04em; line-height: 1.1; }
+.sx-slide-note { font-size: 14px; color: var(--dim); }
+.sx-table-wrap { overflow-x: auto; }
+.reveal-viewport { background: #f7f7f4; color: #191919; }
+.reveal .slides { text-align: left; }
+.reveal .sx-mast { padding: 0 0 8px; }
+.reveal .sx-story { padding: 4px 0 12px; }
+.reveal .sx-story h2 { font-size: 34px; }
+.reveal .sx-story p { font-size: 16px; }
+.reveal .sx-table { width: 100%; margin: 24px 0; }
+.reveal .sx-table th, .reveal .sx-table td { font-size: 22px; padding: 18px; }
+@media (max-width: 700px) {
+  .sx-word { font-size: 22px; letter-spacing: -.04em; }
+  .sx-mast { padding: 8px 0; }
+  .sx-att { min-width: 0; }
+  .sx-story h2 { font-size: 28px; }
+}

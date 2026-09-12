@@ -47,4 +47,4 @@ asyncio_mode = "auto"
 # renders its own widgets inside shadow roots that page CSS cannot reach, so its
 # theme has to be set here for sliders, dropdowns and buttons to match the page.
 [tool.marimo.display]
-theme = "dark"
+theme = "light"

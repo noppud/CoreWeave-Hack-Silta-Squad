@@ -34,7 +34,7 @@ SERVICES = (
     (
         "Notebook",
         "http://127.0.0.1:2732/",
-        "Silta CNC · 3 minute demo",
+        "SILTA CAD · Demo",
         [
             str(ROOT / ".venv/bin/marimo"),
             "run",

@@ -11,7 +11,7 @@ from urllib.parse import urlsplit, urlunsplit
 import qrcode
 
 # Verified Cloud Run service; override for another deployment, never a session URL.
-DEFAULT_DEMO_URL = "https://silta-cdswwreljq-uc.a.run.app"
+DEFAULT_DEMO_URL = "https://silta-1020247549062.us-central1.run.app"
 
 
 def public_demo_url(value: str | None = None) -> str:
@@ -50,7 +50,7 @@ def qr_svg(url: str) -> str:
     )
     return (
         f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {size} {size}" '
-        'width="184" height="184" role="img" aria-label="Scan to try Silta CNC" '
+        'width="184" height="184" role="img" aria-label="Scan to try SILTA CAD" '
         'shape-rendering="crispEdges">'
         f'<rect width="{size}" height="{size}" fill="white"/>'
         f'<path d="{path}" fill="black"/></svg>'
@@ -65,7 +65,7 @@ def share_panel() -> str:
     escaped = html.escape(url, quote=True)
     return (
         '<div class="sx-share"><div>'
-        '<span class="sx-k">OPEN THE PRODUCT</span><h2>Try it on your phone.</h2>'
+        '<span class="sx-k">OPEN THE PRODUCT</span><h2>Share SILTA CAD.</h2>'
         "<p>Rotate the part, inspect each attempt, and try the planning controls. "
         "Drag with one finger; pinch to zoom. Each visitor gets a separate session.</p>"
         f'<a href="{escaped}" target="_blank" rel="noopener noreferrer">Open live demo ↗</a>'

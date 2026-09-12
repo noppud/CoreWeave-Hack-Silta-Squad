@@ -5,24 +5,24 @@
    renders this inside a shadow root where :root matches nothing. */
 
 .silta-viewer {
-  --scope:  #0A2B41;
-  --panel:  #0E3550;
-  --rule:   #2F5F80;
+  --scope:  #17191b;
+  --panel:  #222426;
+  --rule:   #46494b;
   --text:   #EFF6FA;
-  --dim:    #9CC0D6;
-  --dye:    #6FA3C2;
+  --dim:    #c4c6c7;
+  --dye:    #eeeeea;
   --dye-fill: #EFF6FA;
   --stamp:  #F2634B;
   --enamel: #5CC894;
   --metal:  #C7DCE8;
-  --v-text: "Jost", system-ui, -apple-system, sans-serif;
+  --v-text: Arial, system-ui, -apple-system, sans-serif;
   --v-mono: "DM Mono", ui-monospace, "SF Mono", Menlo, monospace;
 }
 
 .silta-viewer {
   position: relative;
   width: 100%;
-  height: 600px;
+  height: min(56vh, 540px);
   background: var(--scope);
   border-radius: 0;
   overflow: hidden;
@@ -101,7 +101,7 @@
 
 .silta-viewer .silta-viewer-speed-active {
   background: var(--dye-fill);
-  color: #0A2B41;
+  color: #17191b;
   border-color: var(--dye-fill);
 }
 
@@ -197,7 +197,7 @@
 
 .silta-viewer .silta-viewer-button {
   background: var(--dye-fill);
-  color: #0A2B41;
+  color: #17191b;
   border: none;
   border-radius: 0;
   padding: 8px 16px;
@@ -354,3 +354,9 @@
     transition-duration: .01ms !important;
   }
 }
+
+.silta-viewer { min-height: 340px; }
+.silta-viewer details summary { cursor:pointer; padding:8px; font-size:12px; color:var(--text); }
+.silta-viewer details[open] .silta-viewer-top-controls { padding:8px 0; gap:16px; }
+.silta-viewer .silta-viewer-readout-item:first-child { display:none; }
+.silta-viewer[data-view-mode="target"] .silta-viewer-controls { display:none; }

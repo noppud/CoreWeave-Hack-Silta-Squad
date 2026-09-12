@@ -1,0 +1,13 @@
+{
+  "type": "slides",
+  "data": {
+    "cells": [
+      {"type": "skip"},
+      {"type": "slide"},
+      {"type": "slide"},
+      {"type": "slide"},
+      {"type": "slide"}
+    ],
+    "deck": {"transition": "none", "verticalAlign": "top"}
+  }
+}

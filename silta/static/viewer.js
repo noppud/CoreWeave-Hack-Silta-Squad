@@ -163,7 +163,7 @@ function createTargetMesh(positions) {
 
   // The requested shape, shown as a translucent ghost of the goal
   const material = new THREE.MeshStandardMaterial({
-    color: 0x5E90B2,
+    color: 0xD4D6D3,
     metalness: 0.2,
     roughness: 0.6,
     transparent: true,
@@ -231,7 +231,7 @@ function createFixtureBox(fixture) {
   const geometry = new THREE.BoxGeometry(sx, sy, sz);
   // Dark anodised blocks
   const material = new THREE.MeshStandardMaterial({
-    color: 0x1B4E70,
+    color: 0x62676C,
     metalness: 0.35,
     roughness: 0.5,
   });
@@ -295,7 +295,7 @@ function createTrajectoryLines(segments, currentSegmentIndex = -1) {
     const rapidGeom = new THREE.BufferGeometry();
     rapidGeom.setAttribute('position', new THREE.Float32BufferAttribute(rapidPoints, 3));
     const rapidMat = new THREE.LineDashedMaterial({
-      color: 0x5E90B2,
+      color: 0xD4D6D3,
       linewidth: 1,
       transparent: true,
       opacity: 0.25,
@@ -440,7 +440,7 @@ export function render({ model, el }) {
     container.appendChild(canvas);
 
     scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x0A2B41); // --scope
+    scene.background = new THREE.Color(0x17191B); // --scope
 
     camera = new THREE.PerspectiveCamera(50, container.clientWidth / container.clientHeight, 0.1, 1000);
 
@@ -487,7 +487,7 @@ export function render({ model, el }) {
     const controlsDiv = document.createElement('div');
     controlsDiv.className = 'silta-viewer-controls';
     controlsDiv.innerHTML = `
-      <div class="silta-viewer-top-controls">
+      <details><summary>Playback options</summary><div class="silta-viewer-top-controls">
         <button class="silta-viewer-button silta-viewer-button-small" id="resetBtn" aria-label="Reset view">Reset view</button>
         <div class="silta-viewer-speed-controls">
           <label class="silta-viewer-label">Speed</label>
@@ -496,7 +496,7 @@ export function render({ model, el }) {
           <button class="silta-viewer-speed-btn" data-speed="4" aria-label="4x speed">4×</button>
         </div>
       </div>
-      <div class="silta-viewer-scrubber">
+      </details><div class="silta-viewer-scrubber">
         <div class="silta-viewer-scrubber-track" id="scrubberTrack">
           <div class="silta-viewer-scrubber-fill" id="scrubberFill"></div>
         </div>
@@ -714,6 +714,7 @@ export function render({ model, el }) {
 
     function updateVisibility() {
       const mode = model.get('view_mode') || 'all';
+      container.dataset.viewMode = mode;
       if (targetMesh) targetMesh.visible = mode !== 'stock';
       if (stockMesh) stockMesh.visible = mode !== 'target';
       for (const group of [fixtureGroup, trajectoryGroup, toolEnvelope, collisionPathGroup, collisionMarkerGroup]) {
