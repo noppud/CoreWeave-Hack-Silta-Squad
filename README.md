@@ -33,6 +33,58 @@ make check            # ruff + offline pytest
 `make app` needs no credentials. Without a W&B key the planner is deterministic and the page says so
 in its header; it never presents a deterministic plan as live inference.
 
+## Deploy it
+
+The live service is a container running `marimo run notebooks/workbench.py --headless` on Google
+Cloud Run. There is no continuous delivery: GitHub Actions runs lint and tests on every push, but
+nothing deploys on merge. A release is one deliberate command.
+
+```sh
+gcloud auth login
+gcloud config set project silta-hack
+bash scripts/deploy.sh
+```
+
+`scripts/deploy.sh` is idempotent and safe to re-run. It creates what is missing and reuses what
+exists: the `silta` Artifact Registry repository, the `silta-hack-silta-artifacts` bucket, the
+`silta-run` runtime service account, and the `wandb-api-key` secret. It then builds the image
+through Cloud Build (`cloudbuild.yaml`, ~10 minutes on the first run because of cadquery/OCP),
+tags it with the current git commit, and deploys it.
+
+Deployed settings that matter: `--min-instances=1 --max-instances=1` so a job's in-memory state
+survives the demo, `--session-affinity` and `--timeout=3600` for the workbench WebSocket, and
+`--allow-unauthenticated` so judges need no Google account.
+
+### Live inference is optional
+
+The W&B key is read from Secret Manager. If the secret has no enabled version, the script deploys
+**without** it rather than blocking — the app falls back to its deterministic planner and says so in
+its header. To enable live inference:
+
+```sh
+echo -n 'YOUR_WANDB_API_KEY' | gcloud secrets versions add wandb-api-key --data-file=-
+export WANDB_INFERENCE_MODEL=...   # a model id `make models` actually returned
+bash scripts/deploy.sh
+```
+
+Use `echo -n`; a trailing newline in the secret breaks authentication.
+
+### Verify the deployment
+
+```sh
+uv run python scripts/smoke_remote.py https://silta-1020247549062.us-central1.run.app
+uv run python scripts/acceptance_remote.py https://silta-1020247549062.us-central1.run.app
+```
+
+The smoke test checks the page serves unauthenticated HTML; the acceptance harness drives a full
+job over the WebSocket and checks the run reaches a passing attempt. Both exit non-zero on failure.
+
+Overrides, if you are deploying somewhere other than the team project: `GCP_PROJECT`, `GCP_REGION`,
+`SERVICE_NAME`, `WANDB_ENTITY`, `WANDB_PROJECT`.
+
+Rollback, key rotation and artifact cleanup are in [the runbook](docs/runbook.md). Do not deploy
+during the three-minute presentation — a new revision drops the running job.
+
 ## Start here
 
 - [**Verification evidence**](docs/evidence/): geometry oracles, learning subsystem,
@@ -59,7 +111,8 @@ The supplied handbook requires W&B usage and emphasizes agents that improve thro
 | 2.5D stock-removal and collision simulation | working — a real clamp collision, and a clean cut at 0.0 mm residual |
 | Three.js replay driven by the simulator's own results | working |
 | Cross-task improvement (`path_fixture_envelope` promoted into the path stage) | working — measured on development, confirmed on untouched holdout |
-| Live W&B inference | **not verified** — no API key configured, no credit grant confirmed |
+| Live W&B inference | **working** — the deployed service plans with `deepseek-ai/DeepSeek-V4-Pro` on W&B Inference |
+| W&B Weave Evaluations | **published** — 4 runs over the frozen corpus, both policies, [evidence](docs/evidence/weave-evaluations.md) |
 | Weave traces and W&B run metrics read back | **not verified** — telemetry is wired and degrades cleanly to disabled |
 | ARIA analysis | **outstanding external gate** — see `policies/aria-recommendation-001.md` |
 
