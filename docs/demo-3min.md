@@ -10,12 +10,14 @@ make present
 
 Open these before the timer starts:
 
-- **Slides:** http://localhost:8010/slides.html — two slides, arrow-key navigation and Fullscreen.
+- **Slides:** http://localhost:8010/slides.html — five slides, arrow-key navigation and Fullscreen. Reload any previously opened deck tab.
 - **Pitch guide:** http://localhost:8010/guide.html — this script rendered as a browser page, rebuilt by `make present`.
 - **Presenter notebook:** http://localhost:2732 — wait for CAD and both runs to finish, then leave **1 · The part** selected.
+- **Eval evidence:** http://localhost:8010/evals.html — measured policy comparison, every fixture outcome, raw JSON and source hashes.
+- **Interactive eval notebook:** http://localhost:2733 — preloads the policy comparison; keep for Q&A.
 - **Optional W&B evidence tab:** https://wandb.ai/silta/coreweave-hack-silta-squad/runs/c3cxveft — use Charts for recorded metrics; confirm it opens with the presenter's account before using it on stage.
 
-The launcher returns when both servers respond and leaves them running. Repeating `make present` safely reuses them. The notebook needs the project's installed `.venv`, but its fixture workflow requires no inference key or network. The slides embed their drawing and QR code and work offline. The QR opens the public product, which needs internet.
+The launcher returns when all three servers respond and leaves them running. Repeating `make present` safely reuses them. The notebooks need the project's installed `.venv`, but their fixture workflows require no inference key or network. The slides embed their drawing and QR code and work offline. The QR opens the public product, which needs internet.
 
 The presenter notebook deliberately fixes the candidate proposals for reproducibility. CAD, checks, compilation, simulation and memory storage run for real. It creates fresh isolated memory for each presentation session, so another judge's warm run cannot erase your failure story. It constructs a new controller and storage adapter for the second run to prove disk recall.
 
@@ -23,15 +25,31 @@ The presenter notebook deliberately fixes the candidate proposals for reproducib
 
 | Time | Screen and action | Say |
 |---|---|---|
-| 0:00–0:20 | Slide 1 | “Silta turns a part drawing and the shop's available tools into a machining plan. The part stays fixed. When a check finds a problem, we repair the process and keep the evidence for the next job.” |
-| 0:20–0:45 | Notebook, **1 · The part**. Drag the CAD model once. | “This is our demonstration part. For a repeatable demo, the candidate proposals are fixed. The CAD, geometry checks, simulation and memory writes execute here. The full workbench also makes live model calls.” |
-| 0:45–1:20 | **2 · The collision**. Press **Play**. Wait for the collision stop. Open **Inspect the measured checks** if time permits. | “The first tool was too short. A longer tool fixes reach, but the traverse hits this clamp. The simulator records the segment and the measured collision. That evidence goes back into repair and into memory.” |
-| 1:20–1:45 | **3 · The repair**. The final stock view opens automatically. | “The repaired recipe raises clearance. We run the same checks and simulation again. This attempt passes. We changed the process, while the target design stayed fixed.” |
-| 1:45–2:25 | **4 · Memory**. Point to the comparison table. Open **Inspect stored memory** briefly. | “Now a new controller reads what the first run stored. Three attempts become one, with no new planner call. It still performs fresh checks and simulation. Each recipe and lesson has source evidence. Advice stays pending until its validation passes.” |
-| 2:25–2:40 | Preloaded W&B run, or stay on the notebook if the tab is unavailable. | “W&B records our live agent experiments. Marimo makes the model, checks and stored learning inspectable. Judges can examine the evidence instead of taking our success label on trust.” |
-| 2:40–3:00 | Slide 2. Leave the QR visible. | “The result is a process that remembers a verified repair and verifies it again when reused. Scan this to open the live product, rotate the part and inspect a run yourself.” |
+| 0:00–0:15 | Slide 1 | “Silta turns a part drawing and the shop's available tools into a machining plan. The target stays fixed while the system repairs the process.” |
+| 0:15–0:30 | Slide 2 | “Checks and simulation give the planner concrete failure evidence. Memory retains the attempt and a passing recipe. Every reused recipe must be verified again.” |
+| 0:30–0:45 | Notebook, **1 · The part**. Drag once. | “For this repeatable demo, candidate plans are scripted. The CAD, checks, simulation and memory run here. Our full workbench also supports live inference.” |
+| 0:45–1:15 | **2 · The collision**, press **Play** | “The first tool was too short. The longer tool reaches, but its traverse hits the clamp. The simulator records where that happened.” |
+| 1:15–1:30 | **3 · The repair** | “Raising clearance fixes the process. The repaired plan passes the same checks and a fresh simulation.” |
+| 1:30–1:45 | **4 · Memory**, point to comparison | “A new controller recalls the passing recipe from disk: three attempts become one, with fresh verification.” |
+| 1:45–2:20 | Slide 3: eval table | “We also test the checks on twelve existing fixtures: eight development and four regression cases. Both policies match every expected outcome, including correct rejections. The revised clamp check catches the collision before simulation: four development simulations become three. Regression results stay unchanged. These are validator evals with fixed plans, not a model-quality benchmark.” |
+| 2:20–2:40 | Slide 4: memory | “Memory improves this repeated job by reusing evidence. That is separate from the policy improvement. We are reusing a verified recipe, not training model weights.” |
+| 2:40–3:00 | Slide 5: QR | “Marimo lets you inspect the part and checks. W&B records live-run metrics. Scan this to try the product. We also have the case-by-case eval report ready for questions.” |
 
-Approximate spoken copy: 290 words. The remaining time covers clicks, the collision animation and the tab switch. At **2:40**, move to slide 2 even if a detail remains open.
+The schedule includes time for clicks and collision playback. At **2:40**, move to slide 5 even if a detail remains open. Keep the W&B and interactive eval notebooks for Q&A so network latency does not consume the pitch.
+
+## Eval evidence and reproduction
+
+The current presentation snapshot replays the existing corpus under `policy-v0` and `policy-v1`: development matches **8/8 → 8/8**, simulations **4 → 3**; regression matches **4/4 → 4/4**, simulations **2 → 2**. Zero false accepts and false rejects were observed under either policy. Twelve synthetic fixtures do not establish general reliability. The four regression cases remain in the `fixtures/holdout` directory, but retained lineage says an earlier fix used `holdout_03_valid_complex`. Treat them as regression coverage, not a blind holdout.
+
+To refresh the measured report and embed it in the deck:
+
+```sh
+.venv/bin/python scripts/build_demo_evals.py
+.venv/bin/python scripts/build_demo_slides.py
+make present
+```
+
+`demo/evals.json` retains every outcome, the measurement timestamp, and hashes of the fixture and Python source files. The deck reads this file when built; it never invents scores or reruns inference on stage.
 
 ## What to leave out of the timed path
 
@@ -45,7 +63,7 @@ Approximate spoken copy: 290 words. The remaining time covers clicks, the collis
 
 - **Animation or WebGL fails:** open **Inspect the measured checks** and continue from the recorded collision values. All results come from the same executed fixture.
 - **Notebook says “kernel not found” or “Reconnect to app”:** reload the page or open http://localhost:2732/ in a new tab. Wait for the CAD to appear and leave **1 · The part** selected. An old tab can retain a disconnected session even while the server is healthy.
-- **Notebook was not preloaded:** leave slide 1 up while it prepares. If it takes more than ten seconds, present slide 2's measured comparison and offer the live product.
+- **Notebook was not preloaded:** leave slide 2 up while it prepares. If it takes more than ten seconds, continue with slides 3 and 4's measured comparisons and offer the live product.
 - **W&B tab asks for login:** skip it immediately. Do not log in on stage.
 - **Wi-Fi fails:** the local slides and presenter notebook still work. The public QR becomes useful when connectivity returns.
 - **A real live run fails:** say “The system did not find a passing plan within its budget.” Keep that evidence visible. The reproducible presenter notebook remains a separate, explicitly labeled demonstration.
@@ -55,7 +73,8 @@ Approximate spoken copy: 290 words. The remaining time covers clicks, the collis
 - `demo/slides.html`: editable, self-contained browser deck.
 - `notebooks/demo.py`: focused interactive demonstration.
 - `silta/demo.py`: preparation of the actual cold and warm fixture runs.
-- `scripts/start_presenter.sh` and `scripts/start_presenter.py`: start or reuse both local presentation servers.
+- `scripts/start_presenter.sh` and `scripts/start_presenter.py`: start or reuse all three local presentation servers.
+- `scripts/build_demo_evals.py`: refresh the offline eval report and raw evidence.
 - `scripts/build_demo_slides.py`: rebuilds the deck from the repository drawing and QR URL.
 - `scripts/demo_memory.py`: terminal-only reproduction of the three-attempt versus one-attempt result.
 

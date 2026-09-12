@@ -46,6 +46,21 @@ SERVICES = (
             "--headless",
         ],
     ),
+    (
+        "Evals",
+        "http://127.0.0.1:2733/",
+        "Silta CNC Evaluations",
+        [
+            str(ROOT / ".venv/bin/marimo"),
+            "run",
+            str(ROOT / "notebooks/evaluations.py"),
+            "--host",
+            "127.0.0.1",
+            "--port",
+            "2733",
+            "--headless",
+        ],
+    ),
 )
 
 
@@ -93,7 +108,7 @@ def probe(url: str, expected_title: str) -> bool:
 
 
 def launch(services=SERVICES):
-    # Check BOTH ports before launching anything; handle a partially running pair.
+    # Check every port before launching anything; handle partially running services.
     running = [probe(url, title) for _, url, title, _ in services]
     started = []
     log_dir = None
@@ -135,10 +150,12 @@ def launch(services=SERVICES):
                     process.kill()
                     process.wait()
         raise
-    print("\nReady. Open both tabs and wait for the notebook's CAD to appear:", flush=True)
+    print("\nReady. Preload the demo and eval notebooks before presenting:", flush=True)
     print("Slides:   http://localhost:8010/slides.html")
     print("Notebook: http://localhost:2732")
     print("Pitch guide: http://localhost:8010/guide.html")
+    print("Eval report: http://localhost:8010/evals.html")
+    print("Eval notebook: http://localhost:2733")
     print("Servers keep running. Repeating make present safely reuses them.")
     if log_dir:
         print(f"Server logs: {log_dir}")

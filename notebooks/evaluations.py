@@ -74,7 +74,7 @@ def _(mo, ui):
       <h1 class="sx-word">Silta CNC evaluations</h1>
       <p class="sx-tag">
         Policy comparison on frozen fixtures. <b>Development</b> is for tuning;
-        <b>holdout</b> is evaluated once after the policy is frozen. Aggregate
+        <b>former holdout</b> cases now provide regression coverage. Aggregate
         scores show <b>counts and denominators</b>, never bare percentages. False
         accepts and false rejects are surfaced prominently.
       </p>
@@ -206,16 +206,15 @@ def _(compare, mo, score, ui, v0_holdout_outcomes, v1_holdout_outcomes):
 
     mo.Html(
         ui.section(
-            "Holdout set evaluation",
+            "Regression set evaluation (former holdout)",
             ("Fixtures", "4"),
-            ("Evaluated", "once, after policy-v1 was frozen"),
+            ("Evaluated", "replay of existing cases"),
         )
         + f"""
     <div class="sx-note" style="margin-bottom:14px">
-      <b>Holdout discipline.</b> These fixtures were evaluated ONCE after policy-v1
-      was frozen. Holdout validates correctness preservation on unseen cases; it is
-      NOT used for tuning. If holdout results ever inform policy revision, this set
-      must be retired and replaced.
+      <b>Regression evidence.</b> The retained check lineage records an earlier fix
+      prompted by holdout_03_valid_complex. These four cases are therefore regression
+      coverage, not an untouched blind test. A new holdout is needed to measure generalization.
     </div>
     <div class="sx-readout">
       <div class="sx-cellr"><span class="sx-k">Baseline matched</span>

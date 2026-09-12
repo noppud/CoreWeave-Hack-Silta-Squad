@@ -39,3 +39,7 @@ workbench-*.png
 
 # Local spool of telemetry that failed to reach W&B
 telemetry_spool/
+
+# Browser-tooling scratch output
+.playwright-cli/
+output/playwright/
