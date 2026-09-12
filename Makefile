@@ -1,4 +1,4 @@
-.PHONY: setup check doctor models trace demo notebook app evals eval-offline
+.PHONY: setup check doctor models trace demo notebook app evals eval-offline weave-evals
 
 setup:
 	python3 scripts/bootstrap.py
@@ -29,6 +29,12 @@ app:
 evals:
 	uv run marimo run notebooks/evaluations.py
 
+# Publish the frozen corpus to W&B Weave as a real Evaluation, for both policies.
+# Needs WANDB_API_KEY. Uses the deterministic planner, so it costs no inference credits.
+weave-evals:
+	uv run python -m silta.weave_evals --split development
+	uv run python -m silta.weave_evals --split holdout
+
 # Offline policy comparison over the frozen corpus; no network, no spend.
 eval-offline:
 	uv run python -m silta.evaluation
@@ -37,6 +43,6 @@ eval-offline:
 notebook:
 	uv run --with marimo marimo edit
 
-# Two browser slides and the reproducible three-minute presenter notebook.
+# Five browser slides, pitch guide, presenter notebook and eval notebook.
 present:
 	bash scripts/start_presenter.sh

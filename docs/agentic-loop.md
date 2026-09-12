@@ -385,7 +385,14 @@ uv run python -m silta.evaluation --holdout # policy comparison, development and
 make app                                    # the workbench; the demo job runs on load
 make evals                                  # the experiment notebook
 uv run python scripts/smoke_remote.py <URL> # remote acceptance against the deployed service
+make weave-evals                            # publish the corpus to W&B Weave Evaluations
 ```
+
+The same corpus and the same deterministic scorers are published to Weave as a real
+`Evaluation`, so the two policies can be compared in the Evaluations tab rather than only in
+a terminal: <https://wandb.ai/silta/coreweave-hack-silta-squad/weave/evaluations>. Runs are
+named `silta-<split>-<policy>`. None of the scorers asks a model for an opinion — they read
+what the deterministic pipeline measured.
 
 Related reading: [architecture](architecture.md) for the contracts and thresholds,
 [plan](plan.md) for scope and metrics, [policies/](../policies/) for the promotion records, and
