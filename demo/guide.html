@@ -1,0 +1,101 @@
+<!doctype html><html lang="en"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Silta CNC · Pitch guide</title><style>
+body{font:18px/1.6 system-ui,sans-serif;max-width:1100px;margin:40px auto;
+padding:0 24px;color:#163449;background:#f6f9fb}a{color:#075e9b}
+nav{display:flex;gap:24px;flex-wrap:wrap}h1,h2{line-height:1.2}
+table{display:block;overflow-x:auto;border-collapse:collapse;background:white}
+th,td{padding:12px;border:1px solid #ccd9e2;text-align:left;min-width:100px}
+td:last-child{min-width:300px}pre{background:#e5edf3;padding:16px;overflow:auto}
+code{font-size:.9em}blockquote{border-left:4px solid #075e9b;padding-left:16px}
+</style><nav><a href="slides.html">Open slides</a>
+<a href="http://localhost:2732/" target="silta-demo">Open interactive demo</a></nav>
+<main><h1>Silta CNC: three-minute judge demo</h1>
+<h2>Start and preload</h2>
+<p>From the repository root, run:</p>
+<pre><code class="language-sh">make present
+</code></pre>
+<p>Open these before the timer starts:</p>
+<ul>
+<li><strong>Slides:</strong> http://localhost:8010/slides.html — two slides, arrow-key navigation and Fullscreen.</li>
+<li><strong>Pitch guide:</strong> http://localhost:8010/guide.html — this script rendered as a browser page, rebuilt by <code>make present</code>.</li>
+<li><strong>Presenter notebook:</strong> http://localhost:2732 — wait for CAD and both runs to finish, then leave <strong>1 · The part</strong> selected.</li>
+<li><strong>Optional W&amp;B evidence tab:</strong> https://wandb.ai/silta/coreweave-hack-silta-squad/runs/c3cxveft — use Charts for recorded metrics; confirm it opens with the presenter's account before using it on stage.</li>
+</ul>
+<p>The launcher returns when both servers respond and leaves them running. Repeating <code>make present</code> safely reuses them. The notebook needs the project's installed <code>.venv</code>, but its fixture workflow requires no inference key or network. The slides embed their drawing and QR code and work offline. The QR opens the public product, which needs internet.</p>
+<p>The presenter notebook deliberately fixes the candidate proposals for reproducibility. CAD, checks, compilation, simulation and memory storage run for real. It creates fresh isolated memory for each presentation session, so another judge's warm run cannot erase your failure story. It constructs a new controller and storage adapter for the second run to prove disk recall.</p>
+<h2>Run of show</h2>
+<table>
+<thead>
+<tr>
+<th>Time</th>
+<th>Screen and action</th>
+<th>Say</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0:00–0:20</td>
+<td>Slide 1</td>
+<td>“Silta turns a part drawing and the shop's available tools into a machining plan. The part stays fixed. When a check finds a problem, we repair the process and keep the evidence for the next job.”</td>
+</tr>
+<tr>
+<td>0:20–0:45</td>
+<td>Notebook, <strong>1 · The part</strong>. Drag the CAD model once.</td>
+<td>“This is our demonstration part. For a repeatable demo, the candidate proposals are fixed. The CAD, geometry checks, simulation and memory writes execute here. The full workbench also makes live model calls.”</td>
+</tr>
+<tr>
+<td>0:45–1:20</td>
+<td><strong>2 · The collision</strong>. Press <strong>Play</strong>. Wait for the collision stop. Open <strong>Inspect the measured checks</strong> if time permits.</td>
+<td>“The first tool was too short. A longer tool fixes reach, but the traverse hits this clamp. The simulator records the segment and the measured collision. That evidence goes back into repair and into memory.”</td>
+</tr>
+<tr>
+<td>1:20–1:45</td>
+<td><strong>3 · The repair</strong>. The final stock view opens automatically.</td>
+<td>“The repaired recipe raises clearance. We run the same checks and simulation again. This attempt passes. We changed the process, while the target design stayed fixed.”</td>
+</tr>
+<tr>
+<td>1:45–2:25</td>
+<td><strong>4 · Memory</strong>. Point to the comparison table. Open <strong>Inspect stored memory</strong> briefly.</td>
+<td>“Now a new controller reads what the first run stored. Three attempts become one, with no new planner call. It still performs fresh checks and simulation. Each recipe and lesson has source evidence. Advice stays pending until its validation passes.”</td>
+</tr>
+<tr>
+<td>2:25–2:40</td>
+<td>Preloaded W&amp;B run, or stay on the notebook if the tab is unavailable.</td>
+<td>“W&amp;B records our live agent experiments. Marimo makes the model, checks and stored learning inspectable. Judges can examine the evidence instead of taking our success label on trust.”</td>
+</tr>
+<tr>
+<td>2:40–3:00</td>
+<td>Slide 2. Leave the QR visible.</td>
+<td>“The result is a process that remembers a verified repair and verifies it again when reused. Scan this to open the live product, rotate the part and inspect a run yourself.”</td>
+</tr>
+</tbody>
+</table>
+<p>Approximate spoken copy: 290 words. The remaining time covers clicks, the collision animation and the tab switch. At <strong>2:40</strong>, move to slide 2 even if a detail remains open.</p>
+<h2>What to leave out of the timed path</h2>
+<ul>
+<li>Do not start an unconstrained model run or provision a sandbox during the three minutes. They are available from the full workbench but have variable latency.</li>
+<li>The presenter fixture does not demonstrate new model training. It demonstrates repair, durable evidence and recipe reuse with fresh verification.</li>
+<li>W&amp;B Charts contains live-run metrics. CNC stage traces are not yet exported to Weave, and the Logs tab does not contain the detailed repair story. Use the notebook to inspect that evidence.</li>
+<li>W&amp;B Sandbox authentication currently fails with the configured credentials. The adapter and regression gate exist, but do not claim a live sandbox pass or active sandbox-validated lesson.</li>
+<li>ARIA analysis has no verified completed conversation in the retained evidence. Do not credit the fixture repair or memory result to ARIA. Keep that discussion for Q&amp;A once its actual analysis is available.</li>
+</ul>
+<h2>Recovery lines</h2>
+<ul>
+<li><strong>Animation or WebGL fails:</strong> open <strong>Inspect the measured checks</strong> and continue from the recorded collision values. All results come from the same executed fixture.</li>
+<li><strong>Notebook says “kernel not found” or “Reconnect to app”:</strong> reload the page or open http://localhost:2732/ in a new tab. Wait for the CAD to appear and leave <strong>1 · The part</strong> selected. An old tab can retain a disconnected session even while the server is healthy.</li>
+<li><strong>Notebook was not preloaded:</strong> leave slide 1 up while it prepares. If it takes more than ten seconds, present slide 2's measured comparison and offer the live product.</li>
+<li><strong>W&amp;B tab asks for login:</strong> skip it immediately. Do not log in on stage.</li>
+<li><strong>Wi-Fi fails:</strong> the local slides and presenter notebook still work. The public QR becomes useful when connectivity returns.</li>
+<li><strong>A real live run fails:</strong> say “The system did not find a passing plan within its budget.” Keep that evidence visible. The reproducible presenter notebook remains a separate, explicitly labeled demonstration.</li>
+</ul>
+<h2>Files</h2>
+<ul>
+<li><code>demo/slides.html</code>: editable, self-contained browser deck.</li>
+<li><code>notebooks/demo.py</code>: focused interactive demonstration.</li>
+<li><code>silta/demo.py</code>: preparation of the actual cold and warm fixture runs.</li>
+<li><code>scripts/start_presenter.sh</code> and <code>scripts/start_presenter.py</code>: start or reuse both local presentation servers.</li>
+<li><code>scripts/build_demo_slides.py</code>: rebuilds the deck from the repository drawing and QR URL.</li>
+<li><code>scripts/demo_memory.py</code>: terminal-only reproduction of the three-attempt versus one-attempt result.</li>
+</ul>
+<p>Browser rehearsal verified all four notebook steps: collision playback stopped at <code>s0005</code>, the repair opened at playhead 1.0, and the memory comparison displayed Cold <code>3 / 2 / 2</code> versus Warm <code>1 / 0 / 1</code> for attempts / planner calls / fresh simulations. Both browser slides were visually checked. The opening slide and notebook step 1 were left selected.</p></main></html>
