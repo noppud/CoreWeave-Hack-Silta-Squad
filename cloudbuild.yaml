@@ -1,0 +1,76 @@
+# Google Cloud Build configuration for Silta
+# Builds container image with cadquery/OCP dependencies and pushes to Artifact Registry
+
+steps:
+  # Step 1: Build the Docker image with all metadata computed in script
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'build-image'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        set -euo pipefail
+        echo "Computing build metadata..."
+
+        # Use Cloud Build's COMMIT_SHA if available, else compute from git
+        if [ -n "${COMMIT_SHA:-}" ]; then
+          IMAGE_TAG="$COMMIT_SHA"
+        else
+          IMAGE_TAG=$$(git rev-parse HEAD 2>/dev/null || echo "manual-$$(date +%s)")
+        fi
+
+        GIT_COMMIT=$$(git rev-parse HEAD 2>/dev/null || echo "$$IMAGE_TAG")
+        LOCK_HASH=$$(sha256sum uv.lock | cut -d' ' -f1 | head -c 16)
+
+        echo "Git commit: $$GIT_COMMIT"
+        echo "Lock hash: $$LOCK_HASH"
+        echo "Image tag: $$IMAGE_TAG"
+
+        docker build \
+          --build-arg GIT_COMMIT="$$GIT_COMMIT" \
+          --build-arg LOCK_HASH="$$LOCK_HASH" \
+          -t "us-central1-docker.pkg.dev/$PROJECT_ID/silta/silta:$$IMAGE_TAG" \
+          -t "us-central1-docker.pkg.dev/$PROJECT_ID/silta/silta:latest" \
+          .
+
+        # Save image tag for next steps
+        echo "$$IMAGE_TAG" > /workspace/image_tag.txt
+
+  # Step 2: Verify cadquery import in built image
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'verify-imports'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        IMAGE_TAG=$$(cat /workspace/image_tag.txt)
+        echo "Verifying Python dependencies in image: $$IMAGE_TAG"
+        docker run --rm "us-central1-docker.pkg.dev/$PROJECT_ID/silta/silta:$$IMAGE_TAG" \
+          python -c "import cadquery; import marimo; print('✓ cadquery OK'); print('✓ marimo OK')"
+
+  # Step 3: Push both tags to Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'push-images'
+    args:
+      - 'push'
+      - '--all-tags'
+      - 'us-central1-docker.pkg.dev/$PROJECT_ID/silta/silta'
+
+# Use a more powerful machine for building large dependencies like OCP (~500MB)
+options:
+  machineType: 'E2_HIGHCPU_8'
+  diskSizeGb: 100
+  logging: CLOUD_LOGGING_ONLY
+
+# Increase timeout for large dependency downloads and compilation
+timeout: '1800s'  # 30 minutes
+
+# Tag images for traceability
+tags:
+  - 'silta'
+  - 'marimo-app'
+  - 'cadquery'
+
+# Images are pushed in step 3, but list them here for Cloud Build UI
+images:
+  - 'us-central1-docker.pkg.dev/$PROJECT_ID/silta/silta:latest'

@@ -1,0 +1,77 @@
+# Version control
+.git
+.gitignore
+.gitattributes
+
+# Python artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Local artifacts and scratch
+artifacts/
+.artifacts/
+*.db
+*.sqlite
+
+# Environment and secrets - CRITICAL: never in build context
+.env
+.env.*
+*.key
+*.pem
+secrets/
+.secrets/
+
+# Documentation and meta
+docs/
+!docs/evidence/
+meta-ctx/
+README.md
+*.md
+!silta/static/THIRD_PARTY_LICENSES.md
+!policies/*.md
+!fixtures/**/*.md
+
+# Tests and development
+tests/
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# IDE and editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Playwright MCP artifacts
+.playwright-mcp/
+
+# Local runs and fixtures
+notebooks/*.db
+
+# CI/CD (these are for building, not in the image)
+.github/
+.gitlab-ci.yml
+Makefile
+
+# Temporary and build artifacts
+*.tmp
+*.log
+tmp/
+temp/
