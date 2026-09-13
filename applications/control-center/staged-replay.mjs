@@ -24,7 +24,9 @@ export function stagedSteps(detail){
   return steps;
 }
 export function stagedStepDuration(step){
-  return ({drawing:5000,code:22000,failure:7000,checks:6500,verification:14000,instruction:14000,result:8000})[step.kind]||6000;
+  // Keep the source and checks legible, then reach the Fusion view quickly
+  // enough for a live presentation.
+  return ({drawing:3500,code:20000,failure:3500,checks:3500,verification:5000,instruction:10000,result:5000})[step.kind]||3500;
 }
 export function sourceBlocks(text,lines=18){
   const rows=(text||'').split('\n');
