@@ -17,6 +17,7 @@ class Inventory:
         self.files.append(str(relative))
         if expected:
             assert hashlib.sha256(source.read_bytes()).hexdigest() == expected
+        return {"path": str(relative)}
 
     def refs(self, *args):
         pass
@@ -228,3 +229,65 @@ def test_external_playback_survives_before_final_run_receipt(tmp_path, monkeypat
     assert row["playback_evidence"]["embedded_playbacks"] == []
     assert row["playback_evidence"]["external_playbacks"][0]["cleanup_completed"] is False
     assert row["status"] == "incomplete"
+
+
+def test_preadded_sources_keep_actual_deduplicated_stage_links(tmp_path, monkeypatch):
+    run, original_manifest = recovery_fixture(tmp_path, monkeypatch)
+    original_presentation = tmp_path / "runs/stage-example-presentation.json"
+    original_weave = original_manifest.parent / "run-receipt.json"
+    resumed_weave = run / "run-receipt.json"
+    original_weave.write_text('{"weave_recorded": true}')
+    resumed_weave.write_text('{"presentation_playbacks": []}')
+    external = tmp_path / "runs" / f"{run.name}-playback/candidate-0001"
+    external.mkdir(parents=True)
+    playback_path = external / "presentation-playback.json"
+    playback_path.write_text('{"candidate_id": "candidate-0001", "status": "pending"}')
+    output = tmp_path / "bundle"
+    bundle = package.Bundle(output)
+    sources = {
+        "original-record": original_manifest,
+        "original-presentation": original_presentation,
+        "original-weave": original_weave,
+        "recovery-record": run / "manifest.json",
+        "recovery-provenance": run / "workspace/resume-provenance.json",
+        "recovery-weave": resumed_weave,
+        "recovery-playback": playback_path,
+    }
+    expected = {}
+    for label, source in sources.items():
+        item = bundle.add(source, package.Path("already-added") / f"{label}.json")
+        expected[label] = item["path"]
+    rehearsal = package.add_stage_rehearsals(bundle)[0]
+    recovery = package.add_stage_recoveries(bundle)[0]
+    assert rehearsal["record_path"] == expected["original-record"]
+    assert rehearsal["presentation_receipt"] == expected["original-presentation"]
+    assert rehearsal["weave_receipt"] == expected["original-weave"]
+    assert recovery["record_path"] == expected["recovery-record"]
+    assert recovery["resume_provenance"] == expected["recovery-provenance"]
+    assert recovery["original_presentation"] == expected["original-presentation"]
+    assert recovery["weave_receipt"] == expected["recovery-weave"]
+    assert recovery["playback_evidence"]["external_playbacks"][0]["receipt_path"] \
+        == expected["recovery-playback"]
+    for relative in expected.values():
+        assert (output / relative).is_file()
+
+
+def test_recovery_allows_new_separate_shadow_with_pinned_initial_sources(tmp_path, monkeypatch):
+    run, _ = recovery_fixture(tmp_path, monkeypatch)
+    path = run / "workspace/resume-provenance.json"
+    provenance = json.loads(path.read_text())
+    original = package.Path(provenance["learning_provenance"]["learning_directory"])
+    fresh = tmp_path / "runs/fresh-recovery-shadow"
+    fresh.mkdir()
+    for name in ("checks.py", "cad_cam.md"):
+        (fresh / name).write_bytes((original / name).read_bytes())
+    provenance["learning_provenance"]["learning_directory"] = str(fresh)
+    path.write_text(json.dumps(provenance))
+    row = package.add_stage_recoveries(Inventory())[0]
+    assert row["origin_shadow_learning_directory"] == str(original.relative_to(tmp_path))
+    assert row["recovery_shadow_learning_directory"] == str(fresh.relative_to(tmp_path))
+    assert row["fresh_preparation"] is False
+    (fresh / "checks.py").unlink()
+    os.link(tmp_path / "learning/checks.py", fresh / "checks.py")
+    with pytest.raises(ValueError, match="aliases main"):
+        package.add_stage_recoveries(Inventory())

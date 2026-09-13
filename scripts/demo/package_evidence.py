@@ -178,9 +178,9 @@ def add_stage_playback_evidence(bundle, job, base, embedded):
     for source in sorted(root.rglob("*")):
         if source.is_file() and source.suffix.lower() in {".json", ".png", ".jpg", ".txt"}:
             relative = base / "playback" / source.relative_to(root)
-            bundle.add(source, relative, job, expected=digest(source.read_bytes()))
+            item = bundle.add(source, relative, job, expected=digest(source.read_bytes()))
             if source.name == "presentation-playback.json":
-                external.append({"receipt_path": str(relative),
+                external.append({"receipt_path": item["path"],
                                  "source_sha256": digest(source.read_bytes()),
                                  **playback_summary(read(source))})
     return {"embedded_playbacks": [playback_summary(row) for row in embedded],
@@ -208,9 +208,11 @@ def add_stage_rehearsals(bundle):
         if shadow == main or not shadow.is_relative_to(ROOT / "runs"):
             raise ValueError(f"Stage learning directory is not separate: {job}")
         base = Path("stage-rehearsals") / job
-        bundle.add(presentation, base / "presentation.json")
-        bundle.add(manifest_path, base / "run-record.json")
-        bundle.add(manifest_path.parent / "run-receipt.json", base / "weave-receipt.json")
+        presentation_item = bundle.add(presentation, base / "presentation.json")
+        record_item = bundle.add(manifest_path, base / "run-record.json")
+        weave_item = bundle.add(
+            manifest_path.parent / "run-receipt.json", base / "weave-receipt.json"
+        )
         for recovery in sorted(manifest_path.parent.glob("operator-recovery-*.json")):
             bundle.add(recovery, base / recovery.name, expected=digest(recovery.read_bytes()))
         for name, expected in receipt.get("ending_learning_sha256", {}).items():
@@ -246,8 +248,9 @@ def add_stage_rehearsals(bundle):
                 "status": manifest["status"],
                 "collection_warning": manifest.get("collection_warning"),
                 "category": "stage_rehearsal_shadow_learning",
-                "record_path": str(base / "run-record.json"),
-                "presentation_receipt": str(base / "presentation.json"),
+                "record_path": record_item["path"],
+                "presentation_receipt": presentation_item["path"],
+                "weave_receipt": weave_item["path"] if weave_item else None,
                 "counted_in_campaign_completed_drawings": False,
                 "preparation_wall_seconds": preparation,
                 "presenter_pause_seconds": receipt.get("presentation_pause_seconds"),
@@ -301,9 +304,10 @@ def add_stage_recoveries(bundle):
             presentation = ROOT / "runs" / f"{prior['job_id']}-presentation.json"
             if presentation.is_file():
                 origin = read(presentation)
+                origin_shadow = Path(origin["shadow_learning_directory"]).resolve()
                 if (origin.get("no_main_learning_promotion") is not True
                         or origin.get("input_digest") != manifest.get("input_digest")
-                        or Path(origin["shadow_learning_directory"]).resolve() != shadow):
+                        or not origin_shadow.is_relative_to(ROOT / "runs")):
                     raise ValueError("Stage recovery origin does not match isolated rehearsal")
                 break
             prior_provenance = source.parent / "workspace/resume-provenance.json"
@@ -311,13 +315,13 @@ def add_stage_recoveries(bundle):
             bundle.add(prior_provenance, Path("stage-recoveries") / run.name
                        / f"source-{len(chain)}-resume-provenance.json")
         base = Path("stage-recoveries") / run.name
-        bundle.add(provenance_path, base / "resume-provenance.json")
-        bundle.add(manifest_path, base / "run-record.json")
-        bundle.add(presentation, base / "original-presentation.json")
-        run_receipt = {}
+        provenance_item = bundle.add(provenance_path, base / "resume-provenance.json")
+        record_item = bundle.add(manifest_path, base / "run-record.json")
+        original_item = bundle.add(presentation, base / "original-presentation.json")
+        run_receipt, weave_item = {}, None
         if (run / "run-receipt.json").is_file():
             run_receipt = read(run / "run-receipt.json")
-            bundle.add(run / "run-receipt.json", base / "weave-receipt.json")
+            weave_item = bundle.add(run / "run-receipt.json", base / "weave-receipt.json")
         playback_evidence = add_stage_playback_evidence(
             bundle, run.name, base, run_receipt.get("presentation_playbacks", [])
         )
@@ -347,9 +351,13 @@ def add_stage_recoveries(bundle):
                      "fresh_preparation_or_presentation": False,
                      "fresh_preparation": False,
                      "playback_evidence": playback_evidence,
-                     "record_path": str(base / "run-record.json"),
-                     "resume_provenance": str(base / "resume-provenance.json"),
+                     "record_path": record_item["path"],
+                     "resume_provenance": provenance_item["path"],
+                     "original_presentation": original_item["path"],
+                     "weave_receipt": weave_item["path"] if weave_item else None,
                      "source_chain": chain, "initial_learning_sha256": initial,
+                     "origin_shadow_learning_directory": normalized(str(origin_shadow)),
+                     "recovery_shadow_learning_directory": normalized(str(shadow)),
                      "current_learning_versions": manifest.get("current_versions"),
                      "current_learning_sha256": {
                          name: manifest.get("learning_sources", {}).get(
@@ -589,9 +597,10 @@ def build(include_media):
             bundle.add(
                 original, Path("context") / original.relative_to(ROOT), expected=reference["sha256"]
             )
+        dashboard_item = bundle.add(source, Path("context") / source.relative_to(ROOT))
         dashboard_receipts.append(
             {
-                "path": str(Path("context") / source.relative_to(ROOT)),
+                "path": dashboard_item["path"],
                 "source_sha256": digest(source.read_bytes()),
                 "weave_urls": receipt.get("weave_urls", []),
                 "scope": receipt.get("scope"),

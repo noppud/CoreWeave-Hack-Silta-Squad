@@ -359,10 +359,10 @@
     },
     {
       "path": "scripts/demo/package_evidence.py",
-      "source_sha256": "9933524f1585d4c631aeedb918c8b66f31daa3a729482fb29905570901f3109f",
-      "copied_sha256": "9933524f1585d4c631aeedb918c8b66f31daa3a729482fb29905570901f3109f",
-      "bytes": 38690,
-      "release_sha256": "9933524f1585d4c631aeedb918c8b66f31daa3a729482fb29905570901f3109f",
+      "source_sha256": "0d70dbd80bc899ddef03cf91ba92eff3b15f30bcb8dd9281e0a6f41b07f9ab38",
+      "copied_sha256": "0d70dbd80bc899ddef03cf91ba92eff3b15f30bcb8dd9281e0a6f41b07f9ab38",
+      "bytes": 39339,
+      "release_sha256": "0d70dbd80bc899ddef03cf91ba92eff3b15f30bcb8dd9281e0a6f41b07f9ab38",
       "release_matches_copied_source": true
     },
     {
@@ -1311,10 +1311,10 @@
     },
     {
       "path": "tests/test_package_stage.py",
-      "source_sha256": "b843101d95f39e22ac30a66ad18aae4e47779a7acdf5af49f26d008256bbd554",
-      "copied_sha256": "b843101d95f39e22ac30a66ad18aae4e47779a7acdf5af49f26d008256bbd554",
-      "release_sha256": "b843101d95f39e22ac30a66ad18aae4e47779a7acdf5af49f26d008256bbd554",
-      "bytes": 10466,
+      "source_sha256": "f002d27d596589c6fc32af4945b63e5d112ee93d5730aef85da5a313b4df116e",
+      "copied_sha256": "f002d27d596589c6fc32af4945b63e5d112ee93d5730aef85da5a313b4df116e",
+      "release_sha256": "f002d27d596589c6fc32af4945b63e5d112ee93d5730aef85da5a313b4df116e",
+      "bytes": 13803,
       "release_matches_copied_source": true
     },
     {
@@ -2443,9 +2443,33 @@
       "path": "docs/reviews/live-rehearsal.md",
       "previous_source_sha256": null,
       "action": "Audit producer-synced final rehearsal documentation; no copy"
+    },
+    {
+      "at": "2026-09-13T10:48:58.017577+00:00",
+      "path": "scripts/demo/package_evidence.py",
+      "previous_source_sha256": "9933524f1585d4c631aeedb918c8b66f31daa3a729482fb29905570901f3109f",
+      "action": "Use actual deduplicated stage/report/playback link destinations"
+    },
+    {
+      "at": "2026-09-13T10:48:58.017577+00:00",
+      "path": "tests/test_package_stage.py",
+      "previous_source_sha256": "b843101d95f39e22ac30a66ad18aae4e47779a7acdf5af49f26d008256bbd554",
+      "action": "Use actual deduplicated stage/report/playback link destinations"
+    },
+    {
+      "at": "2026-09-13T10:49:45.103893+00:00",
+      "path": "scripts/demo/package_evidence.py",
+      "previous_source_sha256": "8b0faaed00a21e4617a881647de89f4de6206891a5453a5a41be3bf34fcb27ac",
+      "action": "Permit independent pinned recovery shadow; preserve origin directory"
+    },
+    {
+      "at": "2026-09-13T10:49:45.103893+00:00",
+      "path": "tests/test_package_stage.py",
+      "previous_source_sha256": "57d9572775aaa49c9d06b9651ca758d948ee5650cee83af6f5a37904c8661142",
+      "action": "Permit independent pinned recovery shadow; preserve origin directory"
     }
   ],
-  "final_verified_at": "2026-09-13T10:44:43.900323+00:00",
+  "final_verified_at": "2026-09-13T10:49:45.103893+00:00",
   "latest_validation": {
     "pytest": {
       "passed": 550,
@@ -2471,6 +2495,12 @@
       "pytest_passed": 11,
       "ruff": "passed",
       "scope": "Only final rehearsal fixed-list/source-reference inclusion changed; full550suite not rerun as requested"
+    },
+    "post_suite_package_link_check": {
+      "pytest_passed": 13,
+      "ruff": "passed",
+      "at": "2026-09-13T10:49:45.103893+00:00",
+      "scope": "Real dedup regression and new isolated shadow provenance; full suite not rerun"
     }
   },
   "latest_source_sync": {
