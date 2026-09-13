@@ -118,8 +118,10 @@ def prepare(app, payload):
         return targets, others
 
     targets, _ = inventory()
-    target_state = [(target_id(b), b.volume, b.boundingBox.minPoint.asArray(),
-                     b.boundingBox.maxPoint.asArray()) for b in targets]
+    target_state = [
+        (target_id(b), b.volume, b.boundingBox.minPoint.asArray(), b.boundingBox.maxPoint.asArray())
+        for b in targets
+    ]
     fixtures = [o for o in root.occurrences if tag(o, "controller_fixture")]
     if len(fixtures) > 1:
         raise RuntimeError("Multiple controller fixture imports")
@@ -146,14 +148,17 @@ def prepare(app, payload):
             raise RuntimeError("Could not record controller fixture ownership")
 
     identity = adsk.core.Matrix3D.create().asArray()
-    if any(abs(a - b) > 1e-8 for a, b in
-           zip(fixtures[0].transform2.asArray(), identity, strict=True)):
+    if any(
+        abs(a - b) > 1e-8 for a, b in zip(fixtures[0].transform2.asArray(), identity, strict=True)
+    ):
         raise RuntimeError("Prepared fixture occurrence must remain at identity")
     targets, fixture_bodies = inventory()
     if not fixture_bodies:
         raise RuntimeError("Prepared fixture contains no bodies")
-    after = [(target_id(b), b.volume, b.boundingBox.minPoint.asArray(),
-              b.boundingBox.maxPoint.asArray()) for b in targets]
+    after = [
+        (target_id(b), b.volume, b.boundingBox.minPoint.asArray(), b.boundingBox.maxPoint.asArray())
+        for b in targets
+    ]
     if after != target_state:
         raise RuntimeError("Target geometry changed during fixture import")
 
@@ -195,13 +200,15 @@ def prepare(app, payload):
     if not setup.activate():
         raise RuntimeError("Could not activate controller setup")
     setup.visibilityManager.machineVisible = True
-    dimensions = [setup.parameters.itemByName(f"job_stockInfoDimension{a}").value.value * 10
-                  for a in "XYZ"]
+    dimensions = [
+        setup.parameters.itemByName(f"job_stockInfoDimension{a}").value.value * 10 for a in "XYZ"
+    ]
     expected = inputs["setup"]["stock"]["dimensions_mm"]
     if any(abs(a - b) > 1e-5 for a, b in zip(dimensions, expected, strict=True)):
         raise RuntimeError("Actual stock dimensions differ from fixed inputs")
-    offsets = [setup.parameters.itemByName(f"job_position{a}Offset").value.value * 10
-               for a in "XYZ"]
+    offsets = [
+        setup.parameters.itemByName(f"job_position{a}Offset").value.value * 10 for a in "XYZ"
+    ]
     expected_offsets = inputs["setup"]["machine_position"]["translation_mm"]
     if any(abs(a - b) > 1e-5 for a, b in zip(offsets, expected_offsets, strict=True)):
         raise RuntimeError("Actual machine placement differs from fixed inputs")
@@ -212,14 +219,22 @@ def prepare(app, payload):
     if work_offset != 1:
         raise RuntimeError("Actual post work offset differs from required G54 offset 1")
     return {
-        "setup_name": setup.name, "setup_index": 0,
-        "target_body_count": len(targets), "fixture_count": len(setup.fixtures),
+        "setup_name": setup.name,
+        "setup_index": 0,
+        "target_body_count": len(targets),
+        "fixture_count": len(setup.fixtures),
         "fixture_body_count": len(fixture_bodies),
         "machine_model": setup.machine.model,
         "has_simulation_model": setup.machine.hasSimulationModel,
-        "wcs": wcs, "work_offset": work_offset,
-        "stock_dimensions_mm": dimensions, "machine_position_mm": offsets,
-        "settings": {name: {"expression": setup.parameters.itemByName(name).expression,
-                             "value": setup.parameters.itemByName(name).value.value}
-                     for name in parameters},
+        "wcs": wcs,
+        "work_offset": work_offset,
+        "stock_dimensions_mm": dimensions,
+        "machine_position_mm": offsets,
+        "settings": {
+            name: {
+                "expression": setup.parameters.itemByName(name).expression,
+                "value": setup.parameters.itemByName(name).value.value,
+            }
+            for name in parameters
+        },
     }

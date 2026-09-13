@@ -1,0 +1,349 @@
+{
+  "output": "/Users/touko/work/helios-one/repos/coreweavehack/output/presentation/silta-loop-demo.mp4",
+  "sha256": "2c7c9192d3bfd386b4c785ae09e177c91718557ff78d43dbcfbd53b71669bf28",
+  "timeline": [
+    {
+      "chapter": "hook",
+      "start_s": 0,
+      "duration_s": 16,
+      "source": "/Users/touko/work/helios-one/repos/coreweavehack/output/video/umc08-machine-playback.mp4",
+      "source_start_s": 20,
+      "crop": "1280:960:340:160",
+      "type": "actual recorded Fusion frames"
+    },
+    {
+      "chapter": "loop",
+      "start_s": 16,
+      "duration_s": 14,
+      "source": "/Users/touko/work/helios-one/repos/coreweavehack/output/video/umc08-machine-playback.mp4",
+      "source_start_s": 36,
+      "crop": "1280:960:340:160",
+      "type": "actual recorded Fusion frames"
+    },
+    {
+      "chapter": "optimization",
+      "start_s": 30,
+      "duration_s": 12,
+      "source": "/Users/touko/work/helios-one/repos/coreweavehack/output/presentation/film-optimization.png",
+      "source_start_s": 0,
+      "crop": null,
+      "type": "retained evidence graphic"
+    },
+    {
+      "chapter": "transfer",
+      "start_s": 42,
+      "duration_s": 14,
+      "source": "/Users/touko/work/helios-one/repos/coreweavehack/output/presentation/film-transfer.png",
+      "source_start_s": 0,
+      "crop": null,
+      "type": "retained evidence graphic"
+    },
+    {
+      "chapter": "evaluation",
+      "start_s": 56,
+      "duration_s": 14,
+      "source": "/Users/touko/work/helios-one/repos/coreweavehack/output/presentation/film-evaluation.png",
+      "source_start_s": 0,
+      "crop": null,
+      "type": "retained evidence graphic"
+    },
+    {
+      "chapter": "aria",
+      "start_s": 70,
+      "duration_s": 10,
+      "source": "/Users/touko/work/helios-one/repos/coreweavehack/output/presentation/film-aria.png",
+      "source_start_s": 0,
+      "crop": null,
+      "type": "retained evidence graphic"
+    },
+    {
+      "chapter": "indexed-learning",
+      "start_s": 80,
+      "duration_s": 8,
+      "source": "/Users/touko/work/helios-one/repos/coreweavehack/output/presentation/film-indexed-learning.png",
+      "source_start_s": 0,
+      "crop": null,
+      "type": "retained evidence graphic"
+    },
+    {
+      "chapter": "motion",
+      "start_s": 88,
+      "duration_s": 16,
+      "source": "/Users/touko/work/helios-one/repos/coreweavehack/output/video/umc08-machine-playback.mp4",
+      "source_start_s": 56,
+      "crop": "1280:960:340:160",
+      "type": "actual recorded Fusion frames"
+    },
+    {
+      "capture_receipt": "/Users/touko/work/helios-one/repos/coreweavehack/output/video/umc11-close-capture-r3/capture-receipt-portable.json",
+      "receipt_sha256": "84b4c274b0057f1325f9da5be961698575b2e8110612811b7ae57ab78fa68bca",
+      "source": "/Users/touko/work/helios-one/repos/coreweavehack/output/video/umc11-close-capture-r3/finished-stock-orbit.mp4",
+      "source_sha256": "9cd60c1543f7d5d35e6f6f3f4ca469de779676bfbe639b67f269243383c2c338",
+      "duration_s": 5,
+      "source_job": "demo-umc-umc-11-recovery5",
+      "candidate_id": "candidate-0002",
+      "candidate_digest": "a78edd3f6bdf5da79db90f04e8d05b753977c9734aa625bd065c61487ce547ec",
+      "verified_seconds": 2357.727194,
+      "chapter": "captured-tail-0",
+      "start_s": 104,
+      "source_start_s": 0,
+      "type": "actual recorded finished-stock orbit"
+    },
+    {
+      "capture_receipt": "/Users/touko/work/helios-one/repos/coreweavehack/output/video/umc12-close-capture/capture-receipt-portable-v2.json",
+      "receipt_sha256": "43c62dec268798ee0cfa8bce1f0b4542ececa0d9edfbba9043871729bf6b45dc",
+      "source": "/Users/touko/work/helios-one/repos/coreweavehack/output/video/umc12-close-capture/finished-stock-orbit.mp4",
+      "source_sha256": "a68e7152ee1530b03ca888c1bcd59ea71971ea4c44dadf2eef728c7bd2594935",
+      "duration_s": 5,
+      "source_job": "demo-umc-umc-12-recovery1",
+      "candidate_id": "candidate-0004",
+      "candidate_digest": "66da8012cb2e77bdc51dc4c46a25b6b7a396bca6e9a6504638dfcc504a9b4595",
+      "verified_seconds": 908.965929,
+      "chapter": "captured-tail-1",
+      "start_s": 109,
+      "source_start_s": 0,
+      "type": "actual recorded finished-stock orbit"
+    }
+  ],
+  "expected_duration_seconds": 114,
+  "audio": "silent",
+  "check_excerpt": "if scope is not None:\n    side = side_overlap(x, y, z, radius, flute, scope)\n    if side is not None:",
+  "indexed_learning": [
+    {
+      "part": "UMC03",
+      "job_id": "demo-umc-umc-03-recovery3",
+      "job_status": "incomplete",
+      "before_seconds": 466.793213,
+      "after_seconds": 438.955225,
+      "reduction_percent": 5.963665971295945,
+      "fixed_step_sha256": "84ba3adb9d0f32f3d2e6ef2bbeecb121568daf54cd60542e1900432ca24ccdbe",
+      "lesson_sha256": "ba4cb1d63576f234d6b96b42ffc48e4051406ef6fba4f74e7e4756321fd8a859"
+    },
+    {
+      "part": "UMC08",
+      "job_id": "demo-umc-umc-08",
+      "job_status": "completed",
+      "before_seconds": 1065.647591,
+      "after_seconds": 1033.567006,
+      "reduction_percent": 3.0104309596285597,
+      "fixed_step_sha256": "205e7a9415597f5194a02a194f18dd9746942348014c87ed560a49fa178069ec",
+      "lesson_sha256": "ba4cb1d63576f234d6b96b42ffc48e4051406ef6fba4f74e7e4756321fd8a859"
+    }
+  ],
+  "machine_source_receipt": "/Users/touko/work/helios-one/repos/coreweavehack/output/presentation/film-umc08-source-receipt.json",
+  "additional_source_receipts": [
+    "/Users/touko/work/helios-one/repos/coreweavehack/output/presentation/film-umc09-source-receipt.json",
+    "/Users/touko/work/helios-one/repos/coreweavehack/output/video/umc12-close-capture/capture-receipt-portable.json",
+    "/Users/touko/work/helios-one/repos/coreweavehack/output/video/umc11-close-capture-r3/capture-receipt-portable.json",
+    "/Users/touko/work/helios-one/repos/coreweavehack/output/video/umc12-close-capture/capture-receipt-portable-v2.json"
+  ],
+  "rejection_excerpt": "intersects finished X min side beyond the linear tolerance",
+  "sources": [
+    {
+      "path": "/Users/touko/work/helios-one/repos/coreweavehack/output/presentation/film-umc08-source-receipt.json",
+      "sha256": "8d6730d26b2644c7b377bba9c6df34fdf48d6e59af64278e50080d1baa27467b"
+    },
+    {
+      "path": "/Users/touko/work/helios-one/repos/coreweavehack/output/evaluation/learning-evaluation.json",
+      "sha256": "a306f16e4e4cb7edf51baa1a0f58ce0e129217367b8bc6687a81219e6aefe0a2"
+    },
+    {
+      "path": "/Users/touko/work/helios-one/repos/coreweavehack/runs/demo-umc-umc-03-recovery3/manifest.json",
+      "sha256": "0a5df75022e6d13d7769d389bacfd5eac49957799ff2f7fb65beea3e7ad919bb"
+    },
+    {
+      "path": "/Users/touko/work/helios-one/repos/coreweavehack/output/video/umc09-stock-only-orbit.mp4",
+      "sha256": "fc63431c1ffe080cc0100f240ba68983d86a52d6c754e55e5998f89ce7a779b3"
+    },
+    {
+      "path": "/Users/touko/work/helios-one/repos/coreweavehack/runs/learning-part-b1/manifest.json",
+      "sha256": "28eba89cea99b0382a9061b3c556f8da0297b9c6d5b2568d65d8b93043e85397"
+    },
+    {
+      "path": "/Users/touko/work/helios-one/repos/coreweavehack/output/presentation/film-aria.png",
+      "sha256": "e7009d1d451c88b5ef2136ad04aee8cd390d30e0ab5482f3af31ab67e895050c"
+    },
+    {
+      "path": "/Users/touko/work/helios-one/repos/coreweavehack/output/video/umc08-machine-playback.mp4",
+      "sha256": "dabb2cb28caa3404f5a4e3715949e06f34ece2108f31072674594b5ab3b89bfd"
+    },
+    {
+      "path": "/Users/touko/work/helios-one/repos/coreweavehack/output/presentation/film-transfer.png",
+      "sha256": "2658c2eb59844ef58b6af39ce50c58179b401815ba7db954013ad8ccb11169ca"
+    },
+    {
+      "path": "/Users/touko/work/helios-one/repos/coreweavehack/runs/demo-umc-umc-03-recovery3/learning-sources/fb6133ee810e74b475816582396a22710e5b0b04cad4db85c726c12802ae4f73.md",
+      "sha256": "ba4cb1d63576f234d6b96b42ffc48e4051406ef6fba4f74e7e4756321fd8a859"
+    },
+    {
+      "path": "/Users/touko/work/helios-one/repos/coreweavehack/output/presentation/film-optimization.png",
+      "sha256": "c588e0d63aa6ce00a7e2214f05e55a722365d48d7566e948eadf4ce5f9d6833b"
+    },
+    {
+      "path": "/Users/touko/work/helios-one/repos/coreweavehack/output/sponsors/aria-response.md",
+      "sha256": "1044ac85569c63bf2d6aab00c3995072fbc9de03e6451999d753362b4d3ec49a"
+    },
+    {
+      "path": "/Users/touko/work/helios-one/repos/coreweavehack/output/presentation/film-indexed-learning.png",
+      "sha256": "b20e0036523db2eae11a1b5e3602f306ce42c53592a5a42257c39be76a6b4682"
+    },
+    {
+      "path": "/Users/touko/work/helios-one/repos/coreweavehack/output/presentation/film-umc09-source-receipt.json",
+      "sha256": "ad03e6467d4a0363a474e1159eb604d7bc551e1c7dcc1fd1229448bf82569837"
+    },
+    {
+      "path": "/Users/touko/work/helios-one/repos/coreweavehack/runs/learning-soft-jaw-a5/manifest.json",
+      "sha256": "304e03374391a94b8fa3410576c2de8967c7f15269905f9d0b257eb69496b904"
+    },
+    {
+      "path": "/Users/touko/work/helios-one/repos/coreweavehack/output/sponsors/aria-review.json",
+      "sha256": "50aa01cd0a819c6b247a72646329f28b1c7f12a3498329d6981df7617439b7d1"
+    },
+    {
+      "path": "/Users/touko/work/helios-one/repos/coreweavehack/runs/demo-umc-umc-08/learning-sources/fb6133ee810e74b475816582396a22710e5b0b04cad4db85c726c12802ae4f73.md",
+      "sha256": "ba4cb1d63576f234d6b96b42ffc48e4051406ef6fba4f74e7e4756321fd8a859"
+    },
+    {
+      "path": "/Users/touko/work/helios-one/repos/coreweavehack/runs/learning-part-b1/workspace/check-proposal-candidate-0002/checks-0addb6e1d0747fa9bfd1366b291555f672618182d4b9cf78eb82a543a7c6f1be.py",
+      "sha256": "a58a0fe0eba66ea111cb3f74259eebd8efdd3b5f8432001363e76ad311a560b1"
+    },
+    {
+      "path": "/Users/touko/work/helios-one/repos/coreweavehack/runs/demo-umc-umc-09/manifest.json",
+      "sha256": "792aee196192e51e558de58ae78eead8322adfc7775c5a03ce88218f7b3e9d21"
+    },
+    {
+      "path": "/Users/touko/work/helios-one/repos/coreweavehack/output/presentation/film-cad-umc03.png",
+      "sha256": "21b79c2bf5c53806c8091ec5b74462b29ddf980aa1ee7ade612de9aa67caf65a"
+    },
+    {
+      "path": "/Users/touko/work/helios-one/repos/coreweavehack/output/presentation/film-evaluation.png",
+      "sha256": "ad1b31591f2cbd0e18a04de1a86f03c26067a59b9f1c36c567c22dc43d9c5fdd"
+    },
+    {
+      "path": "/Users/touko/work/helios-one/repos/coreweavehack/output/presentation/film-cad-umc08.png",
+      "sha256": "c152866a5804718a100c7c59c352778f8d940f145d2c1725d9c079c100b0feba"
+    },
+    {
+      "path": "/Users/touko/work/helios-one/repos/coreweavehack/runs/demo-umc-umc-08/manifest.json",
+      "sha256": "75a0a0920d3925ef59ac9443ad53a0c9536c5129e95ed6c090d87595abafc408"
+    },
+    {
+      "path": "/Users/touko/work/helios-one/repos/coreweavehack/runs/learning-part-c2/manifest.json",
+      "sha256": "98b25d892f7bf71e8165b1e573f87b555a498d0ee8c18f88f4da7bf86bd32dd2"
+    },
+    {
+      "path": "/Users/touko/work/helios-one/repos/coreweavehack/output/presentation/film-gallery-evidence.json",
+      "sha256": "a6d1c8afda372a5446f2055448fba5d5fd265fc095fa7510c3ec0fbcd7506033"
+    },
+    {
+      "path": "/Users/touko/work/helios-one/repos/coreweavehack/output/video/umc08-finished-orbit.mp4",
+      "sha256": "9cb2bebae7b9d847772425b0b53c5f745b3fee9101dc8cd754eb6a731a05f9cb"
+    },
+    {
+      "path": "/Users/touko/work/helios-one/repos/coreweavehack/output/video/umc12-close-capture/finished-stock-orbit.mp4",
+      "sha256": "a68e7152ee1530b03ca888c1bcd59ea71971ea4c44dadf2eef728c7bd2594935"
+    },
+    {
+      "path": "/Users/touko/work/helios-one/repos/coreweavehack/output/video/umc12-close-capture/capture-receipt-portable.json",
+      "sha256": "97235a4f9e110c96bdfd542f39b4148c29fb85e077941db71c76cf6f9c651c64"
+    },
+    {
+      "path": "/Users/touko/work/helios-one/repos/coreweavehack/output/video/umc11-close-capture-r3/finished-stock-orbit.mp4",
+      "sha256": "9cd60c1543f7d5d35e6f6f3f4ca469de779676bfbe639b67f269243383c2c338"
+    },
+    {
+      "path": "/Users/touko/work/helios-one/repos/coreweavehack/output/video/umc11-close-capture-r3/capture-receipt-portable.json",
+      "sha256": "84b4c274b0057f1325f9da5be961698575b2e8110612811b7ae57ab78fa68bca"
+    },
+    {
+      "path": "/Users/touko/work/helios-one/repos/coreweavehack/output/video/umc12-close-capture/finished-stock-orbit.mp4",
+      "sha256": "a68e7152ee1530b03ca888c1bcd59ea71971ea4c44dadf2eef728c7bd2594935"
+    },
+    {
+      "path": "/Users/touko/work/helios-one/repos/coreweavehack/output/video/umc12-close-capture/capture-receipt-portable-v2.json",
+      "sha256": "43c62dec268798ee0cfa8bce1f0b4542ececa0d9edfbba9043871729bf6b45dc"
+    }
+  ],
+  "limitations": [
+    "No synthetic machining frames; indexed 3+2, not simultaneous five-axis.",
+    "Historical Part A/B/C learning graphics show an earlier three-axis experiment; checks were saved directly and paired Weave replay came afterward.",
+    "Historical indexed-learning graphic is the retained September13 snapshot: UMC03 recovery3 was then incomplete with two verified comparisons; UMC03 later completed under v7. The graphic is not current campaign status.",
+    "Historical ARIA graphic shows its then unit-tested readiness recommendation; subsequent operational focus recovery is separately documented, not a controlled causal reliability benchmark.",
+    "No completed-job count is asserted by the frozen first104seconds.",
+    "Machine cutting footage is UMC08 candidate4. Final104\u2013109seconds show verified UMC11 recovery5 candidate2 stock;109\u2013114seconds show UMC12 recovery1 candidate4 stock.",
+    "UMC11 retained CAM was manually nominated for fresh verification after an export-race fix; not autonomous discovery or new learning. This successful capture attempt was automatic.",
+    "UMC12 capture needed an operator rewind to trigger stock regeneration. Its original receipt and intervention remain retained.",
+    "Final shots are camera-only orbits of actual captured stock, not new machining verification. Times are Fusion CAM estimates, not physical measurements."
+  ],
+  "validation": {
+    "full_video_decode": "passed",
+    "expected_frames": 6840,
+    "actual_frames": 6840,
+    "actual_duration_seconds": 114.0,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "frame_rate": 60,
+    "full_video_decode_at": "2026-09-13T09:31:05.046272+00:00",
+    "full_video_decode_film_sha256": "2c7c9192d3bfd386b4c785ae09e177c91718557ff78d43dbcfbd53b71669bf28",
+    "final_frame_samples": [
+      {
+        "path": "/Users/touko/work/helios-one/repos/coreweavehack/output/presentation/film-final-106.png",
+        "sha256": "1efe801c25c8610ec150d14e0ba4ab20c881eeea7f3b715f5763a42611392760",
+        "seconds": 106
+      },
+      {
+        "path": "/Users/touko/work/helios-one/repos/coreweavehack/output/presentation/film-final-111.png",
+        "sha256": "a27bbc202d10dc10762cdb3cf47cc92624c89b8b54f77d86170b860f2551f551",
+        "seconds": 111
+      }
+    ],
+    "final_frame_visual_review": {
+      "status": "passed",
+      "seconds": [
+        106,
+        111
+      ],
+      "scope": "Two extracted final-film frames inspected: cage and clevis stock clearly visible; annotations readable and candidate/time labels match captures. Full decode separately passed; not frame-by-frame visual review."
+    }
+  },
+  "tail_replacement": {
+    "previous_film": "/Users/touko/work/helios-one/repos/coreweavehack/output/presentation/film-before-tail-453fd11b75f01e57.mp4",
+    "sha256": "453fd11b75f01e57e00c601a6e08445e5c8bc7925110c85a2a0fe39c12d8365b",
+    "previous_evidence": "/Users/touko/work/helios-one/repos/coreweavehack/output/presentation/film-before-tail-453fd11b75f01e57.json",
+    "previous_evidence_sha256": "d68f13e7480f27b80464ba02bec8020db81d7f984b4dd09b81c7e7d2fb3b07e6",
+    "frozen_prefix_seconds": 104,
+    "decoded_prefix_equal": true,
+    "decoded_prefix_hash": "SHA256=ae242710a3c46b249dcd0b7cf4db4d7bcef11a27aa656303c06664a4bc9302c1",
+    "visual_review_operator_attested": true,
+    "shots": [
+      {
+        "capture_receipt": "/Users/touko/work/helios-one/repos/coreweavehack/output/video/umc11-close-capture-r3/capture-receipt-portable.json",
+        "receipt_sha256": "84b4c274b0057f1325f9da5be961698575b2e8110612811b7ae57ab78fa68bca",
+        "source": "/Users/touko/work/helios-one/repos/coreweavehack/output/video/umc11-close-capture-r3/finished-stock-orbit.mp4",
+        "source_sha256": "9cd60c1543f7d5d35e6f6f3f4ca469de779676bfbe639b67f269243383c2c338",
+        "duration_s": 5,
+        "source_job": "demo-umc-umc-11-recovery5",
+        "candidate_id": "candidate-0002",
+        "candidate_digest": "a78edd3f6bdf5da79db90f04e8d05b753977c9734aa625bd065c61487ce547ec",
+        "verified_seconds": 2357.727194
+      },
+      {
+        "capture_receipt": "/Users/touko/work/helios-one/repos/coreweavehack/output/video/umc12-close-capture/capture-receipt-portable-v2.json",
+        "receipt_sha256": "43c62dec268798ee0cfa8bce1f0b4542ececa0d9edfbba9043871729bf6b45dc",
+        "source": "/Users/touko/work/helios-one/repos/coreweavehack/output/video/umc12-close-capture/finished-stock-orbit.mp4",
+        "source_sha256": "a68e7152ee1530b03ca888c1bcd59ea71971ea4c44dadf2eef728c7bd2594935",
+        "duration_s": 5,
+        "source_job": "demo-umc-umc-12-recovery1",
+        "candidate_id": "candidate-0004",
+        "candidate_digest": "66da8012cb2e77bdc51dc4c46a25b6b7a396bca6e9a6504638dfcc504a9b4595",
+        "verified_seconds": 908.965929
+      }
+    ]
+  },
+  "historical_metadata_update": {
+    "at": "2026-09-13T09:31:05.053296+00:00",
+    "scope": "Clarifies old chapter status as dated historical snapshot; first104seconds are decoded-pixel-identical to prior film; no source verdict rewritten."
+  }
+}

@@ -2,3 +2,11 @@
 *.pdf binary
 *.f3d binary
 *.mch -text whitespace=-blank-at-eof,cr-at-eol
+
+# Preserve captured upstream machine-library source bytes, including CRLF.
+research/five-axis/catalog.json -text -whitespace
+research/five-axis/machines-library.html -text -whitespace
+research/five-axis/machines.js -text -whitespace
+
+# Keep the vendored upstream viewer library byte-for-byte.
+applications/control-center/vendor/** -whitespace

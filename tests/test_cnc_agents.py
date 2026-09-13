@@ -41,7 +41,8 @@ GEOMETRY = {"method": "test-fingerprint", "bodies": [{"volume_cm3": 12}]}
 CAD_REPLY = {"source": "result = {'dimensions': 'test'}", "explanation": "test", "unresolved": []}
 CAM_REPLY = {
     "source": "result = {'operation_names': ['test pocket']}",
-    "explanation": "test", "unresolved": [],
+    "explanation": "test",
+    "unresolved": [],
 }
 PREPARED_SETUP = {"setup_index": 0, "tools": [{"number": 1, "description": "approved test tool"}]}
 
@@ -55,6 +56,8 @@ def machining_source(source):
     assert isinstance(compile_call, ast.Call) and compile_call.func.id == "compile"
     assert ast.literal_eval(compile_call.args[1]) == "<silta-machining-plan>"
     return ast.literal_eval(compile_call.args[0])
+
+
 ACCEPT_REPLY = {
     "accepted": True,
     "unresolved": [],
@@ -89,8 +92,12 @@ class BridgeDouble:
             if source == _PREPARE_CAM_SCRIPT:
                 return {"result": PREPARED_SETUP.copy()}
             if source == _CAM_CATALOG_SCRIPT:
-                return {"result": {"compatible_strategies": [{"name": "pocket2d"}],
-                                   "strategies": {"pocket2d": {"parameters": []}}}}
+                return {
+                    "result": {
+                        "compatible_strategies": [{"name": "pocket2d"}],
+                        "strategies": {"pocket2d": {"parameters": []}},
+                    }
+                }
             if source == _GEOMETRY_SCRIPT:
                 return {"result": self.geometry.copy()}
             if source == _REGISTER_TARGET_SCRIPT:
@@ -125,11 +132,15 @@ class BridgeDouble:
             if "saveAsImageFile" in source:
                 # Test double extracts literal output path; it never executes generated source.
                 tree = ast.parse(source)
-                path = Path(next(
-                    node.args[0].value for node in ast.walk(tree)
-                    if isinstance(node, ast.Call) and isinstance(node.func, ast.Attribute)
-                    and node.func.attr == "saveAsImageFile"
-                ))
+                path = Path(
+                    next(
+                        node.args[0].value
+                        for node in ast.walk(tree)
+                        if isinstance(node, ast.Call)
+                        and isinstance(node.func, ast.Attribute)
+                        and node.func.attr == "saveAsImageFile"
+                    )
+                )
                 path.write_bytes(b"test preview placeholder")
                 return {"result": {"saved": True}}
             if source.startswith(_CAM_RESOURCE_PRELUDE):
@@ -222,7 +233,8 @@ def test_actual_source_export_and_post_sequence_produces_unverified_candidate(tm
     )
     assert machining_source(machining["source"]) == CAM_REPLY["source"]
     assert machining["arguments"] == {
-        "inputs": json.loads(json.dumps(asdict(context.inputs))), "setup_index": 0,
+        "inputs": json.loads(json.dumps(asdict(context.inputs))),
+        "setup_index": 0,
     }
     scripts = [call["source"] for call in bridge.script_calls]
     assert scripts.index(_PREPARE_CAM_SCRIPT) < scripts.index(machining["source"])
@@ -239,11 +251,14 @@ def test_ambiguous_drawing_never_executes_fusion(tmp_path, inputs):
 
 
 def test_resolved_manual_postprocessing_note_keeps_export_evidence_in_review(tmp_path, inputs):
-    scoped_inputs = replace(inputs, setup={
-        **inputs.setup,
-        "material": "AL6061",
-        "stock": {"precondition": "Deburring remains a manual final step; no edge-break size."},
-    })
+    scoped_inputs = replace(
+        inputs,
+        setup={
+            **inputs.setup,
+            "material": "AL6061",
+            "stock": {"precondition": "Deburring remains a manual final step; no edge-break size."},
+        },
+    )
     note = "Manual deburring is the supplied final step; no edge-break geometry added."
     client = ClientDouble([dict(CAD_REPLY, explanation=note), ACCEPT_REPLY])
     bridge = BridgeDouble()
@@ -261,15 +276,23 @@ def test_resolved_manual_postprocessing_note_keeps_export_evidence_in_review(tmp
 
 
 def test_manual_scope_does_not_bypass_reported_missing_requirement(tmp_path, inputs):
-    scoped_inputs = replace(inputs, setup={
-        **inputs.setup, "stock": {"precondition": "Deburring remains a manual final step."},
-    })
+    scoped_inputs = replace(
+        inputs,
+        setup={
+            **inputs.setup,
+            "stock": {"precondition": "Deburring remains a manual final step."},
+        },
+    )
     bridge = BridgeDouble()
-    client = ClientDouble([dict(
-        CAD_REPLY,
-        explanation="Deburring is manual.",
-        unresolved=["Required counterbore depth is missing from the drawing."],
-    )])
+    client = ClientDouble(
+        [
+            dict(
+                CAD_REPLY,
+                explanation="Deburring is manual.",
+                unresolved=["Required counterbore depth is missing from the drawing."],
+            )
+        ]
+    )
     with pytest.raises(ValueError, match="counterbore depth"):
         AstraMainAgent(client, bridge).establish_target(scoped_inputs, str(tmp_path))
     assert not bridge.actions
@@ -288,7 +311,9 @@ def test_failed_cad_assessment_does_not_accept_target(tmp_path, inputs):
 
 def test_rejected_material_is_repaired_before_target_acceptance(tmp_path, inputs):
     rejected = dict(
-        ACCEPT_REPLY, accepted=False, explanation="STEP material is Steel; drawing requires AL6061",
+        ACCEPT_REPLY,
+        accepted=False,
+        explanation="STEP material is Steel; drawing requires AL6061",
         unresolved=["material conflict"],
     )
     corrected = dict(CAD_REPLY, source="result = {'material': 'AL6061'}")
@@ -472,6 +497,7 @@ def script_environment(bodies, setups=()):
     from types import SimpleNamespace
 
     root = SimpleNamespace(bRepBodies=FakeCollection(bodies), allOccurrences=FakeCollection())
+
     def resolve(token):
         entities = list(root.bRepBodies) + list(root.allOccurrences)
         for occurrence in root.allOccurrences:
@@ -616,12 +642,15 @@ def test_step_export_preserves_component_material_and_only_target_geometry(
         return True
 
     export_manager = SimpleNamespace(
-        createSTEPExportOptions=lambda path, geometry: (path, geometry), execute=export,
+        createSTEPExportOptions=lambda path, geometry: (path, geometry),
+        execute=export,
     )
     export_design = SimpleNamespace(
-        rootComponent=export_root, exportManager=export_manager,
+        rootComponent=export_root,
+        exportManager=export_manager,
         materials=SimpleNamespace(
-            itemByName=lambda name: copied_materials.get(name), addByCopy=copy_material,
+            itemByName=lambda name: copied_materials.get(name),
+            addByCopy=copy_material,
         ),
     )
     temporary = SimpleNamespace(
@@ -639,14 +668,17 @@ def test_step_export_preserves_component_material_and_only_target_geometry(
     )
     environment["payload"] = {"path": str(tmp_path / "target.step")}
     result = execute_script(_TARGET_STEP_SCRIPT, environment)
-    staged = [body for component in [export_root, *child_components]
-              for body in component.bRepBodies]
+    staged = [
+        body for component in [export_root, *child_components] for body in component.bRepBodies
+    ]
     assert result["scope"] == "accepted_target_only" and result["body_count"] == len(parts)
     assert len(staged) == len(parts)
     assert [body.entityToken for body in staged] == [body.entityToken for body in parts]
     assert all(body not in parts and body is not fixture for body in staged)
-    assert all(part.material is not copied_materials[name]
-               for part, name in zip(parts, material_names, strict=True))
+    assert all(
+        part.material is not copied_materials[name]
+        for part, name in zip(parts, material_names, strict=True)
+    )
     assert transforms == ([identity] * len(parts) if len(parts) > 1 else [])
     assert exported[0][1] is export_root
     assert closed == [False] and restored == [True]
@@ -776,9 +808,17 @@ def test_cam_source_repair_reopens_frozen_candidate_before_executing_replacement
     candidate.verify()
     assert bridge.opens == 2 and bridge.failed_executions == 1
     assert bridge.steps == [
-        "open-frozen", "prepare-setup", "verify-geometry", "source-error",
-        "open-frozen", "prepare-setup", "verify-geometry", "repaired-cam",
-        "verify-geometry", "finalize-nc", "verify-geometry",
+        "open-frozen",
+        "prepare-setup",
+        "verify-geometry",
+        "source-error",
+        "open-frozen",
+        "prepare-setup",
+        "verify-geometry",
+        "repaired-cam",
+        "verify-geometry",
+        "finalize-nc",
+        "verify-geometry",
     ]
     assert "partially mutated setup" in client.calls[-1][0]
     directory = Path(context.job_directory) / "workspace/cam-0001"
@@ -804,7 +844,11 @@ def test_compiled_machining_source_preserves_future_import_and_provided_resource
     )
     main = AstraMainAgent(ClientDouble([]), ExecutingBridge())
     _, execution = main._execute_with_repair(
-        dict(CAM_REPLY, source=source), "test task", tmp_path, "cam", lambda _: None,
+        dict(CAM_REPLY, source=source),
+        "test task",
+        tmp_path,
+        "cam",
+        lambda _: None,
         source_prefix="tools = {1: 'approved cutter'}\n",
         script_arguments={"tool_number": 1},
     )
@@ -862,7 +906,9 @@ def test_cam_scope_resolves_alternate_tokens_and_only_removes_cam_wrapper():
 
     part = FakeBody("part-original-token")
     setup = SimpleNamespace(
-        name="Setup", stockMode=0, models=FakeCollection([part]),
+        name="Setup",
+        stockMode=0,
+        models=FakeCollection([part]),
         fixtures=FakeCollection(),
     )
     environment, _ = script_environment([part], [setup])
@@ -892,7 +938,9 @@ def test_cam_scope_preserves_nested_occurrence_instance_identity():
 
     part, fixture = FakeBody("part"), FakeBody("shared-fixture-body")
     setup = SimpleNamespace(
-        name="Setup", stockMode=0, models=FakeCollection([part]),
+        name="Setup",
+        stockMode=0,
+        models=FakeCollection([part]),
         fixtures=FakeCollection(),
     )
     environment, root = script_environment([part], [setup])
@@ -903,6 +951,7 @@ def test_cam_scope_preserves_nested_occurrence_instance_identity():
     wrapper = FakeOccurrence("cam-wrapper", parent=FakeOccurrence("cam-component"))
     cam.designRootOccurrence = wrapper
     parent_a, parent_b = FakeOccurrence("parent-a"), FakeOccurrence("parent-b")
+
     class ImportedNativeOccurrence(FakeOccurrence):
         def __getattribute__(self, name):
             if name == "entityToken":
@@ -968,8 +1017,9 @@ def test_target_preview_fits_and_refreshes_before_capture(tmp_path, inputs):
 
 
 def test_linked_cam_saves_exact_version_and_forks_before_improvement(tmp_path, inputs):
-    inputs = replace(inputs, machine={**inputs.machine,
-        "simulation_model_cloud": {"project_id": "test-project"}})
+    inputs = replace(
+        inputs, machine={**inputs.machine, "simulation_model_cloud": {"project_id": "test-project"}}
+    )
     main, _, client, context = prepare(tmp_path, inputs, [CAM_REPLY, CAM_REPLY])
 
     class CloudBridge(BridgeDouble):
@@ -990,7 +1040,8 @@ def test_linked_cam_saves_exact_version_and_forks_before_improvement(tmp_path, i
                     self.reference = {
                         "data_file_id": f"lineage-{self.counter}",
                         "version_id": f"urn:adsk.wipprod:fs.file:vf.test{self.counter}?version=1",
-                        "version_number": 1, "project_id": "test-project",
+                        "version_number": 1,
+                        "project_id": "test-project",
                         "document_name": args["name"],
                     }
                     return {"result": {"doc_name": args["name"]}}
@@ -1018,12 +1069,16 @@ def test_linked_cam_saves_exact_version_and_forks_before_improvement(tmp_path, i
     assert bridge.timeline == [
         ("open-version", first_version["version_id"]),
         ("save", first_version["data_file_id"]),
-        ("prepare", None), ("machining", None), ("save", None),
+        ("prepare", None),
+        ("machining", None),
+        ("save", None),
     ]
     assert bridge.actions.count("open_cad") == 1  # Only the initial part-only target.
     assert Path(first.artifacts["fusion_document"].path).read_text() == frozen_reference
-    assert json.loads(Path(second.artifacts["fusion_document"].path).read_text())[
-        "data_file_id"] != first_version["data_file_id"]
+    assert (
+        json.loads(Path(second.artifacts["fusion_document"].path).read_text())["data_file_id"]
+        != first_version["data_file_id"]
+    )
 
 
 def test_cad_that_executes_without_bodies_enters_existing_source_repair(tmp_path, inputs):
@@ -1031,27 +1086,31 @@ def test_cad_that_executes_without_bodies_enters_existing_source_repair(tmp_path
         fresh_documents = 0
 
         def request(self, action, payload=None, **kwargs):
-            source = (payload or {}).get('source')
+            source = (payload or {}).get("source")
             if source == _FRESH_CAD_SCRIPT:
                 self.fresh_documents += 1
             if source == _REGISTER_TARGET_SCRIPT and self.fresh_documents == 1:
                 return {
-                    'status': 'error',
-                    'issues': [{'type': 'fusion_api_error',
-                                'message': 'CAD acceptance requires solid part bodies'}],
-                    'result': {'traceback': 'No solid bodies after completed source execution'},
+                    "status": "error",
+                    "issues": [
+                        {
+                            "type": "fusion_api_error",
+                            "message": "CAD acceptance requires solid part bodies",
+                        }
+                    ],
+                    "result": {"traceback": "No solid bodies after completed source execution"},
                 }
             return super().request(action, payload, **kwargs)
 
-    empty = dict(CAD_REPLY, source='def run(context):\n    pass\n')
+    empty = dict(CAD_REPLY, source="def run(context):\n    pass\n")
     client = ClientDouble([empty, CAD_REPLY, ACCEPT_REPLY])
     bridge = EmptyFirstCad()
     target = AstraMainAgent(client, bridge).establish_target(inputs, str(tmp_path))
     target.verify()
     assert bridge.fresh_documents == 2
-    assert 'solid part bodies' in client.calls[1][0]
-    assert 'definition alone is never called' in client.calls[0][0]
-    assert (tmp_path / 'cad-attempt-02-execution.json').is_file()
+    assert "solid part bodies" in client.calls[1][0]
+    assert "definition alone is never called" in client.calls[0][0]
+    assert (tmp_path / "cad-attempt-02-execution.json").is_file()
 
 
 def test_generation_not_started_returns_source_to_repair_without_posting(tmp_path, inputs):
@@ -1061,16 +1120,18 @@ def test_generation_not_started_returns_source_to_repair_without_posting(tmp_pat
     original = bridge.request
 
     def request(action, payload=None, **kwargs):
-        if action == 'generation_status':
-            return {'status': 'error', 'completed': False,
-                    'issues': [{'type': 'fusion_api_error',
-                                'message': '3 : Generation not started'}]}
+        if action == "generation_status":
+            return {
+                "status": "error",
+                "completed": False,
+                "issues": [{"type": "fusion_api_error", "message": "3 : Generation not started"}],
+            }
         return original(action, payload, **kwargs)
 
     bridge.request = request
     with pytest.raises(CandidateGenerationError) as caught:
-        main.propose(context, None, {}, '', 1)
-    assert caught.value.feedback['source'] == CAM_REPLY['source']
-    assert caught.value.feedback['generation']['completed'] is False
-    assert bridge.actions.count('generate_toolpaths') == 1
-    assert 'postprocess' not in bridge.actions
+        main.propose(context, None, {}, "", 1)
+    assert caught.value.feedback["source"] == CAM_REPLY["source"]
+    assert caught.value.feedback["generation"]["completed"] is False
+    assert bridge.actions.count("generate_toolpaths") == 1
+    assert "postprocess" not in bridge.actions

@@ -21,8 +21,16 @@ def _inspect_machine_coverage(machine, cam):
     type_names = {
         getattr(cam.MachineItemType, "MachineItemType_" + name): name.lower()
         for name in (
-            "TOOL", "TOOL_CUTTER", "TOOL_NONCUTTER", "STOCK", "FIXTURE", "MODEL",
-            "MACHINE_PART", "TURRET_ACTIVE_TOOL", "TURRET_INACTIVE_TOOL", "INVALID",
+            "TOOL",
+            "TOOL_CUTTER",
+            "TOOL_NONCUTTER",
+            "STOCK",
+            "FIXTURE",
+            "MODEL",
+            "MACHINE_PART",
+            "TURRET_ACTIVE_TOOL",
+            "TURRET_INACTIVE_TOOL",
+            "INVALID",
         )
     }
 
@@ -37,11 +45,13 @@ def _inspect_machine_coverage(machine, cam):
         items = sorted(
             [item(pair.item1), item(pair.item2)], key=lambda x: (x["type"], x["part_id"])
         )
-        pairs.append({
-            "items": items,
-            "checked": bool(pair.isCheckedForCollisions),
-            "ignored": bool(pair.isIgnored),
-        })
+        pairs.append(
+            {
+                "items": items,
+                "checked": bool(pair.isCheckedForCollisions),
+                "ignored": bool(pair.isIgnored),
+            }
+        )
     pairs.sort(key=lambda p: tuple((x["type"], x["part_id"]) for x in p["items"]))
     axes = []
 
@@ -53,19 +63,25 @@ def _inspect_machine_coverage(machine, cam):
                 rotary = None if linear else cam.RotaryMachineAxis.cast(axis)
                 bounds = axis.physicalRange
                 infinite = bool(bounds.isInfinite) if bounds else True
-                axes.append({
-                    "part_id": part.id,
-                    "name": axis.name,
-                    "kind": "linear" if linear else "rotary" if rotary else "unknown",
-                    "has_limits": bool(axis.hasLimits),
-                    "infinite": infinite,
-                    "units": "mm" if linear else "radians",
-                    "minimum": None if infinite else bounds.min * (10 if linear else 1),
-                    "maximum": None if infinite else bounds.max * (10 if linear else 1),
-                    "direction": ([linear.direction.x, linear.direction.y, linear.direction.z]
-                                  if linear else None),
-                })
+                axes.append(
+                    {
+                        "part_id": part.id,
+                        "name": axis.name,
+                        "kind": "linear" if linear else "rotary" if rotary else "unknown",
+                        "has_limits": bool(axis.hasLimits),
+                        "infinite": infinite,
+                        "units": "mm" if linear else "radians",
+                        "minimum": None if infinite else bounds.min * (10 if linear else 1),
+                        "maximum": None if infinite else bounds.max * (10 if linear else 1),
+                        "direction": (
+                            [linear.direction.x, linear.direction.y, linear.direction.z]
+                            if linear
+                            else None
+                        ),
+                    }
+                )
             walk(part.children)
+
     walk(kinematics.parts)
     axes.sort(key=lambda x: x["part_id"])
     return {"pairs": pairs, "axes": axes}
@@ -89,11 +105,15 @@ def validate_simulation_coverage(binding: dict) -> dict[str, bool]:
         raise ValueError("Duplicate machine collision pairs")
     enabled_types = {
         tuple(sorted(x["type"] for x in p["items"]))
-        for p in pairs if p.get("checked") is True and p.get("ignored") is False
+        for p in pairs
+        if p.get("checked") is True and p.get("ignored") is False
     }
     required = {
-        ("stock", "tool"), ("fixture", "tool"), ("machine_part", "tool"),
-        ("machine_part", "machine_part"), ("machine_part", "stock"),
+        ("stock", "tool"),
+        ("fixture", "tool"),
+        ("machine_part", "tool"),
+        ("machine_part", "machine_part"),
+        ("machine_part", "stock"),
         ("fixture", "machine_part"),
     }
     if not required <= enabled_types:
@@ -103,20 +123,32 @@ def validate_simulation_coverage(binding: dict) -> dict[str, bool]:
         raise ValueError("Expected three to five distinct machine axes")
     for axis in axes:
         low, high = axis.get("minimum"), axis.get("maximum")
-        finite = (type(low) in (int, float) and type(high) in (int, float)
-                  and math.isfinite(low) and math.isfinite(high) and low < high)
+        finite = (
+            type(low) in (int, float)
+            and type(high) in (int, float)
+            and math.isfinite(low)
+            and math.isfinite(high)
+            and low < high
+        )
         if axis.get("kind") == "rotary":
             if axis.get("units") != "radians":
                 raise ValueError("Rotary axis limits require radians")
-            continuous = (axis.get("infinite") is True and axis.get("has_limits") is False
-                          and low is None and high is None)
-            bounded = (axis.get("infinite") is False and axis.get("has_limits") is True
-                       and finite)
+            continuous = (
+                axis.get("infinite") is True
+                and axis.get("has_limits") is False
+                and low is None
+                and high is None
+            )
+            bounded = axis.get("infinite") is False and axis.get("has_limits") is True and finite
             if not (continuous or bounded):
                 raise ValueError("Rotary axis must retain bounded or explicit continuous limits")
-        elif (axis.get("kind") != "linear" or axis.get("units") != "mm"
-              or axis.get("has_limits") is not True or axis.get("infinite") is not False
-              or not finite):
+        elif (
+            axis.get("kind") != "linear"
+            or axis.get("units") != "mm"
+            or axis.get("has_limits") is not True
+            or axis.get("infinite") is not False
+            or not finite
+        ):
             raise ValueError("Machine overtravel coverage requires finite linear axis limits")
     if sum(a.get("kind") == "linear" for a in axes) != 3:
         raise ValueError("Machine requires exactly three finite linear axes")
@@ -129,7 +161,8 @@ def validate_simulation_coverage(binding: dict) -> dict[str, bool]:
             or setup.get("machine_simulation_model") is not True
             or setup.get("machine_coverage") != expected
             or setup.get("fixture_enabled") is not True
-            or not setup.get("fixtures") or not setup.get("models")
+            or not setup.get("fixtures")
+            or not setup.get("models")
         ):
             raise ValueError("Simulation setup does not retain the pinned machine coverage")
     operations = binding.get("operations", [])

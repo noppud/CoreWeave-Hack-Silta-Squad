@@ -70,8 +70,17 @@ def test_reject_incomplete_job_even_with_verified_best(tmp_path):
 
 
 @pytest.mark.parametrize(
-    "failure", [None, "binding", "partial_video", "stock_pending",
-                "stock_unready", "tool_moved", "restore", "interrupt"]
+    "failure",
+    [
+        None,
+        "binding",
+        "partial_video",
+        "stock_pending",
+        "stock_unready",
+        "tool_moved",
+        "restore",
+        "interrupt",
+    ],
 )
 @pytest.mark.parametrize("framing", ["wide", "close"])
 def test_capture_cleanup_and_source_receipt(tmp_path, failure, framing):
@@ -159,8 +168,10 @@ def test_capture_cleanup_and_source_receipt(tmp_path, failure, framing):
                 raise TimeoutError("Stock regeneration completion was not observed")
             self.directory.mkdir()
             Path(output).write_bytes(b"test-only-stock-double")
-            result = {"status": "exported", "stock_readiness": {
-                "status": "waiting" if failure == "stock_unready" else "ready"}}
+            result = {
+                "status": "exported",
+                "stock_readiness": {"status": "waiting" if failure == "stock_unready" else "ready"},
+            }
             (self.directory / "result.json").write_text(json.dumps(result))
             return result
 

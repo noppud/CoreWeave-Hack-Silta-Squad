@@ -8,21 +8,22 @@ _HELPER = Path(__file__).resolve().parents[2] / "fusion" / "cam_documents.py"
 
 
 def document_call(request, operation, arguments):
-    source = (
-        f"import runpy\nresult = runpy.run_path({str(_HELPER)!r})"
-        f"[{operation!r}](app, payload)"
-    )
+    source = f"import runpy\nresult = runpy.run_path({str(_HELPER)!r})[{operation!r}](app, payload)"
     return request("run_script", {"source": source, "arguments": arguments})["result"]
 
 
 def save_snapshot(request, project_id, name, *, previous=None, timeout=300, receipt=None):
     """Save As once, then poll completion; an uncertain save is never reissued."""
-    handle = document_call(request, "begin_save", {
-        "project_id": project_id,
-        "name": f"{name}-{uuid.uuid4().hex[:12]}",
-        "description": "Silta CAM candidate; simulation status is recorded separately.",
-        "previous_data_file_id": previous,
-    })
+    handle = document_call(
+        request,
+        "begin_save",
+        {
+            "project_id": project_id,
+            "name": f"{name}-{uuid.uuid4().hex[:12]}",
+            "description": "Silta CAM candidate; simulation status is recorded separately.",
+            "previous_data_file_id": previous,
+        },
+    )
     if receipt:
         receipt(handle)
     deadline = time.monotonic() + timeout

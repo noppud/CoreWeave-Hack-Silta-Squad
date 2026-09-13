@@ -142,33 +142,51 @@ def add_collection_capture_proofs(bundle):
             continue
         record = read(capture)
         bundle.add(capture, Path("proofs") / capture.parent.name / capture.name)
-        selected = {key: record.get(key) for key in (
-            "original_capture_receipt", "operator_assistance", "visual_review",
-            "implementation_sources", "finished_stock_artifact", "portable_v2_derivation",
-        )}
+        selected = {
+            key: record.get(key)
+            for key in (
+                "original_capture_receipt",
+                "operator_assistance",
+                "visual_review",
+                "implementation_sources",
+                "finished_stock_artifact",
+                "portable_v2_derivation",
+            )
+        }
         bundle.refs(selected, record["source_job"], [22000 + index * 2000])
         review = record.get("visual_review")
         if review:
             bundle.refs(read(review["path"]), record["source_job"], [23000 + index * 2000])
 
 
-
 def playback_summary(record):
     """Observed motion and successful cleanup are independent presentation facts."""
-    errors = {key: value for key, value in record.items()
-              if (key == "error" or key.endswith("_error")) and value}
+    errors = {
+        key: value
+        for key, value in record.items()
+        if (key == "error" or key.endswith("_error")) and value
+    }
     stop = record.get("simulation_stop") or {}
     restore = record.get("target_display_restore") or {}
     before = (record.get("target_display_before") or {}).get("states_before")
-    cleanup = (not errors and stop.get("status") == "ok"
-               and stop.get("completed") is True and restore.get("status") == "ok"
-               and restore.get("completed") is True and bool(before)
-               and (restore.get("result") or {}).get("states_after") == before)
-    return {"candidate_id": record.get("candidate_id"),
-            "recorded_status": record.get("status"),
-            "tool_motion_observed": record.get("tool_motion_observed") is True,
-            "cleanup_completed": cleanup, "cleanup_errors": errors,
-            "simulation_stop": stop, "target_display_restore": restore}
+    cleanup = (
+        not errors
+        and stop.get("status") == "ok"
+        and stop.get("completed") is True
+        and restore.get("status") == "ok"
+        and restore.get("completed") is True
+        and bool(before)
+        and (restore.get("result") or {}).get("states_after") == before
+    )
+    return {
+        "candidate_id": record.get("candidate_id"),
+        "recorded_status": record.get("status"),
+        "tool_motion_observed": record.get("tool_motion_observed") is True,
+        "cleanup_completed": cleanup,
+        "cleanup_errors": errors,
+        "simulation_stop": stop,
+        "target_display_restore": restore,
+    }
 
 
 def add_stage_playback_evidence(bundle, job, base, embedded):
@@ -180,13 +198,19 @@ def add_stage_playback_evidence(bundle, job, base, embedded):
             relative = base / "playback" / source.relative_to(root)
             item = bundle.add(source, relative, job, expected=digest(source.read_bytes()))
             if source.name == "presentation-playback.json":
-                external.append({"receipt_path": item["path"],
-                                 "source_sha256": digest(source.read_bytes()),
-                                 **playback_summary(read(source))})
-    return {"embedded_playbacks": [playback_summary(row) for row in embedded],
-            "external_playbacks": external,
-            "scope": "Presentation-only motion and cleanup; not manufacturing verdicts. "
-                     "Embedded and external observations are retained separately."}
+                external.append(
+                    {
+                        "receipt_path": item["path"],
+                        "source_sha256": digest(source.read_bytes()),
+                        **playback_summary(read(source)),
+                    }
+                )
+    return {
+        "embedded_playbacks": [playback_summary(row) for row in embedded],
+        "external_playbacks": external,
+        "scope": "Presentation-only motion and cleanup; not manufacturing verdicts. "
+        "Embedded and external observations are retained separately.",
+    }
 
 
 def add_stage_rehearsals(bundle):
@@ -255,7 +279,8 @@ def add_stage_rehearsals(bundle):
                 "preparation_wall_seconds": preparation,
                 "presenter_pause_seconds": receipt.get("presentation_pause_seconds"),
                 "verifications": receipt.get("verifications", []),
-                "best_estimated_machining_seconds": None if manifest.get("collection_warning")
+                "best_estimated_machining_seconds": None
+                if manifest.get("collection_warning")
                 else (manifest.get("best_verification") or {}).get("machining_seconds"),
                 "playback_evidence": playback_evidence,
                 "observed_motion_playbacks": sum(
@@ -296,24 +321,28 @@ def add_stage_recoveries(bundle):
             if digest(raw) != current["source_manifest_sha256"]:
                 raise ValueError(f"Stage recovery source changed: {source}")
             prior = json.loads(raw)
-            if (prior.get("input_digest") != manifest.get("input_digest")
-                    or prior.get("target_digest") != manifest.get("target_digest")):
+            if prior.get("input_digest") != manifest.get("input_digest") or prior.get(
+                "target_digest"
+            ) != manifest.get("target_digest"):
                 raise ValueError("Stage recovery source input or target differs")
-            chain.append({"path": str(source), "sha256": digest(raw),
-                          "job_id": prior["job_id"]})
+            chain.append({"path": str(source), "sha256": digest(raw), "job_id": prior["job_id"]})
             presentation = ROOT / "runs" / f"{prior['job_id']}-presentation.json"
             if presentation.is_file():
                 origin = read(presentation)
                 origin_shadow = Path(origin["shadow_learning_directory"]).resolve()
-                if (origin.get("no_main_learning_promotion") is not True
-                        or origin.get("input_digest") != manifest.get("input_digest")
-                        or not origin_shadow.is_relative_to(ROOT / "runs")):
+                if (
+                    origin.get("no_main_learning_promotion") is not True
+                    or origin.get("input_digest") != manifest.get("input_digest")
+                    or not origin_shadow.is_relative_to(ROOT / "runs")
+                ):
                     raise ValueError("Stage recovery origin does not match isolated rehearsal")
                 break
             prior_provenance = source.parent / "workspace/resume-provenance.json"
             current = read(prior_provenance)
-            bundle.add(prior_provenance, Path("stage-recoveries") / run.name
-                       / f"source-{len(chain)}-resume-provenance.json")
+            bundle.add(
+                prior_provenance,
+                Path("stage-recoveries") / run.name / f"source-{len(chain)}-resume-provenance.json",
+            )
         base = Path("stage-recoveries") / run.name
         provenance_item = bundle.add(provenance_path, base / "resume-provenance.json")
         record_item = bundle.add(manifest_path, base / "run-record.json")
@@ -335,42 +364,57 @@ def add_stage_recoveries(bundle):
             main = ROOT / "learning" / name
             if live.is_symlink() or main.is_file() and live.samefile(main):
                 raise ValueError("Stage recovery learning aliases main learning")
-            bundle.add(Path(ref["path"]), base / "initial-learning" / name,
-                       expected=initial[name])
-        bundle.refs({"inputs": manifest["inputs"], "target": manifest.get("target"),
-                     "best_candidate": manifest.get("best_candidate"),
-                     "best_verification": manifest.get("best_verification"),
-                     "events": manifest.get("events", []),
-                     "learning_sources": manifest.get("learning_sources", {})}, run.name, [31000])
+            bundle.add(Path(ref["path"]), base / "initial-learning" / name, expected=initial[name])
+        bundle.refs(
+            {
+                "inputs": manifest["inputs"],
+                "target": manifest.get("target"),
+                "best_candidate": manifest.get("best_candidate"),
+                "best_verification": manifest.get("best_verification"),
+                "events": manifest.get("events", []),
+                "learning_sources": manifest.get("learning_sources", {}),
+            },
+            run.name,
+            [31000],
+        )
         best = manifest.get("best_verification") or {}
-        valid = not manifest.get("collection_warning") and best.get("completed") is True \
+        valid = (
+            not manifest.get("collection_warning")
+            and best.get("completed") is True
             and best.get("status") == "passed"
-        rows.append({"job_id": run.name, "status": manifest["status"],
-                     "category": "stage_recovery_shadow_learning",
-                     "counted_in_campaign_completed_drawings": False,
-                     "fresh_preparation_or_presentation": False,
-                     "fresh_preparation": False,
-                     "playback_evidence": playback_evidence,
-                     "record_path": record_item["path"],
-                     "resume_provenance": provenance_item["path"],
-                     "original_presentation": original_item["path"],
-                     "weave_receipt": weave_item["path"] if weave_item else None,
-                     "source_chain": chain, "initial_learning_sha256": initial,
-                     "origin_shadow_learning_directory": normalized(str(origin_shadow)),
-                     "recovery_shadow_learning_directory": normalized(str(shadow)),
-                     "current_learning_versions": manifest.get("current_versions"),
-                     "current_learning_sha256": {
-                         name: manifest.get("learning_sources", {}).get(
-                             manifest.get("current_versions", {}).get(kind), {}
-                         ).get("sha256")
-                         for name, kind in (("checks.py", "checks"),
-                                            ("cad_cam.md", "main_prompt"))
-                     },
-                     "collection_warning": manifest.get("collection_warning"),
-                     "best_estimated_machining_seconds": (
-                         best.get("machining_seconds") if valid else None),
-                     "scope": "No fresh CAD/CAM preparation; any post-verification "
-                              "playback has separate recorded evidence."})
+        )
+        rows.append(
+            {
+                "job_id": run.name,
+                "status": manifest["status"],
+                "category": "stage_recovery_shadow_learning",
+                "counted_in_campaign_completed_drawings": False,
+                "fresh_preparation_or_presentation": False,
+                "fresh_preparation": False,
+                "playback_evidence": playback_evidence,
+                "record_path": record_item["path"],
+                "resume_provenance": provenance_item["path"],
+                "original_presentation": original_item["path"],
+                "weave_receipt": weave_item["path"] if weave_item else None,
+                "source_chain": chain,
+                "initial_learning_sha256": initial,
+                "origin_shadow_learning_directory": normalized(str(origin_shadow)),
+                "recovery_shadow_learning_directory": normalized(str(shadow)),
+                "current_learning_versions": manifest.get("current_versions"),
+                "current_learning_sha256": {
+                    name: manifest.get("learning_sources", {})
+                    .get(manifest.get("current_versions", {}).get(kind), {})
+                    .get("sha256")
+                    for name, kind in (("checks.py", "checks"), ("cad_cam.md", "main_prompt"))
+                },
+                "collection_warning": manifest.get("collection_warning"),
+                "best_estimated_machining_seconds": (
+                    best.get("machining_seconds") if valid else None
+                ),
+                "scope": "No fresh CAD/CAM preparation; any post-verification "
+                "playback has separate recorded evidence.",
+            }
+        )
     return rows
 
 
@@ -392,15 +436,18 @@ def build(include_media):
             continue
         m = read(path)
         job = m["job_id"]
-        if ((ROOT / "runs" / f"{job}-presentation.json").is_file()
-                or (job.startswith("stage-")
-                    and (path.parent / "workspace/resume-provenance.json").is_file())):
+        if (ROOT / "runs" / f"{job}-presentation.json").is_file() or (
+            job.startswith("stage-")
+            and (path.parent / "workspace/resume-provenance.json").is_file()
+        ):
             # A stage receipt is categorized below even if a campaign row links it.
             continue
         operator_recoveries = []
-        for recovery in sorted(list(path.parent.glob("operator-recovery-*.json"))
-                               + list(path.parent.glob("operator-collection-*.json"))
-                               + list((path.parent / "workspace").glob("manual-trial-*.json"))):
+        for recovery in sorted(
+            list(path.parent.glob("operator-recovery-*.json"))
+            + list(path.parent.glob("operator-collection-*.json"))
+            + list((path.parent / "workspace").glob("manual-trial-*.json"))
+        ):
             item = bundle.add(
                 recovery,
                 Path("jobs") / job / recovery.name,
@@ -421,14 +468,19 @@ def build(include_media):
                     "job_id": job,
                     "status": m.get("status"),
                     "collection_warning": m.get("collection_warning"),
-                    "verified_best": (not m.get("collection_warning")
-                                      and best.get("status") == "passed"
-                                      and best.get("completed") is True),
+                    "verified_best": (
+                        not m.get("collection_warning")
+                        and best.get("status") == "passed"
+                        and best.get("completed") is True
+                    ),
                     "operator_recovery_receipts": operator_recoveries,
                 }
             )
-            if (not m.get("collection_warning") and best.get("status") == "passed"
-                    and best.get("completed") is True):
+            if (
+                not m.get("collection_warning")
+                and best.get("status") == "passed"
+                and best.get("completed") is True
+            ):
                 bundle.add(path, Path("proofs") / job / "incomplete-run-record.json", job)
                 bundle.refs(
                     {
@@ -728,8 +780,8 @@ def build(include_media):
     )
     recovery_links = "".join(
         f'<li><a href="{html.escape(r["resume_provenance"])}">'
-        f'{html.escape(r["job_id"])}</a>: {html.escape(r["status"])}; '
-        'resumed shadow-learning job, not a fresh presentation.</li>'
+        f"{html.escape(r['job_id'])}</a>: {html.escape(r['status'])}; "
+        "resumed shadow-learning job, not a fresh presentation.</li>"
         for r in stage_recoveries
     )
     page = f"""<!doctype html><meta charset="utf-8"><title>Silta Fusion evidence</title>

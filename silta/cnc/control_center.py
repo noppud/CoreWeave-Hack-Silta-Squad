@@ -918,9 +918,9 @@ def make_handler(center):
                 "STLLoader.js": "examples/jsm/loaders/STLLoader.js",
             }
             if path.startswith("/vendor/") and path[8:] in vendor:
-                p = center.root / "cnc_simulator/viewer/node_modules/three" / vendor[path[8:]]
+                p = center.root / "applications/control-center/vendor" / vendor[path[8:]]
             elif path == "/reference":
-                p = center.root / "cnc_simulator/references/joel-demo/index.html"
+                p = center.root / "demo/index.html"
             elif path in {
                 "/",
                 "/index.html",

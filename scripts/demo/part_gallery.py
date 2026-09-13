@@ -281,10 +281,14 @@ def main():
     text(vd, (40, 35), "Three distinct shapes. Verified CAM plans.", 48, bold=True)
     text(vd, (42, 105), "Actual retained CAD targets / completed Fusion jobs", 26, MUTED)
     preferred = ("UMC 11", "UMC 12", "UMC 10", "UMC 09", "UMC 08", "UMC 04")
-    hero_ids = tuple(identity for identity in preferred if any(
-        p["short_id"] == identity and p["status"] == "completed" and p["has_verified_plan"]
-        for p in parts
-    ))[:3]
+    hero_ids = tuple(
+        identity
+        for identity in preferred
+        if any(
+            p["short_id"] == identity and p["status"] == "completed" and p["has_verified_plan"]
+            for p in parts
+        )
+    )[:3]
     hero_parts = [next(p for p in parts if p["short_id"] == identity) for identity in hero_ids]
     assert all(p["status"] == "completed" and p["has_verified_plan"] for p in hero_parts)
     for index, part in enumerate(hero_parts):
@@ -329,9 +333,7 @@ def main():
                 "view": (
                     "Lower three-quarter then quarter-turn; show indexed side pockets and top holes"
                 ),
-                "needed": (
-                    "Fresh finished-stock orbit of the completed best verified candidate"
-                ),
+                "needed": ("Fresh finished-stock orbit of the completed best verified candidate"),
             },
             {
                 "part": "UMC02",

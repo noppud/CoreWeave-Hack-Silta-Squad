@@ -38,8 +38,9 @@ def select_pairs(report, labels):
                 raise ValueError(f"{label}: collection-invalidated source")
             verdict = manifest["events"][row["event_index"]]["verification"]
             nomination_path = path.parent / "workspace/manual-trial-nomination.json"
-            nomination = (json.loads(nomination_path.read_text())
-                          if nomination_path.is_file() else {})
+            nomination = (
+                json.loads(nomination_path.read_text()) if nomination_path.is_file() else {}
+            )
             manually_selected = nomination.get("candidate_digest") == verdict["candidate_digest"]
             if bool(row.get("manual_nomination")) != manually_selected:
                 raise ValueError(f"{label}: manual nomination attribution differs from source")
@@ -82,7 +83,8 @@ def select_pairs(report, labels):
                 * (1 - best["machining_seconds"] / first["machining_seconds"]),
                 "manual_nomination": best.get("manual_nomination", False),
                 "attribution": "Operator-nominated retained CAM retest; not autonomous improvement"
-                if best.get("manual_nomination") else "Observed within-part CAM optimization",
+                if best.get("manual_nomination")
+                else "Observed within-part CAM optimization",
                 "matched_valid_candidate_count": len(matched),
                 "excluded_other_identity_candidates": len(verified) - len(matched),
             }
@@ -117,7 +119,8 @@ def render(pairs, output):
             height=0.28,
             color="#087f8c",
             label=("Retested CAM" if manually_nominated else "Best valid CAM")
-            if index == 0 else None,
+            if index == 0
+            else None,
         )
         for y, value in ((index - 0.17, first), (index + 0.17, best)):
             ax.text(value + maximum * 0.015, y, f"{value:,.1f}s", va="center", fontsize=11)
@@ -153,9 +156,11 @@ def render(pairs, output):
     fig.text(
         0.08,
         0.035,
-        ("Operator selected retained CAM • Not autonomous improvement or new learning\n"
-         if manually_nominated else
-         "Within-part optimization • Not evidence of cross-part learning causality\n")
+        (
+            "Operator selected retained CAM • Not autonomous improvement or new learning\n"
+            if manually_nominated
+            else "Within-part optimization • Not evidence of cross-part learning causality\n"
+        )
         + "Fusion estimates, not measured physical cycle times. Invalid candidates excluded.",
         color="#526176",
         fontsize=10,

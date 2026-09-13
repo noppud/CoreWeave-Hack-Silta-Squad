@@ -136,6 +136,7 @@ def orbit(app, payload):
 
     import adsk
     import adsk.core
+
     identity = _document_identity(app, payload["document"])
     viewport = app.activeViewport
     before = {

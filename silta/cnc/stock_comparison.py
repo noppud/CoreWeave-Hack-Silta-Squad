@@ -343,8 +343,10 @@ def compare_meshes(
         "method": COMPARISON_VERSION,
         "tolerance_mm": tolerance_mm,
         "target_deflection_mm": target_deflection_mm,
-        "resource_budget": {"max_triangles_per_direction": max_triangles,
-                            "timeout_seconds_per_direction": timeout},
+        "resource_budget": {
+            "max_triangles_per_direction": max_triangles,
+            "timeout_seconds_per_direction": timeout,
+        },
         "directions": directions,
         "issues": issues,
         "stock_volume_mm3": float(stock.volume),

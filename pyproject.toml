@@ -26,6 +26,8 @@ dev = ["pytest>=8,<10", "ruff>=0.11,<1"]
 [tool.ruff]
 target-version = "py312"
 line-length = 100
+# Preserve the exact learned-source snapshots used by retained evidence hashes.
+extend-exclude = ["learning/checks.py", "demo/pitch-app/evidence/checks.py"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "B", "UP"]

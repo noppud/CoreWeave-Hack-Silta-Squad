@@ -1,0 +1,1700 @@
+<!doctype html>
+<html lang="en" data-visualize-standalone>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; style-src 'unsafe-inline' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; img-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; font-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; media-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; worker-src blob:; connect-src blob: data:; frame-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Manufacturing Learning Canvas</title>
+<style>:root{color-scheme:light dark;background:light-dark(rgb(255 255 255), rgb(24 24 24))}html,body{margin:0}body{box-sizing:border-box;padding:1rem;background:inherit}iframe{display:block;width:100%;height:calc(100vh - 2rem);margin:0 auto;border:0}</style>
+</head>
+<body>
+<iframe sandbox="allow-scripts" referrerpolicy="no-referrer" title="Manufacturing Learning Canvas" srcdoc="&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot; data-visualize-standalone&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
+&lt;meta http-equiv=&quot;Content-Security-Policy&quot; content=&quot;default-src &#x27;none&#x27;; script-src &#x27;unsafe-inline&#x27; &#x27;unsafe-eval&#x27; &#x27;wasm-unsafe-eval&#x27; blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; style-src &#x27;unsafe-inline&#x27; blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; img-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; font-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; media-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; worker-src blob:; connect-src blob: data:; frame-src &#x27;none&#x27;; object-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;&quot;&gt;
+&lt;title&gt;Manufacturing Learning Canvas&lt;/title&gt;
+&lt;style&gt;:root {
+  color-scheme: light dark;
+  background-color: var(
+    --background,
+    var(--color-background-primary, light-dark(rgb(255 255 255), rgb(24 24 24)))
+  ) !important;
+
+  /* Agent-facing contract; keep in sync with SKILL.md. */
+  --background: var(
+    --color-background-primary,
+    light-dark(rgb(255 255 255), rgb(24 24 24))
+  );
+  --foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --card: color-mix(in oklab, var(--foreground) 5%, var(--background));
+  --card-foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --popover: var(
+    --color-background-secondary,
+    light-dark(rgb(255 255 255), rgb(45 45 45))
+  );
+  --popover-foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --primary: var(
+    --color-text-info,
+    light-dark(rgb(51 156 255), rgb(131 195 255))
+  );
+  --primary-foreground: var(
+    --color-text-inverse,
+    light-dark(rgb(255 255 255), rgb(13 13 13))
+  );
+  --secondary: var(
+    --color-background-secondary,
+    light-dark(rgb(255 255 255 / 96%), rgb(54 54 54 / 96%))
+  );
+  --secondary-foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --muted: color-mix(in srgb, var(--foreground) 10%, transparent);
+  --muted-foreground: var(
+    --color-text-secondary,
+    light-dark(rgb(26 28 31 / 49.4%), rgb(255 255 255 / 49.8%))
+  );
+  --accent: var(
+    --color-background-info,
+    light-dark(rgb(229 242 255), rgb(13 39 63))
+  );
+  --accent-foreground: var(
+    --color-text-info,
+    light-dark(rgb(51 156 255), rgb(131 195 255))
+  );
+  --destructive: var(
+    --color-text-warning,
+    light-dark(rgb(226 85 7), rgb(255 133 73))
+  );
+  --border: var(
+    --color-border-secondary,
+    light-dark(rgb(26 28 31 / 8%), rgb(255 255 255 / 8.2%))
+  );
+  --input: var(
+    --color-border-primary,
+    light-dark(
+      rgb(26 28 31 / 11.8%),
+      color-mix(in oklab, rgb(0 0 0) 10%, transparent)
+    )
+  );
+  --ring: var(
+    --color-ring-primary,
+    light-dark(rgb(51 156 255), rgb(131 195 255 / 76%))
+  );
+  --font-size-base: var(--font-text-md-size, 14px);
+  --blue: light-dark(rgb(51 156 255), rgb(51 156 255));
+  --orange: light-dark(rgb(226 85 7), rgb(251 106 34));
+  --green: light-dark(rgb(0 162 64), rgb(64 201 119));
+  --red: light-dark(rgb(224 46 42), rgb(255 103 100));
+  --purple: light-dark(rgb(146 79 247), rgb(173 123 249));
+  --yellow: light-dark(rgb(255 195 0), rgb(255 210 64));
+  --viz-series-1: var(--primary);
+  --viz-series-2: light-dark(rgb(243 136 59), rgb(245 154 86));
+  --viz-series-3: light-dark(rgb(93 201 119), rgb(116 213 139));
+  --viz-series-4: light-dark(rgb(235 119 177), rgb(240 143 192));
+  --viz-series-5: light-dark(rgb(155 121 236), rgb(170 145 239));
+  --viz-series-6: light-dark(rgb(58 185 177), rgb(90 203 194));
+
+  /* Internal implementation variables; not part of the agent contract. */
+  --font-sans: -apple-system, system-ui, &quot;Segoe UI&quot;, sans-serif;
+  --font-mono:
+    ui-monospace, SFMono-Regular, &quot;SF Mono&quot;, Menlo, Consolas, &quot;Liberation Mono&quot;,
+    monospace;
+  --font-size-normal: max(11px, var(--font-size-base));
+  --font-size-tooltip: calc(var(--font-size-base) - 1px);
+  --font-size-small: max(11px, calc(var(--font-size-base) - 2px));
+  --font-size-h1: calc(var(--font-size-normal) * 1.7142857143);
+  --font-size-h2: calc(var(--font-size-normal) * 1.4285714286);
+  --font-size-h3: calc(var(--font-size-normal) * 1.2857142857);
+  --font-weight-normal: 430;
+  --font-weight-medium: 500;
+  --icon-size: 16px;
+  --line-height-normal: calc(var(--font-size-normal) * 1.5);
+  --line-height-tooltip: calc(var(--font-size-tooltip) * 1.4285714286);
+  --line-height-small: calc(var(--font-size-small) + 4px);
+  --corner-shape: round;
+  --radius: var(--border-radius-lg, 10px);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-2xl: calc(var(--radius) * 1.6);
+  --radius-full: 9999px;
+  --shadow-sm: 0 1px 2px -1px rgb(0 0 0 / 8%);
+  --checkmark-image: url(&quot;data:image/svg+xml,%3Csvg xmlns=&#x27;http://www.w3.org/2000/svg&#x27; viewBox=&#x27;0 0 17 17&#x27;%3E%3Cpath d=&#x27;M12.8961 3.64101C13.1297 3.41418 13.4984 3.37523 13.7779 3.56581C14.0571 3.75635 14.1554 4.11331 14.0299 4.41347L13.9615 4.53847L7.71151 13.7045C7.59411 13.8767 7.4063 13.9877 7.19881 14.0072C6.99136 14.0267 6.78564 13.9533 6.63826 13.806L2.88826 10.056L2.79842 9.9457C2.6192 9.67407 2.64927 9.30496 2.88826 9.06581C3.12738 8.82669 3.49647 8.79676 3.76815 8.97597L3.8785 9.06581L7.03084 12.2182L12.8053 3.74941L12.8961 3.64101Z&#x27;/%3E%3C/svg%3E&quot;);
+
+  /* Legacy aliases; not part of the current agent contract. */
+  --viz-bg: transparent;
+  --viz-panel: var(--card);
+  --viz-border: var(--border);
+  --viz-text: var(--foreground);
+  --viz-muted: var(--muted-foreground);
+  --viz-accent: var(--primary);
+  --viz-accent-text: var(--primary-foreground);
+  --viz-accent-bg: var(--accent);
+  --viz-font-size: var(--font-size-base);
+  --viz-warning: var(--destructive);
+}
+
+:root[data-theme=&quot;light&quot;] {
+  color-scheme: light;
+}
+
+:root[data-theme=&quot;dark&quot;] {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html &gt; body {
+  /* Preserve MCP aliases for older inline renderers without creating :root cycles. */
+  --color-background-primary: var(
+    --background,
+    light-dark(rgb(255 255 255), rgb(24 24 24))
+  );
+  --color-text-primary: var(
+    --foreground,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --color-border-secondary: var(
+    --border,
+    light-dark(rgb(26 28 31 / 8%), rgb(255 255 255 / 8.2%))
+  );
+
+  margin: 0;
+  padding: var(--visualize-paint-gutter, 0px);
+  color: var(--foreground);
+  background: transparent !important;
+  font-family: var(--font-sans) !important;
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+}
+
+a {
+  color: color-mix(in srgb, var(--viz-accent) 80%, var(--viz-text) 20%);
+  cursor: pointer;
+  font-weight: var(--font-weight-medium, 500);
+  text-decoration: none;
+  text-underline-offset: 2px;
+}
+
+a:is(:hover, :focus-visible) {
+  text-decoration-line: underline;
+  text-decoration-style: dashed;
+  text-decoration-thickness: 0.5px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin-block: 0;
+}
+
+h1 {
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+h3,
+h4,
+h5,
+h6 {
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.3;
+}
+
+b,
+strong,
+th {
+  font-weight: var(--font-weight-medium);
+}
+
+code:not(pre code) {
+  display: inline;
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+  corner-shape: var(--corner-shape);
+  background: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  overflow-wrap: anywhere;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  word-break: break-word;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--foreground);
+  font: inherit;
+  text-align: start;
+}
+
+.table :is(th, td) {
+  padding-block: 10px;
+  padding-inline: 0 24px;
+  overflow-wrap: anywhere;
+  border-bottom: 1px solid var(--border);
+  text-align: start;
+  vertical-align: top;
+}
+
+.table-responsive &gt; .table :is(th, td) {
+  overflow-wrap: break-word;
+}
+
+.table :is(th, td):last-child {
+  padding-inline-end: 0;
+}
+
+.table :is(caption, thead th) {
+  font-weight: 600;
+}
+
+.table thead th {
+  padding-block: 8px;
+  border-bottom-color: color-mix(in srgb, var(--foreground) 16%, transparent);
+}
+
+.table tbody tr:last-child :is(th, td) {
+  border-bottom: 0;
+}
+
+.table.table-sm :is(th, td) {
+  padding-block: 6px;
+}
+
+.table.table-sm :is(th, td):not(:last-child) {
+  padding-inline-end: 16px;
+}
+
+.table :is(.text-end, [align=&quot;right&quot;]) {
+  text-align: end;
+  font-variant-numeric: tabular-nums;
+}
+
+.table :is(.text-center, [align=&quot;center&quot;]) {
+  text-align: center;
+}
+
+.table .text-nowrap {
+  white-space: nowrap;
+}
+
+#widget {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  padding: 0;
+  background: transparent !important;
+}
+
+.card {
+  min-width: 0;
+  padding: 12px;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  border-radius: var(--radius-2xl);
+  corner-shape: var(--corner-shape);
+  color: var(--card-foreground);
+  background: var(--card);
+}
+
+#widget &gt; :not(.card, .progress) {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.tooltip {
+  position: fixed;
+  z-index: 50;
+  top: 0;
+  left: 0;
+  width: max-content;
+  max-width: min(
+    20rem,
+    var(--tooltip-available-width, calc(100vw - 10px)),
+    calc(100vw - 10px)
+  );
+  max-height: min(
+    var(--tooltip-available-height, calc(100vh - 10px)),
+    calc(100vh - 10px)
+  );
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  corner-shape: var(--corner-shape);
+  color: var(--popover-foreground);
+  background: var(--popover);
+  box-shadow: none;
+  font-size: var(--font-size-tooltip);
+  line-height: var(--line-height-tooltip);
+  overflow-wrap: break-word;
+  white-space: normal;
+  pointer-events: none;
+  user-select: none;
+}
+
+.viz-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(max(180px, 24%), 1fr));
+  gap: 10px;
+}
+
+.viz-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.viz-stat-value {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+.viz-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+hr {
+  width: 100%;
+  height: 1px;
+  margin-block: 6px;
+  border: 0;
+  background: var(--border);
+}
+
+.nav {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 4px;
+}
+
+.progress {
+  display: flex;
+  height: 8px;
+  margin-block: calc((var(--line-height-normal, 1.5em) - 8px) / 2);
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: var(--muted);
+}
+
+.progress-bar:only-child {
+  border-radius: var(--radius-full);
+}
+
+.progress-bar {
+  height: 100%;
+  flex-shrink: 0;
+  border: 0;
+  background: var(--viz-series-1);
+}
+
+.viz-badge {
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  color: var(--accent-foreground);
+  background: var(--accent);
+  font-weight: var(--font-weight-medium);
+}
+
+small,
+.text-small,
+.viz-badge {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.text-muted {
+  color: var(--muted-foreground);
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.viz-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.viz-controls &gt; .form-label {
+  display: grid;
+  min-width: min(100%, 260px);
+  flex: 1 1 280px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 2px 12px;
+  margin-bottom: 0;
+}
+
+.viz-controls &gt; .form-label &gt; :is(.form-control, .form-range, .form-select) {
+  grid-column: 1 / -1;
+}
+
+.btn,
+.nav-link,
+.form-check-input,
+.form-control,
+.form-range,
+.form-select {
+  font: inherit;
+}
+
+.btn,
+.nav-link {
+  appearance: button;
+  display: inline-flex;
+  inline-size: fit-content;
+  max-inline-size: 100%;
+  min-height: 28px;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin: 0;
+  padding: 0 8px;
+  -webkit-app-region: no-drag;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  corner-shape: var(--corner-shape);
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+  cursor: var(--cursor-interaction, pointer);
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+.btn:is(.btn-block, .viz-tile) {
+  inline-size: 100%;
+}
+
+.btn.viz-tile {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+a.btn {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn:not(:disabled):hover,
+.nav-link:not(:disabled):not([aria-disabled=&quot;true&quot;]):hover {
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.btn-primary {
+  border-color: transparent;
+  color: var(--primary-foreground);
+  background: var(--foreground);
+  background-clip: padding-box;
+}
+
+.btn-primary .text-muted {
+  color: color-mix(in srgb, var(--primary-foreground) 50%, transparent);
+}
+
+.btn-primary:not(:disabled):hover {
+  background: color-mix(in srgb, var(--foreground) 80%, transparent);
+  background-clip: padding-box;
+}
+
+.btn-ghost {
+  border-color: transparent;
+  color: var(--muted-foreground);
+  background: transparent;
+}
+
+.btn-ghost:not(:disabled):hover {
+  color: var(--foreground);
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.nav-pills .nav-link {
+  min-width: 0;
+  border-color: transparent;
+  color: var(--muted-foreground);
+  background: transparent;
+}
+
+.nav-justified .nav-link {
+  flex: 1 1 0;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+.nav-pills .nav-link.active {
+  color: var(--foreground);
+  background: var(--muted);
+}
+
+.btn:disabled,
+.nav-link:disabled,
+.nav-link[aria-disabled=&quot;true&quot;] {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+[data-lucide] {
+  stroke-width: 1.6;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--foreground);
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  min-height: 28px;
+  padding: 0 8px;
+  outline: none;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  corner-shape: var(--corner-shape);
+  color: var(--foreground);
+  background: var(--secondary);
+}
+
+.form-control::placeholder {
+  color: var(--muted-foreground);
+}
+
+.form-control[type=&quot;file&quot;] {
+  padding: 0;
+  overflow: hidden;
+  cursor: var(--cursor-interaction, pointer);
+}
+
+.form-control[type=&quot;file&quot;]::file-selector-button {
+  min-height: 26px;
+  margin-right: 8px;
+  padding: 0 8px;
+  border: 0;
+  border-right: 1px solid var(--input);
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+  cursor: inherit;
+  font: inherit;
+}
+
+.form-control[type=&quot;file&quot;]:not(:disabled):hover::file-selector-button {
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.form-control-color[type=&quot;color&quot;] {
+  width: 40px;
+  height: 28px;
+  padding: 3px;
+  cursor: var(--cursor-interaction, pointer);
+}
+
+.form-control-color[type=&quot;color&quot;]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.form-control-color[type=&quot;color&quot;]::-webkit-color-swatch {
+  border: 0;
+  border-radius: calc(var(--radius-lg) - 4px);
+  corner-shape: var(--corner-shape);
+}
+
+textarea.form-control {
+  height: auto;
+  min-height: 72px;
+  padding: 8px 10px;
+  resize: vertical;
+}
+
+.form-control:focus-visible {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-control:disabled,
+.form-select:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.form-select {
+  appearance: none;
+  display: block;
+  width: 100%;
+  min-height: 28px;
+  margin: 0;
+  padding: 0 32px 0 8px;
+  outline: none;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  corner-shape: var(--corner-shape);
+  color: var(--foreground);
+  background-color: var(--secondary);
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--muted-foreground) 50%),
+    linear-gradient(135deg, var(--muted-foreground) 50%, transparent 50%);
+  background-position:
+    calc(100% - 14px) 50%,
+    calc(100% - 10px) 50%;
+  background-repeat: no-repeat;
+  background-size: 4px 4px;
+  cursor: var(--cursor-interaction, default);
+}
+
+.form-select:not(:disabled):hover {
+  background-color: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.form-select:focus-visible {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-check {
+  display: flex;
+  min-height: 20px;
+  align-items: center;
+  gap: 6px;
+}
+
+.form-check-input {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+  margin: 0;
+  border: 1px solid var(--input);
+  color: var(--primary-foreground);
+  background-color: transparent;
+  cursor: var(--cursor-interaction, default);
+  transition:
+    background-color 150ms,
+    border-color 150ms,
+    box-shadow 150ms;
+}
+
+.form-check:not(.form-switch) .form-check-input[type=&quot;checkbox&quot;] {
+  border-color: var(--input);
+  border-radius: var(--radius-sm);
+  corner-shape: var(--corner-shape);
+  background-color: var(--secondary);
+  box-shadow: var(--shadow-sm);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input:not(:disabled):not(:checked):hover {
+  background-color: var(--card);
+}
+
+.form-check:not(.form-switch) .form-check-input[type=&quot;checkbox&quot;]:checked {
+  border-color: var(--primary);
+  background-color: var(--primary);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input[type=&quot;checkbox&quot;]:checked::before {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--primary-foreground);
+  content: &quot;&quot;;
+  mask: var(--checkmark-image) center / 12px 12px no-repeat;
+}
+
+.form-check-input[type=&quot;radio&quot;] {
+  width: 14px;
+  height: 14px;
+  border-radius: var(--radius-full);
+}
+
+.form-check-input[type=&quot;radio&quot;]:checked {
+  border: 2px solid var(--primary);
+  background:
+    radial-gradient(circle, var(--primary-foreground) 0 2.5px, transparent 3px),
+    var(--primary);
+}
+
+.form-check:not(.form-switch) .form-check-input:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.form-check:not(.form-switch) .form-check-input:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.form-check:not(.form-switch) .form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+}
+
+.form-switch .form-check-input:disabled,
+.form-switch .form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.form-check-label {
+  color: var(--foreground);
+  cursor: var(--cursor-interaction, default);
+}
+
+.form-switch .form-check-input {
+  position: relative;
+  width: 32px;
+  height: 20px;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: var(--muted);
+  box-shadow: none;
+  transition: background-color 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.form-switch .form-check-input::before {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  box-sizing: border-box;
+  border: 1px solid light-dark(var(--primary-foreground), var(--foreground));
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+  box-shadow: var(--shadow-sm);
+  content: &quot;&quot;;
+  transform: translate(2px, -50%);
+  transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.form-switch .form-check-input:checked {
+  background: var(--primary);
+}
+
+.form-switch .form-check-input:checked::before {
+  transform: translate(14px, -50%);
+}
+
+.form-switch .form-check-input:focus-visible {
+  box-shadow: 0 0 0 2px var(--ring);
+}
+
+.form-range {
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: 28px;
+  flex: 1;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: 0;
+  accent-color: var(--primary);
+  background: linear-gradient(
+      color-mix(in srgb, var(--foreground) 7%, transparent),
+      color-mix(in srgb, var(--foreground) 7%, transparent)
+    )
+    center / 100% 2px no-repeat;
+}
+
+.form-range::-webkit-slider-runnable-track {
+  height: 28px;
+  background: transparent;
+}
+
+.form-range::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  margin-top: 4px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+}
+
+.form-range:focus-visible::-webkit-slider-thumb {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-range::-moz-range-track {
+  height: 28px;
+  background: transparent;
+}
+
+.form-range::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+}
+
+.form-range:focus-visible::-moz-range-thumb {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-range:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.btn:not(.btn-primary, .viz-tile):is(
+  [aria-pressed=&quot;true&quot;],
+  [aria-selected=&quot;true&quot;],
+  .is-selected
+) {
+  border-color: var(--primary);
+  color: var(--primary-foreground);
+  background: var(--primary);
+}
+
+.btn.viz-tile:is([aria-pressed=&quot;true&quot;], [aria-selected=&quot;true&quot;], .is-selected) {
+  border-color: var(--primary);
+  box-shadow: inset 0 0 0 1px var(--primary);
+}
+
+.btn:focus-visible,
+.nav-link:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+@media (pointer: coarse) {
+  .btn,
+  .nav-link,
+  .form-control,
+  .form-select {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  /* Keep small-screen WebKit from zooming when a text field receives focus. */
+  .form-control,
+  .form-select {
+    font-size: max(16px, var(--font-size-normal));
+  }
+
+  .form-control[type=&quot;file&quot;]::file-selector-button {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .form-control-color[type=&quot;color&quot;] {
+    width: 44px;
+    height: 44px;
+  }
+
+  .form-control:is(
+    [type=&quot;date&quot;],
+    [type=&quot;datetime-local&quot;],
+    [type=&quot;month&quot;],
+    [type=&quot;time&quot;],
+    [type=&quot;week&quot;]
+  ) {
+    min-width: 0;
+    max-width: 100%;
+    padding-block: 8px;
+  }
+
+  .form-check {
+    min-height: 44px;
+    padding-inline: 15px;
+  }
+
+  .form-check-input {
+    position: relative;
+  }
+
+  .form-check-input::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 44px;
+    height: 44px;
+    content: &quot;&quot;;
+    transform: translate(-50%, -50%);
+  }
+
+  .form-check-label {
+    display: inline-flex;
+    min-width: 44px;
+    min-height: 44px;
+    align-items: center;
+  }
+
+  .form-range {
+    height: 44px;
+    touch-action: pan-y;
+  }
+
+  .form-range::-webkit-slider-runnable-track {
+    height: 44px;
+  }
+
+  .form-range::-moz-range-track {
+    height: 44px;
+  }
+
+  .form-range::-webkit-slider-thumb {
+    margin-top: 12px;
+  }
+}
+
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+#widget &gt; svg {
+  width: 100%;
+}
+
+/* Model-authored chart rules can otherwise stretch icons after these styles load. */
+svg.lucide {
+  display: block;
+  width: var(--icon-size) !important;
+  height: var(--icon-size) !important;
+  flex: none;
+  margin: 0 !important;
+  stroke-width: 1.6;
+}
+
+.text-warning,
+.text-destructive {
+  color: var(--destructive);
+}
+
+html&gt;body{padding:0}&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;https://fonts.googleapis.com/css2?family=Inter:wght@400;500&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap&quot;&gt;
+&lt;div id=&quot;manufacturing-learning-canvas&quot;&gt;
+  &lt;div class=&quot;intro&quot;&gt;&lt;h2&gt;Better with every part.&lt;/h2&gt;&lt;p style=&quot;font-size:13px;margin:8px 0;color:#777&quot;&gt;27-part illustrative learning curve · scripted outcomes&lt;/p&gt;&lt;/div&gt;
+  &lt;div class=&quot;viz-controls controls&quot;&gt;
+    &lt;button type=&quot;button&quot; class=&quot;btn btn-primary&quot; id=&quot;ml-play&quot;&gt;Play demo&lt;/button&gt;
+    &lt;button type=&quot;button&quot; class=&quot;btn&quot; id=&quot;ml-step&quot;&gt;Next step&lt;/button&gt;
+    &lt;label class=&quot;form-label timeline&quot; for=&quot;ml-timeline&quot;&gt;Parts completed &lt;strong id=&quot;ml-count&quot; class=&quot;tabular-nums&quot;&gt;00 / 27&lt;/strong&gt;&lt;input id=&quot;ml-timeline&quot; class=&quot;form-range&quot; type=&quot;range&quot; min=&quot;0&quot; max=&quot;27&quot; step=&quot;1&quot; value=&quot;0&quot;&gt;&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;workspace&quot;&gt;
+    &lt;section class=&quot;flow-region&quot; aria-label=&quot;Manufacturing agent loops&quot;&gt;
+      &lt;canvas id=&quot;ml-canvas&quot; role=&quot;img&quot; aria-label=&quot;Five equal boxes: Input, code-writing LLM, test gate, simulation, LLM judge. The numbered ball is one part. Simulation failures return directly to the test gate; judge rejections return directly to the LLM.&quot;&gt;Input → code-writing LLM → test gate → simulation → judge. A failed simulation teaches the test gate. A rejected machining time teaches the LLM.&lt;/canvas&gt;
+      &lt;div class=&quot;flow-footer&quot;&gt;&lt;span&gt;● Numbered ball = one part&lt;/span&gt;&lt;/div&gt;
+      &lt;div id=&quot;ml-status&quot; class=&quot;status&quot; aria-live=&quot;polite&quot;&gt;Ready&lt;/div&gt;
+    &lt;/section&gt;
+    &lt;aside class=&quot;chart-region&quot; aria-label=&quot;Live improvement charts&quot;&gt;
+      &lt;div class=&quot;eyebrow chart-caption&quot;&gt;ILLUSTRATIVE LEARNING CURVE&lt;/div&gt;
+      &lt;section&gt;&lt;div class=&quot;chart-heading&quot;&gt;&lt;h3&gt;First simulation passes&lt;/h3&gt;&lt;span id=&quot;ml-pass-value&quot;&gt;—&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;plot&quot; id=&quot;ml-pass-chart&quot;&gt;&lt;/div&gt;&lt;/section&gt;
+      &lt;section&gt;&lt;div class=&quot;chart-heading&quot;&gt;&lt;h3&gt;Simulation runs / part&lt;/h3&gt;&lt;span id=&quot;ml-runs-value&quot;&gt;—&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;plot&quot; id=&quot;ml-runs-chart&quot;&gt;&lt;/div&gt;&lt;/section&gt;
+      &lt;section&gt;&lt;div class=&quot;chart-heading&quot;&gt;&lt;h3 data-tooltip=&quot;Average predicted machining time of the latest 20 completed parts. Uses available parts until 20 have completed.&quot;&gt;Time · last 20 parts&lt;/h3&gt;&lt;span id=&quot;ml-time-value&quot;&gt;—&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;plot&quot; id=&quot;ml-time-chart&quot;&gt;&lt;/div&gt;&lt;/section&gt;
+    &lt;/aside&gt;
+  &lt;/div&gt;
+  &lt;details class=&quot;rule-register&quot;&gt;&lt;summary&gt;Tests and full system prompt&lt;/summary&gt;&lt;div class=&quot;register-columns&quot;&gt;&lt;section&gt;&lt;h3 id=&quot;ml-tests-heading&quot;&gt;Tests · 0&lt;/h3&gt;&lt;div id=&quot;ml-test-register&quot;&gt;&lt;/div&gt;&lt;/section&gt;&lt;section&gt;&lt;h3&gt;System prompt&lt;/h3&gt;&lt;div id=&quot;ml-prompt-register&quot;&gt;&lt;/div&gt;&lt;/section&gt;&lt;/div&gt;&lt;/details&gt;
+&lt;/div&gt;
+&lt;style&gt;
+#manufacturing-learning-canvas{font-family:Inter,Arial,sans-serif;color:var(--foreground);background:transparent;--viz-series-1:var(--foreground)}
+#manufacturing-learning-canvas .intro{margin:4px 0 20px}
+#manufacturing-learning-canvas .eyebrow{font-family:&#x27;IBM Plex Mono&#x27;,monospace;font-size:11px;letter-spacing:.1em;color:var(--muted-foreground)}
+#manufacturing-learning-canvas h2{font-size:30px;font-weight:400;letter-spacing:-1.2px;margin:8px 0 0}
+#manufacturing-learning-canvas .timeline{flex:1;min-width:180px}
+#manufacturing-learning-canvas .workspace{display:grid;grid-template-columns:minmax(0,1fr) 278px;gap:26px;margin:22px 0 16px}
+#manufacturing-learning-canvas .flow-region{min-width:0}
+#manufacturing-learning-canvas canvas{display:block;width:100%;touch-action:pan-y}
+#manufacturing-learning-canvas .flow-footer{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;font-size:11px;color:var(--muted-foreground)}
+#manufacturing-learning-canvas .status{font-size:13px;min-height:36px;margin-top:16px}
+#manufacturing-learning-canvas .chart-region{min-width:0;border-left:1px solid var(--border);padding-left:20px}
+#manufacturing-learning-canvas .chart-caption{margin:0 0 22px}
+#manufacturing-learning-canvas .chart-region section{margin-bottom:17px}
+#manufacturing-learning-canvas .chart-heading{display:flex;align-items:baseline;justify-content:space-between;gap:6px}
+#manufacturing-learning-canvas h3{font-size:12px;font-weight:400;margin:0}
+#manufacturing-learning-canvas .chart-heading&gt;span{font-size:16px;font-family:&#x27;IBM Plex Mono&#x27;,monospace;white-space:nowrap}
+#manufacturing-learning-canvas .plot{min-width:0;width:100%;margin-top:7px}
+#manufacturing-learning-canvas .chart-svg{display:block}
+#manufacturing-learning-canvas .chart-svg text{fill:var(--foreground);font-size:12px;font-family:Inter,Arial,sans-serif}
+#manufacturing-learning-canvas .chart-svg .domain,#manufacturing-learning-canvas .chart-svg .tick line{stroke:var(--border)}
+#manufacturing-learning-canvas .rule-register{margin-top:12px;font-size:12px}
+#manufacturing-learning-canvas summary{cursor:pointer}
+#manufacturing-learning-canvas .register-columns{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:18px}
+#manufacturing-learning-canvas .register-row{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--border)}
+#manufacturing-learning-canvas .register-id{font-family:&#x27;IBM Plex Mono&#x27;,monospace;color:var(--muted-foreground);flex:0 0 32px}
+#manufacturing-learning-canvas .register-empty{color:var(--muted-foreground);margin-top:10px}
+@media(max-width:930px){#manufacturing-learning-canvas .workspace{grid-template-columns:1fr}#manufacturing-learning-canvas .chart-region{border-left:0;padding-left:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}#manufacturing-learning-canvas .chart-caption{grid-column:1/-1;margin:0}}
+@media(max-width:720px){#manufacturing-learning-canvas .chart-region,#manufacturing-learning-canvas .register-columns{grid-template-columns:1fr}#manufacturing-learning-canvas h2{font-size:27px}}
+&lt;/style&gt;
+&lt;script src=&quot;https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+(()=&gt;{
+ const root=document.getElementById(&#x27;manufacturing-learning-canvas&#x27;),$=s=&gt;root.querySelector(s),canvas=$(&#x27;#ml-canvas&#x27;),ctx=canvas.getContext(&#x27;2d&#x27;);
+ const names=[&#x27;Spur gear&#x27;,&#x27;Mounting bracket&#x27;,&#x27;Bearing housing&#x27;,&#x27;Valve body&#x27;,&#x27;Heat sink&#x27;,&#x27;Motor plate&#x27;,&#x27;Shaft collar&#x27;,&#x27;Sensor enclosure&#x27;,&#x27;Fixture block&#x27;,&#x27;Timing pulley&#x27;,&#x27;Camera bracket&#x27;,&#x27;Pump housing&#x27;,&#x27;Manifold block&#x27;,&#x27;Cooling plate&#x27;,&#x27;Adapter plate&#x27;,&#x27;Spacer sleeve&#x27;,&#x27;Electronics case&#x27;,&#x27;Soft jaw&#x27;,&#x27;Worm wheel&#x27;,&#x27;L-bracket&#x27;,&#x27;Gearbox cover&#x27;,&#x27;Nozzle body&#x27;,&#x27;Fin array&#x27;,&#x27;Flange plate&#x27;,&#x27;Bearing sleeve&#x27;,&#x27;Battery tray&#x27;,&#x27;Drill jig&#x27;,&#x27;Sprocket&#x27;,&#x27;Hinge bracket&#x27;,&#x27;Compressor cover&#x27;,&#x27;Flow splitter&#x27;,&#x27;Cold plate&#x27;,&#x27;Motor flange&#x27;,&#x27;Stepped bushing&#x27;,&#x27;Instrument shell&#x27;,&#x27;Clamping block&#x27;,&#x27;Rack segment&#x27;,&#x27;Gusset bracket&#x27;,&#x27;Impeller housing&#x27;,&#x27;Metering valve&#x27;,&#x27;Thermal spreader&#x27;,&#x27;Coupling plate&#x27;,&#x27;Eccentric sleeve&#x27;,&#x27;Optical enclosure&#x27;,&#x27;Vise stop&#x27;,&#x27;Bevel gear&#x27;,&#x27;Actuator bracket&#x27;,&#x27;Turbine cover&#x27;,&#x27;Pneumatic manifold&#x27;,&#x27;Chiller plate&#x27;,&#x27;Robot baseplate&#x27;,&#x27;Guide bushing&#x27;,&#x27;Controller enclosure&#x27;,&#x27;Locating fixture&#x27;];
+ const rules=[[&#x27;Clamp clearance&#x27;,&#x27;assert clearance(toolpath, clamps) &gt; margin&#x27;],[&#x27;Tool reach&#x27;,&#x27;assert cut_depth &lt;= usable_tool_length&#x27;],[&#x27;Wall allowance&#x27;,&#x27;assert wall &gt;= minimum_thickness&#x27;],[&#x27;Cutter fit&#x27;,&#x27;assert cutter_diameter &lt; feature_gap&#x27;],[&#x27;Safe linking&#x27;,&#x27;review_links_in_cleared_stock()&#x27;],[&#x27;Fixture access&#x27;,&#x27;review_access(tool, fixture)&#x27;]];
+ const speedInstructions=[
+   [&#x27;Long toolpaths&#x27;,&#x27;Shorten toolpaths.&#x27;],[&#x27;Travel between scattered features&#x27;,&#x27;Cut nearby features together.&#x27;],[&#x27;Excessive vertical travel&#x27;,&#x27;Reduce full-height retracts.&#x27;],[&#x27;Time spent cutting air&#x27;,&#x27;Skip empty-space cuts.&#x27;],[&#x27;Backtracking between holes&#x27;,&#x27;Visit nearby holes first.&#x27;],[&#x27;Repeated pocket re-entry&#x27;,&#x27;Keep pocket cuts continuous.&#x27;],[&#x27;Too much tool-change time&#x27;,&#x27;Minimize tool changes.&#x27;],[&#x27;Long entry and exit moves&#x27;,&#x27;Shorten entry and exit moves.&#x27;],[&#x27;Duplicate finishing work&#x27;,&#x27;Remove repeat finishing passes.&#x27;],[&#x27;Long moves between contours&#x27;,&#x27;Link adjacent contours directly.&#x27;],[&#x27;Unnecessary tool swaps&#x27;,&#x27;Reuse the active tool.&#x27;],[&#x27;Backtracking between depths&#x27;,&#x27;Reduce travel between depths.&#x27;],[&#x27;Repeated trips to machine home&#x27;,&#x27;Avoid return-home moves.&#x27;],[&#x27;Recutting cleared stock&#x27;,&#x27;Cut remaining stock only.&#x27;],[&#x27;Separate compatible passes&#x27;,&#x27;Combine compatible passes.&#x27;],[&#x27;Distant starting point&#x27;,&#x27;Start closer to the first cut.&#x27;],[&#x27;Too much repositioning time&#x27;,&#x27;Reduce part repositioning.&#x27;],[&#x27;Redundant clearance movements&#x27;,&#x27;Remove extra clearance moves.&#x27;],[&#x27;Scattered finishing operations&#x27;,&#x27;Finish nearby faces together.&#x27;],[&#x27;Long approach moves&#x27;,&#x27;Shorten approach distance.&#x27;]
+ ];
+ const prompts=[&#x27;A small gear&#x27;,&#x27;A light bracket&#x27;,&#x27;A bearing cover&#x27;,&#x27;A valve block&#x27;,&#x27;A finned plate&#x27;,&#x27;A motor mount&#x27;,&#x27;A shaft collar&#x27;,&#x27;A compact case&#x27;,&#x27;A drill guide&#x27;];
+ const known=new Set(),strategies=new Set();let checkBank=[],feedbackBank=[],failTotal=0,runTotal=0,baseTotal=0,finalTotal=0;
+ const shuffledInputs=names.map((name,original)=&gt;({name,original}));
+ let shuffleSeed=20260913;
+ function random(){shuffleSeed=(Math.imul(shuffleSeed,1664525)+1013904223)&gt;&gt;&gt;0;return shuffleSeed/4294967296;}
+ for(let i=shuffledInputs.length-1;i&gt;0;i--){const j=Math.floor(random()*(i+1));[shuffledInputs[i],shuffledInputs[j]]=[shuffledInputs[j],shuffledInputs[i]];}
+ let outcomeSeed=731041;
+ function outcomeRandom(){outcomeSeed=(Math.imul(outcomeSeed,1664525)+1013904223)&gt;&gt;&gt;0;return outcomeSeed/4294967296;}
+ const parts=shuffledInputs.slice(0,27).map(({name,original},i)=&gt;{
+   const x=i+1,f=original%9,h=original%6;
+   const beforeChecks=[...checkBank],beforeFeedback=[...feedbackBank],knownHazard=known.has(h);
+   const gateDraw=outcomeRandom(),simulationDraw=outcomeRandom(),judgeDraw=outcomeRandom();
+   const gateProbability=knownHazard ? .35*Math.exp(-i/24) : 0;
+   const failureProbability=(.05+.55*Math.exp(-(i+checkBank.length)/18))*(knownHazard ? .55 : 1);
+   const judgeProbability=.10+.74*Math.exp(-(i+feedbackBank.length)/22);
+   const preflight=gateDraw&lt;gateProbability,failure=!preflight&amp;&amp;simulationDraw&lt;failureProbability,judge=judgeDraw&lt;judgeProbability;
+   const baseline=30+f*7+(original*13)%37,initial=baseline*(strategies.has(f)?1-Math.min(.34,.08+strategies.size*.012+Math.floor(i/9)*.025):1),final=initial*(judge?1-(.09+f*.008):1);
+   const rule={part:x,title:rules[h][0]+(knownHazard?&#x27; for new geometry&#x27;:&#x27;&#x27;),code:rules[h][1]};
+   const speedIssue=speedInstructions[feedbackBank.length%speedInstructions.length];
+   const rec={part:x,reason:speedIssue[0],action:speedIssue[1]};
+   if(failure){known.add(h);checkBank.push(rule);}if(judge){strategies.add(f);feedbackBank.push(rec);}
+   const runs=1+Number(failure)+Number(judge);failTotal+=Number(failure);runTotal+=runs;baseTotal+=baseline;finalTotal+=final;
+   return {x,name,original,f,h,input:x%7===0?&#x27;Prompt&#x27;:x%3===0?&#x27;PDF&#x27;:&#x27;Drawing&#x27;,beforeChecks,beforeFeedback,afterChecks:[...checkBank],afterFeedback:[...feedbackBank],failure,preflight,judge,failureProbability,judgeProbability,rule,rec,baseline,initial,final,runs,pass:100*(x-failTotal)/x,avgRuns:runTotal/x,saving:100*(baseTotal-finalTotal)/baseTotal};
+ });
+ parts.forEach((part,i)=&gt;{const window=parts.slice(Math.max(0,i-19),i+1);part.meanTime20=window.reduce((sum,p)=&gt;sum+p.final,0)/window.length;part.windowCount=window.length;});
+ const testCatalog=[[&#x27;Syntax&#x27;,&#x27;CAM syntax is valid&#x27;],[&#x27;Clearance&#x27;,&#x27;Cutter clears the stock on approach&#x27;],[&#x27;Tool reach&#x27;,&#x27;Tool can reach the required depth&#x27;],[&#x27;Wall thickness&#x27;,&#x27;Finishing leaves the required wall thickness&#x27;],[&#x27;Cutter fit&#x27;,&#x27;Cutter fits the narrowest feature&#x27;],[&#x27;Fixture&#x27;,&#x27;Toolpath avoids fixture keep-out zones&#x27;],[&#x27;Plunge&#x27;,&#x27;Entry move respects the allowed plunge depth&#x27;],[&#x27;Retract&#x27;,&#x27;Retract move clears the workpiece&#x27;]];
+ parts.filter(p=&gt;p.failure).forEach((p,i)=&gt;{p.rule.id=&#x27;T&#x27;+String(i+1).padStart(2,&#x27;0&#x27;);p.rule.short=testCatalog[i][0];p.rule.title=testCatalog[i][1];});
+ const num=v=&gt;v.toFixed(1),reduced=window.matchMedia(&#x27;(prefers-reduced-motion: reduce)&#x27;);
+ let completed=0,current=parts[0],checks=[],feedback=[],events=[],eventIndex=-1,active=null,progress=1,playing=false,animation=null,raf=0,revision=1,machining=null,statuses={},chartShown=0,llmVisits=0,gateVisits=0,motionFrom=&#x27;input&#x27;;
+ let W=700,H=525,nodes={},routes={},mobile=false,colors={},registerStamp=&#x27;&#x27;;
+ function sequence(d){
+   let rev=1;const e=[];const add=(route,target,text,extra={})=&gt;e.push({route,target,text,rev,...extra});
+   add(null,&#x27;input&#x27;,d.input+&#x27; → a new part to manufacture.&#x27;);
+   add(&#x27;inputLlm&#x27;,&#x27;llm&#x27;,&#x27;LLM writes CAD + CAM using feedback from previous parts.&#x27;);
+   add(&#x27;llmTests&#x27;,&#x27;tests&#x27;,d.beforeChecks.length?&#x27;Saved checks evaluate the new CAM.&#x27;:&#x27;Empty gate → first CAM goes to simulation.&#x27;,{result:d.preflight?&#x27;fail&#x27;:&#x27;pass&#x27;});
+   if(d.preflight){rev++;add(&#x27;testReturn&#x27;,&#x27;llm&#x27;,&#x27;A learned check catches an issue before simulation → rewrite CAM.&#x27;);add(&#x27;llmTests&#x27;,&#x27;tests&#x27;,&#x27;Revised CAM passes the gate.&#x27;,{result:&#x27;pass&#x27;});}
+   add(&#x27;testsSim&#x27;,&#x27;sim&#x27;,d.failure?&#x27;Simulation fails → return this result directly to the test gate.&#x27;:&#x27;Simulation passes · &#x27;+num(d.initial)+&#x27; min machining time.&#x27;,{result:d.failure?&#x27;fail&#x27;:&#x27;pass&#x27;,time:d.failure?null:d.initial});
+   if(d.failure){
+     add(&#x27;simTests&#x27;,&#x27;tests&#x27;,&#x27;New check added inside the gate: &#x27;+d.rule.title+&#x27;.&#x27;,{addCheck:true,result:&#x27;fail&#x27;});
+     rev++;add(&#x27;testReturn&#x27;,&#x27;llm&#x27;,&#x27;The gate sends the new constraint to the LLM → rewrite CAM.&#x27;);
+     add(&#x27;llmTests&#x27;,&#x27;tests&#x27;,&#x27;Revised CAM passes the learned check.&#x27;,{result:&#x27;pass&#x27;});
+     add(&#x27;testsSim&#x27;,&#x27;sim&#x27;,&#x27;Simulation passes · &#x27;+num(d.initial)+&#x27; min machining time.&#x27;,{result:&#x27;pass&#x27;,time:d.initial});
+   }
+   add(&#x27;simJudge&#x27;,&#x27;judge&#x27;,d.judge?&#x27;Judge: too slow. Send a recommendation directly to the LLM.&#x27;:&#x27;Judge: efficient enough. Accept this part.&#x27;,{result:d.judge?&#x27;fail&#x27;:&#x27;pass&#x27;});
+   if(d.judge){
+     rev++;add(&#x27;judgeLlm&#x27;,&#x27;llm&#x27;,&#x27;Judge → LLM: &#x27;+d.rec.action,{addFeedback:true});
+     add(&#x27;llmTests&#x27;,&#x27;tests&#x27;,&#x27;Optimized CAM passes the gate again.&#x27;,{result:&#x27;pass&#x27;});
+     add(&#x27;testsSim&#x27;,&#x27;sim&#x27;,&#x27;Simulation passes · &#x27;+num(d.initial)+&#x27; → &#x27;+num(d.final)+&#x27; min.&#x27;,{result:&#x27;pass&#x27;,time:d.final});
+     add(&#x27;simJudge&#x27;,&#x27;judge&#x27;,&#x27;Judge: faster and valid. Accept this part.&#x27;,{result:&#x27;pass&#x27;});
+   }
+   add(null,&#x27;judge&#x27;,&#x27;Complete&#x27;,{result:&#x27;pass&#x27;,commit:true});
+   return e;
+ }
+ function palette(){
+   const span=document.createElement(&#x27;span&#x27;);span.style.display=&#x27;none&#x27;;root.appendChild(span);
+   for(const [key,token] of Object.entries({fg:&#x27;foreground&#x27;,muted:&#x27;muted-foreground&#x27;,line:&#x27;border&#x27;,paper:&#x27;card&#x27;,soft:&#x27;muted&#x27;,red:&#x27;red&#x27;,green:&#x27;green&#x27;,orange:&#x27;orange&#x27;})){span.style.color=&#x27;var(--&#x27;+token+&#x27;)&#x27;;colors[key]=getComputedStyle(span).color;}span.remove();
+ }
+ function bezier(a,b,c,d,t){const u=1-t;return [u*u*u*a[0]+3*u*u*t*b[0]+3*u*t*t*c[0]+t*t*t*d[0],u*u*u*a[1]+3*u*u*t*b[1]+3*u*t*t*c[1]+t*t*t*d[1]];}
+ function makeRoute(id,points,kind=&#x27;forward&#x27;){
+   const samples=Array.from({length:81},(_,i)=&gt;bezier(...points,i/80)),lengths=[0];for(let i=1;i&lt;samples.length;i++)lengths.push(lengths[i-1]+Math.hypot(samples[i][0]-samples[i-1][0],samples[i][1]-samples[i-1][1]));
+   routes[id]={points,samples,lengths,kind};
+ }
+ function onRoute(r,t){const wanted=r.lengths.at(-1)*t;let i=1;while(i&lt;r.lengths.length-1&amp;&amp;r.lengths[i]&lt;wanted)i++;const a=r.samples[i-1],b=r.samples[i],f=(wanted-r.lengths[i-1])/(r.lengths[i]-r.lengths[i-1]||1);return [a[0]+(b[0]-a[0])*f,a[1]+(b[1]-a[1])*f];}
+ function motionPath(from,event){
+   const a=nodes[from],b=nodes[event.target],start=[a.x,a.y],end=[b.x,b.y],samples=[start];
+   const curve=points=&gt;{for(let i=1;i&lt;=32;i++)samples.push(bezier(...points,i/32));};
+   if(event.route){
+     const r=routes[event.route],p=r.points;
+     const control=(origin,toward,distance)=&gt;{const dx=toward[0]-origin[0],dy=toward[1]-origin[1],l=Math.hypot(dx,dy)||1;return [origin[0]+dx/l*distance,origin[1]+dy/l*distance];};
+     const lead=Math.min(40,Math.hypot(p[0][0]-start[0],p[0][1]-start[1])*.5);
+     const tail=Math.min(40,Math.hypot(end[0]-p[3][0],end[1]-p[3][1])*.5);
+     curve([start,start,control(p[0],p[1],-lead),p[0]]);
+     samples.push(...r.samples.slice(1));
+     curve([p[3],control(p[3],p[2],-tail),end,end]);
+   }else curve([start,start,end,end]);
+   const lengths=[0];for(let i=1;i&lt;samples.length;i++)lengths.push(lengths[i-1]+Math.hypot(samples[i][0]-samples[i-1][0],samples[i][1]-samples[i-1][1]));
+   return {samples,lengths};
+ }
+ function layout(){
+   W=Math.max(280,canvas.getBoundingClientRect().width);mobile=W&lt;610;H=mobile?870:515;nodes={};routes={};
+   const ids=[&#x27;input&#x27;,&#x27;llm&#x27;,&#x27;tests&#x27;,&#x27;sim&#x27;,&#x27;judge&#x27;];
+   if(!mobile){const margin=8,gap=20,bw=(W-margin*2-gap*4)/5;ids.forEach((id,i)=&gt;nodes[id]={x:margin+bw/2+i*(bw+gap),y:226,w:bw,h:144});}
+   else ids.forEach((id,i)=&gt;nodes[id]={x:W/2,y:90+i*164,w:166,h:144});
+   const port=(id,side)=&gt;{const n=nodes[id];return side===&#x27;top&#x27;?[n.x,n.y-n.h/2]:side===&#x27;bottom&#x27;?[n.x,n.y+n.h/2]:side===&#x27;left&#x27;?[n.x-n.w/2,n.y]:[n.x+n.w/2,n.y];};
+   for(const [id,a,b] of [[&#x27;inputLlm&#x27;,&#x27;input&#x27;,&#x27;llm&#x27;],[&#x27;llmTests&#x27;,&#x27;llm&#x27;,&#x27;tests&#x27;],[&#x27;simJudge&#x27;,&#x27;sim&#x27;,&#x27;judge&#x27;]]){
+     const p=port(a,mobile?&#x27;bottom&#x27;:&#x27;right&#x27;),q=port(b,mobile?&#x27;top&#x27;:&#x27;left&#x27;);
+     makeRoute(id,[p,mobile?[p[0]-5,p[1]+10]:[p[0]+8,p[1]-5],mobile?[q[0]+5,q[1]-10]:[q[0]-8,q[1]+5],q]);
+   }
+   if(!mobile){
+     let p=port(&#x27;tests&#x27;,&#x27;top&#x27;),q=port(&#x27;sim&#x27;,&#x27;top&#x27;);makeRoute(&#x27;testsSim&#x27;,[p,[p[0],51],[q[0],51],q]);
+     p=port(&#x27;tests&#x27;,&#x27;top&#x27;);q=port(&#x27;llm&#x27;,&#x27;top&#x27;);makeRoute(&#x27;testReturn&#x27;,[p,[p[0],51],[q[0],51],q],&#x27;repair&#x27;);
+     p=port(&#x27;sim&#x27;,&#x27;bottom&#x27;);q=port(&#x27;tests&#x27;,&#x27;bottom&#x27;);makeRoute(&#x27;simTests&#x27;,[p,[p[0],425],[q[0],425],q],&#x27;repair&#x27;);
+     p=port(&#x27;judge&#x27;,&#x27;bottom&#x27;);q=port(&#x27;llm&#x27;,&#x27;bottom&#x27;);makeRoute(&#x27;judgeLlm&#x27;,[p,[p[0],533],[q[0],533],q],&#x27;optimize&#x27;);
+   }else{
+     let p=port(&#x27;tests&#x27;,&#x27;right&#x27;),q=port(&#x27;sim&#x27;,&#x27;right&#x27;);makeRoute(&#x27;testsSim&#x27;,[p,[W-14,p[1]],[W-14,q[1]],q]);
+     p=port(&#x27;sim&#x27;,&#x27;left&#x27;);q=port(&#x27;tests&#x27;,&#x27;left&#x27;);makeRoute(&#x27;simTests&#x27;,[p,[15,p[1]],[15,q[1]],q],&#x27;repair&#x27;);
+     p=port(&#x27;tests&#x27;,&#x27;left&#x27;);q=port(&#x27;llm&#x27;,&#x27;left&#x27;);makeRoute(&#x27;testReturn&#x27;,[p,[15,p[1]],[15,q[1]],q],&#x27;repair&#x27;);
+     p=port(&#x27;judge&#x27;,&#x27;right&#x27;);q=port(&#x27;llm&#x27;,&#x27;right&#x27;);makeRoute(&#x27;judgeLlm&#x27;,[p,[W+5,p[1]],[W+5,q[1]],q],&#x27;optimize&#x27;);
+   }
+   const dpr=window.devicePixelRatio||1;canvas.width=Math.round(W*dpr);canvas.height=Math.round(H*dpr);canvas.style.height=H+&#x27;px&#x27;;ctx.setTransform(dpr,0,0,dpr,0,0);palette();draw();drawCharts(false);
+ }
+ function txt(t,x,y,size=12,color=colors.fg,align=&#x27;center&#x27;,mono=false){ctx.font=&#x27;400 &#x27;+size+&#x27;px &#x27;+(mono?&#x27;&quot;IBM Plex Mono&quot;,monospace&#x27;:&#x27;Inter,Arial,sans-serif&#x27;);ctx.fillStyle=color;ctx.textAlign=align;ctx.textBaseline=&#x27;middle&#x27;;ctx.fillText(t,x,y);}
+ function rect(x,y,w,h,fill,stroke=colors.line,r=3){ctx.beginPath();ctx.roundRect(x,y,w,h,r);ctx.fillStyle=fill;ctx.fill();if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=1;ctx.stroke();}}
+ function drawRoute(r,color,width){const p=r.points;ctx.beginPath();ctx.moveTo(...p[0]);ctx.bezierCurveTo(...p[1],...p[2],...p[3]);ctx.lineWidth=width;ctx.strokeStyle=color;ctx.stroke();const end=p[3],prev=r.samples.at(-2),a=Math.atan2(end[1]-prev[1],end[0]-prev[0]);ctx.beginPath();ctx.moveTo(...end);ctx.lineTo(end[0]-7*Math.cos(a-.45),end[1]-7*Math.sin(a-.45));ctx.lineTo(end[0]-7*Math.cos(a+.45),end[1]-7*Math.sin(a+.45));ctx.closePath();ctx.fillStyle=color;ctx.fill();}
+ function sketch(n){
+   const cx=n.x,cy=n.y+10,r=Math.min(31,n.w*.28),f=current.f,v=Math.floor(current.original/9);
+   if(current.input===&#x27;Prompt&#x27;){
+     const words=prompts[f].split(&#x27; &#x27;);txt(&#x27;“&#x27;,cx-r,cy-25,24,colors.muted);txt(words.slice(0,2).join(&#x27; &#x27;),cx,cy-7,12);txt(words.slice(2).join(&#x27; &#x27;),cx,cy+11,12);txt(&#x27;TEXT PROMPT&#x27;,cx,n.y+52,11,colors.muted,&#x27;center&#x27;,true);return;
+   }
+   ctx.save();ctx.translate(cx,cy);ctx.rotate((v-2)*.06);ctx.strokeStyle=colors.fg;ctx.lineWidth=1.2;ctx.fillStyle=colors.soft;
+   if(f===0){const teeth=9+v;ctx.beginPath();for(let i=0;i&lt;teeth*4;i++){const a=i*Math.PI*2/(teeth*4),radius=i%4&lt;2?r:r*.78;i?ctx.lineTo(Math.cos(a)*radius,Math.sin(a)*radius):ctx.moveTo(Math.cos(a)*radius,Math.sin(a)*radius);}ctx.closePath();ctx.fill();ctx.stroke();ctx.beginPath();ctx.arc(0,0,r*(.2+v*.015),0,Math.PI*2);ctx.stroke();}
+   else if(f===6){ctx.beginPath();ctx.ellipse(0,0,r,r*(.55+v*.035),0,0,Math.PI*2);ctx.fill();ctx.stroke();ctx.beginPath();ctx.ellipse(0,0,r*.4,r*(.23+v*.01),0,0,Math.PI*2);ctx.stroke();}
+   else{
+     const ry=r*(.56+v*.035);ctx.beginPath();if(f===1){ctx.moveTo(-r,-ry);ctx.lineTo(-r*.3,-ry);ctx.lineTo(-r*.3,ry*.2);ctx.lineTo(r,ry*.2);ctx.lineTo(r,ry);ctx.lineTo(-r,ry);ctx.closePath();}else ctx.roundRect(-r,-ry,2*r,2*ry,f===8?2:5+v);ctx.fill();ctx.stroke();
+     if(f===4){for(let i=0;i&lt;5+v;i++){const x=-r*.8+i*1.6*r/(4+v);ctx.beginPath();ctx.moveTo(x,-ry*.8);ctx.lineTo(x,ry*.8);ctx.stroke();}}
+     else{const holes=2+(v%3);for(let j=0;j&lt;holes;j++){const a=2*Math.PI*j/holes;ctx.beginPath();ctx.arc(Math.cos(a)*r*.65,Math.sin(a)*ry*.58,2.5,0,Math.PI*2);ctx.stroke();}if([2,3,7,8].includes(f)){ctx.beginPath();ctx.roundRect(-r*.4,-ry*.45,r*.8,ry*.9,3);ctx.stroke();}}
+   }
+   ctx.restore();txt(current.input.toUpperCase(),cx,n.y+54,11,colors.muted,&#x27;center&#x27;,true);
+ }
+ function miniSim(n){
+   const x=n.x-n.w*.34,y=n.y-12,w=n.w*.68,h=42;rect(x,y,w,h,colors.soft,null,1);const pts=[];
+   for(let i=0;i&lt;5;i++){const py=y+5+i*8;pts.push([x+5+(i%2?w-10:0),py],[x+5+(i%2?0:w-10),py]);}
+   const t=active?.target===&#x27;sim&#x27;?progress:machining!==null?1:0,segments=(pts.length-1)*t,last=Math.floor(segments);ctx.beginPath();ctx.moveTo(...pts[0]);for(let j=1;j&lt;=last;j++)ctx.lineTo(...pts[j]);let end=pts[last];if(last&lt;pts.length-1){const u=segments-last;end=[pts[last][0]+(pts[last+1][0]-pts[last][0])*u,pts[last][1]+(pts[last+1][1]-pts[last][1])*u];ctx.lineTo(...end);}ctx.strokeStyle=colors.fg;ctx.lineWidth=1;ctx.stroke();ctx.fillStyle=colors.fg;ctx.fillRect(end[0]-2,end[1]-2,4,4);
+ }
+ function drawNode(id,n){
+   const focus=active?.target===id,result=focus&amp;&amp;progress&gt;=.78?active.result:statuses[id],top=n.y-n.h/2;
+   rect(n.x-n.w/2,top,n.w,n.h,colors.paper);
+   if(focus){ctx.save();ctx.globalAlpha=.06;rect(n.x-n.w/2,top,n.w,n.h,result===&#x27;fail&#x27;?colors.red:result===&#x27;pass&#x27;?colors.green:colors.fg,null);ctx.restore();}
+   const titles={input:&#x27;Input&#x27;,llm:&#x27;Code-writing LLM&#x27;,tests:&#x27;Test gate&#x27;,sim:&#x27;Simulation&#x27;,judge:&#x27;LLM judge&#x27;};
+   txt(titles[id],n.x,top+20,id===&#x27;llm&#x27;?11:12);
+   if(id===&#x27;input&#x27;)sketch(n);
+   if(id===&#x27;tests&#x27;){
+     for(let i=0;i&lt;8;i++){const y=top+38+i*11.5,t=checks[i];txt(String(i+1).padStart(2,&#x27;0&#x27;),n.x-n.w/2+8,y,11,t?colors.orange:colors.line,&#x27;left&#x27;,true);if(t){let label=t.short;ctx.font=&#x27;400 11px Inter,Arial,sans-serif&#x27;;while(ctx.measureText(label).width&gt;n.w-36&amp;&amp;label.length&gt;2)label=label.slice(0,-2);if(label!==t.short)label+=&#x27;…&#x27;;txt(label,n.x-n.w/2+30,y,11,colors.fg,&#x27;left&#x27;);}else{ctx.beginPath();ctx.moveTo(n.x-n.w/2+31,y);ctx.lineTo(n.x+n.w/2-10,y);ctx.strokeStyle=colors.line;ctx.lineWidth=1;ctx.stroke();}}
+   }
+   if(id===&#x27;llm&#x27;){
+     txt(&#x27;System prompt&#x27;,n.x,top+36,11,colors.muted);
+     feedback.slice(-3).forEach((instruction,i)=&gt;{const y=top+55+i*27,left=n.x-n.w/2+15,width=n.w-22,words=instruction.action.split(&#x27; &#x27;),lines=[&#x27;&#x27;];ctx.font=&#x27;400 11px Inter,Arial,sans-serif&#x27;;for(const word of words){const candidate=lines.at(-1)+(lines.at(-1)?&#x27; &#x27;:&#x27;&#x27;)+word;if(ctx.measureText(candidate).width&gt;width&amp;&amp;lines.at(-1))lines.push(word);else lines[lines.length-1]=candidate;}if(lines.length&gt;2){let last=lines[1];while(ctx.measureText(last+&#x27;…&#x27;).width&gt;width&amp;&amp;last.length)last=last.slice(0,-1);lines[1]=last+&#x27;…&#x27;;}txt(&#x27;·&#x27;,left-7,y,12,colors.orange);lines.slice(0,2).forEach((line,j)=&gt;txt(line,left,y+j*11,11,colors.fg,&#x27;left&#x27;));});
+   }
+   if(id===&#x27;sim&#x27;){miniSim(n);txt(machining===null?&#x27;Toolpath&#x27;:num(machining)+&#x27; min&#x27;,n.x,n.y+43,11,colors.fg,&#x27;center&#x27;,true);}
+   if(id===&#x27;judge&#x27;){txt(&#x27;FAST ENOUGH?&#x27;,n.x,n.y-13,11,colors.muted,&#x27;center&#x27;,true);txt(machining===null?&#x27;—&#x27;:num(machining)+&#x27; min&#x27;,n.x,n.y+12,13,colors.fg,&#x27;center&#x27;,true);txt(&#x27;LLM evaluation&#x27;,n.x,n.y+34,11,colors.muted);}
+   if(result&amp;&amp;[&#x27;tests&#x27;,&#x27;sim&#x27;,&#x27;judge&#x27;].includes(id))txt(id===&#x27;judge&#x27;?(result===&#x27;fail&#x27;?&#x27;NO&#x27;:&#x27;YES · ACCEPT&#x27;):(result===&#x27;fail&#x27;?&#x27;FAIL&#x27;:&#x27;PASS&#x27;),n.x,n.y+n.h/2-11,11,result===&#x27;fail&#x27;?colors.red:colors.green,&#x27;center&#x27;,true);
+ }
+ function renderRegister(){const stamp=checks.map(c=&gt;c.id).join(&#x27;,&#x27;)+&#x27;|&#x27;+feedback.length;if(stamp===registerStamp)return;registerStamp=stamp;$(&#x27;#ml-tests-heading&#x27;).textContent=&#x27;Tests · &#x27;+checks.length;$(&#x27;#ml-test-register&#x27;).innerHTML=checks.length?checks.map(c=&gt;&#x27;&lt;div class=&quot;register-row&quot;&gt;&lt;span class=&quot;register-id&quot;&gt;&#x27;+c.id+&#x27;&lt;/span&gt;&lt;span&gt;&#x27;+c.title+&#x27;&lt;/span&gt;&lt;/div&gt;&#x27;).join(&#x27;&#x27;):&#x27;&lt;div class=&quot;register-empty&quot;&gt;None yet&lt;/div&gt;&#x27;;$(&#x27;#ml-prompt-register&#x27;).innerHTML=feedback.map(c=&gt;&#x27;&lt;div class=&quot;register-row&quot;&gt;&lt;span style=&quot;color:var(--orange)&quot;&gt;·&lt;/span&gt;&lt;span&gt;&#x27;+c.action+&#x27;&lt;/span&gt;&lt;/div&gt;&#x27;).join(&#x27;&#x27;);}
+ function draw(){
+   ctx.clearRect(0,0,W,H);for(const r of Object.values(routes))drawRoute(r,colors.line,1.3);
+   if(active?.route)drawRoute(routes[active.route],routes[active.route].kind===&#x27;forward&#x27;?colors.fg:colors.red,2);
+   if(!mobile){
+     txt(&#x27;FAIL · REWRITE&#x27;,(nodes.tests.x+nodes.llm.x)/2,63,11,colors.muted,&#x27;center&#x27;,true);
+     txt(&#x27;PASS&#x27;,(nodes.tests.x+nodes.sim.x)/2,63,11,colors.muted,&#x27;center&#x27;,true);
+     txt(&#x27;01 / FAIL → LEARN CHECK&#x27;,(nodes.tests.x+nodes.sim.x)/2,414,11,colors.muted,&#x27;center&#x27;,true);
+     txt(&#x27;02 / TOO SLOW → REWRITE CAM&#x27;,(nodes.judge.x+nodes.llm.x)/2,496,11,colors.muted,&#x27;center&#x27;,true);
+     txt(&#x27;New part&#x27;,nodes.input.x,128,11,colors.muted);
+   }else{
+     ctx.save();ctx.translate(18,(nodes.tests.y+nodes.sim.y)/2);ctx.rotate(-Math.PI/2);txt(&#x27;FAIL → LEARN&#x27;,0,0,11,colors.muted,&#x27;center&#x27;,true);ctx.restore();
+     ctx.save();ctx.translate(W-13,(nodes.llm.y+nodes.judge.y)/2);ctx.rotate(Math.PI/2);txt(&#x27;TOO SLOW → REWRITE&#x27;,0,0,11,colors.muted,&#x27;center&#x27;,true);ctx.restore();
+   }
+   for(const [id,n] of Object.entries(nodes))drawNode(id,n);
+   if(active){const p=onRoute(motionPath(motionFrom,active),Math.min(1,progress/.78));
+     const arrived=progress&gt;=.78,c=arrived&amp;&amp;active.result?(active.result===&#x27;fail&#x27;?colors.red:colors.green):active.route&amp;&amp;routes[active.route].kind!==&#x27;forward&#x27;?colors.red:colors.fg;
+     ctx.save();ctx.globalAlpha=1;ctx.beginPath();ctx.arc(...p,14,0,Math.PI*2);ctx.fillStyle=colors.fg;ctx.fill();ctx.strokeStyle=c;ctx.lineWidth=2;ctx.stroke();
+     // White difference-compositing contrasts with either light or dark ink.
+     ctx.globalCompositeOperation=&#x27;difference&#x27;;ctx.fillStyle=&#x27;#ffffff&#x27;;ctx.font=&#x27;600 13px Arial,sans-serif&#x27;;ctx.textAlign=&#x27;center&#x27;;ctx.textBaseline=&#x27;middle&#x27;;ctx.fillText(String(current.x).padStart(2,&#x27;0&#x27;),p[0],p[1]);ctx.restore();
+   }
+ }
+ // One continuous time curve from part 0 to 27, including fractional steps.
+ function partDuration(x){return playbackTime(x)-playbackTime(x-1);}
+ function playbackTime(x){
+   return 24000*(1-1/Math.sqrt(1+.64*x))/(1-1/Math.sqrt(1+.64*parts.length));
+ }
+ function duration(){
+   const count=events.length||sequence(current).length,index=Math.max(0,eventIndex);
+   const from=current.x-1+index/count,to=current.x-1+(index+1)/count;
+   return playbackTime(to)-playbackTime(from);
+ }
+ function header(){
+   $(&#x27;#ml-count&#x27;).textContent=String(completed).padStart(2,&#x27;0&#x27;)+&#x27; / 27&#x27;;$(&#x27;#ml-timeline&#x27;).value=completed;
+   canvas.setAttribute(&#x27;aria-label&#x27;,&#x27;Part &#x27;+current.x+&#x27;. Test gate: &#x27;+checks.length+&#x27; distinct learned tests. The code-writing LLM starts with no speed instructions. Each judge rejection adds one instruction. The latest three appear inside the box; the full list is in Tests and full system prompt.&#x27;);renderRegister();
+ }
+ function apply(e){
+   revision=e.rev;if(e.result)statuses[e.target]=e.result;if(e.target===&#x27;sim&#x27;)machining=e.time??null;
+   if(e.target===&#x27;llm&#x27;)llmVisits=Math.max(llmVisits,current.x);if(e.target===&#x27;tests&#x27;)gateVisits=Math.max(gateVisits,current.x);
+   if(e.addCheck)checks.push(current.rule);
+   if(e.addFeedback)feedback.push(current.rec);
+   if(e.commit){completed=current.x;metrics();}header();
+ }
+ function prepare(){
+   if(completed&gt;=27)return false;current=parts[completed];events=sequence(current);eventIndex=-1;checks=[...current.beforeChecks];feedback=[...current.beforeFeedback];llmVisits=completed;gateVisits=completed;statuses={};revision=1;machining=null;header();return true;
+ }
+ function step(animate,start=performance.now(),schedule=true){
+   motionFrom=active?.target||&#x27;input&#x27;;
+   if(eventIndex&gt;=events.length-1&amp;&amp;!prepare()){pause();return;}if(!events.length&amp;&amp;!prepare())return;
+   active=events[++eventIndex];progress=animate&amp;&amp;!reduced.matches?0:1;
+   if(active.target===&#x27;input&#x27;)motionFrom=&#x27;input&#x27;;
+   $(&#x27;#ml-status&#x27;).textContent=active.commit?&#x27;Complete&#x27;:active.addCheck?&#x27;New check&#x27;:active.addFeedback?&#x27;Judge: &#x27;+current.rec.reason:active.target===&#x27;input&#x27;?&#x27;Input&#x27;:active.target===&#x27;llm&#x27;?&#x27;Writing CAM&#x27;:active.target===&#x27;tests&#x27;?(active.result===&#x27;fail&#x27;?&#x27;Tests failed&#x27;:&#x27;Tests passed&#x27;):active.target===&#x27;sim&#x27;?(active.result===&#x27;fail&#x27;?&#x27;Simulation failed&#x27;:&#x27;Simulation passed&#x27;):active.result===&#x27;fail&#x27;?&#x27;Judge: too slow&#x27;:&#x27;Judge: passed&#x27;;
+   if(progress===1){apply(active);draw();if(playing)animation={start,duration:duration(),applied:true};}
+   else animation={start,duration:duration(),applied:false};
+   if(animation&amp;&amp;schedule)raf=requestAnimationFrame(frame);
+ }
+ function frame(now){
+   while(animation){
+     progress=reduced.matches?1:Math.min(1,(now-animation.start)/animation.duration);
+     if(progress&gt;=.78&amp;&amp;!animation.applied){apply(active);animation.applied=true;}
+     if(now-animation.start&lt;animation.duration)break;
+     const nextStart=animation.start+animation.duration;
+     animation=null;progress=1;
+     if(!playing)break;
+     if(completed===27){pause();draw();return;}
+     // Carry elapsed time forward instead of adding a frame delay to every step.
+     step(true,nextStart,false);
+   }
+   draw();if(animation)raf=requestAnimationFrame(frame);
+ }
+ function pause(){playing=false;$(&#x27;#ml-play&#x27;).textContent=&#x27;Play demo&#x27;;if(animation){if(!animation.applied)apply(active);animation=null;progress=1;cancelAnimationFrame(raf);draw();}}
+ function seek(n){
+   pause();completed=n;llmVisits=n;gateVisits=n;events=[];eventIndex=-1;active=null;motionFrom=n===27?&#x27;judge&#x27;:&#x27;input&#x27;;statuses={};revision=1;machining=null;progress=1;current=parts[Math.min(n,26)];checks=[...(n===27?current.afterChecks:current.beforeChecks)];feedback=[...(n===27?current.afterFeedback:current.beforeFeedback)];
+   if(n===27){machining=current.final;active={target:&#x27;judge&#x27;,result:&#x27;pass&#x27;};statuses.judge=&#x27;pass&#x27;;}
+   $(&#x27;#ml-status&#x27;).textContent=n===27?&#x27;Complete&#x27;:&#x27;Ready&#x27;;
+   header();metrics(false);draw();
+ }
+ const chartSpecs=[{id:&#x27;pass&#x27;,key:&#x27;pass&#x27;,label:&#x27;Pass rate (%)&#x27;},{id:&#x27;runs&#x27;,key:&#x27;avgRuns&#x27;,label:&#x27;Runs / part&#x27;},{id:&#x27;time&#x27;,key:&#x27;meanTime20&#x27;,label:&#x27;Avg. time (min)&#x27;}];
+ function metrics(animate=true){const d=parts[completed-1];$(&#x27;#ml-pass-value&#x27;).textContent=d?num(d.pass)+&#x27;%&#x27;:&#x27;—&#x27;;$(&#x27;#ml-runs-value&#x27;).textContent=d?num(d.avgRuns):&#x27;—&#x27;;$(&#x27;#ml-time-value&#x27;).textContent=d?num(d.meanTime20)+&#x27; min&#x27;:&#x27;—&#x27;;drawCharts(animate);}
+ function drawCharts(animate=false){
+   if(typeof d3===&#x27;undefined&#x27;)return;const previous=chartShown;chartShown=completed;
+   chartSpecs.forEach(s=&gt;{
+     const host=$(&#x27;#ml-&#x27;+s.id+&#x27;-chart&#x27;),w=Math.max(240,host.getBoundingClientRect().width),h=139,m={l:64,r:10,t:22,b:36};
+     const svg=d3.select(host).selectAll(&#x27;svg&#x27;).data([0]).join(&#x27;svg&#x27;).attr(&#x27;class&#x27;,&#x27;chart-svg&#x27;).attr(&#x27;width&#x27;,&#x27;100%&#x27;).attr(&#x27;height&#x27;,h).attr(&#x27;viewBox&#x27;,&#x27;0 0 &#x27;+w+&#x27; &#x27;+h).attr(&#x27;role&#x27;,&#x27;img&#x27;).attr(&#x27;aria-label&#x27;,s.label+&#x27; across &#x27;+completed+&#x27; completed parts&#x27;);svg.selectAll(&#x27;*&#x27;).interrupt();svg.selectAll(&#x27;*&#x27;).remove();
+     const ext=d3.extent(parts,d=&gt;d[s.key]),pad=Math.max((ext[1]-ext[0])*.12,.1),x=d3.scaleLinear().domain([0,d3.max(parts,d=&gt;d.x)]).range([m.l+4,w-m.r-4]),y=d3.scaleLinear().domain([0,s.key===&#x27;pass&#x27;?100:ext[1]+pad]).nice().range([h-m.b-4,m.t+4]);
+     svg.append(&#x27;rect&#x27;).attr(&#x27;data-chart-frame&#x27;,&#x27;&#x27;).attr(&#x27;x&#x27;,m.l).attr(&#x27;y&#x27;,m.t).attr(&#x27;width&#x27;,w-m.l-m.r).attr(&#x27;height&#x27;,h-m.t-m.b).attr(&#x27;fill&#x27;,&#x27;none&#x27;).attr(&#x27;stroke&#x27;,&#x27;var(--border)&#x27;);
+     svg.append(&#x27;g&#x27;).attr(&#x27;transform&#x27;,&#x27;translate(0,&#x27;+(h-m.b)+&#x27;)&#x27;).call(d3.axisBottom(x).tickValues([0,9,18,27]).tickSize(3));svg.append(&#x27;g&#x27;).attr(&#x27;transform&#x27;,&#x27;translate(&#x27;+m.l+&#x27;,0)&#x27;).call(d3.axisLeft(y).ticks(3).tickSize(3));
+     svg.append(&#x27;text&#x27;).attr(&#x27;class&#x27;,&#x27;axis-title&#x27;).attr(&#x27;data-axis&#x27;,&#x27;x&#x27;).attr(&#x27;x&#x27;,(m.l+w-m.r)/2).attr(&#x27;y&#x27;,h-2).attr(&#x27;text-anchor&#x27;,&#x27;middle&#x27;).text(&#x27;Parts completed&#x27;);svg.append(&#x27;text&#x27;).attr(&#x27;class&#x27;,&#x27;axis-title&#x27;).attr(&#x27;data-axis&#x27;,&#x27;y&#x27;).attr(&#x27;x&#x27;,m.l).attr(&#x27;y&#x27;,10).text(s.label);
+     const visible=parts.slice(0,completed),line=d3.line().x(d=&gt;x(d.x)).y(d=&gt;y(d[s.key]));
+     const p=svg.append(&#x27;path&#x27;).attr(&#x27;fill&#x27;,&#x27;none&#x27;).attr(&#x27;stroke&#x27;,&#x27;var(--viz-series-1)&#x27;).attr(&#x27;stroke-width&#x27;,1.7);
+     if(visible.length){
+       const last=visible.at(-1);p.attr(&#x27;d&#x27;,line(visible));
+       if(animate&amp;&amp;!reduced.matches&amp;&amp;previous===completed-1&amp;&amp;completed&gt;1){const old=parts.slice(0,previous);old.push(old.at(-1));p.attr(&#x27;d&#x27;,line(old)).transition().duration(Math.min(160,duration()*2)).attr(&#x27;d&#x27;,line(visible));}
+       svg.append(&#x27;circle&#x27;).attr(&#x27;cx&#x27;,x(last.x)).attr(&#x27;cy&#x27;,y(last[s.key])).attr(&#x27;r&#x27;,3).attr(&#x27;fill&#x27;,&#x27;var(--viz-series-1)&#x27;);
+     }else svg.append(&#x27;text&#x27;).attr(&#x27;x&#x27;,(m.l+w-m.r)/2).attr(&#x27;y&#x27;,62).attr(&#x27;text-anchor&#x27;,&#x27;middle&#x27;).text(&#x27;No parts yet&#x27;);
+     const labels=svg.selectAll(&#x27;.tick text,.axis-title&#x27;).nodes().map(el=&gt;({el,b:el.getBoundingClientRect()}));for(let i=0;i&lt;labels.length;i++)for(let j=i+1;j&lt;labels.length;j++){const a=labels[i],b=labels[j];if(a.b.left&lt;b.b.right+4&amp;&amp;a.b.right+4&gt;b.b.left&amp;&amp;a.b.top&lt;b.b.bottom+4&amp;&amp;a.b.bottom+4&gt;b.b.top&amp;&amp;a.el.closest(&#x27;.tick&#x27;))a.el.style.visibility=&#x27;hidden&#x27;;}
+   });
+ }
+ $(&#x27;#ml-play&#x27;).addEventListener(&#x27;click&#x27;,()=&gt;{if(playing){pause();return;}if(completed===27)seek(0);playing=true;$(&#x27;#ml-play&#x27;).textContent=&#x27;Pause&#x27;;step(true);});$(&#x27;#ml-step&#x27;).addEventListener(&#x27;click&#x27;,()=&gt;{pause();step(false);});$(&#x27;#ml-timeline&#x27;).addEventListener(&#x27;input&#x27;,e=&gt;seek(Number(e.target.value)));
+ new ResizeObserver(layout).observe(canvas);new MutationObserver(()=&gt;{palette();draw();}).observe(document.documentElement,{attributes:true,attributeFilter:[&#x27;class&#x27;,&#x27;style&#x27;,&#x27;data-theme&#x27;]});window.matchMedia(&#x27;(prefers-color-scheme: dark)&#x27;).addEventListener(&#x27;change&#x27;,()=&gt;{palette();draw();});
+ document.fonts.ready.then(()=&gt;{palette();draw();drawCharts(false);});layout();seek(0);
+})();
+&lt;/script&gt;
+
+&lt;script src=&quot;https://unpkg.com/@floating-ui/core@1.7.3/dist/floating-ui.core.umd.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://unpkg.com/@floating-ui/dom@1.7.4/dist/floating-ui.dom.umd.min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+(() =&gt; {
+  if (window.FloatingUIDOM == null) {
+    return;
+  }
+  const { autoUpdate, computePosition, flip, offset, shift, size } =
+    window.FloatingUIDOM;
+  const tooltipPlacements = new Set([&quot;top&quot;, &quot;right&quot;, &quot;bottom&quot;, &quot;left&quot;]);
+  const tooltipId = `codex-visualization-tooltip-${
+    window.crypto?.randomUUID?.() ?? Date.now().toString(36)
+  }`;
+  const tooltipGap = 5;
+  const hoverDelay = 700;
+  const skipDelay = 300;
+  let activeTrigger = null;
+  let pendingTrigger = null;
+  let tooltip = null;
+  let openTimeout = null;
+  let autoUpdateCleanup = null;
+  let positionRequest = 0;
+  let skipDelayUntil = 0;
+  let lastPointerWasTouch = false;
+  let pinnedByTouch = false;
+
+  const getTrigger = (target) =&gt;
+    target?.nodeType === Node.ELEMENT_NODE
+      ? target.closest(&quot;[data-tooltip]&quot;)
+      : null;
+  const containsTarget = (trigger, target) =&gt;
+    target?.nodeType != null &amp;&amp; trigger.contains(target);
+  const getContent = (trigger) =&gt;
+    trigger.getAttribute(&quot;data-tooltip&quot;)?.trim() ?? &quot;&quot;;
+  const getPlacement = (trigger) =&gt; {
+    const placement = trigger.getAttribute(&quot;data-tooltip-placement&quot;);
+    return tooltipPlacements.has(placement) ? placement : &quot;top&quot;;
+  };
+  const getTooltip = () =&gt; {
+    if (tooltip == null) {
+      tooltip = document.createElement(&quot;div&quot;);
+      tooltip.id = tooltipId;
+      tooltip.className = &quot;tooltip&quot;;
+      tooltip.setAttribute(&quot;role&quot;, &quot;tooltip&quot;);
+    }
+    return tooltip;
+  };
+  const setDescribedBy = (trigger, described) =&gt; {
+    const ids = new Set(
+      (trigger.getAttribute(&quot;aria-describedby&quot;) ?? &quot;&quot;)
+        .split(/\s+/)
+        .filter(Boolean),
+    );
+    if (described) {
+      ids.add(tooltipId);
+    } else {
+      ids.delete(tooltipId);
+    }
+    if (ids.size === 0) {
+      trigger.removeAttribute(&quot;aria-describedby&quot;);
+    } else {
+      trigger.setAttribute(&quot;aria-describedby&quot;, [...ids].join(&quot; &quot;));
+    }
+  };
+  const clearOpenTimeout = () =&gt; {
+    if (openTimeout != null) {
+      window.clearTimeout(openTimeout);
+      openTimeout = null;
+    }
+    pendingTrigger = null;
+  };
+  const closeTooltip = (activateSkipDelay = true) =&gt; {
+    clearOpenTimeout();
+    pinnedByTouch = false;
+    positionRequest += 1;
+    autoUpdateCleanup?.();
+    autoUpdateCleanup = null;
+    if (activeTrigger == null) {
+      return;
+    }
+    setDescribedBy(activeTrigger, false);
+    activeTrigger = null;
+    tooltip?.remove();
+    if (activateSkipDelay) {
+      skipDelayUntil = Date.now() + skipDelay;
+    }
+  };
+  const updatePosition = (trigger, floating) =&gt; {
+    const request = ++positionRequest;
+    void computePosition(trigger, floating, {
+      middleware: [
+        offset(tooltipGap),
+        flip({ padding: tooltipGap }),
+        shift({ padding: tooltipGap }),
+        size({
+          padding: tooltipGap,
+          apply({ availableHeight, availableWidth, elements }) {
+            elements.floating.style.setProperty(
+              &quot;--tooltip-available-width&quot;,
+              `${Math.max(0, availableWidth)}px`,
+            );
+            elements.floating.style.setProperty(
+              &quot;--tooltip-available-height&quot;,
+              `${Math.max(0, availableHeight)}px`,
+            );
+          },
+        }),
+      ],
+      placement: getPlacement(trigger),
+      strategy: &quot;fixed&quot;,
+    })
+      .then(({ x, y }) =&gt; {
+        if (activeTrigger !== trigger || request !== positionRequest) {
+          return;
+        }
+        const scale = window.devicePixelRatio || 1;
+        floating.style.transform = `translate(${Math.round(x * scale) / scale}px, ${Math.round(y * scale) / scale}px)`;
+        floating.style.visibility = &quot;visible&quot;;
+      })
+      .catch(() =&gt; {
+        if (activeTrigger === trigger &amp;&amp; request === positionRequest) {
+          closeTooltip(false);
+        }
+      });
+  };
+  const openTooltip = (trigger) =&gt; {
+    const content = getContent(trigger);
+    if (!trigger.isConnected || content.length === 0) {
+      return;
+    }
+    clearOpenTimeout();
+    if (activeTrigger === trigger) {
+      return;
+    }
+    closeTooltip();
+    const floating = getTooltip();
+    floating.textContent = content;
+    floating.style.visibility = &quot;hidden&quot;;
+    floating.style.transform = &quot;translate(0, 0)&quot;;
+    document.body.appendChild(floating);
+    activeTrigger = trigger;
+    setDescribedBy(trigger, true);
+    autoUpdateCleanup = autoUpdate(trigger, floating, () =&gt; {
+      updatePosition(trigger, floating);
+    });
+  };
+  const requestOpen = (trigger, immediate = false) =&gt; {
+    if (
+      getContent(trigger).length === 0 ||
+      activeTrigger === trigger ||
+      pendingTrigger === trigger
+    ) {
+      return;
+    }
+    clearOpenTimeout();
+    pendingTrigger = trigger;
+    const delay =
+      immediate || activeTrigger != null || Date.now() &lt; skipDelayUntil
+        ? 0
+        : hoverDelay;
+    if (delay === 0) {
+      openTooltip(trigger);
+      return;
+    }
+    openTimeout = window.setTimeout(() =&gt; {
+      openTimeout = null;
+      pendingTrigger = null;
+      openTooltip(trigger);
+    }, delay);
+  };
+  const handlePointerOpen = (event) =&gt; {
+    if (event.pointerType === &quot;touch&quot;) {
+      return;
+    }
+    const trigger = getTrigger(event.target);
+    if (trigger == null || containsTarget(trigger, event.relatedTarget)) {
+      return;
+    }
+    requestOpen(trigger);
+  };
+  const handlePointer = (event) =&gt; {
+    lastPointerWasTouch =
+      event.type === &quot;pointerdown&quot; &amp;&amp; event.pointerType === &quot;touch&quot;;
+  };
+  const handleTouchClick = (event) =&gt; {
+    const isTouch = event.pointerType === &quot;touch&quot; || lastPointerWasTouch;
+    lastPointerWasTouch = false;
+    if (!isTouch || event.detail === 0) {
+      return;
+    }
+    const trigger = getTrigger(event.target);
+    if (
+      trigger == null ||
+      !trigger.isConnected ||
+      getContent(trigger).length === 0 ||
+      (pinnedByTouch &amp;&amp; activeTrigger === trigger)
+    ) {
+      if (pinnedByTouch) {
+        closeTooltip();
+      }
+      return;
+    }
+    openTooltip(trigger);
+    pinnedByTouch = activeTrigger === trigger;
+    window.setTimeout(() =&gt; {
+      if (activeTrigger === trigger &amp;&amp; !trigger.isConnected) {
+        closeTooltip(false);
+      }
+    }, 0);
+  };
+  const handleLeave = (event) =&gt; {
+    if (pinnedByTouch) {
+      return;
+    }
+    const trigger = getTrigger(event.target);
+    if (trigger == null || containsTarget(trigger, event.relatedTarget)) {
+      return;
+    }
+    if (activeTrigger === trigger || pendingTrigger === trigger) {
+      closeTooltip();
+    }
+  };
+  const handleFocusIn = (event) =&gt; {
+    const trigger = getTrigger(event.target);
+    if (trigger?.matches(&quot;:focus-visible&quot;)) {
+      requestOpen(trigger, true);
+    }
+  };
+  const handleKeyDown = (event) =&gt; {
+    if (event.key === &quot;Escape&quot;) {
+      closeTooltip();
+    }
+  };
+  const handleContextMenu = (event) =&gt; {
+    lastPointerWasTouch = false;
+    const trigger = getTrigger(event.target);
+    if (activeTrigger === trigger || pendingTrigger === trigger) {
+      closeTooltip();
+    }
+  };
+  const destroy = () =&gt; {
+    closeTooltip(false);
+    lastPointerWasTouch = false;
+    document.removeEventListener(&quot;pointerover&quot;, handlePointerOpen);
+    document.removeEventListener(&quot;pointerdown&quot;, handlePointer);
+    document.removeEventListener(&quot;pointercancel&quot;, handlePointer);
+    document.removeEventListener(&quot;click&quot;, handleTouchClick);
+    document.removeEventListener(&quot;pointerout&quot;, handleLeave);
+    document.removeEventListener(&quot;focusin&quot;, handleFocusIn);
+    document.removeEventListener(&quot;focusout&quot;, handleLeave);
+    document.removeEventListener(&quot;keydown&quot;, handleKeyDown);
+    document.removeEventListener(&quot;contextmenu&quot;, handleContextMenu);
+    tooltip = null;
+  };
+
+  document.addEventListener(&quot;pointerover&quot;, handlePointerOpen);
+  document.addEventListener(&quot;pointerdown&quot;, handlePointer);
+  document.addEventListener(&quot;pointercancel&quot;, handlePointer);
+  document.addEventListener(&quot;click&quot;, handleTouchClick);
+  document.addEventListener(&quot;pointerout&quot;, handleLeave);
+  document.addEventListener(&quot;focusin&quot;, handleFocusIn);
+  document.addEventListener(&quot;focusout&quot;, handleLeave);
+  document.addEventListener(&quot;keydown&quot;, handleKeyDown);
+  document.addEventListener(&quot;contextmenu&quot;, handleContextMenu);
+  window.addEventListener(&quot;pagehide&quot;, destroy, { once: true });
+})();
+&lt;/script&gt;
+&lt;script id=&quot;codex-visualization-tabs&quot;&gt;
+(() =&gt; {
+  const selector = &#x27;.nav[role=&quot;tablist&quot;] [role=&quot;tab&quot;]&#x27;;
+  const disabled = &#x27;:disabled,[aria-disabled=&quot;true&quot;]&#x27;;
+  const selectTab = (selected) =&gt; {
+    const panelId = selected.getAttribute(&quot;aria-controls&quot;);
+    for (const tab of selected.closest(&#x27;[role=&quot;tablist&quot;]&#x27;).querySelectorAll(&#x27;[role=&quot;tab&quot;]&#x27;)) {
+      const active = tab === selected;
+      tab.classList.toggle(&quot;active&quot;, active);
+      tab.setAttribute(&quot;aria-selected&quot;, String(active));
+      const id = tab.getAttribute(&quot;aria-controls&quot;);
+      const panel = id &amp;&amp; document.getElementById(id);
+      if (panel != null) {
+        panel.hidden = id !== panelId;
+        if (!panel.hidden &amp;&amp; selected.id) {
+          panel.setAttribute(&quot;aria-labelledby&quot;, selected.id);
+        }
+      }
+    }
+  };
+  const interact = (event) =&gt; {
+    const tab = event.target?.closest?.(selector);
+    if (event.defaultPrevented || tab == null || tab.matches(disabled)) {
+      return;
+    }
+    if (event.type === &quot;click&quot;) {
+      selectTab(tab);
+      return;
+    }
+    const tabs = Array.from(
+      tab.closest(&#x27;[role=&quot;tablist&quot;]&#x27;).querySelectorAll(&#x27;[role=&quot;tab&quot;]&#x27;),
+    ).filter((candidate) =&gt; !candidate.matches(disabled));
+    const current = tabs.indexOf(tab);
+    let next;
+    if (event.key === &quot;ArrowRight&quot; || event.key === &quot;ArrowDown&quot;) {
+      next = (current + 1) % tabs.length;
+    } else if (event.key === &quot;ArrowLeft&quot; || event.key === &quot;ArrowUp&quot;) {
+      next = (current + tabs.length - 1) % tabs.length;
+    } else if (event.key === &quot;Home&quot;) {
+      next = 0;
+    } else if (event.key === &quot;End&quot;) {
+      next = tabs.length - 1;
+    } else {
+      return;
+    }
+    event.preventDefault();
+    tabs[next].focus();
+    selectTab(tabs[next]);
+  };
+
+  for (const list of document.querySelectorAll(&#x27;.nav[role=&quot;tablist&quot;]&#x27;)) {
+    const selected =
+      list.querySelector(&#x27;[role=&quot;tab&quot;][aria-selected=&quot;true&quot;]&#x27;) ??
+      list.querySelector(&#x27;[role=&quot;tab&quot;].active&#x27;) ??
+      list.querySelector(&#x27;[role=&quot;tab&quot;]&#x27;);
+    if (selected != null) {
+      selectTab(selected);
+    }
+  }
+  document.addEventListener(&quot;click&quot;, interact);
+  document.addEventListener(&quot;keydown&quot;, interact);
+  window.addEventListener(&quot;pagehide&quot;, () =&gt; {
+    document.removeEventListener(&quot;click&quot;, interact);
+    document.removeEventListener(&quot;keydown&quot;, interact);
+  }, { once: true });
+})();
+&lt;/script&gt;
+&lt;script id=&quot;codex-visualization-lucide&quot; async src=&quot;https://unpkg.com/lucide@1.17.0/dist/umd/lucide.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+(() =&gt; {
+  const initialize = () =&gt; {
+    globalThis.lucide?.createIcons({ attrs: { width: 16, height: 16 } });
+  };
+  if (globalThis.lucide != null) {
+    initialize();
+    return;
+  }
+  document
+    .getElementById(&quot;codex-visualization-lucide&quot;)
+    ?.addEventListener(&quot;load&quot;, initialize, { once: true });
+})();
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+"></iframe>
+</body>
+</html>

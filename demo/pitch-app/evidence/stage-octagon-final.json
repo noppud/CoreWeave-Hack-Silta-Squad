@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "job_id": "stage-octagon08-r1-recovery1",
+  "status": "completed",
+  "sources": [
+    {
+      "path": "/Users/touko/work/helios-one/repos/coreweavehack/runs/stage-octagon08-r1-recovery1/manifest.json",
+      "sha256": "e3edf7b3773ce6b823343935a1c12d512c4ce276d13603e96cc0479ea110a91f"
+    },
+    {
+      "path": "/Users/touko/work/helios-one/repos/coreweavehack/runs/stage-octagon08-r1-recovery1/run-receipt.json",
+      "sha256": "e1698d680c79cdc1e7714a12a3a619743aaec16c1c30f2b661754beae613fa50"
+    },
+    {
+      "path": "/Users/touko/work/helios-one/repos/coreweavehack/runs/stage-octagon08-r1/manifest.json",
+      "sha256": "b4e3bb7cdd7f896bd03cac6346e60843fb629f7b2b2d3ea95280e8ed1b978c8c"
+    },
+    {
+      "path": "/Users/touko/work/helios-one/repos/coreweavehack/runs/stage-octagon08-r1-recovery1/workspace/resume-provenance.json",
+      "sha256": "1789e6551bfb983000dded6773c8005a97e3660d638fe2267241b4ef69cf9818"
+    }
+  ],
+  "best_candidate_id": "candidate-0005",
+  "verifications": [
+    {
+      "attempt": 1,
+      "status": "passed",
+      "completed": true,
+      "candidate_digest": "2dbaaf027aaae0e48d73087ce67c4032e1b6775cd0bfadab2e9f2e00bb429348",
+      "machining_seconds": 1591.867942,
+      "verifier_version": "fusion-fixed-ui-stock-v7-explicit-stock-regeneration"
+    },
+    {
+      "attempt": 2,
+      "status": "passed",
+      "completed": true,
+      "candidate_digest": "337317e53e24f78f48a27b9b417272409e22bd132d8706fe470d0fe2821637b6",
+      "machining_seconds": 1561.445259,
+      "verifier_version": "fusion-fixed-ui-stock-v7-explicit-stock-regeneration"
+    },
+    {
+      "attempt": 3,
+      "status": "passed",
+      "completed": true,
+      "candidate_digest": "5c49a846ffb757060572b4b75a63fa82f86802237a6cf3f99f0144deebde8051",
+      "machining_seconds": 1515.202754,
+      "verifier_version": "fusion-fixed-ui-stock-v7-explicit-stock-regeneration"
+    },
+    {
+      "attempt": 4,
+      "status": "passed",
+      "completed": true,
+      "candidate_digest": "db84a264a79b1e86ae453b4307d36321abb429285604f96b74e62552ae74bf93",
+      "machining_seconds": 1515.202754,
+      "verifier_version": "fusion-fixed-ui-stock-v7-explicit-stock-regeneration"
+    }
+  ],
+  "presentation_playbacks": [
+    {
+      "candidate_id": "candidate-0003",
+      "status": "tool_motion_observed",
+      "tool_motion_observed": true,
+      "simulation_stop_ok": true,
+      "target_restore_ok": true,
+      "cleanup_errors": {},
+      "presentation_wall_seconds": 37.84918654197827
+    },
+    {
+      "candidate_id": "candidate-0004",
+      "status": "tool_motion_observed",
+      "tool_motion_observed": true,
+      "simulation_stop_ok": true,
+      "target_restore_ok": true,
+      "cleanup_errors": {},
+      "presentation_wall_seconds": 37.741147082997486
+    },
+    {
+      "candidate_id": "candidate-0005",
+      "status": "tool_motion_observed",
+      "tool_motion_observed": true,
+      "simulation_stop_ok": true,
+      "target_restore_ok": true,
+      "cleanup_errors": {},
+      "presentation_wall_seconds": 37.87107670796104
+    },
+    {
+      "candidate_id": "candidate-0006",
+      "status": "tool_motion_observed",
+      "tool_motion_observed": true,
+      "simulation_stop_ok": true,
+      "target_restore_ok": true,
+      "cleanup_errors": {},
+      "presentation_wall_seconds": 37.78435116703622
+    }
+  ],
+  "all_playbacks_clean": true,
+  "same_fixed_cad_improvement": {
+    "original_r1_candidate1_seconds": 1614.396515,
+    "final_seconds": 1515.202754,
+    "percent": 6.14432452488291,
+    "scope": "Original prepared run then fresh verification and optimization in recovery; not entirely fresh generation in recovery"
+  },
+  "learning": {
+    "provenance": {
+      "learning_directory": "/Users/touko/work/helios-one/repos/coreweavehack/runs/stage-octagon08-r1-shadow-learning",
+      "recovery_not_fresh_preparation": true,
+      "uses_main_learning_directory": false,
+      "initial_file_sha256": {
+        "checks.py": "a58a0fe0eba66ea111cb3f74259eebd8efdd3b5f8432001363e76ad311a560b1",
+        "cad_cam.md": "ba4cb1d63576f234d6b96b42ffc48e4051406ef6fba4f74e7e4756321fd8a859"
+      }
+    },
+    "ending_file_sha256": {
+      "checks.py": "a58a0fe0eba66ea111cb3f74259eebd8efdd3b5f8432001363e76ad311a560b1",
+      "cad_cam.md": "ba4cb1d63576f234d6b96b42ffc48e4051406ef6fba4f74e7e4756321fd8a859"
+    },
+    "files_unchanged": true
+  },
+  "weave_url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a09a51-6741-753f-ab92-d297767bbc73",
+  "weave_recorded": true,
+  "limits": [
+    "No new checks/prompt learning update",
+    "Original r1 hit attempt cap and had operator-assisted playback cleanup; preserved separately",
+    "Finned r2 and recoveries remain collection-unknown",
+    "No physical machining or posted-NC certification",
+    "Final artifact upload pending"
+  ]
+}

@@ -174,7 +174,9 @@ def part_record(label, paths):
                         **anchor,
                         "attempt": event.get("attempt"),
                         "candidate_digest": verdict.get("candidate_digest"),
-                        "status": "collection_invalidated" if manifest.get("collection_warning") else verdict.get("status"),
+                        "status": "collection_invalidated"
+                        if manifest.get("collection_warning")
+                        else verdict.get("status"),
                         "recorded_status": verdict.get("status"),
                         "collection_warning": manifest.get("collection_warning"),
                         "completed": verdict.get("completed"),
@@ -194,8 +196,15 @@ def part_record(label, paths):
                         "machining_seconds": verdict["machining_seconds"],
                         "attempt": event.get("attempt"),
                         "retained_evidence_hashes_valid": True,
-                        "manual_nomination": bool(nomination and nomination.get("candidate_digest") == key),
-                        "nomination_artifact": {"path": str(nomination_path), "sha256": sha(nomination_path)} if nomination else None,
+                        "manual_nomination": bool(
+                            nomination and nomination.get("candidate_digest") == key
+                        ),
+                        "nomination_artifact": {
+                            "path": str(nomination_path),
+                            "sha256": sha(nomination_path),
+                        }
+                        if nomination
+                        else None,
                     },
                 )
             if event.get("event") == "promoted_change_applied":
@@ -245,9 +254,11 @@ def part_record(label, paths):
             "same_verifier_version": first["verifier_version"] == best["verifier_version"],
             "verifier_implementation_bytes_frozen": False,
             "manual_nomination": best.get("manual_nomination", False),
-            "claim": ("Operator-nominated retained-CAM retest; not autonomous improvement or new learning"
-                      if best.get("manual_nomination") else
-                      "Within-drawing verified candidate optimization, not a cross-part causal effect"),
+            "claim": (
+                "Operator-nominated retained-CAM retest; not autonomous improvement or new learning"
+                if best.get("manual_nomination")
+                else "Within-drawing verified candidate optimization, not a cross-part causal effect"
+            ),
         }
     trials = []
     for decision in decisions:

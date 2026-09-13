@@ -115,7 +115,8 @@ def evidence_audit(manifest):
         "collection_invalidated": bool(manifest.get("collection_warning")),
         "collection_warning": manifest.get("collection_warning"),
         "recorded_latest_verification_status": latest.get("status"),
-        "latest_verification_status": "unknown" if manifest.get("collection_warning")
+        "latest_verification_status": "unknown"
+        if manifest.get("collection_warning")
         else latest.get("status"),
         "latest_verification_completed": not manifest.get("collection_warning")
         and latest.get("completed") is True,

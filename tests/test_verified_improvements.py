@@ -107,7 +107,8 @@ def test_manual_trial_is_labeled_from_retained_source(tmp_path):
     workspace = tmp_path / "workspace"
     workspace.mkdir()
     (workspace / "manual-trial-nomination.json").write_text(
-        json.dumps({"candidate_digest": "candidate1", "manual_nomination": True}))
+        json.dumps({"candidate_digest": "candidate1", "manual_nomination": True})
+    )
     with pytest.raises(ValueError, match="attribution differs"):
         select_pairs(report, ["TEST"])
     report["parts"][0]["verified_candidates"][1]["manual_nomination"] = True

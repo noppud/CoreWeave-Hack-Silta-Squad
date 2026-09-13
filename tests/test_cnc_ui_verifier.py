@@ -281,7 +281,9 @@ def test_binding_script_does_not_read_stock_solids_for_fixed_box_stock():
         fixtureEnabled = False
         parameters = []
         machine = SimpleNamespace(
-            model="VF-2", equivalentTo=lambda _: True, hasSimulationModel=True,
+            model="VF-2",
+            equivalentTo=lambda _: True,
+            hasSimulationModel=True,
             elements=expected_machine.elements,
         )
 
@@ -290,12 +292,16 @@ def test_binding_script_does_not_read_stock_solids_for_fixed_box_stock():
             raise AssertionError("Fusion throws for non-SolidStock setups")
 
     cam_product = SimpleNamespace(setups=[FixedBoxSetup()], allOperations=[])
-    design = SimpleNamespace(rootComponent=SimpleNamespace(
-        bRepBodies=SimpleNamespace(count=0), allOccurrences=[]))
+    design = SimpleNamespace(
+        rootComponent=SimpleNamespace(bRepBodies=SimpleNamespace(count=0), allOccurrences=[])
+    )
     app = SimpleNamespace(
         activeDocument=SimpleNamespace(
-            products=SimpleNamespace(itemByProductType=lambda kind:
-                design if kind == "DesignProductType" else cam_product)
+            products=SimpleNamespace(
+                itemByProductType=lambda kind: (
+                    design if kind == "DesignProductType" else cam_product
+                )
+            )
         )
     )
     adsk = SimpleNamespace(
@@ -306,7 +312,7 @@ def test_binding_script_does_not_read_stock_solids_for_fixed_box_stock():
             Machine=SimpleNamespace(createFromFile=lambda *args: expected_machine),
             LibraryLocations=SimpleNamespace(LocalLibraryLocation=0),
             SetupStockModes=SimpleNamespace(SolidStock=1),
-        )
+        ),
     )
     environment = {"app": app, "adsk": adsk, "payload": {"machine_path": "test.mch"}}
     exec(compile(_BINDING_SCRIPT, "<binding-test>", "exec"), environment)
@@ -337,14 +343,28 @@ def test_binding_resolves_frozen_entity_handles_across_token_changes():
         findEntityByToken=lambda token: [handles[token]] if token in handles else [],
     )
     setup = SimpleNamespace(
-        name="Setup", operationId=1, stockMode=0, models=[body], fixtures=[],
-        fixtureEnabled=False, parameters=[],
-        machine=SimpleNamespace(model="VF-2", equivalentTo=lambda _: True, hasSimulationModel=True,
-                                elements=machine.elements),
+        name="Setup",
+        operationId=1,
+        stockMode=0,
+        models=[body],
+        fixtures=[],
+        fixtureEnabled=False,
+        parameters=[],
+        machine=SimpleNamespace(
+            model="VF-2",
+            equivalentTo=lambda _: True,
+            hasSimulationModel=True,
+            elements=machine.elements,
+        ),
     )
     cam = SimpleNamespace(setups=[setup], allOperations=[], designRootOccurrence=None)
-    app = SimpleNamespace(activeDocument=SimpleNamespace(products=SimpleNamespace(
-        itemByProductType=lambda kind: design if kind == "DesignProductType" else cam)))
+    app = SimpleNamespace(
+        activeDocument=SimpleNamespace(
+            products=SimpleNamespace(
+                itemByProductType=lambda kind: design if kind == "DesignProductType" else cam
+            )
+        )
+    )
     adsk = SimpleNamespace(
         fusion=SimpleNamespace(
             Design=SimpleNamespace(cast=lambda value: value),
@@ -381,14 +401,21 @@ def test_cloud_candidate_verifies_exact_saved_version_without_local_reimport(cas
     from dataclasses import replace
 
     candidate, context = case
-    reference = {"data_file_id": "lineage", "version_id": "exact-version",
-                 "version_number": 1, "project_id": "project"}
+    reference = {
+        "data_file_id": "lineage",
+        "version_id": "exact-version",
+        "version_number": 1,
+        "project_id": "project",
+    }
     path = tmp_path / "fusion-document.json"
     path.write_text(json.dumps(reference))
-    candidate = replace(candidate, artifacts={**candidate.artifacts,
-        "fusion_document": Artifact.from_path(path)})
-    inputs = replace(context.inputs, machine={**context.inputs.machine,
-        "simulation_model_cloud": {"project_id": "project"}})
+    candidate = replace(
+        candidate, artifacts={**candidate.artifacts, "fusion_document": Artifact.from_path(path)}
+    )
+    inputs = replace(
+        context.inputs,
+        machine={**context.inputs.machine, "simulation_model_cloud": {"project_id": "project"}},
+    )
     context = replace(context, inputs=inputs, input_digest=inputs.digest)
 
     class CloudBridge(BridgeDouble):

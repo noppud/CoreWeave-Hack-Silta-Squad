@@ -4,6 +4,7 @@ import hashlib
 import json
 import threading
 from http.server import ThreadingHTTPServer
+from pathlib import Path
 from types import SimpleNamespace
 from urllib.error import HTTPError
 from urllib.request import Request, urlopen
@@ -259,3 +260,19 @@ def test_uploaded_job_enters_part_library_from_real_manifest(center):
     assert len(parts) == 1
     assert parts[0]["label"] == "incoming.pdf"
     assert parts[0]["verified"] is False
+
+
+def test_packaged_viewer_assets_need_no_custom_simulator(center, server):
+    center.root = Path(__file__).resolve().parents[1]
+    for route in (
+        "/",
+        "/model.js",
+        "/reference",
+        "/vendor/three.module.js",
+        "/vendor/three.core.js",
+        "/vendor/OrbitControls.js",
+        "/vendor/STLLoader.js",
+    ):
+        with urlopen(server + route) as response:
+            assert response.status == 200
+            assert response.read()

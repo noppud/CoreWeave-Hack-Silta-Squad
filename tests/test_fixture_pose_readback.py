@@ -1,4 +1,5 @@
 """Regression: source constraints can overwrite an earlier occurrence transform."""
+
 from types import SimpleNamespace
 
 import pytest

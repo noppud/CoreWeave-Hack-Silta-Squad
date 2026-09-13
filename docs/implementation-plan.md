@@ -1,5 +1,7 @@
 # CNC learning demo — current plan
 
+For the consolidated product/design conversation and agent handoff, start with [project-context.md](project-context.md). This file contains chronological implementation checkpoints; later reports supersede earlier next steps. ARIA's evaluation proposals are documented separately and do not change the current direct-learning runtime.
+
 ## Core loop
 
 Drawing/PDF + machine/tools → Astra creates CAD and fixes the target → creates/revises CAM → learned Python checks → real Fusion simulation and finished-stock comparison → judge improves the plan or returns the best verified result.

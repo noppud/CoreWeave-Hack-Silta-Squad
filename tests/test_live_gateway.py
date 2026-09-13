@@ -84,19 +84,25 @@ def test_unpaired_clients_cannot_read_frames_or_submit_jobs(gateway):
 
 def test_pairing_rejects_wrong_secret_and_wrong_origin(gateway):
     assert request(gateway, "POST", "/live/pair", {"token": "wrong"})[0] == 403
-    assert request(gateway, "POST", "/live/pair", {"token": gateway[0].token}, origin=False)[0] == 403
+    assert (
+        request(gateway, "POST", "/live/pair", {"token": gateway[0].token}, origin=False)[0] == 403
+    )
     assert not gateway[0].sessions
 
 
 def test_authenticated_start_forwards_once_with_local_origin(gateway):
     cookie = pair(gateway)
     assert request(gateway, "POST", "/api/start", {"id": "prepared"}, cookie=cookie)[0] == 200
-    assert gateway[1] == [("/api/start", f"http://127.0.0.1:{gateway[0].upstream}", b'{"id": "prepared"}')]
+    assert gateway[1] == [
+        ("/api/start", f"http://127.0.0.1:{gateway[0].upstream}", b'{"id": "prepared"}')
+    ]
 
 
 def test_paired_cookie_does_not_allow_cross_origin_or_arbitrary_actions(gateway):
     cookie = pair(gateway)
-    assert request(gateway, "POST", "/api/start", {"id": "x"}, cookie=cookie, origin=False)[0] == 403
+    assert (
+        request(gateway, "POST", "/api/start", {"id": "x"}, cookie=cookie, origin=False)[0] == 403
+    )
     assert request(gateway, "POST", "/execute", {"code": "x"}, cookie=cookie)[0] == 404
     assert request(gateway, "GET", "/live/status", cookie=cookie, host="attacker.example")[0] == 403
     assert gateway[1] == []
@@ -113,7 +119,9 @@ def test_stale_capture_never_serves_old_frame_as_live(gateway):
     state, _ = gateway
     cookie = pair(gateway)
     (state.directory / "frame.jpg").write_bytes(b"old frame")
-    (state.directory / "status.json").write_text(json.dumps({"status": "live", "heartbeat": time.time() - 60}))
+    (state.directory / "status.json").write_text(
+        json.dumps({"status": "live", "heartbeat": time.time() - 60})
+    )
     assert request(gateway, "GET", "/live/frame.jpg", cookie=cookie)[0] == 503
 
 

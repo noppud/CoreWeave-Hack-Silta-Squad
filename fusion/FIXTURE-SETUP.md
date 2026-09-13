@@ -10,8 +10,8 @@ payload = {
     "output_directory": "/absolute/path/new-output-directory",
     "supports": {
         "dimensions_mm": [152.4, 12.7, 38.1],
-        "source_url": "https://www.haastooling.com/p/09-0108"
-    }
+        "source_url": "https://www.haastooling.com/p/09-0108",
+    },
 }
 ```
 

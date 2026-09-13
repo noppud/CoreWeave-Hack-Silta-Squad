@@ -69,7 +69,10 @@ _OBSERVATION = _object(
 
 # Controller-owned inspection; CAM/model settings may not change while the UI
 # observer selects simulation display options. All values come from Fusion.
-_BINDING_SCRIPT = _TARGET_BODY_HELPERS + MACHINE_COVERAGE_SOURCE + """import json
+_BINDING_SCRIPT = (
+    _TARGET_BODY_HELPERS
+    + MACHINE_COVERAGE_SOURCE
+    + """import json
 import math
 import re
 _product = app.activeDocument.products.itemByProductType("CAMProductType")
@@ -111,6 +114,7 @@ result = {"setups": _setups, "operations": _operations,
           "expected_machine_coverage": _inspect_machine_coverage(_expected, adsk.cam),
           "body_references": _body_reference_handles()}
 """
+)
 
 
 def _save(path: Path, value: dict) -> Artifact:
@@ -259,7 +263,8 @@ class FusionUIVerifier:
             machine.verify()
             opened = (
                 open_snapshot(self._request, json.loads(Path(cloud.path).read_text()))
-                if cloud else self._request("open_cad", {"path": f3d.path})
+                if cloud
+                else self._request("open_cad", {"path": f3d.path})
             )
             geometry = self._request("run_script", {"source": _GEOMETRY_SCRIPT})["result"]
             frozen = json.loads(Path(context.target.artifacts["geometry"].path).read_text())
