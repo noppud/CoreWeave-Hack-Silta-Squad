@@ -22,7 +22,7 @@ Open **http://127.0.0.1:8080/demo/** in a browser. No application build or Fusio
 
 Use **Play demo**, **Next step**, or the completed-parts slider. The demo contains 54 shuffled example inputs, two feedback loops, eight learned tests, and an initially empty speed-instruction list. Each judge rejection adds one instruction. Charts use zero-based y-axes; the third averages final machining-time estimates over the latest 20 completed parts.
 
-The opaque part marker moves over box content along connected paths: from a box centre to the outgoing arrow, through the arrow, and into the next box centre. It also travels back across the boxes to Input between parts instead of teleporting. Both desktop and mobile routes are checked for continuity.
+The opaque, numbered part marker moves over box content along connected paths: from a box centre to the outgoing arrow, through the arrow, and into the next box centre. After acceptance, the next numbered part appears immediately at Input; it does not travel backward from the judge. Both desktop and mobile routes are checked for continuity within each part. The top-corner part and acceleration labels are removed.
 
 The outcomes are scripted presentation data and are independent of the real Fusion runs documented in the repository README.
 

@@ -108,7 +108,7 @@ const playback = new Function('parts', 'sequence', 'interval', 'reducedMotion', 
   let progress=0,playing=true,animation=null,raf=0,applied=0,motionFrom='input';
   const reduced={matches:reducedMotion},performance={now:()=>0};
   const $=()=>({textContent:''}),draw=()=>{},requestAnimationFrame=()=>1;
-  function apply(e){applied++;if(e.commit)completed=current.x;}
+  function apply(e){applied++;if(e.target==='input'&&motionFrom!=='input')throw Error('New parts must start at Input');if(e.commit)completed=current.x;}
   function pause(){playing=false;animation=null;}
   function prepare(){
     if(completed>=54)return false;
@@ -146,6 +146,7 @@ for(const width of [390,760]){
   const {nodes,motionPath,onRoute}=geometry(width);
   let from='input',previous=[nodes.input.x,nodes.input.y];
   for(const part of parts)for(const event of sequence(part)){
+    if(event.target==='input'){from='input';previous=[nodes.input.x,nodes.input.y];}
     const path=motionPath(from,event),start=onRoute(path,0),end=onRoute(path,1);
     assert.ok(Math.hypot(start[0]-previous[0],start[1]-previous[1])<1e-8,'Marker must continue from its previous position');
     assert.ok(Math.hypot(end[0]-nodes[event.target].x,end[1]-nodes[event.target].y)<1e-8,'Marker must finish inside its destination box');
@@ -159,4 +160,5 @@ for(const width of [390,760]){
     previous=end;from=event.target;
   }
 }
-console.log('Passed: continuous marker paths through every box, feedback route, and part handoff on desktop and mobile.');
+assert.ok(!html.includes('id="ml-current"')&&!html.includes('id="ml-speed"'));
+console.log('Passed: continuous paths within each part, fresh parts start at Input, and corner labels removed.');

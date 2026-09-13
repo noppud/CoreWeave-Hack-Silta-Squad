@@ -1045,7 +1045,6 @@ html&gt;body{padding:0}&lt;/style&gt;
   &lt;/div&gt;
   &lt;div class=&quot;workspace&quot;&gt;
     &lt;section class=&quot;flow-region&quot; aria-label=&quot;Manufacturing agent loops&quot;&gt;
-      &lt;div class=&quot;flow-header&quot;&gt;&lt;span id=&quot;ml-current&quot;&gt;PART 01&lt;/span&gt;&lt;span id=&quot;ml-speed&quot;&gt;1.0× · Accelerates automatically&lt;/span&gt;&lt;/div&gt;
       &lt;canvas id=&quot;ml-canvas&quot; role=&quot;img&quot; aria-label=&quot;Five equal boxes: Input, code-writing LLM, test gate, simulation, LLM judge. The numbered ball is one part. Simulation failures return directly to the test gate; judge rejections return directly to the LLM.&quot;&gt;Input → code-writing LLM → test gate → simulation → judge. A failed simulation teaches the test gate. A rejected machining time teaches the LLM.&lt;/canvas&gt;
       &lt;div class=&quot;flow-footer&quot;&gt;&lt;span&gt;● Numbered ball = one part&lt;/span&gt;&lt;/div&gt;
       &lt;div id=&quot;ml-status&quot; class=&quot;status&quot; aria-live=&quot;polite&quot;&gt;Ready&lt;/div&gt;
@@ -1067,7 +1066,6 @@ html&gt;body{padding:0}&lt;/style&gt;
 #manufacturing-learning-canvas .timeline{flex:1;min-width:180px}
 #manufacturing-learning-canvas .workspace{display:grid;grid-template-columns:minmax(0,1fr) 278px;gap:26px;margin:22px 0 16px}
 #manufacturing-learning-canvas .flow-region{min-width:0}
-#manufacturing-learning-canvas .flow-header{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;font-family:&#x27;IBM Plex Mono&#x27;,monospace;font-size:11px;color:var(--muted-foreground)}
 #manufacturing-learning-canvas canvas{display:block;width:100%;touch-action:pan-y}
 #manufacturing-learning-canvas .flow-footer{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;font-size:11px;color:var(--muted-foreground)}
 #manufacturing-learning-canvas .status{font-size:13px;min-height:36px;margin-top:16px}
@@ -1258,7 +1256,9 @@ html&gt;body{padding:0}&lt;/style&gt;
    for(const [id,n] of Object.entries(nodes))drawNode(id,n);
    if(active){const p=onRoute(motionPath(motionFrom,active),Math.min(1,progress/.78));
      const arrived=progress&gt;=.78,c=arrived&amp;&amp;active.result?(active.result===&#x27;fail&#x27;?colors.red:colors.green):active.route&amp;&amp;routes[active.route].kind!==&#x27;forward&#x27;?colors.red:colors.fg;
-     ctx.save();ctx.globalAlpha=1;ctx.beginPath();ctx.arc(...p,13,0,Math.PI*2);ctx.fillStyle=colors.fg;ctx.fill();ctx.strokeStyle=c;ctx.lineWidth=2;ctx.stroke();txt(String(current.x).padStart(2,&#x27;0&#x27;),p[0],p[1],11,colors.paper,&#x27;center&#x27;,true);ctx.restore();
+     ctx.save();ctx.globalAlpha=1;ctx.beginPath();ctx.arc(...p,14,0,Math.PI*2);ctx.fillStyle=colors.fg;ctx.fill();ctx.strokeStyle=c;ctx.lineWidth=2;ctx.stroke();
+     // White difference-compositing contrasts with either light or dark ink.
+     ctx.globalCompositeOperation=&#x27;difference&#x27;;ctx.fillStyle=&#x27;#ffffff&#x27;;ctx.font=&#x27;600 13px Arial,sans-serif&#x27;;ctx.textAlign=&#x27;center&#x27;;ctx.textBaseline=&#x27;middle&#x27;;ctx.fillText(String(current.x).padStart(2,&#x27;0&#x27;),p[0],p[1]);ctx.restore();
    }
  }
  // One continuous time curve from part 0 to 54, including fractional steps.
@@ -1272,7 +1272,7 @@ html&gt;body{padding:0}&lt;/style&gt;
    return playbackTime(to)-playbackTime(from);
  }
  function header(){
-   $(&#x27;#ml-count&#x27;).textContent=String(completed).padStart(2,&#x27;0&#x27;)+&#x27; / 54&#x27;;$(&#x27;#ml-timeline&#x27;).value=completed;$(&#x27;#ml-current&#x27;).textContent=&#x27;PART &#x27;+String(current.x).padStart(2,&#x27;0&#x27;);$(&#x27;#ml-speed&#x27;).textContent=completed===54?&#x27;54 / 54 complete&#x27;:(partDuration(1)/partDuration(current.x)).toFixed(1)+&#x27;× · Accelerates automatically&#x27;;
+   $(&#x27;#ml-count&#x27;).textContent=String(completed).padStart(2,&#x27;0&#x27;)+&#x27; / 54&#x27;;$(&#x27;#ml-timeline&#x27;).value=completed;
    canvas.setAttribute(&#x27;aria-label&#x27;,&#x27;Part &#x27;+current.x+&#x27;. Test gate: &#x27;+checks.length+&#x27; distinct learned tests. The code-writing LLM starts with no speed instructions. Each judge rejection adds one instruction. The latest three appear inside the box; the full list is in Tests and full system prompt.&#x27;);renderRegister();
  }
  function apply(e){
@@ -1289,6 +1289,7 @@ html&gt;body{padding:0}&lt;/style&gt;
    motionFrom=active?.target||&#x27;input&#x27;;
    if(eventIndex&gt;=events.length-1&amp;&amp;!prepare()){pause();return;}if(!events.length&amp;&amp;!prepare())return;
    active=events[++eventIndex];progress=animate&amp;&amp;!reduced.matches?0:1;
+   if(active.target===&#x27;input&#x27;)motionFrom=&#x27;input&#x27;;
    $(&#x27;#ml-status&#x27;).textContent=active.commit?&#x27;Complete&#x27;:active.addCheck?&#x27;New check&#x27;:active.addFeedback?&#x27;Judge: &#x27;+current.rec.reason:active.target===&#x27;input&#x27;?&#x27;Input&#x27;:active.target===&#x27;llm&#x27;?&#x27;Writing CAM&#x27;:active.target===&#x27;tests&#x27;?(active.result===&#x27;fail&#x27;?&#x27;Tests failed&#x27;:&#x27;Tests passed&#x27;):active.target===&#x27;sim&#x27;?(active.result===&#x27;fail&#x27;?&#x27;Simulation failed&#x27;:&#x27;Simulation passed&#x27;):active.result===&#x27;fail&#x27;?&#x27;Judge: too slow&#x27;:&#x27;Judge: passed&#x27;;
    if(progress===1){apply(active);draw();if(playing)animation={start,duration:duration(),applied:true};}
    else animation={start,duration:duration(),applied:false};
