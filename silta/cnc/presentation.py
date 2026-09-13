@@ -45,7 +45,9 @@ def run_summary(manifest):
     saved = baseline - best_seconds if comparable and best_seconds is not None else None
     percent = 100 * saved / baseline if saved is not None and baseline else None
     decisions = [
-        event.get("result", {}) for event in events if event.get("event") == "supervisor_decision"
+        event.get("decision", event.get("result", {}))
+        for event in events
+        if event.get("event") == "supervisor_decision"
     ]
     promotions = [
         event.get("result", {}) for event in events if event.get("event") == "promotion_evaluated"
@@ -59,6 +61,7 @@ def run_summary(manifest):
         "supervisor_decisions": decisions,
         "evaluations": len(promotions),
         "promotions": sum(item.get("promoted") is True for item in promotions),
+        "saved_changes": sum(e.get("event") == "learning_change_saved" for e in events),
         "last_action": decisions[-1].get("action") if decisions else None,
     }
 
@@ -109,9 +112,33 @@ def stage_rows(manifest):
             "Recorded evidence": f"{decisions} decisions · latest: {action}",
         },
         {
-            "Stage": "Learning → evaluated changes",
+            "Stage": "Learning → reusable changes",
             "Recorded evidence": (
-                f"{summary['evaluations']} evaluated · {summary['promotions']} promoted"
+                f"{summary['evaluations']} evaluated · {summary['promotions']} promoted · "
+                f"{summary['saved_changes']} saved directly"
             ),
         },
     ]
+
+
+def current_stage(manifest):
+    """A stopped job must never be presented as a currently running agent."""
+    status = manifest.get("status", "not_started")
+    if status != "running":
+        return {"completed": "Finished", "incomplete": "Stopped with retained evidence"}.get(
+            status, str(status).replace("_", " ").capitalize()
+        )
+    events = manifest.get("events", [])
+    latest = events[-1].get("event") if events else None
+    return {
+        "target_generation_started": "Generating fixed CAD",
+        "target_accepted": "CAD accepted",
+        "candidate_generation_started": "Planning CAM",
+        "candidate_created": "Running cheap checks",
+        "checks_completed": "Checks finished",
+        "verification_started": "Fusion simulation + stock comparison",
+        "verification_completed": "Simulation finished",
+        "supervisor_decision": "Judge decision recorded",
+        "learning_change_saved": "Learning saved",
+        "promoted_change_applied": "Learning applied",
+    }.get(latest, str(latest or "Waiting for first event").replace("_", " "))

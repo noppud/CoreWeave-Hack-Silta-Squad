@@ -24,9 +24,9 @@ def _():
 
     # Marimo launches with the notebook directory on sys.path.
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-    from silta.cnc.presentation import run_summary, stage_rows
+    from silta.cnc.presentation import current_stage, run_summary, stage_rows
 
-    return Path, hashlib, html, json, math, mo, os, run_summary, stage_rows
+    return Path, current_stage, hashlib, html, json, math, mo, os, run_summary, stage_rows
 
 
 @app.cell
@@ -228,26 +228,246 @@ def _(Path, mo, os):
         full_width=True,
     )
     campaign_path = mo.ui.text(
-        value=os.environ.get("SILTA_CAMPAIGN_MANIFEST", ""),
+        value=os.environ.get(
+            "SILTA_CAMPAIGN_MANIFEST",
+            str(Path.cwd() / "runs/demo-campaign.json"),
+        ),
         label="Sequential campaign manifest (optional)",
         full_width=True,
     )
     refresh = mo.ui.refresh(options=["5s", "15s", "1m"], default_interval="15s")
     mo.vstack(
         [
-            mo.md("# Silta · From drawing to verified machining"),
-            mo.md("Recorded runs, machine evidence and measured improvements."),
-            mo.hstack([jobs_root, versions_root, refresh], align="end"),
-            campaign_path,
+            mo.md("# SILTA / Machining that learns"),
+            mo.md("Drawing → fixed CAD → CAM → checks → Fusion simulation → judge → better plan."),
+            mo.accordion(
+                {
+                    "Run sources and refresh": mo.vstack(
+                        [mo.hstack([jobs_root, versions_root, refresh], align="end"), campaign_path]
+                    )
+                }
+            ),
         ]
     )
     return campaign_path, jobs_root, refresh, versions_root
 
 
 @app.cell
+def _(Path, campaign, hashlib, jobs_root, mo, read_json, refresh, run_summary):
+    _tick = refresh.value
+    _repo = Path(jobs_root.value).expanduser().parent
+    history, _history_error = read_json(Path(jobs_root.value) / "four-part-learning-summary.json")
+    _parts = []
+    _seen_targets = set()
+    for _part in history.get("parts", []):
+        _path = Path(jobs_root.value) / _part["final_run"] / "manifest.json"
+        _run, _error = read_json(_path)
+        _result = _run.get("best_verification") or {}
+        if _run.get("target_digest"):
+            _seen_targets.add(_run["target_digest"])
+        _parts.append(
+            {
+                "Part": _part.get("part"),
+                "Run": _part["final_run"],
+                "Plan": _result.get("status", "unavailable"),
+                "Job": _run.get("status", "unavailable"),
+                "Machining estimate (s)": run_summary(_run)["best_seconds"],
+                "Learning carried forward": ", ".join(
+                    key
+                    for key, value in _part.get("final_versions", {}).items()
+                    if value != _part.get("initial_learning_versions", {}).get(key)
+                )
+                or "Existing guidance reused",
+            }
+        )
+    video_evidence, _ = read_json(_repo / "output/video/demo-evidence.json")
+    _video_manifest, _ = (
+        read_json(video_evidence["run_manifest"])
+        if video_evidence.get("run_manifest")
+        else ({}, None)
+    )
+    _verified_video = _video_manifest.get("best_verification") or {}
+    if _video_manifest and _video_manifest.get("job_id") not in {row["Run"] for row in _parts}:
+        _parts.append(
+            {
+                "Part": "Indexed 3+2",
+                "Run": _video_manifest.get("job_id"),
+                "Plan": _verified_video.get("status", "unavailable"),
+                "Job": _video_manifest.get("status", "unavailable"),
+                "Machining estimate (s)": run_summary(_video_manifest)["best_seconds"],
+                "Learning carried forward": "See this run's recorded versions",
+            }
+        )
+    if _video_manifest.get("target_digest"):
+        _seen_targets.add(_video_manifest["target_digest"])
+    for _part in campaign.get("parts", []):
+        _run, _ = read_json(_part["manifest_path"]) if _part.get("manifest_path") else ({}, None)
+        _target = _run.get("target_digest")
+        if not _target or _target in _seen_targets:
+            continue
+        _seen_targets.add(_target)
+        _result = _run.get("best_verification") or {}
+        _parts.append(
+            {
+                "Part": _part.get("label") or _part.get("part_id"),
+                "Run": _run.get("job_id"),
+                "Plan": _result.get("status", "pending"),
+                "Job": _run.get("status", "pending"),
+                "Machining estimate (s)": run_summary(_run)["best_seconds"],
+                "Learning carried forward": "See campaign versions and this run's changes",
+            }
+        )
+    _verified_count = sum(
+        row["Plan"] == "passed" and row["Machining estimate (s)"] is not None for row in _parts
+    )
+    _video = Path(video_evidence["video"]) if video_evidence.get("video") else None
+    _video_ok = (
+        _video
+        and _video.is_file()
+        and hashlib.sha256(_video.read_bytes()).hexdigest() == video_evidence.get("sha256")
+        and _verified_video.get("status") == "passed"
+        and _verified_video.get("completed") is True
+        and _video_manifest.get("best_candidate", {}).get("id")
+        == video_evidence.get("verified_candidate")
+    )
+    mo.vstack(
+        [
+            mo.hstack(
+                [
+                    mo.stat(
+                        label="Distinct showcased parts with verified plans", value=_verified_count
+                    ),
+                    mo.stat(label="Historical target", value="10 parts"),
+                    mo.stat(label="Next live demonstration", value="Run 11 · when ready"),
+                ]
+            ),
+            mo.md(
+                f"**{_verified_count} verified parts are available in this showcase.** "
+                "The ten-part history and eleventh live run are not yet complete."
+            )
+            if _verified_count < 10
+            else mo.md("Open the campaign below for live progress."),
+            mo.hstack(
+                [
+                    mo.vstack(
+                        [
+                            mo.md("### The machine, actually machining"),
+                            mo.video(str(_video), controls=True, width="100%")
+                            if _video_ok
+                            else mo.md("No validated machine recording available."),
+                            mo.md(
+                                "Actual Fusion recording · Haas UMC-750 · indexed 3+2. "
+                                "Edited playback ends with a still of finished stock. "
+                                "Candidate passed; job stopped at the attempt limit."
+                            ),
+                            mo.accordion({"Recording provenance": mo.json(video_evidence)}),
+                        ]
+                    ),
+                    mo.vstack(
+                        [
+                            mo.md("### Learning that transferred"),
+                            mo.vstack(
+                                [
+                                    mo.callout(
+                                        mo.md(
+                                            f"**{item.get('source', '')}**  "
+                                            f"\n{item.get('effect', '')}"
+                                        )
+                                    )
+                                    for item in history.get("observed_learning", [])
+                                ]
+                            ),
+                            mo.md(
+                                "Historical changes were saved directly. "
+                                "Weave traces and later replay evaluations are separate."
+                            ),
+                        ]
+                    ),
+                ]
+            ),
+            mo.ui.table(_parts, selection=None)
+            if _parts
+            else mo.md("No showcase history recorded."),
+            mo.md(
+                "Different parts contain different machining work; "
+                "their times are not a controlled learning curve."
+            ),
+        ]
+    ) if history or video_evidence else mo.md("")
+    return history, video_evidence
+
+
+@app.cell
+def _(Path, jobs_root, mo, read_json, refresh):
+    import difflib
+
+    _tick = refresh.value
+    _path = Path(jobs_root.value).expanduser().parent / "output/evaluation/learning-evaluation.json"
+    evaluation, _ = read_json(_path) if _path.is_file() else ({}, None)
+    _variant_rows = [
+        {
+            key: variant.get(key)
+            for key in ("name", "caught_invalid", "false_rejections", "median_runtime_ms")
+        }
+        for variant in evaluation.get("variants", [])
+    ]
+    _links = [
+        mo.md(f"[{variant.get('name', 'Evaluation')} in Weave]({variant['weave_url']})")
+        for variant in evaluation.get("variants", [])
+        if str(variant.get("weave_url", "")).startswith("https://wandb.ai/")
+    ]
+    _source = evaluation.get("check_source", {})
+    _diff = "\n".join(
+        difflib.unified_diff(
+            str(_source.get("baseline", "")).splitlines(),
+            str(_source.get("learned", "")).splitlines(),
+            fromfile="Initial checks",
+            tofile="Learned checks",
+            lineterm="",
+        )
+    )
+    mo.vstack(
+        [
+            mo.md("## Does the learning hold up?"),
+            mo.md(str(evaluation.get("scope", "No replay evaluation recorded yet."))),
+            mo.md(
+                f"**{evaluation.get('dataset', {}).get('case_count', 0)} retained cases** · "
+                f"{evaluation.get('dataset', {}).get('invalid_count', 0)} invalid · "
+                f"{evaluation.get('dataset', {}).get('valid_count', 0)} valid · "
+                f"Publication: {evaluation.get('status', 'not recorded')}"
+            ),
+            mo.ui.table(_variant_rows, selection=None)
+            if _variant_rows
+            else mo.md("Evaluation results pending."),
+            mo.hstack(_links) if _links else mo.md("No published evaluation links yet."),
+            mo.accordion(
+                {
+                    "Learned check diff": mo.md("```diff\n" + _diff + "\n```"),
+                    "Planning guidance": mo.md(
+                        "```markdown\n"
+                        + str(evaluation.get("prompt_source", "Not supplied"))
+                        + "\n```"
+                    ),
+                    "Per-case replay": mo.ui.table(evaluation.get("rows", []), selection=None)
+                    if evaluation.get("rows")
+                    else mo.md("No cases"),
+                    "Prompt improvement evidence": mo.json(evaluation.get("prompt_evidence", [])),
+                    "Scope and limitations": mo.json(evaluation.get("limitations", [])),
+                }
+            ),
+        ]
+    ) if evaluation else mo.md("")
+    return (evaluation,)
+
+
+@app.cell
 def _(Path, campaign_path, mo, read_json, refresh, run_summary):
     _tick = refresh.value
-    campaign, _error = read_json(campaign_path.value) if campaign_path.value else ({}, None)
+    campaign, _error = (
+        read_json(campaign_path.value)
+        if campaign_path.value and Path(campaign_path.value).is_file()
+        else ({}, None)
+    )
     campaign_runs = []
     _rows = []
     for _part in campaign.get("parts", []):
@@ -278,7 +498,8 @@ def _(Path, campaign_path, mo, read_json, refresh, run_summary):
             ),
             mo.md(
                 "Parts run in order. Each part keeps its own fixed target. "
-                "Only evaluated promotions carry checks and planning guidance forward."
+                "Learning status comes from recorded events; "
+                "saved changes and evaluated promotions are distinct."
             ),
             mo.ui.table(_rows, selection=None) if _rows else mo.md("No campaign parts recorded."),
             mo.accordion(
@@ -306,7 +527,13 @@ def _(Path, campaign_path, mo, read_json, refresh, run_summary):
 
 
 @app.cell
-def _(Path, campaign, campaign_runs, jobs_root, mo, refresh):
+def _(mo):
+    selected_run, remember_selected_run = mo.state(None)
+    return remember_selected_run, selected_run
+
+
+@app.cell
+def _(Path, campaign, campaign_runs, jobs_root, mo, refresh, remember_selected_run, selected_run):
     _refresh_tick = refresh.value
     manifest_files = sorted(
         set(Path(jobs_root.value).expanduser().glob("*/manifest.json")) | set(campaign_runs),
@@ -321,13 +548,15 @@ def _(Path, campaign, campaign_runs, jobs_root, mo, refresh):
         ),
         None,
     )
+    _preferred = selected_run() or _current_path
     _selected = next(
-        (path.parent.name for path in manifest_files if str(path) == _current_path),
+        (path.parent.name for path in manifest_files if str(path) == _preferred),
         manifest_files[0].parent.name if manifest_files else None,
     )
     job_selector = mo.ui.dropdown(
         options={path.parent.name: str(path) for path in manifest_files},
         value=_selected,
+        on_change=remember_selected_run,
         label="Run",
         full_width=True,
     )
@@ -343,12 +572,11 @@ def _(Path, campaign, campaign_runs, jobs_root, mo, refresh):
 
 
 @app.cell
-def _(attempt_rows, job_selector, mo, read_json, refresh):
+def _(attempt_rows, current_stage, job_selector, mo, read_json, refresh):
     _refresh_tick = refresh.value
     manifest, load_error = read_json(job_selector.value) if job_selector.value else ({}, None)
     rows = attempt_rows(manifest)
     events = manifest.get("events", [])
-    current_event = events[-1].get("event", "Waiting for a run") if events else "Waiting for a run"
     latest_candidate = next(
         (
             event.get("candidate", {})
@@ -387,7 +615,7 @@ def _(attempt_rows, job_selector, mo, read_json, refresh):
                     mo.stat(
                         label="Recorded run status", value=manifest.get("status", "Not started")
                     ),
-                    mo.stat(label="Latest event", value=current_event.replace("_", " ")),
+                    mo.stat(label="Current stage", value=current_stage(manifest)),
                     mo.stat(label="Current candidate", value=latest_candidate.get("id", "—")),
                     mo.stat(label="Best verified candidate", value=best.get("id", "None yet")),
                 ]
@@ -486,7 +714,9 @@ def _(best, html, latest_candidate, mo, saved_cam_document):
             )
             if _document
             else mo.md("No saved CAM reference recorded for this candidate."),
-            mo.json(_document) if _document else mo.md(""),
+            mo.accordion({"Exact Fusion document reference": mo.json(_document)})
+            if _document
+            else mo.md(""),
             mo.md("Verification results below identify the candidate they apply to.")
             if _document
             else mo.md(""),
@@ -547,7 +777,12 @@ def _(
     latest_verification,
     latest_verification_candidate,
     mo,
+    manifest,
+    video_evidence,
 ):
+    _showcase_matches = video_evidence.get("verified_candidate") == best.get("id") and Path(
+        video_evidence.get("run_manifest", "missing")
+    ).parent.name == manifest.get("job_id")
     _shown_verification = best_verification or latest_verification
     _shown_candidate = best.get("id") if best_verification else latest_verification_candidate
     _media = [
@@ -577,8 +812,9 @@ def _(
             if _media
             else mo.callout(
                 mo.md(
-                    "No machine recording is attached to this verification. "
-                    "The application will display the actual Fusion recording when available."
+                    "This candidate’s recording is shown in the showcase above."
+                    if _showcase_matches
+                    else "No machine recording is attached to this verification."
                 )
             ),
             mo.accordion(
@@ -710,6 +946,56 @@ def _(Path, artifact_paths, best, html, manifest, mo):
 
 
 @app.cell
+def _(Path, hashlib, manifest, mo):
+    import difflib as learning_difflib
+
+    _sources = manifest.get("learning_sources", {})
+    _changes = []
+    for _event in manifest.get("events", []):
+        if _event.get("event") != "promoted_change_applied":
+            continue
+        _texts = []
+        for _version in (_event.get("previous_version"), _event.get("version")):
+            _record = _sources.get(_version, {})
+            _file = Path(_record["path"]) if _record.get("path") else None
+            _texts.append(
+                _file.read_text()
+                if _file
+                and _file.is_file()
+                and hashlib.sha256(_file.read_bytes()).hexdigest() == _record.get("sha256")
+                else None
+            )
+        _diff = (
+            "\n".join(
+                learning_difflib.unified_diff(
+                    _texts[0].splitlines(),
+                    _texts[1].splitlines(),
+                    fromfile="Before",
+                    tofile="After",
+                    lineterm="",
+                )
+            )
+            if all(text is not None for text in _texts)
+            else "Source snapshots unavailable for this historical change."
+        )
+        _changes.append(
+            mo.vstack(
+                [
+                    mo.md(
+                        f"**{_event.get('change_kind', 'Learning')}** · "
+                        f"after attempt {_event.get('after_attempt', '—')}"
+                    ),
+                    mo.md("```diff\n" + _diff + "\n```"),
+                ]
+            )
+        )
+    mo.accordion(
+        {"Learning changes applied in this run": mo.vstack(_changes)}
+    ) if _changes else mo.md("")
+    return
+
+
+@app.cell
 def _(Path, job_selector, manifest, mo, read_json, weave_link):
     _receipt_path = (
         Path(job_selector.value).parent / "run-receipt.json" if job_selector.value else None
@@ -748,9 +1034,9 @@ def _(Path, events, html, mo, read_json, refresh, versions_root, weave_link):
         [
             mo.md("## Learning and evaluation"),
             mo.md(
-                "Reusable changes are promoted only after the paired evaluation gate. "
-                "Earlier steps retain their recorded versions; subsequent steps adopt evaluated "
-                "promotions. Benchmark runs keep their assigned versions."
+                "Saved learning, later reuse and evaluation results are separate evidence. "
+                "The historical four-part experiment saved changes directly; it did not use "
+                "a Weave promotion gate. Replay evaluations below do not change that history."
             ),
             mo.ui.table(
                 [

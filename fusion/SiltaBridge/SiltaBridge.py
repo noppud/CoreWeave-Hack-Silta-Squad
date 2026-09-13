@@ -12,7 +12,7 @@ import adsk.cam
 import adsk.core
 import adsk.fusion
 
-from . import operations
+from . import operations, recovery
 
 EVENT_ID = "com.silta.fusion.bridge.request"
 _handlers = []
@@ -54,6 +54,7 @@ class RequestHandler(adsk.core.CustomEventHandler):
             )
         _write(_root / "responses" / (request["request_id"] + ".json"), reply)
         (_root / "processing" / (request["request_id"] + ".json")).unlink(missing_ok=True)
+        (_root / "processing" / (request["request_id"] + ".owner")).unlink(missing_ok=True)
 
 
 def _watch():
@@ -64,6 +65,7 @@ def _watch():
         for path in sorted((_root / "requests").glob("*.json")):
             claimed = _root / "processing" / path.name
             try:
+                _write(claimed.with_suffix(".owner"), {"pid": os.getpid(), "session": _owner_token})
                 path.replace(claimed)
                 request = json.loads(claimed.read_text(encoding="utf-8"))
                 if request.get("request_id") != path.stem:
@@ -138,6 +140,9 @@ def run(context):
         _app = adsk.core.Application.get()
         for name in ("requests", "responses", "processing"):
             (_root / name).mkdir(parents=True, exist_ok=True)
+        recovered = recovery.recover_dead_requests(_root)
+        if recovered:
+            _write(_root / "startup-recovery.json", {"recovered": recovered})
         _event = _app.registerCustomEvent(EVENT_ID)
         if _event is None:
             raise RuntimeError("Fusion did not register the bridge event")

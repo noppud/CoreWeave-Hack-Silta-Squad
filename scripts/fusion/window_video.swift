@@ -46,6 +46,8 @@ final class RecordingEvents: NSObject, SCRecordingOutputDelegate, SCStreamOutput
 @main
 struct WindowVideo {
     static func main() async {
+        // Initialize the WindowServer connection before ScreenCaptureKit capture.
+        _ = NSApplication.shared
         let args = CommandLine.arguments
         if args.count == 2 && args[1] == "--preflight" {
             let value: [String: Any] = ["screen_recording_access": CGPreflightScreenCaptureAccess(),
@@ -80,7 +82,7 @@ struct WindowVideo {
         }
         let content = try await SCShareableContent.excludingDesktopWindows(true, onScreenWindowsOnly: true)
         let pattern = "^" + NSRegularExpression.escapedPattern(for: document)
-            + "(?: \\([^)]*\\))? - Autodesk Fusion"
+            + "\\*?(?:\\s*\\([^)]*\\))* - Autodesk Fusion"
         let matches = content.windows.filter {
             $0.owningApplication?.bundleIdentifier == "com.autodesk.fusion360"
             && ($0.title ?? "").range(of: pattern, options: .regularExpression) != nil

@@ -29,6 +29,54 @@ CLOUD_ID = "QTApplication.QTFrameWindow.MainWidget.checkSaveIn"
 PATH_ID = "QTApplication.QTFrameWindow.standardActions.labelLocalSavePath"
 
 
+def stock_generation_progress(state: dict) -> float | None:
+    """Read Fusion's observed bottom-right stock regeneration status, not Time."""
+    values = []
+    for item in state.get("texts", []):
+        text = item.get("text", "")
+        if "stock generation" not in text.lower():
+            continue
+        match = re.fullmatch(r"Stock generation:\s*(\d+(?:\.\d+)?)%", text.strip(), re.I)
+        if not match or item.get("confidence", 0) < 0.8:
+            raise RuntimeError("Unreadable Fusion stock generation progress")
+        value = float(match[1])
+        if not 0 <= value <= 100:
+            raise RuntimeError("Invalid Fusion stock generation progress")
+        values.append(value)
+    if len(values) > 1:
+        raise RuntimeError("Ambiguous Fusion stock generation progress")
+    return values[0] if values else None
+
+
+def restore_fusion_space() -> None:
+    """Select the uniquely observed Fusion desktop when normal activation fails."""
+    source = '''tell application "System Events"
+        tell process "Dock"
+            if not (exists group "Mission Control") then
+                tell application "System Events" to key code 126 using control down
+            end if
+        end tell
+        repeat 20 times
+            tell process "Dock"
+                if exists group "Mission Control" then exit repeat
+            end tell
+            delay 0.1
+        end repeat
+        tell process "Dock"
+            tell list 1 of group "Spaces Bar" of group 1 of group "Mission Control"
+                set targets to every button whose name is "Fusion"
+                if (count of targets) is not 1 then
+                    tell application "System Events" to key code 53
+                    error "No unique Fusion desktop in Mission Control"
+                end if
+                click item 1 of targets
+            end tell
+        end tell
+    end tell'''
+    subprocess.run(['osascript', '-e', source], check=True, capture_output=True,
+                   text=True, timeout=10)
+
+
 def native_binary(source: Path = NATIVE_SOURCE, *, cache: Path | None = None) -> Path:
     """Compile once per source version; publish only a completed executable."""
     cache = cache or ROOT / ".private/fusion-native-cache"
@@ -177,6 +225,7 @@ class StockExporter:
         self.directory.mkdir(parents=True, exist_ok=False)
         self.bridge = bridge or FusionBridge()
         self.sequence = 0
+        self.space_restore_attempted = False
         self.state = None
         self.binary = native_binary()
 
@@ -204,6 +253,13 @@ class StockExporter:
             ) from error
         stem.with_suffix(".json").write_text(json.dumps(result, indent=2))
         if process.returncode or result.get("error"):
+            if (action == "focus" and not self.space_restore_attempted
+                    and str(result.get("error", "")).startswith(
+                        "Expected exactly one visible Fusion document:")):
+                self.space_restore_attempted = True
+                restore_fusion_space()
+                time.sleep(0.5)
+                return self.ui("focus")
             raise RuntimeError(result.get("error", process.stderr))
         if not result["foreground"]:
             raise RuntimeError("Fusion lost foreground access; export stopped")
@@ -217,11 +273,18 @@ class StockExporter:
     def menu(self):
         # A first click can only focus the canvas. Retry once, after observing
         # the menu is absent. Never replay Save blindly after an uncertain result.
+        self.ui("inspect")  # Discard a stale frame of a menu fading after selection.
         _, _, width, height = self.state["window_bounds"]
         for _attempt in range(2):
-            if any(w["title"] == "Marking Menu" for w in self.state["windows"]):
+            try:
                 find_text(self.state, "End of Toolpath")
                 return
+            except RuntimeError:
+                # Some Fusion sessions expose the menu as an untitled window.
+                # Its observed unique control is sufficient; do not toggle an
+                # already open menu merely because the window lacks a title.
+                if any(w["title"] == "Marking Menu" for w in self.state["windows"]):
+                    raise
             self.ui("click", width * 0.55, height * 0.42, "right")
         find_text(self.state, "End of Toolpath")
 
@@ -269,17 +332,96 @@ class StockExporter:
             _, _, width, height = self.state["window_bounds"]
             self.click_text("Stock", region=(width * 0.25, height * 0.4, width * 0.78, height))
             self.click_text("Save Stock")
-            self.wait_dialog()
             try:
+                self.wait_dialog(timeout=5)
                 for identifier in (CLOUD_ID, LOCAL_ID, PATH_ID):
                     dialog_element(self.state, identifier)
                 return
-            except RuntimeError:
+            except (RuntimeError, TimeoutError):
                 if attempt:
                     raise
                 cancel = "QTApplication.QTFrameWindow.standardActions.CancelButton"
-                dialog_element(self.state, cancel)
-                self.ui("press", "Save Stock", cancel)
+                try:
+                    dialog_element(self.state, cancel)
+                except RuntimeError:
+                    # The same Qt omission can affect Cancel. Use its observed
+                    # text within the dialog footer, never a guessed coordinate.
+                    windows = [w for w in self.state["windows"] if w["title"] == "Save Stock"]
+                    if len(windows) != 1:
+                        raise RuntimeError("Expected one unsaved stock dialog") from None
+                    box = windows[0]["bounds"]
+                    wx, wy, _, _ = self.state["window_bounds"]
+                    self.click_text("Cancel", region=(
+                        box["X"] - wx + box["Width"] * 0.5,
+                        box["Y"] - wy + box["Height"] * 0.8,
+                        box["X"] - wx + box["Width"],
+                        box["Y"] - wy + box["Height"],
+                    ))
+                else:
+                    self.ui("press", "Save Stock", cancel)
+
+    def wait_stock_ready(self, *, timeout: float = 180) -> dict:
+        """Wait for observed regeneration completion at the requested endpoint.
+
+        A stable file, machine-verification completion and playback Time are
+        independent of stock regeneration. Never accept mere missing progress
+        without first observing generation or its explicit 100% completion.
+        """
+        from .simulation_video import menu_play_enabled, playback_position
+
+        if not math.isfinite(timeout) or not 1 <= timeout <= 600:
+            raise ValueError("Stock readiness timeout must be finite and 1..600 seconds")
+        deadline = time.monotonic() + timeout
+        samples = []
+        observed_generation = False
+        stable_count = 0
+        previous_pose = None
+        result = {"status": "waiting", "method": "observed-stock-generation-end-v1",
+                  "samples": samples, "timeout_seconds": timeout}
+        receipt = self.directory / "stock-readiness.json"
+        try:
+            while True:
+                progress = stock_generation_progress(self.state)
+                if progress is not None:
+                    observed_generation = True
+                reply = self.bridge.request("simulation_dialog", timeout=15)
+                (self.directory / f"stock-ready-{len(samples):03d}.json").write_text(
+                    json.dumps(reply, indent=2)
+                )
+                position = playback_position(reply, self.document)
+                pose = (position["operation"], position["tool_position"])
+                complete = observed_generation and (progress is None or progress == 100)
+                valid_pose = bool(position["operation"]) and len(position["tool_position"]) == 3
+                stable = complete and valid_pose and pose == previous_pose
+                stable_count = stable_count + 1 if stable else 0
+                previous_pose = pose
+                samples.append({"observed_at": time.time(), "progress_percent": progress,
+                                "position": position, "stable_count": stable_count})
+                receipt.write_text(json.dumps(result, indent=2))
+                if stable_count >= 2:
+                    # End of Toolpath was explicitly selected immediately before
+                    # this wait. Confirm the endpoint remains still and stopped.
+                    self.menu()
+                    stopped = menu_play_enabled(self.state)
+                    menu_progress = stock_generation_progress(self.state)
+                    self.ui("key", "escape")
+                    if not stopped:
+                        raise RuntimeError("Fusion playback is not stopped after End of Toolpath")
+                    if menu_progress is not None and menu_progress < 100:
+                        stable_count = 0
+                    else:
+                        result.update(status="ready", final_position=position,
+                                      playback_stopped=True, end_of_toolpath_requested=True)
+                        receipt.write_text(json.dumps(result, indent=2))
+                        return result
+                if time.monotonic() >= deadline:
+                    raise TimeoutError("Fusion stock regeneration completion was not observed")
+                time.sleep(0.5)  # Poll cadence only; elapsed time never establishes readiness.
+                self.ui("inspect")
+        except BaseException as error:
+            result.update(status="collection_failed", error=f"{type(error).__name__}: {error}")
+            receipt.write_text(json.dumps(result, indent=2))
+            raise
 
     def export(self, output: Path) -> dict:
         output = output.resolve()
@@ -307,8 +449,14 @@ class StockExporter:
             control = issues_close[0]
             self.ui("press", control["window"], control["AXIdentifier"])
         accuracy = self.maximum_accuracy()
+        # Regenerate on rewind must already be enabled in the observed Fusion
+        # Display settings. The tested Start -> End commands force a fresh stock
+        # generation even after playback is already at its final position.
+        self.menu()
+        self.click_text("Start of Toolpath")
         self.menu()
         self.click_text("End of Toolpath")
+        readiness = self.wait_stock_ready()
         self.open_stock_dialog()
         if dialog_element(self.state, CLOUD_ID).get("AXValue") not in (0, "0"):
             self.ui("press", "Save Stock", CLOUD_ID)
@@ -342,7 +490,13 @@ class StockExporter:
         source = local_directory / (export_name + ".stl")
         if source.exists():
             raise FileExistsError(source)
+        progress = stock_generation_progress(self.state)
+        if progress is not None and progress < 100:
+            raise RuntimeError("Fusion restarted stock generation before Save")
         self.click_text("Save")
+        progress = stock_generation_progress(self.state)
+        if progress is not None and progress < 100:
+            raise RuntimeError("Fusion restarted stock generation during Save")
         deadline = time.monotonic() + 30
         previous_size = None
         while time.monotonic() < deadline:
@@ -374,9 +528,12 @@ class StockExporter:
             "fusion_original": str(source),
             "geometry": geometry,
             "end_of_toolpath_requested": True,
+            "regeneration_trigger": ["Start of Toolpath", "End of Toolpath"],
+            "regenerate_on_rewind_required": True,
             "foreground_required": True,
             "volume_crosscheck": volume_evidence,
             "stock_accuracy": accuracy,
+            "stock_readiness": readiness,
             "verification_pass": False,
             "meaning": "Simulated stock mesh exported; target comparison is separate",
             "evidence_directory": str(self.directory),

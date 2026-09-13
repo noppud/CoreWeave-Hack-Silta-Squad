@@ -168,3 +168,19 @@ def test_stock_collection_failure_never_becomes_pass(case):  # noqa: F811
     ).verify(*case)
     assert result.status == "unknown" and not result.completed
     assert "Mac locked" in result.issues[0]
+
+
+def test_issues_recovery_is_bound_once_separately_from_raw_observations(case):  # noqa: F811
+    receipt = {"reason": "issues_panel_absent_after_three_reads", "simulation_restarted": False}
+
+    class RecoveryReader(Reader):
+        def read(self):
+            return {**super().read(), "issues_panel_recovery": receipt}
+
+    reader = RecoveryReader([snapshot(percent=30), snapshot()])
+    result = FixedFusionVerifier(FixedBridge(), lambda _: reader, poll_seconds=0).verify(*case)
+    artifacts = [a for a in result.evidence if Path(a.path).name == "issues-panel-recovery.json"]
+    assert len(artifacts) == 1
+    artifacts[0].verify()
+    assert json.loads(Path(artifacts[0].path).read_text()) == receipt
+    assert result.status == "failed"

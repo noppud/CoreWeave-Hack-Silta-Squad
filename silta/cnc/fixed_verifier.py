@@ -19,7 +19,7 @@ from .ui_verifier import (
     validate_simulation_coverage,
 )
 
-VERIFIER_VERSION = "fusion-fixed-ui-stock-v2"
+VERIFIER_VERSION = "fusion-fixed-ui-stock-v7-explicit-stock-regeneration"
 
 
 class FixedFusionVerifier:
@@ -159,8 +159,12 @@ class FixedFusionVerifier:
                 last_error = "No Issues summary observed"
                 index = 0
                 last_text = None
+                issues_recovery_saved = False
                 while time.monotonic() < deadline:
                     observation = reader.read()
+                    if observation.get("issues_panel_recovery") and not issues_recovery_saved:
+                        save("issues-panel-recovery.json", observation["issues_panel_recovery"])
+                        issues_recovery_saved = True
                     if observation["raw_text"] != last_text:
                         save(f"native-read-{index:04d}.json", observation)
                         index += 1

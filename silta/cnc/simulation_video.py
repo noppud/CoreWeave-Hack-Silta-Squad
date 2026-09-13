@@ -17,7 +17,7 @@ from pathlib import Path
 
 from .fusion import FusionBridge
 from .models import Artifact
-from .stock_export import StockExporter, find_text
+from .stock_export import StockExporter
 
 ROOT = Path(__file__).resolve().parents[2]
 VIDEO_SOURCE = ROOT / "scripts/fusion/window_video.swift"
@@ -42,12 +42,40 @@ def playback_position(reply: dict, document: str) -> dict:
         values = re.findall(rf"^\s*{axis}, eDropDownEntry, [XYZ] position, ([^\n]+)", raw, re.M)
         if len(values) == 1:
             pose[axis] = values[0]
+    descriptions = re.findall(r"^\s*description, eDropDownEntry, Description, ([^\n]+)", raw, re.M)
     return {
+        "operation": descriptions[0] if len(descriptions) == 1 else None,
         "percent": percent,
         "tool_position": pose,
         "document": document,
         "fusion_version": result.get("fusion_version"),
     }
+
+
+def menu_play_enabled(state: dict) -> bool:
+    """Fusion keeps a dim disabled Pause label beside enabled Play.
+
+    OCR presence alone cannot distinguish them. When both labels are visible,
+    require dark Play text and light disabled Pause text on these white controls.
+    Unknown themes/contrast fail closed.
+    """
+    labels = {item["text"].strip(): item for item in state["texts"]}
+    if "Play" not in labels:
+        return False
+    if "Pause" not in labels:
+        return True
+    from PIL import Image
+
+    image = Image.open(state["screenshot"]).convert("RGB")
+    sx = image.width / state["window_bounds"][2]
+    sy = image.height / state["window_bounds"][3]
+    levels = {}
+    for label in ("Play", "Pause"):
+        x, y, w, h = labels[label]["bounds"]
+        pixels = image.crop((x * sx, y * sy, (x + w) * sx, (y + h) * sy))
+        values = sorted(min(pixel) for pixel in pixels.get_flattened_data())
+        levels[label] = values[int(len(values) * 0.1)]
+    return levels["Play"] < 110 and levels["Pause"] > 145
 
 
 class FusionPlayback:
@@ -56,17 +84,48 @@ class FusionPlayback:
     def __init__(self, document: str, evidence: Path, bridge):
         self.document, self.bridge = document, bridge
         self.native = StockExporter(document, evidence, bridge=bridge)
+        self.end_position = None
+
+    def stopped_menu(self):
+        # Rewind may briefly disable controls while stock regenerates, and its
+        # fading menu can remain in the captured frame. Observe readiness again;
+        # never toggle Play/Pause to discover state.
+        for attempt in range(4):
+            if attempt:
+                time.sleep(0.25)
+                self.native.ui("inspect")
+            self.native.menu()
+            if menu_play_enabled(self.native.state):
+                return
+        raise RuntimeError("Playback must be stopped before recording")
 
     def prepare(self) -> None:
         self.native.ui("focus")
-        self.native.menu()
         # A visible Play command establishes that playback is currently stopped.
         # Do not blindly toggle a Play/Pause control when its state is unknown.
-        find_text(self.native.state, "Play")
-        self.native.click_text("Start of Toolpath")
+        self.stopped_menu()
+        self.native.click_text("End of Toolpath")
+        self.end_position = playback_position(
+            self.bridge.request("simulation_dialog"), self.document
+        )
+        (self.native.directory / "expected-end.json").write_text(
+            json.dumps(self.end_position, indent=2)
+        )
+        if not self.end_position["operation"] or len(self.end_position["tool_position"]) != 3:
+            raise RuntimeError("Cannot establish final operation and tool position")
         self.native.menu()
-        find_text(self.native.state, "Play")
+        self.native.click_text("Start of Toolpath")
+        self.stopped_menu()
         self.native.ui("key", "escape")
+
+    def at_end(self, position: dict) -> bool:
+        end = self.end_position
+        if not end or any(position[key] != end[key] for key in ("operation", "tool_position")):
+            return False
+        self.native.menu()
+        stopped = menu_play_enabled(self.native.state)
+        self.native.ui("key", "escape")
+        return stopped
 
     def start(self) -> None:
         buttons = [
@@ -86,10 +145,10 @@ class FusionPlayback:
             for item in self.native.state["texts"]
             if item.get("confidence", 0) >= 0.8
         }
-        if "Pause" in labels:
-            self.native.click_text("Pause")
-        elif "Play" in labels:
+        if menu_play_enabled(self.native.state):
             self.native.ui("key", "escape")  # Already stopped at the end.
+        elif "Pause" in labels:
+            self.native.click_text("Pause")
         else:
             self.native.ui("key", "escape")
             raise RuntimeError("Could not establish whether Fusion playback has stopped")
@@ -212,7 +271,7 @@ class SimulationVideo:
                 position = observe()
                 if recorder.status().get("status") != "recording":
                     raise RuntimeError("Native window recording failed during playback")
-                if position["percent"] >= 99.9:
+                if playback.at_end(position):
                     complete = True
                     break
                 time.sleep(0.5)

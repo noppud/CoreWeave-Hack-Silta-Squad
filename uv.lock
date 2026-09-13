@@ -675,6 +675,23 @@ wheels = [
 ]
 
 [[package]]
+name = "libigl"
+version = "2.6.3"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "numpy" },
+    { name = "scipy" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/5c/41/8b04eb112af0579790af6a04f7d0ffc9be6827ce44e99495d30c6820e1fc/libigl-2.6.3.tar.gz", hash = "sha256:e2a3ff17b88cae728cb60ea63850131315bb661045a8642db73aea98c91486ab", size = 41273089, upload-time = "2026-09-01T02:47:31.393Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/28/83/29c5a7a76d1f231ea75dc55369289393f96fd0dd30748bc2109c2454b403/libigl-2.6.3-cp312-abi3-macosx_10_15_x86_64.whl", hash = "sha256:913ae71a57e164ed79237c8c320677923b61fd762fdbaa1d3b2a974a198ba3a9", size = 13481939, upload-time = "2026-09-01T02:46:00.082Z" },
+    { url = "https://files.pythonhosted.org/packages/50/5a/687c38287c1ae298fc1221d8422f6fd63de9b9461dc8b0368e54953cc5ca/libigl-2.6.3-cp312-abi3-macosx_11_0_arm64.whl", hash = "sha256:da3c62c50103be9b192bc76bbcb9e5031d80a2cf209b3ef0a0cf0060750088d9", size = 12215411, upload-time = "2026-09-01T02:46:11.991Z" },
+    { url = "https://files.pythonhosted.org/packages/6a/88/d964fc9e6ee297793b8c65937f1bbe1365f3faaa29fc22054aa51a1e05a1/libigl-2.6.3-cp312-abi3-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:98952af1bc41e363a642c880465e91f951164a6ee23ca62e8e8449d00a31e2d0", size = 13158545, upload-time = "2026-09-01T02:46:25.196Z" },
+    { url = "https://files.pythonhosted.org/packages/f6/c2/8641402402fbfa553c51615825434802de9c3b60b2580acdaad5312af396/libigl-2.6.3-cp312-abi3-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:4a1d28aebfeb8b232a58943b1af318ec61a1fff7650a9d25a1396ba8fa1ef6d6", size = 13889363, upload-time = "2026-09-01T02:46:41.414Z" },
+    { url = "https://files.pythonhosted.org/packages/0c/13/6893321d8fc1a742a276a5de796e1818cae33a0589b46f487a6cba2547c5/libigl-2.6.3-cp312-abi3-win_amd64.whl", hash = "sha256:1d91745ed0e78c56a04539e3231ce6faff49ae0dbe123caa2034e1886fcb2e7d", size = 20239839, upload-time = "2026-09-01T02:47:07.712Z" },
+]
+
+[[package]]
 name = "loro"
 version = "1.13.2"
 source = { registry = "https://pypi.org/simple" }
@@ -1659,6 +1676,7 @@ dependencies = [
     { name = "cadquery-ocp" },
     { name = "cwsandbox" },
     { name = "httpx" },
+    { name = "libigl" },
     { name = "marimo" },
     { name = "numpy" },
     { name = "openai-codex" },
@@ -1682,6 +1700,7 @@ requires-dist = [
     { name = "cadquery-ocp", specifier = ">=7.8,<8" },
     { name = "cwsandbox", specifier = "==1.14.2" },
     { name = "httpx", specifier = ">=0.28,<1" },
+    { name = "libigl", specifier = "==2.6.3" },
     { name = "marimo", specifier = ">=0.24.2" },
     { name = "numpy", specifier = ">=2,<3" },
     { name = "openai-codex", specifier = ">=0.154.0" },

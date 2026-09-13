@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "base_config": "/Users/touko/work/helios-one/repos/coreweavehack/config/umc-actuator-tall-job.json",
+  "fixture": {
+    "path": "/Users/touko/work/helios-one/repos/coreweavehack/config/umc-tall-pedestal-g54.f3d",
+    "sha256": "b64840531f39ffca6a49e715dc478ff56284c7f8b99ae6c97ace8b62cd7a3679"
+  },
+  "description": "Six NEW indexed target definitions; no machining outcomes included.",
+  "parts": [
+    {
+      "id": "umc-02",
+      "name": "Compact sensor node",
+      "split": "training",
+      "config_path": "/Users/touko/work/helios-one/repos/coreweavehack/config/demo-campaign/umc-02-job.json",
+      "pdf_path": "/Users/touko/work/helios-one/repos/coreweavehack/output/pdf/demo-campaign/umc-02.pdf",
+      "pdf_sha256": "700aec1f93f1e56317dae2042b79509c4e7819f7410b6fc66df5ed521de2f3be",
+      "geometry_sha256": "44c989a7bf095304e52db3824060b4afb5d9b9c4d7661343704a4a14346ff39a",
+      "status": "prepared_not_run"
+    },
+    {
+      "id": "umc-03",
+      "name": "Drive encoder housing",
+      "split": "training",
+      "config_path": "/Users/touko/work/helios-one/repos/coreweavehack/config/demo-campaign/umc-03-job.json",
+      "pdf_path": "/Users/touko/work/helios-one/repos/coreweavehack/output/pdf/demo-campaign/umc-03.pdf",
+      "pdf_sha256": "5e121d57c3c2499203fc0da9bdb5470fdd6105df911666af072ad984b4678347",
+      "geometry_sha256": "d208dec659407630485472e13ad922081a8e9f00237f279eb74d833faf923912",
+      "status": "prepared_not_run"
+    },
+    {
+      "id": "umc-04",
+      "name": "Valve feedback block",
+      "split": "training",
+      "config_path": "/Users/touko/work/helios-one/repos/coreweavehack/config/demo-campaign/umc-04-job.json",
+      "pdf_path": "/Users/touko/work/helios-one/repos/coreweavehack/output/pdf/demo-campaign/umc-04.pdf",
+      "pdf_sha256": "3e403164ec097eeb9d161cfdf2e6d167975bcbf08b2a35efc9c47475aedc28b8",
+      "geometry_sha256": "f6cf900b8fa6b4dad9652cb452e5c8109fddef2d1f9541323e388f1538a262eb",
+      "status": "prepared_not_run"
+    },
+    {
+      "id": "umc-05",
+      "name": "Wide service manifold",
+      "split": "training",
+      "config_path": "/Users/touko/work/helios-one/repos/coreweavehack/config/demo-campaign/umc-05-job.json",
+      "pdf_path": "/Users/touko/work/helios-one/repos/coreweavehack/output/pdf/demo-campaign/umc-05.pdf",
+      "pdf_sha256": "b48eb0f15e15fe6d16d39950f6d679b1137c6bdbf5228508aaace294c16c97e6",
+      "geometry_sha256": "80d73081632846fe7841ce2a1203117b04fa4b4f14f9e413cf597fd1875c5036",
+      "status": "prepared_not_run"
+    },
+    {
+      "id": "umc-06",
+      "name": "Offset monitoring block",
+      "split": "training",
+      "config_path": "/Users/touko/work/helios-one/repos/coreweavehack/config/demo-campaign/umc-06-job.json",
+      "pdf_path": "/Users/touko/work/helios-one/repos/coreweavehack/output/pdf/demo-campaign/umc-06.pdf",
+      "pdf_sha256": "acdab9fc6b2853c3688d9a3983490b56f4729e8ec95380c56149368e8a7aabd2",
+      "geometry_sha256": "881a07632bbf13387dd31af96f66d345b14c24bab7f9798c6cf6b323663db5eb",
+      "status": "prepared_not_run"
+    },
+    {
+      "id": "umc-07",
+      "name": "Cross-port service block",
+      "split": "heldout",
+      "config_path": "/Users/touko/work/helios-one/repos/coreweavehack/config/demo-campaign/umc-07-job.json",
+      "pdf_path": "/Users/touko/work/helios-one/repos/coreweavehack/output/pdf/demo-campaign/umc-07.pdf",
+      "pdf_sha256": "0a7f356630174bfa2f5e164a903a505da433a7ea0ddf93e0063cd5cad76cf8f4",
+      "geometry_sha256": "239b9d7590ed9a1d4b4d7d814d8a9af4e5712533b06a68a3f60732ddf5aca908",
+      "status": "prepared_not_run"
+    }
+  ]
+}

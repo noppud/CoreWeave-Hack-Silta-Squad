@@ -17,7 +17,7 @@ import trimesh
 
 from .models import file_digest
 
-COMPARISON_VERSION = "bidirectional-adaptive-mesh-v1"
+COMPARISON_VERSION = "bidirectional-adaptive-mesh-v4-covered-collinear"
 
 
 def step_mesh(path: Path, deflection_mm: float) -> trimesh.Trimesh:
@@ -71,16 +71,90 @@ def validate_mesh(mesh, name: str):
         raise ValueError(f"{name} is not a triangle mesh")
     if not np.isfinite(mesh.vertices).all() or not mesh.is_volume:
         raise ValueError(f"{name} must be finite, watertight, consistently wound, positive volume")
-    if np.any(mesh.area_faces <= 0):
-        raise ValueError(f"{name} has degenerate triangles")
+    covered_collinear_faces(mesh)
+
+
+def covered_collinear_faces(mesh):
+    """Prove each zero-area facet is a segment already in a positive-area face.
+
+    Exact rational arithmetic checks collinearity of stored float coordinates.
+    Extreme vertices must share an edge of a nondegenerate adjacent triangle;
+    that triangle contains the entire segment. Topology retains these facets.
+    """
+    from fractions import Fraction
+
+    indices = np.flatnonzero(mesh.area_faces <= 0)
+    for index in indices:
+        face = mesh.faces[index]
+        points = [[Fraction(float(x)) for x in p] for p in mesh.triangles[index]]
+        u = [points[1][i] - points[0][i] for i in range(3)]
+        v = [points[2][i] - points[0][i] for i in range(3)]
+        if any(u[a] * v[b] != u[b] * v[a] for a, b in ((0, 1), (0, 2), (1, 2))):
+            raise ValueError("Degenerate facet is not exactly collinear")
+        axis = next((i for i in range(3) if len({p[i] for p in points}) > 1), None)
+        if axis is None:
+            raise ValueError("Degenerate point facet is unsupported")
+        low = min(range(3), key=lambda i: points[i][axis])
+        high = max(range(3), key=lambda i: points[i][axis])
+        adjacent = np.any(mesh.faces == face[low], axis=1) & np.any(
+            mesh.faces == face[high], axis=1
+        )
+        if not np.any(adjacent & (mesh.area_faces > 0)):
+            raise ValueError("Collinear facet lacks a covering nondegenerate edge")
+    return indices
+
+
+def _closest_backend(mesh):
+    """Build one immutable BVH for one directed comparison; no global cache."""
+    import igl
+
+    vertices = np.array(mesh.vertices, dtype=np.float64, order="C", copy=True)
+    covered = covered_collinear_faces(mesh)
+    retained = np.flatnonzero(~np.isin(np.arange(len(mesh.faces)), covered))
+    faces = np.array(mesh.faces[retained], dtype=np.int64, order="C", copy=True)
+    if (
+        vertices.ndim != 2
+        or vertices.shape[1] != 3
+        or not np.isfinite(vertices).all()
+        or faces.ndim != 2
+        or faces.shape[1] != 3
+        or not len(faces)
+        or np.any(faces < 0)
+        or np.any(faces >= len(vertices))
+    ):
+        raise ValueError("Invalid nearest-triangle mesh")
+    vertices.flags.writeable = False
+    faces.flags.writeable = False
+    tree = igl.AABB()
+    tree.init(vertices, faces)
+
+    def closest(points):
+        points = np.ascontiguousarray(points, dtype=np.float64)
+        if points.ndim != 2 or points.shape[1] != 3 or not np.isfinite(points).all():
+            raise ValueError("Invalid nearest-triangle query")
+        if not len(points):
+            return np.empty((0, 3)), np.empty(0), np.empty(0, dtype=np.int64)
+        squared, indices, coordinates = tree.squared_distance(vertices, faces, points)
+        if (
+            squared.shape != (len(points),)
+            or indices.shape != (len(points),)
+            or coordinates.shape != points.shape
+            or not np.isfinite(squared).all()
+            or not np.isfinite(coordinates).all()
+            or np.any(squared < 0)
+            or not np.issubdtype(indices.dtype, np.integer)
+            or np.any(indices < 0)
+            or np.any(indices >= len(faces))
+        ):
+            raise ValueError("Invalid nearest-triangle result")
+        return coordinates, np.sqrt(squared), retained[indices]
+
+    return closest
 
 
 def _closest(mesh, points):
-    rows = [
-        trimesh.proximity.closest_point(mesh, points[i : i + 1000])
-        for i in range(0, len(points), 1000)
-    ]
-    return tuple(np.concatenate([row[j] for row in rows]) for j in range(3))
+    """One-shot query; directed comparisons retain the backend across batches."""
+    return _closest_backend(mesh)(points)
 
 
 def _planar_regions(mesh):
@@ -91,6 +165,8 @@ def _planar_regions(mesh):
     regions = []
     for face_ids in mesh.facets:
         if len(face_ids) < 3:
+            continue
+        if np.any(mesh.area_faces[face_ids] <= 0):
             continue
         normal = mesh.face_normals[face_ids[0]]
         origin = mesh.triangles[face_ids[0], 0]
@@ -145,7 +221,9 @@ def directed_surface(
     validate_mesh(source, "Source")
     validate_mesh(target, "Reference")
     started = time.monotonic()
-    pending = source.triangles.copy()
+    covered = covered_collinear_faces(source)
+    pending = np.delete(source.triangles, covered, axis=0)
+    closest_query = _closest_backend(target)
     by_face, regions = _planar_regions(target)
     processed = 0
     max_lower = 0.0
@@ -164,7 +242,7 @@ def directed_surface(
         triangles, pending = pending[:2000], pending[2000:]
         centers = triangles.mean(axis=1)
         sample = np.concatenate((centers, triangles.reshape(-1, 3)))
-        _, distances, nearest_faces = _closest(target, sample)
+        _, distances, nearest_faces = closest_query(sample)
         if not np.isfinite(distances).all():
             raise ValueError("Non-finite surface distances")
         index = int(distances.argmax())
@@ -219,7 +297,7 @@ def directed_surface(
 
 
 def compare_meshes(
-    stock, target, tolerance_mm, *, target_deflection_mm=0.0, max_triangles=2_000_000, timeout=120
+    stock, target, tolerance_mm, *, target_deflection_mm=0.0, max_triangles=8_000_000, timeout=300
 ) -> dict:
     if not math.isfinite(tolerance_mm) or tolerance_mm <= 0:
         raise ValueError("A finite positive drawing tolerance is required")
@@ -265,6 +343,8 @@ def compare_meshes(
         "method": COMPARISON_VERSION,
         "tolerance_mm": tolerance_mm,
         "target_deflection_mm": target_deflection_mm,
+        "resource_budget": {"max_triangles_per_direction": max_triangles,
+                            "timeout_seconds_per_direction": timeout},
         "directions": directions,
         "issues": issues,
         "stock_volume_mm3": float(stock.volume),
@@ -277,6 +357,40 @@ def compare_meshes(
     }
 
 
+def load_stock_mesh(stock_path: Path):
+    """Drop only raw facets with exactly repeated coordinates; preserve all others.
+
+    Such facets have no surface area and double-count an existing edge. This is
+    not hole filling, approximate welding, or removal of collinear triangles.
+    The raw export remains the hashed evidence artifact.
+    """
+    stock = trimesh.load_mesh(stock_path, process=False)
+    if not isinstance(stock, trimesh.Trimesh):
+        raise ValueError("Stock export must contain one triangle mesh")
+    triangles = stock.triangles
+    repeated = (
+        np.all(triangles[:, 0] == triangles[:, 1], axis=1)
+        | np.all(triangles[:, 1] == triangles[:, 2], axis=1)
+        | np.all(triangles[:, 0] == triangles[:, 2], axis=1)
+    )
+    receipt = {
+        "method": "raw-exact-repeated-vertex-facets-only-v1",
+        "raw_face_count": len(stock.faces),
+        "removed_face_count": int(np.count_nonzero(repeated)),
+        "removed_face_indices": np.flatnonzero(repeated).tolist(),
+        "raw_stock_sha256": file_digest(stock_path),
+        "raw_file_modified": False,
+    }
+    stock.update_faces(~repeated)
+    stock.process()
+    receipt["processed_face_count"] = len(stock.faces)
+    receipt["covered_collinear_face_indices"] = covered_collinear_faces(stock).tolist()
+    receipt["collinear_policy"] = (
+        "Retain for topology; omit covered zero-area primitives from queries"
+    )
+    return stock, receipt
+
+
 def compare_stock_to_step(
     stock_path: Path, step_path: Path, tolerance_mm: float, directory: Path
 ) -> dict:
@@ -285,8 +399,9 @@ def compare_stock_to_step(
     target = step_mesh(step_path, deflection)
     target_path = directory / "target-tessellation.stl"
     target.export(target_path)
-    stock = trimesh.load_mesh(stock_path, process=True)
+    stock, normalization = load_stock_mesh(stock_path)
     result = compare_meshes(stock, target, tolerance_mm, target_deflection_mm=deflection)
+    result["stock_normalization"] = normalization
     result["artifacts"] = {
         "stock": {"path": str(stock_path), "sha256": file_digest(stock_path)},
         "target_step": {"path": str(step_path), "sha256": file_digest(step_path)},

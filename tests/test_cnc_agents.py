@@ -215,6 +215,8 @@ def test_actual_source_export_and_post_sequence_produces_unverified_candidate(tm
     catalog_path = tmp_path / "workspace/cam-0001/cam-api-catalog.json"
     assert str(catalog_path) in client.calls[-1][0]
     assert json.loads(catalog_path.read_text())["compatible_strategies"]
+    catalog_request = next(c for c in bridge.script_calls if c["source"] == _CAM_CATALOG_SCRIPT)
+    assert {"pocket_clearing", "adaptive"} <= set(catalog_request["arguments"]["strategies"])
     machining = next(
         call for call in bridge.script_calls if call["source"].startswith(_CAM_RESOURCE_PRELUDE)
     )
@@ -1050,3 +1052,25 @@ def test_cad_that_executes_without_bodies_enters_existing_source_repair(tmp_path
     assert 'solid part bodies' in client.calls[1][0]
     assert 'definition alone is never called' in client.calls[0][0]
     assert (tmp_path / 'cad-attempt-02-execution.json').is_file()
+
+
+def test_generation_not_started_returns_source_to_repair_without_posting(tmp_path, inputs):
+    from silta.cnc.models import CandidateGenerationError
+
+    main, bridge, _, context = prepare(tmp_path, inputs, [CAM_REPLY])
+    original = bridge.request
+
+    def request(action, payload=None, **kwargs):
+        if action == 'generation_status':
+            return {'status': 'error', 'completed': False,
+                    'issues': [{'type': 'fusion_api_error',
+                                'message': '3 : Generation not started'}]}
+        return original(action, payload, **kwargs)
+
+    bridge.request = request
+    with pytest.raises(CandidateGenerationError) as caught:
+        main.propose(context, None, {}, '', 1)
+    assert caught.value.feedback['source'] == CAM_REPLY['source']
+    assert caught.value.feedback['generation']['completed'] is False
+    assert bridge.actions.count('generate_toolpaths') == 1
+    assert 'postprocess' not in bridge.actions

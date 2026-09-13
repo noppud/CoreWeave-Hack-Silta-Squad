@@ -1,0 +1,142 @@
+{
+  "scope": "Relocated local bytes only; no Fusion access or simulation tested",
+  "configs": [
+    {
+      "config": "config/demo-campaign/umc-02-job.json",
+      "status": "verified",
+      "verified_artifacts": 12,
+      "read_inputs_verify": true
+    },
+    {
+      "config": "config/demo-campaign/umc-03-job.json",
+      "status": "verified",
+      "verified_artifacts": 12,
+      "read_inputs_verify": true
+    },
+    {
+      "config": "config/demo-campaign/umc-04-job.json",
+      "status": "verified",
+      "verified_artifacts": 12,
+      "read_inputs_verify": true
+    },
+    {
+      "config": "config/demo-campaign/umc-05-job.json",
+      "status": "verified",
+      "verified_artifacts": 12,
+      "read_inputs_verify": true
+    },
+    {
+      "config": "config/demo-campaign/umc-06-job.json",
+      "status": "verified",
+      "verified_artifacts": 12,
+      "read_inputs_verify": true
+    },
+    {
+      "config": "config/demo-campaign/umc-07-job.json",
+      "status": "verified",
+      "verified_artifacts": 12,
+      "read_inputs_verify": true
+    },
+    {
+      "config": "config/demo-campaign/umc-08-job.json",
+      "status": "verified",
+      "verified_artifacts": 12,
+      "read_inputs_verify": true
+    },
+    {
+      "config": "config/demo-campaign/umc-09-job.json",
+      "status": "verified",
+      "verified_artifacts": 12,
+      "read_inputs_verify": true
+    },
+    {
+      "config": "config/demo-campaign/umc-10-job.json",
+      "status": "verified",
+      "verified_artifacts": 12,
+      "read_inputs_verify": true
+    },
+    {
+      "config": "config/learning-part-b-job.json",
+      "status": "verified",
+      "verified_artifacts": 14,
+      "read_inputs_verify": true
+    },
+    {
+      "config": "config/learning-part-c-job.json",
+      "status": "verified",
+      "verified_artifacts": 14,
+      "read_inputs_verify": true
+    },
+    {
+      "config": "config/learning-part-d-job.json",
+      "status": "verified",
+      "verified_artifacts": 14,
+      "read_inputs_verify": true
+    },
+    {
+      "config": "config/learning-part-e-job.json",
+      "status": "verified",
+      "verified_artifacts": 14,
+      "read_inputs_verify": true
+    },
+    {
+      "config": "config/learning-part-f-job.json",
+      "status": "verified",
+      "verified_artifacts": 14,
+      "read_inputs_verify": true
+    },
+    {
+      "config": "config/learning-part-g-job.json",
+      "status": "verified",
+      "verified_artifacts": 14,
+      "read_inputs_verify": true
+    },
+    {
+      "config": "config/learning-part-h-job.json",
+      "status": "verified",
+      "verified_artifacts": 14,
+      "read_inputs_verify": true
+    },
+    {
+      "config": "config/learning-part-i-job.json",
+      "status": "verified",
+      "verified_artifacts": 14,
+      "read_inputs_verify": true
+    },
+    {
+      "config": "config/learning-part-j-job.json",
+      "status": "verified",
+      "verified_artifacts": 14,
+      "read_inputs_verify": true
+    },
+    {
+      "config": "config/soft-jaw-job.json",
+      "status": "verified",
+      "verified_artifacts": 14,
+      "read_inputs_verify": true
+    },
+    {
+      "config": "config/umc-actuator-job.json",
+      "status": "verified",
+      "verified_artifacts": 12,
+      "read_inputs_verify": true
+    },
+    {
+      "config": "config/umc-actuator-tall-job.json",
+      "status": "verified",
+      "verified_artifacts": 12,
+      "read_inputs_verify": true
+    },
+    {
+      "config": "config/demo-campaign/umc-12-job.json",
+      "status": "verified",
+      "verified_artifacts": 12,
+      "read_inputs_verify": true,
+      "source_config_sha256": "76ee57173ab46d9551adda042dfd75fa21fce1c396dd51d06d0fea3010d51755",
+      "release_config_sha256": "76ee57173ab46d9551adda042dfd75fa21fce1c396dd51d06d0fea3010d51755",
+      "relocated_config_sha256": "3b9fd4cb581bf76d9b9f87c050c49363f4857b80c7053fa043bac28e836901a6",
+      "drawing_sha256": "d0351e3f31d722f76ac684c46fd55a4d2aed862ddecac07f711f899f330287b3",
+      "scope": "Corrected UMC12 setup notes; original PDF bytes unchanged; relocation validated in memory."
+    }
+  ]
+}

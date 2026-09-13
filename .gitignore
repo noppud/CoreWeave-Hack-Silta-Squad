@@ -32,3 +32,15 @@ data/local/
 .private/
 runs/
 versions/
+
+# Generated demo evidence and media; keep small frozen drawing inputs
+/output/*
+!/output/pdf/
+/output/pdf/*
+!/output/pdf/learning-part-*.pdf
+!/output/pdf/umc-actuator-housing.pdf
+!/output/pdf/demo-campaign/
+/output/pdf/demo-campaign/*
+!/output/pdf/demo-campaign/*.pdf
+/tmp/
+/notebooks/__marimo__/

@@ -7,6 +7,7 @@ dependencies = [
   "cadquery-ocp>=7.8,<8",
   "cwsandbox==1.14.2",
   "httpx>=0.28,<1",
+  "libigl==2.6.3",
   "marimo>=0.24.2",
   "numpy>=2,<3",
   "openai-codex>=0.154.0",

@@ -68,4 +68,35 @@ def test_unknown_and_unpromoted_learning_are_distinct():
     assert summary["evaluations"] == 1
     assert summary["promotions"] == 0
     assert "1 unknown" in stage_rows(manifest)[3]["Recorded evidence"]
-    assert stage_rows(manifest)[-1]["Recorded evidence"] == "1 evaluated · 0 promoted"
+    assert (
+        stage_rows(manifest)[-1]["Recorded evidence"]
+        == "1 evaluated · 0 promoted · 0 saved directly"
+    )
+
+
+def test_live_generation_and_stopped_job_are_not_conflated():
+    from silta.cnc.presentation import current_stage
+
+    event = {"event": "candidate_generation_started", "attempt": 1}
+    assert current_stage({"status": "running", "events": [event]}) == "Planning CAM"
+    assert (
+        current_stage({"status": "incomplete", "events": [event]})
+        == "Stopped with retained evidence"
+    )
+
+
+def test_judge_decision_and_direct_learning_are_read_from_current_schema():
+    result = run_summary(
+        {
+            "events": [
+                {
+                    "event": "supervisor_decision",
+                    "decision": {"action": "stop", "instructions": "Done"},
+                },
+                {"event": "learning_change_saved", "evaluation_performed": False},
+            ]
+        }
+    )
+    assert result["last_action"] == "stop"
+    assert result["saved_changes"] == 1
+    assert result["evaluations"] == result["promotions"] == 0

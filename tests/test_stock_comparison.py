@@ -75,3 +75,105 @@ def test_step_tessellation_preserves_mm_size_and_placement(tmp_path):
     assert mesh.is_volume
     assert np.allclose(mesh.bounds, [[-5, -4, -4], [5, 4, 0]])
     assert mesh.volume == pytest.approx(320)
+
+
+def test_compiled_nearest_matches_exhaustive_oracle_and_owns_snapshot():
+    from silta.cnc.stock_comparison import _closest_backend
+
+    mesh = trimesh.creation.icosphere(subdivisions=1)
+    points = np.random.default_rng(104).uniform(-2, 2, (80, 3))
+    oracle = trimesh.proximity.closest_point_naive(mesh, points)
+    query = _closest_backend(mesh)
+    coordinates, distances, faces = query(points)
+    assert np.allclose(distances, oracle[1], atol=1e-10, rtol=0)
+    projected = trimesh.triangles.closest_point(mesh.triangles[faces], coordinates)
+    assert np.allclose(coordinates, projected, atol=1e-10, rtol=0)
+    mesh.apply_translation([100, 0, 0])
+    assert np.array_equal(query(points)[1], distances)
+
+
+def test_compiled_nearest_rejects_nonfinite_queries():
+    from silta.cnc.stock_comparison import _closest_backend
+
+    query = _closest_backend(trimesh.creation.box())
+    with pytest.raises(ValueError, match="query"):
+        query(np.array([[np.nan, 0, 0]]))
+
+
+def test_compiled_nearest_rejects_invalid_native_result(monkeypatch):
+    import igl
+
+    from silta.cnc.stock_comparison import _closest_backend
+
+    class BadTree:
+        def init(self, vertices, faces):
+            pass
+
+        def squared_distance(self, vertices, faces, points):
+            return np.zeros(len(points)), np.full(len(points), -1), points.copy()
+
+    monkeypatch.setattr(igl, "AABB", BadTree)
+    with pytest.raises(ValueError, match="result"):
+        _closest_backend(trimesh.creation.box())(np.zeros((1, 3)))
+
+
+@pytest.mark.parametrize("offset,expected", [(0.126, "passed"), (0.129, "failed")])
+def test_compiled_boundary_keeps_tolerance(offset, expected):
+    target = trimesh.creation.box()
+    stock = target.copy()
+    stock.apply_translation([offset, 0, 0])
+    assert compare_meshes(stock, target, 0.127)["status"] == expected
+
+
+def test_exact_repeated_facets_removed_but_collinear_facets_retained(tmp_path):
+    from silta.cnc.stock_comparison import load_stock_mesh
+
+    triangles = np.array(
+        [
+            [[0, 0, 0], [1, 0, 0], [0, 0, 0]],
+            [[0, 0, 0], [1, 0, 0], [2, 0, 0]],
+            [[0, 0, 0], [2, 0, 0], [0, 1, 0]],
+        ],
+        dtype=float,
+    )
+    mesh = trimesh.Trimesh(
+        vertices=triangles.reshape(-1, 3), faces=np.arange(9).reshape(-1, 3), process=False
+    )
+    path = tmp_path / "raw.stl"
+    mesh.export(path)
+    before = path.read_bytes()
+    normalized, receipt = load_stock_mesh(path)
+    assert receipt["removed_face_indices"] == [0]
+    assert len(normalized.faces) == 2
+    assert np.count_nonzero(normalized.area_faces == 0) == 1
+    assert path.read_bytes() == before
+
+
+def test_normalization_does_not_close_a_real_open_surface(tmp_path):
+    from silta.cnc.stock_comparison import load_stock_mesh, validate_mesh
+
+    mesh = trimesh.creation.box()
+    mesh.update_faces(np.arange(len(mesh.faces)) != 0)
+    path = tmp_path / "open.stl"
+    mesh.export(path)
+    normalized, receipt = load_stock_mesh(path)
+    assert receipt["removed_face_count"] == 0
+    with pytest.raises(ValueError, match="watertight"):
+        validate_mesh(normalized, "Stock")
+
+
+def test_collinear_line_requires_an_exact_covering_edge():
+    from silta.cnc.stock_comparison import covered_collinear_faces
+
+    vertices = [[0, 0, 0], [1, 0, 0], [2, 0, 0], [0, 1, 0]]
+    covered = trimesh.Trimesh(vertices=vertices, faces=[[0, 1, 2], [0, 2, 3]], process=False)
+    assert covered_collinear_faces(covered).tolist() == [0]
+    from silta.cnc.stock_comparison import _closest
+
+    points, distances, indices = _closest(covered, np.array([[1.0, 0.0, 1.0]]))
+    assert np.allclose(points, [[1, 0, 0]])
+    assert distances.tolist() == [1.0]
+    assert indices.tolist() == [1]
+    uncovered = trimesh.Trimesh(vertices=vertices, faces=[[0, 1, 2], [0, 1, 3]], process=False)
+    with pytest.raises(ValueError, match="covering"):
+        covered_collinear_faces(uncovered)

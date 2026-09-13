@@ -17,6 +17,7 @@ from .cam_documents import open_snapshot, save_snapshot
 from .models import (
     Candidate,
     CandidateGenerationError,
+    CandidateProposalUnresolved,
     JobContext,
     JobInputs,
     ReusableProposal,
@@ -445,6 +446,14 @@ class FusionScriptError(RuntimeError):
         super().__init__(f"Fusion generated script failed: {reply.get('issues', [])}")
 
 
+class FusionGenerationNotStarted(RuntimeError):
+    """Fusion explicitly rejected generation; this is repair feedback, not a timeout."""
+
+    def __init__(self, reply: dict):
+        self.reply = reply
+        super().__init__("Fusion confirmed toolpath generation did not start")
+
+
 class TargetAssessmentRejected(ValueError):
     """Actual CAD review failed before the target was accepted or frozen."""
 
@@ -456,9 +465,12 @@ class TargetAssessmentRejected(ValueError):
 
 
 _FRESH_CAD_SCRIPT = """
+import adsk.fusion
 _document = app.documents.add(adsk.core.DocumentTypes.FusionDesignDocumentType)
 if not _document:
     raise RuntimeError("Fusion did not create a fresh CAD document")
+_design = adsk.fusion.Design.cast(_document.products.itemByProductType('DesignProductType'))
+_design.unitsManager.distanceDisplayUnits = adsk.fusion.DistanceUnits.MillimeterDistanceUnits
 result = {"created": True, "document": _document.name}
 """
 
@@ -499,6 +511,10 @@ class AstraMainAgent(_Roles):
             )
         ):
             raise FusionScriptError(reply)
+        if (action == "generation_status" and reply.get("status") == "error"
+                and any(issue.get("message") == "3 : Generation not started"
+                        for issue in reply.get("issues", []) if isinstance(issue, dict))):
+            raise FusionGenerationNotStarted(reply)
         if reply.get("status") in {"error", "failed"} or reply.get("error"):
             raise RuntimeError(f"Fusion {action} failed: {reply.get('error', reply.get('issues'))}")
         return reply
@@ -535,6 +551,8 @@ class AstraMainAgent(_Roles):
         """Retry only confirmed source errors, after restoring an isolated baseline."""
         for attempt in range(1, self.max_source_attempts + 1):
             if reply.get("unresolved"):
+                if stage == "cam":
+                    raise CandidateProposalUnresolved(reply["unresolved"])
                 raise ValueError(f"{stage} needs clarification: " + "; ".join(reply["unresolved"]))
             name = f"{stage}-attempt-{attempt:02d}"
             _save(directory / f"{name}-response.json", reply)
@@ -638,6 +656,12 @@ class AstraMainAgent(_Roles):
         prompt = self._prompt("main_prompt") + "\nTASK: Create CAD from these actual drawings.\n"
         prompt += (
             "The controller will create a fresh empty document before source execution. "
+            "It sets millimetre display units; do not change units. API geometry still uses "
+            "centimetres. Fusion's defaultLengthUnits property is read-only. "
+            "Face sketches can already contain fixed projected curves: do not blanket-set "
+            "isFixed on all sketch entities. Leave projected or already-fixed entities alone. "
+            "ConstructionPlane.isVisible is read-only; visibility cleanup is optional, "
+            "and isLightBulbOn is its writable visibility property. "
             "Source is executed directly as Python module code, not installed as a Fusion "
             "add-in. Execute the build at top level and assign result; a run(context) "
             "definition alone is never called. "
@@ -828,7 +852,8 @@ class AstraMainAgent(_Roles):
         catalog = self._request("run_script", {
             "source": _CAM_CATALOG_SCRIPT,
             "arguments": {"setup_index": prepared["setup_index"],
-                          "strategies": ["pocket2d", "adaptive2d", "contour2d", "face", "drill"]},
+                          "strategies": ["pocket2d", "adaptive2d", "contour2d", "face", "drill",
+                                         "pocket_clearing", "adaptive"]},
         })["result"]
         if not catalog.get("compatible_strategies"):
             raise RuntimeError("Fusion did not report its available machining strategies")
@@ -907,7 +932,19 @@ class AstraMainAgent(_Roles):
         if nc.get("sha256") != postprocessor.get("sha256"):
             raise ValueError("Actual NC postprocessor differs from the configured postprocessor")
         self._request("generate_toolpaths", {"skip_valid": False})
-        generated = self._wait("generation_status")
+        try:
+            generated = self._wait("generation_status")
+        except FusionGenerationNotStarted as error:
+            failure = {
+                "stage": "toolpath_generation",
+                "issues": ["Fusion explicitly reports generation not started. Inspect operation "
+                           "geometry and orientation references; do not treat this as a pass."],
+                "inspection": self._request("inspect")["result"],
+                "source": reply["source"],
+                "generation": error.reply,
+            }
+            _save(directory / "toolpath-generation-failure.json", failure)
+            raise CandidateGenerationError(failure) from error
         inspection = self._request("inspect")["result"]
         cutting = self._request("run_script", {"source": _CUTTING_PARAMETERS_SCRIPT})["result"]
         observed = {op["id"]: op for op in cutting["operations"]}

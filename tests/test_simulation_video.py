@@ -37,6 +37,9 @@ class Playback:
     def prepare(self):
         self.order.append("rewind")
 
+    def at_end(self, position):
+        return position["percent"] == 100  # transport stub only
+
     def start(self):
         self.order.append("play")
         if self.fail_start:
@@ -153,3 +156,86 @@ def test_ambiguous_or_absent_progress_is_not_completion():
     data["result"]["active_command"] = "SelectCommand"
     with pytest.raises(RuntimeError, match="active Fusion"):
         playback_position(data, "Part A")
+
+
+def test_per_operation_percentage_cannot_finish_whole_movie():
+    from silta.cnc.simulation_video import FusionPlayback
+
+    playback = FusionPlayback.__new__(FusionPlayback)
+    playback.end_position = {
+        "operation": "last side",
+        "tool_position": {"x": "0 mm", "y": "0 mm", "z": "50 mm"},
+    }
+    assert not playback.at_end(
+        {
+            "percent": 100,
+            "operation": "first top",
+            "tool_position": {"x": "0 mm", "y": "0 mm", "z": "50 mm"},
+        }
+    )
+
+
+def test_matching_end_pose_requires_stopped_playback():
+    from silta.cnc.simulation_video import FusionPlayback
+
+    class Native:
+        state = {"texts": [{"text": "Pause"}]}
+
+        def menu(self):
+            pass
+
+        def ui(self, *args):
+            pass
+
+    playback = FusionPlayback.__new__(FusionPlayback)
+    playback.native = Native()
+    playback.end_position = {"operation": "last", "tool_position": {"x": "1", "y": "2", "z": "3"}}
+    position = dict(playback.end_position, percent=0)
+    assert not playback.at_end(position)
+    playback.native.state = {"texts": [{"text": "Play"}]}
+    assert playback.at_end(position)
+
+
+def test_dim_disabled_pause_is_not_mistaken_for_active_playback(tmp_path):
+    from PIL import Image, ImageDraw
+
+    from silta.cnc.simulation_video import menu_play_enabled
+
+    image = Image.new("RGB", (100, 50), "white")
+    draw = ImageDraw.Draw(image)
+    draw.rectangle((10, 10, 30, 25), fill=(60, 60, 60))
+    draw.rectangle((50, 10, 70, 25), fill=(178, 178, 178))
+    path = tmp_path / "menu.png"
+    image.save(path)
+    state = {
+        "screenshot": str(path),
+        "window_bounds": [0, 0, 100, 50],
+        "texts": [
+            {"text": "Play", "bounds": [10, 10, 20, 15]},
+            {"text": "Pause", "bounds": [50, 10, 20, 15]},
+        ],
+    }
+    assert menu_play_enabled(state)
+    draw.rectangle((50, 10, 70, 25), fill=(60, 60, 60))
+    image.save(path)
+    assert not menu_play_enabled(state)
+
+
+def test_recording_waits_for_rewind_controls_without_toggling_play(monkeypatch):
+    from types import SimpleNamespace
+
+    import silta.cnc.simulation_video as video
+    from silta.cnc.simulation_video import FusionPlayback
+
+    calls = []
+    states = iter([False, True])
+    monkeypatch.setattr(video, "menu_play_enabled", lambda state: next(states))
+    monkeypatch.setattr(video.time, "sleep", lambda seconds: None)
+    playback = object.__new__(FusionPlayback)
+    playback.native = SimpleNamespace(
+        state={},
+        menu=lambda: calls.append("menu"),
+        ui=lambda action: calls.append(action),
+    )
+    playback.stopped_menu()
+    assert calls == ["menu", "inspect", "menu"]

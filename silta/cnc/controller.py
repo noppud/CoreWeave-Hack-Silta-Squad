@@ -10,8 +10,10 @@ from typing import Any, Protocol
 
 from .checks import CheckRunner, IntegrityChecks
 from .models import (
+    Artifact,
     Candidate,
     CandidateGenerationError,
+    CandidateProposalUnresolved,
     JobContext,
     JobInputs,
     JobResult,
@@ -89,6 +91,7 @@ class Controller:
         job_id: str,
         versions: dict[str, str],
         max_attempts: int = 20,
+        verified_incumbent: tuple[Candidate, VerificationResult] | None = None,
     ) -> JobResult:
         """Limits are an operational stop, never a successful supervisor decision."""
         if max_attempts < 1:
@@ -103,6 +106,23 @@ class Controller:
         instructions = ""
         status = "incomplete"
         reason = "Operational attempt limit reached"
+
+        def retain_learning(refs: dict[str, str]) -> None:
+            """Keep evaluated source bytes as run evidence, not extra active memory."""
+            if self.learning is None:
+                return
+            directory = store.directory / "learning-sources"
+            directory.mkdir(exist_ok=True)
+            sources = store.data.setdefault("learning_sources", {})
+            for kind in ("main_prompt", "checks"):
+                ref = refs.get(kind)
+                if not ref or ref in sources:
+                    continue
+                obj = self.learning.get(ref)
+                path = directory / (ref + (".py" if kind == "checks" else ".md"))
+                path.write_text(obj["content"])
+                sources[ref] = {"kind": kind, **asdict(Artifact.from_path(path))}
+            store.save()
 
         def promote(
             proposals: tuple[ReusableProposal, ...], context: JobContext
@@ -147,6 +167,7 @@ class Controller:
                     context = replace(context, versions={
                         **context.versions, proposal.kind: proposal.proposed_version,
                     })
+                    retain_learning(context.versions)
                     store.data["current_versions"] = deepcopy(context.versions)
                     store.event(
                         "promoted_change_applied",
@@ -159,20 +180,59 @@ class Controller:
                     )
             return context
 
+        def review(candidate, verification, context):
+            # Every supervisor call remains bound to an actual completed pass.
+            candidate.verify()
+            context.target.verify()
+            context.inputs.verify()
+            verification.validate(candidate, context)
+            if verification.status != "passed" or not verification.completed:
+                raise ValueError("Supervisor requires a completed verified candidate")
+            decision = self.supervisor.decide(
+                deepcopy(context), deepcopy(candidate), deepcopy(verification),
+                deepcopy(store.data["events"]),
+            )
+            if decision.action not in ("improve", "stop"):
+                raise ValueError("Invalid supervisor action")
+            store.event("supervisor_decision", decision=asdict(decision),
+                        versions=deepcopy(context.versions))
+            context = promote(decision.reusable_proposals, context)
+            if decision.action == "improve" and not decision.instructions.strip():
+                raise ValueError("Improvement decision requires instructions")
+            return context, decision
+
         try:
             inputs = store.inputs(deepcopy(inputs))
             pinned = deepcopy(versions)
             store.data["versions"] = deepcopy(pinned)
             store.data["current_versions"] = deepcopy(pinned)
+            retain_learning(pinned)
             store.save()
             workspace = store.directory / "workspace"
             workspace.mkdir()
+            store.event("target_generation_started")
             target = self.main.establish_target(deepcopy(inputs), str(workspace))
             target.verify()
             target = store.target(target)
             context = JobContext(inputs, target, inputs.digest, pinned, str(store.directory))
             accepted_digest = target.digest
             store.event("target_accepted", target_digest=accepted_digest)
+            if verified_incumbent is not None:
+                restored, verification = deepcopy(verified_incumbent)
+                restored.verify()
+                verification.validate(restored, context)
+                if restored.target_digest != accepted_digest or verification.status != "passed":
+                    raise ValueError("Resumed incumbent must be verified against the fixed target")
+                best = store.candidate(restored, 0)
+                evidence = store.snapshot("resumed-evidence", {
+                    f"evidence-{i}": artifact for i, artifact in enumerate(verification.evidence)
+                })
+                best_verification = replace(verification, evidence=tuple(evidence.values()))
+                previous = best
+                store.data["best_candidate"] = asdict(best)
+                store.data["best_verification"] = asdict(best_verification)
+                store.event("verified_incumbent_resumed", candidate=asdict(best),
+                            verification=asdict(best_verification))
             for attempts in range(1, max_attempts + 1):
                 context.inputs.verify()
                 target.verify()
@@ -182,6 +242,7 @@ class Controller:
                 ):
                     raise ValueError("Fixed target or manufacturing inputs changed")
                 try:
+                    store.event("candidate_generation_started", attempt=attempts)
                     candidate = self.main.propose(
                         deepcopy(context),
                         deepcopy(previous),
@@ -189,6 +250,20 @@ class Controller:
                         instructions,
                         attempts,
                     )
+                except CandidateProposalUnresolved as error:
+                    store.event("cam_proposal_unresolved", attempt=attempts,
+                                issues=error.issues, instructions=instructions)
+                    if best is None or best_verification is None:
+                        raise
+                    context, decision = review(best, best_verification, context)
+                    if decision.action == "stop":
+                        status, reason = "completed", "Supervisor selected the best verified plan"
+                        break
+                    instructions = decision.instructions
+                    previous = best
+                    feedback = {"stage": "supervisor", "unresolved_proposal": error.issues,
+                                "verification": asdict(best_verification)}
+                    continue
                 except CandidateGenerationError as error:
                     feedback = deepcopy(error.feedback)
                     store.event("cam_generation_failed", attempt=attempts, feedback=feedback)
@@ -263,24 +338,10 @@ class Controller:
                     store.data["best_candidate"] = asdict(best)
                     store.data["best_verification"] = asdict(best_verification)
                     store.event("incumbent_updated", candidate_id=best.id)
-                decision = self.supervisor.decide(
-                    deepcopy(context),
-                    deepcopy(candidate),
-                    deepcopy(verification),
-                    deepcopy(store.data["events"]),
-                )
-                if decision.action not in ("improve", "stop"):
-                    raise ValueError("Invalid supervisor action")
-                store.event(
-                    "supervisor_decision", decision=asdict(decision),
-                    versions=deepcopy(context.versions),
-                )
-                context = promote(decision.reusable_proposals, context)
+                context, decision = review(candidate, verification, context)
                 if decision.action == "stop":
                     status, reason = "completed", "Supervisor selected the best verified plan"
                     break
-                if not decision.instructions.strip():
-                    raise ValueError("Improvement decision requires instructions")
                 instructions = decision.instructions
                 previous = best
                 feedback = {"stage": "supervisor", "verification": asdict(best_verification)}

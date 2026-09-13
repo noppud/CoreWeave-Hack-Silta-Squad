@@ -71,11 +71,64 @@ def test_open_rejects_dirty_copy_or_wrong_opened_version():
     data = SimpleNamespace(id=ref["data_file_id"], versionId=ref["version_id"],
         isComplete=True, parentProject=SimpleNamespace(id=ref["project_id"]))
     document = SimpleNamespace(dataFile=data, isModified=True)
+    class Documents(list):
+        def open(self, *_):
+            return document
+
     app = SimpleNamespace(data=SimpleNamespace(findFileById=lambda _: data),
-        documents=SimpleNamespace(open=lambda *_: document))
+        documents=Documents())
     with pytest.raises(RuntimeError, match="unmodified pinned version"):
         open_version(app, {"reference": ref})
     document.isModified = False
     document.dataFile = SimpleNamespace(versionId="newer-version")
     with pytest.raises(RuntimeError, match="unmodified pinned version"):
         open_version(app, {"reference": ref})
+
+
+@pytest.mark.parametrize("export_succeeds", [False, True])
+def test_reopen_preserves_modified_copy_before_closing(tmp_path, monkeypatch, export_succeeds):
+    import sys
+    from pathlib import Path
+    from types import ModuleType
+
+    import fusion.cam_documents as module
+
+    monkeypatch.setattr(module, '__file__', str(tmp_path/'fusion/cam_documents.py'))
+    ref = _reference()
+    data = SimpleNamespace(id=ref['data_file_id'], versionId=ref['version_id'],
+                           isComplete=True, parentProject=SimpleNamespace(id=ref['project_id']))
+    saved = []
+
+    def export(path):
+        if export_succeeds:
+            Path(path).write_bytes(b'preserved modified document')
+            saved.append(path)
+        return export_succeeds
+
+    exporter = SimpleNamespace(createFusionArchiveExportOptions=lambda p: p, execute=export)
+    design = SimpleNamespace(exportManager=exporter)
+    adsk = ModuleType('adsk')
+    adsk.fusion = ModuleType('adsk.fusion')
+    adsk.fusion.Design = SimpleNamespace(cast=lambda d: d)
+    monkeypatch.setitem(sys.modules, 'adsk', adsk)
+    monkeypatch.setitem(sys.modules, 'adsk.fusion', adsk.fusion)
+    dirty = SimpleNamespace(dataFile=data, isModified=True, activate=Mock(),
+                            products=SimpleNamespace(itemByProductType=lambda _: design),
+                            close=Mock(return_value=True))
+    clean = SimpleNamespace(dataFile=data, isModified=False, name='candidate')
+
+    class Documents(list):
+        def open(self, *_):
+            return clean
+
+    app = SimpleNamespace(data=SimpleNamespace(findFileById=lambda _: data),
+                          documents=Documents([dirty]))
+    if not export_succeeds:
+        with pytest.raises(RuntimeError, match='preserve modified'):
+            open_version(app, {'reference': ref})
+        dirty.close.assert_not_called()
+    else:
+        result = open_version(app, {'reference': ref})
+        assert result['preserved_modified_archives'] == saved
+        assert Path(saved[0]).read_bytes() == b'preserved modified document'
+        dirty.close.assert_called_once_with(False)

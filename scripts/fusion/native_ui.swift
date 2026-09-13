@@ -27,8 +27,21 @@ func windowList() -> [[String:Any]] {
 func mainWindow() -> [String:Any] {
     // Saved hub documents can append the hub name, e.g. " (helios)", to
     // the exact document title. The API still returns the unadorned name.
-    let pattern = "^" + NSRegularExpression.escapedPattern(for:expected) + "(?: \\([^)]*\\))? - Autodesk Fusion"
-    let matches = windowList().filter { ($0[kCGWindowOwnerPID as String] as? Int32) == pid && ($0[kCGWindowName as String] as? String ?? "").range(of:pattern,options:.regularExpression) != nil }
+    let pattern = "^" + NSRegularExpression.escapedPattern(for:expected) + "\\*?(?:\\s*\\([^)]*\\))* - Autodesk Fusion"
+    func matching() -> [[String:Any]] {
+        windowList().filter { ($0[kCGWindowOwnerPID as String] as? Int32) == pid && ($0[kCGWindowName as String] as? String ?? "").range(of:pattern,options:.regularExpression) != nil }
+    }
+    var matches = matching()
+    // Cloud document activation can precede its WindowServer title/Space update.
+    // Observe that transition for focus only; never retry a click or accept a
+    // different document merely because it belongs to the same application.
+    if action == "focus" {
+        let deadline = Date(timeIntervalSinceNow:3)
+        while matches.isEmpty && Date() < deadline {
+            RunLoop.current.run(until:Date(timeIntervalSinceNow:0.1))
+            matches = matching()
+        }
+    }
     guard matches.count == 1 else {fail("Expected exactly one visible Fusion document: " + expected)}
     return matches[0]
 }
@@ -131,6 +144,14 @@ if action == "click" {
 } else if action == "drag" {
     guard args.count == 8, let x=Double(args[4]), let y=Double(args[5]), let ex=Double(args[6]), let ey=Double(args[7]) else {fail("Expected drag start and end relative coordinates")}
     click(CGPoint(x:bounds.minX+x,y:bounds.minY+y),false,CGPoint(x:bounds.minX+ex,y:bounds.minY+ey))
+} else if action == "scroll" {
+    foreground()
+    guard args.count == 7, let x=Double(args[4]), let y=Double(args[5]), let delta=Int32(args[6]), abs(delta) <= 1000 else {fail("Expected scroll x y bounded pixel delta")}
+    let point = CGPoint(x:bounds.minX+x,y:bounds.minY+y)
+    guard bounds.contains(point) else {fail("Scroll must remain inside Fusion window")}
+    let event = CGEvent(scrollWheelEvent2Source:nil,units:.pixel,wheelCount:1,wheel1:delta,wheel2:0,wheel3:0)!
+    event.location=point; event.post(tap:.cghidEventTap)
+    RunLoop.current.run(until:Date(timeIntervalSinceNow:0.2))
 } else if action == "set" || action == "press" {
     foreground()
     guard args.count >= 6 else {fail("Expected window title and exact AXIdentifier")}
@@ -187,7 +208,7 @@ let request = VNRecognizeTextRequest()
 request.recognitionLevel = .accurate; request.usesLanguageCorrection = false; request.recognitionLanguages = ["en-US"]
 request.minimumTextHeight = 0.003
 try VNImageRequestHandler(url:URL(fileURLWithPath:output),options:[:]).perform([request])
-let texts: [[String:Any]] = (request.results ?? []).compactMap { observation in
+var texts: [[String:Any]] = (request.results ?? []).compactMap { observation in
     guard let text = observation.topCandidates(1).first else {return nil}
     let b = observation.boundingBox
     return ["text":text.string,"confidence":text.confidence,"bounds":[b.minX*bounds.width,(1-b.maxY)*bounds.height,b.width*bounds.width,b.height*bounds.height]]
@@ -198,6 +219,37 @@ var smallWindowTexts: [[String:Any]] = []
 if let source = CGImageSourceCreateWithURL(URL(fileURLWithPath:output) as CFURL,nil),
    let captured = CGImageSourceCreateImageAtIndex(source,0,nil) {
     let scale = Double(captured.width) / bounds.width
+    // Vision can omit small labels in a large Retina screenshot. Read the
+    // observed floating Fusion panels separately at native resolution, replacing
+    // full-image text in those rectangles to avoid duplicate clickable labels.
+    for window in windowList() where (window[kCGWindowOwnerPID as String] as? Int32) == pid {
+        let r = rect(window)
+        guard r.width >= 240, r.width <= 320, r.height >= 150,
+              bounds.contains(r) else {continue}
+        let crop = CGRect(x:(r.minX-bounds.minX)*scale,y:(r.minY-bounds.minY)*scale,
+                          width:r.width*scale,height:r.height*scale)
+        guard let bitmap = captured.cropping(to:crop) else {continue}
+        let read = VNRecognizeTextRequest()
+        read.recognitionLevel = .accurate; read.usesLanguageCorrection = false
+        read.recognitionLanguages = ["en-US"]; read.minimumTextHeight = 0.003
+        try VNImageRequestHandler(cgImage:bitmap,options:[:]).perform([read])
+        let local = CGRect(x:r.minX-bounds.minX,y:r.minY-bounds.minY,
+                           width:r.width,height:r.height)
+        texts.removeAll { row in
+            // Vision/CGRect coordinates above are CGFloat values. A [Double]
+            // cast fails silently in an Any dictionary, retaining duplicate OCR.
+            guard let b = row["bounds"] as? [CGFloat], b.count == 4 else {return false}
+            return local.contains(CGPoint(x:b[0]+b[2]/2,y:b[1]+b[3]/2))
+        }
+        for item in read.results ?? [] {
+            guard let candidate = item.topCandidates(1).first else {continue}
+            let b = item.boundingBox
+            texts.append(["text":candidate.string,"confidence":candidate.confidence,
+                          "bounds":[local.minX+b.minX*r.width,
+                                    local.minY+(1-b.maxY)*r.height,
+                                    b.width*r.width,b.height*r.height]])
+        }
+    }
     for window in windowList() where (window[kCGWindowOwnerPID as String] as? Int32) == pid {
         let r = rect(window)
         guard r.width < 100, r.height < 50, bounds.contains(r) else {continue}
