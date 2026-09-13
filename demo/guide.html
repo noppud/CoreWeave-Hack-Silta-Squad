@@ -34,19 +34,19 @@ padding:12px;text-align:left;vertical-align:top}code{font-size:.85em}pre{overflo
 <td>Show a failed attempt, feedback, revision and what carries to the next part.</td>
 </tr>
 <tr>
-<td>4. Videos</td>
+<td>4. Outer review loop</td>
+<td>20 s</td>
+<td>Shrink the demo and reveal the planned system → ARIA → system loop.</td>
+</tr>
+<tr>
+<td>5. Videos</td>
 <td>40 s</td>
 <td>Show actual CAD/CAM generation and simulation in the product.</td>
 </tr>
 <tr>
-<td>5. Architecture / Weave</td>
+<td>6. Architecture / Weave</td>
 <td>20 s</td>
 <td>Explain what Astra, Fusion and Weave do.</td>
-</tr>
-<tr>
-<td>6. ARIA</td>
-<td>20 s</td>
-<td>Explain the concrete advice that helped the team build.</td>
 </tr>
 </tbody>
 </table>
@@ -67,7 +67,7 @@ padding:12px;text-align:left;vertical-align:top}code{font-size:.85em}pre{overflo
 </tr>
 <tr>
 <td>Creativity</td>
-<td>Slides 3 and 5: planning, checking and judging roles cooperate through concrete feedback.</td>
+<td>Slides 3 and 6: planning, checking and judging roles cooperate through concrete feedback.</td>
 </tr>
 <tr>
 <td>Utility</td>
@@ -75,11 +75,11 @@ padding:12px;text-align:left;vertical-align:top}code{font-size:.85em}pre{overflo
 </tr>
 <tr>
 <td>Technical execution</td>
-<td>Slide 4: actual product recordings. Slide 5: understandable application/Fusion/Weave boundaries.</td>
+<td>Slide 5: actual product recordings. Slide 6: understandable application/Fusion/Weave boundaries.</td>
 </tr>
 <tr>
 <td>Sponsor usage</td>
-<td>Slides 5–6: trace evidence and the specific ARIA recommendation, implementation and result.</td>
+<td>Slide 6: trace evidence. Slide 4: planned ARIA review loop; describe the completed advisory work verbally.</td>
 </tr>
 </tbody>
 </table>
@@ -89,6 +89,7 @@ padding:12px;text-align:left;vertical-align:top}code{font-size:.85em}pre{overflo
 <p><strong>Problem:</strong> “The shop receives a drawing. It needs a process that works with its machines and tools, and an estimate of the machining time.”</p>
 <p><strong>Interactive demo:</strong> “The learned lists start empty. Simulation failures add distinct checks at the test gate. When the judge thinks a valid plan can be faster, its feedback updates the CAM-writing LLM’s speed instructions. Revised CAM returns through checks and simulation. Relevant lessons persist for later parts.” The separate animated timeline is illustrative; do not present its chart values as real manufacturing measurements.</p>
 <p><strong>Videos:</strong> Show the product working. Keep the first clip focused on input and CAD/CAM generation, the second on simulation and revision. Placeholder areas remain until the recordings are ready.</p>
+<p><strong>Outer review loop:</strong> Press Next after slide 3. The demo placeholder shrinks to half its width and height, and curved arrows reveal a proposed overarching review cycle. The whole agent system sends traces and outcomes to ARIA; recommendations return to the system. This is a planned design, not a claim that continuous ARIA monitoring or automatic implementation is running. Replace the rectangle with the same system image/video used in the demo when ready. Reduced-motion settings disable the shrink animation.</p>
 <p><strong>Architecture:</strong> The current source has an Astra-driven application, Fusion simulation, persisted code checks and CAM instructions, and Weave tracing. Weave records evidence; it does not run the manufacturing loop or approve learned updates. The final Weave walkthrough is explicitly unfinished per Joel’s latest instruction. Add a real trace and show one attempt’s input, feedback and revision when ready.</p>
 <p><strong>ARIA:</strong> The new <code>docs/aria-loop-review.md</code> records a review of the current source and a concrete repository integration proposal. ARIA helped us learn Weave, challenged immediate shared learning, and proposed comparing old and new checks and prompts on the same unseen parts. It mapped that work to policy versions, trace events and existing paired evaluation code. The next step is one check replay and one prompt comparison in Weave. This remains a proposal: no runtime changes or new manufacturing experiments were performed by the review. Explain the contribution without displaying the transcript. ARIA is not the runtime speed judge.</p>
 <h2>Source discipline</h2>
@@ -97,9 +98,9 @@ padding:12px;text-align:left;vertical-align:top}code{font-size:.85em}pre{overflo
 <h2>Ready for final media</h2>
 <ul>
 <li><code>agent-loop-slot</code> on slide 3: interactive product/loop demo.</li>
-<li><code>product-video-1-slot</code> and <code>product-video-2-slot</code> on slide 4: product recordings.</li>
-<li>Slide 5: replace the pending footer with verified Weave evidence after tomorrow’s integration.</li>
-<li>Slide 6: the current ARIA recommendation is summarized. Add its implemented effect only after matching it to a commit and measured result.</li>
+<li><code>agent-loop-overview-slot</code> on slide 4: smaller view of the whole system, with the planned ARIA loop around it.</li>
+<li><code>product-video-1-slot</code> and <code>product-video-2-slot</code> on slide 5: product recordings.</li>
+<li>Slide 6: replace the pending footer with verified Weave evidence after tomorrow’s integration.</li>
 </ul>
 <p>The original team photo remains embedded in the cover. All six slides use the same light background and Arial typography.</p>
 <h2>Build</h2>
