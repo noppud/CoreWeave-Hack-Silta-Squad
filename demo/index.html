@@ -5,18 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="referrer" content="no-referrer">
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; style-src 'unsafe-inline' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; img-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; font-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; media-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; worker-src blob:; connect-src blob: data:; frame-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
-<title>Silta learning loops</title>
+<title>Manufacturing Learning Canvas</title>
 <style>:root{color-scheme:light dark;background:light-dark(rgb(255 255 255), rgb(24 24 24))}html,body{margin:0}body{box-sizing:border-box;padding:1rem;background:inherit}iframe{display:block;width:100%;height:calc(100vh - 2rem);margin:0 auto;border:0}</style>
 </head>
 <body>
-<iframe sandbox="allow-scripts" referrerpolicy="no-referrer" title="Silta learning loops" srcdoc="&lt;!doctype html&gt;
+<iframe sandbox="allow-scripts" referrerpolicy="no-referrer" title="Manufacturing Learning Canvas" srcdoc="&lt;!doctype html&gt;
 &lt;html lang=&quot;en&quot; data-visualize-standalone&gt;
 &lt;head&gt;
 &lt;meta charset=&quot;utf-8&quot;&gt;
 &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
 &lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
 &lt;meta http-equiv=&quot;Content-Security-Policy&quot; content=&quot;default-src &#x27;none&#x27;; script-src &#x27;unsafe-inline&#x27; &#x27;unsafe-eval&#x27; &#x27;wasm-unsafe-eval&#x27; blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; style-src &#x27;unsafe-inline&#x27; blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; img-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; font-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; media-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; worker-src blob:; connect-src blob: data:; frame-src &#x27;none&#x27;; object-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;&quot;&gt;
-&lt;title&gt;Silta learning loops&lt;/title&gt;
+&lt;title&gt;Manufacturing Learning Canvas&lt;/title&gt;
 &lt;style&gt;:root {
   color-scheme: light dark;
   background-color: var(
@@ -1246,9 +1246,15 @@ html&gt;body{padding:0}&lt;/style&gt;
      ctx.save();ctx.globalAlpha=.08;ctx.beginPath();ctx.arc(...p,18,0,Math.PI*2);ctx.fillStyle=c;ctx.fill();ctx.restore();ctx.beginPath();ctx.arc(...p,11,0,Math.PI*2);ctx.fillStyle=colors.paper;ctx.fill();ctx.strokeStyle=c;ctx.lineWidth=2;ctx.stroke();txt(String(current.x).padStart(2,&#x27;0&#x27;),p[0],p[1],11,colors.fg,&#x27;center&#x27;,true);
    }
  }
- function duration(){return Math.max(12,400*Math.pow(.30,current.x-1));}
+ // Budget by whole part, so feedback-heavy examples still fit the presentation.
+ function partDuration(x){
+   if(x===1)return 6500;if(x===2)return 3500;
+   const ratio=Math.exp(-.055),count=parts.length-2;
+   return 14000*(1-ratio)/(1-Math.pow(ratio,count))*Math.pow(ratio,x-3);
+ }
+ function duration(){return partDuration(current.x)/(events.length||sequence(current).length);}
  function header(){
-   $(&#x27;#ml-count&#x27;).textContent=String(completed).padStart(2,&#x27;0&#x27;)+&#x27; / 54&#x27;;$(&#x27;#ml-timeline&#x27;).value=completed;$(&#x27;#ml-current&#x27;).textContent=&#x27;PART &#x27;+String(current.x).padStart(2,&#x27;0&#x27;);$(&#x27;#ml-speed&#x27;).textContent=completed===54?&#x27;54 / 54 complete&#x27;:(400/duration()).toFixed(1)+&#x27;× · Accelerates automatically&#x27;;
+   $(&#x27;#ml-count&#x27;).textContent=String(completed).padStart(2,&#x27;0&#x27;)+&#x27; / 54&#x27;;$(&#x27;#ml-timeline&#x27;).value=completed;$(&#x27;#ml-current&#x27;).textContent=&#x27;PART &#x27;+String(current.x).padStart(2,&#x27;0&#x27;);$(&#x27;#ml-speed&#x27;).textContent=completed===54?&#x27;54 / 54 complete&#x27;:(partDuration(1)/partDuration(current.x)).toFixed(1)+&#x27;× · Accelerates automatically&#x27;;
    canvas.setAttribute(&#x27;aria-label&#x27;,&#x27;Part &#x27;+current.x+&#x27;. Test gate: &#x27;+checks.length+&#x27; distinct learned tests. The code-writing LLM starts with no speed instructions. Each judge rejection adds one instruction. The latest three appear inside the box; the full list is in Tests and full system prompt.&#x27;);renderRegister();
  }
  function apply(e){
@@ -1261,18 +1267,27 @@ html&gt;body{padding:0}&lt;/style&gt;
  function prepare(){
    if(completed&gt;=54)return false;current=parts[completed];events=sequence(current);eventIndex=-1;checks=[...current.beforeChecks];feedback=[...current.beforeFeedback];llmVisits=completed;gateVisits=completed;statuses={};revision=1;machining=null;header();return true;
  }
- function step(animate){
+ function step(animate,start=performance.now(),schedule=true){
    if(eventIndex&gt;=events.length-1&amp;&amp;!prepare()){pause();return;}if(!events.length&amp;&amp;!prepare())return;
    active=events[++eventIndex];progress=animate&amp;&amp;!reduced.matches?0:1;
    $(&#x27;#ml-status&#x27;).textContent=active.commit?&#x27;Complete&#x27;:active.addCheck?&#x27;New check&#x27;:active.addFeedback?&#x27;Judge: &#x27;+current.rec.reason:active.target===&#x27;input&#x27;?&#x27;Input&#x27;:active.target===&#x27;llm&#x27;?&#x27;Writing CAM&#x27;:active.target===&#x27;tests&#x27;?(active.result===&#x27;fail&#x27;?&#x27;Tests failed&#x27;:&#x27;Tests passed&#x27;):active.target===&#x27;sim&#x27;?(active.result===&#x27;fail&#x27;?&#x27;Simulation failed&#x27;:&#x27;Simulation passed&#x27;):active.result===&#x27;fail&#x27;?&#x27;Judge: too slow&#x27;:&#x27;Judge: passed&#x27;;
-   if(progress===1){apply(active);draw();if(playing)animation={start:performance.now(),duration:Math.max(90,duration()),applied:true};}
-   else animation={start:performance.now(),duration:duration(),applied:false};
-   if(animation)raf=requestAnimationFrame(frame);
+   if(progress===1){apply(active);draw();if(playing)animation={start,duration:duration(),applied:true};}
+   else animation={start,duration:duration(),applied:false};
+   if(animation&amp;&amp;schedule)raf=requestAnimationFrame(frame);
  }
  function frame(now){
-   if(!animation)return;progress=reduced.matches?1:Math.min(1,(now-animation.start)/animation.duration);
-   if(progress&gt;=.78&amp;&amp;!animation.applied){apply(active);animation.applied=true;}draw();
-   if(now-animation.start&gt;=animation.duration){animation=null;progress=1;draw();if(playing){if(completed===54){pause();return;}step(true);}}else raf=requestAnimationFrame(frame);
+   while(animation){
+     progress=reduced.matches?1:Math.min(1,(now-animation.start)/animation.duration);
+     if(progress&gt;=.78&amp;&amp;!animation.applied){apply(active);animation.applied=true;}
+     if(now-animation.start&lt;animation.duration)break;
+     const nextStart=animation.start+animation.duration;
+     animation=null;progress=1;
+     if(!playing)break;
+     if(completed===54){pause();draw();return;}
+     // Carry elapsed time forward instead of adding a frame delay to every step.
+     step(true,nextStart,false);
+   }
+   draw();if(animation)raf=requestAnimationFrame(frame);
  }
  function pause(){playing=false;$(&#x27;#ml-play&#x27;).textContent=&#x27;Play demo&#x27;;if(animation){if(!animation.applied)apply(active);animation=null;progress=1;cancelAnimationFrame(raf);draw();}}
  function seek(n){

@@ -24,6 +24,8 @@ Use **Play demo**, **Next step**, or the completed-parts slider. The demo contai
 
 The outcomes are scripted presentation data and are independent of the real Fusion runs documented in the repository README.
 
+Playback budgets 6.5 seconds for the first part and 3.5 seconds for the second, then accelerates exponentially through the remaining 52 parts in 14 seconds: 24 seconds total while playing uninterrupted. Frame delays are carried forward rather than added to each step. Pausing intentionally extends the presentation; a suspended browser tab cannot guarantee a wall-clock finish.
+
 ## Check the exported page
 
 With Node.js 20 or later:

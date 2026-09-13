@@ -83,4 +83,45 @@ for (let i = 1; i < parts.length; i++) {
   assert.ok(parts[i].failureProbability > 0 && parts[i].failureProbability < 1);
 }
 
-console.log('Passed: 54 inputs, eight distinct tests, one speed instruction per judge rejection, and rolling averages.');
+const timingSource = script.slice(script.indexOf(' function partDuration('), script.indexOf(' function header('));
+const animationSource = script.slice(script.indexOf(' function step('), script.indexOf(' function pause('));
+const partDuration = new Function('parts', timingSource + 'return partDuration;')(parts);
+assert.equal(partDuration(1), 6500);
+assert.equal(partDuration(2), 3500);
+const totalDuration = parts.reduce((sum, part) => sum + partDuration(part.x), 0);
+assert.ok(Math.abs(totalDuration - 24000) < 1e-6);
+for (let x = 3; x < 54; x++) {
+  assert.ok(partDuration(x + 1) < partDuration(x));
+  assert.ok(Math.abs(partDuration(x + 1) / partDuration(x) - partDuration(4) / partDuration(3)) < 1e-10);
+}
+
+// Exercise the actual animation scheduler at different refresh rates and after
+// a delayed frame. Every feedback event must still apply once, without drift.
+const playback = new Function('parts', 'sequence', 'interval', 'reducedMotion', 'initialDelay', `
+  let completed=0,current=parts[0],events=[],eventIndex=-1,active=null;
+  let progress=0,playing=true,animation=null,raf=0,applied=0;
+  const reduced={matches:reducedMotion},performance={now:()=>0};
+  const $=()=>({textContent:''}),draw=()=>{},requestAnimationFrame=()=>1;
+  function apply(e){applied++;if(e.commit)completed=current.x;}
+  function pause(){playing=false;animation=null;}
+  function prepare(){
+    if(completed>=54)return false;
+    current=parts[completed];events=sequence(current);eventIndex=-1;return true;
+  }
+  ${timingSource}
+  ${animationSource}
+  step(true);
+  let now=initialDelay;
+  while(playing&&now<26000){now+=interval;frame(now);}
+  return {completed,applied,now,playing};
+`);
+const expectedEvents = parts.reduce((sum, part) => sum + sequence(part).length, 0);
+for (const [interval, reducedMotion, initialDelay] of [[1000/60,false,0],[1000/30,false,0],[1000/60,true,0],[1000/30,false,12000]]) {
+  const result = playback(parts, sequence, interval, reducedMotion, initialDelay);
+  assert.equal(result.completed, 54);
+  assert.equal(result.applied, expectedEvents);
+  assert.equal(result.playing, false);
+  assert.ok(result.now >= 24000 && result.now < 24100, JSON.stringify(result));
+}
+
+console.log('Passed: loop/data checks and 24-second playback; first two parts 6.5s + 3.5s, exponential acceleration, no dropped feedback.');
