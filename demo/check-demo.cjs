@@ -105,7 +105,7 @@ for (let x = 1; x < 54; x++) {
 // a delayed frame. Every feedback event must still apply once, without drift.
 const playback = new Function('parts', 'sequence', 'interval', 'reducedMotion', 'initialDelay', `
   let completed=0,current=parts[0],events=[],eventIndex=-1,active=null;
-  let progress=0,playing=true,animation=null,raf=0,applied=0;
+  let progress=0,playing=true,animation=null,raf=0,applied=0,motionFrom='input';
   const reduced={matches:reducedMotion},performance={now:()=>0};
   const $=()=>({textContent:''}),draw=()=>{},requestAnimationFrame=()=>1;
   function apply(e){applied++;if(e.commit)completed=current.x;}
@@ -131,3 +131,32 @@ for (const [interval, reducedMotion, initialDelay] of [[1000/60,false,0],[1000/3
 }
 
 console.log('Passed: continuous pacing across parts and steps; 24-second playback, first two parts '+(partDuration(1)/1000).toFixed(2)+'s + '+(partDuration(2)/1000).toFixed(2)+'s; no dropped feedback.');
+
+const geometrySource=script.slice(script.indexOf(' function bezier('),script.indexOf(' function layout('));
+const layoutSource=script.slice(script.indexOf(' function layout('),script.indexOf(' function txt('));
+const geometry=new Function('width',`
+  let W,H,mobile,nodes={},routes={};
+  const canvas={getBoundingClientRect:()=>({width}),style:{}},window={devicePixelRatio:1};
+  const ctx={setTransform(){}},palette=()=>{},draw=()=>{},drawCharts=()=>{};
+  ${geometrySource}
+  ${layoutSource}
+  layout();return {nodes,motionPath,onRoute};
+`);
+for(const width of [390,760]){
+  const {nodes,motionPath,onRoute}=geometry(width);
+  let from='input',previous=[nodes.input.x,nodes.input.y];
+  for(const part of parts)for(const event of sequence(part)){
+    const path=motionPath(from,event),start=onRoute(path,0),end=onRoute(path,1);
+    assert.ok(Math.hypot(start[0]-previous[0],start[1]-previous[1])<1e-8,'Marker must continue from its previous position');
+    assert.ok(Math.hypot(end[0]-nodes[event.target].x,end[1]-nodes[event.target].y)<1e-8,'Marker must finish inside its destination box');
+    let last=start;
+    for(let i=1;i<=100;i++){
+      const point=onRoute(path,i/100);
+      assert.ok(point.every(Number.isFinite));
+      assert.ok(Math.hypot(point[0]-last[0],point[1]-last[1])<=path.lengths.at(-1)/100+1e-6,'No jumps within a route');
+      last=point;
+    }
+    previous=end;from=event.target;
+  }
+}
+console.log('Passed: continuous marker paths through every box, feedback route, and part handoff on desktop and mobile.');

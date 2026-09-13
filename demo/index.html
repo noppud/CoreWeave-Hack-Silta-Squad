@@ -1127,7 +1127,7 @@ html&gt;body{padding:0}&lt;/style&gt;
  const testCatalog=[[&#x27;Syntax&#x27;,&#x27;CAM syntax is valid&#x27;],[&#x27;Clearance&#x27;,&#x27;Cutter clears the stock on approach&#x27;],[&#x27;Tool reach&#x27;,&#x27;Tool can reach the required depth&#x27;],[&#x27;Wall thickness&#x27;,&#x27;Finishing leaves the required wall thickness&#x27;],[&#x27;Cutter fit&#x27;,&#x27;Cutter fits the narrowest feature&#x27;],[&#x27;Fixture&#x27;,&#x27;Toolpath avoids fixture keep-out zones&#x27;],[&#x27;Plunge&#x27;,&#x27;Entry move respects the allowed plunge depth&#x27;],[&#x27;Retract&#x27;,&#x27;Retract move clears the workpiece&#x27;]];
  parts.filter(p=&gt;p.failure).forEach((p,i)=&gt;{p.rule.id=&#x27;T&#x27;+String(i+1).padStart(2,&#x27;0&#x27;);p.rule.short=testCatalog[i][0];p.rule.title=testCatalog[i][1];});
  const num=v=&gt;v.toFixed(1),reduced=window.matchMedia(&#x27;(prefers-reduced-motion: reduce)&#x27;);
- let completed=0,current=parts[0],checks=[],feedback=[],events=[],eventIndex=-1,active=null,progress=1,playing=false,animation=null,raf=0,revision=1,machining=null,statuses={},chartShown=0,llmVisits=0,gateVisits=0;
+ let completed=0,current=parts[0],checks=[],feedback=[],events=[],eventIndex=-1,active=null,progress=1,playing=false,animation=null,raf=0,revision=1,machining=null,statuses={},chartShown=0,llmVisits=0,gateVisits=0,motionFrom=&#x27;input&#x27;;
  let W=700,H=525,nodes={},routes={},mobile=false,colors={},registerStamp=&#x27;&#x27;;
  function sequence(d){
    let rev=1;const e=[];const add=(route,target,text,extra={})=&gt;e.push({route,target,text,rev,...extra});
@@ -1162,6 +1162,21 @@ html&gt;body{padding:0}&lt;/style&gt;
    routes[id]={points,samples,lengths,kind};
  }
  function onRoute(r,t){const wanted=r.lengths.at(-1)*t;let i=1;while(i&lt;r.lengths.length-1&amp;&amp;r.lengths[i]&lt;wanted)i++;const a=r.samples[i-1],b=r.samples[i],f=(wanted-r.lengths[i-1])/(r.lengths[i]-r.lengths[i-1]||1);return [a[0]+(b[0]-a[0])*f,a[1]+(b[1]-a[1])*f];}
+ function motionPath(from,event){
+   const a=nodes[from],b=nodes[event.target],start=[a.x,a.y],end=[b.x,b.y],samples=[start];
+   const curve=points=&gt;{for(let i=1;i&lt;=32;i++)samples.push(bezier(...points,i/32));};
+   if(event.route){
+     const r=routes[event.route],p=r.points;
+     const control=(origin,toward,distance)=&gt;{const dx=toward[0]-origin[0],dy=toward[1]-origin[1],l=Math.hypot(dx,dy)||1;return [origin[0]+dx/l*distance,origin[1]+dy/l*distance];};
+     const lead=Math.min(40,Math.hypot(p[0][0]-start[0],p[0][1]-start[1])*.5);
+     const tail=Math.min(40,Math.hypot(end[0]-p[3][0],end[1]-p[3][1])*.5);
+     curve([start,start,control(p[0],p[1],-lead),p[0]]);
+     samples.push(...r.samples.slice(1));
+     curve([p[3],control(p[3],p[2],-tail),end,end]);
+   }else curve([start,start,end,end]);
+   const lengths=[0];for(let i=1;i&lt;samples.length;i++)lengths.push(lengths[i-1]+Math.hypot(samples[i][0]-samples[i-1][0],samples[i][1]-samples[i-1][1]));
+   return {samples,lengths};
+ }
  function layout(){
    W=Math.max(280,canvas.getBoundingClientRect().width);mobile=W&lt;610;H=mobile?870:515;nodes={};routes={};
    const ids=[&#x27;input&#x27;,&#x27;llm&#x27;,&#x27;tests&#x27;,&#x27;sim&#x27;,&#x27;judge&#x27;];
@@ -1241,9 +1256,9 @@ html&gt;body{padding:0}&lt;/style&gt;
      ctx.save();ctx.translate(W-13,(nodes.llm.y+nodes.judge.y)/2);ctx.rotate(Math.PI/2);txt(&#x27;TOO SLOW → REWRITE&#x27;,0,0,11,colors.muted,&#x27;center&#x27;,true);ctx.restore();
    }
    for(const [id,n] of Object.entries(nodes))drawNode(id,n);
-   if(active){let p;if(active.route)p=onRoute(routes[active.route],Math.min(1,progress/.78));else{const n=nodes[active.target];p=[n.x,n.y-n.h/2];}
+   if(active){const p=onRoute(motionPath(motionFrom,active),Math.min(1,progress/.78));
      const arrived=progress&gt;=.78,c=arrived&amp;&amp;active.result?(active.result===&#x27;fail&#x27;?colors.red:colors.green):active.route&amp;&amp;routes[active.route].kind!==&#x27;forward&#x27;?colors.red:colors.fg;
-     ctx.save();ctx.globalAlpha=.08;ctx.beginPath();ctx.arc(...p,18,0,Math.PI*2);ctx.fillStyle=c;ctx.fill();ctx.restore();ctx.beginPath();ctx.arc(...p,11,0,Math.PI*2);ctx.fillStyle=colors.paper;ctx.fill();ctx.strokeStyle=c;ctx.lineWidth=2;ctx.stroke();txt(String(current.x).padStart(2,&#x27;0&#x27;),p[0],p[1],11,colors.fg,&#x27;center&#x27;,true);
+     ctx.save();ctx.globalAlpha=1;ctx.beginPath();ctx.arc(...p,13,0,Math.PI*2);ctx.fillStyle=colors.fg;ctx.fill();ctx.strokeStyle=c;ctx.lineWidth=2;ctx.stroke();txt(String(current.x).padStart(2,&#x27;0&#x27;),p[0],p[1],11,colors.paper,&#x27;center&#x27;,true);ctx.restore();
    }
  }
  // One continuous time curve from part 0 to 54, including fractional steps.
@@ -1271,6 +1286,7 @@ html&gt;body{padding:0}&lt;/style&gt;
    if(completed&gt;=54)return false;current=parts[completed];events=sequence(current);eventIndex=-1;checks=[...current.beforeChecks];feedback=[...current.beforeFeedback];llmVisits=completed;gateVisits=completed;statuses={};revision=1;machining=null;header();return true;
  }
  function step(animate,start=performance.now(),schedule=true){
+   motionFrom=active?.target||&#x27;input&#x27;;
    if(eventIndex&gt;=events.length-1&amp;&amp;!prepare()){pause();return;}if(!events.length&amp;&amp;!prepare())return;
    active=events[++eventIndex];progress=animate&amp;&amp;!reduced.matches?0:1;
    $(&#x27;#ml-status&#x27;).textContent=active.commit?&#x27;Complete&#x27;:active.addCheck?&#x27;New check&#x27;:active.addFeedback?&#x27;Judge: &#x27;+current.rec.reason:active.target===&#x27;input&#x27;?&#x27;Input&#x27;:active.target===&#x27;llm&#x27;?&#x27;Writing CAM&#x27;:active.target===&#x27;tests&#x27;?(active.result===&#x27;fail&#x27;?&#x27;Tests failed&#x27;:&#x27;Tests passed&#x27;):active.target===&#x27;sim&#x27;?(active.result===&#x27;fail&#x27;?&#x27;Simulation failed&#x27;:&#x27;Simulation passed&#x27;):active.result===&#x27;fail&#x27;?&#x27;Judge: too slow&#x27;:&#x27;Judge: passed&#x27;;
@@ -1294,7 +1310,7 @@ html&gt;body{padding:0}&lt;/style&gt;
  }
  function pause(){playing=false;$(&#x27;#ml-play&#x27;).textContent=&#x27;Play demo&#x27;;if(animation){if(!animation.applied)apply(active);animation=null;progress=1;cancelAnimationFrame(raf);draw();}}
  function seek(n){
-   pause();completed=n;llmVisits=n;gateVisits=n;events=[];eventIndex=-1;active=null;statuses={};revision=1;machining=null;progress=1;current=parts[Math.min(n,53)];checks=[...(n===54?current.afterChecks:current.beforeChecks)];feedback=[...(n===54?current.afterFeedback:current.beforeFeedback)];
+   pause();completed=n;llmVisits=n;gateVisits=n;events=[];eventIndex=-1;active=null;motionFrom=n===54?&#x27;judge&#x27;:&#x27;input&#x27;;statuses={};revision=1;machining=null;progress=1;current=parts[Math.min(n,53)];checks=[...(n===54?current.afterChecks:current.beforeChecks)];feedback=[...(n===54?current.afterFeedback:current.beforeFeedback)];
    if(n===54){machining=current.final;active={target:&#x27;judge&#x27;,result:&#x27;pass&#x27;};statuses.judge=&#x27;pass&#x27;;}
    $(&#x27;#ml-status&#x27;).textContent=n===54?&#x27;Complete&#x27;:&#x27;Ready&#x27;;
    header();metrics(false);draw();
