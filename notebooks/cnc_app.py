@@ -48,6 +48,12 @@ def _(Path, hashlib, html, json, math):
                     "Candidate": "—",
                     "Checks": "Pending",
                     "Verification": "Pending",
+                    "Fusion verification (%)": None,
+                    "Fusion errors": None,
+                    "Fusion warnings": None,
+                    "Fusion process errors": None,
+                    "API machining estimate (s)": None,
+                    "API tool changes": None,
                     "Seconds": None,
                     "Estimated cost": None,
                     "Issues": "",
@@ -73,6 +79,31 @@ def _(Path, hashlib, html, json, math):
                     else str(result.get("status", "unknown")).capitalize()
                 )
                 row["Issues"] = "; ".join(result.get("issues", []))
+                # Observations remain useful on rejected/unapproved plans, but
+                # never populate the verified-only chart fields below.
+                feedback = result.get("feedback")
+                feedback = feedback if isinstance(feedback, dict) else {}
+                summary = feedback.get("summary")
+                summary = summary if isinstance(summary, dict) else {}
+                metrics = feedback.get("metrics")
+                metrics = metrics if isinstance(metrics, dict) else {}
+                for column, value, count, maximum in (
+                    ("Fusion verification (%)", summary.get("percent"), False, 100),
+                    ("Fusion errors", summary.get("errors"), True, None),
+                    ("Fusion warnings", summary.get("warnings"), True, None),
+                    ("Fusion process errors", summary.get("process_errors"), True, None),
+                    ("API machining estimate (s)", metrics.get("machining_seconds"), False, None),
+                    ("API tool changes", metrics.get("tool_change_count"), True, None),
+                ):
+                    if (
+                        isinstance(value, (int, float))
+                        and not isinstance(value, bool)
+                        and math.isfinite(value)
+                        and value >= 0
+                        and (maximum is None or value <= maximum)
+                        and (not count or isinstance(value, int))
+                    ):
+                        row[column] = value
                 # Failed/unknown plans never appear as cheap or fast successes.
                 if passed:
                     for column, key in (
@@ -330,6 +361,11 @@ def _(best_verification, metric_chart, mo, rows):
                 "**Best plan verification coverage:** "
                 + str(best_verification.get("coverage", "Not available"))
             ),
+            mo.md(
+                "The attempt table also shows Fusion's observed progress/issues and API time "
+                "estimates for failed or unknown plans. These do not imply overall verification "
+                "approval; 100% means Fusion finished its verification."
+            ),
             mo.ui.table(rows, selection=None) if rows else mo.md("No machining attempts recorded."),
         ]
     )
@@ -436,7 +472,8 @@ def _(Path, events, html, mo, read_json, refresh, versions_root, weave_link):
             mo.md("## Learning and evaluation"),
             mo.md(
                 "Reusable changes are promoted only after the paired evaluation gate. "
-                "This run retains its pinned versions."
+                "Earlier steps retain their recorded versions; subsequent steps adopt evaluated "
+                "promotions. Benchmark runs keep their assigned versions."
             ),
             mo.ui.table(
                 [
