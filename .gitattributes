@@ -7,3 +7,6 @@
 research/five-axis/catalog.json -text -whitespace
 research/five-axis/machines-library.html -text -whitespace
 research/five-axis/machines.js -text -whitespace
+
+# Keep the vendored upstream viewer library byte-for-byte.
+applications/control-center/vendor/** -whitespace
