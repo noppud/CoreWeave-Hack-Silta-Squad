@@ -11,6 +11,77 @@ import pytest
 from silta.cnc.fusion import FusionBridge
 
 
+@pytest.fixture
+def simulation_dispatch(monkeypatch):
+    core = SimpleNamespace()
+    fusion = SimpleNamespace()
+    cam = SimpleNamespace(CAM=SimpleNamespace(cast=lambda product: product))
+    for name, module in {
+        "adsk": SimpleNamespace(core=core, fusion=fusion, cam=cam),
+        "adsk.core": core,
+        "adsk.fusion": fusion,
+        "adsk.cam": cam,
+    }.items():
+        monkeypatch.setitem(sys.modules, name, module)
+    return runpy.run_path(
+        str(Path(__file__).resolve().parents[1] / "fusion/SiltaBridge/operations.py")
+    )["dispatch"]
+
+
+def test_simulation_dialog_preserves_raw_text_without_claiming_verification(simulation_dispatch):
+    commands = []
+    raw = "collisions, eDropDownEntry, Collisions, 54"
+    app = SimpleNamespace(
+        version="2705.1.15",
+        activeDocument=SimpleNamespace(name="Candidate"),
+        userInterface=SimpleNamespace(activeCommand="IronMachineSimulation"),
+        executeTextCommand=lambda command: commands.append(command) or raw,
+    )
+    reply = simulation_dispatch(app, "simulation_dialog", {})
+    assert commands == ["Toolkit.cmdDialog"]
+    assert reply["result"]["raw_text"] == raw
+    assert reply["result"]["active_command"] == "IronMachineSimulation"
+    assert "status" not in reply and "completed" not in reply
+    assert reply["coverage"] == ["simulation_dialog_text_only"]
+
+
+def test_simulation_issues_does_not_exit_simulation_first(simulation_dispatch):
+    calls = []
+    command = SimpleNamespace(name="Issues", execute=lambda: calls.append("execute") or True)
+    app = SimpleNamespace(
+        userInterface=SimpleNamespace(
+            commandDefinitions=SimpleNamespace(itemById=lambda name: calls.append(name) or command)
+        )
+    )
+    reply = simulation_dispatch(app, "simulation_command", {"command_id": "SimulationIssues"})
+    assert calls == ["SimulationIssues", "execute"]
+    assert reply["result"]["verification_completed"] is False
+    with pytest.raises(ValueError, match="Unsupported"):
+        simulation_dispatch(app, "simulation_command", {"command_id": "SelectCommand"})
+
+
+def test_machine_simulation_requires_explicit_setup_and_machine_model(simulation_dispatch):
+    setup = SimpleNamespace(operationId=2, machine=SimpleNamespace(hasSimulationModel=False))
+    cam = SimpleNamespace(setups=SimpleNamespace(count=1, item=lambda i: setup))
+    app = SimpleNamespace(
+        activeDocument=SimpleNamespace(products=SimpleNamespace(itemByProductType=lambda _: cam)),
+        userInterface=SimpleNamespace(),
+    )
+    for ids in ([], ["2", "2"]):
+        with pytest.raises(ValueError, match="Explicit unique"):
+            simulation_dispatch(
+                app, "simulation_command", {"command_id": "IronMachineSimulation", "setup_ids": ids}
+            )
+    with pytest.raises(ValueError, match="missing"):
+        simulation_dispatch(
+            app, "simulation_command", {"command_id": "IronMachineSimulation", "setup_ids": ["3"]}
+        )
+    with pytest.raises(ValueError, match="full machine model"):
+        simulation_dispatch(
+            app, "simulation_command", {"command_id": "IronMachineSimulation", "setup_ids": ["2"]}
+        )
+
+
 def test_blank_fusion_document_ping_and_inspect_do_not_require_cam(monkeypatch):
     empty = SimpleNamespace(count=0)
     design = SimpleNamespace(rootComponent=SimpleNamespace(bRepBodies=empty))

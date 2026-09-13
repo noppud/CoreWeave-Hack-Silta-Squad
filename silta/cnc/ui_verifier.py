@@ -19,6 +19,8 @@ from typing import Protocol
 from .agents import _GEOMETRY_SCRIPT, _TARGET_BODY_HELPERS
 from .cam_documents import open_snapshot
 from .models import Artifact, Candidate, JobContext, VerificationResult, digest_json
+from .simulation_coverage import MACHINE_COVERAGE_SOURCE
+from .simulation_coverage import validate_simulation_coverage as validate_simulation_coverage
 
 REQUIRED_COVERAGE = (
     "machine_collisions",
@@ -67,7 +69,7 @@ _OBSERVATION = _object(
 
 # Controller-owned inspection; CAM/model settings may not change while the UI
 # observer selects simulation display options. All values come from Fusion.
-_BINDING_SCRIPT = _TARGET_BODY_HELPERS + """import json
+_BINDING_SCRIPT = _TARGET_BODY_HELPERS + MACHINE_COVERAGE_SOURCE + """import json
 import math
 import re
 _product = app.activeDocument.products.itemByProductType("CAMProductType")
@@ -89,6 +91,7 @@ for _setup in _cam.setups:
         "machine_model": _machine.model if _machine else None,
         "machine_matches": bool(_machine and _machine.equivalentTo(_expected)),
         "machine_simulation_model": bool(_machine and _machine.hasSimulationModel),
+        "machine_coverage": _inspect_machine_coverage(_machine, adsk.cam),
         "fixture_enabled": _setup.fixtureEnabled,
         "fixtures": [_entity(x) for x in _setup.fixtures],
         "models": [_entity(x) for x in _setup.models],
@@ -105,6 +108,7 @@ for _base in _cam.allOperations:
             "parameters": _parameters(_op.parameters),
             "tool": json.loads(_op.tool.toJson()) if _op.tool else None})
 result = {"setups": _setups, "operations": _operations,
+          "expected_machine_coverage": _inspect_machine_coverage(_expected, adsk.cam),
           "body_references": _body_reference_handles()}
 """
 

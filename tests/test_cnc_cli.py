@@ -16,6 +16,21 @@ def test_draft_config_cannot_run(tmp_path):
         read_inputs(config)
 
 
+def test_ready_flag_cannot_hide_unresolved_setup(tmp_path):
+    config = tmp_path / "job.json"
+    config.write_text(
+        json.dumps(
+            {
+                "status": "ready",
+                "unresolved": [],
+                "setup": {"unresolved": ["machine still unassigned"]},
+            }
+        )
+    )
+    with pytest.raises(ValueError, match="machine still unassigned"):
+        read_inputs(config)
+
+
 def test_config_rejects_replaced_drawing(tmp_path):
     drawing = tmp_path / "part.pdf"
     drawing.write_bytes(b"original test drawing")
@@ -57,11 +72,19 @@ def test_ui_doctor_does_not_report_success_when_mac_is_locked(tmp_path, monkeypa
         def check_access(self, workspace):
             return {"authenticated": True}
 
-        def ask_with_evidence(self, *args, **kwargs):
-            return {"value": {"status": "unavailable", "screen": "Mac is locked"}}
+    class Reader:
+        def __init__(self, workspace):
+            pass
+
+        def __enter__(self):
+            raise RuntimeError("Mac is locked")
+
+        def __exit__(self, *args):
+            pass
 
     monkeypatch.chdir(tmp_path)
     monkeypatch.setattr("silta.cnc.cli.AstraClient", Client)
+    monkeypatch.setattr("silta.cnc.fusion_reader.FusionUIReader", Reader)
     monkeypatch.setattr("sys.argv", ["silta", "doctor", "--fusion-ui"])
     with pytest.raises(SystemExit) as error:
         main()

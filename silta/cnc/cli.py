@@ -24,6 +24,8 @@ def read_inputs(path: Path) -> JobInputs:
     if data.get("status") != "ready" or data.get("unresolved"):
         raise ValueError("Job configuration is not ready: " + "; ".join(data.get("unresolved", [])))
     fields = data.get("inputs", data)
+    if fields.get("setup", {}).get("unresolved"):
+        raise ValueError("Job setup is not ready: " + "; ".join(fields["setup"]["unresolved"]))
     drawings = []
     for item in fields["drawings"]:
         name = item["path"] if isinstance(item, dict) else item
@@ -78,9 +80,11 @@ def make_checks(store: VersionStore, ref: str):
 
 def run_job(args) -> dict:
     from .agents import AstraCheckLearner, AstraMainAgent, AstraSupervisor
+    from .approvals import FusionAppApproval
     from .controller import Controller
+    from .fixed_verifier import VERIFIER_VERSION, FixedFusionVerifier
+    from .fusion_reader import FusionUIReader
     from .tracing import trace_adapter, trace_call, trace_controller
-    from .ui_verifier import VERIFIER_VERSION, FusionUIVerifier
 
     inputs = read_inputs(args.config.resolve())
     api_key = os.environ.get("WANDB_API_KEY") or os.environ.pop("COREWEAVE_WANDB_API_KEY", "")
@@ -100,19 +104,29 @@ def run_job(args) -> dict:
     ping = bridge.request("ping", timeout=5)
     if ping.get("status") == "error":
         raise RuntimeError("Fusion add-in is not ready")
-    ui_astra = AstraClient(computer_use=True)
+    fusion_approval = FusionAppApproval()
 
     def factory(pins, evaluation_enabled=False):
-        return trace_controller(Controller(
-            main=AstraMainAgent(
-                astra, bridge, version_store=store, default_versions=pins, api_docs=args.api_docs
+        return trace_controller(
+            Controller(
+                main=AstraMainAgent(
+                    astra,
+                    bridge,
+                    version_store=store,
+                    default_versions=pins,
+                    api_docs=args.api_docs,
+                ),
+                checks=make_checks(store, pins["checks"]),
+                fusion=FixedFusionVerifier(
+                    bridge,
+                    lambda directory: FusionUIReader(directory, app_approval=fusion_approval),
+                ),
+                supervisor=AstraSupervisor(astra, version_store=store, default_versions=pins),
+                learner=AstraCheckLearner(astra, version_store=store, default_versions=pins),
+                check_runner_factory=lambda ref: make_checks(store, ref),
             ),
-            checks=make_checks(store, pins["checks"]),
-            fusion=FusionUIVerifier(ui_astra, bridge),
-            supervisor=AstraSupervisor(astra, version_store=store, default_versions=pins),
-            learner=AstraCheckLearner(astra, version_store=store, default_versions=pins),
-            check_runner_factory=lambda ref: make_checks(store, ref),
-        ), weave.op)
+            weave.op,
+        )
 
     controller = factory(versions)
     from .benchmarks import BenchmarkRunner
@@ -169,7 +183,7 @@ def main() -> None:
     doctor.add_argument(
         "--fusion-ui",
         action="store_true",
-        help="Ask Astra to read Fusion once, requesting native app consent if needed",
+        help="Read Fusion directly through the SDK without a model turn",
     )
     commands.add_parser("init", help="Register initial local check and prompt versions")
     run = commands.add_parser("run", help="Run a real configured CNC job")
@@ -189,23 +203,23 @@ def main() -> None:
             if args.fusion:
                 result["fusion"] = FusionBridge().request("ping", timeout=5)
             if args.fusion_ui:
+                from .fusion_reader import FusionUIReader
+
                 evidence_dir = Path(".private/access/fusion-ui")
                 evidence_dir.mkdir(parents=True, exist_ok=True)
-                result["fusion_ui"] = AstraClient(computer_use=True).ask_with_evidence(
-                    "Read Autodesk Fusion with computer use once and report the current screen. "
-                    "Do not click, change anything, or retry after a denial or lock error.",
-                    workspace=evidence_dir.resolve(),
-                    schema={
-                        "type": "object",
-                        "properties": {
-                            "status": {"type": "string", "enum": ["read", "unavailable"]},
-                            "screen": {"type": "string"},
-                        },
-                        "required": ["status", "screen"],
-                        "additionalProperties": False,
-                    },
-                )
-                if result["fusion_ui"]["value"]["status"] != "read":
+                try:
+                    with FusionUIReader(evidence_dir) as reader:
+                        observation = reader.read()
+                    path = evidence_dir / "latest-read.json"
+                    path.write_text(json.dumps(observation, indent=2))
+                    result["fusion_ui"] = {
+                        "status": "read",
+                        "screen": observation["raw_text"],
+                        "evidence": str(path.resolve()),
+                        "model_turns": 0,
+                    }
+                except RuntimeError as error:
+                    result["fusion_ui"] = {"status": "unavailable", "error": str(error)}
                     result["status"] = "incomplete"
         elif args.command == "init":
             result = initialize(VersionStore("versions"))

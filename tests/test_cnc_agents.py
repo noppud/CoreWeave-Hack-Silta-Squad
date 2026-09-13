@@ -9,6 +9,7 @@ from pathlib import Path
 import pytest
 
 from silta.cnc.agents import (
+    _CAM_CATALOG_SCRIPT,
     _CAM_RESOURCE_PRELUDE,
     _CAM_SCOPE_SCRIPT,
     _CUTTING_PARAMETERS_SCRIPT,
@@ -87,6 +88,9 @@ class BridgeDouble:
             self.script_calls.append(json.loads(json.dumps(payload)))
             if source == _PREPARE_CAM_SCRIPT:
                 return {"result": PREPARED_SETUP.copy()}
+            if source == _CAM_CATALOG_SCRIPT:
+                return {"result": {"compatible_strategies": [{"name": "pocket2d"}],
+                                   "strategies": {"pocket2d": {"parameters": []}}}}
             if source == _GEOMETRY_SCRIPT:
                 return {"result": self.geometry.copy()}
             if source == _REGISTER_TARGET_SCRIPT:
@@ -208,6 +212,9 @@ def test_actual_source_export_and_post_sequence_produces_unverified_candidate(tm
         name in client.calls[-1][0] for name in ("`cam`", "`setup`", "`tools`", "`target_bodies`")
     )
     assert json.dumps(PREPARED_SETUP) in client.calls[-1][0]
+    catalog_path = tmp_path / "workspace/cam-0001/cam-api-catalog.json"
+    assert str(catalog_path) in client.calls[-1][0]
+    assert json.loads(catalog_path.read_text())["compatible_strategies"]
     machining = next(
         call for call in bridge.script_calls if call["source"].startswith(_CAM_RESOURCE_PRELUDE)
     )
@@ -467,9 +474,16 @@ def script_environment(bodies, setups=()):
         entities = list(root.bRepBodies) + list(root.allOccurrences)
         for occurrence in root.allOccurrences:
             entities.extend(occurrence.bRepBodies)
-        native_entities = [entity.nativeObject or entity for entity in entities]
-        return [entity for i, entity in enumerate(native_entities)
-                if entity.entityToken == token and entity not in native_entities[:i]]
+        entities += [entity.nativeObject or entity for entity in entities]
+        matches = []
+        for entity in entities:
+            try:
+                matched = entity.entityToken == token
+            except RuntimeError:
+                continue  # Only root-context proxies can issue some imported tokens.
+            if matched and entity not in matches:
+                matches.append(entity)
+        return matches
 
     design = SimpleNamespace(rootComponent=root, findEntityByToken=resolve)
     cam = SimpleNamespace(setups=FakeCollection(setups), designRootOccurrence=None)
@@ -884,24 +898,35 @@ def test_cam_scope_preserves_nested_occurrence_instance_identity():
     products = environment["app"].activeDocument.products
     design = products.itemByProductType("DesignProductType")
     cam = products.itemByProductType("CAMProductType")
-    wrapper = FakeOccurrence("cam-wrapper")
+    wrapper = FakeOccurrence("cam-wrapper", parent=FakeOccurrence("cam-component"))
     cam.designRootOccurrence = wrapper
     parent_a, parent_b = FakeOccurrence("parent-a"), FakeOccurrence("parent-b")
-    child = FakeOccurrence("shared-child-native")
+    class ImportedNativeOccurrence(FakeOccurrence):
+        def __getattribute__(self, name):
+            if name == "entityToken":
+                raise RuntimeError("Tokens require a root-context proxy")
+            return super().__getattribute__(name)
+
+    child = ImportedNativeOccurrence("unavailable-native-token")
     design_child = FakeOccurrence("design-child-proxy", native=child, parent=parent_a)
     design_body = FakeBody("fixture-design-proxy")
     design_body.nativeObject, design_body.assemblyContext = fixture, design_child
     design_child.bRepBodies.append(design_body)
     root.allOccurrences.extend([parent_a, design_child])
     original_resolver = design.findEntityByToken
-    design.findEntityByToken = lambda token: (
-        [parent_b] if token == parent_b.entityToken else original_resolver(token)
-    )
     parent_a_cam = FakeOccurrence("parent-a-cam", native=parent_a, parent=wrapper)
     child_cam = FakeOccurrence("child-cam", native=child, parent=parent_a_cam)
     fixture_cam = FakeBody("fixture-cam-proxy")
     fixture_cam.nativeObject, fixture_cam.assemblyContext = fixture, child_cam
     setup.fixtures.append(fixture_cam)
+
+    def resolve_context(token):
+        for occurrence in (child_cam, child_cam.assemblyContext, parent_b):
+            if token == occurrence.entityToken:
+                return [occurrence]
+        return original_resolver(token)
+
+    design.findEntityByToken = resolve_context
     assert execute_script(_CAM_SCOPE_SCRIPT, environment)["setups"][0]["fixture_body_count"] == 1
 
     # Same native body and same child component, but another assembly instance.

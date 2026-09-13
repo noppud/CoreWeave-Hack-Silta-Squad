@@ -14,11 +14,21 @@ The default queue is `~/Library/Application Support/Silta/FusionBridge`. `ready.
 - `machining_time`: required `feed_scale_percent`, `rapid_feed_cm_s`, `tool_change_seconds`; returns explicit seconds and centimeter units.
 - `postprocess`: `program_index`, empty unique `output_directory`; uses the NC program's explicitly selected postprocessor. If `completed` is false, poll `collect_outputs` with that directory. Postprocessing is not NC verification.
 - `command_inventory`: list installed command IDs/names matching simulation, verification and collision. Discovery only, no undocumented commands executed.
+- `simulation_command`: fixed `command_id` (`IronMachineSimulation`, `SimulationIssues`, `SimulationStop`, or `SimulationStockToModel`). Machine simulation requires explicit `setup_ids` and their full machine models. Command execution is not verification completion.
+- `simulation_dialog`: raw `Toolkit.cmdDialog` text, active command, document and Fusion version. This command does not exit simulation. Current Fusion exposes statistics here, but its Issues summary/tree require accessibility extraction.
 - `simulation`: returns `unknown`, `completed:false`, `needs_ui_verification`. Never synthesizes a pass from toolpath availability or empty issue lists.
 
 ## Verification boundary
 
 The installed Fusion `adsk/cam.py` exposes toolpath generation, machining estimates and NC postprocessing. It does not expose a discoverable milling Simulation/Verification result class. The bridge therefore deliberately cannot approve candidates. A separate trusted UI evidence adapter must observe completed verification, covered settings and issues, bind those to the exact candidate/setup, and distinguish internal CAM simulation from posted NC verification. The displayed time is an estimate under caller-provided machine assumptions.
+
+The application's fixed verifier now invokes these commands and uses the Codex
+SDK's direct MCP call to read Fusion accessibility text. It does not start a model
+turn for routine collection. `Verification: 100%` and the explicit Issues counts
+are parsed together; a transport response's `completed` field merely means the
+bridge request returned. Completed collisions can reject a candidate. Zero
+reported errors cannot approve one without stock comparison and coverage evidence.
+`SimulationStockToModel` is a cursor-point measurement, not a whole-part result.
 
 Do not have two agents modify Fusion concurrently. CAD/CAM scripts should be finite and return promptly: a hung script blocks the UI and cannot be safely interrupted by this file protocol. Keep existing documents; no action automatically closes or saves them to the cloud.
 

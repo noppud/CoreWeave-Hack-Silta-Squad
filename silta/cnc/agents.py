@@ -51,6 +51,10 @@ _resources = runpy.run_path({str(FUSION_HELPERS / 'cam_resources.py')!r})
 _setup_helper["prepare"](app, payload)
 result = _resources["finalize_nc"](app, payload)
 """
+_CAM_CATALOG_SCRIPT = f"""
+import runpy
+result = runpy.run_path({str(FUSION_HELPERS / 'cam_api_catalog.py')!r})["describe"](app, payload)
+"""
 
 # These instructions are outside the mutable prompt versions. Enforcement of
 # verification, geometry, pinned inputs and promotion remains controller code.
@@ -170,10 +174,11 @@ def _occurrence_chain(body):
     while occurrence:
         native = occurrence.nativeObject or occurrence
         if wrapper and native == (wrapper.nativeObject or wrapper):
-            if occurrence.assemblyContext:
-                raise RuntimeError("Unexpected parent above the CAM Design wrapper")
             break
-        chain.append(native)
+        # Retain the root-context proxy when obtaining its token. Imported
+        # fixture child native occurrences cannot always issue tokens; resolve
+        # the contextual token back to native identity only during comparison.
+        chain.append(occurrence)
         occurrence = occurrence.assemblyContext
     return chain
 def _body_handles(body):
@@ -804,6 +809,14 @@ class AstraMainAgent(_Roles):
 
         prepared = prepare_cam()
         _save(directory / "cam-setup.json", prepared)
+        catalog = self._request("run_script", {
+            "source": _CAM_CATALOG_SCRIPT,
+            "arguments": {"setup_index": prepared["setup_index"],
+                          "strategies": ["pocket2d", "adaptive2d", "contour2d", "face", "drill"]},
+        })["result"]
+        if not catalog.get("compatible_strategies"):
+            raise RuntimeError("Fusion did not report its available machining strategies")
+        catalog_path = _save(directory / "cam-api-catalog.json", catalog)
         frozen = json.loads(Path(context.target.artifacts["geometry"].path).read_text())
         before = self._geometry()
         if digest_json(before) != digest_json(frozen):
@@ -815,6 +828,11 @@ class AstraMainAgent(_Roles):
             "`setup`, `target_bodies` and `tools` (a dict keyed by tool number). "
             "Use tools[number] directly for operation tools. Choose machining strategies, "
             "operation order, geometry selections, depths, feeds, speeds and linking paths. "
+            "Read the supplied live CAM API catalogue before writing source. It records "
+            "actual parameter names and allowed choice values for common strategies; use "
+            "those instead of guessing API names from UI labels. The catalogue's strategy "
+            "examples do not restrict your machining choices, and its defaults are not a "
+            "recommended cutting plan. Other compatible strategies are listed as well. "
             "On improvement, edit or replace operations in this setup as needed. "
             "Do not create setups, import fixtures, load libraries, configure a post or "
             "create NC programs: deterministic code owns those tasks. Never alter the "
@@ -831,6 +849,7 @@ class AstraMainAgent(_Roles):
                 "supervisor_instructions": instructions,
                 "installed_api_docs": self.api_docs,
                 "prepared_setup": prepared,
+                "cam_api_catalog": str(catalog_path),
                 "required_script_result": {"operation_names": "list of actual operation names"},
             }
         )

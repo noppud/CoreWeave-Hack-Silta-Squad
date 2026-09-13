@@ -91,6 +91,55 @@ def dispatch(app, action, payload):
         }
     if action == "inspect":
         return {"result": _inspect(app)}
+    if action == "simulation_dialog":
+        # Read the current dialog without ending simulation. This text-command
+        # workaround is not a typed verification API; preserve raw evidence.
+        return {
+            "result": {
+                "fusion_version": app.version,
+                "document": app.activeDocument.name if app.activeDocument else None,
+                "active_command": app.userInterface.activeCommand,
+                "raw_text": app.executeTextCommand("Toolkit.cmdDialog"),
+            },
+            "coverage": ["simulation_dialog_text_only"],
+        }
+    if action == "simulation_command":
+        # Fixed public command execution must not issue SelectCommand first:
+        # that would exit simulation before opening its Issues report.
+        command_id = payload["command_id"]
+        if command_id not in {
+            "IronMachineSimulation",
+            "SimulationIssues",
+            "SimulationStop",
+            "SimulationStockToModel",
+        }:
+            raise ValueError("Unsupported simulation runner command")
+        ui = app.userInterface
+        if command_id == "IronMachineSimulation":
+            ids = payload.get("setup_ids", [])
+            if not ids or len(set(ids)) != len(ids):
+                raise ValueError("Explicit unique setup IDs are required")
+            setups = [s for s in _items(_cam(app).setups) if str(s.operationId) in ids]
+            if len(setups) != len(ids):
+                raise ValueError("A requested simulation setup is missing")
+            if any(not s.machine or not s.machine.hasSimulationModel for s in setups):
+                raise ValueError("Every setup requires its full machine model")
+            ui.activeSelections.clear()
+            for setup in setups:
+                if not ui.activeSelections.add(setup):
+                    raise RuntimeError("Could not select simulation setup")
+        command = ui.commandDefinitions.itemById(command_id)
+        if not command or not command.execute():
+            raise RuntimeError("Fusion simulation command could not execute: " + command_id)
+        return {
+            "result": {
+                "command_id": command_id,
+                "command_name": command.name,
+                "launched": True,
+                "verification_completed": False,
+            },
+            "coverage": ["simulation_ui_command_only"],
+        }
     if action == "run_script":
         source = payload["source"]
         # This is authorized CAD/CAM code, not an isolation boundary.
@@ -205,12 +254,15 @@ def dispatch(app, action, payload):
             "coverage": ["exported_files_only"],
         }
     if action == "command_inventory":
+        terms = payload.get("terms", ["simulat", "verif", "collis"])
+        if not isinstance(terms, list) or not all(isinstance(s, str) and s for s in terms):
+            raise ValueError("Command inventory terms must be nonempty strings")
         return {
             "result": {
                 "commands": [
                     {"id": c.id, "name": c.name}
                     for c in _items(app.userInterface.commandDefinitions)
-                    if any(s in (c.id + c.name).lower() for s in ("simulat", "verif", "collis"))
+                    if any(s.lower() in (c.id + c.name).lower() for s in terms)
                 ]
             }
         }

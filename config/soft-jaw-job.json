@@ -662,10 +662,7 @@
       "machine_source_reference": "system://haas next generation.cps",
       "status": "downloaded_not_live_posted"
     },
-    "unresolved": [
-      "Assign configured machine and place prepared fixture base on its actual table; record setup machine/workpiece transform and verify placement.",
-      "Apply the specified machine values and two enabled tool/holder assemblies in Fusion; confirm gauge-length interpretation and maximum cutting depth before toolpath generation."
-    ],
+    "unresolved": [],
     "work_coordinate_system": {
       "name": "G54",
       "origin": "center of blank top face",
@@ -737,5 +734,13 @@
     "tools": "https://cam.autodesk.com/tools/download.php?name=Haas%20Tooling/Haas%20Tooling",
     "holders": "https://cam.autodesk.com/tools/download.php?name=Haas%20Tooling/Haas%20Holders"
   },
-  "readiness_scope": "Inputs ready for autonomous CAM generation. Machine assignment, stock, G54 and Part Position read back in Fusion; tools roundtripped. Each generated plan still requires actual operation tool/holder assignment, checks and completed simulation."
+  "readiness_scope": "Inputs ready for autonomous CAM generation. Machine assignment, stock, G54 and Part Position read back in Fusion; tools roundtripped. Each generated plan still requires actual operation tool/holder assignment, checks and completed simulation.",
+  "resolved_setup_items": {
+    "previous_items": [
+      "Assign configured machine and place prepared fixture base on its actual table; record setup machine/workpiece transform and verify placement.",
+      "Apply the specified machine values and two enabled tool/holder assemblies in Fusion; confirm gauge-length interpretation and maximum cutting depth before toolpath generation."
+    ],
+    "resolution": "Actual Fusion setup and NC readback: linked VF-2 assigned, fixture Part Position applied, G54 offset 1, both cutter/holder assemblies loaded with 96.52/90.17 mm gauge lengths and 25.4/19.05 mm flute lengths. Astra selected T1 and 25.6 mm maximum depth for this CAM plan; holder/fixture clearance and target conformity remain simulation checks, not completed assertions.",
+    "evidence_run": "soft-jaw-first-loop-v4"
+  }
 }

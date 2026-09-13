@@ -21,7 +21,14 @@ uv run python -m silta doctor --fusion
 hsec exec --only COREWEAVE_WANDB_API_KEY -- uv run python -m silta run config/soft-jaw-job.json
 ```
 
-The selected configuration blocks execution while setup is unresolved. The UI verifier uses Astra to observe Fusion's own completed verification and saves the raw native tool evidence. Live behavior is still unverified; unavailable permissions, missing coverage or uncertain completion produce `unknown`. The application never treats a moving animation or generated toolpath as a verification pass. No physical-machine commands are sent.
+The selected configuration blocks execution while setup is unresolved. The fixed
+verifier launches Fusion's machine simulation through the bridge and reads its
+Issues text through a direct SDK computer-use call, with no model turn for routine
+collection. Raw observations are retained. The live reader has extracted a
+completed collision report; repeatable job integration and target-stock comparison
+are still being validated. Missing access, coverage or completion produces
+`unknown`. An animation or generated toolpath is never a verification pass. No
+physical-machine commands are sent.
 
 All agent roles use **GPT-6 Astra through the local Codex SDK and ChatGPT subscription login**. There is no weaker-model or API-credit fallback. W&B supplies Weave tracing and evaluation. Credentials are supplied to the process, never checked into this repo. ARIA is deferred.
 
@@ -38,8 +45,10 @@ consent through the SDK's MCP elicitation protocol; it does not edit global app
 permissions. Other app requests and shell/file approval requests remain denied.
 The permission handshake and a subsequent native Fusion screen read have passed
 live tests through the project launcher. Fusion's welcome setup is complete;
-the updated SiltaBridge add-in has started and answered a live ping. CAD generation and review have passed live integration. CAM generation and
-completed simulation still require live validation.
+the updated SiltaBridge add-in has started and answered a live ping. CAD generation,
+review, CAM toolpath generation and NC export have passed live integration. A
+completed simulation has reported collisions; repair to a verified pass and the
+learning demonstration still require live validation.
 
 The Python launcher owns the autonomous loop. It calls the Codex SDK directly;
 this development conversation is not required to advance a job. Fusion and the

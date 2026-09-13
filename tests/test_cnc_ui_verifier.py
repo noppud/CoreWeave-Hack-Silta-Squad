@@ -268,6 +268,10 @@ def test_required_coverage_cannot_be_silently_removed():
 def test_binding_script_does_not_read_stock_solids_for_fixed_box_stock():
     from types import SimpleNamespace
 
+    from test_simulation_coverage import _api_machine
+
+    expected_machine, machine_api, _, _ = _api_machine()
+
     class FixedBoxSetup:
         name = "Fixed Box"
         operationId = 1
@@ -277,7 +281,8 @@ def test_binding_script_does_not_read_stock_solids_for_fixed_box_stock():
         fixtureEnabled = False
         parameters = []
         machine = SimpleNamespace(
-            model="VF-2", equivalentTo=lambda _: True, hasSimulationModel=True
+            model="VF-2", equivalentTo=lambda _: True, hasSimulationModel=True,
+            elements=expected_machine.elements,
         )
 
         @property
@@ -296,8 +301,9 @@ def test_binding_script_does_not_read_stock_solids_for_fixed_box_stock():
     adsk = SimpleNamespace(
         fusion=SimpleNamespace(Design=SimpleNamespace(cast=lambda value: value)),
         cam=SimpleNamespace(
+            **vars(machine_api),
             CAM=SimpleNamespace(cast=lambda value: value),
-            Machine=SimpleNamespace(createFromFile=lambda *args: object()),
+            Machine=SimpleNamespace(createFromFile=lambda *args: expected_machine),
             LibraryLocations=SimpleNamespace(LocalLibraryLocation=0),
             SetupStockModes=SimpleNamespace(SolidStock=1),
         )
@@ -310,6 +316,10 @@ def test_binding_script_does_not_read_stock_solids_for_fixed_box_stock():
 
 def test_binding_resolves_frozen_entity_handles_across_token_changes():
     from types import SimpleNamespace
+
+    from test_simulation_coverage import _api_machine
+
+    machine, machine_api, _, _ = _api_machine()
 
     class Collection(list):
         @property
@@ -329,7 +339,8 @@ def test_binding_resolves_frozen_entity_handles_across_token_changes():
     setup = SimpleNamespace(
         name="Setup", operationId=1, stockMode=0, models=[body], fixtures=[],
         fixtureEnabled=False, parameters=[],
-        machine=SimpleNamespace(model="VF-2", equivalentTo=lambda _: True, hasSimulationModel=True),
+        machine=SimpleNamespace(model="VF-2", equivalentTo=lambda _: True, hasSimulationModel=True,
+                                elements=machine.elements),
     )
     cam = SimpleNamespace(setups=[setup], allOperations=[], designRootOccurrence=None)
     app = SimpleNamespace(activeDocument=SimpleNamespace(products=SimpleNamespace(
@@ -340,8 +351,9 @@ def test_binding_resolves_frozen_entity_handles_across_token_changes():
             BRepBody=SimpleNamespace(cast=lambda value: value if value is body else None),
         ),
         cam=SimpleNamespace(
+            **vars(machine_api),
             CAM=SimpleNamespace(cast=lambda value: value),
-            Machine=SimpleNamespace(createFromFile=lambda *args: object()),
+            Machine=SimpleNamespace(createFromFile=lambda *args: machine),
             LibraryLocations=SimpleNamespace(LocalLibraryLocation=0),
             SetupStockModes=SimpleNamespace(SolidStock=1),
         ),
