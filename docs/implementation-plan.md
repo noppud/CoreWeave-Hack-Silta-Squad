@@ -1,162 +1,68 @@
-# CNC agent implementation plan
+# CNC learning demo — current plan
 
-2026-09-12 · Current implementation direction; some access and integration checks remain unverified. Earlier research documents contain alternatives, not additional requirements.
+2026-09-12. The user removed Weave evaluation gates and deferred video recording until learning works. This supersedes earlier promotion/evaluation plans.
 
-**Model requirement:** use GPT-6 Astra for all agentic development and every agent/model-based judge inside the project. No weaker-model fallbacks. ARIA is the explicit exception: use its best available model when added later. Other optional model-based Signals or sponsor inference require verified Astra support. Deterministic checks and scoring do not require a model.
+## Core loop
 
-## Goal and loop
+Drawing/PDF + machine/tools → Astra creates CAD, then keeps it fixed → creates/revises CAM → learned Python checks → real Fusion simulation and finished-stock comparison → judge improves CAM or returns the best verified plan.
 
-Drawing/PDF + machine/tool/setup inputs → accepted CAD target + CAM → cheap checks → Fusion verification → supervisor → improve CAM or return the best verified plan.
+- Check failure: return the issue to the CAD/CAM agent.
+- Simulation failure: repair CAM; the check writer can replace the shared checks file.
+- Simulation pass: give machining time, tool changes, cost assumptions and simulation feedback to the judge.
+- Judge: give next-attempt instructions, stop, and/or replace the shared CAD/CAM prompt directly.
+- The next attempt and subsequent parts use the updated files. No evaluation gate or extra agent loop.
 
-- Establish the CAD target against the drawing, then keep it fixed during CAM optimization.
-- Check failures return to the main agent for repair.
-- Simulation failures return for repair and can trigger proposals for better cheap checks.
-- Only a completed verification pass reaches the supervisor, with machining time, cost assumptions and feedback.
-- The supervisor proposes a better CAM plan or stops. Keep the best verified candidate throughout.
+## Exactly two active learning files
 
-```mermaid
-flowchart TD
-    A["Drawing / PDF + machine and tools<br/>New run: Part A, then Part B, and so on"] --> B["Main agent<br/>Generate CAD, then keep target fixed<br/>Create or revise CAM plan"]
-    B --> C["Cheap code checks"]
-    C -->|Fail: explain and repair| B
-    C -->|Pass| D["Machining simulation"]
-    D -->|Fail: diagnose and repair| B
-    D -->|Failure reveals a missing check| E["Generate and validate better code checks"]
-    E -->|Promoted checks| C
-    D -->|Pass: machining time, cost and feedback| F["Supervisor agent"]
-    F -->|Improve: instructions to main agent and updates to planning playbook| B
-    F -->|Finish| G["Return best verified plan"]
+| File | Initial state | Updates |
+|---|---|---|
+| `learning/cad_cam.md` | Basic CAD/CAM instructions | Judge returns full replacement Markdown; applied immediately |
+| `learning/checks.py` | `check(data)` returns pass; no learned manufacturing checks | Check writer returns full replacement Python after a completed simulation failure |
 
-    subgraph PERSIST["Persistent learning shared across runs and different parts"]
-        H[("Saved validated checks<br/>Versioned on disk")]
-        I["Evaluate reusable supervisor lessons<br/>and planning playbook updates"]
-        J[("Saved supervisor lessons and planning playbook<br/>Versioned on disk")]
-        I -->|Promote validated improvement| J
-    end
-    E -->|Save after evaluation and promotion| H
-    F -->|Propose reusable learning| I
-    H -.->|Load saved checks for every new run| C
-    J -.->|Load saved planning guidance for every new run| B
-    J -.->|Load saved supervisor lessons for every new run| F
-    G -.->|Next run: a different part, retained learning| A
+The judge sees the current Markdown before editing it. Python syntax is checked before saving a check update; this is not a quality evaluation. The supervisor's own instructions are fixed. Existing run logs retain attempts, changes and results; they are not additional learning stores. Old `versions/` and benchmark code are historical and are not consulted by the default runtime.
+
+Fixed target/input integrity and actual simulation completion remain application code. A learned check pass does not replace simulation. Directly learned instructions/checks have not been evaluated for regressions.
+
+## Components
+
+- All agent roles: GPT-6 Astra, low reasoning, fast service tier, subscription-authenticated local Codex SDK. No weaker-model fallback. Fast is normalized to priority by the app-server; live readback and a model call passed.
+- Fusion: professional trial on this Mac, linked Haas VF-2, configured vise/stock and two enabled cutter/holder assemblies. Deterministic API code owns setup, toolpath generation and NC export; Astra chooses machining operations.
+- Simulation: deterministic native UI runner for Issues and stock export, API timing, stock-to-fixed-STEP comparison. Foreground Fusion is required during UI collection. Native helper compilation is cached; Issues polling skips screenshot/OCR.
+- Checks: local Python subprocess. No hosted sandbox dependency.
+- Weave: traces only. No benchmark runs or evaluation required to save learning.
+- Videos: deferred. No recording in the current job path.
+
+## Evidence and next step
+
+Real Fusion run `runs/soft-jaw-first-loop-v14/manifest.json` completed three verified candidates (216.76 → 211.00 → 205.23 seconds estimated machining time) and a supervisor stop. These were within-part improvements, not persistent learning.
+
+The direct-learning controller integration test now proves immediate checks/prompt refresh and reuse after a process restart, using fake simulation adapters. It creates only the two active learning files. This is software wiring evidence, not proof of learning across real parts.
+
+Next: run a real first part from the basic prompt and empty learned checks, retain its actual learning, then run a second part using those files. Demonstrate the learned behavior before the remaining acceptance parts or videos. Do not claim speed improvement by comparing unrelated part geometries.
+
+## Run
+
+```sh
+uv run python -m silta init
+hsec exec --only COREWEAVE_WANDB_API_KEY -- uv run python -m silta run config/soft-jaw-job.json
 ```
 
-**Part B inherits what was learned on Part A.** Validated checks and supervisor lessons persist on disk across runs and process restarts. Each new run loads the promoted versions; checks retain their applicability conditions. Current-part repair and optimization remain inside the run. Reusable changes pass evaluation before being saved as active learning for later runs. This is the intended workflow; the complete transfer demonstration remains unverified.
+`--learning-directory` selects the directory containing the two shared files (default `learning`). Reuse it across parts. `--job-id` selects a new output job, and `--max-attempts` is an operational stop, not the judge's success decision.
 
-## What runs where
+Final artifacts: accepted CAD/STEP, editable CAM, posted NC, best verified plan, actual verification evidence and estimated machining time/cost. The simulation verifies its recorded internal CAM scope; this is not a physical machine trial.
 
-The deliverable is an autonomous application: one job submission starts the Python controller, which calls Astra through the Codex SDK for every agent role and advances the loop itself. This development chat is not part of the runtime. Fusion remains a desktop dependency on the Mac; its API bridge and the SDK's computer-use tools are application-controlled integrations. Initial account/app consent is setup, and unavailable access is reported as an incomplete job.
+### Live test checkpoint — September 12
 
-| Component | Choice |
-|---|---|
-| Main agent, supervisor, check writer | GPT-6 Astra through local Codex SDK/app-server using ChatGPT subscription login; separate roles. Managed Agents API is a separately billed alternative, not the default. |
-| Controller | One Python application on the Mac |
-| CAD, CAM and simulation | Fusion professional trial on the Mac; APIs where supported, computer use for remaining UI workflows |
-| Generated check execution | Separate local Python process per check run, with a clean environment and execution limits; no container/service requirement for the controlled demo |
-| Traces, datasets, versions and comparisons | Weave |
-| Interface | marimo, reading the same job artifacts and metrics |
-| Durable state | Versioned files and a JSON job manifest |
+Fresh PDF-to-CAD acceptance passed in `runs/learning-soft-jaw-a1`. Real simulations found 26, 32 and subsequently 52 errors across repairs; none reached the judge. The check writer initially declined unsupported rules. Its fixed instructions now explicitly require inspecting available posted NC and CAM source, not only the analysis summary.
 
-Fusion supplies the actual manufacturing simulation and verification. A fixed
-runner opens the exact candidate, invokes Simulate with Machine and Issues, waits
-for explicit verification completion, and reads the results through the SDK's
-direct computer-use tool call. Routine collection does not start an Astra model
-turn. Astra receives the resulting feedback for machining decisions. A moving
-animation or an empty issues list before verification completes is not a pass.
-[Simulation](https://help.autodesk.com/view/fusion360/ENU/?contextId=MFG-REF-SIMULATION),
-[issue inspection](https://help.autodesk.com/view/fusion360/ENU/?contextId=MFG-SIMULATE-MACHINE-COLLISION-DETECTION-PREVIEW).
+Testing exposed two integration defects: Fusion can omit the Issues summary from accessibility until the panel is closed/reopened, and completed empty-toolpath generation was interrupting the controller. The native reader now performs one observed Issues-panel refresh; this restored the actual 100%/52-error label live. Completed generation errors now return their source and inspection to the CAM agent; 322 software tests pass.
 
-**September 12 setup change:** W&B Sandboxes were unavailable due to the reported service bug. The user authorized replacing them. For the demo, checks run as trusted application code in a local subprocess, with copied job inputs, no inherited API credentials and a timeout. This is process separation, not security isolation: generated code can still access host files. Weave tracing, paired evaluations and promotion rules stay the same. Strong isolation is future work before accepting untrusted code.
+With Fusion foreground, `runs/learning-soft-jaw-a5` completed two real verified simulations: the saved repair at 384.860379 seconds, followed by a judge-directed ramp-feed change at 211.037438 seconds (45.2% less estimated machining time). Both passed machine Issues collection and bidirectional finished-stock comparison against the fixed CAD. The judge stopped and wrote its first reusable lesson directly into `learning/cad_cam.md`. This proves measured within-part optimization and persistent prompt writing; transfer to another part remains to be tested. Weave receipt: `01a098a9-7350-7b4b-adb4-e5d9c997f8c4`.
 
-## Evaluation before reusable changes
+Part B is the authored test drawing `output/pdf/learning-part-b.pdf`, with its job in `config/learning-part-b-job.json`. It changes slot size/spacing/recess depth while retaining the fixed blank and fixture; it has not run. The original caliper/engine-case drawings require different setups, so they were not substituted into this fixture. Videos remain deferred. Detailed test status is saved in `.private/fusion-live/learning-test-status.json`.
 
-Current-part CAM changes repeat checks and simulation. Reusable prompt, supervisor or check changes go through a Weave evaluation before promotion; no additional always-running outer agent is needed.
+The corrected check-writer input instructions yielded a real learned check from the completed 52-error run. `learning/checks.py` now checks supported posted-NC cutter endpoints against the exact modeled solid fixture parallels. A diagnostic replay rejected failed candidate-0003 in 0.024 seconds and accepted verified candidate-0006 in 0.040 seconds. This is narrow coverage, not a complete collision detector, and was not an evaluation gate. Both the failure evidence and direct update are traced in Weave call `01a098ad-3518-7fff-a815-21cc0b3585e2`. Part B is now running with both shared learned files.
 
-- **Prompt/supervisor changes:** run old and proposed versions on the same small part set. Compare verified completion first, then machining time/cost and simulation attempts on matched successful parts.
-- **Check changes:** replay frozen simulator-labeled valid/invalid candidates. Measure failures caught, false rejections and runtime; reuse labels only while candidate/setup/verifier inputs remain unchanged.
-- Publish versioned results and promote only a demonstrated improvement without unacceptable regressions. Keep old versions for rollback. After an evidenced promotion, the running job adopts that exact check or prompt version for subsequent steps; record each step's versions and preserve earlier evidence. Benchmark runs retain their assigned baseline or proposed versions.
-- Include simple and awkward development parts; reserve unseen parts for final assessment. Fixed target, machine constraints and scoring rules cannot be rewritten by the learner.
+Part B completed in `runs/learning-part-b2` at 205.344625 seconds after repairing a real stock-conformity failure in `learning-part-b1`. Its first CAM source explicitly used the imported ramp-feed preset from the shared guidance. The failure added a second learned check for outer-side intrusion under the pre-sized-blank/internal-only contract; the same job refreshed its checks before the next candidate. Diagnostic replay rejects the failed B candidate in 0.041 seconds and accepts the verified repair in 0.042 seconds. Fusion omitted a Save Stock checkbox from AX; a single cancel/reopen of the still-unsaved dialog restored it live and is now in the exporter (13 focused tests pass).
 
-## First implementation milestone
-
-1. Verify Fusion trial entitlement, subscription-backed Codex execution/computer-use integration, local check execution and one visible Weave trace.
-2. Select one three-axis machine profile, cutters/holders, stock/material, fixture, tolerances and supported postprocessor. Define feed limits, tool-change time and cost/batch assumptions.
-3. Automatically generate one CAM plan, invoke Fusion verification, capture completion and a deliberately introduced failure, repair it and capture a pass. Establish whether the evidence covers internal CAM motions or the exact exported NC program.
-4. Add the repair loop, check learning and supervisor; then demonstrate a reusable change passing the Weave evaluation gate.
-
-Optimize verified machining time/cost under fixed limits; include cutting, rapids and tool changes. Report estimates and assumptions. Do not reward unrestricted feed increases.
-
-## Final result
-
-Accepted CAD/STEP, editable CAM, exported NC/G-code, setup/tool definitions, best verified plan, verification evidence, estimated time/cost and linked Weave history. Claim only the verification coverage actually demonstrated.
-
-If Fusion access or repeatable verification is blocked, resolve it with the team before proceeding. Do not substitute another simulator or change the agreed plan because access is missing.
-
-## Live integration checkpoint
-
-The SDK CAD stage has generated and independently accepted the selected soft-jaw drawing, including actual Aluminum6061 material in Fusion and STEP. The prepared vise and parallels reopened with all19 bodies intact; both enabled cutter/holder assemblies passed actual Fusion library roundtrip. The selected inputs have produced real CAM and posted NC; the fixed runner has collected completed machine verification for both a failing candidate and its repair. Full approval remains pending final stock comparison.
-
-Autodesk requires the simulation model in a writable Fusion hub. The pinned VF-2 design is saved and fully processed in the helios hub, project **Silta CNC Hackathon**, as **Silta VF2 simulation model**. The user linked that saved design in the local machine definition's Model page. Fusion persisted its version URN, and actual API setup assignment now succeeds. Stock dimensions, G54 and Part Position offsets were applied and read back; the full machine is visible around the setup. The first loop was stopped after setup API errors so that predictable setup could move into deterministic code. That setup-only checkpoint has since been superseded by the completed verification runs below.
-
-### Deterministic CAM preparation
-
-The controller now activates Manufacturing, prepares exactly one owned setup and
-fixture, applies the linked machine, stock, G54 (`job_workOffset=1`) and Part
-Position, and provides actual approved cutter/holder objects. Astra receives
-`cam`, `setup`, `target_bodies` and `tools`; it chooses operations, geometry,
-strategies, order, depths, feeds, speeds and paths. Controller code finalizes the
-NC program and verifies the actual bound CPS bytes while preserving chosen
-cutting parameters. These changes add no agent loop.
-
-Before asking Astra for CAM source, the controller exports a live API catalogue
-of compatible strategies and the actual parameter names, expressions and choice
-values for common milling/drilling operations. It creates transient inputs only,
-without adding machining operations. Astra reads this catalogue to avoid guessing
-API names from UI labels; the recorded defaults are not a recommended cutting plan.
-
-Full-machine CAM archives contain external references and cannot be imported
-through Fusion's local F3D importer. CAM candidates therefore also carry a
-hashed `fusion_document` receipt naming an exact saved cloud version. Improvement
-opens that version and completes Save As to an independent working copy before
-edits; verification reopens the exact completed candidate version. The F3D export
-is retained, and the accepted part-only target still opens locally. Saves are
-submitted once and polled, never blindly retried after a timeout.
-
-Live checks confirmed repeatable setup without duplicate fixtures, both approved
-tools, exact NC post binding, cloud save/reopen/fork, and retained VF-2 model,
-fixture, G54 and unchanged accepted geometry after reopening. The early NC wiring
-probe had no generated toolpath and was not simulation evidence; the later runs
-below contain generated toolpaths and actual machine verification.
-
-### Fixed simulation collection checkpoint
-
-The subsequent candidate generated four real toolpaths and posted NC. Fixed
-`IronMachineSimulation` and `SimulationIssues` commands launched Fusion's actual
-machine verification. Its accessibility summary was observed at **100%, 54
-errors, 0 warnings, 0 process errors**. Reported issues included fixture/cutter,
-stock/shaft and rapid-stock collisions. This is evidence of a failed candidate,
-not a successful manufacturing plan. `Toolkit.cmdDialog` provides statistics but
-omits the current version's detailed Issues widget; its completion/counts are
-read from accessibility text instead. Offscreen issue details may be absent and
-must not be represented as a complete list.
-
-The fixed runner collected the failed candidate automatically in
-`runs/soft-jaw-first-loop-v9`. Astra repaired the CAM without changing the accepted
-CAD. The repaired candidate completed verification at **100%, 0 errors, 0
-warnings, 0 process errors** in `runs/soft-jaw-first-loop-v10`. Fusion's API
-machining estimate fell from **463.86 s to 223.11 s**. This is an estimated CAM
-time, not measured physical cycle time or a full manufacturing approval.
-
-Supported typed API readback now confirms the actual setup retains the pinned
-machine's collision pairs (including intentional exclusions) and three finite
-linear axis limits. The fixed runner records and validates that configuration
-before simulation and checks it remains unchanged afterward. This configuration
-readback is not itself a geometric verdict.
-
-**Remaining verification gap:** automatically export the finished simulated stock
-and compare it with the frozen target. The current zero-error result stays
-unknown until that comparison is established. Fusion's documented canvas
-**Stock → Save Stock** route exists, but automated canvas clicks currently fail;
-menu controls and the fixed Issues reader work. A pointwise Stock-to-Model probe
-cannot stand in for whole-part comparison. Existing unknown job results remain
-unknown; later probes do not retroactively relabel them.
+The remaining eight authored drawings C-J vary dimensions, feature count and spacing while retaining the same setup. Their configs are `config/learning-part-{c..j}-job.json`. A sequential batch is running; its live status is `runs/learning-ten-part-test/progress.json`, with completed receipts in `results.jsonl`. Each new process/run loads the shared files. No assumption of monotonic machining-time improvement across different geometries is made. Videos remain deferred.

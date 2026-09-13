@@ -28,6 +28,7 @@ def check_cases():
             input_hash=f"candidate-{label}",
             verifier_hash="v1",
             verification_evidence=["verified.json"],
+            verification_timing={"elapsed_ms": 10000},
         )
         for label in ("valid", "invalid")
     ]
@@ -39,6 +40,7 @@ def check_runs(cases, valid_pass=True, invalid_pass=True, runtime=1):
             **case,
             "passed": valid_pass if case["label"] == "valid" else invalid_pass,
             "runtime_ms": runtime,
+            "runtime_samples_ms": [runtime] * 5,
         }
         for case in cases
     ]
@@ -238,3 +240,48 @@ def test_cloud_failure_never_promotes(tmp_path):
     assert not result.promoted
     assert "Weave unavailable" in result.reason
     assert store.active()["supervisor_prompt"] == base
+
+
+def test_useful_new_check_can_add_small_cost_but_not_erase_simulation_savings():
+    cases = check_cases()
+    result = evaluate_check_change(
+        cases, check_runs(cases), check_runs(cases, invalid_pass=False, runtime=10)
+    )
+    assert result.eligible
+    assert result.summary["added_runtime_upper_ms"] == 18
+    assert result.summary["saved_verification_ms"] == 10000
+    assert result.summary["runtime_budget_ms"] == 1000
+    costly = evaluate_check_change(
+        cases, check_runs(cases), check_runs(cases, invalid_pass=False, runtime=600)
+    )
+    assert not costly.eligible
+    assert any("savings budget" in reason for reason in costly.reasons)
+
+
+def test_timing_noise_alone_never_promotes_identical_check_behavior():
+    cases = check_cases()
+    result = evaluate_check_change(
+        cases, check_runs(cases, runtime=10), check_runs(cases, runtime=9)
+    )
+    assert not result.eligible
+    assert "No demonstrated improvement" in result.reasons
+
+
+def test_check_timing_requires_repetitions_and_uses_conservative_sample_spread():
+    cases = check_cases()
+    before, after = check_runs(cases), check_runs(cases, invalid_pass=False)
+    after[0]["runtime_samples_ms"] = [1]
+    with pytest.raises(ValueError, match="5 replay samples"):
+        evaluate_check_change(cases, before, after)
+    after = check_runs(cases, invalid_pass=False)
+    after[0]["runtime_samples_ms"] = [1, 1, 1, 1, 1001]
+    result = evaluate_check_change(cases, before, after)
+    assert not result.eligible
+    assert any("ceiling" in reason for reason in result.reasons)
+
+
+def test_check_gain_needs_observed_simulation_duration_not_machining_time():
+    cases = check_cases()
+    del cases[1]["verification_timing"]
+    with pytest.raises(ValueError, match="verification elapsed_ms"):
+        evaluate_check_change(cases, check_runs(cases), check_runs(cases, invalid_pass=False))

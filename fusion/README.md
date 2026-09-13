@@ -32,6 +32,57 @@ reported errors cannot approve one without stock comparison and coverage evidenc
 
 Do not have two agents modify Fusion concurrently. CAD/CAM scripts should be finite and return promptly: a hung script blocks the UI and cannot be safely interrupted by this file protocol. Keep existing documents; no action automatically closes or saves them to the cloud.
 
+## Scripted simulated-stock export
+
+After the fixed runner has completed machine simulation and before it executes
+`SimulationStop`, export the current simulated stock with:
+
+```sh
+uv run python -m silta.cnc.stock_export \
+  --document 'Silta CAM 2-a5bff71375b7' \
+  --output /absolute/new-output/finished-stock.stl \
+  --evidence /absolute/new-output/export-evidence
+```
+
+Use the exact active document name and a new evidence directory/output file.
+This is also callable through `silta.cnc.stock_export.StockExporter`. It requires
+macOS, Xcode command-line tools (`swiftc`), existing Fusion accessibility/screen
+capture access, the running bridge and an unlocked desktop. It brings Fusion to
+the foreground. Do not run another Fusion worker or use the mouse during export.
+
+The script closes an observed Issues panel, sets stock Accuracy to maximum and
+reads back its numeric value (8), selects End of Toolpath, opens
+Stock → Save Stock, saves under a unique local filename, verifies the binary STL,
+and copies it to the requested output without overwriting files. It records raw
+native accessibility/OCR observations, screenshots, document identity, geometry
+and Fusion's displayed stock volume as a diagnostic when available. An unexpected/ambiguous control or
+lost foreground access stops the script; an uncertain save is not blindly retried.
+The original export is retained in Fusion's selected local save folder.
+
+No model or Astra computer-use turn is involved. The Swift helper lives in
+`scripts/fusion/native_ui.swift`. Four live unattended runs produced identical
+triangle geometry, including after rewind and after a fresh machine simulation.
+See `research/fusion-background-control.md` for the export checkpoint and
+`docs/implementation-plan.md` for the completed optimization run.
+
+`FixedFusionVerifier` now invokes this component before stopping simulation and
+compares the exported geometry to the frozen STEP with `stock_comparison.py`.
+The standalone command still requires an already running simulation. Export
+success and volume agreement alone are never a manufacturing pass.
+
+The comparison uses OCCT tessellation, two-way triangle distance bounds and
+adaptive subdivision without aligning or editing either geometry. Coplanar patch
+unions preserve holes. A failed comparison localizes leftover material or gouging;
+a resource limit or malformed mesh returns unknown. It verifies exported internal
+CAM simulation geometry, not posted-NC motion or cutting physics.
+
+Live September 12 evidence: maximum-accuracy stock (4,594 triangles) passed the
+0.127 mm target comparison twice, most recently in
+`.private/fusion-live/stock-comparison-fixed-accuracy-v2/comparison.json`.
+Fusion's displayed volume stayed coarse while the export became finer, so that
+cross-check is diagnostic. Native AX supplies completion/error counts; OCR is
+used only to locate export controls and read the accuracy slider.
+
 ## Sources
 
 - [Fusion threading/custom events](https://help.autodesk.com/cloudhelp/ENU/Fusion-360-API/files/Threading_UM.htm)

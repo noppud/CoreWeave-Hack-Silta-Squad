@@ -1,6 +1,6 @@
 import pytest
 
-from silta.cnc.simulation_report import parse_issues_ax
+from silta.cnc.simulation_report import parse_issues_ax, parse_issues_native
 
 
 def snapshot(percent=100, errors=54, warnings=0, process=0):
@@ -45,3 +45,20 @@ def test_zero_errors_does_not_bypass_stock_comparison():
 def test_missing_changed_or_ambiguous_evidence_is_rejected(text):
     with pytest.raises(ValueError):
         parse_issues_ax(text)
+
+
+def test_native_rows_require_actual_unique_summary_not_ocr_or_animation():
+    row = {
+        "AXIdentifier": "QTApplication.SimulationIssuesWidget.verificationLabel",
+        "AXValue": "Verification: 100%  |  Errors: 0  |  Warnings: 0  |  Process: 0",
+    }
+    state = {"foreground": True, "document": "Candidate", "elements": [row]}
+    assert parse_issues_native(state).result == "requires_stock_comparison"
+    for changed in (
+        {**state, "foreground": False},
+        {**state, "elements": []},
+        {**state, "elements": [row, row]},
+        {**state, "elements": [{**row, "AXIdentifier": "animationLabel"}]},
+    ):
+        with pytest.raises(ValueError):
+            parse_issues_native(changed)

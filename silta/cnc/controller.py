@@ -11,6 +11,7 @@ from typing import Any, Protocol
 from .checks import CheckRunner, IntegrityChecks
 from .models import (
     Candidate,
+    CandidateGenerationError,
     JobContext,
     JobInputs,
     JobResult,
@@ -70,6 +71,7 @@ class Controller:
         learner: CheckLearner | None = None,
         evaluation: EvaluationGate | None = None,
         check_runner_factory: Callable[[str], CheckRunner] | None = None,
+        learning=None,
     ):
         self.main = main
         self.checks = IntegrityChecks(checks)
@@ -78,6 +80,7 @@ class Controller:
         self.learner = learner
         self.evaluation = evaluation
         self.check_runner_factory = check_runner_factory
+        self.learning = learning
 
     def run(
         self,
@@ -106,17 +109,26 @@ class Controller:
         ) -> JobContext:
             for proposal in proposals:
                 store.event("reusable_change_proposed", proposal=asdict(proposal))
-                if self.evaluation is None:
+                if self.learning is not None:
+                    evidence = self.learning.apply(proposal, deepcopy(context))
+                    result = PromotionResult(
+                        proposal.id, True, "Applied directly; evaluation disabled", evidence,
+                    )
+                    store.event("learning_change_saved", proposal_id=proposal.id,
+                                change_kind=proposal.kind, evaluation_performed=False)
+                elif self.evaluation is None:
                     store.event(
                         "promotion_deferred",
                         proposal_id=proposal.id,
                         reason="No evaluation gate configured",
                     )
                     continue
-                result = self.evaluation.evaluate(proposal, deepcopy(context))
+                else:
+                    result = self.evaluation.evaluate(proposal, deepcopy(context))
                 if result.proposal_id != proposal.id or (result.promoted and not result.evidence):
                     raise ValueError("Promotion requires matching evaluation evidence")
-                store.event("promotion_evaluated", result=asdict(result))
+                if self.learning is None:
+                    store.event("promotion_evaluated", result=asdict(result))
                 if result.promoted:
                     if (
                         proposal.kind not in {"checks", "main_prompt", "supervisor_prompt"}
@@ -169,13 +181,18 @@ class Controller:
                     or context.inputs.digest != context.input_digest
                 ):
                     raise ValueError("Fixed target or manufacturing inputs changed")
-                candidate = self.main.propose(
-                    deepcopy(context),
-                    deepcopy(previous),
-                    deepcopy(feedback),
-                    instructions,
-                    attempts,
-                )
+                try:
+                    candidate = self.main.propose(
+                        deepcopy(context),
+                        deepcopy(previous),
+                        deepcopy(feedback),
+                        instructions,
+                        attempts,
+                    )
+                except CandidateGenerationError as error:
+                    feedback = deepcopy(error.feedback)
+                    store.event("cam_generation_failed", attempt=attempts, feedback=feedback)
+                    continue
                 candidate.verify()
                 candidate = store.candidate(candidate, attempts)
                 store.event(

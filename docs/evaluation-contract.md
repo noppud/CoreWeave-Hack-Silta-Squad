@@ -1,3 +1,5 @@
+> Deferred as of 2026-09-12: the user removed evaluation gates from the demo. The default runtime directly updates the two learning files; the material below describes the inactive evaluation implementation.
+
 # Reusable-change evaluation contract
 
 `silta.cnc.evaluation.WeaveEvaluationGate` implements the controller's promotion interface. It does not run a separate agent loop. The application supplies a benchmark runner that really executes the current and proposed versions on the same frozen cases.
@@ -10,15 +12,19 @@ After the gate confirms promotion with matching evidence, the running controller
 - Dataset rows include `case_id`, `input_hash`, `verifier_hash` and the input artifact references required by the runner. `input_hash` covers the drawing, accepted CAD target, machine, tools/holders, fixtures, tolerances, and costing assumptions. The verifier hash covers its implementation and coverage/configuration.
 - The runner receives `(kind, version_ref, frozen_cases, job_context)` and returns one record per case. Every record carries the same case/input/verifier references and the executed `version_ref`.
 - Loop results: explicit `verified` bool, evidence references, `machining_seconds`, `cost`, and `simulation_attempts`. Failed runs may omit metrics; they are never converted into zero-cost successes.
-- Check datasets additionally contain simulator `label` (`valid` or `invalid`) and `verification_evidence`. Check results have explicit `passed` and `runtime_ms`. A changed candidate/setup/verifier invalidates the cached label.
+- Check datasets additionally contain simulator `label` (`valid` or `invalid`) and `verification_evidence`. Check results have explicit `passed`, five `runtime_samples_ms`, and their median `runtime_ms`. Captured cases carry `verification_timing` from that attempt’s start/completion events; replay revalidates those timestamps against the source manifest. This is observed verification wall time, including collection and evidence retention, not estimated machine cycle time. A changed candidate/setup/verifier invalidates the cached label.
 
 ## Gate
 
-Loop changes cannot lose an existing verified completion. Compare machining time, cost and attempts only on cases where both versions succeeded. Require a completion or metric improvement without regression in those matched aggregate metrics. Check changes require both valid and invalid examples, no false rejection, no newly escaped known failure, and no runtime regression. These intentionally strict deterministic rules are controller code, never mutable agent instructions.
+Loop changes cannot lose an existing verified completion. Compare machining time, cost and attempts only on cases where both versions succeeded. Require a completion or metric improvement without regression in those matched aggregate metrics. Check changes require both valid and invalid examples, no false rejection, no newly escaped known failure, and a newly caught failure or removed false rejection. Faster timings alone never qualify. Start with an empty learned-check set; adding a useful check is expected to cost a little runtime.
+
+Each frozen case is replayed five times per version with identical verdicts and issues required. Keep raw timings and report the median. The fixed policy allows added checking overhead only up to **10% of the observed verification time avoided on newly caught invalid cases**, summed over the same dataset. Conservatively bound overhead per case by the slowest proposed sample minus the fastest baseline sample, clamped at zero. Each proposed sample must also stay under a one-second cheap-check ceiling. These are application policy values, not learner-editable instructions. No recorded verification duration means no savings credit; machine cycle-time estimates cannot substitute. Timing jitter cannot by itself earn a promotion, and can only make the overhead test more conservative.
+
+This gate proves a bounded replay benefit on known cases, not faster end-to-end production. Sequential unseen-part runs must measure actual check, agent, simulation and evaluation wall time separately, as well as machine cycle time. Evaluation overhead is a learning investment and must remain visible in campaign totals.
 
 Local scoring is not a Weave evaluation success. The gate publishes a versioned dataset and paired `weave.EvaluationLogger` runs, including the actual evaluated prompt/check artifacts, then reads both finalized server calls. Missing credentials or failed publication leave the production pointer unchanged. Each decision and publication receipt is saved locally. Promotion uses a locked compare-and-swap; rollback can select a previously active version. Earlier job steps retain their recorded versions; subsequent steps adopt the evaluated promotion. Benchmark jobs retain their assigned versions.
 
-No real benchmark results are included in this implementation. The tests use explicit fixtures and are unit/integration verification of the gate, not evidence that generated CAM improves. The live application must configure the production runner factories and cloud credentials.
+Unit tests do not supply real benchmark results. The tests use explicit fixtures and are unit/integration verification of the gate, not evidence that generated CAM improves. The live application must configure the production runner factories and cloud credentials.
 
 Implementation follows the installed Weave SDK's `EvaluationLogger` signatures and explicit prediction finalization. The SDK currently exposes its evaluation call through `_evaluate_call`; the code fails closed if that interface changes. See [EvaluationLogger documentation](https://docs.wandb.ai/weave/guides/evaluation/evaluation_logger).
 
@@ -53,6 +59,6 @@ Revalidate retained evidence before reuse:
 python -m silta.cnc.datasets inspect --store versions --dataset '<dataset_ref>'
 ```
 
-Keep the recorded job artifacts and verifier files: datasets reference their exact hashed bytes, including failed-verdict evidence. Moving, deleting or changing a referenced file makes reuse fail rather than silently relabeling it. Registration is local; the actual Weave dataset and paired results are published when a reusable-change evaluation runs.
+Keep the recorded job manifests, artifacts and verifier files: datasets reference their exact hashed bytes, including failed-verdict evidence. Moving, deleting or changing a referenced file makes reuse fail rather than silently relabeling it. Registration is local; the actual Weave dataset and paired results are published when a reusable-change evaluation runs.
 
 The production `BenchmarkRunner` executes full controller runs sequentially with the accepted CAD target frozen, and disables recursive evaluation. Check replays use the configured isolated runner and reuse unchanged simulator labels. The CLI supplies these production factories; neither dataset preparation nor benchmark execution substitutes synthetic metrics when access is missing.

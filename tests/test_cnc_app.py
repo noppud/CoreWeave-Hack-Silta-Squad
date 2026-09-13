@@ -48,17 +48,30 @@ def test_only_recorded_completed_pass_is_charted(reader):
 
 @pytest.mark.parametrize("status,errors", [("failed", 54), ("unknown", 0)])
 def test_real_fusion_feedback_is_visible_without_overall_approval(reader, status, errors):
-    rows = reader["attempt_rows"]({"events": [{
-        "event": "verification_completed", "attempt": 1,
-        "verification": {
-            "status": status, "completed": True,
-            "feedback": {
-                "summary": {"percent": 100.0, "errors": errors,
-                            "warnings": 0, "process_errors": 0, "observed_details": []},
-                "metrics": {"machining_seconds": 223.109368, "tool_change_count": 0},
-            },
-        },
-    }]})
+    rows = reader["attempt_rows"](
+        {
+            "events": [
+                {
+                    "event": "verification_completed",
+                    "attempt": 1,
+                    "verification": {
+                        "status": status,
+                        "completed": True,
+                        "feedback": {
+                            "summary": {
+                                "percent": 100.0,
+                                "errors": errors,
+                                "warnings": 0,
+                                "process_errors": 0,
+                                "observed_details": [],
+                            },
+                            "metrics": {"machining_seconds": 223.109368, "tool_change_count": 0},
+                        },
+                    },
+                }
+            ]
+        }
+    )
     row = rows[0]
     assert row["Verification"] == status.capitalize()
     assert row["Fusion verification (%)"] == 100
@@ -70,20 +83,43 @@ def test_real_fusion_feedback_is_visible_without_overall_approval(reader, status
     assert "No verified" in reader["metric_chart"](rows, "Seconds", "Seconds", "#000")
 
 
-@pytest.mark.parametrize("feedback", [None, [], {}, {"summary": None, "metrics": []}, {
-    "summary": {"percent": 101, "errors": True, "warnings": -1, "process_errors": 0.5},
-    "metrics": {"machining_seconds": float("nan"), "tool_change_count": "2"},
-}, {
-    "summary": {"percent": float("inf"), "errors": "0", "warnings": None},
-    "metrics": {"machining_seconds": -4, "tool_change_count": False},
-}])
+@pytest.mark.parametrize(
+    "feedback",
+    [
+        None,
+        [],
+        {},
+        {"summary": None, "metrics": []},
+        {
+            "summary": {"percent": 101, "errors": True, "warnings": -1, "process_errors": 0.5},
+            "metrics": {"machining_seconds": float("nan"), "tool_change_count": "2"},
+        },
+        {
+            "summary": {"percent": float("inf"), "errors": "0", "warnings": None},
+            "metrics": {"machining_seconds": -4, "tool_change_count": False},
+        },
+    ],
+)
 def test_missing_or_invalid_fusion_feedback_stays_missing(reader, feedback):
-    rows = reader["attempt_rows"]({"events": [{
-        "event": "verification_completed", "attempt": 1,
-        "verification": {"status": "unknown", "completed": False, "feedback": feedback},
-    }]})
-    for column in ("Fusion verification (%)", "Fusion errors", "Fusion warnings",
-                   "Fusion process errors", "API machining estimate (s)", "API tool changes"):
+    rows = reader["attempt_rows"](
+        {
+            "events": [
+                {
+                    "event": "verification_completed",
+                    "attempt": 1,
+                    "verification": {"status": "unknown", "completed": False, "feedback": feedback},
+                }
+            ]
+        }
+    )
+    for column in (
+        "Fusion verification (%)",
+        "Fusion errors",
+        "Fusion warnings",
+        "Fusion process errors",
+        "API machining estimate (s)",
+        "API tool changes",
+    ):
         assert rows[0][column] is None
 
 
@@ -99,14 +135,23 @@ def test_artifacts_and_weave_links_only_come_from_explicit_records(reader):
 
 
 def test_incomplete_attempt_never_keeps_running_or_passed_label(reader):
-    rows = reader["attempt_rows"]({
-        "status": "incomplete",
-        "events": [
-            {"event": "verification_started", "attempt": 1},
-            {"event": "verification_completed", "attempt": 2,
-             "verification": {"status": "passed", "completed": False, "machining_seconds": 0}},
-        ],
-    })
+    rows = reader["attempt_rows"](
+        {
+            "status": "incomplete",
+            "events": [
+                {"event": "verification_started", "attempt": 1},
+                {
+                    "event": "verification_completed",
+                    "attempt": 2,
+                    "verification": {
+                        "status": "passed",
+                        "completed": False,
+                        "machining_seconds": 0,
+                    },
+                },
+            ],
+        }
+    )
     assert rows[0]["Verification"] == "Interrupted"
     assert rows[0]["Checks"] == "Not completed"
     assert rows[1]["Verification"] == "Unknown"
@@ -126,9 +171,14 @@ def test_saved_cam_document_displays_exact_pinned_reference_and_rejects_tamperin
     }
     path = tmp_path / "fusion-document.json"
     path.write_text(json.dumps(reference))
-    candidate = {"artifacts": {"fusion_document": {
-        "path": str(path), "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
-    }}}
+    candidate = {
+        "artifacts": {
+            "fusion_document": {
+                "path": str(path),
+                "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+            }
+        }
+    }
     assert reader["saved_cam_document"](candidate) == (reference, None)
     path.write_text(json.dumps({**reference, "version_number": 4}))
     actual, error = reader["saved_cam_document"](candidate)
@@ -144,12 +194,18 @@ def test_refresh_dependent_selector_discovers_a_new_run(tmp_path):
 
     # Marimo uses cell dependencies to decide what refresh actually reruns.
     tree = ast.parse(Path("notebooks/cnc_app.py").read_text())
-    selector = next(cell for cell in tree.body if isinstance(cell, ast.FunctionDef)
-                    and any(isinstance(node, ast.Name) and node.id == "manifest_files"
-                            for node in ast.walk(cell)))
+    selector = next(
+        cell
+        for cell in tree.body
+        if isinstance(cell, ast.FunctionDef)
+        and any(
+            isinstance(node, ast.Name) and node.id == "manifest_files" for node in ast.walk(cell)
+        )
+    )
     assert "refresh" in [arg.arg for arg in selector.args.args]
     overrides = {
         "jobs_root": SimpleNamespace(value=str(tmp_path)),
+        "campaign_path": SimpleNamespace(value=""),
         "versions_root": SimpleNamespace(value=str(tmp_path / "versions")),
         "refresh": SimpleNamespace(value=0),
     }
@@ -163,3 +219,43 @@ def test_refresh_dependent_selector_discovers_a_new_run(tmp_path):
     _, populated = app.run(defs=overrides)
     assert populated["job_selector"].value == str(manifest)
     assert populated["manifest"]["status"] == "running"
+
+
+def test_campaign_selects_current_recorded_part_and_retains_pending_parts(tmp_path):
+    import json
+    from types import SimpleNamespace
+
+    run = tmp_path / "part-one"
+    run.mkdir()
+    manifest = run / "manifest.json"
+    manifest.write_text(json.dumps({"status": "completed", "events": []}))
+    campaign = tmp_path / "campaign.json"
+    campaign.write_text(
+        json.dumps(
+            {
+                "campaign_id": "sequential",
+                "status": "running",
+                "current_part_id": "one",
+                "parts": [
+                    {
+                        "part_id": "one",
+                        "label": "First",
+                        "status": "completed",
+                        "manifest_path": str(manifest),
+                    },
+                    {"part_id": "two", "label": "Second", "status": "pending"},
+                ],
+            }
+        )
+    )
+    _, definitions = app.run(
+        defs={
+            "jobs_root": SimpleNamespace(value=str(tmp_path / "no-other-runs")),
+            "versions_root": SimpleNamespace(value=str(tmp_path / "versions")),
+            "campaign_path": SimpleNamespace(value=str(campaign)),
+            "refresh": SimpleNamespace(value=0),
+        }
+    )
+    assert definitions["job_selector"].value == str(manifest)
+    assert len(definitions["campaign"]["parts"]) == 2
+    assert definitions["campaign_runs"] == [manifest]

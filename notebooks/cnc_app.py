@@ -17,11 +17,16 @@ def _():
     import json
     import math
     import os
+    import sys
     from pathlib import Path
 
     import marimo as mo
 
-    return Path, hashlib, html, json, math, mo, os
+    # Marimo launches with the notebook directory on sys.path.
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+    from silta.cnc.presentation import run_summary, stage_rows
+
+    return Path, hashlib, html, json, math, mo, os, run_summary, stage_rows
 
 
 @app.cell
@@ -64,8 +69,11 @@ def _(Path, hashlib, html, json, math):
             elif event.get("event") == "checks_completed":
                 result = event.get("result", {})
                 row["Checks"] = (
-                    "Passed" if result.get("passed") is True
-                    else "Failed" if result.get("passed") is False else "Unknown"
+                    "Passed"
+                    if result.get("passed") is True
+                    else "Failed"
+                    if result.get("passed") is False
+                    else "Unknown"
                 )
                 row["Issues"] = "; ".join(result.get("issues", []))
             elif event.get("event") == "verification_started":
@@ -74,8 +82,10 @@ def _(Path, hashlib, html, json, math):
                 result = event.get("verification", {})
                 passed = result.get("status") == "passed" and result.get("completed") is True
                 row["Verification"] = (
-                    "Passed" if passed
-                    else "Unknown" if result.get("status") == "passed"
+                    "Passed"
+                    if passed
+                    else "Unknown"
+                    if result.get("status") == "passed"
                     else str(result.get("status", "unknown")).capitalize()
                 )
                 row["Issues"] = "; ".join(result.get("issues", []))
@@ -137,10 +147,14 @@ def _(Path, hashlib, html, json, math):
             if hashlib.sha256(raw).hexdigest() != artifact.get("sha256"):
                 return {}, "Saved Fusion document reference failed its artifact hash check"
             reference = json.loads(raw)
-            if not isinstance(reference, dict) or not all(
-                isinstance(reference.get(key), str) and reference[key]
-                for key in ("document_name", "version_id", "data_file_id", "project_id")
-            ) or type(reference.get("version_number")) is not int:
+            if (
+                not isinstance(reference, dict)
+                or not all(
+                    isinstance(reference.get(key), str) and reference[key]
+                    for key in ("document_name", "version_id", "data_file_id", "project_id")
+                )
+                or type(reference.get("version_number")) is not int
+            ):
                 return {}, "Saved Fusion document reference is incomplete"
             return reference, None
         except (OSError, ValueError, KeyError, TypeError) as error:
@@ -213,28 +227,107 @@ def _(Path, mo, os):
         label="Evaluation versions directory",
         full_width=True,
     )
+    campaign_path = mo.ui.text(
+        value=os.environ.get("SILTA_CAMPAIGN_MANIFEST", ""),
+        label="Sequential campaign manifest (optional)",
+        full_width=True,
+    )
     refresh = mo.ui.refresh(options=["5s", "15s", "1m"], default_interval="15s")
     mo.vstack(
         [
             mo.md("# Silta · From drawing to verified machining"),
             mo.md("Recorded runs, machine evidence and measured improvements."),
             mo.hstack([jobs_root, versions_root, refresh], align="end"),
+            campaign_path,
         ]
     )
-    return jobs_root, refresh, versions_root
+    return campaign_path, jobs_root, refresh, versions_root
 
 
 @app.cell
-def _(Path, jobs_root, mo, refresh):
+def _(Path, campaign_path, mo, read_json, refresh, run_summary):
+    _tick = refresh.value
+    campaign, _error = read_json(campaign_path.value) if campaign_path.value else ({}, None)
+    campaign_runs = []
+    _rows = []
+    for _part in campaign.get("parts", []):
+        _manifest_path = _part.get("manifest_path")
+        _run, _run_error = read_json(_manifest_path) if _manifest_path else ({}, None)
+        if _manifest_path and Path(_manifest_path).is_file():
+            campaign_runs.append(Path(_manifest_path))
+        _summary = run_summary(_run)
+        _rows.append(
+            {
+                "Part": _part.get("label") or _part.get("part_id"),
+                "Campaign status": _part.get("status", "pending"),
+                "Run status": _run.get("status", "Not started"),
+                "Verified time (s)": _summary["best_seconds"],
+                "Within-part improvement (%)": _summary["improvement_percent"],
+                "Evaluations": _summary["evaluations"],
+                "Promotions": _summary["promotions"],
+                "Evidence": _run_error or ("Recorded run" if _run else "No run yet"),
+            }
+        )
+    mo.vstack(
+        [
+            mo.md("## Sequential learning campaign"),
+            mo.md(
+                f"**{campaign.get('campaign_id', 'Campaign')}** · "
+                f"{campaign.get('status', 'unknown')} "
+                f"· Current part: {campaign.get('current_part_id') or 'none'}"
+            ),
+            mo.md(
+                "Parts run in order. Each part keeps its own fixed target. "
+                "Only evaluated promotions carry checks and planning guidance forward."
+            ),
+            mo.ui.table(_rows, selection=None) if _rows else mo.md("No campaign parts recorded."),
+            mo.accordion(
+                {
+                    "Initial versions and campaign history": mo.json(
+                        {
+                            "initial_versions": campaign.get("initial_versions"),
+                            "version_store": campaign.get("version_store"),
+                            "events": campaign.get("events", []),
+                            "part_versions": [
+                                {
+                                    "part": part.get("part_id"),
+                                    "starting": part.get("starting_versions"),
+                                    "ending": part.get("ending_versions"),
+                                }
+                                for part in campaign.get("parts", [])
+                            ],
+                        }
+                    )
+                }
+            ),
+        ]
+    ) if campaign else (mo.callout(mo.md(_error), kind="danger") if _error else mo.md(""))
+    return campaign, campaign_runs
+
+
+@app.cell
+def _(Path, campaign, campaign_runs, jobs_root, mo, refresh):
     _refresh_tick = refresh.value
     manifest_files = sorted(
-        Path(jobs_root.value).expanduser().glob("*/manifest.json"),
+        set(Path(jobs_root.value).expanduser().glob("*/manifest.json")) | set(campaign_runs),
         key=lambda path: path.stat().st_mtime,
         reverse=True,
     )
+    _current_path = next(
+        (
+            part.get("manifest_path")
+            for part in campaign.get("parts", [])
+            if part.get("part_id") == campaign.get("current_part_id")
+        ),
+        None,
+    )
+    _selected = next(
+        (path.parent.name for path in manifest_files if str(path) == _current_path),
+        manifest_files[0].parent.name if manifest_files else None,
+    )
     job_selector = mo.ui.dropdown(
         options={path.parent.name: str(path) for path in manifest_files},
-        value=manifest_files[0].parent.name if manifest_files else None,
+        value=_selected,
         label="Run",
         full_width=True,
     )
@@ -273,10 +366,13 @@ def _(attempt_rows, job_selector, mo, read_json, refresh):
         {},
     )
     latest_verification_candidate = next(
-        (event.get("candidate", {}).get("id", "Unknown") for event in reversed(events)
-         if event.get("event") == "candidate_created"
-         and event.get("candidate_digest")
-         and event["candidate_digest"] == latest_verification.get("candidate_digest")),
+        (
+            event.get("candidate", {}).get("id", "Unknown")
+            for event in reversed(events)
+            if event.get("event") == "candidate_created"
+            and event.get("candidate_digest")
+            and event["candidate_digest"] == latest_verification.get("candidate_digest")
+        ),
         "No bound candidate recorded",
     )
     best = manifest.get("best_candidate") or {}
@@ -298,33 +394,102 @@ def _(attempt_rows, job_selector, mo, read_json, refresh):
             ),
             mo.md(str(manifest.get("reason", ""))),
             mo.md(
-                "Last recorded event: " + str(events[-1].get("at", "Timestamp unavailable"))
-                + (" · Activity is not independently monitored."
-                   if manifest.get("status") == "running" else "")
-            ) if events else mo.md(""),
+                "Last recorded event: "
+                + str(events[-1].get("at", "Timestamp unavailable"))
+                + (
+                    " · Activity is not independently monitored."
+                    if manifest.get("status") == "running"
+                    else ""
+                )
+            )
+            if events
+            else mo.md(""),
         ]
     )
     return (
-        best, best_verification, events, latest_candidate, latest_verification,
-        latest_verification_candidate, manifest, rows,
+        best,
+        best_verification,
+        events,
+        latest_candidate,
+        latest_verification,
+        latest_verification_candidate,
+        manifest,
+        rows,
     )
 
 
 @app.cell
-def _(html, latest_candidate, mo, saved_cam_document):
-    _document, _document_error = saved_cam_document(latest_candidate)
+def _(manifest, mo, run_summary, stage_rows):
+    summary = run_summary(manifest)
+    _best = summary["best_seconds"]
+    _baseline = summary["baseline_seconds"]
+    _gain = summary["improvement_percent"]
     mo.vstack(
         [
-            mo.md("## Saved Fusion CAM document"),
+            mo.md("## The loop in this run"),
+            mo.md(
+                "**Fixed CAD → CAM → cheap checks → "
+                "Fusion + finished-part comparison → supervisor.** "
+                "Failures return to CAM repair; missing checks can become evaluated improvements."
+            ),
+            mo.hstack(
+                [
+                    mo.stat(
+                        label="First verified plan in this run",
+                        value=f"{_baseline:.2f} s" if _baseline is not None else "—",
+                    ),
+                    mo.stat(
+                        label="Best verified machining estimate",
+                        value=f"{_best:.2f} s" if _best is not None else "—",
+                    ),
+                    mo.stat(
+                        label="Improvement within this run",
+                        value=f"{_gain:.1f}%" if _gain is not None else "—",
+                    ),
+                    mo.stat(label="Completed verification passes", value=summary["passes"]),
+                ]
+            ),
+            mo.ui.table(stage_rows(manifest), selection=None),
+            mo.accordion(
+                {
+                    f"Supervisor decision {index + 1} · {decision.get('action', 'unknown')}": mo.md(
+                        str(decision.get("instructions", "No instructions recorded"))
+                    )
+                    for index, decision in enumerate(summary["supervisor_decisions"])
+                }
+            )
+            if summary["supervisor_decisions"]
+            else mo.md("Supervisor has not been reached."),
+        ]
+    )
+    return (summary,)
+
+
+@app.cell
+def _(best, html, latest_candidate, mo, saved_cam_document):
+    _selected_candidate = best or latest_candidate
+    _document, _document_error = saved_cam_document(_selected_candidate)
+    mo.vstack(
+        [
+            mo.md(
+                "## Best verified Fusion CAM document" if best else "## Latest Fusion CAM document"
+            ),
             mo.callout(mo.md(_document_error), kind="danger") if _document_error else mo.md(""),
             mo.Html(
-                "<p>Candidate <strong>" + html.escape(str(latest_candidate.get("id", "—")))
-                + "</strong>: " + html.escape(_document["document_name"])
-                + " · Version " + str(_document["version_number"]) + "</p>"
-            ) if _document else mo.md("No saved CAM reference recorded for this candidate."),
+                "<p>Candidate <strong>"
+                + html.escape(str(_selected_candidate.get("id", "—")))
+                + "</strong>: "
+                + html.escape(_document["document_name"])
+                + " · Version "
+                + str(_document["version_number"])
+                + "</p>"
+            )
+            if _document
+            else mo.md("No saved CAM reference recorded for this candidate."),
             mo.json(_document) if _document else mo.md(""),
             mo.md("Verification results below identify the candidate they apply to.")
-            if _document else mo.md(""),
+            if _document
+            else mo.md(""),
         ]
     )
     return
@@ -373,26 +538,40 @@ def _(best_verification, metric_chart, mo, rows):
 
 
 @app.cell
-def _(Path, artifact_paths, html, latest_verification, latest_verification_candidate, mo):
+def _(
+    Path,
+    artifact_paths,
+    best,
+    best_verification,
+    html,
+    latest_verification,
+    latest_verification_candidate,
+    mo,
+):
+    _shown_verification = best_verification or latest_verification
+    _shown_candidate = best.get("id") if best_verification else latest_verification_candidate
     _media = [
         Path(path)
-        for path in artifact_paths(latest_verification)
+        for path in artifact_paths(_shown_verification)
         if Path(path).suffix.lower() in {".mp4", ".webm", ".mov"} and Path(path).is_file()
     ]
     _screens = [
         Path(path)
-        for path in artifact_paths(latest_verification)
+        for path in artifact_paths(_shown_verification)
         if Path(path).suffix.lower() in {".png", ".jpg", ".jpeg"} and Path(path).is_file()
     ]
     mo.vstack(
         [
             mo.md("## Machine verification evidence"),
-            mo.Html("<p>Most recent result · Candidate: <strong>"
-                    + html.escape(str(latest_verification_candidate)) + "</strong></p>"),
+            mo.Html(
+                "<p>Best verified result (or latest if none passed) · Candidate: <strong>"
+                + html.escape(str(_shown_candidate))
+                + "</strong></p>"
+            ),
             mo.Html(
                 "<p>Status: <strong>"
-                + html.escape(str(latest_verification.get("status", "not run")))
-                + f"</strong> · Completed: {latest_verification.get('completed') is True}</p>"
+                + html.escape(str(_shown_verification.get("status", "not run")))
+                + f"</strong> · Completed: {_shown_verification.get('completed') is True}</p>"
             ),
             mo.video(str(_media[-1]), controls=True, width="100%")
             if _media
@@ -402,12 +581,93 @@ def _(Path, artifact_paths, html, latest_verification, latest_verification_candi
                     "The application will display the actual Fusion recording when available."
                 )
             ),
-            mo.image(str(_screens[-1]), width="100%") if _screens else mo.md(""),
+            mo.accordion(
+                {
+                    f"Recorded Fusion screenshot {index + 1}": mo.image(str(path), width="100%")
+                    for index, path in enumerate(_screens)
+                }
+            )
+            if _screens
+            else mo.md(""),
             mo.md(
                 "\n".join(
                     f"- {html.escape(str(issue))}"
-                    for issue in latest_verification.get("issues", [])
+                    for issue in _shown_verification.get("issues", [])
                 )
+            ),
+        ]
+    )
+    return
+
+
+@app.cell
+def _(Path, best, best_verification, hashlib, manifest, mo):
+    _target = manifest.get("target", {}).get("artifacts", {})
+    _cam = best.get("artifacts", {})
+    _downloads = []
+    _missing = []
+    _preview = None
+    _records = [
+        ("Target CAD · STEP", _target.get("step")),
+        ("CAM project · Fusion", _cam.get("f3d")),
+    ]
+    _records.extend(
+        (f"Posted NC · {key}", value) for key, value in _cam.items() if key.startswith("nc-")
+    )
+    for _label, _record in _records:
+        if not _record:
+            continue
+        _path = Path(_record["path"])
+        if _path.is_file() and hashlib.sha256(_path.read_bytes()).hexdigest() == _record.get(
+            "sha256"
+        ):
+            _downloads.append(mo.download(data=_path.read_bytes, filename=_path.name, label=_label))
+        else:
+            _missing.append(f"{_label}: recorded file missing or changed")
+    _image_record = _target.get("preview", {})
+    if _image_record.get("path"):
+        _image_path = Path(_image_record["path"])
+        if _image_path.is_file() and hashlib.sha256(
+            _image_path.read_bytes()
+        ).hexdigest() == _image_record.get("sha256"):
+            _preview = mo.image(str(_image_path), width="100%")
+    _comparison = best_verification.get("feedback", {}).get("target_stock_comparison", {})
+    mo.vstack(
+        [
+            mo.md("## The part and returned files"),
+            mo.hstack(
+                [
+                    _preview or mo.md("No recorded target preview."),
+                    mo.vstack(
+                        [
+                            mo.md(
+                                "**Machine:** "
+                                + str(
+                                    manifest.get("inputs", {})
+                                    .get("machine", {})
+                                    .get("name", "Not recorded")
+                                )
+                            ),
+                            mo.md(
+                                "**Finished-part comparison:** "
+                                + str(_comparison.get("status", "Not recorded"))
+                                + (
+                                    f" · tolerance {_comparison['tolerance_mm']} mm"
+                                    if "tolerance_mm" in _comparison
+                                    else ""
+                                )
+                            ),
+                            mo.vstack(_downloads)
+                            if _downloads
+                            else mo.md("No returned manufacturing files yet."),
+                            mo.md(
+                                "Internal CAM was simulated. "
+                                "The posted NC is a separate exported deliverable."
+                            ),
+                            mo.md("\n".join(_missing)) if _missing else mo.md(""),
+                        ]
+                    ),
+                ]
             ),
         ]
     )
@@ -446,6 +706,23 @@ def _(Path, artifact_paths, best, html, manifest, mo):
             ),
         ]
     )
+    return
+
+
+@app.cell
+def _(Path, job_selector, manifest, mo, read_json, weave_link):
+    _receipt_path = (
+        Path(job_selector.value).parent / "run-receipt.json" if job_selector.value else None
+    )
+    _receipt, _ = (
+        read_json(_receipt_path) if _receipt_path and _receipt_path.is_file() else ({}, None)
+    )
+    _project = _receipt.get("weave_project", "")
+    _call = _receipt.get("weave_call_id", "")
+    _recorded = _receipt.get("weave_recorded") is True
+    _same_job = not _receipt.get("job_id") or _receipt.get("job_id") == manifest.get("job_id")
+    _link = weave_link(f"weave:///{_project}/call/{_call}") if _project and _call else None
+    mo.md(f"[Open this run in Weave]({_link})") if _recorded and _same_job and _link else mo.md("")
     return
 
 

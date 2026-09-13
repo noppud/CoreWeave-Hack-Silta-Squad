@@ -1022,3 +1022,31 @@ def test_linked_cam_saves_exact_version_and_forks_before_improvement(tmp_path, i
     assert Path(first.artifacts["fusion_document"].path).read_text() == frozen_reference
     assert json.loads(Path(second.artifacts["fusion_document"].path).read_text())[
         "data_file_id"] != first_version["data_file_id"]
+
+
+def test_cad_that_executes_without_bodies_enters_existing_source_repair(tmp_path, inputs):
+    class EmptyFirstCad(BridgeDouble):
+        fresh_documents = 0
+
+        def request(self, action, payload=None, **kwargs):
+            source = (payload or {}).get('source')
+            if source == _FRESH_CAD_SCRIPT:
+                self.fresh_documents += 1
+            if source == _REGISTER_TARGET_SCRIPT and self.fresh_documents == 1:
+                return {
+                    'status': 'error',
+                    'issues': [{'type': 'fusion_api_error',
+                                'message': 'CAD acceptance requires solid part bodies'}],
+                    'result': {'traceback': 'No solid bodies after completed source execution'},
+                }
+            return super().request(action, payload, **kwargs)
+
+    empty = dict(CAD_REPLY, source='def run(context):\n    pass\n')
+    client = ClientDouble([empty, CAD_REPLY, ACCEPT_REPLY])
+    bridge = EmptyFirstCad()
+    target = AstraMainAgent(client, bridge).establish_target(inputs, str(tmp_path))
+    target.verify()
+    assert bridge.fresh_documents == 2
+    assert 'solid part bodies' in client.calls[1][0]
+    assert 'definition alone is never called' in client.calls[0][0]
+    assert (tmp_path / 'cad-attempt-02-execution.json').is_file()

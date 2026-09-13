@@ -12,9 +12,9 @@ from dataclasses import asdict
 from pathlib import Path
 
 from .astra import AstraClient
-from .evaluation import VersionStore, WeaveEvaluationGate
+from .evaluation import VersionStore
 from .fusion import FusionBridge
-from .models import Artifact, JobInputs, PromotionResult
+from .models import Artifact, JobInputs
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -80,11 +80,10 @@ def make_checks(store: VersionStore, ref: str):
 
 def run_job(args) -> dict:
     from .agents import AstraCheckLearner, AstraMainAgent, AstraSupervisor
-    from .approvals import FusionAppApproval
     from .controller import Controller
     from .fixed_verifier import VERIFIER_VERSION, FixedFusionVerifier
-    from .fusion_reader import FusionUIReader
-    from .tracing import trace_adapter, trace_call, trace_controller
+    from .learning import SharedLearning
+    from .tracing import trace_controller
 
     inputs = read_inputs(args.config.resolve())
     api_key = os.environ.get("WANDB_API_KEY") or os.environ.pop("COREWEAVE_WANDB_API_KEY", "")
@@ -95,8 +94,8 @@ def run_job(args) -> dict:
     import weave
 
     client = weave.init(args.project)
-    store = VersionStore(args.versions)
-    versions = initialize(store)
+    store = SharedLearning(args.learning_directory)
+    versions = store.active()
     versions["verifier"] = VERIFIER_VERSION
     astra = AstraClient()
     astra.check_access(args.config.parent.resolve())
@@ -104,62 +103,21 @@ def run_job(args) -> dict:
     ping = bridge.request("ping", timeout=5)
     if ping.get("status") == "error":
         raise RuntimeError("Fusion add-in is not ready")
-    fusion_approval = FusionAppApproval()
 
-    def factory(pins, evaluation_enabled=False):
-        return trace_controller(
-            Controller(
-                main=AstraMainAgent(
-                    astra,
-                    bridge,
-                    version_store=store,
-                    default_versions=pins,
-                    api_docs=args.api_docs,
-                ),
-                checks=make_checks(store, pins["checks"]),
-                fusion=FixedFusionVerifier(
-                    bridge,
-                    lambda directory: FusionUIReader(directory, app_approval=fusion_approval),
-                ),
-                supervisor=AstraSupervisor(astra, version_store=store, default_versions=pins),
-                learner=AstraCheckLearner(astra, version_store=store, default_versions=pins),
-                check_runner_factory=lambda ref: make_checks(store, ref),
+    controller = trace_controller(
+        Controller(
+            main=AstraMainAgent(
+                astra, bridge, version_store=store, default_versions=versions,
+                api_docs=args.api_docs,
             ),
-            weave.op,
-        )
-
-    controller = factory(versions)
-    from .benchmarks import BenchmarkRunner
-
-    runner = BenchmarkRunner(
-        store=store,
-        root=args.runs / "benchmarks",
-        make_controller=factory,
-        check_runner_factory=lambda ref: trace_adapter(
-            make_checks(store, ref), {"run": "candidate_checks"}, weave.op
+            checks=store.make_checks(versions["checks"]),
+            fusion=FixedFusionVerifier(bridge),
+            supervisor=AstraSupervisor(astra, version_store=store, default_versions=versions),
+            learner=AstraCheckLearner(astra, version_store=store, default_versions=versions),
+            check_runner_factory=store.make_checks,
+            learning=store,
         ),
-        max_attempts=args.max_attempts,
-    )
-
-    class DatasetGate:
-        def evaluate(self, proposal, context):
-            dataset = args.check_dataset if proposal.kind == "checks" else args.loop_dataset
-            if not dataset:
-                return PromotionResult(
-                    proposal.id,
-                    False,
-                    "Awaiting real simulator cases; no change promoted without a Weave evaluation",
-                )
-            gate = WeaveEvaluationGate(
-                store=store,
-                project=args.project,
-                dataset_ref=dataset,
-                runner=trace_call(runner, "paired_benchmark_run", weave.op),
-            )
-            return gate.evaluate(proposal, context)
-
-    controller.evaluation = trace_adapter(
-        DatasetGate(), {"evaluate": "reusable_change_evaluation"}, weave.op
+        weave.op,
     )
 
     # Fusion computes verification; the UI adapter requires actual native observations.
@@ -185,17 +143,15 @@ def main() -> None:
         action="store_true",
         help="Read Fusion directly through the SDK without a model turn",
     )
-    commands.add_parser("init", help="Register initial local check and prompt versions")
+    commands.add_parser("init", help="Create the two shared learning files if missing")
     run = commands.add_parser("run", help="Run a real configured CNC job")
     run.add_argument("config", type=Path)
     run.add_argument("--project", default="silta/coreweave-hack-silta-squad")
     run.add_argument("--runs", type=Path, default=Path("runs"))
-    run.add_argument("--versions", type=Path, default=Path("versions"))
+    run.add_argument("--learning-directory", type=Path, default=Path("learning"))
     run.add_argument("--job-id")
     run.add_argument("--max-attempts", type=int, default=20)
     run.add_argument("--api-docs", nargs="*", default=[])
-    run.add_argument("--check-dataset", help="Immutable dataset ref of simulator-labeled plans")
-    run.add_argument("--loop-dataset", help="Immutable dataset ref of fixed-target part cases")
     args = parser.parse_args()
     try:
         if args.command == "doctor":
@@ -222,7 +178,9 @@ def main() -> None:
                     result["fusion_ui"] = {"status": "unavailable", "error": str(error)}
                     result["status"] = "incomplete"
         elif args.command == "init":
-            result = initialize(VersionStore("versions"))
+            from .learning import SharedLearning
+
+            result = SharedLearning(Path("learning")).active()
         else:
             result = run_job(args)
         print(json.dumps(result, indent=2))

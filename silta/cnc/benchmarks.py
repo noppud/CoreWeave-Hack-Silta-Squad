@@ -11,11 +11,13 @@ import json
 import math
 import uuid
 from dataclasses import asdict
+from datetime import datetime
 from pathlib import Path
+from statistics import median
 from typing import Any
 
 from .checks import IntegrityChecks
-from .evaluation import KINDS, VersionStore
+from .evaluation import CHECK_REPETITIONS, KINDS, VersionStore
 from .models import (
     Artifact,
     Candidate,
@@ -125,7 +127,34 @@ def validate_case(case: dict) -> tuple[JobInputs, Target, Candidate, Verificatio
         raise ValueError("Cached label contradicts the recorded simulation verdict")
     if case["verification_evidence"] != [item.path for item in verification.evidence]:
         raise ValueError("Cached evidence references do not match the verification")
+    if "verification_timing" in case:
+        timing = case["verification_timing"]
+        manifest = json.loads(Path(case["source_manifest"]).read_text())
+        measured = verification_timing(manifest, case["source_attempt"])
+        if timing != measured:
+            raise ValueError("Verification timing differs from recorded source events")
     return inputs, target, candidate, verification
+
+
+def verification_timing(manifest: dict, attempt: int) -> dict:
+    """Observed verifier wall time, including collection and evidence retention."""
+    endpoints = []
+    for name in ("verification_started", "verification_completed"):
+        events = [
+            event
+            for event in manifest["events"]
+            if event.get("event") == name and event.get("attempt") == attempt
+        ]
+        if len(events) != 1:
+            raise ValueError("Verification timing needs exactly one start and completion")
+        endpoints.append(events[0]["at"])
+    start, end = [datetime.fromisoformat(value) for value in endpoints]
+    if start.tzinfo is None or end.tzinfo is None:
+        raise ValueError("Verification timestamps require timezones")
+    elapsed = (end - start).total_seconds() * 1000
+    if not math.isfinite(elapsed) or elapsed <= 0:
+        raise ValueError("Verification elapsed time must be positive")
+    return {"started_at": endpoints[0], "completed_at": endpoints[1], "elapsed_ms": elapsed}
 
 
 def capture_case(
@@ -184,6 +213,7 @@ def capture_case(
         "verification_evidence": [item.path for item in verification.evidence],
         "source_manifest": str(path),
         "source_attempt": attempt,
+        "verification_timing": verification_timing(manifest, attempt),
     }
     case = json.loads(json.dumps(case, allow_nan=False))
     validate_case(case)
@@ -262,18 +292,25 @@ class BenchmarkRunner:
                 workspace.mkdir(parents=True)
                 context = JobContext(inputs, target, inputs.digest, versions, str(workspace))
                 runner = IntegrityChecks(self.check_runner_factory(version_ref))
-                result = runner.run(copy.deepcopy(candidate), copy.deepcopy(context))
-                validate_case(case)  # Catch mutation by generated code; labels remain frozen.
-                if (
-                    type(result.passed) is not bool
-                    or not math.isfinite(result.runtime_s)
-                    or result.runtime_s < 0
-                ):
-                    raise ValueError("Malformed check benchmark result")
+                results = []
+                for _ in range(CHECK_REPETITIONS):
+                    result = runner.run(copy.deepcopy(candidate), copy.deepcopy(context))
+                    validate_case(case)  # Catch mutation; simulator labels remain frozen.
+                    if (
+                        type(result.passed) is not bool
+                        or not math.isfinite(result.runtime_s)
+                        or result.runtime_s < 0
+                    ):
+                        raise ValueError("Malformed check benchmark result")
+                    results.append(result)
+                if len({(result.passed, result.issues) for result in results}) != 1:
+                    raise ValueError("Check replay verdict or issues changed between repetitions")
+                samples = [result.runtime_s * 1000 for result in results]
                 record.update(
-                    passed=result.passed,
-                    runtime_ms=result.runtime_s * 1000,
-                    issues=list(result.issues),
+                    passed=results[0].passed,
+                    runtime_ms=median(samples),
+                    runtime_samples_ms=samples,
+                    issues=list(results[0].issues),
                 )
                 (workspace / "check-result.json").write_text(json.dumps(record, allow_nan=False))
             else:

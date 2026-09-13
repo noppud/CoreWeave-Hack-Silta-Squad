@@ -14,7 +14,12 @@ import os
 import tempfile
 from dataclasses import asdict, dataclass
 from pathlib import Path
+from statistics import median
 from typing import Any
+
+CHECK_REPETITIONS = 5
+CHECK_SAVINGS_FRACTION = 0.1
+CHECK_MAX_RUNTIME_MS = 1000.0
 
 KINDS = frozenset({"checks", "main_prompt", "supervisor_prompt"})
 
@@ -132,6 +137,8 @@ def evaluate_check_change(
     if {case.get("label") for case in cases} != {"valid", "invalid"}:
         raise ValueError("Check evaluation needs both simulator-labeled valid and invalid examples")
     reasons, rows = [], []
+    saved_verification_ms = 0.0
+    added_runtime_upper_ms = 0.0
     totals = [{"caught": 0, "false_rejections": 0, "runtime_ms": 0.0} for _ in (0, 1)]
     for key, case in sorted(frozen.items()):
         if not case.get("verification_evidence"):
@@ -140,13 +147,28 @@ def evaluate_check_change(
             _same_inputs(case, row)
             if type(row.get("passed")) is not bool:
                 raise ValueError("Check result must be explicit passed bool")
-            totals[i]["runtime_ms"] += _number(row.get("runtime_ms"), "runtime_ms")
+            samples = row.get("runtime_samples_ms")
+            if not isinstance(samples, list) or len(samples) != CHECK_REPETITIONS:
+                raise ValueError(f"Check timings require {CHECK_REPETITIONS} replay samples")
+            samples = [_number(value, "runtime sample") for value in samples]
+            runtime = _number(row.get("runtime_ms"), "runtime_ms")
+            if not math.isclose(runtime, median(samples), abs_tol=1e-9):
+                raise ValueError("Check runtime must be the median of recorded samples")
+            totals[i]["runtime_ms"] += runtime
+            if i == 1 and max(samples) > CHECK_MAX_RUNTIME_MS:
+                reasons.append(f"Proposed checks exceed cheap-check runtime ceiling on {key}")
             totals[i]["caught"] += int(case["label"] == "invalid" and not row["passed"])
             totals[i]["false_rejections"] += int(case["label"] == "valid" and not row["passed"])
         if case["label"] == "valid" and not new[key]["passed"]:
             reasons.append(f"Proposed checks reject a simulator-valid plan: {key}")
         if case["label"] == "invalid" and not old[key]["passed"] and new[key]["passed"]:
             reasons.append(f"Previously caught failure escapes on {key}")
+        added_runtime_upper_ms += max(
+            0.0, max(new[key]["runtime_samples_ms"]) - min(old[key]["runtime_samples_ms"])
+        )
+        if case["label"] == "invalid" and old[key]["passed"] and not new[key]["passed"]:
+            timing = case.get("verification_timing", {})
+            saved_verification_ms += _number(timing.get("elapsed_ms"), "verification elapsed_ms")
         rows.append(
             {
                 "case_id": key,
@@ -163,17 +185,33 @@ def evaluate_check_change(
     improved = (
         totals[1]["caught"] > totals[0]["caught"]
         or totals[1]["false_rejections"] < totals[0]["false_rejections"]
-        or totals[1]["runtime_ms"] < totals[0]["runtime_ms"] - 1e-9
     )
-    if totals[1]["runtime_ms"] > totals[0]["runtime_ms"] + 1e-9:
-        reasons.append("Check runtime regressed")
+    # Compare check overhead to observed verifier wall time, not machining time.
+    # Worst proposed minus best baseline samples conservatively includes timing noise.
+    budget_ms = CHECK_SAVINGS_FRACTION * saved_verification_ms
+    if added_runtime_upper_ms > budget_ms:
+        reasons.append("Added check runtime exceeds the measured simulation-savings budget")
     if not improved:
         reasons.append("No demonstrated improvement")
     return EvaluationResult(
         "checks",
         not reasons,
         tuple(reasons),
-        {"baseline": totals[0], "proposed": totals[1], "examples": len(cases)},
+        {
+            "baseline": totals[0],
+            "proposed": totals[1],
+            "examples": len(cases),
+            "saved_verification_ms": saved_verification_ms,
+            "added_runtime_upper_ms": added_runtime_upper_ms,
+            "runtime_budget_ms": budget_ms,
+            "timing_scope": "frozen-case replay estimate, not campaign wall-clock speedup",
+            "policy": {
+                "repetitions": CHECK_REPETITIONS,
+                "savings_fraction": CHECK_SAVINGS_FRACTION,
+                "max_case_runtime_ms": CHECK_MAX_RUNTIME_MS,
+                "timing_only_promotion": False,
+            },
+        },
         tuple(rows),
     )
 

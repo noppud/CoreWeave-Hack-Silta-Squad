@@ -16,6 +16,7 @@ from typing import Any, Protocol
 from .cam_documents import open_snapshot, save_snapshot
 from .models import (
     Candidate,
+    CandidateGenerationError,
     JobContext,
     JobInputs,
     ReusableProposal,
@@ -120,7 +121,7 @@ _ASSESSMENT_SCHEMA = _object(
 )
 _PROPOSAL_SCHEMA = _object(
     {
-        "kind": {"type": "string", "enum": ["main_prompt", "supervisor_prompt"]},
+        "kind": {"type": "string", "enum": ["main_prompt"]},
         "content": _STRING,
         "reason": _STRING,
     }
@@ -529,6 +530,7 @@ class AstraMainAgent(_Roles):
         *,
         source_prefix: str = "",
         script_arguments: dict | None = None,
+        after_execution: Callable[[dict], None] | None = None,
     ) -> tuple[dict, dict]:
         """Retry only confirmed source errors, after restoring an isolated baseline."""
         for attempt in range(1, self.max_source_attempts + 1):
@@ -547,6 +549,8 @@ class AstraMainAgent(_Roles):
                         + ", '<silta-machining-plan>', 'exec'), globals())\n"
                     )
                 execution = self._script(executable, directory, name, script_arguments)
+                if after_execution is not None:
+                    after_execution(execution)
             except Exception as error:
                 confirmed = isinstance(error, FusionScriptError)
                 _save(
@@ -634,6 +638,9 @@ class AstraMainAgent(_Roles):
         prompt = self._prompt("main_prompt") + "\nTASK: Create CAD from these actual drawings.\n"
         prompt += (
             "The controller will create a fresh empty document before source execution. "
+            "Source is executed directly as Python module code, not installed as a Fusion "
+            "add-in. Execute the build at top level and assign result; a run(context) "
+            "definition alone is never called. "
             "Build only the part described by the drawing in that active document. "
             "Do not import machine, stock or fixture bodies during CAD creation; "
             "those are assembled during CAM setup after target acceptance. "
@@ -669,8 +676,17 @@ class AstraMainAgent(_Roles):
             if created.get("result", {}).get("created") is not True:
                 raise RuntimeError("Fresh CAD baseline was not established")
 
-        reply, execution = self._execute_with_repair(reply, prompt, directory, "cad", fresh_cad)
-        registration = self._request("run_script", {"source": _REGISTER_TARGET_SCRIPT})["result"]
+        registration = {}
+
+        def register_target(execution: dict) -> None:
+            registration.clear()
+            registration.update(
+                self._request("run_script", {"source": _REGISTER_TARGET_SCRIPT})["result"]
+            )
+
+        reply, execution = self._execute_with_repair(
+            reply, prompt, directory, "cad", fresh_cad, after_execution=register_target,
+        )
         if not registration.get("target_body_ids"):
             raise ValueError("Fusion did not register accepted part-body scope")
         geometry = self._geometry()
@@ -898,10 +914,19 @@ class AstraMainAgent(_Roles):
         for operation in inspection.get("operations", []):
             operation.update(observed.get(operation["id"], {}))
         operations = inspection.get("operations", [])
-        if any(op.get("has_error") for op in operations):
-            raise RuntimeError("Fusion reports operation errors after toolpath generation")
-        if not operations or not all(op.get("has_toolpath") is True for op in operations):
-            raise RuntimeError("One or more Fusion operations have no generated toolpath")
+        if (not operations or any(op.get("has_error") for op in operations)
+                or not all(op.get("has_toolpath") is True for op in operations)):
+            failure = {
+                "stage": "toolpath_generation",
+                "issues": [
+                    "Fusion completed generation but some operations have errors or no toolpath"
+                ],
+                "inspection": inspection,
+                "source": reply["source"],
+                "generation": generated,
+            }
+            _save(directory / "toolpath-generation-failure.json", failure)
+            raise CandidateGenerationError(failure)
         rates = context.inputs.machine.get("time_estimation")
         if not isinstance(rates, dict) or not all(
             key in rates for key in ("feed_scale_percent", "rapid_feed_cm_s", "tool_change_seconds")
@@ -985,6 +1010,7 @@ class AstraSupervisor(_Roles):
                     "candidate": asdict(candidate),
                     "verification": asdict(verification),
                     "history": history,
+                    "current_main_prompt": self._prompt("main_prompt", context.versions),
                 }
             ),
             directory,
