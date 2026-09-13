@@ -192,3 +192,21 @@ def test_resume_presentation_exception_preserves_exact_verdict(tmp_path):
     wrapper = helper(SimpleNamespace(verify=lambda *args: verdict), fail, None, tmp_path, receipts)
     assert wrapper.verify(SimpleNamespace(id="c1"), None) is verdict
     assert receipts[0]["status"] == "presentation_failed"
+
+
+def test_retained_candidate_ids_are_reserved_for_new_generations():
+    from types import SimpleNamespace
+
+    helpers = runpy.run_path(
+        str(Path(__file__).resolve().parents[1] / "scripts/demo/resume_fusion_job.py")
+    )
+    source = {"events": [{"candidate": {"id": "candidate-0003"}}]}
+    offset = helpers["candidate_generation_offset"](source)
+    number = helpers["generation_attempt_number"]
+    assert [number(attempt, offset, True) for attempt in (2, 3)] == [4, 5]
+    assert [number(attempt, offset, False) for attempt in (1, 2)] == [1, 2]
+    trial_offset = helpers["candidate_generation_offset"](
+        source, SimpleNamespace(id="candidate-0002")
+    )
+    assert number(2, trial_offset, True) == 4
+    assert source["events"][0]["candidate"]["id"] == "candidate-0003"

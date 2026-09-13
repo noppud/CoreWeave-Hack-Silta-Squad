@@ -11,6 +11,7 @@ import fcntl
 import hashlib
 import json
 import os
+import re
 import sys
 from dataclasses import asdict
 from pathlib import Path
@@ -100,6 +101,32 @@ def recovery_learning(directory):
     return SharedLearning(directory), provenance
 
 
+def candidate_generation_offset(source, trial=None):
+    """Reserve every numeric candidate identity already present in retained inputs."""
+    numbers = []
+
+    def visit(value):
+        if isinstance(value, dict):
+            for child in value.values():
+                visit(child)
+        elif isinstance(value, list):
+            for child in value:
+                visit(child)
+        elif isinstance(value, str):
+            match = re.fullmatch(r"candidate-([0-9]+)", value)
+            if match:
+                numbers.append(int(match.group(1)))
+
+    visit(source)
+    if trial is not None:
+        visit(trial.id)
+    return max(numbers, default=0)
+
+
+def generation_attempt_number(attempt, offset, reuses_first):
+    return offset + attempt - 1 if reuses_first else attempt
+
+
 class PlaybackVerifier:
     """Optional presentation after verification; return the original verdict unchanged."""
 
@@ -171,6 +198,7 @@ def main():
         trial, nomination = selected_trial(
             args.trial_source, args.trial_candidate_id, inputs.digest, target
         )
+    generation_offset = candidate_generation_offset(source, trial)
     learning, learning_provenance = recovery_learning(args.learning_directory)
     key = os.environ.get("WANDB_API_KEY") or os.environ.pop("COREWEAVE_WANDB_API_KEY", "")
     if not key:
@@ -191,6 +219,7 @@ def main():
                         "source_manifest_sha256": source_sha256,
                         "manual_trial": nomination,
                         "learning_provenance": learning_provenance,
+                        "candidate_generation_offset": generation_offset,
                         "candidate_digest": candidate.digest if candidate else None,
                         "reason": (
                             "Same fixed target; fresh verification of retained candidate first"
@@ -231,7 +260,10 @@ def main():
                         "source_manifest": str(args.source.resolve()),
                     },
                 }
-            return super().propose(context, previous, feedback, instructions, attempt)
+            generated_attempt = generation_attempt_number(
+                attempt, generation_offset, candidate is not None or trial is not None
+            )
+            return super().propose(context, previous, feedback, instructions, generated_attempt)
 
     class ResumeJudge(AstraSupervisor):
         def decide(self, context, candidate, verification, history):
@@ -299,6 +331,7 @@ def main():
         weave_project="silta/coreweave-hack-silta-squad",
         weave_call_id=call.id,
         learning_provenance=learning_provenance,
+        candidate_generation_offset=generation_offset,
         presentation_playbacks=playback_receipts,
         presentation_scope="Known retained CAD/CAM; fresh verification, separate playback",
         ending_learning_sha256={
