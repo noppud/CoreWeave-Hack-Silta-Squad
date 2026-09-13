@@ -28,6 +28,10 @@ export function stagedSteps(detail,{presentation=false}={}){
       // Keep the repair cue once, then jump to the successful final attempt.
       steps.splice(failedIndex+1,0,{stage:'judge',title:'Judge: improve machining time',kind:'instruction',text:'Add the learned planning guidance and regenerate the same CAD.'});
     }
+    const finalIndex=steps.findIndex(s=>s.event===finalVerification);
+    if(finalIndex>=0&&!steps.some(s=>s.kind==='ready')){
+      steps.splice(finalIndex,0,{...steps[finalIndex],stage:'simulate',title:'Starting Fusion simulation',kind:'ready'});
+    }
   }
   const passes=steps.filter(s=>s.kind==='verification'&&s.passed&&Number.isFinite(s.seconds));
   if(passes.length)steps.push({stage:'output',title:'Final machining plan',kind:'result',before:passes[0].seconds,after:passes.at(-1).seconds});

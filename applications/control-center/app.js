@@ -515,7 +515,9 @@ function showRecordedSimulation(){
   $('#demo-mode').textContent='Fusion · simulation';
   $('#demo-scene').innerHTML=`<video id="demo-recorded-simulation" autoplay muted playsinline src="${esc(film.url)}"></video>`;
   $('#demo-fallback').hidden=true;$('#demo-reset').hidden=false;
-  $('#demo-recorded-simulation').addEventListener('ended',()=>{D.fallbackComplete=true;finishDemoSimulation();},{once:true});
+  const video=$('#demo-recorded-simulation');
+  video.addEventListener('ended',()=>{D.fallbackComplete=true;finishDemoSimulation();},{once:true});
+  video.play().catch(()=>{video.controls=true;$('#demo-status').textContent='Click play to start simulation';});
 }
 function showLiveDemo(){
   pauseDemo();D.live=true;D.liveRequested=true;$('#demo-body').classList.add('is-live');$('#demo-mode').textContent='Starting Fusion simulation';
