@@ -1,0 +1,229 @@
+AUTOMATIC TRANSCRIPT — uncorrected; not verbatim evidence. Obvious recognition failures around 206–244 seconds. Names and technical terms may be wrong. First ~196 seconds concern a different project. Source: /Users/touko/Downloads/IMG_0206.MOV
+
+[0.0–2.9]  I'm just going to walk around the house a little bit to show you what it looks like.
+[2.9–5.2]  It does a really good job with shadows and lighting.
+[5.2–8.4]  And if you remember, the stove has the stove here.
+[8.4–10.3]  And I'm going to go ahead and open our inventory.
+[10.3–11.8]  We can buy a dresser.
+[11.8–14.8]  We'll just put it on this wall over here.
+[14.8–17.7]  And, yeah.
+[17.7–21.7]  I think future-wise, we expect, like, full regenerate, you know?
+[21.7–24.9]  So just show me a completely different layout.
+[24.9–26.6]  Do eight in parallel.
+[26.6–28.7]  Complete it fully agented.
+[28.7–30.4]  Find people to order everything.
+[30.4–31.1]  Get builders.
+[31.1–32.2]  Get TaskRabbit.
+[32.2–35.6]  Fully end-to-end just handle the full customization.
+[35.6–41.2]  And, of course, keep it more grounded than the semi-slop it is now.
+[41.2–44.1]  It did quite good with actually sticking to dimensions.
+[44.1–46.5]  So paste in a Costco link for a couch.
+[46.5–48.8]  It finds dimensions.
+[48.8–49.4]  Thank you, team.
+[49.4–49.9]  Homebody.
+[49.9–51.1]  Let's give a round of applause.
+[55.8–58.7]  Any questions from our judges?
+[58.7–60.7]  The layout sounds look amazing.
+[60.7–64.2]  Do they generally follow the laws of physics?
+[64.2–67.7]  Do you have to, like, adjust it to make sure they fit?
+[67.7–72.2]  In our experience, when you have a floor plan, it does a pretty amazing job.
+[72.2–74.7]  Also, just the capabilities are quite good.
+[74.7–78.0]  And in terms of, like, lighting, it kind of took a lot of prompting to figure out how to,
+[78.0–80.9]  like, make it not look like just a basic render.
+[80.9–82.4]  But it works pretty good.
+[82.4–85.9]  As you can see, like, some of the physics are a bit wonky here, like this door.
+[85.9–86.9]  Yeah.
+[86.9–92.4]  But by and large, some of the old models we tested just to play around weren't as good.
+[92.4–95.9]  Like, I think sometimes the bed is at the doorway.
+[95.9–97.9]  There's a dresser right at the entrance.
+[97.9–100.0]  New model fixed a lot of this, so.
+[100.0–108.4]  How do you imagine people being able to give feedback to the types of decisions that astronauts?
+[108.4–112.9]  One of the fun things you can imagine is just a chat with a diagram, right?
+[112.9–114.8]  So, I don't like this.
+[114.8–120.5]  You can just do it all in natural language and it should be able to pull from a catalog, redesign it.
+[120.5–125.4]  I think there's a side of personalization and learning your preference, but in reality,
+[125.4–130.7]  your movements, I don't think this stuff needs to be super complicated, right?
+[130.7–135.5]  You just, even if it's not super grounded, you use it as inspiration tooling,
+[135.5–137.5]  so you're not slipping out of interest.
+[137.5–141.9]  Do we have any final questions from Ajax?
+[141.9–144.5]  What would you like to do if you had more time?
+[144.5–153.2]  I think that it does a good job with just the floor plans, but it would be really amazing
+[153.2–157.2]  to go beyond just looking at your apartment, but maybe like the whole building, the block,
+[157.2–160.9]  the neighborhood, and see how you can interact with it.
+[160.9–164.6]  This is like a big skyline, obviously, but imagine in a world where, like, you know,
+[164.6–169.0]  you're not the dead side of San Francisco, you can just actually really be immersed into
+[169.0–171.6]  that world and get a picture of what your life would look like.
+[171.6–178.0]  We did this for our office, like a very raw three-minute walkthrough of a big building.
+[178.0–180.0]  Create a system, but also no work, right?
+[180.0–182.4]  So, no floor plan, no images.
+[182.4–184.4]  The model kind of cut it all up.
+[184.4–189.9]  There's, like, good grounding it does, and it shows you you can edit and fix the space.
+[189.9–191.4]  But that's some stuff.
+[191.4–193.8]  All right, thank you, team Humba.
+[193.8–195.8]  Let's get a round of applause.
+[195.8–201.8]  And up next to the stage, we have team Cat Sandboxes.
+[201.8–205.8]  Let's welcome team Cat Sandboxes to the stage.
+[205.8–206.4]  Ape.
+[206.4–207.4]  Ape, I can do a good one.
+[207.4–207.8]  Ape, I can do a good one.
+[207.8–207.9]  and a good one.
+[207.9–208.2]  I can do a good one.
+[208.2–208.5]  I can do a good one.
+[208.5–208.7]  I can do a good one.
+[208.7–209.0]  I can do a good one.
+[209.0–209.3]  I can do a good one.
+[209.3–209.7]  I can do a good one.
+[209.7–210.0]  I can do a good one.
+[210.0–210.2]  I can do a good one.
+[210.2–210.5]  I can do a good one.
+[210.5–210.7]  I can do a good one.
+[210.7–210.9]  I can do a good one.
+[210.9–211.2]  I can do a good one.
+[211.2–211.4]  I can do a good one.
+[211.4–211.6]  I can do a good one.
+[211.6–211.9]  I can do a good one.
+[211.9–212.3]  I can do a good one.
+[212.3–212.5]  I can do a good one.
+[212.5–212.8]  I can do a good one.
+[212.8–213.1]  to a good one.
+[213.1–213.6] iliar, I can do a good one.
+[213.6–215.4]  I was not an old one.
+[215.5–216.6]  I have a good one.
+[216.6–217.6]  I have a good one.
+[217.6–218.6]  I have a good one.
+[218.6–218.9]  I have a good one.
+[218.9–219.2]  I have a good one.
+[219.2–219.6]  I have a good one.
+[219.6–219.9]  I have a good one.
+[219.9–220.2]  I have a good one.
+[220.2–220.3]  I have a good one.
+[220.3–220.4]  I have a good one.
+[220.4–220.5]  I have a good one.
+[220.5–220.6]  I have a good one.
+[220.6–220.7]  I have a good one.
+[220.7–220.8]  I have a good one.
+[220.8–220.9]  I have a good one.
+[220.9–221.1]  I have a good one.
+[221.1–221.2]  I have a good one.
+[221.2–221.3]  I have a good one.
+[221.3–221.5]  I have a good one.
+[221.5–221.6]  I have a good one.
+[221.6–221.9]  I have a good one.
+[221.9–222.0]  I have a good one.
+[222.0–222.1]  I have a good one.
+[222.1–222.2]  I have a good one.
+[222.2–222.4]  I have a good one.
+[222.4–222.6]  I have a good one.
+[222.6–224.8]  I as a lot to do, I as a good as a part.
+[224.8–226.8]  you can like to have a good way to this
+[226.8–227.9]  you can have a good way to the
+[227.9–228.9]  I can have a good way to the
+[228.9–229.8]  I can have a good way to the
+[229.8–230.4]  I can have a good way to the
+[230.4–230.8]  I can have a good way to the
+[230.8–231.1]  I can have a good way to the
+[231.1–231.5]  I can have a good way to the
+[231.5–231.8]  I can have a good way to the
+[231.8–231.9]  I can have a good way to the
+[231.9–232.3]  I can have a good way to the
+[232.3–232.6]  I can have a good way to the
+[232.6–232.8]  I can have a good way to the
+[232.8–233.1]  I can have a good way to the
+[233.1–233.4]  I can have a good way to the
+[233.4–233.7]  I can have a good way to the
+[233.7–233.9]  I can have a good way to the
+[233.9–234.3]  I can have a good way to the
+[234.3–234.7]  I can have a good way to the
+[234.7–235.0]  I can have a good way to the
+[235.0–235.3]  I can have a good way to the
+[235.3–235.6]  I can have a good way to the
+[235.6–237.6]  I don't know if you're a good answer.
+[239.6–241.6]  I don't know if you're a good answer.
+[241.6–243.6]  I don't know if you're a good answer.
+[243.6–249.6]  Yeah, so I've been doing this for my CAD work with
+[249.6–253.6]  and I'm just like, it's for different capabilities.
+[253.6–259.6]  I think it's like really interesting to see what, you know, fundamentally they're capable of understanding
+[259.6–263.6]  in a three-pronential space, which is a little bit different than, like, the VLM layers
+[263.6–267.6]  that we're used to with, like, routes you use in computers today.
+[267.6–269.6]  I think this is a little bit frozen.
+[269.6–283.6]  So, anyways, what I put together was basically kind of like CAD-side boxes.
+[283.6–301.6]  So, I think from what you can see from the previous generation of models about six months ago to today,
+[301.6–307.6]  is that you're starting to see longer horizon tasks appear, where you can sort of give, like, a single prompt
+[307.6–309.6]  and let it kind of go off on its own, right?
+[309.6–315.6]  And we saw this shift with coding agents where, you know, we have tab and then we have agent inside of our ID,
+[315.6–320.6]  and then we shift it away towards terminal and background agents, you know, even codex and things like that.
+[320.6–326.6]  And the reason, like, fundamentally is the models got to a point where they could just kind of operate for five, ten minutes on their own, right?
+[326.6–334.6]  So, this is basically Fusion 360 in a browser, or sorry, in AWS, essentially.
+[334.6–340.6]  And then I wrap it around with an HTTP server, expose all of the interfaces, they have a very nice...
+[340.6–344.6]  Wi-Fi might be down, I don't know.
+[344.6–349.6]  But they have a very nice interface for interacting via the SDK.
+[349.6–355.6]  And so you can basically control, like, every part of Fusion 360 and allow it kind of to design things.
+[355.6–359.6]  And then on the right, we have kind of a terminal in the browser, which is just a fun open source project,
+[359.6–366.6]  where we stream kind of real-time the state of the model back to codex.
+[366.6–371.6]  So, it's just showcasing, like, a world where you might have codex on the left-hand side,
+[371.6–374.6]  and then, like, a real-time view of the model that you're working on.
+[374.6–380.6]  And it should start going soon, maybe, if the Wi-Fi works.
+[380.6–382.6]  I apologize.
+[382.6–388.6]  But I just wanted to walk through kind of, like, history, maybe, while that's trying to do stuff.
+[388.6–393.6]  You know, this was, like, state-of-the-art, maybe, like, eight months ago, like, very simple coasters, right?
+[393.6–400.6]  Got to a point where, like, I sort of got into design some of this, which is, like, a full cam base.
+[400.6–406.6]  Essentially, that's the shelf that I just showed you, and then underneath, you need some supporting material
+[406.6–409.6]  if you're actually going to machine this from wood, which is what I did.
+[409.6–416.6]  You know, it got, like, the rough structure, but I still went in and, like, adjusted things to deal with the natural curves.
+[416.6–425.6]  But the other day, like, I think Saturday, I was working on, effectively, a valve, a mechanical valve that uses a servo.
+[425.6–433.6]  And just for fun, like, I gave Astro my new, like, my CanSea Life, or Fusion, and I was like, hey, like, these are the specs.
+[433.6–437.6]  You know, this is the bomb that you have. Take a shot.
+[437.6–443.6]  I didn't really expect much, and it came back with a whole assembly that actually, like, actuated and looks like this.
+[443.6–449.6]  And you can see, like, some basic, like, issues at the bottom right, like, there's over-lab on some of the holes.
+[449.6–455.6]  There's, like, issues in the screw holes on the part that goes on top of the tube, where, like, the wall would be too thin.
+[455.6–460.6]  But then you just talk to it and you tell it, like, hey, these are the issues, and then it iterates on itself.
+[460.6–466.6]  I am going to play a video real fast, which is just a demo video, because I don't know why the Wi-Fi is not working.
+[466.6–473.6]  But, you know, essentially, this, I'm, again, asking it to design a servo valve for air.
+[473.6–477.6]  So it just, like, spat that out, like, roughly in a step.
+[477.6–480.6]  Then it's adding a servo housing on top of that.
+[480.6–485.6]  And then I will eventually, like, give it around so you can see a little bit more.
+[485.6–491.6]  But, like, it's designing the entire plan with all the dimensions, right, based off, like, different specs.
+[491.6–494.6]  You can tell if you have download, you know, schematics for different parts.
+[494.6–500.6]  And then it's all just code, like, because it's an SDK to control Fusion 360.
+[500.6–509.6]  And so, anyways, the whole project is just around, like, can I have a remote environment with Fusion 360 to provide kind of a sandbox where I can just give the task.
+[509.6–511.6]  And thank you, team CAT Sandboxes.
+[511.6–513.6]  Give a round of applause.
+[517.6–520.6]  Now I would like to hand it over to our judges for any questions.
+[524.6–528.6]  Do we have any questions for our viewers?
+[528.6–533.6]  How would you go back and forth to update these designs and make edits in a tool like this?
+[533.6–538.6]  Yeah, I think, like, the biggest thing that I found that you have to get right is basically reference frame.
+[538.6–542.6]  So with, like, 3D models, you don't have, like, a common reference.
+[542.6–546.6]  Like, if you say edit the right-hand side of the model, it really depends on, like, where your visual perspective comes from, right?
+[546.6–552.6]  So I think, like, the biggest thing is giving a click interface where you can actually click on the model itself, right?
+[552.6–558.6]  So, like, you can actually, like, highlight the different parts, right?
+[558.6–561.6]  You can imagine if it's more complex.
+[561.6–564.6]  You would want to be able to, like, click on that part and then provide a note, right?
+[564.6–571.6]  So you're providing, like, an annotated point in space and then also telling it, like, hey, add a whole here for, you know, adjust these dimensions, essentially.
+[571.6–579.6]  That's probably, like, the best interface that I have kind of come up with or gotten to in working back and forth.
+[579.6–585.6]  Obviously, like, more complex assemblies, the more you can decompose them into, like, smaller pieces.
+[585.6–588.6]  So that way you can open up sub-assemblies and, like, work on that.
+[588.6–590.6]  I think it's important.
+[590.6–592.6]  But, yeah.
+[592.6–598.6]  I think, I mean, I think we're still, like, a year or two, a year and a half, maybe, from, like, general purpose, right?
+[598.6–602.6]  Where you can just show up, anybody can show up with a complex task.
+[602.6–607.6]  But it's really cool to see, like, how fast it's improved.
+[607.6–609.6]  Do we have any other questions?
+[609.6–615.6]  Are there, do you have to inject, you know, real data from actuators, et cetera, to make it?
+[615.6–619.6]  Or do you just describe it and it will be, like, how does that work?
+[619.6–627.6]  Yeah. So, the one that I showed you, that was based on, like, an actual, so basically I had to, like, pick out all the parts, all the nutsets,
+[627.6–634.6]  all the screws, all the servos, so then it went and found, like, an open schematic online.
+[634.6–640.6]  And then I was able to figure out the dimensions of, like, the wing and the actual, like, body of the servo and design around that, essentially,
+[640.6–645.6]  which is much better than it has, like, actual grounding and, like, all that stuff.
+[645.6–654.6]  What was interesting, I was working with Codex beforehand, and it actually asked me to hold up a ruler next to something else
+[654.6–661.6]  so that I could look at, like, how, like, the measurement of the part and the design around that, which I thought, like, that's what a human would ask me to do.
+[661.6–666.6]  And the fact that it was asking me for help was, like, really eerie but also really cool.
+[666.6–669.6]  I think we have time for one more question.
+[669.6–676.6]  Maybe a quick one. I was curious, like, from your experience, like, what's the benefit of the work, like, with, like, this CAD software in the cloud that can stream back?
+[676.6–685.6]  Like, is it just you build more, you build faster, versus having, like, the CAD software in the cloud?
+[685.6–688.6]  I think it's parallel work, the same way, like, with coding, right?
+[688.6–694.6]  Like, eventually, you want to be able to say, hey, go do this thing, and you have sort of an expectation of, like, how confident it is,
+[694.6–696.6]  and then you let it go out and do that.
+[696.6–699.6]  And in that world, you don't want it in front of you, right?
+[699.6–702.6]  So that's kind of that I think the main thing.
+[702.6–704.6]  Great. Thank you, team CAD sandboxes.
+[704.6–706.6]  Let's get a round of applause.

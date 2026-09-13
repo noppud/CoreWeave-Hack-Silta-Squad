@@ -1,52 +1,68 @@
-# CoreWeave Hack — Silta Squad
+# Silta CNC learning demo
 
-Team workspace for the CoreWeave Hacks hackathon.
+An autonomous drawing-to-CAD/CAM loop using Astra, Fusion and Weave tracing.
 
-**Status:** repository bootstrap. The product idea, team roster, and prize track are still to be chosen.
+Drawing/PDF + machine/tools → fixed CAD target → CAM → cheap learned checks → real Fusion simulation and stock comparison → judge improves or returns the best verified plan.
 
-Repository: https://github.com/noppud/CoreWeave-Hack-Silta-Squad
+**Current evidence:** completed soft-jaw variants and indexed housings, including an octagonal housing with 18 single-tool operations, plus actual machining video. A check learned from Part B rejected Part C’s bad toolpath before simulation in 51 ms. Paired Weave replay evaluations caught 2/2 retained invalid plans with learned checks versus 0/2 with empty checks, while accepting 4/4 valid plans. A fresh five-axis campaign is in progress; consult the generated [readiness report](output/demo-readiness.json) for counts, rather than treating queued jobs as results. See [learning evidence](docs/learning-results.md), [five-axis evidence](docs/five-axis-demo.md), and [evaluation scope](docs/demo-evaluation.md).
+
+The [versioned W&B evidence bundle](https://wandb.ai/silta/coreweave-hack-silta-squad/runs/43m1kgqx) contains drawing/STEP/NC files, verification results, exact learned sources, evaluations and the film. Its first snapshot contains six completed drawings and is explicitly partial. The bundle is for inspection; running Fusion requires the configured local application and machine model.
 
 ## Start here
 
-- [Hackathon brief](docs/hackathon.md): handbook requirements, judging, resources, and schedule caveats.
-- [Sponsor setup and credits](docs/sponsors.md): W&B, TypeSafe credit activation, ARIA, MCP, and molab GPU access.
-- [Build plan](docs/plan.md): choose the problem and ship the first complete agent loop.
-- [Submission draft](docs/submission.md): fill this in as we build.
+The [project context and agent handoff](docs/project-context.md) consolidates the product goal, both feedback loops, final demo decisions, metric definitions, ARIA's role, and engineering/pitch priorities from Joel's design conversation. Agents should also read [AGENTS.md](AGENTS.md).
 
-The supplied handbook requires W&B usage and emphasizes agents that improve through feedback. Keep the first demo focused on one useful task, a measurable failure, and a visible correction.
+## Standalone learning-loop presentation
 
-## Run the starter
+The [learning-loop presentation](demo/README.md) animates 54 example parts. It uses explicitly scripted presentation data, separate from the real Fusion evidence below. Run `python3 -m http.server 8080 --bind 127.0.0.1` and open **http://127.0.0.1:8080/demo/**. This presentation does not require Fusion. Preserve the separately maintained [pitch notes](docs/demo-3min.md).
 
-Install [uv](https://docs.astral.sh/uv/getting-started/installation/), then:
+## Learning
+
+Only two active learning files:
+
+- `learning/cad_cam.md`: the CAD/CAM system prompt. Judge-requested edits replace it directly.
+- `learning/checks.py`: learned manufacturing checks. A fresh learning directory starts empty; the repository file is the learned campaign snapshot. Simulation failures can produce new checks.
+
+Updates apply to the next attempt and survive for subsequent parts. Weave records traces and separate offline replay evaluations; evaluations do not gate live updates. New runs retain exact learning-source snapshots as evidence. The actual five-axis video and evaluation comparisons are available in the marimo workbench.
+
+## Retained Fusion workbench
 
 ```sh
-make setup
-# Add your W&B API key to .env; team is preset to konstav-control-dev.
-make models
-# Set WANDB_INFERENCE_MODEL in .env to one of the returned model IDs.
-make doctor
-make trace
-uv run python -m silta "Draft a practical plan for our hackathon demo"
+uv run marimo run notebooks/cnc_app.py --host 127.0.0.1 --port 8791 --headless
+uv run python scripts/demo/verify_demo.py
 ```
 
-The starter makes one initial draft, asks the model for a critique, and revises the answer. Each model request and the enclosing loop are traced in Weave using the [documented tracing API](https://docs.wandb.ai/weave/quickstart); inference uses the [W&B API](https://docs.wandb.ai/inference/api-reference). It defaults to three inference calls. `--rounds 2` or `--rounds 3` adds revision rounds (five or seven total calls). Each request has a timeout and an output token limit; failed requests stop the run.
+The workbench reads `runs/demo-campaign.json`, refreshes every 15 seconds, and keeps historical runs selectable while the next part runs. It includes the real Fusion video, CAD/CAM/NC downloads, check and prompt changes, and published Weave links. [Campaign drawings](docs/demo-campaign.md) reserve UMC07 as the fresh live example. The separate `cnc_simulator/` application has its own execution and evidence; these Fusion measurements do not describe that backend.
 
-This is a wiring example. Model critique does **not** establish measured improvement. Replace it with a task-specific evaluator and real examples once we choose the product. No UI, deployment, or live W&B verification is included yet.
+The workbench displays an empty state in a fresh clone: retained `runs/` and raw media are local artifacts. The published evidence bundle above is for inspection. `verify_demo.py` validates the original recording machine's retained evidence and is not a fresh-clone smoke test.
 
-`--check` validates that settings are present without calling any service. A real run uses inference credits and sends the task, draft, and feedback to W&B for inference and tracing. Choose a model currently available to the team's account at [W&B Inference](https://wandb.ai/inference). Open the printed Weave link to verify traces and add it to the submission draft.
-
-## Development checks
+## Run
 
 ```sh
-uv run ruff check .
-uv run ruff format --check .
+uv sync --locked
+uv run python -m silta init
+uv run python -m silta doctor --fusion
+hsec exec --only COREWEAVE_WANDB_API_KEY -- uv run python -m silta run config/soft-jaw-job.json
+uv run marimo run notebooks/cnc_app.py --host 127.0.0.1 --port 2720
+```
+
+Before executing a job from another checkout, follow [configuration relocation and Fusion linking](config/README.md#relocating-a-checkout). Relocation verifies local pinned bytes; it does not create Fusion cloud/library access.
+
+Reuse the default `learning` directory for sequential parts, or select it with `--learning-directory`. Each job saves its attempts and verification evidence under `runs/`.
+
+All agent roles use **GPT-6 Astra, low reasoning and fast mode**, through the local Codex SDK and ChatGPT subscription login. No weaker-model or API-credit fallback for project agent roles. A separate ARIA review of actual Weave traces used ARIA's exposed gpt-5.5 and informed a tested Fusion readiness repair; see [sponsor evidence](docs/sponsor-evidence.md).
+
+Joel's separate [ARIA architecture and evaluation review](docs/aria-loop-review.md) remains a development-review record and proposal. The trace-readiness repair described above is a distinct ARIA engagement; neither makes evaluation-gated promotion the default runtime.
+
+The [Fusion bridge](fusion/README.md) must be running. The fixed native UI runner needs unlocked foreground Fusion during simulation collection. Setup, CAM generation and postprocessing use Fusion APIs. Routine simulation collection does not require Astra clicking. No physical-machine commands are sent.
+
+Generated checks run in a local Python subprocess with copied inputs, clean environment and execution limits. This is not a security sandbox. No hosted W&B Sandboxes or Docker dependency.
+
+## Development
+
+```sh
 uv run pytest
+uv run ruff check silta tests checks notebooks/cnc_app.py
 ```
 
-Tests use a fake provider and require no credentials or network. GitHub Actions runs these checks when the files are pushed.
-
-## Team workflow
-
-Use short branches and small commits. Integrate a working path early, then improve it. Keep credentials in a local `.env` file; commit only placeholder configuration. Record the distinction between hackathon work and anything that already existed.
-
-The saved handbook lists **June 6–7**, while this repository is being initialized on **September 12, 2026**. Confirm the current event schedule and submission link with the organizers before relying on the stated Sunday 1 PM deadline.
+Tests using adapter doubles are software checks, not manufacturing evidence. Historical evaluation code and `versions/` are retained but inactive in the default application. See [machine configuration](config/README.md), [hackathon evidence](docs/hackathon.md), and the [job viewer](notebooks/cnc_app.py).

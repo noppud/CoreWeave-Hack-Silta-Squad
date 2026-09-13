@@ -1,0 +1,11 @@
+{
+  "haas-c1-fusion-files.zip": "https://files.upskill-dev.autodesk.com/public/aex/HaasF360/C1-CAD_CAM-Blueprints_CAD_CAM_CNC/data/haas-c1-fusion-files.zip",
+  "haas-c1-course-challenge.zip": "https://files.upskill-dev.autodesk.com/public/aex/HaasF360/C1-CAD_CAM-Blueprints_CAD_CAM_CNC/data/haas-c1-course-challenge.zip",
+  "cam-cnc-mill-resources-2.zip": "https://files.upskill-dev.autodesk.com/public/fusion360-intro-cad-cam-practical-cnc-associate/2022-update/er/cam-cnc-mill-resources-2.zip",
+  "simple-3x-part-cam-challenge.f3d": "https://files.upskill-dev.autodesk.com/public/aex/fusion/24/dts/Simple%203X%20Part%20CAM%20Challenge.f3d",
+  "haas-vf2-machine-simulation-guide.pdf": "https://files.upskill-dev.autodesk.com/public/aex/HaasF360/C4-Machined_Part_Finish_Inspect/pdf/221215_SbS_S4-M3-02_Machine-simulation.pdf",
+  "haas-vf-2.mch": "https://cam.autodesk.com/machines/download.php?name=haas%20vf-2.mch",
+  "haas-tooling.json": "https://cam.autodesk.com/tools/download.php?name=Haas%20Tooling/Haas%20Tooling",
+  "haas-holders.json": "https://cam.autodesk.com/tools/download.php?name=Haas%20Tooling/Haas%20Holders",
+  "haas-vf-2.f3d": "https://cam.autodesk.com/machines/machines/haas%20vf-2.f3d"
+}

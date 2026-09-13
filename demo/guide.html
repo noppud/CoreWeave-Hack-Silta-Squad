@@ -1,0 +1,109 @@
+<!doctype html><html lang="en"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SILTA CAD · Pitch guide</title><style>
+body{margin:48px auto;padding:0 28px;max-width:920px;background:#f3f2ee;
+color:#191919;font:18px/1.65 Arial,sans-serif}h1,h2,h3{line-height:1.2;
+font-weight:500;letter-spacing:-.025em}h2{margin-top:48px}a{color:inherit}
+table{border-collapse:collapse;width:100%;font-size:15px}th,td{border-bottom:1px solid #ccc;
+padding:12px;text-align:left;vertical-align:top}code{font-size:.85em}pre{overflow:auto}
+</style><a href="slides.html">← SILTA CAD pitch</a><main><h1>SILTA CAD — six-slide pitch</h1>
+<p><a href="slides.html">Open the deck</a>. Arrow keys navigate; Home returns to the cover.</p>
+<h2>Order and timing</h2>
+<table>
+<thead>
+<tr>
+<th>Slide</th>
+<th>Time</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. Intro</td>
+<td>10 s</td>
+<td>Name the product and the manufacturing decision.</td>
+</tr>
+<tr>
+<td>2. Problem</td>
+<td>15 s</td>
+<td>A shop needs to turn a new drawing into a feasible machining plan.</td>
+</tr>
+<tr>
+<td>3. Interactive demo</td>
+<td>75 s</td>
+<td>Show a failed attempt, feedback, revision and what carries to the next part.</td>
+</tr>
+<tr>
+<td>4. Outer review loop</td>
+<td>20 s</td>
+<td>Shrink the demo and reveal the planned system → ARIA → system loop.</td>
+</tr>
+<tr>
+<td>5. Videos</td>
+<td>40 s</td>
+<td>Show actual CAD/CAM generation and simulation in the product.</td>
+</tr>
+<tr>
+<td>6. Architecture / Weave</td>
+<td>20 s</td>
+<td>Explain what Astra, Fusion and Weave do.</td>
+</tr>
+</tbody>
+</table>
+<p>The official handbook was reread live during this revision. It gives three minutes and no more than one or two explanatory slides, with emphasis on the demo. The six-slide review deck follows Joel’s requested order. For strict stage compliance, use the intro and combined architecture/sponsor explanation as the two explanatory slides; deliver the problem and ARIA context verbally around the demo and videos. Keep the full deck for preparation and Q&amp;A.</p>
+<h2>Grading alignment</h2>
+<p>Source: <a href="https://wandbai.notion.site/CoreWeave-Hacks-Participant-Handbook-3c9e2f5c7ef380eab21ecdde12620caf">official participant handbook</a>. The handbook still has stale June schedule headings; this review uses its grading and presentation rules, not those dates.</p>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th>Evidence in this pitch</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Best Loop</td>
+<td>Slide 3: failure → new code test; slow plan → speed instruction; revised CAM tested again. Show an actual improvement when the recording is ready.</td>
+</tr>
+<tr>
+<td>Creativity</td>
+<td>Slides 3 and 6: planning, checking and judging roles cooperate through concrete feedback.</td>
+</tr>
+<tr>
+<td>Utility</td>
+<td>Slide 2: one manufacturing problem, stated briefly.</td>
+</tr>
+<tr>
+<td>Technical execution</td>
+<td>Slide 5: actual product recordings. Slide 6: understandable application/Fusion/Weave boundaries.</td>
+</tr>
+<tr>
+<td>Sponsor usage</td>
+<td>Slide 6: trace evidence. Slide 4: planned ARIA review loop; describe the completed advisory work verbally.</td>
+</tr>
+</tbody>
+</table>
+<p>Most Production-Ready is a later award, two weeks after the event. Do not spend the three-minute presentation listing speculative production features. The handbook also requires W&amp;B use, a code repository judges can inspect, disclosure of prior work, team eligibility and a completed submission. Those are submission tasks, not more pitch slides.</p>
+<h2>Speaking notes</h2>
+<p><strong>Intro:</strong> “SILTA CAD helps a shop work out how to manufacture a new part, before committing to the job.”</p>
+<p><strong>Problem:</strong> “The shop receives a drawing. It needs a process that works with its machines and tools, and an estimate of the machining time.”</p>
+<p><strong>Interactive demo:</strong> “The learned lists start empty. Simulation failures add distinct checks at the test gate. When the judge thinks a valid plan can be faster, its feedback updates the CAM-writing LLM’s speed instructions. Revised CAM returns through checks and simulation. Relevant lessons persist for later parts.” The separate animated timeline is illustrative; do not present its chart values as real manufacturing measurements.</p>
+<p><strong>Videos:</strong> Show the product working. Keep the first clip focused on input and CAD/CAM generation, the second on simulation and revision. Placeholder areas remain until the recordings are ready.</p>
+<p><strong>Outer review loop:</strong> Press Next after slide 3. The demo placeholder shrinks to half its width and height, and curved arrows reveal a proposed overarching review cycle. The whole agent system sends traces and outcomes to ARIA; recommendations return to the system. This is a planned design, not a claim that continuous ARIA monitoring or automatic implementation is running. Replace the rectangle with the same system image/video used in the demo when ready. Reduced-motion settings disable the shrink animation.</p>
+<p><strong>Architecture:</strong> The current source has an Astra-driven application, Fusion simulation, persisted code checks and CAM instructions, and Weave tracing. Weave records evidence; it does not run the manufacturing loop or approve learned updates. The final Weave walkthrough is explicitly unfinished per Joel’s latest instruction. Add a real trace and show one attempt’s input, feedback and revision when ready.</p>
+<p><strong>ARIA:</strong> The new <code>docs/aria-loop-review.md</code> records a review of the current source and a concrete repository integration proposal. ARIA helped us learn Weave, challenged immediate shared learning, and proposed comparing old and new checks and prompts on the same unseen parts. It mapped that work to policy versions, trace events and existing paired evaluation code. The next step is one check replay and one prompt comparison in Weave. This remains a proposal: no runtime changes or new manufacturing experiments were performed by the review. Explain the contribution without displaying the transcript. ARIA is not the runtime speed judge.</p>
+<h2>Source discipline</h2>
+<p>Use the active source branch designated by Joel. Current review: <a href="https://github.com/noppud/CoreWeave-Hack-Silta-Squad/tree/toukoversion">toukoversion</a>, including <code>README.md</code>, <code>silta/cnc/tracing.py</code>, <code>learning/cad_cam.md</code> and <code>learning/checks.py</code>. Old branch results, former fixture comparisons and recipe-reuse results are excluded from this deck. Nothing has been archived or deleted from GitHub.</p>
+<p>The current branch README describes a real Fusion run but also says cross-part learning still needs demonstration. Do not treat software tests using adapter doubles as manufacturing evidence. Older ARIA onboarding/design advice is retained context, not proof of a newer implemented recommendation.</p>
+<h2>Ready for final media</h2>
+<ul>
+<li><code>agent-loop-slot</code> on slide 3: interactive product/loop demo.</li>
+<li><code>agent-loop-overview-slot</code> on slide 4: smaller view of the whole system, with the planned ARIA loop around it.</li>
+<li><code>product-video-1-slot</code> and <code>product-video-2-slot</code> on slide 5: product recordings.</li>
+<li>Slide 6: replace the pending footer with verified Weave evidence after tomorrow’s integration.</li>
+</ul>
+<p>The original team photo remains embedded in the cover. All six slides use the same light background and Arial typography.</p>
+<h2>Build</h2>
+<pre><code>python scripts/build_demo_slides.py
+</code></pre>
+<p>The build requires Python Markdown and embeds <code>demo/assets/team.jpeg</code>. It generates <code>demo/slides.html</code> and <code>demo/guide.html</code> without importing the product or old evaluation data.</p></main></html>

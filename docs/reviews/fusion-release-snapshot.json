@@ -1,0 +1,2574 @@
+{
+  "created_at": "2026-09-13T06:29:02.574838+00:00",
+  "source_commit": "0afc2ec9836bce93175a33a04823958c0e30ea04",
+  "release_base_commit": "6984406e04660e9be455ceb1861212e42d475789",
+  "source_worktree_dirty": true,
+  "scope": "Explicit Fusion source/assets only; copied bytes pinned; no run artifacts or custom simulator",
+  "files": [
+    {
+      "path": "README.md",
+      "source_sha256": "f5a18c3ed2992e859a7a22f677a37d1e8c835d0c1670ffd7d8f0f19b83b8918e",
+      "copied_sha256": "f5a18c3ed2992e859a7a22f677a37d1e8c835d0c1670ffd7d8f0f19b83b8918e",
+      "bytes": 4365,
+      "release_sha256": "43509edb37c9852836d16e08ff13228d0f1a3e4adc785fb79dad740eb4de519d",
+      "release_matches_copied_source": false
+    },
+    {
+      "path": "docs/evaluation-contract.md",
+      "source_sha256": "2655afeb0d5a1901d21596d65efc91e9c29e5e901ebf65fc0b8578f1d28e733f",
+      "copied_sha256": "2655afeb0d5a1901d21596d65efc91e9c29e5e901ebf65fc0b8578f1d28e733f",
+      "bytes": 8600,
+      "release_sha256": "2655afeb0d5a1901d21596d65efc91e9c29e5e901ebf65fc0b8578f1d28e733f",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "fusion/README.md",
+      "source_sha256": "6b1242553879b6ca96501001ebed9802b5939a597ce744094d2d24f9ef4d4324",
+      "copied_sha256": "6b1242553879b6ca96501001ebed9802b5939a597ce744094d2d24f9ef4d4324",
+      "bytes": 7896,
+      "release_sha256": "6b1242553879b6ca96501001ebed9802b5939a597ce744094d2d24f9ef4d4324",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "fusion/SiltaBridge/operations.py",
+      "source_sha256": "5831884ed88e2031f918136aa24e463307d17c6bf6ab75f1033f7ec3df0e6fa3",
+      "copied_sha256": "5831884ed88e2031f918136aa24e463307d17c6bf6ab75f1033f7ec3df0e6fa3",
+      "bytes": 12045,
+      "release_sha256": "5831884ed88e2031f918136aa24e463307d17c6bf6ab75f1033f7ec3df0e6fa3",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "fusion/cam_documents.py",
+      "source_sha256": "4f66d8a00a22973b4dbd3c1b7b6c080c140b18eb6f659ac65e55b39feea9b153",
+      "copied_sha256": "4f66d8a00a22973b4dbd3c1b7b6c080c140b18eb6f659ac65e55b39feea9b153",
+      "bytes": 4999,
+      "release_sha256": "4f66d8a00a22973b4dbd3c1b7b6c080c140b18eb6f659ac65e55b39feea9b153",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "notebooks/cnc_app.py",
+      "source_sha256": "6b4598f40f369e78ae0ef9411798d10959f5877be9db239d9b1befc5745cdd87",
+      "copied_sha256": "6b4598f40f369e78ae0ef9411798d10959f5877be9db239d9b1befc5745cdd87",
+      "bytes": 43112,
+      "release_sha256": "6b4598f40f369e78ae0ef9411798d10959f5877be9db239d9b1befc5745cdd87",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "prompts/check_writer.md",
+      "source_sha256": "70b6d835fe3b83979d5954fbe9bea870d26ffd7ed687e283f7b6ec36b5031a64",
+      "copied_sha256": "70b6d835fe3b83979d5954fbe9bea870d26ffd7ed687e283f7b6ec36b5031a64",
+      "bytes": 1782,
+      "release_sha256": "70b6d835fe3b83979d5954fbe9bea870d26ffd7ed687e283f7b6ec36b5031a64",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "prompts/supervisor_prompt.md",
+      "source_sha256": "d2a1fbeec1ab45b42c5745dda161c830432448f1a580a58c4733527a72baee00",
+      "copied_sha256": "d2a1fbeec1ab45b42c5745dda161c830432448f1a580a58c4733527a72baee00",
+      "bytes": 1616,
+      "release_sha256": "d2a1fbeec1ab45b42c5745dda161c830432448f1a580a58c4733527a72baee00",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "pyproject.toml",
+      "source_sha256": "806c9396d32cdeb8d1d6c157123413116792d2ce6f5e195e5aa9d8234e62a5a4",
+      "copied_sha256": "806c9396d32cdeb8d1d6c157123413116792d2ce6f5e195e5aa9d8234e62a5a4",
+      "bytes": 712,
+      "release_sha256": "806c9396d32cdeb8d1d6c157123413116792d2ce6f5e195e5aa9d8234e62a5a4",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "silta/cnc/agents.py",
+      "source_sha256": "1186f23a62ea3b4f93812fedab73650c6f9fb641ac30dea6b698d564960b411a",
+      "copied_sha256": "1186f23a62ea3b4f93812fedab73650c6f9fb641ac30dea6b698d564960b411a",
+      "bytes": 52332,
+      "release_sha256": "1186f23a62ea3b4f93812fedab73650c6f9fb641ac30dea6b698d564960b411a",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "silta/cnc/astra.py",
+      "source_sha256": "467a7861a415e486cb24b24b7fd4690df7a9713e1e01f2170b79429208668cc0",
+      "copied_sha256": "467a7861a415e486cb24b24b7fd4690df7a9713e1e01f2170b79429208668cc0",
+      "bytes": 7425,
+      "release_sha256": "467a7861a415e486cb24b24b7fd4690df7a9713e1e01f2170b79429208668cc0",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "silta/cnc/benchmarks.py",
+      "source_sha256": "bc517726717b827b464a8b54be8ba9a7586609eb7a84d6bc007f7f9b2aa6fc30",
+      "copied_sha256": "bc517726717b827b464a8b54be8ba9a7586609eb7a84d6bc007f7f9b2aa6fc30",
+      "bytes": 15594,
+      "release_sha256": "bc517726717b827b464a8b54be8ba9a7586609eb7a84d6bc007f7f9b2aa6fc30",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "silta/cnc/cli.py",
+      "source_sha256": "35522d6fe91d8a7ac7908089167cb68116f11465a64f264428d77a6dc636cbb0",
+      "copied_sha256": "35522d6fe91d8a7ac7908089167cb68116f11465a64f264428d77a6dc636cbb0",
+      "bytes": 7994,
+      "release_sha256": "35522d6fe91d8a7ac7908089167cb68116f11465a64f264428d77a6dc636cbb0",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "silta/cnc/controller.py",
+      "source_sha256": "56e505547f750e6fa54383b3d798e9606bad7c464b0f4fa1b9597edb9a2b16c6",
+      "copied_sha256": "56e505547f750e6fa54383b3d798e9606bad7c464b0f4fa1b9597edb9a2b16c6",
+      "bytes": 16335,
+      "release_sha256": "56e505547f750e6fa54383b3d798e9606bad7c464b0f4fa1b9597edb9a2b16c6",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "silta/cnc/evaluation.py",
+      "source_sha256": "6add8425090664b3060696d2d62add3e413416347b0077cfd67c7970d34eecf8",
+      "copied_sha256": "6add8425090664b3060696d2d62add3e413416347b0077cfd67c7970d34eecf8",
+      "bytes": 21755,
+      "release_sha256": "6add8425090664b3060696d2d62add3e413416347b0077cfd67c7970d34eecf8",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "silta/cnc/fixed_verifier.py",
+      "source_sha256": "10f41f3fe36b52b320a32242ec411be0d4a096fa9898f5dcd4c7efdf0740fd65",
+      "copied_sha256": "10f41f3fe36b52b320a32242ec411be0d4a096fa9898f5dcd4c7efdf0740fd65",
+      "bytes": 14958,
+      "release_sha256": "10f41f3fe36b52b320a32242ec411be0d4a096fa9898f5dcd4c7efdf0740fd65",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "silta/cnc/fusion_reader.py",
+      "source_sha256": "94ab024cc64d6b7b722f0ce3151f0befa02d0702c386554527fa7939b3ec08bd",
+      "copied_sha256": "94ab024cc64d6b7b722f0ce3151f0befa02d0702c386554527fa7939b3ec08bd",
+      "bytes": 6107,
+      "release_sha256": "94ab024cc64d6b7b722f0ce3151f0befa02d0702c386554527fa7939b3ec08bd",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "silta/cnc/models.py",
+      "source_sha256": "4bd02f6a24d1024177d8a38d8340187423221ba019354935b0ef1d4614e4094f",
+      "copied_sha256": "4bd02f6a24d1024177d8a38d8340187423221ba019354935b0ef1d4614e4094f",
+      "bytes": 8615,
+      "release_sha256": "4bd02f6a24d1024177d8a38d8340187423221ba019354935b0ef1d4614e4094f",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "silta/cnc/simulation_coverage.py",
+      "source_sha256": "7e3c2b9f366d5147252df8775cfe942fd4b3bb377d4f6d72ffcacf8b0fb72b59",
+      "copied_sha256": "7e3c2b9f366d5147252df8775cfe942fd4b3bb377d4f6d72ffcacf8b0fb72b59",
+      "bytes": 6691,
+      "release_sha256": "7e3c2b9f366d5147252df8775cfe942fd4b3bb377d4f6d72ffcacf8b0fb72b59",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "silta/cnc/simulation_report.py",
+      "source_sha256": "0277b55b04402dc14638dc6db562a9cea431ccc1cb152405f9a585654065348c",
+      "copied_sha256": "0277b55b04402dc14638dc6db562a9cea431ccc1cb152405f9a585654065348c",
+      "bytes": 3761,
+      "release_sha256": "0277b55b04402dc14638dc6db562a9cea431ccc1cb152405f9a585654065348c",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "tests/test_cam_documents.py",
+      "source_sha256": "b32423d1bbf839b10c2a2407c524740d87e5544e569538c19bb4f8e1c19ffc42",
+      "copied_sha256": "b32423d1bbf839b10c2a2407c524740d87e5544e569538c19bb4f8e1c19ffc42",
+      "bytes": 5942,
+      "release_sha256": "b32423d1bbf839b10c2a2407c524740d87e5544e569538c19bb4f8e1c19ffc42",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "tests/test_cnc_agents.py",
+      "source_sha256": "12f6d1f34b901bb6cd1afa9505d28a727def7abbf618d5ff66a8c824c9a1c4b5",
+      "copied_sha256": "12f6d1f34b901bb6cd1afa9505d28a727def7abbf618d5ff66a8c824c9a1c4b5",
+      "bytes": 47546,
+      "release_sha256": "12f6d1f34b901bb6cd1afa9505d28a727def7abbf618d5ff66a8c824c9a1c4b5",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "tests/test_cnc_app.py",
+      "source_sha256": "c6f67483eff358b61204a127071460a694d3a5070bcbb9a3e66b00db367129a8",
+      "copied_sha256": "c6f67483eff358b61204a127071460a694d3a5070bcbb9a3e66b00db367129a8",
+      "bytes": 9078,
+      "release_sha256": "c6f67483eff358b61204a127071460a694d3a5070bcbb9a3e66b00db367129a8",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "tests/test_cnc_benchmarks.py",
+      "source_sha256": "d2f9a434491969c5a46414c3f77c59335b3c64e1243389c22ab722ea5f391e8d",
+      "copied_sha256": "d2f9a434491969c5a46414c3f77c59335b3c64e1243389c22ab722ea5f391e8d",
+      "bytes": 10918,
+      "release_sha256": "d2f9a434491969c5a46414c3f77c59335b3c64e1243389c22ab722ea5f391e8d",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "tests/test_cnc_controller.py",
+      "source_sha256": "389c1940e65f7e8ea2226299f02abf0032f32030a2556bd932e0d60f096f7880",
+      "copied_sha256": "389c1940e65f7e8ea2226299f02abf0032f32030a2556bd932e0d60f096f7880",
+      "bytes": 22974,
+      "release_sha256": "389c1940e65f7e8ea2226299f02abf0032f32030a2556bd932e0d60f096f7880",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "tests/test_cnc_datasets.py",
+      "source_sha256": "5d3c329347937f741a02f6a29bd7b28dccf8e567ebae3a6ab1ff5205313c923f",
+      "copied_sha256": "5d3c329347937f741a02f6a29bd7b28dccf8e567ebae3a6ab1ff5205313c923f",
+      "bytes": 5982,
+      "release_sha256": "5d3c329347937f741a02f6a29bd7b28dccf8e567ebae3a6ab1ff5205313c923f",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "tests/test_cnc_evaluation.py",
+      "source_sha256": "07b4b9a5004b9466d04e0ad1fd63130074e0c5d892acc1331615dfe9ca4337e9",
+      "copied_sha256": "07b4b9a5004b9466d04e0ad1fd63130074e0c5d892acc1331615dfe9ca4337e9",
+      "bytes": 10619,
+      "release_sha256": "07b4b9a5004b9466d04e0ad1fd63130074e0c5d892acc1331615dfe9ca4337e9",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "tests/test_fixed_verifier.py",
+      "source_sha256": "0b13c3ea706bd6686202a3335ce2d9c40c6024afbc8d4d79f9f82f6b65cc0169",
+      "copied_sha256": "0b13c3ea706bd6686202a3335ce2d9c40c6024afbc8d4d79f9f82f6b65cc0169",
+      "release_sha256": "0b13c3ea706bd6686202a3335ce2d9c40c6024afbc8d4d79f9f82f6b65cc0169",
+      "bytes": 7798,
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "tests/test_fusion_reader.py",
+      "source_sha256": "ca23572e610481a123e05e352dac39bb54c87a63148dd048c799a650dcfd5fac",
+      "copied_sha256": "ca23572e610481a123e05e352dac39bb54c87a63148dd048c799a650dcfd5fac",
+      "bytes": 5514,
+      "release_sha256": "ca23572e610481a123e05e352dac39bb54c87a63148dd048c799a650dcfd5fac",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "tests/test_simulation_coverage.py",
+      "source_sha256": "7297d9e6079e6ff9d5ba8007ce6b565baaca93a62ac4237833e8dc300cf068b4",
+      "copied_sha256": "7297d9e6079e6ff9d5ba8007ce6b565baaca93a62ac4237833e8dc300cf068b4",
+      "bytes": 6975,
+      "release_sha256": "7297d9e6079e6ff9d5ba8007ce6b565baaca93a62ac4237833e8dc300cf068b4",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "tests/test_simulation_report.py",
+      "source_sha256": "5852ec280340b48901684bea5ea2854f04df6ddc476e31cab2f1374fbfe670c8",
+      "copied_sha256": "5852ec280340b48901684bea5ea2854f04df6ddc476e31cab2f1374fbfe670c8",
+      "bytes": 2576,
+      "release_sha256": "5852ec280340b48901684bea5ea2854f04df6ddc476e31cab2f1374fbfe670c8",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "uv.lock",
+      "source_sha256": "6dbe6a9377bf2445259b758f603be6e57da47405a3445947788ec37e2b23e8db",
+      "copied_sha256": "6dbe6a9377bf2445259b758f603be6e57da47405a3445947788ec37e2b23e8db",
+      "bytes": 332860,
+      "release_sha256": "6dbe6a9377bf2445259b758f603be6e57da47405a3445947788ec37e2b23e8db",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "fusion/INDEXED_CAM_API.md",
+      "source_sha256": "41797bcc58645652b0ef6c5b00eb9ff5901ed1a3e1a9acf6e93bba848ed1ca67",
+      "copied_sha256": "41797bcc58645652b0ef6c5b00eb9ff5901ed1a3e1a9acf6e93bba848ed1ca67",
+      "release_sha256": "41797bcc58645652b0ef6c5b00eb9ff5901ed1a3e1a9acf6e93bba848ed1ca67",
+      "bytes": 4192,
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "fusion/SiltaBridge/presentation.py",
+      "source_sha256": "8e24b8ae827be22ac035b76975bc8041bb02364d30722577d492ac5422462d54",
+      "copied_sha256": "8e24b8ae827be22ac035b76975bc8041bb02364d30722577d492ac5422462d54",
+      "bytes": 8142,
+      "release_sha256": "8e24b8ae827be22ac035b76975bc8041bb02364d30722577d492ac5422462d54",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "fusion/operation_frames.cps",
+      "source_sha256": "33d0fa51c85851fe19124a20692f9e989f5a1720d184761570bfb844eb1be14d",
+      "copied_sha256": "33d0fa51c85851fe19124a20692f9e989f5a1720d184761570bfb844eb1be14d",
+      "bytes": 2329,
+      "release_sha256": "33d0fa51c85851fe19124a20692f9e989f5a1720d184761570bfb844eb1be14d",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "fusion/operation_frames.py",
+      "source_sha256": "8acbc559e12ab1a1ecb61d715ea9da7b614034014d99b17b5635468cb37a4363",
+      "copied_sha256": "8acbc559e12ab1a1ecb61d715ea9da7b614034014d99b17b5635468cb37a4363",
+      "bytes": 2753,
+      "release_sha256": "8acbc559e12ab1a1ecb61d715ea9da7b614034014d99b17b5635468cb37a4363",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "learning/cad_cam.md",
+      "source_sha256": "ba4cb1d63576f234d6b96b42ffc48e4051406ef6fba4f74e7e4756321fd8a859",
+      "copied_sha256": "ba4cb1d63576f234d6b96b42ffc48e4051406ef6fba4f74e7e4756321fd8a859",
+      "bytes": 2892,
+      "release_sha256": "ba4cb1d63576f234d6b96b42ffc48e4051406ef6fba4f74e7e4756321fd8a859",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "learning/checks.py",
+      "source_sha256": "a58a0fe0eba66ea111cb3f74259eebd8efdd3b5f8432001363e76ad311a560b1",
+      "copied_sha256": "a58a0fe0eba66ea111cb3f74259eebd8efdd3b5f8432001363e76ad311a560b1",
+      "bytes": 10422,
+      "release_sha256": "a58a0fe0eba66ea111cb3f74259eebd8efdd3b5f8432001363e76ad311a560b1",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "scripts/demo/benchmark_geometry_backend.py",
+      "source_sha256": "3814a7ef536aa43ada0fbbfce11924d657a25885fa0bb82722584eb8fdd01228",
+      "copied_sha256": "3814a7ef536aa43ada0fbbfce11924d657a25885fa0bb82722584eb8fdd01228",
+      "bytes": 6915,
+      "release_sha256": "3814a7ef536aa43ada0fbbfce11924d657a25885fa0bb82722584eb8fdd01228",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "scripts/demo/campaign_report.py",
+      "source_sha256": "d749d116e4e081195cedf1af6a3f4fed7543acb58ae719565e6e1006d7fe15ed",
+      "copied_sha256": "d749d116e4e081195cedf1af6a3f4fed7543acb58ae719565e6e1006d7fe15ed",
+      "bytes": 10914,
+      "release_sha256": "d749d116e4e081195cedf1af6a3f4fed7543acb58ae719565e6e1006d7fe15ed",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "scripts/demo/edit_fusion_video.py",
+      "source_sha256": "624181cb1c176f763a99a1a7700410ead88c44d6d1705ec9145574d4a400334c",
+      "copied_sha256": "624181cb1c176f763a99a1a7700410ead88c44d6d1705ec9145574d4a400334c",
+      "bytes": 4541,
+      "release_sha256": "624181cb1c176f763a99a1a7700410ead88c44d6d1705ec9145574d4a400334c",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "scripts/demo/evaluate_learning.py",
+      "source_sha256": "3d1fa6568d1cf297c660a9086059860e89d1d718d85b1dfe756ca4c1179649af",
+      "copied_sha256": "3d1fa6568d1cf297c660a9086059860e89d1d718d85b1dfe756ca4c1179649af",
+      "bytes": 20767,
+      "release_sha256": "3d1fa6568d1cf297c660a9086059860e89d1d718d85b1dfe756ca4c1179649af",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "scripts/demo/learning_transfer_report.py",
+      "source_sha256": "9934ea2e26355b9ec52688e4cf8b496a70db659ba9f965b71829cb5a405ac07c",
+      "copied_sha256": "9934ea2e26355b9ec52688e4cf8b496a70db659ba9f965b71829cb5a405ac07c",
+      "bytes": 24289,
+      "release_sha256": "9934ea2e26355b9ec52688e4cf8b496a70db659ba9f965b71829cb5a405ac07c",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "scripts/demo/live_terminal.py",
+      "source_sha256": "e5e287ba2363619d080a1aa0d9cbeae22077c6063e2c6aae00cef84a81a7d9b6",
+      "copied_sha256": "e5e287ba2363619d080a1aa0d9cbeae22077c6063e2c6aae00cef84a81a7d9b6",
+      "release_sha256": "e5e287ba2363619d080a1aa0d9cbeae22077c6063e2c6aae00cef84a81a7d9b6",
+      "bytes": 20460,
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "scripts/demo/package_evidence.py",
+      "source_sha256": "0d70dbd80bc899ddef03cf91ba92eff3b15f30bcb8dd9281e0a6f41b07f9ab38",
+      "copied_sha256": "0d70dbd80bc899ddef03cf91ba92eff3b15f30bcb8dd9281e0a6f41b07f9ab38",
+      "bytes": 39339,
+      "release_sha256": "0d70dbd80bc899ddef03cf91ba92eff3b15f30bcb8dd9281e0a6f41b07f9ab38",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "scripts/demo/part_gallery.py",
+      "source_sha256": "c879b8a879914da0bcd7cb925db0dd63180d7ab3cee058b4c4f9058e2e0b848f",
+      "copied_sha256": "c879b8a879914da0bcd7cb925db0dd63180d7ab3cee058b4c4f9058e2e0b848f",
+      "bytes": 16027,
+      "release_sha256": "c879b8a879914da0bcd7cb925db0dd63180d7ab3cee058b4c4f9058e2e0b848f",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "scripts/demo/prepare_bracket.py",
+      "source_sha256": "015f4269491ab4bd436f10b884e20e0db9e51c9dcf78e5551cf53cd56b189315",
+      "copied_sha256": "015f4269491ab4bd436f10b884e20e0db9e51c9dcf78e5551cf53cd56b189315",
+      "bytes": 12882,
+      "release_sha256": "015f4269491ab4bd436f10b884e20e0db9e51c9dcf78e5551cf53cd56b189315",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "scripts/demo/prepare_fusion_campaign.py",
+      "source_sha256": "29bbb7e9b21be9bd203d55384235c822ca30a43d9440ebd9d71dbcf4cf7e60a4",
+      "copied_sha256": "29bbb7e9b21be9bd203d55384235c822ca30a43d9440ebd9d71dbcf4cf7e60a4",
+      "bytes": 15409,
+      "release_sha256": "29bbb7e9b21be9bd203d55384235c822ca30a43d9440ebd9d71dbcf4cf7e60a4",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "scripts/demo/prepare_showpiece.py",
+      "source_sha256": "0e9eaac307d33a385acea7a13b945c33087b3bc344182e000108eb18af42490c",
+      "copied_sha256": "0e9eaac307d33a385acea7a13b945c33087b3bc344182e000108eb18af42490c",
+      "bytes": 12981,
+      "release_sha256": "0e9eaac307d33a385acea7a13b945c33087b3bc344182e000108eb18af42490c",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "scripts/demo/presentation_build.py",
+      "source_sha256": "f5772bb04cc18cd69430bff43b01614ebf5ffd423c63b13e9bffe4341f676ed3",
+      "copied_sha256": "f5772bb04cc18cd69430bff43b01614ebf5ffd423c63b13e9bffe4341f676ed3",
+      "bytes": 7333,
+      "release_sha256": "f5772bb04cc18cd69430bff43b01614ebf5ffd423c63b13e9bffe4341f676ed3",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "scripts/demo/presentation_film.py",
+      "source_sha256": "404761d3f0683ef2d4cce376b0dc51a12381a6342a4b65ab17d00556d7ca311a",
+      "copied_sha256": "404761d3f0683ef2d4cce376b0dc51a12381a6342a4b65ab17d00556d7ca311a",
+      "release_sha256": "404761d3f0683ef2d4cce376b0dc51a12381a6342a4b65ab17d00556d7ca311a",
+      "bytes": 40228,
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "scripts/demo/resume_fusion_job.py",
+      "source_sha256": "03d88674f006754121c94b2504583c1a1327de0f5f0d30ef043789c4a675e95d",
+      "copied_sha256": "03d88674f006754121c94b2504583c1a1327de0f5f0d30ef043789c4a675e95d",
+      "bytes": 14914,
+      "release_sha256": "03d88674f006754121c94b2504583c1a1327de0f5f0d30ef043789c4a675e95d",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "scripts/demo/run_fusion_campaign.py",
+      "source_sha256": "9569f99a898eed702758f8fc938c7d0625044144025cc12ceeca9067cf119c36",
+      "copied_sha256": "9569f99a898eed702758f8fc938c7d0625044144025cc12ceeca9067cf119c36",
+      "bytes": 4614,
+      "release_sha256": "9569f99a898eed702758f8fc938c7d0625044144025cc12ceeca9067cf119c36",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "scripts/demo/score_fusion_runs.py",
+      "source_sha256": "4657976546c83f8c745b9201c1f4a30024e3e16b6b455b6a325764d775958734",
+      "copied_sha256": "4657976546c83f8c745b9201c1f4a30024e3e16b6b455b6a325764d775958734",
+      "bytes": 13730,
+      "release_sha256": "4657976546c83f8c745b9201c1f4a30024e3e16b6b455b6a325764d775958734",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "scripts/demo/sponsor_review.py",
+      "source_sha256": "bf2bf5ee028cd3b24b7cbe205e4aab840b83d52ffb3ee9672bcc2dbb7856044e",
+      "copied_sha256": "bf2bf5ee028cd3b24b7cbe205e4aab840b83d52ffb3ee9672bcc2dbb7856044e",
+      "bytes": 6281,
+      "release_sha256": "bf2bf5ee028cd3b24b7cbe205e4aab840b83d52ffb3ee9672bcc2dbb7856044e",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "scripts/demo/stage_fusion_demo.py",
+      "source_sha256": "f6b46c8f44a8c39eca14b6247031c30abbb0daea225883ea3c9de2be8754e875",
+      "copied_sha256": "f6b46c8f44a8c39eca14b6247031c30abbb0daea225883ea3c9de2be8754e875",
+      "bytes": 8563,
+      "release_sha256": "f6b46c8f44a8c39eca14b6247031c30abbb0daea225883ea3c9de2be8754e875",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "scripts/demo/verify_demo.py",
+      "source_sha256": "a9d2b53582e032744086ea61d935fbe378f9dac0467d4622c637b461af556a25",
+      "copied_sha256": "a9d2b53582e032744086ea61d935fbe378f9dac0467d4622c637b461af556a25",
+      "bytes": 10548,
+      "release_sha256": "a9d2b53582e032744086ea61d935fbe378f9dac0467d4622c637b461af556a25",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "scripts/fusion/native_ui.swift",
+      "source_sha256": "7f082e5f743c9e7f6d07aa16252df7cb13f47f8cf8336a990be95ec2e79a3e44",
+      "copied_sha256": "7f082e5f743c9e7f6d07aa16252df7cb13f47f8cf8336a990be95ec2e79a3e44",
+      "bytes": 16683,
+      "release_sha256": "7f082e5f743c9e7f6d07aa16252df7cb13f47f8cf8336a990be95ec2e79a3e44",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "scripts/fusion/post_operation_frames.py",
+      "source_sha256": "1b17813d69b5361d346c32590021bcc1607a1ae924f8f55523359d8d2c4ae943",
+      "copied_sha256": "1b17813d69b5361d346c32590021bcc1607a1ae924f8f55523359d8d2c4ae943",
+      "bytes": 6826,
+      "release_sha256": "1b17813d69b5361d346c32590021bcc1607a1ae924f8f55523359d8d2c4ae943",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "scripts/fusion/record_part_reveal.py",
+      "source_sha256": "3e490610164d2dfd3f71652486299bab499e82554ec74b3e9bbaf709fbbeb723",
+      "copied_sha256": "3e490610164d2dfd3f71652486299bab499e82554ec74b3e9bbaf709fbbeb723",
+      "bytes": 3277,
+      "release_sha256": "3e490610164d2dfd3f71652486299bab499e82554ec74b3e9bbaf709fbbeb723",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "scripts/fusion/window_video.swift",
+      "source_sha256": "e42ab31fcf4fbb0fc719c6e558c68d80124c81531f1cc62f0b5887ff61d31161",
+      "copied_sha256": "e42ab31fcf4fbb0fc719c6e558c68d80124c81531f1cc62f0b5887ff61d31161",
+      "bytes": 8141,
+      "release_sha256": "e42ab31fcf4fbb0fc719c6e558c68d80124c81531f1cc62f0b5887ff61d31161",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "silta/cnc/learning.py",
+      "source_sha256": "c1c7d50649f676de029d6f1dfa59ec45099d527fb1274526963182050252b5ae",
+      "copied_sha256": "c1c7d50649f676de029d6f1dfa59ec45099d527fb1274526963182050252b5ae",
+      "bytes": 3460,
+      "release_sha256": "c1c7d50649f676de029d6f1dfa59ec45099d527fb1274526963182050252b5ae",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "silta/cnc/native_reader.py",
+      "source_sha256": "32295600363aec1acab70afbea17e4126d0425dc07b06dc230567b13434e8fba",
+      "copied_sha256": "32295600363aec1acab70afbea17e4126d0425dc07b06dc230567b13434e8fba",
+      "release_sha256": "32295600363aec1acab70afbea17e4126d0425dc07b06dc230567b13434e8fba",
+      "bytes": 8062,
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "silta/cnc/presentation.py",
+      "source_sha256": "7e321e83c99cfaa539131d3e7ac672ec0c03caafcf68e7c2798843e5aae13209",
+      "copied_sha256": "7e321e83c99cfaa539131d3e7ac672ec0c03caafcf68e7c2798843e5aae13209",
+      "bytes": 5697,
+      "release_sha256": "7e321e83c99cfaa539131d3e7ac672ec0c03caafcf68e7c2798843e5aae13209",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "silta/cnc/simulation_video.py",
+      "source_sha256": "5983b8b09293bc418d978b86b677152b6135dd373e207787f09006b88b65d843",
+      "copied_sha256": "5983b8b09293bc418d978b86b677152b6135dd373e207787f09006b88b65d843",
+      "bytes": 14170,
+      "release_sha256": "5983b8b09293bc418d978b86b677152b6135dd373e207787f09006b88b65d843",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "silta/cnc/stock_comparison.py",
+      "source_sha256": "0c6ee6ebbf423d7277cb6d03f3a5d155f7590976ca412f490b1cada2905964a2",
+      "copied_sha256": "0c6ee6ebbf423d7277cb6d03f3a5d155f7590976ca412f490b1cada2905964a2",
+      "bytes": 17406,
+      "release_sha256": "0c6ee6ebbf423d7277cb6d03f3a5d155f7590976ca412f490b1cada2905964a2",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "silta/cnc/stock_export.py",
+      "source_sha256": "3171dbd43ec2925571ba512e7bf21dd014a9afda1dc51fd65b8740260db1e26d",
+      "copied_sha256": "3171dbd43ec2925571ba512e7bf21dd014a9afda1dc51fd65b8740260db1e26d",
+      "bytes": 26347,
+      "release_sha256": "3171dbd43ec2925571ba512e7bf21dd014a9afda1dc51fd65b8740260db1e26d",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "tests/test_cnc_view.py",
+      "source_sha256": "5ef53eb60c5249dc5eeae6a5e66dee6c849dde5b0ae855ca3394b80a37c56e51",
+      "copied_sha256": "5ef53eb60c5249dc5eeae6a5e66dee6c849dde5b0ae855ca3394b80a37c56e51",
+      "bytes": 3428,
+      "release_sha256": "5ef53eb60c5249dc5eeae6a5e66dee6c849dde5b0ae855ca3394b80a37c56e51",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "tests/test_demo_readiness.py",
+      "source_sha256": "e63e45a9906fe79eff14159231bd9a56fd177cdf74997527f3f65779106313eb",
+      "copied_sha256": "e63e45a9906fe79eff14159231bd9a56fd177cdf74997527f3f65779106313eb",
+      "bytes": 2428,
+      "release_sha256": "e63e45a9906fe79eff14159231bd9a56fd177cdf74997527f3f65779106313eb",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "tests/test_demo_terminal.py",
+      "source_sha256": "3115e16d52a1c701c5ac30771c6d1556bfcc68846b23fa5d75104ea7dfde880c",
+      "copied_sha256": "3115e16d52a1c701c5ac30771c6d1556bfcc68846b23fa5d75104ea7dfde880c",
+      "release_sha256": "3115e16d52a1c701c5ac30771c6d1556bfcc68846b23fa5d75104ea7dfde880c",
+      "bytes": 12015,
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "tests/test_demo_weave_scorer.py",
+      "source_sha256": "0fb2ee260f3721d3a3d6ec3c29bb7fed712ced232f4e327433ea4edb46c370ff",
+      "copied_sha256": "0fb2ee260f3721d3a3d6ec3c29bb7fed712ced232f4e327433ea4edb46c370ff",
+      "bytes": 8701,
+      "release_sha256": "0fb2ee260f3721d3a3d6ec3c29bb7fed712ced232f4e327433ea4edb46c370ff",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "tests/test_native_reader.py",
+      "source_sha256": "59021dcf1f9b64916be9ca0078c296e80ea13f9d287192982d93b9585ae73206",
+      "copied_sha256": "59021dcf1f9b64916be9ca0078c296e80ea13f9d287192982d93b9585ae73206",
+      "release_sha256": "59021dcf1f9b64916be9ca0078c296e80ea13f9d287192982d93b9585ae73206",
+      "bytes": 6101,
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "tests/test_operation_frames.py",
+      "source_sha256": "8e91069b11528e8cf43cd69d971821bd20b36fd3498085e77d8182cb6041c4b9",
+      "copied_sha256": "8e91069b11528e8cf43cd69d971821bd20b36fd3498085e77d8182cb6041c4b9",
+      "bytes": 1406,
+      "release_sha256": "8e91069b11528e8cf43cd69d971821bd20b36fd3498085e77d8182cb6041c4b9",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "tests/test_post_operation_frames.py",
+      "source_sha256": "a43ae53c409857c1c9422e22b7d31a6ac2f73cc30304c09cde54b0a1beefbd35",
+      "copied_sha256": "a43ae53c409857c1c9422e22b7d31a6ac2f73cc30304c09cde54b0a1beefbd35",
+      "bytes": 622,
+      "release_sha256": "a43ae53c409857c1c9422e22b7d31a6ac2f73cc30304c09cde54b0a1beefbd35",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "tests/test_presentation_orbit.py",
+      "source_sha256": "d1f361c0cbd4733cd0dc5e5c36aed75d0d7f4a73da0ce5cc591211d40a79f839",
+      "copied_sha256": "d1f361c0cbd4733cd0dc5e5c36aed75d0d7f4a73da0ce5cc591211d40a79f839",
+      "bytes": 1825,
+      "release_sha256": "d1f361c0cbd4733cd0dc5e5c36aed75d0d7f4a73da0ce5cc591211d40a79f839",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "tests/test_simulation_video.py",
+      "source_sha256": "252b5ee137682c8cc5f9fcb1593476050ea8c8002edc1101e99089013384b68f",
+      "copied_sha256": "252b5ee137682c8cc5f9fcb1593476050ea8c8002edc1101e99089013384b68f",
+      "bytes": 7846,
+      "release_sha256": "252b5ee137682c8cc5f9fcb1593476050ea8c8002edc1101e99089013384b68f",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "tests/test_sponsor_review.py",
+      "source_sha256": "473b5e70790a747d6089845239cdb7a8b740df673db5c0531bf173b5fd671b7f",
+      "copied_sha256": "473b5e70790a747d6089845239cdb7a8b740df673db5c0531bf173b5fd671b7f",
+      "bytes": 1756,
+      "release_sha256": "473b5e70790a747d6089845239cdb7a8b740df673db5c0531bf173b5fd671b7f",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "tests/test_stage_fusion_demo.py",
+      "source_sha256": "31dddb3b95dc35efa6d59e6f3032216ca25df12207c17157c16cddaa7da3be5e",
+      "copied_sha256": "31dddb3b95dc35efa6d59e6f3032216ca25df12207c17157c16cddaa7da3be5e",
+      "release_sha256": "31dddb3b95dc35efa6d59e6f3032216ca25df12207c17157c16cddaa7da3be5e",
+      "bytes": 13207,
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "tests/test_stock_comparison.py",
+      "source_sha256": "af130f5350910425577a69c6601fa94c971f5da95166fee4171d82d96af21e98",
+      "copied_sha256": "af130f5350910425577a69c6601fa94c971f5da95166fee4171d82d96af21e98",
+      "bytes": 6928,
+      "release_sha256": "af130f5350910425577a69c6601fa94c971f5da95166fee4171d82d96af21e98",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "tests/test_stock_export.py",
+      "source_sha256": "d2e9f131e8b9ddbad6a208aa49f0368e9e7a529b1f2de64deacef3f656ad47af",
+      "copied_sha256": "d2e9f131e8b9ddbad6a208aa49f0368e9e7a529b1f2de64deacef3f656ad47af",
+      "bytes": 13265,
+      "release_sha256": "d2e9f131e8b9ddbad6a208aa49f0368e9e7a529b1f2de64deacef3f656ad47af",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "docs/bracket-part.md",
+      "source_sha256": "91dc45fcde36e51b81ae893737b31716b9850d061581f8cb2090a1dedbe49478",
+      "copied_sha256": "91dc45fcde36e51b81ae893737b31716b9850d061581f8cb2090a1dedbe49478",
+      "bytes": 1794,
+      "release_sha256": "91dc45fcde36e51b81ae893737b31716b9850d061581f8cb2090a1dedbe49478",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "docs/campaign-results.md",
+      "source_sha256": "0c2f6d86031007339766f4c2a65b2a49a7f862fd8ef4a91bd0151a9f3b3dddd1",
+      "copied_sha256": "0c2f6d86031007339766f4c2a65b2a49a7f862fd8ef4a91bd0151a9f3b3dddd1",
+      "release_sha256": "0c2f6d86031007339766f4c2a65b2a49a7f862fd8ef4a91bd0151a9f3b3dddd1",
+      "bytes": 1748,
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "docs/demo-campaign.md",
+      "source_sha256": "6d94dfee6cf0650cd164baa1fd18eeb51ff6097b0fd187801d11b8dac749fc55",
+      "copied_sha256": "6d94dfee6cf0650cd164baa1fd18eeb51ff6097b0fd187801d11b8dac749fc55",
+      "bytes": 3897,
+      "release_sha256": "6d94dfee6cf0650cd164baa1fd18eeb51ff6097b0fd187801d11b8dac749fc55",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "docs/demo-evaluation.md",
+      "source_sha256": "700293da4522c696988cae70c0d0b5084001beebc7bffd93c2cb0ebc0040a4e9",
+      "copied_sha256": "700293da4522c696988cae70c0d0b5084001beebc7bffd93c2cb0ebc0040a4e9",
+      "bytes": 3851,
+      "release_sha256": "700293da4522c696988cae70c0d0b5084001beebc7bffd93c2cb0ebc0040a4e9",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "docs/demo-runbook.md",
+      "source_sha256": "81e7fa372b4cf888879398b0d296f5c6f50b8a33fed4c3549b378d7c9d1597e4",
+      "copied_sha256": "81e7fa372b4cf888879398b0d296f5c6f50b8a33fed4c3549b378d7c9d1597e4",
+      "bytes": 14254,
+      "release_sha256": "81e7fa372b4cf888879398b0d296f5c6f50b8a33fed4c3549b378d7c9d1597e4",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "docs/five-axis-demo.md",
+      "source_sha256": "cada8d7edd3c1e30efdf97f181a15cebb9f8ec89f8a12d45159ada4a50e4ff8f",
+      "copied_sha256": "cada8d7edd3c1e30efdf97f181a15cebb9f8ec89f8a12d45159ada4a50e4ff8f",
+      "bytes": 4863,
+      "release_sha256": "cada8d7edd3c1e30efdf97f181a15cebb9f8ec89f8a12d45159ada4a50e4ff8f",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "docs/geometry-performance.md",
+      "source_sha256": "36501f7c04a216a0925c94086d26806dc929ce60c8969075c0ce35becea07400",
+      "copied_sha256": "36501f7c04a216a0925c94086d26806dc929ce60c8969075c0ce35becea07400",
+      "bytes": 7343,
+      "release_sha256": "36501f7c04a216a0925c94086d26806dc929ce60c8969075c0ce35becea07400",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "docs/learning-results.md",
+      "source_sha256": "417513081d855911d6db2ac7c9bdb88a1977632aabd3f9296b94af66dde27ee4",
+      "copied_sha256": "417513081d855911d6db2ac7c9bdb88a1977632aabd3f9296b94af66dde27ee4",
+      "bytes": 3259,
+      "release_sha256": "417513081d855911d6db2ac7c9bdb88a1977632aabd3f9296b94af66dde27ee4",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "docs/learning-transfer.md",
+      "source_sha256": "1ce5394fde0c35864de379421331f76a1ea7e4b45aa803928c16cd207480c5ac",
+      "copied_sha256": "1ce5394fde0c35864de379421331f76a1ea7e4b45aa803928c16cd207480c5ac",
+      "release_sha256": "1ce5394fde0c35864de379421331f76a1ea7e4b45aa803928c16cd207480c5ac",
+      "bytes": 5384,
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "docs/showpiece-part.md",
+      "source_sha256": "7cf5d70a07e4e5b85bf71609d0ac5e1fbaa797afc332af284b2b7f480092a491",
+      "copied_sha256": "7cf5d70a07e4e5b85bf71609d0ac5e1fbaa797afc332af284b2b7f480092a491",
+      "bytes": 2915,
+      "release_sha256": "7cf5d70a07e4e5b85bf71609d0ac5e1fbaa797afc332af284b2b7f480092a491",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "docs/simulation-video.md",
+      "source_sha256": "b930a3d68c9b97798cf502e454c81d1f96ef6358daaffd07f6880f3b359b05df",
+      "copied_sha256": "b930a3d68c9b97798cf502e454c81d1f96ef6358daaffd07f6880f3b359b05df",
+      "bytes": 6071,
+      "release_sha256": "b930a3d68c9b97798cf502e454c81d1f96ef6358daaffd07f6880f3b359b05df",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "docs/sponsor-evidence.md",
+      "source_sha256": "0f93609f7b0717935666c3d0e0e7f6ef2b3cbd440ef36ceb25108d394bc5c827",
+      "copied_sha256": "0f93609f7b0717935666c3d0e0e7f6ef2b3cbd440ef36ceb25108d394bc5c827",
+      "bytes": 6942,
+      "release_sha256": "0f93609f7b0717935666c3d0e0e7f6ef2b3cbd440ef36ceb25108d394bc5c827",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "docs/three-hour-demo-plan.md",
+      "source_sha256": "e0d028a7505f85847cda995827156d1a8278766737b192bebb4a395a81a063ee",
+      "copied_sha256": "e0d028a7505f85847cda995827156d1a8278766737b192bebb4a395a81a063ee",
+      "bytes": 9248,
+      "release_sha256": "e0d028a7505f85847cda995827156d1a8278766737b192bebb4a395a81a063ee",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "docs/weave-monitoring-options.md",
+      "source_sha256": "05d2510c155beca9bdb5c0e02103d496095dbbae49df420d12b3aa963376c949",
+      "copied_sha256": "05d2510c155beca9bdb5c0e02103d496095dbbae49df420d12b3aa963376c949",
+      "bytes": 8868,
+      "release_sha256": "05d2510c155beca9bdb5c0e02103d496095dbbae49df420d12b3aa963376c949",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "config/demo-campaign/manifest.json",
+      "source_sha256": "81332e3f4b2ef09f0f698336ee8a89c7b9ab3e163857bf9836b4686262329541",
+      "copied_sha256": "81332e3f4b2ef09f0f698336ee8a89c7b9ab3e163857bf9836b4686262329541",
+      "bytes": 3631,
+      "release_sha256": "81332e3f4b2ef09f0f698336ee8a89c7b9ab3e163857bf9836b4686262329541",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "config/demo-campaign/umc-02-job.json",
+      "source_sha256": "a56a5cf7e96ca708070e77679a9df09a8df1a8968383acbbd8f53dff15b36a8a",
+      "copied_sha256": "a56a5cf7e96ca708070e77679a9df09a8df1a8968383acbbd8f53dff15b36a8a",
+      "bytes": 28935,
+      "release_sha256": "a56a5cf7e96ca708070e77679a9df09a8df1a8968383acbbd8f53dff15b36a8a",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "config/demo-campaign/umc-03-job.json",
+      "source_sha256": "b992260b5b7f490122c626bca58e63c3b38d6c99babd666185dbb9a433444b93",
+      "copied_sha256": "b992260b5b7f490122c626bca58e63c3b38d6c99babd666185dbb9a433444b93",
+      "bytes": 28937,
+      "release_sha256": "b992260b5b7f490122c626bca58e63c3b38d6c99babd666185dbb9a433444b93",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "config/demo-campaign/umc-04-job.json",
+      "source_sha256": "55ed4f4446ab9c2336508f09071aa0b33f91d98766fcbd4a0898eadb68a451e3",
+      "copied_sha256": "55ed4f4446ab9c2336508f09071aa0b33f91d98766fcbd4a0898eadb68a451e3",
+      "bytes": 28936,
+      "release_sha256": "55ed4f4446ab9c2336508f09071aa0b33f91d98766fcbd4a0898eadb68a451e3",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "config/demo-campaign/umc-05-job.json",
+      "source_sha256": "8766f7f89488a128c9d5e3b06969a370a75a46e3c46772a54429f94d88c35762",
+      "copied_sha256": "8766f7f89488a128c9d5e3b06969a370a75a46e3c46772a54429f94d88c35762",
+      "bytes": 28937,
+      "release_sha256": "8766f7f89488a128c9d5e3b06969a370a75a46e3c46772a54429f94d88c35762",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "config/demo-campaign/umc-06-job.json",
+      "source_sha256": "1c21110065f51c065e1d6653200fde4ae089f28cab317d858a848be9bfdaf279",
+      "copied_sha256": "1c21110065f51c065e1d6653200fde4ae089f28cab317d858a848be9bfdaf279",
+      "bytes": 28941,
+      "release_sha256": "1c21110065f51c065e1d6653200fde4ae089f28cab317d858a848be9bfdaf279",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "config/demo-campaign/umc-07-job.json",
+      "source_sha256": "4573fcc602c2fe2480b99c50c8e6795c42fb8a13dc5b6921b5fad07a25985b51",
+      "copied_sha256": "4573fcc602c2fe2480b99c50c8e6795c42fb8a13dc5b6921b5fad07a25985b51",
+      "bytes": 28942,
+      "release_sha256": "4573fcc602c2fe2480b99c50c8e6795c42fb8a13dc5b6921b5fad07a25985b51",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "config/demo-campaign/umc-08-job.json",
+      "source_sha256": "75c5e32b193f61122f3532cff52c390937d95d6ee233cbd878601c458b850d63",
+      "copied_sha256": "75c5e32b193f61122f3532cff52c390937d95d6ee233cbd878601c458b850d63",
+      "bytes": 28829,
+      "release_sha256": "75c5e32b193f61122f3532cff52c390937d95d6ee233cbd878601c458b850d63",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "config/demo-campaign/umc-09-job.json",
+      "source_sha256": "3d392ab3ac83d66bc74b2c00bed9c52bdb21aae6aab59078a034fd8f245d10af",
+      "copied_sha256": "3d392ab3ac83d66bc74b2c00bed9c52bdb21aae6aab59078a034fd8f245d10af",
+      "bytes": 29003,
+      "release_sha256": "3d392ab3ac83d66bc74b2c00bed9c52bdb21aae6aab59078a034fd8f245d10af",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "config/haas-umc750-linked.mch",
+      "source_sha256": "0d783e3e333de99a21b7afcf83d0f2c0cd337cd33f1b6310095349f5ee25633b",
+      "copied_sha256": "0d783e3e333de99a21b7afcf83d0f2c0cd337cd33f1b6310095349f5ee25633b",
+      "bytes": 44730,
+      "release_sha256": "0d783e3e333de99a21b7afcf83d0f2c0cd337cd33f1b6310095349f5ee25633b",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "config/learning-part-b-job.json",
+      "source_sha256": "2b4ba34968775f0ac71fd992e9cb42338ede3b8c0408d484bb29309fe88a3794",
+      "copied_sha256": "2b4ba34968775f0ac71fd992e9cb42338ede3b8c0408d484bb29309fe88a3794",
+      "bytes": 29464,
+      "release_sha256": "2b4ba34968775f0ac71fd992e9cb42338ede3b8c0408d484bb29309fe88a3794",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "config/learning-part-c-job.json",
+      "source_sha256": "4c4ab96cbe79bff74bc38e9ec9223e356c8920e6cccf83e064f69414238b8846",
+      "copied_sha256": "4c4ab96cbe79bff74bc38e9ec9223e356c8920e6cccf83e064f69414238b8846",
+      "bytes": 29464,
+      "release_sha256": "4c4ab96cbe79bff74bc38e9ec9223e356c8920e6cccf83e064f69414238b8846",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "config/learning-part-d-job.json",
+      "source_sha256": "e3bc0a52f7fc6feb6c7852bc4793a65cefe6a28343a273f83d4da2a31e92a950",
+      "copied_sha256": "e3bc0a52f7fc6feb6c7852bc4793a65cefe6a28343a273f83d4da2a31e92a950",
+      "bytes": 29464,
+      "release_sha256": "e3bc0a52f7fc6feb6c7852bc4793a65cefe6a28343a273f83d4da2a31e92a950",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "config/learning-part-e-job.json",
+      "source_sha256": "8d32ca2faaa0345469cbc5faa9c9e5d6525811a40753ecaa11dd7490bcd8dc5b",
+      "copied_sha256": "8d32ca2faaa0345469cbc5faa9c9e5d6525811a40753ecaa11dd7490bcd8dc5b",
+      "bytes": 29464,
+      "release_sha256": "8d32ca2faaa0345469cbc5faa9c9e5d6525811a40753ecaa11dd7490bcd8dc5b",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "config/learning-part-f-job.json",
+      "source_sha256": "0fdb0eeb2ec5c70eed78c4bc34ba42b70a604b3010e1714f58624e846dcbfddf",
+      "copied_sha256": "0fdb0eeb2ec5c70eed78c4bc34ba42b70a604b3010e1714f58624e846dcbfddf",
+      "bytes": 29464,
+      "release_sha256": "0fdb0eeb2ec5c70eed78c4bc34ba42b70a604b3010e1714f58624e846dcbfddf",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "config/learning-part-g-job.json",
+      "source_sha256": "a769309567ecea97957553e7b2fad42dbffa4abde1846d2d827db986f4ec8e0f",
+      "copied_sha256": "a769309567ecea97957553e7b2fad42dbffa4abde1846d2d827db986f4ec8e0f",
+      "bytes": 29464,
+      "release_sha256": "a769309567ecea97957553e7b2fad42dbffa4abde1846d2d827db986f4ec8e0f",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "config/learning-part-h-job.json",
+      "source_sha256": "ae00e0a4fcb4479ea85ecb09a93384c08e5be502d452de604ebd53c6e752d578",
+      "copied_sha256": "ae00e0a4fcb4479ea85ecb09a93384c08e5be502d452de604ebd53c6e752d578",
+      "bytes": 29464,
+      "release_sha256": "ae00e0a4fcb4479ea85ecb09a93384c08e5be502d452de604ebd53c6e752d578",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "config/learning-part-i-job.json",
+      "source_sha256": "d69279e9a00f0bd1d1a32b27c90f50f81f2357280eb120d5a43d37e611e22fb5",
+      "copied_sha256": "d69279e9a00f0bd1d1a32b27c90f50f81f2357280eb120d5a43d37e611e22fb5",
+      "bytes": 29464,
+      "release_sha256": "d69279e9a00f0bd1d1a32b27c90f50f81f2357280eb120d5a43d37e611e22fb5",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "config/learning-part-j-job.json",
+      "source_sha256": "81acb06c12c1d893e873d93fb12bd99cdca67dbb7aae7efc7463ab695f6e8747",
+      "copied_sha256": "81acb06c12c1d893e873d93fb12bd99cdca67dbb7aae7efc7463ab695f6e8747",
+      "bytes": 29464,
+      "release_sha256": "81acb06c12c1d893e873d93fb12bd99cdca67dbb7aae7efc7463ab695f6e8747",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "config/umc-actuator-job.json",
+      "source_sha256": "d9d5bceae483a3e5045ba4ab5335b812bd4aa99a405991b990ff17d7949368be",
+      "copied_sha256": "d9d5bceae483a3e5045ba4ab5335b812bd4aa99a405991b990ff17d7949368be",
+      "bytes": 26598,
+      "release_sha256": "d9d5bceae483a3e5045ba4ab5335b812bd4aa99a405991b990ff17d7949368be",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "config/umc-actuator-tall-job.json",
+      "source_sha256": "a0c926fcce6f787663f7b0782683a8fea32c0a246f9f05abb1b66fe3eb645ed3",
+      "copied_sha256": "a0c926fcce6f787663f7b0782683a8fea32c0a246f9f05abb1b66fe3eb645ed3",
+      "bytes": 26919,
+      "release_sha256": "a0c926fcce6f787663f7b0782683a8fea32c0a246f9f05abb1b66fe3eb645ed3",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "config/umc-pedestal-direct-g54.f3d",
+      "source_sha256": "969fa718306973912c0413c9622eb903ecc2737481b25583c60631ff80a63823",
+      "copied_sha256": "969fa718306973912c0413c9622eb903ecc2737481b25583c60631ff80a63823",
+      "bytes": 51540,
+      "release_sha256": "969fa718306973912c0413c9622eb903ecc2737481b25583c60631ff80a63823",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "config/umc-tall-pedestal-g54.f3d",
+      "source_sha256": "b64840531f39ffca6a49e715dc478ff56284c7f8b99ae6c97ace8b62cd7a3679",
+      "copied_sha256": "b64840531f39ffca6a49e715dc478ff56284c7f8b99ae6c97ace8b62cd7a3679",
+      "bytes": 95105,
+      "release_sha256": "b64840531f39ffca6a49e715dc478ff56284c7f8b99ae6c97ace8b62cd7a3679",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "output/pdf/demo-campaign/umc-02.pdf",
+      "source_sha256": "700aec1f93f1e56317dae2042b79509c4e7819f7410b6fc66df5ed521de2f3be",
+      "copied_sha256": "700aec1f93f1e56317dae2042b79509c4e7819f7410b6fc66df5ed521de2f3be",
+      "bytes": 4435,
+      "release_sha256": "700aec1f93f1e56317dae2042b79509c4e7819f7410b6fc66df5ed521de2f3be",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "output/pdf/demo-campaign/umc-03.pdf",
+      "source_sha256": "5e121d57c3c2499203fc0da9bdb5470fdd6105df911666af072ad984b4678347",
+      "copied_sha256": "5e121d57c3c2499203fc0da9bdb5470fdd6105df911666af072ad984b4678347",
+      "bytes": 4448,
+      "release_sha256": "5e121d57c3c2499203fc0da9bdb5470fdd6105df911666af072ad984b4678347",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "output/pdf/demo-campaign/umc-04.pdf",
+      "source_sha256": "3e403164ec097eeb9d161cfdf2e6d167975bcbf08b2a35efc9c47475aedc28b8",
+      "copied_sha256": "3e403164ec097eeb9d161cfdf2e6d167975bcbf08b2a35efc9c47475aedc28b8",
+      "bytes": 4433,
+      "release_sha256": "3e403164ec097eeb9d161cfdf2e6d167975bcbf08b2a35efc9c47475aedc28b8",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "output/pdf/demo-campaign/umc-05.pdf",
+      "source_sha256": "b48eb0f15e15fe6d16d39950f6d679b1137c6bdbf5228508aaace294c16c97e6",
+      "copied_sha256": "b48eb0f15e15fe6d16d39950f6d679b1137c6bdbf5228508aaace294c16c97e6",
+      "bytes": 4442,
+      "release_sha256": "b48eb0f15e15fe6d16d39950f6d679b1137c6bdbf5228508aaace294c16c97e6",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "output/pdf/demo-campaign/umc-06.pdf",
+      "source_sha256": "acdab9fc6b2853c3688d9a3983490b56f4729e8ec95380c56149368e8a7aabd2",
+      "copied_sha256": "acdab9fc6b2853c3688d9a3983490b56f4729e8ec95380c56149368e8a7aabd2",
+      "bytes": 4530,
+      "release_sha256": "acdab9fc6b2853c3688d9a3983490b56f4729e8ec95380c56149368e8a7aabd2",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "output/pdf/demo-campaign/umc-07.pdf",
+      "source_sha256": "0a7f356630174bfa2f5e164a903a505da433a7ea0ddf93e0063cd5cad76cf8f4",
+      "copied_sha256": "0a7f356630174bfa2f5e164a903a505da433a7ea0ddf93e0063cd5cad76cf8f4",
+      "bytes": 4507,
+      "release_sha256": "0a7f356630174bfa2f5e164a903a505da433a7ea0ddf93e0063cd5cad76cf8f4",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "output/pdf/demo-campaign/umc-08.pdf",
+      "source_sha256": "7f9b18fcd3c4afd2336a7d0fd86613d65175c8fc83c5cb5e522f0fd131defe43",
+      "copied_sha256": "7f9b18fcd3c4afd2336a7d0fd86613d65175c8fc83c5cb5e522f0fd131defe43",
+      "bytes": 8944,
+      "release_sha256": "7f9b18fcd3c4afd2336a7d0fd86613d65175c8fc83c5cb5e522f0fd131defe43",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "output/pdf/demo-campaign/umc-09.pdf",
+      "source_sha256": "b182e794482976275a55eda14fbf906b7ce24f1fd247163b96b1c143255c3e50",
+      "copied_sha256": "b182e794482976275a55eda14fbf906b7ce24f1fd247163b96b1c143255c3e50",
+      "bytes": 4617,
+      "release_sha256": "b182e794482976275a55eda14fbf906b7ce24f1fd247163b96b1c143255c3e50",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "output/pdf/learning-part-b.pdf",
+      "source_sha256": "0b57a91e4a23822cd183e1b6a70d666edf9ba9f5ad36cbd08995ff580a62ac34",
+      "copied_sha256": "0b57a91e4a23822cd183e1b6a70d666edf9ba9f5ad36cbd08995ff580a62ac34",
+      "bytes": 3152,
+      "release_sha256": "0b57a91e4a23822cd183e1b6a70d666edf9ba9f5ad36cbd08995ff580a62ac34",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "output/pdf/learning-part-c.pdf",
+      "source_sha256": "d15fbc53f8df817cb475f6f8d8bee6cc588117372c97d91aac4dc29cc9ab59de",
+      "copied_sha256": "d15fbc53f8df817cb475f6f8d8bee6cc588117372c97d91aac4dc29cc9ab59de",
+      "bytes": 3120,
+      "release_sha256": "d15fbc53f8df817cb475f6f8d8bee6cc588117372c97d91aac4dc29cc9ab59de",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "output/pdf/learning-part-d.pdf",
+      "source_sha256": "48a8b0b3043d58a6b28f389f348cc9e580d0bf3d29bf5e56f54cf556a8525697",
+      "copied_sha256": "48a8b0b3043d58a6b28f389f348cc9e580d0bf3d29bf5e56f54cf556a8525697",
+      "bytes": 3120,
+      "release_sha256": "48a8b0b3043d58a6b28f389f348cc9e580d0bf3d29bf5e56f54cf556a8525697",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "output/pdf/learning-part-e.pdf",
+      "source_sha256": "65db0fdc56355ab3371d279735c2a81f5423a0491660a9a532b656eb16f8c8a8",
+      "copied_sha256": "65db0fdc56355ab3371d279735c2a81f5423a0491660a9a532b656eb16f8c8a8",
+      "bytes": 3110,
+      "release_sha256": "65db0fdc56355ab3371d279735c2a81f5423a0491660a9a532b656eb16f8c8a8",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "output/pdf/learning-part-f.pdf",
+      "source_sha256": "64c5778cbed221b21e803885b7dc002a91b508499b80dba665447ff070195538",
+      "copied_sha256": "64c5778cbed221b21e803885b7dc002a91b508499b80dba665447ff070195538",
+      "bytes": 3117,
+      "release_sha256": "64c5778cbed221b21e803885b7dc002a91b508499b80dba665447ff070195538",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "output/pdf/learning-part-g.pdf",
+      "source_sha256": "6a46088f69d6666aaa71156becc29d0f16876eaed0c0a606e959a3659ba4ea46",
+      "copied_sha256": "6a46088f69d6666aaa71156becc29d0f16876eaed0c0a606e959a3659ba4ea46",
+      "bytes": 2916,
+      "release_sha256": "6a46088f69d6666aaa71156becc29d0f16876eaed0c0a606e959a3659ba4ea46",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "output/pdf/learning-part-h.pdf",
+      "source_sha256": "dba139bd725ca4eb3eae127680b641fe1183e3d8c05c156af7e0195bcaa63715",
+      "copied_sha256": "dba139bd725ca4eb3eae127680b641fe1183e3d8c05c156af7e0195bcaa63715",
+      "bytes": 3302,
+      "release_sha256": "dba139bd725ca4eb3eae127680b641fe1183e3d8c05c156af7e0195bcaa63715",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "output/pdf/learning-part-i.pdf",
+      "source_sha256": "41172f2f290b55b00f778b30546309c9122eaacec11a9f897d7640abc01c55be",
+      "copied_sha256": "41172f2f290b55b00f778b30546309c9122eaacec11a9f897d7640abc01c55be",
+      "bytes": 3125,
+      "release_sha256": "41172f2f290b55b00f778b30546309c9122eaacec11a9f897d7640abc01c55be",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "output/pdf/learning-part-j.pdf",
+      "source_sha256": "450c9a4b41807537f1eccf8be2b51ee89310925be1838cff8f59593f6572f62e",
+      "copied_sha256": "450c9a4b41807537f1eccf8be2b51ee89310925be1838cff8f59593f6572f62e",
+      "bytes": 3126,
+      "release_sha256": "450c9a4b41807537f1eccf8be2b51ee89310925be1838cff8f59593f6572f62e",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "output/pdf/umc-actuator-housing.pdf",
+      "source_sha256": "cb5d9af223ca5ec70529b59ab62f26d8d2bbc128b74a20ad5eeedbeab5a81672",
+      "copied_sha256": "cb5d9af223ca5ec70529b59ab62f26d8d2bbc128b74a20ad5eeedbeab5a81672",
+      "bytes": 3186,
+      "release_sha256": "cb5d9af223ca5ec70529b59ab62f26d8d2bbc128b74a20ad5eeedbeab5a81672",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "research/five-axis/haas-umc750-reboot.f3d",
+      "source_sha256": "b33ed15419fdf3234f1a6269f86676ab5b2fda5b2e2044d460499192bba4f403",
+      "copied_sha256": "b33ed15419fdf3234f1a6269f86676ab5b2fda5b2e2044d460499192bba4f403",
+      "bytes": 6568341,
+      "release_sha256": "b33ed15419fdf3234f1a6269f86676ab5b2fda5b2e2044d460499192bba4f403",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "research/five-axis/haas-umc750-reboot.mch",
+      "source_sha256": "ed825408f4d43ba7382da9863b8d1ef38e63f760dee26ac79fb7f2dc4e6b3f08",
+      "copied_sha256": "ed825408f4d43ba7382da9863b8d1ef38e63f760dee26ac79fb7f2dc4e6b3f08",
+      "bytes": 41859,
+      "release_sha256": "ed825408f4d43ba7382da9863b8d1ef38e63f760dee26ac79fb7f2dc4e6b3f08",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "research/fusion-background-control.md",
+      "source_sha256": "941773291c3c6ecc039c3f945ce41aab99882c7b6d1dcb77b21775292080574b",
+      "copied_sha256": "941773291c3c6ecc039c3f945ce41aab99882c7b6d1dcb77b21775292080574b",
+      "bytes": 5768,
+      "release_sha256": "941773291c3c6ecc039c3f945ce41aab99882c7b6d1dcb77b21775292080574b",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": ".gitignore",
+      "source_sha256": "2674aec4f86b8b196e631f7de0988de3a795a5e2c9b6066240e3bc966fcf3783",
+      "copied_sha256": "2674aec4f86b8b196e631f7de0988de3a795a5e2c9b6066240e3bc966fcf3783",
+      "bytes": 646,
+      "release_sha256": "58d423f3fe8ceb9928681a4c5b35729179b04cdf1428182324b30eeea4903f21",
+      "release_matches_copied_source": false
+    },
+    {
+      "path": "config/README.md",
+      "source_sha256": "c4aaa16e4a3d9c5b88fc74cdb9d10ca7cae66efd082ad383efaf2ae5fbd69888",
+      "copied_sha256": "c4aaa16e4a3d9c5b88fc74cdb9d10ca7cae66efd082ad383efaf2ae5fbd69888",
+      "bytes": 7663,
+      "release_sha256": "c4aaa16e4a3d9c5b88fc74cdb9d10ca7cae66efd082ad383efaf2ae5fbd69888",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "scripts/demo/relocate_config.py",
+      "source_sha256": "6f6079fbeb65dc4ac61e60401a83e09c80b0c272ca2eff84cd56a063ca075901",
+      "copied_sha256": "6f6079fbeb65dc4ac61e60401a83e09c80b0c272ca2eff84cd56a063ca075901",
+      "bytes": 3550,
+      "release_sha256": "6f6079fbeb65dc4ac61e60401a83e09c80b0c272ca2eff84cd56a063ca075901",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "tests/test_relocate_config.py",
+      "source_sha256": "acc2b66260f93eaf0a45b389be0873e4d7beaafca15de508136e36ceceff773d",
+      "copied_sha256": "acc2b66260f93eaf0a45b389be0873e4d7beaafca15de508136e36ceceff773d",
+      "bytes": 1317,
+      "release_sha256": "acc2b66260f93eaf0a45b389be0873e4d7beaafca15de508136e36ceceff773d",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "docs/implementation-plan.md",
+      "source_sha256": "e56d252797473f7c8c5e0a5440196b63160a5a9b99fd78ba01c7a1bdc2e0b1c8",
+      "copied_sha256": "e56d252797473f7c8c5e0a5440196b63160a5a9b99fd78ba01c7a1bdc2e0b1c8",
+      "bytes": 4231,
+      "release_sha256": "b3ea26b7eea10616d04d3f541cae43eac36958a5baaab5e28ec6ea2ae4d505f5",
+      "release_matches_copied_source": false
+    },
+    {
+      "path": "docs/submission.md",
+      "source_sha256": "4317ef26120faba2f9e41229dcba164e0bec6b84ec201e63087cd2f784cff3ec",
+      "copied_sha256": "4317ef26120faba2f9e41229dcba164e0bec6b84ec201e63087cd2f784cff3ec",
+      "bytes": 12504,
+      "release_sha256": "4317ef26120faba2f9e41229dcba164e0bec6b84ec201e63087cd2f784cff3ec",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "docs/reviews/current-event-verification.md",
+      "source_sha256": "ab5fdcaf458906182acc9b0918bb3efef18fdadf0f81064f0d987cd3d069e2e2",
+      "copied_sha256": "ab5fdcaf458906182acc9b0918bb3efef18fdadf0f81064f0d987cd3d069e2e2",
+      "bytes": 3744,
+      "release_sha256": "ab5fdcaf458906182acc9b0918bb3efef18fdadf0f81064f0d987cd3d069e2e2",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "scripts/demo/prepare_finned.py",
+      "source_sha256": "ecbf9b5a5de017d146a567a4295423ee405869262f5c55134e22836882f8091e",
+      "copied_sha256": "ecbf9b5a5de017d146a567a4295423ee405869262f5c55134e22836882f8091e",
+      "release_sha256": "ecbf9b5a5de017d146a567a4295423ee405869262f5c55134e22836882f8091e",
+      "bytes": 14241,
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "config/demo-campaign/umc-10-job.json",
+      "source_sha256": "704cfda34b9537685bb6a272e333c6349c4fabf464a3ee8702e5509f59549c17",
+      "copied_sha256": "704cfda34b9537685bb6a272e333c6349c4fabf464a3ee8702e5509f59549c17",
+      "release_sha256": "704cfda34b9537685bb6a272e333c6349c4fabf464a3ee8702e5509f59549c17",
+      "bytes": 29659,
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "output/pdf/demo-campaign/umc-10.pdf",
+      "source_sha256": "f8b170e1caeeeb6f65d58eb9864d5a1878aeb60ebb6b453c4eb1202b80f83865",
+      "copied_sha256": "f8b170e1caeeeb6f65d58eb9864d5a1878aeb60ebb6b453c4eb1202b80f83865",
+      "release_sha256": "f8b170e1caeeeb6f65d58eb9864d5a1878aeb60ebb6b453c4eb1202b80f83865",
+      "bytes": 4728,
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "docs/finned-part.md",
+      "source_sha256": "98bfdc1a095798897abb430e02b37bc5b6edc9d322b2def8b27c064ea466af57",
+      "copied_sha256": "98bfdc1a095798897abb430e02b37bc5b6edc9d322b2def8b27c064ea466af57",
+      "release_sha256": "98bfdc1a095798897abb430e02b37bc5b6edc9d322b2def8b27c064ea466af57",
+      "bytes": 2620,
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "tests/test_demo_evaluation_summary.py",
+      "source_sha256": "7dd78d311541733fbbec1cb1c0d11825f2bb918aedb73a005dcf60adb061f8df",
+      "copied_sha256": "7dd78d311541733fbbec1cb1c0d11825f2bb918aedb73a005dcf60adb061f8df",
+      "release_sha256": "7dd78d311541733fbbec1cb1c0d11825f2bb918aedb73a005dcf60adb061f8df",
+      "bytes": 2132,
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "docs/weave-evaluation-dashboard.md",
+      "source_sha256": "d87a688e9eeefe00ce3f7f570dcef346af7220ccfb40c3380ab0496c26af26ac",
+      "copied_sha256": "d87a688e9eeefe00ce3f7f570dcef346af7220ccfb40c3380ab0496c26af26ac",
+      "release_sha256": "d87a688e9eeefe00ce3f7f570dcef346af7220ccfb40c3380ab0496c26af26ac",
+      "bytes": 3190,
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "scripts/demo/stage_playback.py",
+      "source_sha256": "0110ec7adee4fd0e78e6be58ca9373af660946b9e78509f4ad33a59702d4ad47",
+      "copied_sha256": "0110ec7adee4fd0e78e6be58ca9373af660946b9e78509f4ad33a59702d4ad47",
+      "release_sha256": "0110ec7adee4fd0e78e6be58ca9373af660946b9e78509f4ad33a59702d4ad47",
+      "bytes": 10114,
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "tests/test_stock_topology_review.py",
+      "source_sha256": "e952b7340fd7459ef34facf94c91488b2817b0470353f601497c79dd02e8e6d5",
+      "copied_sha256": "e952b7340fd7459ef34facf94c91488b2817b0470353f601497c79dd02e8e6d5",
+      "bytes": 2616,
+      "release_sha256": "e952b7340fd7459ef34facf94c91488b2817b0470353f601497c79dd02e8e6d5",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "docs/reviews/geometry-normalization-review.md",
+      "source_sha256": "da78f7c9aa79993cf46ba402d9a53024882c50ddd7b831b5b65d80b6dfc79ee9",
+      "copied_sha256": "da78f7c9aa79993cf46ba402d9a53024882c50ddd7b831b5b65d80b6dfc79ee9",
+      "release_sha256": "da78f7c9aa79993cf46ba402d9a53024882c50ddd7b831b5b65d80b6dfc79ee9",
+      "release_matches_copied_source": true,
+      "bytes": 2937
+    },
+    {
+      "path": "scripts/demo/plot_verified_improvements.py",
+      "source_sha256": "5835f13294e4f6f81ffc749a486ab0003c3ca431eb29f50bff815405f5ea1c9e",
+      "copied_sha256": "5835f13294e4f6f81ffc749a486ab0003c3ca431eb29f50bff815405f5ea1c9e",
+      "release_sha256": "5835f13294e4f6f81ffc749a486ab0003c3ca431eb29f50bff815405f5ea1c9e",
+      "bytes": 8624,
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "tests/test_verified_improvements.py",
+      "source_sha256": "213cefc25af81a491843cbe2a1a2a0456d8e1ebf8108605b53f68c4b0fb85498",
+      "copied_sha256": "213cefc25af81a491843cbe2a1a2a0456d8e1ebf8108605b53f68c4b0fb85498",
+      "release_sha256": "213cefc25af81a491843cbe2a1a2a0456d8e1ebf8108605b53f68c4b0fb85498",
+      "bytes": 3972,
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "docs/verified-improvements.md",
+      "source_sha256": "7c1436101ee33929a72483418f074eb495b96a69bf7df715adaf4f1d9d9ec964",
+      "copied_sha256": "7c1436101ee33929a72483418f074eb495b96a69bf7df715adaf4f1d9d9ec964",
+      "release_sha256": "7c1436101ee33929a72483418f074eb495b96a69bf7df715adaf4f1d9d9ec964",
+      "bytes": 2170,
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "docs/queue-recovery.md",
+      "source_sha256": "c34272c7a286a021e1d51e75e06e9cc0d67bd9e6ec00e80c8f4a6f046cd30348",
+      "copied_sha256": "c34272c7a286a021e1d51e75e06e9cc0d67bd9e6ec00e80c8f4a6f046cd30348",
+      "bytes": 4087,
+      "release_sha256": "c34272c7a286a021e1d51e75e06e9cc0d67bd9e6ec00e80c8f4a6f046cd30348",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "fusion/SiltaBridge/SiltaBridge.py",
+      "source_sha256": "2a97bb20e16acf408fc34f00f2ad0bf9d5a62a200e2dc3e1bf7122003ec6e63b",
+      "copied_sha256": "2a97bb20e16acf408fc34f00f2ad0bf9d5a62a200e2dc3e1bf7122003ec6e63b",
+      "release_sha256": "2a97bb20e16acf408fc34f00f2ad0bf9d5a62a200e2dc3e1bf7122003ec6e63b",
+      "bytes": 7098,
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "fusion/SiltaBridge/recovery.py",
+      "source_sha256": "b96195c967dc9b64c428b973910abd959b354d2bf8d1f9d5484af93ae80fe4f0",
+      "copied_sha256": "b96195c967dc9b64c428b973910abd959b354d2bf8d1f9d5484af93ae80fe4f0",
+      "release_sha256": "b96195c967dc9b64c428b973910abd959b354d2bf8d1f9d5484af93ae80fe4f0",
+      "bytes": 1819,
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "tests/test_fusion_bridge_recovery.py",
+      "source_sha256": "c52b1d99c0b54bd2fff52af8fc07d4551aa0a6a917a69c559c8913ced77d9c4d",
+      "copied_sha256": "c52b1d99c0b54bd2fff52af8fc07d4551aa0a6a917a69c559c8913ced77d9c4d",
+      "release_sha256": "c52b1d99c0b54bd2fff52af8fc07d4551aa0a6a917a69c559c8913ced77d9c4d",
+      "bytes": 2878,
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "scripts/demo/export_slide_pdf.py",
+      "source_sha256": "87b10f33274218dae867a13c95b7f54e2ae71eb9205f19069e885f18933c00b2",
+      "copied_sha256": "87b10f33274218dae867a13c95b7f54e2ae71eb9205f19069e885f18933c00b2",
+      "release_sha256": "87b10f33274218dae867a13c95b7f54e2ae71eb9205f19069e885f18933c00b2",
+      "bytes": 1249,
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "docs/slide-pdf.md",
+      "source_sha256": "224ab7f5ed59117e599f85f370c0a64123eb04efc607e065d006b2791bcb84e8",
+      "copied_sha256": "224ab7f5ed59117e599f85f370c0a64123eb04efc607e065d006b2791bcb84e8",
+      "release_sha256": "224ab7f5ed59117e599f85f370c0a64123eb04efc607e065d006b2791bcb84e8",
+      "bytes": 495,
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "tests/test_package_stage.py",
+      "source_sha256": "f002d27d596589c6fc32af4945b63e5d112ee93d5730aef85da5a313b4df116e",
+      "copied_sha256": "f002d27d596589c6fc32af4945b63e5d112ee93d5730aef85da5a313b4df116e",
+      "release_sha256": "f002d27d596589c6fc32af4945b63e5d112ee93d5730aef85da5a313b4df116e",
+      "bytes": 13803,
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "scripts/demo/prepare_cage.py",
+      "source_sha256": "f98458a6fb73800a6fbfb3a0e5199bce55080364801ba89fdc2f9a94b1e0e92a",
+      "copied_sha256": "f98458a6fb73800a6fbfb3a0e5199bce55080364801ba89fdc2f9a94b1e0e92a",
+      "release_sha256": "f98458a6fb73800a6fbfb3a0e5199bce55080364801ba89fdc2f9a94b1e0e92a",
+      "bytes": 22310,
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "config/demo-campaign/umc-11-job.json",
+      "source_sha256": "a0097da76c5a837035f0dd61fd25a4820455bcbf580ef5c8f5816f086a1512b5",
+      "copied_sha256": "a0097da76c5a837035f0dd61fd25a4820455bcbf580ef5c8f5816f086a1512b5",
+      "release_sha256": "a0097da76c5a837035f0dd61fd25a4820455bcbf580ef5c8f5816f086a1512b5",
+      "bytes": 30204,
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "output/pdf/demo-campaign/umc-11.pdf",
+      "source_sha256": "bf9d10c72c4b9d0ccfff069bf7c988a889335082623a756e37e5fb6aa516d274",
+      "copied_sha256": "bf9d10c72c4b9d0ccfff069bf7c988a889335082623a756e37e5fb6aa516d274",
+      "release_sha256": "bf9d10c72c4b9d0ccfff069bf7c988a889335082623a756e37e5fb6aa516d274",
+      "bytes": 7361,
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "docs/cage-part.md",
+      "source_sha256": "8b7c5eb2e4ddc8dcb1a29e0a43f3051bf3b2c26c06b17aee97a5b69ac8c6dc55",
+      "copied_sha256": "8b7c5eb2e4ddc8dcb1a29e0a43f3051bf3b2c26c06b17aee97a5b69ac8c6dc55",
+      "release_sha256": "8b7c5eb2e4ddc8dcb1a29e0a43f3051bf3b2c26c06b17aee97a5b69ac8c6dc55",
+      "bytes": 3390,
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "scripts/demo/prepare_umc12_challenge.py",
+      "source_sha256": "6c7c867951219b215bdfc745893044148cc23c863b5d0e2c7cc330776b0875a9",
+      "copied_sha256": "6c7c867951219b215bdfc745893044148cc23c863b5d0e2c7cc330776b0875a9",
+      "bytes": 9186,
+      "release_sha256": "6c7c867951219b215bdfc745893044148cc23c863b5d0e2c7cc330776b0875a9",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "config/demo-campaign/umc-12-job.json",
+      "source_sha256": "76ee57173ab46d9551adda042dfd75fa21fce1c396dd51d06d0fea3010d51755",
+      "copied_sha256": "76ee57173ab46d9551adda042dfd75fa21fce1c396dd51d06d0fea3010d51755",
+      "bytes": 29574,
+      "release_sha256": "76ee57173ab46d9551adda042dfd75fa21fce1c396dd51d06d0fea3010d51755",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "output/pdf/demo-campaign/umc-12.pdf",
+      "source_sha256": "d0351e3f31d722f76ac684c46fd55a4d2aed862ddecac07f711f899f330287b3",
+      "copied_sha256": "d0351e3f31d722f76ac684c46fd55a4d2aed862ddecac07f711f899f330287b3",
+      "release_sha256": "d0351e3f31d722f76ac684c46fd55a4d2aed862ddecac07f711f899f330287b3",
+      "bytes": 4692,
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "docs/reviews/final-demo-claims.md",
+      "source_sha256": "054e47adf88f7bc77958047800a809e5bde19ad96ee36f65612bcd2f58945059",
+      "copied_sha256": "054e47adf88f7bc77958047800a809e5bde19ad96ee36f65612bcd2f58945059",
+      "bytes": 7380,
+      "release_sha256": "054e47adf88f7bc77958047800a809e5bde19ad96ee36f65612bcd2f58945059",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "tests/test_film_tail.py",
+      "source_sha256": "5158d2c34f273bc8e17ec3eab93040f9979ed9d8b2b7ab9de6fa7743b0f115b5",
+      "copied_sha256": "5158d2c34f273bc8e17ec3eab93040f9979ed9d8b2b7ab9de6fa7743b0f115b5",
+      "release_sha256": "5158d2c34f273bc8e17ec3eab93040f9979ed9d8b2b7ab9de6fa7743b0f115b5",
+      "bytes": 4117,
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "scripts/demo/capture_verified_candidate.py",
+      "source_sha256": "fb07e4f9704f4c0271d9aa9a3d65276ca0f74ed1b811fe8fea3f029b4e458b1c",
+      "copied_sha256": "fb07e4f9704f4c0271d9aa9a3d65276ca0f74ed1b811fe8fea3f029b4e458b1c",
+      "bytes": 14582,
+      "release_sha256": "fb07e4f9704f4c0271d9aa9a3d65276ca0f74ed1b811fe8fea3f029b4e458b1c",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "tests/test_capture_verified_candidate.py",
+      "source_sha256": "1544c3aec7afddcb8a4dd01bc281531247b3be15c02bc3fcaae4671b1c595efd",
+      "copied_sha256": "1544c3aec7afddcb8a4dd01bc281531247b3be15c02bc3fcaae4671b1c595efd",
+      "bytes": 8322,
+      "release_sha256": "1544c3aec7afddcb8a4dd01bc281531247b3be15c02bc3fcaae4671b1c595efd",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "docs/verified-capture.md",
+      "source_sha256": "92b715007ad88ec607305fc9f173548e153d6db034273c4ca0f550ef6d8379af",
+      "copied_sha256": "92b715007ad88ec607305fc9f173548e153d6db034273c4ca0f550ef6d8379af",
+      "bytes": 3577,
+      "release_sha256": "92b715007ad88ec607305fc9f173548e153d6db034273c4ca0f550ef6d8379af",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "tests/test_resume_fusion_job.py",
+      "source_sha256": "422dc01f6fd7129fb10ad8de29219733fbc6ad35db72e3fc9380513e60d0c51f",
+      "copied_sha256": "422dc01f6fd7129fb10ad8de29219733fbc6ad35db72e3fc9380513e60d0c51f",
+      "bytes": 8156,
+      "release_sha256": "422dc01f6fd7129fb10ad8de29219733fbc6ad35db72e3fc9380513e60d0c51f",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "docs/stock-regeneration-audit.md",
+      "source_sha256": "455a1dea2115866b19d9b80d6ffffcf673153cc5156469fe2c4a6ccbe16a6b20",
+      "copied_sha256": "455a1dea2115866b19d9b80d6ffffcf673153cc5156469fe2c4a6ccbe16a6b20",
+      "bytes": 7062,
+      "release_sha256": "455a1dea2115866b19d9b80d6ffffcf673153cc5156469fe2c4a6ccbe16a6b20",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "tests/test_collection_invalidated_reports.py",
+      "source_sha256": "df98a8a6ee07282f258511f14b1994e17d68b8164f8b482db60eebaa83fdfb9c",
+      "copied_sha256": "df98a8a6ee07282f258511f14b1994e17d68b8164f8b482db60eebaa83fdfb9c",
+      "bytes": 2218,
+      "release_sha256": "df98a8a6ee07282f258511f14b1994e17d68b8164f8b482db60eebaa83fdfb9c",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "docs/reviews/finned-rehearsal-collection.md",
+      "source_sha256": "25f1709497e56ebbaea7d017bc46e909439c10caec10ae627bc0e50a50d7d0f4",
+      "copied_sha256": "25f1709497e56ebbaea7d017bc46e909439c10caec10ae627bc0e50a50d7d0f4",
+      "bytes": 2443,
+      "release_sha256": "25f1709497e56ebbaea7d017bc46e909439c10caec10ae627bc0e50a50d7d0f4",
+      "release_matches_copied_source": true
+    },
+    {
+      "path": "docs/reviews/live-rehearsal.md",
+      "source_sha256": "5139bd14816e4f6bffc2d385f98272d1ce2a3980a629e0a9416396637eb03c7f",
+      "copied_sha256": "5139bd14816e4f6bffc2d385f98272d1ce2a3980a629e0a9416396637eb03c7f",
+      "bytes": 2018,
+      "release_sha256": "5139bd14816e4f6bffc2d385f98272d1ce2a3980a629e0a9416396637eb03c7f",
+      "release_matches_copied_source": true
+    }
+  ],
+  "protected_remote_files": {
+    "AGENTS.md": "f7685dc61b0d3a8643b6be8ec9339d239a53ee64032dde1c9ef2317df2bc912e",
+    "docs/project-context.md": "695337a036350dad2ba91a68ef74b3ae6637d51cf7f2a6c33fb9f431146793d8",
+    "docs/aria-loop-review.md": "e18551d9e64acf2ce24340c8a7cd6db377feeb0577d69dd42d561f2b418d42f9",
+    "docs/demo-3min.md": "d696e37e507e9466bcfed6e1b335d19d319b225a88242b1b5846294183c36088",
+    "scripts/build_demo_slides.py": "51cf7cae4b10ab85e0c27cf65d63e962e62f2909d7d9ec0e733d6dcbd109a658",
+    "scripts/pitch_template.html": "299192802b2ed1cfa6d2cc539b22e0872d415faab2db772710a24731389d19eb",
+    "demo/index.html": "eef2cd58113e9b925022ee0f2781cddf6adeb2025496a6c26427f94db136c583",
+    "demo/guide.html": "350ed3a87af746f838b5b22a3a0fc4acde8b22a3793065db2dca25dac647a04b",
+    "demo/check-demo.cjs": "58251c6d8c67a4b86a88eb2f14dacf9eb993d672ffdb0a32a7e41d76a972f393",
+    "demo/README.md": "0c44be1c4224b7c45c20a36eb17662c9e588f1b8844793109af96fccff88b3ff",
+    "demo/slides.html": "fb28de556e1f57e9d94d0bb807ab65068c3398981cc61d04bf10a50f8a51f5b7",
+    "demo/assets/team.jpeg": "1228722e455b2cb6c033526098b05eb24bd313aaec711f3c6117cd37f9afb404"
+  },
+  "integration_changes": [
+    {
+      "path": "README.md",
+      "source_sha256": "f5a18c3ed2992e859a7a22f677a37d1e8c835d0c1670ffd7d8f0f19b83b8918e",
+      "release_sha256": "43509edb37c9852836d16e08ff13228d0f1a3e4adc785fb79dad740eb4de519d"
+    },
+    {
+      "path": ".gitignore",
+      "source_sha256": "2674aec4f86b8b196e631f7de0988de3a795a5e2c9b6066240e3bc966fcf3783",
+      "release_sha256": "58d423f3fe8ceb9928681a4c5b35729179b04cdf1428182324b30eeea4903f21"
+    },
+    {
+      "path": "docs/implementation-plan.md",
+      "source_sha256": "e56d252797473f7c8c5e0a5440196b63160a5a9b99fd78ba01c7a1bdc2e0b1c8",
+      "release_sha256": "b3ea26b7eea10616d04d3f541cae43eac36958a5baaab5e28ec6ea2ae4d505f5"
+    }
+  ],
+  "source_drift_at_verification": [],
+  "protected_remote_files_valid": true,
+  "resync_history": [
+    {
+      "at": "2026-09-13T06:31:53.843334+00:00",
+      "path": "docs/implementation-plan.md",
+      "previous_source_sha256": "eaa09ce453ca5d446b2bcf01bc7398989f704acd7263a9568d440210c5923463"
+    },
+    {
+      "at": "2026-09-13T06:31:53.843692+00:00",
+      "path": "docs/submission.md",
+      "previous_source_sha256": "71c1185a98e068b152bac48004a7a4e4c3066c6d0b58ce89b19cee0d60df5e5d"
+    },
+    {
+      "at": "2026-09-13T06:33:22.948002+00:00",
+      "path": "docs/submission.md",
+      "previous_source_sha256": "a172afee324f2f245b12004dfdb50b22a9448fda5fe023b47354ef0775187801"
+    },
+    {
+      "at": "2026-09-13T06:33:22.948476+00:00",
+      "path": "scripts/demo/presentation_film.py",
+      "previous_source_sha256": "94dcb0dc268bfd0ac61be70463d7a72f28de0f6e387124fe74178976a04f0ab2"
+    },
+    {
+      "at": "2026-09-13T06:33:22.948716+00:00",
+      "path": "tests/test_demo_readiness.py",
+      "previous_source_sha256": "7cacaa5cf2d76b4f0a40d4f481d899ca6d731d6818c324e1c46a5442219fb2fa"
+    },
+    {
+      "at": "2026-09-13T06:33:22.948853+00:00",
+      "path": "tests/test_operation_frames.py",
+      "previous_source_sha256": "0032764a8fe92e8c9cc1652780f43d04d1e379b8918c909cd61e3a00da13d6c5"
+    },
+    {
+      "at": "2026-09-13T06:33:22.949025+00:00",
+      "path": "tests/test_post_operation_frames.py",
+      "previous_source_sha256": "467bee02d5a2bd7c6ad654ddf5f342a9714a53d9c681f4611bce675ce16de533"
+    },
+    {
+      "at": "2026-09-13T06:33:22.949191+00:00",
+      "path": "tests/test_relocate_config.py",
+      "previous_source_sha256": "34c734fc7439731229762262915e8cbb430d66c735df89c8c4c51d3293fe5e15"
+    },
+    {
+      "at": "2026-09-13T06:33:22.949319+00:00",
+      "path": "scripts/demo/relocate_config.py",
+      "previous_source_sha256": "104e6cc3f305e399b3c55a225d3b89ec1a8d07ef9339822d222cd249a5ad1086"
+    },
+    {
+      "at": "2026-09-13T06:38:25.634157+00:00",
+      "reason": "Add unrun heldout finned drawing and preparation source",
+      "paths": [
+        "scripts/demo/prepare_finned.py",
+        "config/demo-campaign/umc-10-job.json",
+        "output/pdf/demo-campaign/umc-10.pdf",
+        "docs/finned-part.md"
+      ]
+    },
+    {
+      "at": "2026-09-13T06:42:03.090336+00:00",
+      "path": "scripts/demo/evaluate_learning.py",
+      "previous_source_sha256": "cb657e49787cfaa9349eb7ae6e58a2ef749eccca876880d2ef1d5ab5af4fcb33"
+    },
+    {
+      "at": "2026-09-13T06:48:28.919182+00:00",
+      "path": "scripts/demo/learning_transfer_report.py",
+      "previous_source_sha256": "afb9c31642dfc67c0b6ceb83ca5c6b469fcb7b1009fb169fd300e8a6017b0e96"
+    },
+    {
+      "at": "2026-09-13T06:48:28.919902+00:00",
+      "path": "scripts/demo/part_gallery.py",
+      "previous_source_sha256": "0c6fc1d11164e25b2d0540d2307ec7bbf20a6642811726e47f565e126ae27339"
+    },
+    {
+      "at": "2026-09-13T06:48:28.921124+00:00",
+      "path": "scripts/demo/stage_fusion_demo.py",
+      "previous_source_sha256": "b41d8d0b95ea753973e71b6f4bbabdbf52216a2def9aef14d5dc38b9ad2fba32"
+    },
+    {
+      "at": "2026-09-13T06:48:28.924416+00:00",
+      "path": "tests/test_operation_frames.py",
+      "previous_source_sha256": "7fda117e1eede4403dd2f0d37e85c1cc92627a9f21ae15ecdc02778090638c89"
+    },
+    {
+      "at": "2026-09-13T06:48:28.924620+00:00",
+      "path": "tests/test_post_operation_frames.py",
+      "previous_source_sha256": "0d717883cf0ccf73e58e07fea3f2fca414ce101d389b28a9e57860423e8d19bb"
+    },
+    {
+      "at": "2026-09-13T06:48:28.925532+00:00",
+      "path": "tests/test_stage_fusion_demo.py",
+      "previous_source_sha256": "e6108c6e97ca8b243c34580aa3190400a269364a934e5fb6b2372abf3b672b5f"
+    },
+    {
+      "at": "2026-09-13T06:48:28.926304+00:00",
+      "path": "docs/campaign-results.md",
+      "previous_source_sha256": "d686c28c7565c0ff5232591856f5d084968e3d670fc971808dd990be17c3c91f"
+    },
+    {
+      "at": "2026-09-13T06:48:28.926523+00:00",
+      "path": "docs/demo-evaluation.md",
+      "previous_source_sha256": "f5d99768d5473447f5bc3494081670df4af71e6bc468227f4900901525f67c5d"
+    },
+    {
+      "at": "2026-09-13T06:48:28.926754+00:00",
+      "path": "docs/demo-runbook.md",
+      "previous_source_sha256": "474bfa06bf7ac8fd683c206b4f81ba75b7b9a7a7df7a85e25e954fd50169431b"
+    },
+    {
+      "at": "2026-09-13T06:48:28.927619+00:00",
+      "path": "docs/learning-transfer.md",
+      "previous_source_sha256": "20c63d9a233d41ac0fd84131166fbeb613fcf8bdbb1d09184f13126af3fe87fd"
+    },
+    {
+      "at": "2026-09-13T06:48:28.938835+00:00",
+      "path": "docs/submission.md",
+      "previous_source_sha256": "8605c2d325c34223b1e844715c07a13173c690106500f1b4e34309b68e70d4c1"
+    },
+    {
+      "at": "2026-09-13T06:48:28.939873+00:00",
+      "path": "docs/weave-evaluation-dashboard.md",
+      "previous_source_sha256": "a31ecc092c8edec7e4225aa6fce6d328b5108fb36152cb3847e1d8fcbbadf40a"
+    },
+    {
+      "at": "2026-09-13T07:08:31.689564+00:00",
+      "path": "silta/cnc/stock_comparison.py",
+      "previous_source_sha256": "534fb8180f460c4f2761abbe538222cb2896bf6230e0c525ecd7066a5dc6db25"
+    },
+    {
+      "at": "2026-09-13T07:08:31.689908+00:00",
+      "path": "silta/cnc/fixed_verifier.py",
+      "previous_source_sha256": "dbbd8f8762b13a37f245d389f4c6cc98032b42a75115f1e51e4cfc4cb4e6c5bc"
+    },
+    {
+      "at": "2026-09-13T07:08:31.690193+00:00",
+      "path": "tests/test_stock_comparison.py",
+      "previous_source_sha256": "9d318f71c9ca562f7eb1444d734ab755ce1e9db8f67374d10a691afbb68df672"
+    },
+    {
+      "at": "2026-09-13T07:08:31.690440+00:00",
+      "path": "docs/geometry-performance.md",
+      "previous_source_sha256": "a30f71a44c02694587cbcce2724f77ec0fad515ccd2fe06d9818fabbc8fc349a"
+    },
+    {
+      "at": "2026-09-13T07:08:31.690688+00:00",
+      "path": "scripts/demo/stage_playback.py",
+      "previous_source_sha256": "a2ead7124aa2927dfe0de21daa5363c3914d8c720a56ef146ed563a6c87bb2c5"
+    },
+    {
+      "at": "2026-09-13T07:08:31.690965+00:00",
+      "path": "scripts/demo/stage_fusion_demo.py",
+      "previous_source_sha256": "f6b46c8f44a8c39eca14b6247031c30abbb0daea225883ea3c9de2be8754e875"
+    },
+    {
+      "at": "2026-09-13T07:08:31.691101+00:00",
+      "path": "tests/test_stage_fusion_demo.py",
+      "previous_source_sha256": "c072f67e8645e5e9257a17885991a65ed45d11d6434986bc0339199ef4e1121a"
+    },
+    {
+      "at": "2026-09-13T07:08:31.691228+00:00",
+      "path": "silta/cnc/agents.py",
+      "previous_source_sha256": "a5e6b88c503c53bab46380dea21e0b277c48e9fc3b4b45c245e44f5a313b36e4"
+    },
+    {
+      "at": "2026-09-13T07:08:31.691374+00:00",
+      "path": "scripts/demo/presentation_film.py",
+      "previous_source_sha256": "d6f39aa5475adcdeddccfb3bdb579f7db899e9c6d1810aef73e61a2ce5793e67"
+    },
+    {
+      "at": "2026-09-13T07:08:31.691608+00:00",
+      "path": "scripts/demo/package_evidence.py",
+      "previous_source_sha256": "9df80a1a13a2064537d464b3e2a2201ff84a60d95b7abc8e5c9d91caa70db5a7"
+    },
+    {
+      "at": "2026-09-13T07:27:13.085189+00:00",
+      "path": "scripts/demo/plot_verified_improvements.py",
+      "previous_source_sha256": null
+    },
+    {
+      "at": "2026-09-13T07:27:13.085189+00:00",
+      "path": "tests/test_verified_improvements.py",
+      "previous_source_sha256": null
+    },
+    {
+      "at": "2026-09-13T07:27:13.085189+00:00",
+      "path": "docs/verified-improvements.md",
+      "previous_source_sha256": null
+    },
+    {
+      "at": "2026-09-13T07:27:13.085189+00:00",
+      "path": "docs/queue-recovery.md",
+      "previous_source_sha256": null
+    },
+    {
+      "at": "2026-09-13T07:27:13.085189+00:00",
+      "path": "fusion/SiltaBridge/SiltaBridge.py",
+      "previous_source_sha256": null
+    },
+    {
+      "at": "2026-09-13T07:27:13.085189+00:00",
+      "path": "fusion/SiltaBridge/recovery.py",
+      "previous_source_sha256": null
+    },
+    {
+      "at": "2026-09-13T07:27:13.085189+00:00",
+      "path": "tests/test_fusion_bridge_recovery.py",
+      "previous_source_sha256": null
+    },
+    {
+      "at": "2026-09-13T07:27:13.085189+00:00",
+      "path": "docs/campaign-results.md",
+      "previous_source_sha256": "0c9db0c47db4116fde8428f04b8c63c07fd2385b50b6b928b7673c075c30397c"
+    },
+    {
+      "at": "2026-09-13T07:27:13.085189+00:00",
+      "path": "docs/learning-transfer.md",
+      "previous_source_sha256": "f508580bf56a3bf206311f2f7a43678d410f238688ee2444adf4588e38c9fd27"
+    },
+    {
+      "at": "2026-09-13T07:27:13.085189+00:00",
+      "path": "docs/demo-runbook.md",
+      "previous_source_sha256": "489701effd405a575d7023b207af959ebc170ea8b85e625700a3c3461d2a233e"
+    },
+    {
+      "at": "2026-09-13T07:28:55.931307+00:00",
+      "path": "scripts/demo/stage_playback.py",
+      "previous_source_sha256": "3bd1b7fb1be906bc84fc26f1a878854d53b8ddb93f3ddfa244a24acbd0bb4c01"
+    },
+    {
+      "at": "2026-09-13T07:28:55.931307+00:00",
+      "path": "tests/test_stage_fusion_demo.py",
+      "previous_source_sha256": "d9cdeba8b5abde112010b69eb3f3014fb72025b0a1d877e49bf7bbba2a32d6e2"
+    },
+    {
+      "at": "2026-09-13T07:28:55.931307+00:00",
+      "path": "scripts/demo/package_evidence.py",
+      "previous_source_sha256": "c46c7daece06b317f3367b0c589e168d3fd2e559ffe60b56a7e91893629139f2"
+    },
+    {
+      "at": "2026-09-13T07:28:55.931307+00:00",
+      "path": "docs/verified-improvements.md",
+      "previous_source_sha256": "ed0e739d971aff2e04e78717dcf5201746fc13ceb7afb8d1c7cfc8ca2b027b49"
+    },
+    {
+      "at": "2026-09-13T07:34:05.340048+00:00",
+      "path": "scripts/demo/live_terminal.py",
+      "previous_source_sha256": "5361e05fab1de2114e300b14a8954e405e58f22c05e5d74e6d84f6fdf15da174"
+    },
+    {
+      "at": "2026-09-13T07:34:05.340048+00:00",
+      "path": "tests/test_demo_terminal.py",
+      "previous_source_sha256": "99e01f16d355c047ae782673bd59da44cabc47a705e67fa8fdeaa20aa9325c93"
+    },
+    {
+      "at": "2026-09-13T07:34:05.340048+00:00",
+      "path": "scripts/demo/package_evidence.py",
+      "previous_source_sha256": "50e9426fd8072fbcb0af24d2d0dde6ccd7399636cd5ca334dce23781d4e6aaeb"
+    },
+    {
+      "at": "2026-09-13T07:34:05.340048+00:00",
+      "path": "silta/cnc/native_reader.py",
+      "previous_source_sha256": "06735749f3dd6c6b5239efbc6c00dd5e67cc8a4ea06fc23c35d46359dc45dbaa"
+    },
+    {
+      "at": "2026-09-13T07:34:05.340048+00:00",
+      "path": "tests/test_native_reader.py",
+      "previous_source_sha256": "fa90bfb4d5f20551db4e66e3a4baedf6cb20b96e2412d5b53c78536742f0687b"
+    },
+    {
+      "at": "2026-09-13T07:35:50.447082+00:00",
+      "path": "silta/cnc/native_reader.py",
+      "previous_source_sha256": "5f2c87b6bcfc2e8ae799d924b0883ccdfcf697ccc5fb765b5a80c3953f45b822"
+    },
+    {
+      "at": "2026-09-13T07:35:50.447082+00:00",
+      "path": "silta/cnc/fixed_verifier.py",
+      "previous_source_sha256": "c55002fa99547814b78a998830bec9eb1bf131ccb013ebe9fb69e83e2b812618"
+    },
+    {
+      "at": "2026-09-13T07:35:50.447082+00:00",
+      "path": "tests/test_native_reader.py",
+      "previous_source_sha256": "59021dcf1f9b64916be9ca0078c296e80ea13f9d287192982d93b9585ae73206"
+    },
+    {
+      "at": "2026-09-13T07:35:50.447082+00:00",
+      "path": "tests/test_fixed_verifier.py",
+      "previous_source_sha256": "186369ad05326cae58b113b23e4f78010412777a72eb786ced669285945428eb"
+    },
+    {
+      "at": "2026-09-13T07:35:50.447082+00:00",
+      "path": "docs/campaign-results.md",
+      "previous_source_sha256": "f947aa11c04c741afae3270f0df904ecd8bdc28317b5f50d824ebcd832b29575"
+    },
+    {
+      "at": "2026-09-13T07:35:50.447082+00:00",
+      "path": "docs/learning-transfer.md",
+      "previous_source_sha256": "2d3f018590031ca8573476f9cb87096a18027e350a4369376c40e8a41dfcfea2"
+    },
+    {
+      "at": "2026-09-13T07:35:50.447082+00:00",
+      "path": "docs/verified-improvements.md",
+      "previous_source_sha256": "74d22d16929df0188a0a4215e1eb6d58f81e7b797436250ba637273b9330e55c"
+    },
+    {
+      "at": "2026-09-13T07:45:26.008912+00:00",
+      "path": "scripts/demo/export_slide_pdf.py",
+      "previous_source_sha256": null
+    },
+    {
+      "at": "2026-09-13T07:45:26.008912+00:00",
+      "path": "scripts/demo/package_evidence.py",
+      "previous_source_sha256": "dcf0c3b6c4f0910e30c810573ef7654e64a0017539c3b479e312ca6591e15dc3"
+    },
+    {
+      "at": "2026-09-13T07:45:26.008912+00:00",
+      "path": "scripts/demo/part_gallery.py",
+      "previous_source_sha256": "e092fdb63bf8c28e5a36e243a2d1348703fccde21c22d5a5c7525adc04ec097e"
+    },
+    {
+      "at": "2026-09-13T07:45:26.008912+00:00",
+      "path": "docs/slide-pdf.md",
+      "previous_source_sha256": null
+    },
+    {
+      "at": "2026-09-13T07:45:43.309955+00:00",
+      "path": "scripts/demo/package_evidence.py",
+      "previous_source_sha256": "e7eecf6b011db45dc537ecd691b26ea81419bd2abf19585fdd27b443f45177d8"
+    },
+    {
+      "at": "2026-09-13T07:45:43.310214+00:00",
+      "path": "docs/slide-pdf.md",
+      "previous_source_sha256": "9a65dc71c48daa8c989ba7935c478b60cdfafdfec2ebbf4b8b6cb42344058c7b"
+    },
+    {
+      "at": "2026-09-13T07:56:58.614346+00:00",
+      "path": "scripts/demo/package_evidence.py",
+      "previous_source_sha256": "2c468fde5f22bc6662e2c4e383a0754df9ffe251ff62bde441d764bbbcd9d4d2"
+    },
+    {
+      "at": "2026-09-13T07:56:58.614346+00:00",
+      "path": "tests/test_package_stage.py",
+      "previous_source_sha256": null
+    },
+    {
+      "at": "2026-09-13T07:56:58.614346+00:00",
+      "path": "docs/demo-runbook.md",
+      "previous_source_sha256": "7f6d325547ab50409274ea08d6f438ffb8ee36b8d86c992a6378e5e771a684c8"
+    },
+    {
+      "at": "2026-09-13T07:56:58.614346+00:00",
+      "path": "scripts/demo/prepare_cage.py",
+      "previous_source_sha256": null
+    },
+    {
+      "at": "2026-09-13T07:56:58.614346+00:00",
+      "path": "config/demo-campaign/umc-11-job.json",
+      "previous_source_sha256": null
+    },
+    {
+      "at": "2026-09-13T07:56:58.614346+00:00",
+      "path": "output/pdf/demo-campaign/umc-11.pdf",
+      "previous_source_sha256": null
+    },
+    {
+      "at": "2026-09-13T07:56:58.614346+00:00",
+      "path": "docs/cage-part.md",
+      "previous_source_sha256": null
+    },
+    {
+      "at": "2026-09-13T07:58:34.709543+00:00",
+      "path": "scripts/demo/prepare_umc12_challenge.py",
+      "previous_source_sha256": null
+    },
+    {
+      "at": "2026-09-13T07:58:34.709543+00:00",
+      "path": "config/demo-campaign/umc-12-job.json",
+      "previous_source_sha256": null
+    },
+    {
+      "at": "2026-09-13T07:58:34.709543+00:00",
+      "path": "output/pdf/demo-campaign/umc-12.pdf",
+      "previous_source_sha256": null
+    },
+    {
+      "at": "2026-09-13T07:58:34.709543+00:00",
+      "path": "docs/reviews/final-demo-claims.md",
+      "previous_source_sha256": null
+    },
+    {
+      "at": "2026-09-13T07:59:04.714532+00:00",
+      "path": "scripts/demo/package_evidence.py",
+      "previous_source_sha256": "08bd3b95544f8f808c3a64674a7de71d7b30a36d4478cf6400f31a4f9b285e57"
+    },
+    {
+      "at": "2026-09-13T08:05:52.090251+00:00",
+      "path": "scripts/demo/presentation_film.py",
+      "previous_source_sha256": "3177e622b5d7dd380664b4ccf62a1de81fc3957543ba332a214288b8f3eee133"
+    },
+    {
+      "at": "2026-09-13T08:05:52.090251+00:00",
+      "path": "tests/test_film_tail.py",
+      "previous_source_sha256": null
+    },
+    {
+      "at": "2026-09-13T08:05:52.090251+00:00",
+      "path": "scripts/demo/capture_verified_candidate.py",
+      "previous_source_sha256": null
+    },
+    {
+      "at": "2026-09-13T08:05:52.090251+00:00",
+      "path": "tests/test_capture_verified_candidate.py",
+      "previous_source_sha256": null
+    },
+    {
+      "at": "2026-09-13T08:05:52.090251+00:00",
+      "path": "docs/verified-capture.md",
+      "previous_source_sha256": null
+    },
+    {
+      "at": "2026-09-13T08:05:52.090251+00:00",
+      "path": "scripts/demo/resume_fusion_job.py",
+      "previous_source_sha256": "ce2e55bdfe7a6a20fc1e3fce731f4cf69fa4ef19306b8b445b7f972dbcda6de2"
+    },
+    {
+      "at": "2026-09-13T08:05:52.090251+00:00",
+      "path": "tests/test_resume_fusion_job.py",
+      "previous_source_sha256": null
+    },
+    {
+      "at": "2026-09-13T08:05:52.090251+00:00",
+      "path": "silta/cnc/agents.py",
+      "previous_source_sha256": "a5e6b88c503c53bab46380dea21e0b277c48e9fc3b4b45c245e44f5a313b36e4"
+    },
+    {
+      "at": "2026-09-13T08:05:52.090251+00:00",
+      "path": "tests/test_cnc_agents.py",
+      "previous_source_sha256": "a23a25ae5b1717639fe318d7e889a4474700184f89ce935f6bc80bb7c1914f4a"
+    },
+    {
+      "at": "2026-09-13T08:05:52.090251+00:00",
+      "path": "fusion/INDEXED_CAM_API.md",
+      "previous_source_sha256": "daf95f0b834f039c7fe3ad126b4723183bce3f036d383abf05ce4ae3d0408ba3"
+    },
+    {
+      "at": "2026-09-13T08:26:40.536434+00:00",
+      "path": "silta/cnc/stock_export.py",
+      "previous_source_sha256": "79fa839eb56165c6e35bdd61d799dafa0af90db2d877b54f527fd9c23c0bb7b8"
+    },
+    {
+      "at": "2026-09-13T08:26:40.536813+00:00",
+      "path": "silta/cnc/fixed_verifier.py",
+      "previous_source_sha256": "2c4646170ea91a22768289c509307f1298b8a0b59bf29ba9830b58bb313f5edd"
+    },
+    {
+      "at": "2026-09-13T08:26:40.537157+00:00",
+      "path": "tests/test_stock_export.py",
+      "previous_source_sha256": "e037095eaa8120b366d01dd72aff9cd2824292f813eacd97734d8451ba65b59a"
+    },
+    {
+      "at": "2026-09-13T08:26:40.537328+00:00",
+      "path": "scripts/demo/resume_fusion_job.py",
+      "previous_source_sha256": "02f72d0e2e914ed0c84205a17863b6290557f6646cf7fe14a69ca2ab4f353294"
+    },
+    {
+      "at": "2026-09-13T08:26:40.537455+00:00",
+      "path": "tests/test_resume_fusion_job.py",
+      "previous_source_sha256": "c11ee343f2ac88b29a06f6fc71f02f51ba339a2a92afe4efecde791de5afeb2c"
+    },
+    {
+      "at": "2026-09-13T08:26:40.537762+00:00",
+      "path": "docs/stock-regeneration-audit.md",
+      "previous_source_sha256": null
+    },
+    {
+      "at": "2026-09-13T08:26:40.538130+00:00",
+      "path": "scripts/demo/campaign_report.py",
+      "previous_source_sha256": "728ef22658dd3032d2055e669a6142319da72f0a22b0f780f4945ee661b1f05d"
+    },
+    {
+      "at": "2026-09-13T08:26:40.538292+00:00",
+      "path": "scripts/demo/learning_transfer_report.py",
+      "previous_source_sha256": "54d1d755b9a2205db9076ba567fb9d6a4fd4590b728a07450a2f09fe340b866f"
+    },
+    {
+      "at": "2026-09-13T08:26:40.538435+00:00",
+      "path": "scripts/demo/package_evidence.py",
+      "previous_source_sha256": "d74d71c8b9cef5b2186c40ce0cb8fcf3fc5f712502f4a4c8df6c22555151cf18"
+    },
+    {
+      "at": "2026-09-13T08:26:40.538573+00:00",
+      "path": "tests/test_collection_invalidated_reports.py",
+      "previous_source_sha256": null
+    },
+    {
+      "at": "2026-09-13T08:29:19.790607+00:00",
+      "path": "docs/stock-regeneration-audit.md",
+      "previous_source_sha256": "09f75b7c97113049967de70298e4daf71c6cf17d899f2f72b2141020bac9c81a"
+    },
+    {
+      "at": "2026-09-13T08:29:19.790871+00:00",
+      "path": "scripts/demo/package_evidence.py",
+      "previous_source_sha256": "21cf676574634335585bc312d5970451e04d1e6bf8a0279e4d1a78e9f1fffa38"
+    },
+    {
+      "at": "2026-09-13T08:33:26.638360+00:00",
+      "path": "silta/cnc/stock_comparison.py",
+      "previous_source_sha256": "983975c100472b48d364f12a580e266b541b0402ad212ad89ae4cf1c7caf6055"
+    },
+    {
+      "at": "2026-09-13T08:33:26.638676+00:00",
+      "path": "tests/test_stock_comparison.py",
+      "previous_source_sha256": "af130f5350910425577a69c6601fa94c971f5da95166fee4171d82d96af21e98"
+    },
+    {
+      "at": "2026-09-13T08:33:26.638804+00:00",
+      "path": "tests/test_stock_topology_review.py",
+      "previous_source_sha256": "e952b7340fd7459ef34facf94c91488b2817b0470353f601497c79dd02e8e6d5"
+    },
+    {
+      "at": "2026-09-13T08:33:26.638964+00:00",
+      "path": "scripts/demo/prepare_umc12_challenge.py",
+      "previous_source_sha256": "c22d0a8d5a87152292cc4ce15122f83352df6fcfe93e40b65406372948b7c4f4"
+    },
+    {
+      "at": "2026-09-13T08:33:26.639091+00:00",
+      "path": "config/demo-campaign/umc-12-job.json",
+      "previous_source_sha256": "952c337e29ac4c1890f6e48196d980e2b253fd1214014d2a6e367418d9b1a6a9"
+    },
+    {
+      "at": "2026-09-13T08:33:26.639210+00:00",
+      "path": "docs/stock-regeneration-audit.md",
+      "previous_source_sha256": "b593991e7a9e47ec50b0f8b976220b9075134904a47597207399f5c757c49e12"
+    },
+    {
+      "at": "2026-09-13T08:34:56.325064+00:00",
+      "path": "scripts/demo/capture_verified_candidate.py",
+      "previous_source_sha256": "134f0e1b39d69a6816ef1b27825a98aab25842108b071089b5d1d401296c0bb5"
+    },
+    {
+      "at": "2026-09-13T08:34:56.325406+00:00",
+      "path": "tests/test_capture_verified_candidate.py",
+      "previous_source_sha256": "085ecf858f03a3d3c464b2cccc26599270477db35f6e969154ca25301d4af64c"
+    },
+    {
+      "at": "2026-09-13T08:34:56.325506+00:00",
+      "path": "docs/verified-capture.md",
+      "previous_source_sha256": "32a180328b7a71ba63ce8c3768e2f8a4ef19df4468f36e6463e1815c05ef0c0e"
+    },
+    {
+      "at": "2026-09-13T08:53:30.719104+00:00",
+      "path": "silta/cnc/stock_export.py",
+      "previous_source_sha256": "8b6fc55e3019364e74c59265771062f2936dce6282525e50b97fba54998aa559"
+    },
+    {
+      "at": "2026-09-13T08:53:30.719525+00:00",
+      "path": "silta/cnc/fixed_verifier.py",
+      "previous_source_sha256": "f44f033d627801a4334b9849125cc48c47006eba8a12e2cb233d3a393bc84fa6"
+    },
+    {
+      "at": "2026-09-13T08:53:30.719931+00:00",
+      "path": "tests/test_stock_export.py",
+      "previous_source_sha256": "cd9dba3fa78596b99329a8ba0a084a67fd2d98e998e8f899617afbe6def1557a"
+    },
+    {
+      "at": "2026-09-13T08:53:30.720236+00:00",
+      "path": "docs/stock-regeneration-audit.md",
+      "previous_source_sha256": "b3ec35cb27c0815bf3b5bc7e7760e0205f5fd016e0fd972dda89424205dc3e5f"
+    },
+    {
+      "at": "2026-09-13T09:02:52.710878+00:00",
+      "path": "scripts/demo/package_evidence.py",
+      "previous_source_sha256": "47b4a5f8b3485a537ec660bea0b6af7eadb0860a9721dcf3e24033bf259dc51f"
+    },
+    {
+      "at": "2026-09-13T09:02:52.711364+00:00",
+      "path": "scripts/demo/score_fusion_runs.py",
+      "previous_source_sha256": "cda9f884e89bf8c536722ac3ad5122eeff8027c04d6045913d8c59d560f1fd3b"
+    },
+    {
+      "at": "2026-09-13T09:02:52.711849+00:00",
+      "path": "tests/test_demo_weave_scorer.py",
+      "previous_source_sha256": "ec0de36d0af5a9e74b323613dd275986b6b4eecb82e8777c6c207a2a44fa8b5f"
+    },
+    {
+      "at": "2026-09-13T09:02:52.712241+00:00",
+      "path": "docs/demo-runbook.md",
+      "previous_source_sha256": "deb80f0a4d6fd8ef4102cc616d1feabde43852f1965506e34a9dd8efe30c00af"
+    },
+    {
+      "at": "2026-09-13T09:02:52.712442+00:00",
+      "path": "docs/reviews/final-demo-claims.md",
+      "previous_source_sha256": "c29831651f270807134659fa8a9fde8e2ebc083bccb133a31ad6c7ac71b5c1b1"
+    },
+    {
+      "at": "2026-09-13T09:05:48.373423+00:00",
+      "path": "silta/cnc/models.py",
+      "previous_source_sha256": "b79d3e08675dbebf3dee5e4c6875aefa53eb8031641bb96b9f78e3a1d1f2f63f"
+    },
+    {
+      "at": "2026-09-13T09:05:48.373922+00:00",
+      "path": "silta/cnc/agents.py",
+      "previous_source_sha256": "d7266e8354af1289cbf02360f646cdaa6388dc258af794a180eb6bedd86d2f0c"
+    },
+    {
+      "at": "2026-09-13T09:05:48.374275+00:00",
+      "path": "silta/cnc/controller.py",
+      "previous_source_sha256": "b4335f9af782f7a803ad7f30b787bda05ed6bc0cce0feccbd4c9640f449836ee"
+    },
+    {
+      "at": "2026-09-13T09:05:48.374735+00:00",
+      "path": "tests/test_cnc_controller.py",
+      "previous_source_sha256": "758e9cfa3b5f41a486e9e8e6e0a13788282e4c9b369f95fdfed2f6edf77f1c6b"
+    },
+    {
+      "at": "2026-09-13T09:05:48.375125+00:00",
+      "path": "tests/test_cnc_agents.py",
+      "previous_source_sha256": "12f6d1f34b901bb6cd1afa9505d28a727def7abbf618d5ff66a8c824c9a1c4b5"
+    },
+    {
+      "at": "2026-09-13T09:05:48.375483+00:00",
+      "path": "scripts/demo/learning_transfer_report.py",
+      "previous_source_sha256": "d9d3e09454260e0e6871139bf679b0e58bb476764fa78c4e7b2f15bb632202ef"
+    },
+    {
+      "at": "2026-09-13T09:05:48.375801+00:00",
+      "path": "scripts/demo/part_gallery.py",
+      "previous_source_sha256": "cbc51b8ad934f013a0de5ff4a1ed0c0806e8dd85b83cf4a665cfdddd4ad15791"
+    },
+    {
+      "at": "2026-09-13T09:05:48.376236+00:00",
+      "path": "docs/sponsor-evidence.md",
+      "previous_source_sha256": "8165e2d7ce1dc4c9c4d320a1dfea0ae9ba49832573ea70be11f3cf9fa5c943b5"
+    },
+    {
+      "at": "2026-09-13T09:05:48.376573+00:00",
+      "path": "docs/submission.md",
+      "previous_source_sha256": "e42f1133ddd41caad54a1ceb52178261ffa3fb75a691d8f50cab0cf0c4a73988"
+    },
+    {
+      "at": "2026-09-13T09:13:55.598145+00:00",
+      "path": "scripts/demo/resume_fusion_job.py",
+      "previous_source_sha256": "e4f680019ff6cd958cd4dea827188a8e85272c487f4201b37aa0186ec8fdb1e1"
+    },
+    {
+      "at": "2026-09-13T09:13:55.598483+00:00",
+      "path": "tests/test_resume_fusion_job.py",
+      "previous_source_sha256": "c11ee343f2ac88b29a06f6fc71f02f51ba339a2a92afe4efecde791de5afeb2c"
+    },
+    {
+      "at": "2026-09-13T09:13:55.598760+00:00",
+      "path": "silta/cnc/controller.py",
+      "previous_source_sha256": "6bc6bdd8f6c9b5236d40d3ecd77e6cf5ceae174a4d031284d4c23e3126d94521"
+    },
+    {
+      "at": "2026-09-13T09:13:55.599017+00:00",
+      "path": "tests/test_cnc_controller.py",
+      "previous_source_sha256": "784e1ee8d29b5bf3dbaafc3d1d3783929f1c11b9d56dc8dd8c9aa9536ee876d0"
+    },
+    {
+      "at": "2026-09-13T09:13:55.599108+00:00",
+      "path": "scripts/demo/package_evidence.py",
+      "previous_source_sha256": "b1f7a7510f97c13f35c7617d402b77e3cf562f29f7b55398c5987c6f792a03f9"
+    },
+    {
+      "at": "2026-09-13T09:13:55.599370+00:00",
+      "path": "docs/queue-recovery.md",
+      "previous_source_sha256": "b04e66924d7f34dabec89c423d387157be627cc816331d86c84060ff4eb159d7"
+    },
+    {
+      "at": "2026-09-13T09:15:26.490767+00:00",
+      "path": "scripts/demo/package_evidence.py",
+      "previous_source_sha256": "5cf0710d345a5f1e136d2652dc621d12ebed5f98afa067c23d64d105a5c862a9"
+    },
+    {
+      "at": "2026-09-13T09:26:20.618346+00:00",
+      "path": "scripts/demo/learning_transfer_report.py",
+      "previous_source_sha256": "524e79f180b741dc72400ad6baf733c0c6926aa4330a7e84b7a09b03bcec01da"
+    },
+    {
+      "at": "2026-09-13T09:26:20.618346+00:00",
+      "path": "scripts/demo/campaign_report.py",
+      "previous_source_sha256": "07db803db5a5f8f0d835401802053bc059439da618515f198cfea25d9ffd863d"
+    },
+    {
+      "at": "2026-09-13T09:26:20.618346+00:00",
+      "path": "scripts/demo/plot_verified_improvements.py",
+      "previous_source_sha256": "3b7fb5553de892b0db02377289834f5e9c43cd610527d6c19fefe16d9fa85ca2"
+    },
+    {
+      "at": "2026-09-13T09:26:20.618346+00:00",
+      "path": "scripts/demo/part_gallery.py",
+      "previous_source_sha256": "75370c6683ba4af29165f27015b6822503102502691199ea7704e39c9bcbc745"
+    },
+    {
+      "at": "2026-09-13T09:26:20.618346+00:00",
+      "path": "scripts/demo/package_evidence.py",
+      "previous_source_sha256": "94617390262bded4a8242fb1ee88d0886fa916fda619bd264f33bff79dc6d3f9"
+    },
+    {
+      "at": "2026-09-13T09:26:20.618346+00:00",
+      "path": "tests/test_verified_improvements.py",
+      "previous_source_sha256": "d32f29174cefa31b8acacd98226166d3e9507c5412d6d7b377189b0bbd2f4077"
+    },
+    {
+      "at": "2026-09-13T09:26:20.618346+00:00",
+      "path": "docs/reviews/final-demo-claims.md",
+      "previous_source_sha256": "d869d55eccbd624fc9b1dc667a043ecad1273584bc9bbd7a01313a6548d527da"
+    },
+    {
+      "at": "2026-09-13T09:26:20.618346+00:00",
+      "path": "docs/demo-runbook.md",
+      "previous_source_sha256": "a45caaa2240ad7d79b9015993965635c057806ed7ac248c765adac762248e505"
+    },
+    {
+      "at": "2026-09-13T09:26:20.618346+00:00",
+      "path": "docs/verified-improvements.md",
+      "previous_source_sha256": "eb88611a7bdec9930cd451d174f6088fe11f7155ffe49a8a8c41a7e7aaf19ab4"
+    },
+    {
+      "at": "2026-09-13T09:26:20.618346+00:00",
+      "path": "docs/learning-transfer.md",
+      "previous_source_sha256": "bfae370453d7a8427826b61822829c4ce28a56c3f2c7e66e98f541d49ee0680b"
+    },
+    {
+      "at": "2026-09-13T09:26:20.618346+00:00",
+      "path": "docs/campaign-results.md",
+      "previous_source_sha256": "8a41f8b88d1a9a3c953c85fba16ff194f89a57076c81a47eba4694f7741ebd52"
+    },
+    {
+      "at": "2026-09-13T09:26:20.618346+00:00",
+      "path": "silta/cnc/stock_export.py",
+      "previous_source_sha256": "c7cf6ab6baf206748a990102a87150a89aa89154489fcb0207dabf4af4cfc40d"
+    },
+    {
+      "at": "2026-09-13T09:26:20.618346+00:00",
+      "path": "tests/test_stock_export.py",
+      "previous_source_sha256": "8509b18d23e48a2f1584b9ee4a36385e2c9164d458884bcb249d134af5f9aa9b"
+    },
+    {
+      "at": "2026-09-13T09:26:54.912777+00:00",
+      "path": "silta/cnc/stock_export.py",
+      "previous_source_sha256": "27da17dd71cebfe0b6a371c0e3256ec5f425fa1b456e85b1699b4abcc44ffbff"
+    },
+    {
+      "at": "2026-09-13T09:26:54.912777+00:00",
+      "path": "tests/test_stock_export.py",
+      "previous_source_sha256": "dd0c79eb1b5b6737dd8c2aedcba74ec1fe7933688547eb0b2d717ffd9ec0357c"
+    },
+    {
+      "at": "2026-09-13T09:26:54.912777+00:00",
+      "path": "silta/cnc/simulation_video.py",
+      "previous_source_sha256": "8f3488b27f3c47975b40240826c9309c1af20d8213034459a3698124a57741e6"
+    },
+    {
+      "at": "2026-09-13T09:26:54.912777+00:00",
+      "path": "tests/test_simulation_video.py",
+      "previous_source_sha256": "2c68082f93eb80dcbeed1f29fb361a692942b6a1f6718b3b0b7053630fd359eb"
+    },
+    {
+      "at": "2026-09-13T09:31:45.689919+00:00",
+      "path": "scripts/demo/package_evidence.py",
+      "previous_source_sha256": "6417e9a95c9969aa222ac321a0023ba07ac180f848dd30071395ae479c18914b"
+    },
+    {
+      "at": "2026-09-13T09:31:45.689919+00:00",
+      "path": "docs/demo-runbook.md",
+      "previous_source_sha256": "a5766e8498bdaab4f3e1f742dc5062dbc0b63135a0e6e4f0dcc2cc0b930ba8e0"
+    },
+    {
+      "at": "2026-09-13T09:49:26.259700+00:00",
+      "path": "docs/submission.md",
+      "previous_source_sha256": "09a930429a6eb70041fccc877cba3a3d3538b0a01b034d754d4ccb169f17951c"
+    },
+    {
+      "at": "2026-09-13T09:53:41.970841+00:00",
+      "path": "scripts/demo/package_evidence.py",
+      "previous_source_sha256": "e1aafa8b8acd8944d5d19cfdf498c41af1415b1ba1209b4e3c7e564ab2de8920"
+    },
+    {
+      "at": "2026-09-13T09:53:41.970841+00:00",
+      "path": "tests/test_package_stage.py",
+      "previous_source_sha256": "7a8c5e64155cbc4a7ddeaf75b40a7c9c5f18c172bf020cedae8a7c05d41684e8"
+    },
+    {
+      "at": "2026-09-13T10:12:13.053911+00:00",
+      "path": "docs/reviews/finned-rehearsal-collection.md",
+      "previous_source_sha256": null
+    },
+    {
+      "at": "2026-09-13T10:12:13.053911+00:00",
+      "path": "docs/demo-runbook.md",
+      "previous_source_sha256": "3cb371f7cb84cad4fcc419c386f75dd9eb91b99496352dbae96156d07d5b0dbe"
+    },
+    {
+      "at": "2026-09-13T10:37:08.174456+00:00",
+      "path": "scripts/demo/package_evidence.py",
+      "previous_source_sha256": "a3181788afb5dbeb73573adbf72332fa9a264f5369327fa5fd8a6ce53e913f77"
+    },
+    {
+      "at": "2026-09-13T10:37:08.174456+00:00",
+      "path": "tests/test_package_stage.py",
+      "previous_source_sha256": "097c10722e2fdfbb291fcf4cdb518bc003112c29612bcca49d60648b7ab4e1a0"
+    },
+    {
+      "at": "2026-09-13T10:39:24.362082+00:00",
+      "path": "fusion/operation_frames.py",
+      "previous_source_sha256": "720ade58591f8dccec6c56ed60da62dccf1cf85a2f2ca712ddf5e09773c85843",
+      "previous_copied_sha256": "720ade58591f8dccec6c56ed60da62dccf1cf85a2f2ca712ddf5e09773c85843",
+      "previous_release_sha256": "720ade58591f8dccec6c56ed60da62dccf1cf85a2f2ca712ddf5e09773c85843",
+      "action": "audit reconciliation: source and release already match; no source copy"
+    },
+    {
+      "at": "2026-09-13T10:39:24.362082+00:00",
+      "path": "scripts/demo/live_terminal.py",
+      "previous_source_sha256": "444edc62aafe92982ca19378b46e722499c11828b2ba6b258175cd0c8ad0d2ce",
+      "previous_copied_sha256": "444edc62aafe92982ca19378b46e722499c11828b2ba6b258175cd0c8ad0d2ce",
+      "previous_release_sha256": "444edc62aafe92982ca19378b46e722499c11828b2ba6b258175cd0c8ad0d2ce",
+      "action": "audit reconciliation: source and release already match; no source copy"
+    },
+    {
+      "at": "2026-09-13T10:39:24.362082+00:00",
+      "path": "scripts/demo/resume_fusion_job.py",
+      "previous_source_sha256": "75ebf3a93875c479a14cd22e9e95d1c031f236a2150efabf9c605766f921ddbc",
+      "previous_copied_sha256": "75ebf3a93875c479a14cd22e9e95d1c031f236a2150efabf9c605766f921ddbc",
+      "previous_release_sha256": "75ebf3a93875c479a14cd22e9e95d1c031f236a2150efabf9c605766f921ddbc",
+      "action": "audit reconciliation: source and release already match; no source copy"
+    },
+    {
+      "at": "2026-09-13T10:39:24.362082+00:00",
+      "path": "scripts/fusion/post_operation_frames.py",
+      "previous_source_sha256": "38b35359f13b9132dae00f559843f21ddbdacfba26150c6dc60654c52e42333d",
+      "previous_copied_sha256": "38b35359f13b9132dae00f559843f21ddbdacfba26150c6dc60654c52e42333d",
+      "previous_release_sha256": "38b35359f13b9132dae00f559843f21ddbdacfba26150c6dc60654c52e42333d",
+      "action": "audit reconciliation: source and release already match; no source copy"
+    },
+    {
+      "at": "2026-09-13T10:39:24.362082+00:00",
+      "path": "scripts/fusion/record_part_reveal.py",
+      "previous_source_sha256": "ba54ddab020ad6675c3730d6aa295d292095ee8e3ec2f747e9622cbd4adb6cd6",
+      "previous_copied_sha256": "ba54ddab020ad6675c3730d6aa295d292095ee8e3ec2f747e9622cbd4adb6cd6",
+      "previous_release_sha256": "ba54ddab020ad6675c3730d6aa295d292095ee8e3ec2f747e9622cbd4adb6cd6",
+      "action": "audit reconciliation: source and release already match; no source copy"
+    },
+    {
+      "at": "2026-09-13T10:39:24.362082+00:00",
+      "path": "silta/cnc/stock_export.py",
+      "previous_source_sha256": "27da17dd71cebfe0b6a371c0e3256ec5f425fa1b456e85b1699b4abcc44ffbff",
+      "previous_copied_sha256": "27da17dd71cebfe0b6a371c0e3256ec5f425fa1b456e85b1699b4abcc44ffbff",
+      "previous_release_sha256": "27da17dd71cebfe0b6a371c0e3256ec5f425fa1b456e85b1699b4abcc44ffbff",
+      "action": "audit reconciliation: source and release already match; no source copy"
+    },
+    {
+      "at": "2026-09-13T10:39:24.362082+00:00",
+      "path": "tests/test_demo_terminal.py",
+      "previous_source_sha256": "086d3b0db02ccaeab3e3520a0b9bc285acff4cec2133ad63ee7b83146b8a90e1",
+      "previous_copied_sha256": "086d3b0db02ccaeab3e3520a0b9bc285acff4cec2133ad63ee7b83146b8a90e1",
+      "previous_release_sha256": "086d3b0db02ccaeab3e3520a0b9bc285acff4cec2133ad63ee7b83146b8a90e1",
+      "action": "audit reconciliation: source and release already match; no source copy"
+    },
+    {
+      "at": "2026-09-13T10:39:24.362082+00:00",
+      "path": "tests/test_simulation_video.py",
+      "previous_source_sha256": "276295c03cef9692f88d8f5a2037dfed69dd41bd3a36c9713c1534efa097acfb",
+      "previous_copied_sha256": "276295c03cef9692f88d8f5a2037dfed69dd41bd3a36c9713c1534efa097acfb",
+      "previous_release_sha256": "276295c03cef9692f88d8f5a2037dfed69dd41bd3a36c9713c1534efa097acfb",
+      "action": "audit reconciliation: source and release already match; no source copy"
+    },
+    {
+      "at": "2026-09-13T10:39:24.362082+00:00",
+      "path": "tests/test_stage_fusion_demo.py",
+      "previous_source_sha256": "2aef7dce83e9d3889456db84797fdfc1d38cc01d5fa17071954253f6c19b5998",
+      "previous_copied_sha256": "2aef7dce83e9d3889456db84797fdfc1d38cc01d5fa17071954253f6c19b5998",
+      "previous_release_sha256": "2aef7dce83e9d3889456db84797fdfc1d38cc01d5fa17071954253f6c19b5998",
+      "action": "audit reconciliation: source and release already match; no source copy"
+    },
+    {
+      "at": "2026-09-13T10:39:24.362082+00:00",
+      "path": "tests/test_stock_export.py",
+      "previous_source_sha256": "dd0c79eb1b5b6737dd8c2aedcba74ec1fe7933688547eb0b2d717ffd9ec0357c",
+      "previous_copied_sha256": "dd0c79eb1b5b6737dd8c2aedcba74ec1fe7933688547eb0b2d717ffd9ec0357c",
+      "previous_release_sha256": "dd0c79eb1b5b6737dd8c2aedcba74ec1fe7933688547eb0b2d717ffd9ec0357c",
+      "action": "audit reconciliation: source and release already match; no source copy"
+    },
+    {
+      "at": "2026-09-13T10:39:24.362082+00:00",
+      "path": "docs/demo-runbook.md",
+      "previous_source_sha256": "ec9984f730c775b2d9f4823a14d6ea0b34a43fc8c9eb32beae2745b35514a884",
+      "previous_copied_sha256": "ec9984f730c775b2d9f4823a14d6ea0b34a43fc8c9eb32beae2745b35514a884",
+      "previous_release_sha256": "ec9984f730c775b2d9f4823a14d6ea0b34a43fc8c9eb32beae2745b35514a884",
+      "action": "audit reconciliation: source and release already match; no source copy"
+    },
+    {
+      "at": "2026-09-13T10:39:24.362082+00:00",
+      "path": "scripts/demo/relocate_config.py",
+      "previous_source_sha256": "ded216d8dee33467c3a44db9756a499654fb1a15644f4aa3a8185e881b723e9a",
+      "previous_copied_sha256": "ded216d8dee33467c3a44db9756a499654fb1a15644f4aa3a8185e881b723e9a",
+      "previous_release_sha256": "ded216d8dee33467c3a44db9756a499654fb1a15644f4aa3a8185e881b723e9a",
+      "action": "audit reconciliation: source and release already match; no source copy"
+    },
+    {
+      "at": "2026-09-13T10:39:24.362082+00:00",
+      "path": "scripts/demo/stage_playback.py",
+      "previous_source_sha256": "d5fe785957e4fc44a9d05b5434932742f5f2043816c071cae438310d985e0218",
+      "previous_copied_sha256": "d5fe785957e4fc44a9d05b5434932742f5f2043816c071cae438310d985e0218",
+      "previous_release_sha256": "d5fe785957e4fc44a9d05b5434932742f5f2043816c071cae438310d985e0218",
+      "action": "audit reconciliation: source and release already match; no source copy"
+    },
+    {
+      "at": "2026-09-13T10:39:24.362082+00:00",
+      "path": "tests/test_resume_fusion_job.py",
+      "previous_source_sha256": "ead0533a162680382478c37f8704e270562c0b194c5334f581ffacfd9eb7ac93",
+      "previous_copied_sha256": "ead0533a162680382478c37f8704e270562c0b194c5334f581ffacfd9eb7ac93",
+      "previous_release_sha256": "ead0533a162680382478c37f8704e270562c0b194c5334f581ffacfd9eb7ac93",
+      "action": "audit reconciliation: source and release already match; no source copy"
+    },
+    {
+      "at": "2026-09-13T10:41:29.213142+00:00",
+      "path": "scripts/demo/live_terminal.py",
+      "previous_source_sha256": "947da4f5c3c2fcb3961f721f66ca2bbe3ee6cb255f8ce8c0e7ce6b80ea5dfb7b",
+      "previous_release_sha256": "947da4f5c3c2fcb3961f721f66ca2bbe3ee6cb255f8ce8c0e7ce6b80ea5dfb7b",
+      "action": "Final viewer-label audit; files already match, no copy"
+    },
+    {
+      "at": "2026-09-13T10:41:29.213142+00:00",
+      "path": "tests/test_demo_terminal.py",
+      "previous_source_sha256": "74267b431c966c7c7a789960ea7965f12d99bafb832641bf9249cbd077fc7a3b",
+      "previous_release_sha256": "74267b431c966c7c7a789960ea7965f12d99bafb832641bf9249cbd077fc7a3b",
+      "action": "Final viewer-label audit; files already match, no copy"
+    },
+    {
+      "at": "2026-09-13T10:43:38.734858+00:00",
+      "path": "scripts/demo/package_evidence.py",
+      "previous_source_sha256": "5a53b5fb3caa59e933ef82cf213ca6b194a2eb1e981c60dd61b5e6ffb81e0dc6",
+      "action": "Final rehearsal report allowlist and recursive source pins"
+    },
+    {
+      "at": "2026-09-13T10:44:24.264976+00:00",
+      "path": "scripts/demo/package_evidence.py",
+      "previous_source_sha256": "173fe6a5f64bc2a224fbf602ccd7bad1ad2e0724d909851ee0f1042a82600453",
+      "action": "Resumed playback wording distinct from fresh preparation"
+    },
+    {
+      "at": "2026-09-13T10:44:43.900323+00:00",
+      "path": "docs/demo-runbook.md",
+      "previous_source_sha256": "62da836fdd2a87d3f4b3d66a1491cbd2aede6f927710e4d9e25fe97e88dd34af",
+      "action": "Audit producer-synced final rehearsal documentation; no copy"
+    },
+    {
+      "at": "2026-09-13T10:44:43.900323+00:00",
+      "path": "docs/submission.md",
+      "previous_source_sha256": "ab06a21ae2e8fd79f4bb07fa30ed9ae317a3f8ffe73e9f082cd2443b398652f3",
+      "action": "Audit producer-synced final rehearsal documentation; no copy"
+    },
+    {
+      "at": "2026-09-13T10:44:43.900323+00:00",
+      "path": "docs/reviews/live-rehearsal.md",
+      "previous_source_sha256": null,
+      "action": "Audit producer-synced final rehearsal documentation; no copy"
+    },
+    {
+      "at": "2026-09-13T10:48:58.017577+00:00",
+      "path": "scripts/demo/package_evidence.py",
+      "previous_source_sha256": "9933524f1585d4c631aeedb918c8b66f31daa3a729482fb29905570901f3109f",
+      "action": "Use actual deduplicated stage/report/playback link destinations"
+    },
+    {
+      "at": "2026-09-13T10:48:58.017577+00:00",
+      "path": "tests/test_package_stage.py",
+      "previous_source_sha256": "b843101d95f39e22ac30a66ad18aae4e47779a7acdf5af49f26d008256bbd554",
+      "action": "Use actual deduplicated stage/report/playback link destinations"
+    },
+    {
+      "at": "2026-09-13T10:49:45.103893+00:00",
+      "path": "scripts/demo/package_evidence.py",
+      "previous_source_sha256": "8b0faaed00a21e4617a881647de89f4de6206891a5453a5a41be3bf34fcb27ac",
+      "action": "Permit independent pinned recovery shadow; preserve origin directory"
+    },
+    {
+      "at": "2026-09-13T10:49:45.103893+00:00",
+      "path": "tests/test_package_stage.py",
+      "previous_source_sha256": "57d9572775aaa49c9d06b9651ca758d948ee5650cee83af6f5a37904c8661142",
+      "action": "Permit independent pinned recovery shadow; preserve origin directory"
+    }
+  ],
+  "final_verified_at": "2026-09-13T10:49:45.103893+00:00",
+  "latest_validation": {
+    "pytest": {
+      "passed": 552,
+      "warnings": 7,
+      "skipped": 0,
+      "seconds": 6.26,
+      "command": ".venv/bin/python -m pytest -q",
+      "evidence_source": "Root executed the complete working-checkout suite after final package-link changes"
+    },
+    "git_diff_check": "passed in isolated release",
+    "protected_remote_files": {
+      "checked": 12,
+      "unchanged": 12
+    },
+    "scope": "Final full suite; code changes are copied to the isolated release. Detailed prior source audits retained separately.",
+    "recorded_at": "2026-09-13T10:51:48.756198+00:00"
+  },
+  "latest_source_sync": {
+    "at": "2026-09-13T10:41:29.213142+00:00",
+    "scope": "Final viewer label/source audit; no code changes",
+    "changed_entries": [
+      "scripts/demo/live_terminal.py",
+      "tests/test_demo_terminal.py"
+    ]
+  },
+  "validation_history": [
+    {
+      "superseded_at": "2026-09-13T10:39:24.362082+00:00",
+      "validation": {
+        "pytest": {
+          "passed": 522,
+          "skipped": 1,
+          "warnings": 7,
+          "seconds": 5.11
+        },
+        "compileall": "passed: silta fusion scripts/demo",
+        "ruff": "passed: silta tests checks notebooks/cnc_app.py",
+        "marimo_check": "passed",
+        "protected_demo_node_checks": "passed",
+        "git_diff_check": "passed",
+        "scope": "Isolated source checks; no new Fusion execution or evidence publication"
+      }
+    },
+    {
+      "superseded_at": "2026-09-13T10:41:29.213142+00:00",
+      "validation": {
+        "pytest": {
+          "passed": 549,
+          "warnings": 7,
+          "skipped": 0,
+          "skip_note": "No skipped tests reported in root final full-suite result",
+          "evidence_source": "Root final full-suite report; audit worker did not rerun tests"
+        },
+        "git_diff_check": "passed in isolated release during this audit",
+        "protected_remote_files": {
+          "checked": 12,
+          "unchanged": 12
+        },
+        "source_audit": {
+          "selected_files": 180,
+          "reconciled_matching_entries": 14,
+          "current_source_drift": []
+        },
+        "scope": "Final isolated suite as reported by root; current source/release hashes freshly reconciled without runtime or source edits",
+        "recorded_at": "2026-09-13T10:39:24.362082+00:00"
+      }
+    },
+    {
+      "pytest": {
+        "passed": 550,
+        "warnings": 7,
+        "skipped": 0,
+        "seconds": 5.5,
+        "evidence_source": "Root final full-suite report; audit worker did not rerun tests"
+      },
+      "git_diff_check": "passed in isolated release during this audit",
+      "protected_remote_files": {
+        "checked": 12,
+        "unchanged": 12
+      },
+      "source_audit": {
+        "selected_files": 180,
+        "reconciled_matching_entries": 2,
+        "current_source_drift": []
+      },
+      "scope": "Final isolated suite as reported by root; current source/release hashes freshly reconciled without runtime or source edits",
+      "recorded_at": "2026-09-13T10:41:29.213142+00:00",
+      "post_suite_allowlist_check": {
+        "at": "2026-09-13T10:43:38.734858+00:00",
+        "pytest_passed": 11,
+        "ruff": "passed",
+        "scope": "Only final rehearsal fixed-list/source-reference inclusion changed; full550suite not rerun as requested"
+      },
+      "post_suite_package_link_check": {
+        "pytest_passed": 13,
+        "ruff": "passed",
+        "at": "2026-09-13T10:49:45.103893+00:00",
+        "scope": "Real dedup regression and new isolated shadow provenance; full suite not rerun"
+      }
+    }
+  ]
+}

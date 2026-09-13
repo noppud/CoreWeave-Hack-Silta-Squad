@@ -1,0 +1,405 @@
+{
+    "data": [
+        {
+            "BMC": "carbide",
+            "GRADE": "Mill Generic",
+            "description": "1/2\" Dia. Carbide End Mill, 3 Flute, Uncoated, 1/2\" Smooth Shank x 1\" LOC, Square Profile, HSAM1",
+            "geometry": {
+                "CSP": false,
+                "DC": 0.49999999999999994,
+                "HAND": true,
+                "LB": 1.2999999999999998,
+                "LCF": 0.9999999999999999,
+                "NOF": 3,
+                "NT": 1,
+                "OAL": 2.9999999999999996,
+                "RE": 0,
+                "SFDM": 0.49999999999999994,
+                "TA": 0,
+                "TP": 0,
+                "assemblyGaugeLength": 3.8,
+                "shoulder-diameter": 0.49999999999999994,
+                "shoulder-length": 0.9999999999999999,
+                "thread-profile-angle": 60,
+                "tip-diameter": 0.49999999999999994,
+                "tip-length": 0,
+                "tip-offset": 0
+            },
+            "guid": "b72de3f0-eeaf-48bd-a2da-6bed39b8224a",
+            "holder": {
+                "description": "CT40 ER32 COLLET CHUCK X 2-1/2\" GAGE LENGTH, TSC",
+                "gaugeLength": 2.5,
+                "guid": "a9962fe4-c289-4a9c-9871-f5a2dc8bbfb8",
+                "product-id": "04-0010",
+                "product-link": "https://www.haascnc.com/haas-tooling/mill_toolholding/er_collet_chucks/04-0010.html",
+                "segments": [
+                    {
+                        "height": 0.0105511811023622,
+                        "lower-diameter": 1.45385826771654,
+                        "upper-diameter": 1.53259842519685
+                    },
+                    {
+                        "height": 0.114448818897638,
+                        "lower-diameter": 1.53259842519685,
+                        "upper-diameter": 1.92913385826772
+                    },
+                    {
+                        "height": 0.0340944881889764,
+                        "lower-diameter": 1.92913385826772,
+                        "upper-diameter": 1.96850393700787
+                    },
+                    {
+                        "height": 0.785787401574803,
+                        "lower-diameter": 1.96850393700787,
+                        "upper-diameter": 1.96850393700787
+                    },
+                    {
+                        "height": 0.262204724409449,
+                        "lower-diameter": 1.5748031496063,
+                        "upper-diameter": 1.5748031496063
+                    },
+                    {
+                        "height": 0.0393700787401575,
+                        "lower-diameter": 1.67125984251969,
+                        "upper-diameter": 1.75
+                    },
+                    {
+                        "height": 0.385433070866142,
+                        "lower-diameter": 1.75,
+                        "upper-diameter": 1.75
+                    },
+                    {
+                        "height": 0.118110236220472,
+                        "lower-diameter": 1.75,
+                        "upper-diameter": 1.98622047244095
+                    },
+                    {
+                        "height": 0.0393700787401575,
+                        "lower-diameter": 2.42125984251969,
+                        "upper-diameter": 2.5
+                    },
+                    {
+                        "height": 0.12244094488189,
+                        "lower-diameter": 2.5,
+                        "upper-diameter": 2.5
+                    },
+                    {
+                        "height": 0.0170472440944882,
+                        "lower-diameter": 2.5,
+                        "upper-diameter": 2.48031496062992
+                    },
+                    {
+                        "height": 0.0571653543307087,
+                        "lower-diameter": 2.48031496062992,
+                        "upper-diameter": 2.28232283464567
+                    },
+                    {
+                        "height": 0.151968503937008,
+                        "lower-diameter": 2.21889763779528,
+                        "upper-diameter": 2.21889763779528
+                    },
+                    {
+                        "height": 0.0571653543307087,
+                        "lower-diameter": 2.28232283464567,
+                        "upper-diameter": 2.48031496062992
+                    },
+                    {
+                        "height": 0.0170472440944882,
+                        "lower-diameter": 2.48031496062992,
+                        "upper-diameter": 2.5
+                    },
+                    {
+                        "height": 0.123425196850394,
+                        "lower-diameter": 2.5,
+                        "upper-diameter": 2.5
+                    },
+                    {
+                        "height": 0.0393700787401575,
+                        "lower-diameter": 2.5,
+                        "upper-diameter": 2.42125984251969
+                    },
+                    {
+                        "height": 0.031496062992126,
+                        "lower-diameter": 1.7755905511811,
+                        "upper-diameter": 1.71259842519685
+                    },
+                    {
+                        "height": 0.0617716535433071,
+                        "lower-diameter": 1.71259842519685,
+                        "upper-diameter": 1.71259842519685
+                    },
+                    {
+                        "height": 0.0222834645669291,
+                        "lower-diameter": 1.71259842519685,
+                        "upper-diameter": 1.73106299212598
+                    },
+                    {
+                        "height": 0.00948818897637795,
+                        "lower-diameter": 1.73106299212598,
+                        "upper-diameter": 1.75
+                    },
+                    {
+                        "height": 2.65330708661417,
+                        "lower-diameter": 1.75,
+                        "upper-diameter": 0.976102362204724
+                    },
+                    {
+                        "height": 0.0337007874015748,
+                        "lower-diameter": 0.976102362204724,
+                        "upper-diameter": 0.898188976377953
+                    }
+                ],
+                "type": "holder",
+                "unit": "inches",
+                "vendor": "Haas Automation"
+            },
+            "post-process": {
+                "break-control": false,
+                "comment": "",
+                "diameter-offset": 1,
+                "length-offset": 1,
+                "live": true,
+                "manual-tool-change": false,
+                "number": 1,
+                "turret": 0
+            },
+            "product-id": "03-0086",
+            "product-link": "https://www.haascnc.com/haas-tooling/milling/end_mills/03-0086.html",
+            "start-values": {
+                "presets": [
+                    {
+                        "description": "Aluminum-Wrought Alloy",
+                        "f_n": 0.003,
+                        "f_z": 0.003,
+                        "guid": "73b44c93-8013-4b0a-824c-f4ba915a18ba",
+                        "material": {
+                            "category": "all",
+                            "query": "",
+                            "use-hardness": false
+                        },
+                        "n": 6000,
+                        "n_ramp": 6000,
+                        "name": "Silta AL6061 T1 simulation limits",
+                        "ramp-angle": 2,
+                        "stepdown": 0.5,
+                        "stepover": 0.5,
+                        "tool-coolant": "flood",
+                        "use-stepdown": true,
+                        "use-stepover": true,
+                        "v_c": 785.3981633974481,
+                        "v_f": 54,
+                        "v_f_leadIn": 54,
+                        "v_f_leadOut": 54,
+                        "v_f_plunge": 18,
+                        "v_f_ramp": 18,
+                        "v_f_transition": 54
+                    }
+                ]
+            },
+            "type": "flat end mill",
+            "unit": "inches",
+            "vendor": "Haas Automation"
+        },
+        {
+            "BMC": "carbide",
+            "GRADE": "Mill Generic",
+            "description": "1/4\" Dia. Carbide End Mill, 3 Flute, Uncoated, 1/4\" Smooth Shank x 3/4\" LOC, Square Profile, HSAM1",
+            "geometry": {
+                "CSP": false,
+                "DC": 0.24999999999999997,
+                "HAND": true,
+                "LB": 1.0499999999999998,
+                "LCF": 0.7499999999999999,
+                "NOF": 3,
+                "NT": 1,
+                "OAL": 2.5,
+                "RE": 0,
+                "SFDM": 0.24999999999999997,
+                "TA": 0,
+                "TP": 0,
+                "assemblyGaugeLength": 3.5499999999999994,
+                "shoulder-diameter": 0.24999999999999997,
+                "shoulder-length": 0.7499999999999999,
+                "thread-profile-angle": 60,
+                "tip-diameter": 0.24999999999999997,
+                "tip-length": 0,
+                "tip-offset": 0
+            },
+            "guid": "b91e9b30-67d6-456b-a4c2-a12a5f911518",
+            "holder": {
+                "description": "CT40 ER32 COLLET CHUCK X 2-1/2\" GAGE LENGTH, TSC",
+                "gaugeLength": 2.5,
+                "guid": "a9962fe4-c289-4a9c-9871-f5a2dc8bbfb8",
+                "product-id": "04-0010",
+                "product-link": "https://www.haascnc.com/haas-tooling/mill_toolholding/er_collet_chucks/04-0010.html",
+                "segments": [
+                    {
+                        "height": 0.0105511811023622,
+                        "lower-diameter": 1.45385826771654,
+                        "upper-diameter": 1.53259842519685
+                    },
+                    {
+                        "height": 0.114448818897638,
+                        "lower-diameter": 1.53259842519685,
+                        "upper-diameter": 1.92913385826772
+                    },
+                    {
+                        "height": 0.0340944881889764,
+                        "lower-diameter": 1.92913385826772,
+                        "upper-diameter": 1.96850393700787
+                    },
+                    {
+                        "height": 0.785787401574803,
+                        "lower-diameter": 1.96850393700787,
+                        "upper-diameter": 1.96850393700787
+                    },
+                    {
+                        "height": 0.262204724409449,
+                        "lower-diameter": 1.5748031496063,
+                        "upper-diameter": 1.5748031496063
+                    },
+                    {
+                        "height": 0.0393700787401575,
+                        "lower-diameter": 1.67125984251969,
+                        "upper-diameter": 1.75
+                    },
+                    {
+                        "height": 0.385433070866142,
+                        "lower-diameter": 1.75,
+                        "upper-diameter": 1.75
+                    },
+                    {
+                        "height": 0.118110236220472,
+                        "lower-diameter": 1.75,
+                        "upper-diameter": 1.98622047244095
+                    },
+                    {
+                        "height": 0.0393700787401575,
+                        "lower-diameter": 2.42125984251969,
+                        "upper-diameter": 2.5
+                    },
+                    {
+                        "height": 0.12244094488189,
+                        "lower-diameter": 2.5,
+                        "upper-diameter": 2.5
+                    },
+                    {
+                        "height": 0.0170472440944882,
+                        "lower-diameter": 2.5,
+                        "upper-diameter": 2.48031496062992
+                    },
+                    {
+                        "height": 0.0571653543307087,
+                        "lower-diameter": 2.48031496062992,
+                        "upper-diameter": 2.28232283464567
+                    },
+                    {
+                        "height": 0.151968503937008,
+                        "lower-diameter": 2.21889763779528,
+                        "upper-diameter": 2.21889763779528
+                    },
+                    {
+                        "height": 0.0571653543307087,
+                        "lower-diameter": 2.28232283464567,
+                        "upper-diameter": 2.48031496062992
+                    },
+                    {
+                        "height": 0.0170472440944882,
+                        "lower-diameter": 2.48031496062992,
+                        "upper-diameter": 2.5
+                    },
+                    {
+                        "height": 0.123425196850394,
+                        "lower-diameter": 2.5,
+                        "upper-diameter": 2.5
+                    },
+                    {
+                        "height": 0.0393700787401575,
+                        "lower-diameter": 2.5,
+                        "upper-diameter": 2.42125984251969
+                    },
+                    {
+                        "height": 0.031496062992126,
+                        "lower-diameter": 1.7755905511811,
+                        "upper-diameter": 1.71259842519685
+                    },
+                    {
+                        "height": 0.0617716535433071,
+                        "lower-diameter": 1.71259842519685,
+                        "upper-diameter": 1.71259842519685
+                    },
+                    {
+                        "height": 0.0222834645669291,
+                        "lower-diameter": 1.71259842519685,
+                        "upper-diameter": 1.73106299212598
+                    },
+                    {
+                        "height": 0.00948818897637795,
+                        "lower-diameter": 1.73106299212598,
+                        "upper-diameter": 1.75
+                    },
+                    {
+                        "height": 2.65330708661417,
+                        "lower-diameter": 1.75,
+                        "upper-diameter": 0.976102362204724
+                    },
+                    {
+                        "height": 0.0337007874015748,
+                        "lower-diameter": 0.976102362204724,
+                        "upper-diameter": 0.898188976377953
+                    }
+                ],
+                "type": "holder",
+                "unit": "inches",
+                "vendor": "Haas Automation"
+            },
+            "post-process": {
+                "break-control": false,
+                "comment": "",
+                "diameter-offset": 2,
+                "length-offset": 2,
+                "live": true,
+                "manual-tool-change": false,
+                "number": 2,
+                "turret": 0
+            },
+            "product-id": "03-0083",
+            "product-link": "https://www.haascnc.com/haas-tooling/milling/end_mills/03-0083.html",
+            "start-values": {
+                "presets": [
+                    {
+                        "description": "Aluminum-Wrought Alloy",
+                        "f_n": 0.0015,
+                        "f_z": 0.0015,
+                        "guid": "9dbdb400-ef7e-48de-b6af-7cef07dae036",
+                        "material": {
+                            "category": "all",
+                            "query": "",
+                            "use-hardness": false
+                        },
+                        "n": 6000,
+                        "n_ramp": 6000,
+                        "name": "Silta AL6061 T2 simulation limits",
+                        "ramp-angle": 2,
+                        "stepdown": 0.25,
+                        "stepover": 0.25,
+                        "tool-coolant": "flood",
+                        "use-stepdown": true,
+                        "use-stepover": true,
+                        "v_c": 392.69908169872406,
+                        "v_f": 27,
+                        "v_f_leadIn": 27,
+                        "v_f_leadOut": 27,
+                        "v_f_plunge": 9,
+                        "v_f_ramp": 9,
+                        "v_f_transition": 27
+                    }
+                ]
+            },
+            "type": "flat end mill",
+            "unit": "inches",
+            "vendor": "Haas Automation"
+        }
+    ],
+    "version": 37
+}
