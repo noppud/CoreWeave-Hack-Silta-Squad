@@ -556,6 +556,7 @@ function renderDemoStep(){
   else if(step.kind==='ready'){D.playing=false;body='<div class="demo-ready"><span>CAM + CHECKS COMPLETE</span><strong>Starting Fusion simulation</strong></div>';}
   else if(step.kind==='result'){pauseDemo();body=`<div class="demo-ready"><span>VERIFIED PLAN</span><strong>${((step.before-step.after)/step.before*100).toFixed(2)}% less machining time</strong><p>${(step.before/60).toFixed(2)} → ${(step.after/60).toFixed(2)} min estimated</p></div>`;}
   $('#demo-scene').innerHTML=`<div class="demo-scene-heading"><small>${step.attempt?'ATTEMPT '+step.attempt:'CLEVIS'}</small><h3>${esc(step.kind==='checks'?'Code checks':step.kind==='verification'?'Fusion simulation':step.kind==='instruction'?'Judge review':step.title)}</h3></div><div id="demo-step-content">${body}</div>`;
+  if(step.kind==='verification'&&step.passed){setTimeout(()=>{if(version===D.version&&index===D.index&&$('#demo-dialog').open&&!D.fallback)showRecordedSimulation();},0);}
   const duration=stagedStepDuration(step),version=D.version,index=D.index;
   if(step.kind==='code'){
     const source=step.source?.content||'# Source unavailable',started=performance.now(),target=$('#demo-code'),pre=target.parentElement;
