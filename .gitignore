@@ -44,3 +44,7 @@ versions/
 !/output/pdf/demo-campaign/*.pdf
 /tmp/
 /notebooks/__marimo__/
+
+# Required packaged Fusion viewer modules (not generated project build output).
+!/applications/control-center/vendor/build/
+!/applications/control-center/vendor/build/*.js
