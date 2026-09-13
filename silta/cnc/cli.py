@@ -107,7 +107,10 @@ def run_job(args) -> dict:
     controller = trace_controller(
         Controller(
             main=AstraMainAgent(
-                astra, bridge, version_store=store, default_versions=versions,
+                astra,
+                bridge,
+                version_store=store,
+                default_versions=versions,
                 api_docs=args.api_docs,
             ),
             checks=store.make_checks(versions["checks"]),
@@ -130,10 +133,18 @@ def run_job(args) -> dict:
     receipt = client.get_call(call.id)
     result["weave_call_id"] = call.id
     result["weave_recorded"] = receipt.ended_at is not None
-    (args.runs / result["job_id"] / "run-receipt.json").write_text(json.dumps({
-        "job_id": result["job_id"], "weave_project": args.project,
-        "weave_call_id": call.id, "weave_recorded": result["weave_recorded"],
-    }, indent=2) + "\n")
+    (args.runs / result["job_id"] / "run-receipt.json").write_text(
+        json.dumps(
+            {
+                "job_id": result["job_id"],
+                "weave_project": args.project,
+                "weave_call_id": call.id,
+                "weave_recorded": result["weave_recorded"],
+            },
+            indent=2,
+        )
+        + "\n"
+    )
     return result
 
 

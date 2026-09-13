@@ -39,7 +39,9 @@ class Recorder:
                     raise
                 finally:
                     self.active.pop()
+
             return invoke
+
         return decorate
 
 
@@ -100,13 +102,16 @@ def test_controller_stages_and_benchmark_children_keep_results_and_order():
         return {"observed": value}
 
     def controller():
-        return trace_controller(SimpleNamespace(
-            main=SimpleNamespace(establish_target=operation, propose=operation),
-            checks=SimpleNamespace(run=operation),
-            fusion=SimpleNamespace(verify=operation),
-            supervisor=SimpleNamespace(decide=operation),
-            learner=SimpleNamespace(propose_checks=operation),
-        ), recorder.op)
+        return trace_controller(
+            SimpleNamespace(
+                main=SimpleNamespace(establish_target=operation, propose=operation),
+                checks=SimpleNamespace(run=operation),
+                fusion=SimpleNamespace(verify=operation),
+                supervisor=SimpleNamespace(decide=operation),
+                learner=SimpleNamespace(propose_checks=operation),
+            ),
+            recorder.op,
+        )
 
     live = controller()
     assert live.main.establish_target("target") == {"observed": "target"}
@@ -126,9 +131,16 @@ def test_controller_stages_and_benchmark_children_keep_results_and_order():
         "observed": "stop",
     }
     assert [call["name"] for call in recorder.calls] == [
-        "cad_target", "cam_candidate", "candidate_checks", "fusion_verification",
-        "check_learning_proposal", "paired_benchmark_run", "cam_candidate",
-        "candidate_checks", "fusion_verification", "supervisor_decision",
+        "cad_target",
+        "cam_candidate",
+        "candidate_checks",
+        "fusion_verification",
+        "check_learning_proposal",
+        "paired_benchmark_run",
+        "cam_candidate",
+        "candidate_checks",
+        "fusion_verification",
+        "supervisor_decision",
     ]
     assert all(call["parent"] == "paired_benchmark_run" for call in recorder.calls[6:])
     assert len(executed) == 9

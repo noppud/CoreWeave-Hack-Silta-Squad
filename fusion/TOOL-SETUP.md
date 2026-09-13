@@ -31,10 +31,13 @@ the pinned chuck's vendor exterior segments are the collision envelope.
 Through the running Silta bridge, load this module and call:
 
 ```python
-result = namespace['apply'](app, {
-    'config_path': '/Users/touko/work/helios-one/repos/coreweavehack/config/soft-jaw-job.json',
-    'output_directory': '/Users/touko/work/helios-one/repos/coreweavehack/.private/fusion-live/tools-v1',
-})
+result = namespace["apply"](
+    app,
+    {
+        "config_path": "/Users/touko/work/helios-one/repos/coreweavehack/config/soft-jaw-job.json",
+        "output_directory": "/Users/touko/work/helios-one/repos/coreweavehack/.private/fusion-live/tools-v1",
+    },
+)
 ```
 
 Use a fresh output directory. `tools-assembled-input.json` is only a proposal.

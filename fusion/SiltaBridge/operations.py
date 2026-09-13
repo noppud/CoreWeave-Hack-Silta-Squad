@@ -93,6 +93,7 @@ def dispatch(app, action, payload):
         return {"result": _inspect(app)}
     if action == "presentation_camera":
         from .presentation import frame
+
         # Camera changes must not exit the active machine simulation.
         return {"result": frame(app, payload), "coverage": ["presentation_camera_only"]}
     if action == "simulation_dialog":

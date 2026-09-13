@@ -104,15 +104,27 @@ def recovery_fixture(tmp_path, monkeypatch):
         copied.write_bytes((shadow / name).read_bytes())
         hashes[name] = hashlib.sha256(copied.read_bytes()).hexdigest()
         refs[kind] = dict(path=str(copied), sha256=hashes[name], kind=kind)
-    manifest = dict(job_id=run.name, status="incomplete", input_digest="input",
-                    target_digest="target", inputs={}, events=[], learning_sources=refs,
-                    versions={k: k for k in refs}, current_versions={k: k for k in refs})
+    manifest = dict(
+        job_id=run.name,
+        status="incomplete",
+        input_digest="input",
+        target_digest="target",
+        inputs={},
+        events=[],
+        learning_sources=refs,
+        versions={k: k for k in refs},
+        current_versions={k: k for k in refs},
+    )
     (run / "manifest.json").write_text(json.dumps(manifest))
-    provenance = dict(source_manifest=str(source),
-                      source_manifest_sha256=hashlib.sha256(source.read_bytes()).hexdigest(),
-                      learning_provenance=dict(learning_directory=str(shadow),
-                                               uses_main_learning_directory=False,
-                                               initial_file_sha256=hashes))
+    provenance = dict(
+        source_manifest=str(source),
+        source_manifest_sha256=hashlib.sha256(source.read_bytes()).hexdigest(),
+        learning_provenance=dict(
+            learning_directory=str(shadow),
+            uses_main_learning_directory=False,
+            initial_file_sha256=hashes,
+        ),
+    )
     (run / "workspace/resume-provenance.json").write_text(json.dumps(provenance))
     return run, source
 
@@ -170,19 +182,25 @@ def test_second_recovery_preserves_two_hop_source_chain(tmp_path, monkeypatch):
     (next_run / "manifest.json").write_text(json.dumps(manifest))
     provenance = json.loads((run / "workspace/resume-provenance.json").read_text())
     source = run / "manifest.json"
-    provenance.update(source_manifest=str(source),
-                      source_manifest_sha256=hashlib.sha256(source.read_bytes()).hexdigest())
+    provenance.update(
+        source_manifest=str(source),
+        source_manifest_sha256=hashlib.sha256(source.read_bytes()).hexdigest(),
+    )
     (next_run / "workspace/resume-provenance.json").write_text(json.dumps(provenance))
     rows = package.add_stage_recoveries(Inventory())
     assert [item["path"] for item in rows[1]["source_chain"]] == [str(source), str(origin)]
 
 
 def test_motion_does_not_hide_cleanup_failure():
-    summary = package.playback_summary(dict(
-        candidate_id="candidate-0001", status="tool_motion_observed",
-        tool_motion_observed=True, stop_error="menu missing",
-        simulation_stop_error="request timed out",
-    ))
+    summary = package.playback_summary(
+        dict(
+            candidate_id="candidate-0001",
+            status="tool_motion_observed",
+            tool_motion_observed=True,
+            stop_error="menu missing",
+            simulation_stop_error="request timed out",
+        )
+    )
     assert summary["recorded_status"] == "tool_motion_observed"
     assert summary["tool_motion_observed"] is True
     assert summary["cleanup_completed"] is False
@@ -192,12 +210,14 @@ def test_motion_does_not_hide_cleanup_failure():
 def test_recovery_retains_embedded_and_external_playbacks_with_cleanup(tmp_path, monkeypatch):
     run, _ = recovery_fixture(tmp_path, monkeypatch)
     clean = dict(
-        candidate_id="candidate-0003", status="tool_motion_observed",
+        candidate_id="candidate-0003",
+        status="tool_motion_observed",
         tool_motion_observed=True,
         simulation_stop=dict(status="ok", completed=True),
         target_display_before=dict(states_before={"body": True}),
-        target_display_restore=dict(status="ok", completed=True,
-                                    result=dict(states_after={"body": True})),
+        target_display_restore=dict(
+            status="ok", completed=True, result=dict(states_after={"body": True})
+        ),
     )
     (run / "run-receipt.json").write_text(json.dumps(dict(presentation_playbacks=[clean])))
     external = tmp_path / "runs" / f"{run.name}-playback" / "candidate-0003"
@@ -211,20 +231,30 @@ def test_recovery_retains_embedded_and_external_playbacks_with_cleanup(tmp_path,
     assert playback["embedded_playbacks"][0]["cleanup_completed"] is True
     assert playback["external_playbacks"][0]["cleanup_completed"] is True
     assert playback["external_playbacks"][0]["candidate_id"] == "candidate-0003"
-    assert f"stage-recoveries/{run.name}/playback/candidate-0003/operator-cleanup.json" \
+    assert (
+        f"stage-recoveries/{run.name}/playback/candidate-0003/operator-cleanup.json"
         in inventory.files
-    assert f"stage-recoveries/{run.name}/playback/candidate-0003/ui/001-inspect.json" \
+    )
+    assert (
+        f"stage-recoveries/{run.name}/playback/candidate-0003/ui/001-inspect.json"
         in inventory.files
+    )
 
 
 def test_external_playback_survives_before_final_run_receipt(tmp_path, monkeypatch):
     run, _ = recovery_fixture(tmp_path, monkeypatch)
     external = tmp_path / "runs" / f"{run.name}-playback" / "candidate-0001"
     external.mkdir(parents=True)
-    (external / "presentation-playback.json").write_text(json.dumps(dict(
-        candidate_id="candidate-0001", status="presentation_failed",
-        tool_motion_observed=True, target_display_restore_error="not restored",
-    )))
+    (external / "presentation-playback.json").write_text(
+        json.dumps(
+            dict(
+                candidate_id="candidate-0001",
+                status="presentation_failed",
+                tool_motion_observed=True,
+                target_display_restore_error="not restored",
+            )
+        )
+    )
     row = package.add_stage_recoveries(Inventory())[0]
     assert row["playback_evidence"]["embedded_playbacks"] == []
     assert row["playback_evidence"]["external_playbacks"][0]["cleanup_completed"] is False
@@ -266,8 +296,10 @@ def test_preadded_sources_keep_actual_deduplicated_stage_links(tmp_path, monkeyp
     assert recovery["resume_provenance"] == expected["recovery-provenance"]
     assert recovery["original_presentation"] == expected["original-presentation"]
     assert recovery["weave_receipt"] == expected["recovery-weave"]
-    assert recovery["playback_evidence"]["external_playbacks"][0]["receipt_path"] \
+    assert (
+        recovery["playback_evidence"]["external_playbacks"][0]["receipt_path"]
         == expected["recovery-playback"]
+    )
     for relative in expected.values():
         assert (output / relative).is_file()
 

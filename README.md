@@ -14,7 +14,11 @@ The [project context and agent handoff](docs/project-context.md) consolidates th
 
 ## Standalone learning-loop presentation
 
-The [learning-loop presentation](demo/README.md) animates 54 example parts. It uses explicitly scripted presentation data, separate from the real Fusion evidence below. Run `python3 -m http.server 8080 --bind 127.0.0.1` and open **http://127.0.0.1:8080/demo/**. This presentation does not require Fusion. Preserve the separately maintained [pitch notes](docs/demo-3min.md).
+The [learning-loop presentation](demo/README.md) animates 27 example parts. It uses explicitly scripted presentation data, separate from the real Fusion evidence below. Run `python3 -m http.server 8080 --bind 127.0.0.1` and open **http://127.0.0.1:8080/demo/**. This presentation does not require Fusion. Preserve the separately maintained [pitch notes](docs/demo-3min.md).
+
+## Fusion control center
+
+Run `uv run python -m silta.cnc.control_center` for the local Fusion workbench. See [live Fusion connection](docs/live-fusion-connection.md) for the companion viewer and LAN pairing. Historical runs and full recordings remain local; the [pitch app](demo/pitch-app/README.md) includes curated presentation footage.
 
 ## Learning
 
@@ -32,7 +36,7 @@ uv run marimo run notebooks/cnc_app.py --host 127.0.0.1 --port 8791 --headless
 uv run python scripts/demo/verify_demo.py
 ```
 
-The workbench reads `runs/demo-campaign.json`, refreshes every 15 seconds, and keeps historical runs selectable while the next part runs. It includes the real Fusion video, CAD/CAM/NC downloads, check and prompt changes, and published Weave links. [Campaign drawings](docs/demo-campaign.md) reserve UMC07 as the fresh live example. The separate `cnc_simulator/` application has its own execution and evidence; these Fusion measurements do not describe that backend.
+The workbench reads `runs/demo-campaign.json`, refreshes every 15 seconds, and keeps historical runs selectable while the next part runs. It includes the real Fusion video, CAD/CAM/NC downloads, check and prompt changes, and published Weave links. [Campaign drawings](docs/demo-campaign.md) reserve UMC07 as the fresh live example. The standalone custom simulator is maintained separately and is outside this Fusion release.
 
 The workbench displays an empty state in a fresh clone: retained `runs/` and raw media are local artifacts. The published evidence bundle above is for inspection. `verify_demo.py` validates the original recording machine's retained evidence and is not a fresh-clone smoke test.
 

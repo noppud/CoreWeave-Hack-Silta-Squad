@@ -11,12 +11,16 @@ with the checkout and a fresh job artifact directory):
 
 ```python
 import runpy
-helper = runpy.run_path('/absolute/checkout/fusion/apply_machine_profile.py')
-result = helper['apply'](app, {
-    'config_path': '/absolute/checkout/config/soft-jaw-job.json',
-    'output_directory': '/absolute/job/machine-attempt-1',
-    # 'setup_index': 0,  # Include only when that exact setup should change.
-})
+
+helper = runpy.run_path("/absolute/checkout/fusion/apply_machine_profile.py")
+result = helper["apply"](
+    app,
+    {
+        "config_path": "/absolute/checkout/config/soft-jaw-job.json",
+        "output_directory": "/absolute/job/machine-attempt-1",
+        # 'setup_index': 0,  # Include only when that exact setup should change.
+    },
+)
 ```
 
 The installed API supports `Machine.create(MachineFromFileInput.create(path))`.

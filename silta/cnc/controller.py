@@ -124,18 +124,23 @@ class Controller:
                 sources[ref] = {"kind": kind, **asdict(Artifact.from_path(path))}
             store.save()
 
-        def promote(
-            proposals: tuple[ReusableProposal, ...], context: JobContext
-        ) -> JobContext:
+        def promote(proposals: tuple[ReusableProposal, ...], context: JobContext) -> JobContext:
             for proposal in proposals:
                 store.event("reusable_change_proposed", proposal=asdict(proposal))
                 if self.learning is not None:
                     evidence = self.learning.apply(proposal, deepcopy(context))
                     result = PromotionResult(
-                        proposal.id, True, "Applied directly; evaluation disabled", evidence,
+                        proposal.id,
+                        True,
+                        "Applied directly; evaluation disabled",
+                        evidence,
                     )
-                    store.event("learning_change_saved", proposal_id=proposal.id,
-                                change_kind=proposal.kind, evaluation_performed=False)
+                    store.event(
+                        "learning_change_saved",
+                        proposal_id=proposal.id,
+                        change_kind=proposal.kind,
+                        evaluation_performed=False,
+                    )
                 elif self.evaluation is None:
                     store.event(
                         "promotion_deferred",
@@ -164,9 +169,13 @@ class Controller:
                         self.checks = IntegrityChecks(
                             self.check_runner_factory(proposal.proposed_version)
                         )
-                    context = replace(context, versions={
-                        **context.versions, proposal.kind: proposal.proposed_version,
-                    })
+                    context = replace(
+                        context,
+                        versions={
+                            **context.versions,
+                            proposal.kind: proposal.proposed_version,
+                        },
+                    )
                     retain_learning(context.versions)
                     store.data["current_versions"] = deepcopy(context.versions)
                     store.event(
@@ -189,13 +198,18 @@ class Controller:
             if verification.status != "passed" or not verification.completed:
                 raise ValueError("Supervisor requires a completed verified candidate")
             decision = self.supervisor.decide(
-                deepcopy(context), deepcopy(candidate), deepcopy(verification),
+                deepcopy(context),
+                deepcopy(candidate),
+                deepcopy(verification),
                 deepcopy(store.data["events"]),
             )
             if decision.action not in ("improve", "stop"):
                 raise ValueError("Invalid supervisor action")
-            store.event("supervisor_decision", decision=asdict(decision),
-                        versions=deepcopy(context.versions))
+            store.event(
+                "supervisor_decision",
+                decision=asdict(decision),
+                versions=deepcopy(context.versions),
+            )
             context = promote(decision.reusable_proposals, context)
             if decision.action == "improve" and not decision.instructions.strip():
                 raise ValueError("Improvement decision requires instructions")
@@ -224,15 +238,19 @@ class Controller:
                 if restored.target_digest != accepted_digest or verification.status != "passed":
                     raise ValueError("Resumed incumbent must be verified against the fixed target")
                 best = store.candidate(restored, 0)
-                evidence = store.snapshot("resumed-evidence", {
-                    f"evidence-{i}": artifact for i, artifact in enumerate(verification.evidence)
-                })
+                evidence = store.snapshot(
+                    "resumed-evidence",
+                    {f"evidence-{i}": artifact for i, artifact in enumerate(verification.evidence)},
+                )
                 best_verification = replace(verification, evidence=tuple(evidence.values()))
                 previous = best
                 store.data["best_candidate"] = asdict(best)
                 store.data["best_verification"] = asdict(best_verification)
-                store.event("verified_incumbent_resumed", candidate=asdict(best),
-                            verification=asdict(best_verification))
+                store.event(
+                    "verified_incumbent_resumed",
+                    candidate=asdict(best),
+                    verification=asdict(best_verification),
+                )
             for attempts in range(1, max_attempts + 1):
                 context.inputs.verify()
                 target.verify()
@@ -251,8 +269,12 @@ class Controller:
                         attempts,
                     )
                 except CandidateProposalUnresolved as error:
-                    store.event("cam_proposal_unresolved", attempt=attempts,
-                                issues=error.issues, instructions=instructions)
+                    store.event(
+                        "cam_proposal_unresolved",
+                        attempt=attempts,
+                        issues=error.issues,
+                        instructions=instructions,
+                    )
                     if best is None or best_verification is None:
                         raise
                     context, decision = review(best, best_verification, context)
@@ -261,8 +283,11 @@ class Controller:
                         break
                     instructions = decision.instructions
                     previous = best
-                    feedback = {"stage": "supervisor", "unresolved_proposal": error.issues,
-                                "verification": asdict(best_verification)}
+                    feedback = {
+                        "stage": "supervisor",
+                        "unresolved_proposal": error.issues,
+                        "verification": asdict(best_verification),
+                    }
                     continue
                 except CandidateGenerationError as error:
                     feedback = deepcopy(error.feedback)
@@ -279,7 +304,9 @@ class Controller:
                 )
                 check = self.checks.run(deepcopy(candidate), deepcopy(context))
                 store.event(
-                    "checks_completed", attempt=attempts, result=asdict(check),
+                    "checks_completed",
+                    attempt=attempts,
+                    result=asdict(check),
                     versions=deepcopy(context.versions),
                 )
                 previous = candidate

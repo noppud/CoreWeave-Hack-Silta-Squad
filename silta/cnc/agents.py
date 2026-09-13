@@ -32,8 +32,8 @@ PROMPTS = Path(__file__).resolve().parents[2] / "prompts"
 FUSION_HELPERS = PROMPTS.parent / "fusion"
 _PREPARE_CAM_SCRIPT = f"""
 import runpy
-_setup_helper = runpy.run_path({str(FUSION_HELPERS / 'prepare_cam_setup.py')!r})
-_resources = runpy.run_path({str(FUSION_HELPERS / 'cam_resources.py')!r})
+_setup_helper = runpy.run_path({str(FUSION_HELPERS / "prepare_cam_setup.py")!r})
+_resources = runpy.run_path({str(FUSION_HELPERS / "cam_resources.py")!r})
 _prepared = _setup_helper["prepare"](app, payload)
 _loaded = _resources["load_tools"](app, payload)
 result = {{**_prepared, "tools": _loaded["inventory"]}}
@@ -43,19 +43,19 @@ import adsk.core, adsk.fusion, adsk.cam, runpy
 cam = adsk.cam.CAM.cast(app.activeDocument.products.itemByProductType("CAMProductType"))
 setup = cam.setups.item(payload["setup_index"])
 target_bodies = list(setup.models)
-_resources = runpy.run_path({str(FUSION_HELPERS / 'cam_resources.py')!r})
+_resources = runpy.run_path({str(FUSION_HELPERS / "cam_resources.py")!r})
 tools = _resources["load_tools"](app, payload)["tools"]
 """
 _FINALIZE_CAM_SCRIPT = f"""
 import runpy
-_setup_helper = runpy.run_path({str(FUSION_HELPERS / 'prepare_cam_setup.py')!r})
-_resources = runpy.run_path({str(FUSION_HELPERS / 'cam_resources.py')!r})
+_setup_helper = runpy.run_path({str(FUSION_HELPERS / "prepare_cam_setup.py")!r})
+_resources = runpy.run_path({str(FUSION_HELPERS / "cam_resources.py")!r})
 _setup_helper["prepare"](app, payload)
 result = _resources["finalize_nc"](app, payload)
 """
 _CAM_CATALOG_SCRIPT = f"""
 import runpy
-result = runpy.run_path({str(FUSION_HELPERS / 'cam_api_catalog.py')!r})["describe"](app, payload)
+result = runpy.run_path({str(FUSION_HELPERS / "cam_api_catalog.py")!r})["describe"](app, payload)
 """
 
 # These instructions are outside the mutable prompt versions. Enforcement of
@@ -511,9 +511,15 @@ class AstraMainAgent(_Roles):
             )
         ):
             raise FusionScriptError(reply)
-        if (action == "generation_status" and reply.get("status") == "error"
-                and any(issue.get("message") == "3 : Generation not started"
-                        for issue in reply.get("issues", []) if isinstance(issue, dict))):
+        if (
+            action == "generation_status"
+            and reply.get("status") == "error"
+            and any(
+                issue.get("message") == "3 : Generation not started"
+                for issue in reply.get("issues", [])
+                if isinstance(issue, dict)
+            )
+        ):
             raise FusionGenerationNotStarted(reply)
         if reply.get("status") in {"error", "failed"} or reply.get("error"):
             raise RuntimeError(f"Fusion {action} failed: {reply.get('error', reply.get('issues'))}")
@@ -563,7 +569,8 @@ class AstraMainAgent(_Roles):
                     # Compile the machining source as its own module so future
                     # imports and tracebacks remain valid with injected resources.
                     executable = source_prefix + (
-                        "\nexec(compile(" + repr(executable)
+                        "\nexec(compile("
+                        + repr(executable)
                         + ", '<silta-machining-plan>', 'exec'), globals())\n"
                     )
                 execution = self._script(executable, directory, name, script_arguments)
@@ -709,7 +716,12 @@ class AstraMainAgent(_Roles):
             )
 
         reply, execution = self._execute_with_repair(
-            reply, prompt, directory, "cad", fresh_cad, after_execution=register_target,
+            reply,
+            prompt,
+            directory,
+            "cad",
+            fresh_cad,
+            after_execution=register_target,
         )
         if not registration.get("target_body_ids"):
             raise ValueError("Fusion did not register accepted part-body scope")
@@ -736,7 +748,7 @@ class AstraMainAgent(_Roles):
         geometry_path = _save(directory / "target-geometry.json", geometry)
         preview = directory / "target.png"
         preview_source = (
-            'if not app.activeViewport.fit() or not app.activeViewport.refresh():\n'
+            "if not app.activeViewport.fit() or not app.activeViewport.refresh():\n"
             '    raise RuntimeError("Fusion target preview could not fit/refresh")\n'
             'result = {"saved": app.activeViewport.saveAsImageFile('
             + repr(str(preview))
@@ -824,8 +836,11 @@ class AstraMainAgent(_Roles):
                 reference = json.loads(Path(source.path).read_text())
                 opened = open_snapshot(self._request, reference)
                 working = save_snapshot(
-                    self._request, reference["project_id"], f"Silta working CAM {attempt}",
-                    previous=reference["data_file_id"], timeout=self.operation_timeout,
+                    self._request,
+                    reference["project_id"],
+                    f"Silta working CAM {attempt}",
+                    previous=reference["data_file_id"],
+                    timeout=self.operation_timeout,
                     receipt=lambda handle: _save(
                         directory / f"cam-attempt-{source_attempt:02d}-fork-save.json", handle
                     ),
@@ -849,12 +864,24 @@ class AstraMainAgent(_Roles):
 
         prepared = prepare_cam()
         _save(directory / "cam-setup.json", prepared)
-        catalog = self._request("run_script", {
-            "source": _CAM_CATALOG_SCRIPT,
-            "arguments": {"setup_index": prepared["setup_index"],
-                          "strategies": ["pocket2d", "adaptive2d", "contour2d", "face", "drill",
-                                         "pocket_clearing", "adaptive"]},
-        })["result"]
+        catalog = self._request(
+            "run_script",
+            {
+                "source": _CAM_CATALOG_SCRIPT,
+                "arguments": {
+                    "setup_index": prepared["setup_index"],
+                    "strategies": [
+                        "pocket2d",
+                        "adaptive2d",
+                        "contour2d",
+                        "face",
+                        "drill",
+                        "pocket_clearing",
+                        "adaptive",
+                    ],
+                },
+            },
+        )["result"]
         if not catalog.get("compatible_strategies"):
             raise RuntimeError("Fusion did not report its available machining strategies")
         catalog_path = _save(directory / "cam-api-catalog.json", catalog)
@@ -913,8 +940,13 @@ class AstraMainAgent(_Roles):
                     raise ValueError("CAM repair baseline differs from accepted target")
 
         reply, execution = self._execute_with_repair(
-            reply, prompt, directory, "cam", reset_cam,
-            source_prefix=_CAM_RESOURCE_PRELUDE, script_arguments=setup_arguments,
+            reply,
+            prompt,
+            directory,
+            "cam",
+            reset_cam,
+            source_prefix=_CAM_RESOURCE_PRELUDE,
+            script_arguments=setup_arguments,
         )
         after = self._geometry()
         if digest_json(after) != digest_json(frozen):
@@ -937,8 +969,10 @@ class AstraMainAgent(_Roles):
         except FusionGenerationNotStarted as error:
             failure = {
                 "stage": "toolpath_generation",
-                "issues": ["Fusion explicitly reports generation not started. Inspect operation "
-                           "geometry and orientation references; do not treat this as a pass."],
+                "issues": [
+                    "Fusion explicitly reports generation not started. Inspect operation "
+                    "geometry and orientation references; do not treat this as a pass."
+                ],
                 "inspection": self._request("inspect")["result"],
                 "source": reply["source"],
                 "generation": error.reply,
@@ -951,8 +985,11 @@ class AstraMainAgent(_Roles):
         for operation in inspection.get("operations", []):
             operation.update(observed.get(operation["id"], {}))
         operations = inspection.get("operations", [])
-        if (not operations or any(op.get("has_error") for op in operations)
-                or not all(op.get("has_toolpath") is True for op in operations)):
+        if (
+            not operations
+            or any(op.get("has_error") for op in operations)
+            or not all(op.get("has_toolpath") is True for op in operations)
+        ):
             failure = {
                 "stage": "toolpath_generation",
                 "issues": [
@@ -978,7 +1015,9 @@ class AstraMainAgent(_Roles):
         cloud_path = None
         if project_id:
             reference = save_snapshot(
-                self._request, project_id, f"Silta CAM {attempt}",
+                self._request,
+                project_id,
+                f"Silta CAM {attempt}",
                 timeout=self.operation_timeout,
                 receipt=lambda handle: _save(directory / "candidate-save.json", handle),
             )

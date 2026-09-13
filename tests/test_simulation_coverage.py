@@ -14,8 +14,16 @@ from silta.cnc.simulation_coverage import (
 
 def _api_machine():
     names = (
-        "TOOL", "TOOL_CUTTER", "TOOL_NONCUTTER", "STOCK", "FIXTURE", "MODEL",
-        "MACHINE_PART", "TURRET_ACTIVE_TOOL", "TURRET_INACTIVE_TOOL", "INVALID",
+        "TOOL",
+        "TOOL_CUTTER",
+        "TOOL_NONCUTTER",
+        "STOCK",
+        "FIXTURE",
+        "MODEL",
+        "MACHINE_PART",
+        "TURRET_ACTIVE_TOOL",
+        "TURRET_INACTIVE_TOOL",
+        "INVALID",
     )
     enum = NS(**{"MachineItemType_" + name: i for i, name in enumerate(names)})
 
@@ -31,23 +39,39 @@ def _api_machine():
         (("MACHINE_PART", "head"), ("STOCK", "table")),
         (("MACHINE_PART", "head"), ("FIXTURE", "table")),
     ]:
-        pairs.append(NS(item1=item(*first), item2=item(*second),
-                        isCheckedForCollisions=True, isIgnored=False))
-    pairs.append(NS(item1=item("MACHINE_PART", "Z"), item2=item("TOOL", "head"),
-                    isCheckedForCollisions=False, isIgnored=True))
+        pairs.append(
+            NS(
+                item1=item(*first),
+                item2=item(*second),
+                isCheckedForCollisions=True,
+                isIgnored=False,
+            )
+        )
+    pairs.append(
+        NS(
+            item1=item("MACHINE_PART", "Z"),
+            item2=item("TOOL", "head"),
+            isCheckedForCollisions=False,
+            isIgnored=True,
+        )
+    )
     roots = []
     for ident, low, high, direction in [
         ("Z", -50.8, 0, [0, 0, 1]),
         ("Y", -20.3, 20.3, [0, -1, 0]),
         ("X", -38.1, 38.1, [-1, 0, 0]),
     ]:
-        axis = NS(name=ident, hasLimits=True, physicalRange=NS(min=low, max=high, isInfinite=False),
-                  direction=NS(x=direction[0], y=direction[1], z=direction[2]))
+        axis = NS(
+            name=ident,
+            hasLimits=True,
+            physicalRange=NS(min=low, max=high, isInfinite=False),
+            direction=NS(x=direction[0], y=direction[1], z=direction[2]),
+        )
         roots.append(NS(id=ident, axis=axis, children=[]))
     kinematics = NS(parts=[NS(id="base", axis=None, children=roots)])
-    elements = NS(defaultItemByType=lambda ident: {
-        "interactions": pairs, "kinematics": kinematics
-    }[ident])
+    elements = NS(
+        defaultItemByType=lambda ident: {"interactions": pairs, "kinematics": kinematics}[ident]
+    )
     cam = NS(
         MachineItemType=enum,
         InteractionsMachineElement=NS(cast=lambda x: x, staticTypeId=lambda: "interactions"),
@@ -81,20 +105,31 @@ def binding():
     scope = _inspect_machine_coverage(machine, cam)
     return {
         "expected_machine_coverage": scope,
-        "setups": [{"machine_coverage": deepcopy(scope), "machine_matches": True,
-                    "machine_simulation_model": True, "fixture_enabled": True,
-                    "fixtures": [{"body_references": ["vise"]}],
-                    "models": [{"body_references": ["part"]}]}],
-        "operations": [{"tool": {"geometry": {"DC": 12.7},
-                                  "holder": {"segments": [{"height": 10}]}}}],
+        "setups": [
+            {
+                "machine_coverage": deepcopy(scope),
+                "machine_matches": True,
+                "machine_simulation_model": True,
+                "fixture_enabled": True,
+                "fixtures": [{"body_references": ["vise"]}],
+                "models": [{"body_references": ["part"]}],
+            }
+        ],
+        "operations": [
+            {"tool": {"geometry": {"DC": 12.7}, "holder": {"segments": [{"height": 10}]}}}
+        ],
     }
 
 
 def test_configured_scope_does_not_claim_stock_comparison_or_verdict(binding):
     scope = validate_simulation_coverage(binding)
-    assert scope == {"machine_collisions": True, "tool_holder_fixture_collisions": True,
-                     "rapid_stock_collisions": True, "axis_overtravel": True,
-                     "target_stock_comparison": False}
+    assert scope == {
+        "machine_collisions": True,
+        "tool_holder_fixture_collisions": True,
+        "rapid_stock_collisions": True,
+        "axis_overtravel": True,
+        "target_stock_comparison": False,
+    }
     assert "passed" not in scope
 
 
@@ -113,10 +148,17 @@ def test_disabled_required_category_in_pin_is_not_coverage(binding):
         validate_simulation_coverage(binding)
 
 
-@pytest.mark.parametrize("change", [
-    {"minimum": float("-inf")}, {"infinite": True}, {"has_limits": False},
-    {"minimum": 0, "maximum": 0}, {"kind": "nonlinear"}, {"units": "cm"},
-])
+@pytest.mark.parametrize(
+    "change",
+    [
+        {"minimum": float("-inf")},
+        {"infinite": True},
+        {"has_limits": False},
+        {"minimum": 0, "maximum": 0},
+        {"kind": "nonlinear"},
+        {"units": "cm"},
+    ],
+)
 def test_unbounded_or_wrong_axis_definition_rejected(binding, change):
     binding["expected_machine_coverage"]["axes"][0].update(change)
     with pytest.raises(ValueError, match="finite linear axis"):
@@ -138,25 +180,43 @@ def test_missing_holder_geometry_cannot_claim_holder_coverage(binding):
 
 
 def _add_rotary_axes(binding):
-    binding['expected_machine_coverage']['axes'].extend([
-        {'part_id': 'B', 'name': 'B', 'kind': 'rotary', 'units': 'radians',
-         'minimum': -0.61, 'maximum': 1.92, 'has_limits': True, 'infinite': False},
-        {'part_id': 'C', 'name': 'C', 'kind': 'rotary', 'units': 'radians',
-         'minimum': None, 'maximum': None, 'has_limits': False, 'infinite': True},
-    ])
-    binding['setups'][0]['machine_coverage'] = deepcopy(binding['expected_machine_coverage'])
+    binding["expected_machine_coverage"]["axes"].extend(
+        [
+            {
+                "part_id": "B",
+                "name": "B",
+                "kind": "rotary",
+                "units": "radians",
+                "minimum": -0.61,
+                "maximum": 1.92,
+                "has_limits": True,
+                "infinite": False,
+            },
+            {
+                "part_id": "C",
+                "name": "C",
+                "kind": "rotary",
+                "units": "radians",
+                "minimum": None,
+                "maximum": None,
+                "has_limits": False,
+                "infinite": True,
+            },
+        ]
+    )
+    binding["setups"][0]["machine_coverage"] = deepcopy(binding["expected_machine_coverage"])
 
 
 def test_indexed_machine_keeps_b_limits_and_continuous_c(binding):
     _add_rotary_axes(binding)
-    assert validate_simulation_coverage(binding)['axis_overtravel'] is True
-    binding['setups'][0]['machine_coverage']['axes'][-2]['maximum'] = 2.5
-    with pytest.raises(ValueError, match='pinned machine coverage'):
+    assert validate_simulation_coverage(binding)["axis_overtravel"] is True
+    binding["setups"][0]["machine_coverage"]["axes"][-2]["maximum"] = 2.5
+    with pytest.raises(ValueError, match="pinned machine coverage"):
         validate_simulation_coverage(binding)
 
 
 def test_rotary_missing_limits_cannot_be_treated_as_continuous(binding):
     _add_rotary_axes(binding)
-    binding['expected_machine_coverage']['axes'][-2]['minimum'] = None
-    with pytest.raises(ValueError, match='Rotary axis must retain'):
+    binding["expected_machine_coverage"]["axes"][-2]["minimum"] = None
+    with pytest.raises(ValueError, match="Rotary axis must retain"):
         validate_simulation_coverage(binding)

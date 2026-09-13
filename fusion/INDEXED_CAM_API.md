@@ -18,13 +18,13 @@ only `_get_isVisible` (observed during the UMC-03 CAD attempt).
 For a side pocket, the following reference form generated toolpaths successfully:
 
 ```python
-op = setup.operations.createInput('pocket2d')
+op = setup.operations.createInput("pocket2d")
 op.tool = tools[1]
-op.parameters.itemByName('overrideToolView').expression = 'true'
-op.parameters.itemByName('view_orientation_mode').expression = "'axesZX'"
-op.parameters.itemByName('view_orientation_axisZ').value.value = [pocket_floor_face]
-op.parameters.itemByName('view_orientation_axisX').value.value = [root.zConstructionAxis]
-op.parameters.itemByName('view_origin_mode').expression = "'jobOrigin'"
+op.parameters.itemByName("overrideToolView").expression = "true"
+op.parameters.itemByName("view_orientation_mode").expression = "'axesZX'"
+op.parameters.itemByName("view_orientation_axisZ").value.value = [pocket_floor_face]
+op.parameters.itemByName("view_orientation_axisX").value.value = [root.zConstructionAxis]
+op.parameters.itemByName("view_origin_mode").expression = "'jobOrigin'"
 ```
 
 Select the actual planar pocket floor whose outward normal is the desired tool
@@ -35,7 +35,7 @@ operation with fresh references instead of retaining that invalid selection.
 Pocket face selections preserve islands:
 
 ```python
-value = op.parameters.itemByName('pockets').value
+value = op.parameters.itemByName("pockets").value
 curves = value.getCurveSelections()
 selection = curves.createNewPocketSelection()
 selection.inputGeometry = [pocket_floor_face]

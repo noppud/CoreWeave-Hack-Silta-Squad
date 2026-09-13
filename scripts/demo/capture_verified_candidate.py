@@ -238,8 +238,10 @@ def capture(
         )
         row["stock_export"] = exporter.export(stock_path)
         exported = row["stock_export"]
-        if (exported.get("status") != "exported"
-                or exported.get("stock_readiness", {}).get("status") != "ready"):
+        if (
+            exported.get("status") != "exported"
+            or exported.get("stock_readiness", {}).get("status") != "ready"
+        ):
             raise RuntimeError("Completed stock regeneration was not confirmed; orbit skipped")
         row["finished_stock_artifact"] = pin(stock_path)
         row["stock_export_scope"] = "Observed completed stock for presentation; not a new verdict"

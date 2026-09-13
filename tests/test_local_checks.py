@@ -54,7 +54,9 @@ def check(data):
 
 
 def test_large_cad_is_streamed_and_available_to_actual_check_process(tmp_path, monkeypatch):
-    runner, _, context = make(tmp_path, """
+    runner, _, context = make(
+        tmp_path,
+        """
 import hashlib, os
 def check(data):
     artifact = data['candidate']['artifacts']['f3d']
@@ -62,7 +64,8 @@ def check(data):
     with open(artifact['path'], 'rb') as stream:
         assert hashlib.file_digest(stream, 'sha256').hexdigest() == artifact['sha256']
     return {'passed': True, 'issues': []}
-""")
+""",
+    )
     archive = tmp_path / "candidate.f3d"
     with archive.open("wb") as output:
         for _ in range(21):

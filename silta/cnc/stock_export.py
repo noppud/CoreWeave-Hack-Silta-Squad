@@ -50,7 +50,7 @@ def stock_generation_progress(state: dict) -> float | None:
 
 def restore_fusion_space() -> None:
     """Select the uniquely observed Fusion desktop when normal activation fails."""
-    source = '''tell application "System Events"
+    source = """tell application "System Events"
         tell process "Dock"
             if not (exists group "Mission Control") then
                 tell application "System Events" to key code 126 using control down
@@ -72,9 +72,10 @@ def restore_fusion_space() -> None:
                 click item 1 of targets
             end tell
         end tell
-    end tell'''
-    subprocess.run(['osascript', '-e', source], check=True, capture_output=True,
-                   text=True, timeout=10)
+    end tell"""
+    subprocess.run(
+        ["osascript", "-e", source], check=True, capture_output=True, text=True, timeout=10
+    )
 
 
 def native_binary(source: Path = NATIVE_SOURCE, *, cache: Path | None = None) -> Path:
@@ -88,7 +89,10 @@ def native_binary(source: Path = NATIVE_SOURCE, *, cache: Path | None = None) ->
             pending = Path(staging) / "native-ui"
             subprocess.run(
                 ["swiftc", str(source), "-o", str(pending)],
-                check=True, capture_output=True, text=True, timeout=60,
+                check=True,
+                capture_output=True,
+                text=True,
+                timeout=60,
             )
             pending.replace(binary)
     return binary
@@ -253,9 +257,13 @@ class StockExporter:
             ) from error
         stem.with_suffix(".json").write_text(json.dumps(result, indent=2))
         if process.returncode or result.get("error"):
-            if (action == "focus" and not self.space_restore_attempted
-                    and str(result.get("error", "")).startswith(
-                        "Expected exactly one visible Fusion document:")):
+            if (
+                action == "focus"
+                and not self.space_restore_attempted
+                and str(result.get("error", "")).startswith(
+                    "Expected exactly one visible Fusion document:"
+                )
+            ):
                 self.space_restore_attempted = True
                 restore_fusion_space()
                 time.sleep(0.5)
@@ -356,12 +364,15 @@ class StockExporter:
                         raise RuntimeError("Expected one unsaved stock dialog") from None
                     box = windows[0]["bounds"]
                     wx, wy, _, _ = self.state["window_bounds"]
-                    self.click_text("Cancel", region=(
-                        box["X"] - wx + box["Width"] * 0.5,
-                        box["Y"] - wy + box["Height"] * 0.8,
-                        box["X"] - wx + box["Width"],
-                        box["Y"] - wy + box["Height"],
-                    ))
+                    self.click_text(
+                        "Cancel",
+                        region=(
+                            box["X"] - wx + box["Width"] * 0.5,
+                            box["Y"] - wy + box["Height"] * 0.8,
+                            box["X"] - wx + box["Width"],
+                            box["Y"] - wy + box["Height"],
+                        ),
+                    )
                 else:
                     self.ui("press", "Save Stock", cancel)
 
@@ -381,8 +392,12 @@ class StockExporter:
         observed_generation = False
         stable_count = 0
         previous_pose = None
-        result = {"status": "waiting", "method": "observed-stock-generation-end-v1",
-                  "samples": samples, "timeout_seconds": timeout}
+        result = {
+            "status": "waiting",
+            "method": "observed-stock-generation-end-v1",
+            "samples": samples,
+            "timeout_seconds": timeout,
+        }
         receipt = self.directory / "stock-readiness.json"
         try:
             while True:
@@ -400,8 +415,14 @@ class StockExporter:
                 stable = complete and valid_pose and pose == previous_pose
                 stable_count = stable_count + 1 if stable else 0
                 previous_pose = pose
-                samples.append({"observed_at": time.time(), "progress_percent": progress,
-                                "position": position, "stable_count": stable_count})
+                samples.append(
+                    {
+                        "observed_at": time.time(),
+                        "progress_percent": progress,
+                        "position": position,
+                        "stable_count": stable_count,
+                    }
+                )
                 receipt.write_text(json.dumps(result, indent=2))
                 if stable_count >= 2:
                     # End of Toolpath was explicitly selected immediately before
@@ -415,8 +436,12 @@ class StockExporter:
                     if menu_progress is not None and menu_progress < 100:
                         stable_count = 0
                     else:
-                        result.update(status="ready", final_position=position,
-                                      playback_stopped=True, end_of_toolpath_requested=True)
+                        result.update(
+                            status="ready",
+                            final_position=position,
+                            playback_stopped=True,
+                            end_of_toolpath_requested=True,
+                        )
                         receipt.write_text(json.dumps(result, indent=2))
                         return result
                 if time.monotonic() >= deadline:

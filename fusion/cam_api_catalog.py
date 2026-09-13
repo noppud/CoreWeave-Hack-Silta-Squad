@@ -30,9 +30,10 @@ def describe(app, payload):
         raise RuntimeError("Catalog requires the controller-owned setup")
     operations = setup.operations
     before = operations.count
-    compatible = [{"name": s.name, "title": s.title,
-                   "generation_allowed": s.isGenerationAllowed}
-                  for s in operations.compatibleStrategies]
+    compatible = [
+        {"name": s.name, "title": s.title, "generation_allowed": s.isGenerationAllowed}
+        for s in operations.compatibleStrategies
+    ]
     names = {s["name"] for s in compatible}
     descriptions = {}
     for strategy in requested:
@@ -48,15 +49,21 @@ def describe(app, payload):
                 row = {"name": parameter.name, "title": parameter.title}
                 try:
                     value = parameter.value
-                    row.update(expression=parameter.expression, value_type=value.objectType,
-                               enabled=parameter.isEnabled, editable=parameter.isEditable,
-                               deprecated=parameter.isDeprecated)
+                    row.update(
+                        expression=parameter.expression,
+                        value_type=value.objectType,
+                        enabled=parameter.isEnabled,
+                        editable=parameter.isEditable,
+                        deprecated=parameter.isDeprecated,
+                    )
                     choice = adsk.cam.ChoiceParameterValue.cast(value)
                     if choice is not None:
                         ok, labels, values = choice.getChoices()
                         row["choices_available"] = ok
-                        row["choices"] = [{"title": title, "value": item}
-                                          for title, item in zip(labels, values, strict=True)]
+                        row["choices"] = [
+                            {"title": title, "value": item}
+                            for title, item in zip(labels, values, strict=True)
+                        ]
                         row["selected_value"] = choice.value
                 except Exception as error:
                     row["read_error"] = str(error)
@@ -66,7 +73,12 @@ def describe(app, payload):
             descriptions[strategy] = {"error": str(error)}
     if operations.count != before:
         raise RuntimeError("Operation count changed during read-only CAM inspection")
-    return {"setup_index": index, "setup_name": setup.name, "compatible_strategies": compatible,
-            "strategies": descriptions, "operation_count": before,
-            "defaults_note": "Transient inputs use current Fusion user defaults; no tool or "
-                             "geometry was assigned. Enabled states can change with other values."}
+    return {
+        "setup_index": index,
+        "setup_name": setup.name,
+        "compatible_strategies": compatible,
+        "strategies": descriptions,
+        "operation_count": before,
+        "defaults_note": "Transient inputs use current Fusion user defaults; no tool or "
+        "geometry was assigned. Enabled states can change with other values.",
+    }

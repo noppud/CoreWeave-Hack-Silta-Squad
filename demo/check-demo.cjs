@@ -26,9 +26,9 @@ const { parts, sequence } = new Function(
   data + 'const num=v=>v.toFixed(1);' + sequenceSource + 'return {parts,sequence};',
 )();
 
-assert.equal(parts.length, 54);
-assert.equal(new Set(parts.map(part => part.name)).size, 54);
-assert.equal(new Set(parts.map(part => part.original)).size, 54);
+assert.equal(parts.length, 27);
+assert.equal(new Set(parts.map(part => part.name)).size, 27);
+assert.equal(new Set(parts.map(part => part.original)).size, 27);
 assert.ok(parts.some((part, index) => part.original !== index));
 assert.equal(parts[0].beforeFeedback.length, 0);
 
@@ -72,8 +72,8 @@ for (const part of parts) {
 }
 
 const last = parts.at(-1);
-assert.equal(last.afterChecks.length, 8);
-assert.equal(new Set(last.afterChecks.map(check => check.title)).size, 8);
+assert.equal(last.afterChecks.length, 7);
+assert.equal(new Set(last.afterChecks.map(check => check.title)).size, 7);
 assert.equal(last.afterFeedback.length, parts.filter(part => part.judge).length);
 assert.equal(new Set(last.afterFeedback.map(instruction => instruction.action)).size, last.afterFeedback.length);
 assert.equal(parts[0].meanTime20, parts[0].final);
@@ -88,11 +88,11 @@ const animationSource = script.slice(script.indexOf(' function step('), script.i
 const {partDuration, playbackTime} = new Function('parts', timingSource + 'return {partDuration, playbackTime};')(parts);
 assert.ok(Math.abs(partDuration(1)-6500)<500);
 assert.ok(Math.abs(partDuration(2)-3500)<500);
-assert.ok(Math.abs(partDuration(1)+partDuration(2)-10000)<500);
+assert.ok(Math.abs(partDuration(1)+partDuration(2)-10580)<100);
 const totalDuration = parts.reduce((sum, part) => sum + partDuration(part.x), 0);
 assert.ok(Math.abs(totalDuration - 24000) < 1e-6);
 assert.equal(playbackTime(0), 0);
-for (let x = 1; x < 54; x++) {
+for (let x = 1; x < 27; x++) {
   assert.ok(partDuration(x + 1) < partDuration(x));
   if(x>1)assert.ok(partDuration(x+1)/partDuration(x)>partDuration(x)/partDuration(x-1));
   // No discontinuity in playback speed where one part becomes the next.
@@ -111,7 +111,7 @@ const playback = new Function('parts', 'sequence', 'interval', 'reducedMotion', 
   function apply(e){applied++;if(e.target==='input'&&motionFrom!=='input')throw Error('New parts must start at Input');if(e.commit)completed=current.x;}
   function pause(){playing=false;animation=null;}
   function prepare(){
-    if(completed>=54)return false;
+    if(completed>=27)return false;
     current=parts[completed];events=sequence(current);eventIndex=-1;return true;
   }
   ${timingSource}
@@ -124,7 +124,7 @@ const playback = new Function('parts', 'sequence', 'interval', 'reducedMotion', 
 const expectedEvents = parts.reduce((sum, part) => sum + sequence(part).length, 0);
 for (const [interval, reducedMotion, initialDelay] of [[1000/60,false,0],[1000/30,false,0],[1000/60,true,0],[1000/30,false,12000]]) {
   const result = playback(parts, sequence, interval, reducedMotion, initialDelay);
-  assert.equal(result.completed, 54);
+  assert.equal(result.completed, 27);
   assert.equal(result.applied, expectedEvents);
   assert.equal(result.playing, false);
   assert.ok(result.now >= 24000 && result.now < 24100, JSON.stringify(result));

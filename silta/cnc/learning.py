@@ -77,6 +77,7 @@ class SharedLearning:
     def make_checks(self, ref: str) -> LocalCheckRunner:
         content = self.get(ref)["content"]
         return LocalCheckRunner(
-            self.paths["checks"], version=ref,
+            self.paths["checks"],
+            version=ref,
             sha256=hashlib.sha256(content.encode()).hexdigest(),
         )

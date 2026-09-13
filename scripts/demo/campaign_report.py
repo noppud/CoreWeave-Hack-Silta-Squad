@@ -92,7 +92,11 @@ def report(root=ROOT):
                                 "machining_seconds": v.get("machining_seconds"),
                                 "candidate_digest": v.get("candidate_digest"),
                                 "evidence_count": len(v.get("evidence", [])),
-                                "manual_nomination": bool(nomination and nomination.get("candidate_digest") == v.get("candidate_digest")),
+                                "manual_nomination": bool(
+                                    nomination
+                                    and nomination.get("candidate_digest")
+                                    == v.get("candidate_digest")
+                                ),
                             }
                         )
                 else:

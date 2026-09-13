@@ -45,10 +45,12 @@ def trace_call(method: Callable, name: str, op: Callable) -> Callable:
 
 
 def trace_adapter(adapter: Any, methods: dict[str, str], op: Callable) -> Any:
-    return SimpleNamespace(**{
-        method: trace_call(getattr(adapter, method), name, op)
-        for method, name in methods.items()
-    })
+    return SimpleNamespace(
+        **{
+            method: trace_call(getattr(adapter, method), name, op)
+            for method, name in methods.items()
+        }
+    )
 
 
 def trace_controller(controller: Any, op: Callable) -> Any:

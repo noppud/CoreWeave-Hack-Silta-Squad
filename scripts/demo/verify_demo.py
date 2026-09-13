@@ -182,12 +182,14 @@ def verify(root=ROOT):
     )
     latest_capture = root / ".private/five-axis/umc08-machine-playback/result.json"
     wide = read_json(
-        latest_capture if latest_capture.exists()
+        latest_capture
+        if latest_capture.exists()
         else root / ".private/five-axis/video-wide-2/result.json"
     )
     video_errors = check_hashes(wide, cache)
     video = available(
-        "output/video/umc08-machine-playback.mp4" if latest_capture.exists()
+        "output/video/umc08-machine-playback.mp4"
+        if latest_capture.exists()
         else "output/video/silta-five-axis-demo.mp4"
     )
     video_ready = (

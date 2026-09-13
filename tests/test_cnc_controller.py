@@ -188,7 +188,9 @@ def test_simulation_learned_checks_apply_to_next_attempt_only(tmp_path, inputs, 
             observed_checks.append((candidate.id, self.ref, dict(context.versions)))
             failed = self.ref == "checks-v2" and candidate.parameters["attempt"] == 2
             return CheckResult(
-                not failed, ("learned fixture check",) if failed else (), version=self.ref,
+                not failed,
+                ("learned fixture check",) if failed else (),
+                version=self.ref,
             )
 
     def factory(ref):
@@ -214,7 +216,10 @@ def test_simulation_learned_checks_apply_to_next_attempt_only(tmp_path, inputs, 
             context.versions["checks"] = "checks-v2"
             context.versions["verifier"] = "do-not-adopt-this-unproposed-change"
             return PromotionResult(
-                proposal.id, promoted, "paired test evaluation", ("weave://test",),
+                proposal.id,
+                promoted,
+                "paired test evaluation",
+                ("weave://test",),
             )
 
     fusion = FusionDouble([("failed", 0), ("passed", 100)])
@@ -239,7 +244,8 @@ def test_simulation_learned_checks_apply_to_next_attempt_only(tmp_path, inputs, 
     assert all(row[1:] == (expected, {"checks": expected}) for row in observed_checks[1:])
     assert result.attempts == (3 if promoted else 2)
     assert [candidate.id for candidate in fusion.calls] == [
-        "candidate-1", "candidate-3" if promoted else "candidate-2",
+        "candidate-1",
+        "candidate-3" if promoted else "candidate-2",
     ]
     if promoted:
         assert main.calls[2][1]["stage"] == "checks"
@@ -251,8 +257,10 @@ def test_simulation_learned_checks_apply_to_next_attempt_only(tmp_path, inputs, 
 
 def test_promoted_main_and_supervisor_prompts_apply_to_subsequent_calls(tmp_path, inputs):
     pins = {
-        "checks": "checks-v1", "main_prompt": "main-v1",
-        "supervisor_prompt": "supervisor-v1", "verifier": "test-verifier-v1",
+        "checks": "checks-v1",
+        "main_prompt": "main-v1",
+        "supervisor_prompt": "supervisor-v1",
+        "verifier": "test-verifier-v1",
     }
     main_contexts, supervisor_contexts = [], []
 
@@ -264,15 +272,21 @@ def test_promoted_main_and_supervisor_prompts_apply_to_subsequent_calls(tmp_path
     class Supervisor:
         def decide(self, context, candidate, verification, history):
             supervisor_contexts.append(context)
-            proposals = tuple(
-                ReusableProposal(kind, kind, old, new, "prompt.md", "shorter paths")
-                for kind, old, new in (
-                    ("main_prompt", "main-v1", "main-v2"),
-                    ("supervisor_prompt", "supervisor-v1", "supervisor-v2"),
+            proposals = (
+                tuple(
+                    ReusableProposal(kind, kind, old, new, "prompt.md", "shorter paths")
+                    for kind, old, new in (
+                        ("main_prompt", "main-v1", "main-v2"),
+                        ("supervisor_prompt", "supervisor-v1", "supervisor-v2"),
+                    )
                 )
-            ) if len(supervisor_contexts) == 1 else ()
+                if len(supervisor_contexts) == 1
+                else ()
+            )
             return SupervisorDecision(
-                "improve" if proposals else "stop", "try a different toolpath", proposals,
+                "improve" if proposals else "stop",
+                "try a different toolpath",
+                proposals,
             )
 
     class Gate:
@@ -280,8 +294,11 @@ def test_promoted_main_and_supervisor_prompts_apply_to_subsequent_calls(tmp_path
             return PromotionResult(proposal.id, True, "paired evaluation passed", ("weave://test",))
 
     result = Controller(
-        Main(), ChecksDouble(), FusionDouble([("passed", 100), ("passed", 90)]),
-        Supervisor(), evaluation=Gate(),
+        Main(),
+        ChecksDouble(),
+        FusionDouble([("passed", 100), ("passed", 90)]),
+        Supervisor(),
+        evaluation=Gate(),
     ).run(inputs, tmp_path / "jobs", "job", pins)
     assert result.status == "completed"
     expected = {**pins, "main_prompt": "main-v2", "supervisor_prompt": "supervisor-v2"}
@@ -301,23 +318,34 @@ def test_promoted_main_and_supervisor_prompts_apply_to_subsequent_calls(tmp_path
 def test_invalid_promotion_cannot_change_running_versions(tmp_path, inputs, defect):
     class Learner:
         def propose_checks(self, context, candidate, verification):
-            return (ReusableProposal(
-                "proposal", "verifier" if defect == "verifier_change" else "checks",
-                "wrong-base" if defect == "wrong_base" else "checks-v1",
-                "checks-v2", "change.py", "test proposal",
-            ),)
+            return (
+                ReusableProposal(
+                    "proposal",
+                    "verifier" if defect == "verifier_change" else "checks",
+                    "wrong-base" if defect == "wrong_base" else "checks-v1",
+                    "checks-v2",
+                    "change.py",
+                    "test proposal",
+                ),
+            )
 
     class Gate:
         def evaluate(self, proposal, context):
             return PromotionResult(
-                proposal.id, True, "test gate",
+                proposal.id,
+                True,
+                "test gate",
                 () if defect == "missing_evidence" else ("weave://test",),
             )
 
     factories = []
     result = run(
-        tmp_path, inputs, fusion=FusionDouble([("failed", 0)]), learner=Learner(),
-        evaluation=Gate(), check_runner_factory=lambda ref: factories.append(ref),
+        tmp_path,
+        inputs,
+        fusion=FusionDouble([("failed", 0)]),
+        learner=Learner(),
+        evaluation=Gate(),
+        check_runner_factory=lambda ref: factories.append(ref),
     )
     assert result.status == "incomplete"
     assert result.attempts == 1
@@ -394,12 +422,22 @@ def test_two_file_learning_applies_now_and_survives_next_part(tmp_path, inputs):
     class Learner:
         def propose_checks(self, context, candidate, verification):
             # Fixture-only rule: the next part's first candidate must be caught.
-            source = ('def check(data):\n'
-                      '    bad = data["candidate"]["parameters"]["attempt"] == 1\n'
-                      '    return {"passed": not bad, "issues": ["test issue"] if bad else []}\n')
+            source = (
+                "def check(data):\n"
+                '    bad = data["candidate"]["parameters"]["attempt"] == 1\n'
+                '    return {"passed": not bad, "issues": ["test issue"] if bad else []}\n'
+            )
             ref = learning.put("checks", source)
-            return (ReusableProposal("learn-check", "checks", context.versions["checks"],
-                                     ref, "test-proposal", "test failure"),)
+            return (
+                ReusableProposal(
+                    "learn-check",
+                    "checks",
+                    context.versions["checks"],
+                    ref,
+                    "test-proposal",
+                    "test failure",
+                ),
+            )
 
     class Judge:
         def __init__(self):
@@ -410,20 +448,37 @@ def test_two_file_learning_applies_now_and_survives_next_part(tmp_path, inputs):
             if self.calls > 1:
                 return SupervisorDecision("stop")
             ref = learning.put("main_prompt", BASIC_PROMPT + "\nA reusable test lesson.\n")
-            return SupervisorDecision("improve", "test a shorter path", (
-                ReusableProposal("learn-prompt", "main_prompt", context.versions["main_prompt"],
-                                 ref, "test-proposal", "judge instruction"),
-            ))
+            return SupervisorDecision(
+                "improve",
+                "test a shorter path",
+                (
+                    ReusableProposal(
+                        "learn-prompt",
+                        "main_prompt",
+                        context.versions["main_prompt"],
+                        ref,
+                        "test-proposal",
+                        "judge instruction",
+                    ),
+                ),
+            )
 
     def controller(outcomes, judge, learner=None):
         return Controller(
-            Main(), learning.make_checks(learning.active()["checks"]),
-            FusionDouble(outcomes), judge, learner=learner, learning=learning,
+            Main(),
+            learning.make_checks(learning.active()["checks"]),
+            FusionDouble(outcomes),
+            judge,
+            learner=learner,
+            learning=learning,
             check_runner_factory=learning.make_checks,
         )
 
     first = controller([("failed", 0), ("passed", 100), ("passed", 90)], Judge(), Learner()).run(
-        inputs, tmp_path / "jobs", "part-a", initial,
+        inputs,
+        tmp_path / "jobs",
+        "part-a",
+        initial,
     )
     assert first.status == "completed", first.reason
     assert observed_prompts[:2] == [BASIC_PROMPT, BASIC_PROMPT]
@@ -445,7 +500,10 @@ def test_two_file_learning_applies_now_and_survives_next_part(tmp_path, inputs):
     learning = SharedLearning(learning.root)
     assert len(list(learning.root.iterdir())) == 2
     second = controller([("passed", 80)], SupervisorDouble(["stop"])).run(
-        inputs, tmp_path / "jobs", "part-b", learning.active(),
+        inputs,
+        tmp_path / "jobs",
+        "part-b",
+        learning.active(),
     )
     assert second.status == "completed", second.reason
     assert second.attempts == 2
@@ -460,50 +518,65 @@ def test_completed_toolpath_failure_returns_to_main_without_simulation(tmp_path,
     class Main(MainDouble):
         def propose(self, context, previous, feedback, instructions, attempt):
             if attempt == 1:
-                raise CandidateGenerationError({
-                    'stage': 'toolpath_generation', 'issues': ['empty toolpath'],
-                    'source': 'failed source',
-                })
-            assert feedback['stage'] == 'toolpath_generation'
-            assert feedback['source'] == 'failed source'
+                raise CandidateGenerationError(
+                    {
+                        "stage": "toolpath_generation",
+                        "issues": ["empty toolpath"],
+                        "source": "failed source",
+                    }
+                )
+            assert feedback["stage"] == "toolpath_generation"
+            assert feedback["source"] == "failed source"
             return super().propose(context, previous, feedback, instructions, attempt)
 
-    result = run(tmp_path, inputs, main=Main(), fusion=FusionDouble([('passed', 100)]))
-    assert result.status == 'completed'
+    result = run(tmp_path, inputs, main=Main(), fusion=FusionDouble([("passed", 100)]))
+    assert result.status == "completed"
     assert result.attempts == 2 and result.simulations == 1
 
 
 def test_resume_retains_verified_incumbent_when_trial_is_slower(tmp_path, inputs):
-    first = Controller(MainDouble(), ChecksDouble(), FusionDouble([('passed', 100)]),
-                       SupervisorDouble(['stop'])).run(inputs, tmp_path, 'first', {})
-    judge = SupervisorDouble(['stop'])
-    result = Controller(MainDouble(), ChecksDouble(), FusionDouble([('passed', 120)]),
-                        judge).run(inputs, tmp_path, 'resumed', {},
-                                   verified_incumbent=(
-                                       first.best_candidate, first.best_verification,
-                                   ))
-    assert result.status == 'completed'
+    first = Controller(
+        MainDouble(), ChecksDouble(), FusionDouble([("passed", 100)]), SupervisorDouble(["stop"])
+    ).run(inputs, tmp_path, "first", {})
+    judge = SupervisorDouble(["stop"])
+    result = Controller(MainDouble(), ChecksDouble(), FusionDouble([("passed", 120)]), judge).run(
+        inputs,
+        tmp_path,
+        "resumed",
+        {},
+        verified_incumbent=(
+            first.best_candidate,
+            first.best_verification,
+        ),
+    )
+    assert result.status == "completed"
     assert result.best_verification.machining_seconds == 100
     assert result.simulations == 1
-    assert Path(result.best_candidate.artifacts['nc'].path).parent.name == 'attempt-0000'
+    assert Path(result.best_candidate.artifacts["nc"].path).parent.name == "attempt-0000"
     manifest = json.loads(Path(result.manifest_path).read_text())
-    assert manifest['best_candidate'] == manifest['result']['best_candidate']
-    assert manifest['best_verification'] == manifest['result']['best_verification']
+    assert manifest["best_candidate"] == manifest["result"]["best_candidate"]
+    assert manifest["best_verification"] == manifest["result"]["best_verification"]
     result.best_candidate.verify()
     assert judge.calls[0].digest == first.best_candidate.digest
 
 
 def test_resume_rejects_mismatched_verification_before_new_candidate(tmp_path, inputs):
-    first = Controller(MainDouble(), ChecksDouble(), FusionDouble([('passed', 100)]),
-                       SupervisorDouble(['stop'])).run(inputs, tmp_path, 'first', {})
+    first = Controller(
+        MainDouble(), ChecksDouble(), FusionDouble([("passed", 100)]), SupervisorDouble(["stop"])
+    ).run(inputs, tmp_path, "first", {})
     main = MainDouble()
     result = Controller(main, ChecksDouble(), FusionDouble([]), SupervisorDouble([])).run(
-        inputs, tmp_path, 'resumed', {}, verified_incumbent=(
-            first.best_candidate, replace(first.best_verification, input_digest='other-setup'),
+        inputs,
+        tmp_path,
+        "resumed",
+        {},
+        verified_incumbent=(
+            first.best_candidate,
+            replace(first.best_verification, input_digest="other-setup"),
         ),
     )
-    assert result.status == 'incomplete'
-    assert 'does not match' in result.reason
+    assert result.status == "incomplete"
+    assert "does not match" in result.reason
     assert not main.calls
 
 
@@ -513,27 +586,27 @@ def test_unresolved_improvement_returns_verified_incumbent_to_supervisor(tmp_pat
     class Main(MainDouble):
         def propose(self, context, previous, feedback, instructions, attempt):
             if attempt == 2:
-                raise CandidateProposalUnresolved(['Entry stock clearance is not established'])
+                raise CandidateProposalUnresolved(["Entry stock clearance is not established"])
             return super().propose(context, previous, feedback, instructions, attempt)
 
     class Judge(SupervisorDouble):
         def decide(self, context, candidate, verification, history):
             if self.calls:
-                assert history[-1]['event'] == 'cam_proposal_unresolved'
-                assert 'Entry stock' in history[-1]['issues'][0]
+                assert history[-1]["event"] == "cam_proposal_unresolved"
+                assert "Entry stock" in history[-1]["issues"][0]
                 assert candidate.digest == self.calls[0].digest
-                assert verification.status == 'passed' and verification.completed
+                assert verification.status == "passed" and verification.completed
             return super().decide(context, candidate, verification, history)
 
-    fusion = FusionDouble([('passed', 100)])
-    judge = Judge(['improve', 'stop'])
+    fusion = FusionDouble([("passed", 100)])
+    judge = Judge(["improve", "stop"])
     result = run(tmp_path, inputs, main=Main(), fusion=fusion, supervisor=judge)
-    assert result.status == 'completed'
+    assert result.status == "completed"
     assert result.best_verification.machining_seconds == 100
     assert result.attempts == 2 and result.simulations == 1
     assert len(judge.calls) == 2 and len(fusion.calls) == 1
-    events = json.loads(Path(result.manifest_path).read_text())['events']
-    assert sum(e['event'] == 'candidate_created' for e in events) == 1
+    events = json.loads(Path(result.manifest_path).read_text())["events"]
+    assert sum(e["event"] == "candidate_created" for e in events) == 1
 
 
 def test_unresolved_first_cam_never_reaches_supervisor(tmp_path, inputs):
@@ -541,9 +614,9 @@ def test_unresolved_first_cam_never_reaches_supervisor(tmp_path, inputs):
 
     class Main(MainDouble):
         def propose(self, *args):
-            raise CandidateProposalUnresolved(['Required dimension is missing'])
+            raise CandidateProposalUnresolved(["Required dimension is missing"])
 
     judge, fusion = SupervisorDouble([]), FusionDouble([])
     result = run(tmp_path, inputs, main=Main(), fusion=fusion, supervisor=judge)
-    assert result.status == 'incomplete' and result.best_candidate is None
+    assert result.status == "incomplete" and result.best_candidate is None
     assert not judge.calls and not fusion.calls

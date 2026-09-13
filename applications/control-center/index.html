@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light"><title>SILTA — Shop control</title>
+  <link rel="stylesheet" href="/style.css">
+  <script type="importmap">{"imports":{"three":"/vendor/three.module.js"}}</script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="Silta home"><svg viewBox="0 0 30 30" aria-hidden="true"><path d="M3 25V11L15 4l12 7v14M3 16l12-7 12 7M10 25V15m10 10V15"/></svg>SILTA<span>SHOP CONTROL</span></a>
+    <nav class="mainnav" aria-label="Main navigation">
+      <button class="nav active" data-view="overview">Loop</button><button class="nav" data-view="timeline">Timeline</button><button class="nav" data-view="parts">Part library</button><button class="nav" data-view="learning">Learnings <span class="count" id="nav-learning">—</span></button>
+    </nav>
+    <div class="topright"><span class="connection"><i id="connection-dot"></i><span id="connection-label">Connecting</span></span><button class="avatar" data-action="worker" aria-label="Worker connection">S</button></div>
+  </header>
+  <main>
+    <section class="pagehead"><div><h1 id="page-title">Learning loop</h1><p id="page-subtitle" hidden></p></div><button class="primary" data-action="upload"><span>＋</span> New drawing</button></section>
+    <div id="live-strip" class="live-strip" hidden></div>
+    <section id="overview-view" class="view">
+      <section class="loop-panel" aria-label="Interactive learning loop">
+        <div class="canvas-toolbar"><button class="canvas-job" data-action="open-part"><span class="dot"></span><span id="canvas-job-title">Loading parts…</span><span class="subtle">↗</span></button><div><button class="text-button" data-action="slides">Diagram ↗</button><button class="text-button" data-action="aria">ARIA ↗</button></div></div>
+        <div class="flow-scroll"><div class="flow">
+          <svg class="routes" viewBox="0 0 1200 620" preserveAspectRatio="none" aria-hidden="true"><defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1L9 5L1 9" fill="none" stroke="currentColor" stroke-width="1.4"/></marker></defs>
+          <g class="forward"><path d="M260 143 C300 143 320 143 360 143"/><path d="M590 145 C718 145 790 178 825 226"/><path d="M940 346 C940 386 930 420 870 453"/><path d="M760 508 C675 536 610 528 550 510"/></g>
+          <g class="feedback"><path d="M848 226 C824 44 610 17 475 76"/><path d="M475 453 C578 375 661 280 535 210"/><path d="M788 458 C690 312 450 304 308 366"/><path d="M205 322 C204 267 312 251 387 210"/></g>
+          <text x="306" y="128">PDF</text><text x="722" y="160">NC</text><text x="967" y="401">pass</text><text x="647" y="548">results</text>
+          <text class="route-note" x="655" y="68">repair</text><text class="route-note" x="596" y="336">improve</text><text class="route-note" x="509" y="358">learn</text><text class="route-note" x="250" y="268">reuse</text>
+          </svg>
+          <div class="nodes">
+            <button class="node node-input" data-stage="input"><span class="node-top">01 / INPUT <span>↗</span></span><strong>Drawing</strong><span class="node-description">PDF + shop setup</span><span class="node-foot" id="input-foot">Original drawing</span></button>
+            <button class="node node-cam" data-stage="cam"><span class="node-top">02 / ASTRA <span>↗</span></span><strong>CAD / CAM agent</strong><span class="node-description">Geometry & toolpaths</span><span class="node-foot" id="cam-count">Generated code</span></button>
+            <button class="node node-checks" data-stage="checks"><span class="node-top">03 / TESTS <span>↗</span></span><strong>Checks</strong><span class="node-description check-lines"><span>Fixture clearance</span><span>Finished-side protection</span></span><span class="node-foot orange" id="checks-foot">2 learned checks</span></button>
+            <button class="node node-fusion" data-stage="fusion"><span class="node-top">04 / FUSION <span>↗</span></span><strong>Simulation</strong><span class="node-description">Machine + finished stock</span><span class="node-foot" id="fusion-foot">Verification</span></button>
+            <button class="node node-judge" data-stage="judge"><span class="node-top">05 / JUDGE <span>↗</span></span><strong>Review results</strong><span class="node-description">Improve or finish</span><span class="node-foot" id="judge-foot">Select verified plan</span></button>
+            <button class="node node-memory" data-action="memories"><span class="node-top">LEARNED MEMORY <span>↗</span></span><strong>Planning lessons</strong><span class="node-description" id="memory-preview">Saved machining guidance</span><span class="node-foot orange" id="memory-count">Current shared memory</span></button>
+          </div>
+          <button class="loop-center" data-action="open-part"><span class="loop-orbit">↻</span><span>Current part</span><strong id="loop-part-name">—</strong></button>
+        </div></div>
+        <div class="loop-bottom"><button class="text-button" data-view="timeline">Activity <span id="last-event">↗</span></button><button class="text-button" data-view="parts"><span id="stat-parts">—</span> verified parts ↗</button></div>
+      </section>
+    </section>
+    <section id="timeline-view" class="view" hidden><div class="toolbar"><div class="segmented" id="timeline-filters"><button class="active" data-filter="all">All activity</button><button data-filter="learning">New learnings</button><button data-filter="checks">Checks</button><button data-filter="judge">Judge decisions</button></div><input id="timeline-search" placeholder="Search parts or events…" aria-label="Search timeline"></div><div id="timeline-content"></div></section>
+    <section id="parts-view" class="view" hidden><div class="toolbar"><span id="library-count"></span><input id="part-search" placeholder="Find a part…" aria-label="Find a part"></div><div id="parts-grid" class="parts-grid"></div></section>
+    <section id="learning-view" class="view" hidden><div id="learning-content"></div></section>
+
+  </main>
+  <dialog id="workbench-dialog"><div class="workbench-close"><span>Job details</span><button class="icon-button" data-action="close-workbench" aria-label="Close job details">×</button></div>      <section class="workbench">
+        <div class="part-view">
+          <div class="part-head"><div><span class="eyebrow" id="selected-number">SELECTED PART</span><h2 id="selected-title">Loading parts…</h2></div><div class="part-head-right"><span class="badge" id="selected-status">Loading</span><select id="part-select" aria-label="Select part"></select></div></div>
+          <div class="media-tabs" role="tablist" aria-label="Part views"><button role="tab" aria-selected="true" data-media="model">3D part</button><button role="tab" aria-selected="false" data-media="video">Fusion recordings <span id="video-count"></span></button><button role="tab" aria-selected="false" data-media="drawing">Drawing</button><button role="tab" aria-selected="false" data-media="live">Live Fusion <span class="orange">·</span></button><button role="tab" aria-selected="false" data-media="code">CAM code <span class="code-symbol">&lt;/&gt;</span></button></div>
+          <div id="media" class="media-stage"></div>
+          <div class="media-bottom"><span id="media-caption">Retained CAD geometry</span><button class="text-button" id="media-expand" data-action="expand-media">Expand ↗</button></div>
+        </div>
+        <aside class="inspector"><div class="inspector-head"><p class="eyebrow" id="inspector-kicker">04 / FUSION</p><h2 id="inspector-title">Verification, recorded.</h2></div><div id="inspector-body"></div></aside>
+      </section>
+</dialog>
+  <dialog id="drawer"><div class="dialog-head"><div><p class="eyebrow" id="drawer-kicker"></p><h2 id="drawer-title"></h2></div><button class="icon-button" data-action="close" aria-label="Close details">×</button></div><div id="drawer-body"></div></dialog>
+  <dialog id="upload-dialog"><div class="dialog-head"><div><p class="eyebrow">PDF INTAKE</p><h2>New drawing</h2></div><button class="icon-button" data-action="close-upload" aria-label="Close upload">×</button></div><div class="upload-body"><label class="dropzone" id="dropzone"><span class="upload-icon">↥</span><strong>Drop a PDF drawing here</strong><span>or click to choose a file · up to 25 MB</span><input type="file" id="pdf-file" accept="application/pdf,.pdf"></label><div id="upload-result"></div><div class="upload-samples"><p class="eyebrow">RECENT DRAWINGS</p><div id="sample-drawings"></div></div></div></dialog>
+  <div id="toast" role="status" hidden></div>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
