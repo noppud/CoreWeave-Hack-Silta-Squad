@@ -46,6 +46,47 @@ def test_only_recorded_completed_pass_is_charted(reader):
     assert "No verified" in reader["metric_chart"](rows, "Estimated cost", "Cost", "#000")
 
 
+@pytest.mark.parametrize("status,errors", [("failed", 54), ("unknown", 0)])
+def test_real_fusion_feedback_is_visible_without_overall_approval(reader, status, errors):
+    rows = reader["attempt_rows"]({"events": [{
+        "event": "verification_completed", "attempt": 1,
+        "verification": {
+            "status": status, "completed": True,
+            "feedback": {
+                "summary": {"percent": 100.0, "errors": errors,
+                            "warnings": 0, "process_errors": 0, "observed_details": []},
+                "metrics": {"machining_seconds": 223.109368, "tool_change_count": 0},
+            },
+        },
+    }]})
+    row = rows[0]
+    assert row["Verification"] == status.capitalize()
+    assert row["Fusion verification (%)"] == 100
+    assert row["Fusion errors"] == errors
+    assert row["Fusion warnings"] == row["Fusion process errors"] == 0
+    assert row["API machining estimate (s)"] == 223.109368
+    assert row["API tool changes"] == 0
+    assert row["Seconds"] is row["Estimated cost"] is None
+    assert "No verified" in reader["metric_chart"](rows, "Seconds", "Seconds", "#000")
+
+
+@pytest.mark.parametrize("feedback", [None, [], {}, {"summary": None, "metrics": []}, {
+    "summary": {"percent": 101, "errors": True, "warnings": -1, "process_errors": 0.5},
+    "metrics": {"machining_seconds": float("nan"), "tool_change_count": "2"},
+}, {
+    "summary": {"percent": float("inf"), "errors": "0", "warnings": None},
+    "metrics": {"machining_seconds": -4, "tool_change_count": False},
+}])
+def test_missing_or_invalid_fusion_feedback_stays_missing(reader, feedback):
+    rows = reader["attempt_rows"]({"events": [{
+        "event": "verification_completed", "attempt": 1,
+        "verification": {"status": "unknown", "completed": False, "feedback": feedback},
+    }]})
+    for column in ("Fusion verification (%)", "Fusion errors", "Fusion warnings",
+                   "Fusion process errors", "API machining estimate (s)", "API tool changes"):
+        assert rows[0][column] is None
+
+
 def test_artifacts_and_weave_links_only_come_from_explicit_records(reader):
     assert reader["artifact_paths"]({"path": "/unverified.mp4"}) == {}
     assert reader["artifact_paths"](
