@@ -1,5 +1,7 @@
 # Interactive learning-loop demo
 
+For the agreed loop behavior, final visual decisions, metric definitions, and the distinction between this scripted artifact and the real product, read the [project context](../docs/project-context.md).
+
 ## Pitch deck
 
 [slides.html](slides.html) is the six-slide SILTA CAD pitch, with [presenter notes](guide.html). Open **http://127.0.0.1:8080/demo/slides.html** using the server below. The interactive demo and video areas are placeholders until the final presentation media is selected. Weave integration and ARIA's proposed evaluations are explicitly marked as unfinished.

@@ -1,5 +1,7 @@
 # CNC learning demo — current plan
 
+For the consolidated product/design conversation and agent handoff, start with [project-context.md](project-context.md). This file also contains chronological implementation checkpoints: later reports supersede earlier “next step” or “not yet run” statements. ARIA's evaluation proposals are documented separately and do not change the current direct-learning runtime.
+
 2026-09-12. The user removed Weave evaluation gates and deferred video recording until learning works. This supersedes earlier promotion/evaluation plans.
 
 ## Core loop

@@ -4,7 +4,11 @@ An autonomous drawing-to-CAD/CAM loop using Astra, Fusion and Weave tracing.
 
 Drawing/PDF + machine/tools → fixed CAD target → CAM → cheap learned checks → real Fusion simulation and stock comparison → judge improves or returns the best verified plan.
 
-**Current state:** a real soft-jaw run completed three verified CAM candidates and stopped at an estimated 205.23 seconds. Direct learning is wired and tested with adapter doubles; learning transfer across real parts remains to be demonstrated.
+## Start here
+
+The [project context and agent handoff](docs/project-context.md) consolidates the product goal, both feedback loops, final demo decisions, metric definitions, ARIA's role, and engineering/pitch priorities from Joel's design conversation. Agents should also read [AGENTS.md](AGENTS.md).
+
+**Evidence status:** the [implementation checkpoints](docs/implementation-plan.md) report real within-part optimization, persisted lessons, and later reuse on another authored part. Those reports are chronological and were not rerun for this documentation update. They do not establish broad cross-part generalization; the 54-part animation is scripted presentation data. Verify matching run evidence before using quantitative pitch claims.
 
 ## Interactive demo
 
