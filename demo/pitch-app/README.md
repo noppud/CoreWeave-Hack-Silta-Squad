@@ -12,4 +12,6 @@ Open [the pitch app](http://127.0.0.1:8080/demo/pitch-app/SILTA%20Pitch%20Deck.d
 
 The export runtime is deferred until the HTML is parsed to avoid its startup MutationObserver error. The ARIA arrow overlay ignores pointer events so the smaller demo remains interactive.
 
-`github.md` is metadata supplied by the export; its earlier slide count may differ from the final HTML. Product recordings remain placeholders in this export.
+The current deck has 11 slides: the original seven story beats plus four evidence slides. The learning animation now has 27 illustrative parts. Product recording slots contain the 114-second film and cage/clevis motion plus finished-stock clips. The actual stage drawing and CAD preview are included. See [the evidence map](evidence/README.md) for exact sources, measurement scope, and media hashes.
+
+Use arrow keys or the sidebar to navigate and each video's play control to start the recording. All media are relative files and travel with the `demo` directory. The imported runtime and fonts still need internet access. `github.md` is historical export metadata; its earlier slide count is stale.

@@ -1,0 +1,1541 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-13T09:19:45.242253+00:00",
+  "campaign_status": "completed",
+  "current_part_id": null,
+  "counts": {
+    "distinct_drawings": 14,
+    "verified_drawings": 14,
+    "completed_drawings": 13,
+    "job_runs": 43,
+    "candidate_attempts": 67,
+    "verification_unknown": 22
+  },
+  "parts": [
+    {
+      "drawing_identity": "ba76d8acac247295a15b9d9617bc59a3632e7aaafbc30d601793e8c25a488e6c",
+      "drawing_hashes": [
+        "393e71c04e8e4c08bff8e43e33a31d1590d91a38275a05fca8a57fbc463399c6"
+      ],
+      "jobs": [
+        {
+          "job_id": "learning-soft-jaw-a1",
+          "status": "incomplete",
+          "reason": "Fusion verification is incomplete or unknown; access/result needs resolving",
+          "collection_warning": null,
+          "manual_trial_nomination": null,
+          "manifest_path": "/Users/touko/work/helios-one/repos/coreweavehack/runs/learning-soft-jaw-a1/manifest.json",
+          "manifest_sha256": "a5541d130de9b6d56738e8cf3094e399ef20d3faf04db2517ac5eea8b3a01d2a",
+          "weave_recorded": true,
+          "weave_url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a09893-e882-7f34-9efe-c00632bb1f94"
+        },
+        {
+          "job_id": "learning-soft-jaw-a2",
+          "status": "incomplete",
+          "reason": "Fusion verification is incomplete or unknown; access/result needs resolving",
+          "collection_warning": null,
+          "manual_trial_nomination": null,
+          "manifest_path": "/Users/touko/work/helios-one/repos/coreweavehack/runs/learning-soft-jaw-a2/manifest.json",
+          "manifest_sha256": "165b36960e8056321358e298e99d15c779b86e8e50607b4b0c20b9acae4337bd",
+          "weave_recorded": true,
+          "weave_url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a0989b-c186-77d5-bc4c-d2673f5bafff"
+        },
+        {
+          "job_id": "learning-soft-jaw-a3",
+          "status": "incomplete",
+          "reason": "RuntimeError: One or more Fusion operations have no generated toolpath",
+          "collection_warning": null,
+          "manual_trial_nomination": null,
+          "manifest_path": "/Users/touko/work/helios-one/repos/coreweavehack/runs/learning-soft-jaw-a3/manifest.json",
+          "manifest_sha256": "b5e0f257ced6fa7c13c8aa8bb995e6f8f19efb83a8a8d478dc3957919ac7b6a4",
+          "weave_recorded": true,
+          "weave_url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a0989f-58ae-7a3d-a10b-8e321f351b41"
+        },
+        {
+          "job_id": "learning-soft-jaw-a4",
+          "status": "incomplete",
+          "reason": "Fusion verification is incomplete or unknown; access/result needs resolving",
+          "collection_warning": null,
+          "manual_trial_nomination": null,
+          "manifest_path": "/Users/touko/work/helios-one/repos/coreweavehack/runs/learning-soft-jaw-a4/manifest.json",
+          "manifest_sha256": "ae36792d941a0f42c5a7c2a808175891ab48cc46e82bf7d1dc3bc0f3e2f9669b",
+          "weave_recorded": true,
+          "weave_url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a098a2-ba2c-7335-a818-9a2d3e5c9545"
+        },
+        {
+          "job_id": "learning-soft-jaw-a5",
+          "status": "completed",
+          "reason": "Supervisor selected the best verified plan",
+          "collection_warning": null,
+          "manual_trial_nomination": null,
+          "manifest_path": "/Users/touko/work/helios-one/repos/coreweavehack/runs/learning-soft-jaw-a5/manifest.json",
+          "manifest_sha256": "304e03374391a94b8fa3410576c2de8967c7f15269905f9d0b257eb69496b904",
+          "weave_recorded": true,
+          "weave_url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a098a9-7350-7b4b-adb4-e5d9c997f8c4"
+        }
+      ],
+      "starting_versions": {
+        "checks": "d8a395e27e7226846352f01a323950b54cba2353abe34a1f534c6ca407ac7f75",
+        "main_prompt": "a7cf610bce0888d3f70fad6a422331a5bcef66f1882fade3fb20f2cc2137909b",
+        "verifier": "fusion-fixed-ui-stock-v2"
+      },
+      "ending_versions": {
+        "checks": "d8a395e27e7226846352f01a323950b54cba2353abe34a1f534c6ca407ac7f75",
+        "main_prompt": "481a12b310d2bc21062918bc70b2154d6082b1e956bf6c62d1e3b32a7a2eb761",
+        "verifier": "fusion-fixed-ui-stock-v2"
+      },
+      "attempts": 8,
+      "simulation_passes": 2,
+      "simulation_failures": 3,
+      "verification_unknown": 3,
+      "collection_invalidated": 0,
+      "check_rejections": 0,
+      "verified_candidates": [
+        {
+          "job_id": "learning-soft-jaw-a5",
+          "attempt": 1,
+          "at": "2026-09-13T02:48:01.402925+00:00",
+          "machining_seconds": 384.860379,
+          "candidate_digest": "7f195c8c70424b967b061e94b4d4d12d675db3abc5a8fd969e6a528bc1e48477",
+          "evidence_count": 42,
+          "manual_nomination": false
+        },
+        {
+          "job_id": "learning-soft-jaw-a5",
+          "attempt": 2,
+          "at": "2026-09-13T02:49:46.408229+00:00",
+          "machining_seconds": 211.037438,
+          "candidate_digest": "4ebd1970b5001a36c2658e9ad5deacc5765d6cb153789790fe99d6e3d8d33067",
+          "evidence_count": 43,
+          "manual_nomination": false
+        }
+      ],
+      "learning_changes": [
+        {
+          "job_id": "learning-soft-jaw-a5",
+          "at": "2026-09-13T02:50:11.086578+00:00",
+          "kind": "main_prompt",
+          "evaluation_performed": false,
+          "base_version": "a7cf610bce0888d3f70fad6a422331a5bcef66f1882fade3fb20f2cc2137909b",
+          "proposed_version": "481a12b310d2bc21062918bc70b2154d6082b1e956bf6c62d1e3b32a7a2eb761"
+        }
+      ],
+      "first_verified_seconds": 384.860379,
+      "best_verified_seconds": 211.037438,
+      "same_part_improvement_percent": 45.165195090139434,
+      "has_verified_candidate": true,
+      "completed": true,
+      "job_runs": 5,
+      "incomplete_job_runs": 4
+    },
+    {
+      "drawing_identity": "772b16378f019d4a498fdd944ff3faff1f2f8a4ec2c03a078da8389e1cd5de54",
+      "drawing_hashes": [
+        "0b57a91e4a23822cd183e1b6a70d666edf9ba9f5ad36cbd08995ff580a62ac34"
+      ],
+      "jobs": [
+        {
+          "job_id": "learning-part-b1",
+          "status": "incomplete",
+          "reason": "Fusion verification is incomplete or unknown; access/result needs resolving",
+          "collection_warning": null,
+          "manual_trial_nomination": null,
+          "manifest_path": "/Users/touko/work/helios-one/repos/coreweavehack/runs/learning-part-b1/manifest.json",
+          "manifest_sha256": "28eba89cea99b0382a9061b3c556f8da0297b9c6d5b2568d65d8b93043e85397",
+          "weave_recorded": true,
+          "weave_url": null
+        },
+        {
+          "job_id": "learning-part-b2",
+          "status": "completed",
+          "reason": "Supervisor selected the best verified plan",
+          "collection_warning": null,
+          "manual_trial_nomination": null,
+          "manifest_path": "/Users/touko/work/helios-one/repos/coreweavehack/runs/learning-part-b2/manifest.json",
+          "manifest_sha256": "22c8a10a3b24d00be38209ac5ad638ce663fbf303b4e5b5c50f8317338ff46dc",
+          "weave_recorded": true,
+          "weave_url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a098b7-8d4b-7489-a092-3859fb7adccd"
+        }
+      ],
+      "starting_versions": {
+        "checks": "576d826b090c1e20f1ee5d19a1302d6fd2a87d003337916479539e71f711495b",
+        "main_prompt": "481a12b310d2bc21062918bc70b2154d6082b1e956bf6c62d1e3b32a7a2eb761",
+        "verifier": "fusion-fixed-ui-stock-v2"
+      },
+      "ending_versions": {
+        "checks": "0addb6e1d0747fa9bfd1366b291555f672618182d4b9cf78eb82a543a7c6f1be",
+        "main_prompt": "481a12b310d2bc21062918bc70b2154d6082b1e956bf6c62d1e3b32a7a2eb761",
+        "verifier": "fusion-fixed-ui-stock-v2"
+      },
+      "attempts": 3,
+      "simulation_passes": 1,
+      "simulation_failures": 1,
+      "verification_unknown": 1,
+      "collection_invalidated": 0,
+      "check_rejections": 0,
+      "verified_candidates": [
+        {
+          "job_id": "learning-part-b2",
+          "attempt": 1,
+          "at": "2026-09-13T03:03:27.394741+00:00",
+          "machining_seconds": 205.344625,
+          "candidate_digest": "af006c7bb0e690a00b473866efc89ce0595edd0d527e7e5ae8ab00f8ad6e2156",
+          "evidence_count": 42,
+          "manual_nomination": false
+        }
+      ],
+      "learning_changes": [
+        {
+          "job_id": "learning-part-b1",
+          "at": "2026-09-13T02:59:09.322178+00:00",
+          "kind": "checks",
+          "evaluation_performed": false,
+          "base_version": "576d826b090c1e20f1ee5d19a1302d6fd2a87d003337916479539e71f711495b",
+          "proposed_version": "0addb6e1d0747fa9bfd1366b291555f672618182d4b9cf78eb82a543a7c6f1be"
+        }
+      ],
+      "first_verified_seconds": 205.344625,
+      "best_verified_seconds": 205.344625,
+      "same_part_improvement_percent": 0.0,
+      "has_verified_candidate": true,
+      "completed": true,
+      "job_runs": 2,
+      "incomplete_job_runs": 1
+    },
+    {
+      "drawing_identity": "912534a78a0c383972345e041a1229d21af7fff30f24a77eb26e9d598101c10f",
+      "drawing_hashes": [
+        "d15fbc53f8df817cb475f6f8d8bee6cc588117372c97d91aac4dc29cc9ab59de"
+      ],
+      "jobs": [
+        {
+          "job_id": "learning-part-c1",
+          "status": "incomplete",
+          "reason": "FusionScriptError: Fusion generated script failed: [{'type': 'fusion_api_error', 'message': 'CAD acceptance requires solid part bodies'}]",
+          "collection_warning": null,
+          "manual_trial_nomination": null,
+          "manifest_path": "/Users/touko/work/helios-one/repos/coreweavehack/runs/learning-part-c1/manifest.json",
+          "manifest_sha256": "22813b0247c824dfb1e821f988c04732057ab48c80942c6edec1e075aa5a459d",
+          "weave_recorded": true,
+          "weave_url": null
+        },
+        {
+          "job_id": "learning-part-c2",
+          "status": "incomplete",
+          "reason": "Fusion verification is incomplete or unknown; access/result needs resolving",
+          "collection_warning": null,
+          "manual_trial_nomination": null,
+          "manifest_path": "/Users/touko/work/helios-one/repos/coreweavehack/runs/learning-part-c2/manifest.json",
+          "manifest_sha256": "98b25d892f7bf71e8165b1e573f87b555a498d0ee8c18f88f4da7bf86bd32dd2",
+          "weave_recorded": true,
+          "weave_url": null
+        },
+        {
+          "job_id": "learning-part-c3",
+          "status": "incomplete",
+          "reason": "Fusion verification is incomplete or unknown; access/result needs resolving",
+          "collection_warning": null,
+          "manual_trial_nomination": null,
+          "manifest_path": "/Users/touko/work/helios-one/repos/coreweavehack/runs/learning-part-c3/manifest.json",
+          "manifest_sha256": "949c1cde26bd5f08abb2bb901df09607059a90d898235406fdd14856fcceb28d",
+          "weave_recorded": true,
+          "weave_url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a098c4-1211-7fe7-adcf-c850360219ef"
+        },
+        {
+          "job_id": "learning-part-c4",
+          "status": "incomplete",
+          "reason": "Fusion verification is incomplete or unknown; access/result needs resolving",
+          "collection_warning": null,
+          "manual_trial_nomination": null,
+          "manifest_path": "/Users/touko/work/helios-one/repos/coreweavehack/runs/learning-part-c4/manifest.json",
+          "manifest_sha256": "6476c200ec6441fac3283c3c28c0f3c2e3cec3ff4a6ced64e25d7b0102128273",
+          "weave_recorded": true,
+          "weave_url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a098c5-a316-7104-aa9b-05e32effcd0a"
+        },
+        {
+          "job_id": "learning-part-c5",
+          "status": "completed",
+          "reason": "Supervisor selected the best verified plan",
+          "collection_warning": null,
+          "manual_trial_nomination": null,
+          "manifest_path": "/Users/touko/work/helios-one/repos/coreweavehack/runs/learning-part-c5/manifest.json",
+          "manifest_sha256": "fc47d9515fb8f515d5c345c7d2aa6b5cb50b6f00d9d1c5fba8bff581a0b52cae",
+          "weave_recorded": true,
+          "weave_url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a098c9-7ed1-7b60-81e5-6f877aebfda8"
+        }
+      ],
+      "starting_versions": {
+        "checks": "0addb6e1d0747fa9bfd1366b291555f672618182d4b9cf78eb82a543a7c6f1be",
+        "main_prompt": "481a12b310d2bc21062918bc70b2154d6082b1e956bf6c62d1e3b32a7a2eb761",
+        "verifier": "fusion-fixed-ui-stock-v2"
+      },
+      "ending_versions": {
+        "checks": "0addb6e1d0747fa9bfd1366b291555f672618182d4b9cf78eb82a543a7c6f1be",
+        "main_prompt": "05e8cc6ca1cb6f7cdc8ba4f2a7dc9d489828f5140b11219c2c506dc0ad3bc881",
+        "verifier": "fusion-fixed-ui-stock-v2"
+      },
+      "attempts": 6,
+      "simulation_passes": 2,
+      "simulation_failures": 0,
+      "verification_unknown": 3,
+      "collection_invalidated": 0,
+      "check_rejections": 1,
+      "verified_candidates": [
+        {
+          "job_id": "learning-part-c4",
+          "attempt": 1,
+          "at": "2026-09-13T03:18:47.647923+00:00",
+          "machining_seconds": 228.181869,
+          "candidate_digest": "b6cb7c12dc95ebaf44afa1913a507148c784e5c70afbfce4e22ed6f3180bea95",
+          "evidence_count": 43,
+          "manual_nomination": false
+        },
+        {
+          "job_id": "learning-part-c5",
+          "attempt": 1,
+          "at": "2026-09-13T03:24:40.341947+00:00",
+          "machining_seconds": 211.850339,
+          "candidate_digest": "17ea344007d074931a9b00ea3a59040bd9bd4692f0247869800378e40cce0832",
+          "evidence_count": 42,
+          "manual_nomination": false
+        }
+      ],
+      "learning_changes": [
+        {
+          "job_id": "learning-part-c5",
+          "at": "2026-09-13T03:25:22.852131+00:00",
+          "kind": "main_prompt",
+          "evaluation_performed": false,
+          "base_version": "481a12b310d2bc21062918bc70b2154d6082b1e956bf6c62d1e3b32a7a2eb761",
+          "proposed_version": "05e8cc6ca1cb6f7cdc8ba4f2a7dc9d489828f5140b11219c2c506dc0ad3bc881"
+        }
+      ],
+      "first_verified_seconds": 228.181869,
+      "best_verified_seconds": 211.850339,
+      "same_part_improvement_percent": 7.157242629124059,
+      "has_verified_candidate": true,
+      "completed": true,
+      "job_runs": 5,
+      "incomplete_job_runs": 4
+    },
+    {
+      "drawing_identity": "20be53637f702d0a8397a4423ab90815a5b28359bbf183e8e11aac4d070250e8",
+      "drawing_hashes": [
+        "48a8b0b3043d58a6b28f389f348cc9e580d0bf3d29bf5e56f54cf556a8525697"
+      ],
+      "jobs": [
+        {
+          "job_id": "learning-part-d1",
+          "status": "completed",
+          "reason": "Supervisor selected the best verified plan",
+          "collection_warning": null,
+          "manual_trial_nomination": null,
+          "manifest_path": "/Users/touko/work/helios-one/repos/coreweavehack/runs/learning-part-d1/manifest.json",
+          "manifest_sha256": "f423d8e828d31d4df014ab569f14374038ac91f65271735f036d29ea28fa5385",
+          "weave_recorded": true,
+          "weave_url": null
+        }
+      ],
+      "starting_versions": {
+        "checks": "0addb6e1d0747fa9bfd1366b291555f672618182d4b9cf78eb82a543a7c6f1be",
+        "main_prompt": "05e8cc6ca1cb6f7cdc8ba4f2a7dc9d489828f5140b11219c2c506dc0ad3bc881",
+        "verifier": "fusion-fixed-ui-stock-v2"
+      },
+      "ending_versions": {
+        "checks": "0addb6e1d0747fa9bfd1366b291555f672618182d4b9cf78eb82a543a7c6f1be",
+        "main_prompt": "05e8cc6ca1cb6f7cdc8ba4f2a7dc9d489828f5140b11219c2c506dc0ad3bc881",
+        "verifier": "fusion-fixed-ui-stock-v2"
+      },
+      "attempts": 1,
+      "simulation_passes": 1,
+      "simulation_failures": 0,
+      "verification_unknown": 0,
+      "collection_invalidated": 0,
+      "check_rejections": 0,
+      "verified_candidates": [
+        {
+          "job_id": "learning-part-d1",
+          "attempt": 2,
+          "at": "2026-09-13T03:30:51.841037+00:00",
+          "machining_seconds": 208.572795,
+          "candidate_digest": "8cdadd6e626f3ee5b69c0c1a7d2d0c24cffc3a515557a91e48be091dacd77e7c",
+          "evidence_count": 43,
+          "manual_nomination": false
+        }
+      ],
+      "learning_changes": [],
+      "first_verified_seconds": 208.572795,
+      "best_verified_seconds": 208.572795,
+      "same_part_improvement_percent": 0.0,
+      "has_verified_candidate": true,
+      "completed": true,
+      "job_runs": 1,
+      "incomplete_job_runs": 0
+    },
+    {
+      "drawing_identity": "f2ea02f21108299235602e2caf82b2e695b9a9f71e1897870c407f1354001cc8",
+      "drawing_hashes": [
+        "cb5d9af223ca5ec70529b59ab62f26d8d2bbc128b74a20ad5eeedbeab5a81672"
+      ],
+      "jobs": [
+        {
+          "job_id": "umc-actuator-v1",
+          "status": "incomplete",
+          "reason": "FusionScriptError: Fusion generated script failed: [{'type': 'fusion_api_error', 'message': '2 : InternalValidationError : pResult'}]",
+          "collection_warning": null,
+          "manual_trial_nomination": null,
+          "manifest_path": "/Users/touko/work/helios-one/repos/coreweavehack/runs/umc-actuator-v1/manifest.json",
+          "manifest_sha256": "667ca022800d792216947fb46b3f498555e517442b4aa23c14a19d06930475af",
+          "weave_recorded": false,
+          "weave_url": null
+        },
+        {
+          "job_id": "umc-actuator-v2",
+          "status": "incomplete",
+          "reason": "RuntimeError: Fusion generation_status failed: [{'type': 'fusion_api_error', 'message': '3 : Generation not started'}]",
+          "collection_warning": null,
+          "manual_trial_nomination": null,
+          "manifest_path": "/Users/touko/work/helios-one/repos/coreweavehack/runs/umc-actuator-v2/manifest.json",
+          "manifest_sha256": "3239057564ee4ec81cc56a1d022b061d7e300d6e76fb86b912d2b36f34e27938",
+          "weave_recorded": true,
+          "weave_url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a098df-d17d-771a-b3a0-e376e2a5b3ab"
+        },
+        {
+          "job_id": "umc-actuator-v3",
+          "status": "incomplete",
+          "reason": "Fusion verification is incomplete or unknown; access/result needs resolving",
+          "collection_warning": null,
+          "manual_trial_nomination": null,
+          "manifest_path": "/Users/touko/work/helios-one/repos/coreweavehack/runs/umc-actuator-v3/manifest.json",
+          "manifest_sha256": "0db72376d069211eb5b3e33848532cdce7d871a9d133c5755aefb0293c43eb3e",
+          "weave_recorded": true,
+          "weave_url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a098e6-9c88-70c7-ae5a-b7ce8d103a5d"
+        },
+        {
+          "job_id": "umc-actuator-v4",
+          "status": "incomplete",
+          "reason": "Operational attempt limit reached",
+          "collection_warning": null,
+          "manual_trial_nomination": null,
+          "manifest_path": "/Users/touko/work/helios-one/repos/coreweavehack/runs/umc-actuator-v4/manifest.json",
+          "manifest_sha256": "f485d4bbf35d19671c8103bc422ac0a761c5d3c20637d161a27d8af97090170e",
+          "weave_recorded": true,
+          "weave_url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a098ef-c639-7552-a4ac-2de16401cc2d"
+        },
+        {
+          "job_id": "umc-actuator-v5",
+          "status": "incomplete",
+          "reason": "Operational attempt limit reached",
+          "collection_warning": null,
+          "manual_trial_nomination": null,
+          "manifest_path": "/Users/touko/work/helios-one/repos/coreweavehack/runs/umc-actuator-v5/manifest.json",
+          "manifest_sha256": "f60b0567d9575485c2069047f0baff070e9369682a38bcf6b9d0dc5b198fcf5e",
+          "weave_recorded": true,
+          "weave_url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a098f1-4c18-772a-9f80-bddd53c00164"
+        }
+      ],
+      "starting_versions": {
+        "checks": "0addb6e1d0747fa9bfd1366b291555f672618182d4b9cf78eb82a543a7c6f1be",
+        "main_prompt": "05e8cc6ca1cb6f7cdc8ba4f2a7dc9d489828f5140b11219c2c506dc0ad3bc881",
+        "verifier": "fusion-fixed-ui-stock-v2"
+      },
+      "ending_versions": {
+        "checks": "0addb6e1d0747fa9bfd1366b291555f672618182d4b9cf78eb82a543a7c6f1be",
+        "main_prompt": "05e8cc6ca1cb6f7cdc8ba4f2a7dc9d489828f5140b11219c2c506dc0ad3bc881",
+        "verifier": "fusion-fixed-ui-stock-v3-indexed"
+      },
+      "attempts": 3,
+      "simulation_passes": 1,
+      "simulation_failures": 1,
+      "verification_unknown": 1,
+      "collection_invalidated": 0,
+      "check_rejections": 0,
+      "verified_candidates": [
+        {
+          "job_id": "umc-actuator-v5",
+          "attempt": 1,
+          "at": "2026-09-13T04:07:51.686737+00:00",
+          "machining_seconds": 836.778256,
+          "candidate_digest": "8ef9052530dc899d345a73143d3d34d1017a80185fd0cb9d8a92e507eba6acbe",
+          "evidence_count": 43,
+          "manual_nomination": false
+        }
+      ],
+      "learning_changes": [],
+      "first_verified_seconds": 836.778256,
+      "best_verified_seconds": 836.778256,
+      "same_part_improvement_percent": 0.0,
+      "has_verified_candidate": true,
+      "completed": false,
+      "job_runs": 5,
+      "incomplete_job_runs": 5
+    },
+    {
+      "drawing_identity": "b330612279075250e098a56ffd6180eed86d223d6c2a31fd294fb696b7ef8bec",
+      "drawing_hashes": [
+        "700aec1f93f1e56317dae2042b79509c4e7819f7410b6fc66df5ed521de2f3be"
+      ],
+      "jobs": [
+        {
+          "job_id": "demo-umc-umc-02",
+          "status": "incomplete",
+          "reason": "Fusion verification is incomplete or unknown; access/result needs resolving",
+          "collection_warning": null,
+          "manual_trial_nomination": null,
+          "manifest_path": "/Users/touko/work/helios-one/repos/coreweavehack/runs/demo-umc-umc-02/manifest.json",
+          "manifest_sha256": "943de36f6bf1f1b3caeb852249b310af0a2725a298543eaf5e0c278efb7180de",
+          "weave_recorded": true,
+          "weave_url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a0991b-7319-7be8-871e-020b200fdb56"
+        },
+        {
+          "job_id": "demo-umc-umc-02-recovery1",
+          "status": "incomplete",
+          "reason": "Fusion verification is incomplete or unknown; access/result needs resolving",
+          "collection_warning": null,
+          "manual_trial_nomination": null,
+          "manifest_path": "/Users/touko/work/helios-one/repos/coreweavehack/runs/demo-umc-umc-02-recovery1/manifest.json",
+          "manifest_sha256": "7aee8a1fcfcdf416d07b13c9fe89f45b309998703904429dec7e8c4209ba6af1",
+          "weave_recorded": true,
+          "weave_url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a09923-e58c-7121-9e39-b7a96fc45c32"
+        },
+        {
+          "job_id": "demo-umc-umc-02-recovery2",
+          "status": "incomplete",
+          "reason": "Fusion verification is incomplete or unknown; access/result needs resolving",
+          "collection_warning": null,
+          "manual_trial_nomination": null,
+          "manifest_path": "/Users/touko/work/helios-one/repos/coreweavehack/runs/demo-umc-umc-02-recovery2/manifest.json",
+          "manifest_sha256": "faff729819b07fe3812aed6dc866287fe0fbe60493adff4f5603bdf09f6f3b28",
+          "weave_recorded": true,
+          "weave_url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a09929-3eba-7bde-9b83-694a62b95685"
+        },
+        {
+          "job_id": "demo-umc-umc-02-recovery3",
+          "status": "incomplete",
+          "reason": "Fusion verification is incomplete or unknown; access/result needs resolving",
+          "collection_warning": null,
+          "manual_trial_nomination": null,
+          "manifest_path": "/Users/touko/work/helios-one/repos/coreweavehack/runs/demo-umc-umc-02-recovery3/manifest.json",
+          "manifest_sha256": "d9299d9c2f26e7979093486dcc4fbc99e540e6ef0ade6708d180bd073208f1b6",
+          "weave_recorded": true,
+          "weave_url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a0992a-dfdd-7e08-a59d-586cd50e2fed"
+        },
+        {
+          "job_id": "demo-umc-umc-02-recovery4",
+          "status": "completed",
+          "reason": "Supervisor selected the best verified plan",
+          "collection_warning": null,
+          "manual_trial_nomination": null,
+          "manifest_path": "/Users/touko/work/helios-one/repos/coreweavehack/runs/demo-umc-umc-02-recovery4/manifest.json",
+          "manifest_sha256": "f4c66bfcc9aca22cbfd7d9fb7858f3943f4b8bfef2fb33c76d83d1538f4e9c08",
+          "weave_recorded": true,
+          "weave_url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a0992f-9e23-714c-b93e-4867f6388205"
+        }
+      ],
+      "starting_versions": {
+        "checks": "0addb6e1d0747fa9bfd1366b291555f672618182d4b9cf78eb82a543a7c6f1be",
+        "main_prompt": "05e8cc6ca1cb6f7cdc8ba4f2a7dc9d489828f5140b11219c2c506dc0ad3bc881",
+        "verifier": "fusion-fixed-ui-stock-v3-indexed"
+      },
+      "ending_versions": {
+        "checks": "0addb6e1d0747fa9bfd1366b291555f672618182d4b9cf78eb82a543a7c6f1be",
+        "main_prompt": "05e8cc6ca1cb6f7cdc8ba4f2a7dc9d489828f5140b11219c2c506dc0ad3bc881",
+        "verifier": "fusion-fixed-ui-stock-v3-indexed"
+      },
+      "attempts": 5,
+      "simulation_passes": 1,
+      "simulation_failures": 0,
+      "verification_unknown": 4,
+      "collection_invalidated": 0,
+      "check_rejections": 0,
+      "verified_candidates": [
+        {
+          "job_id": "demo-umc-umc-02-recovery4",
+          "attempt": 1,
+          "at": "2026-09-13T05:16:44.158791+00:00",
+          "machining_seconds": 371.053684,
+          "candidate_digest": "4d1e13ae78176c2fd9ffb2ac004c5c96385621604e08fac6e5b4ce3b3caccb6b",
+          "evidence_count": 43,
+          "manual_nomination": false
+        }
+      ],
+      "learning_changes": [],
+      "first_verified_seconds": 371.053684,
+      "best_verified_seconds": 371.053684,
+      "same_part_improvement_percent": 0.0,
+      "has_verified_candidate": true,
+      "completed": true,
+      "job_runs": 5,
+      "incomplete_job_runs": 4
+    },
+    {
+      "drawing_identity": "65f7bb71ed791a763d5dda56dbd553bb369eb5a6799623d500c6330c20b39918",
+      "drawing_hashes": [
+        "5e121d57c3c2499203fc0da9bdb5470fdd6105df911666af072ad984b4678347"
+      ],
+      "jobs": [
+        {
+          "job_id": "demo-umc-umc-03",
+          "status": "incomplete",
+          "reason": "Fusion verification is incomplete or unknown; access/result needs resolving",
+          "collection_warning": null,
+          "manual_trial_nomination": null,
+          "manifest_path": "/Users/touko/work/helios-one/repos/coreweavehack/runs/demo-umc-umc-03/manifest.json",
+          "manifest_sha256": "4ccefe0d08db4939ed47f3dc0d89a1b9d9f5144ff3e2abae45175b566ed09bab",
+          "weave_recorded": true,
+          "weave_url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a09938-2ecc-7817-8484-4c0b1f9d7359"
+        },
+        {
+          "job_id": "demo-umc-umc-03-recovery1",
+          "status": "incomplete",
+          "reason": "Fusion verification is incomplete or unknown; access/result needs resolving",
+          "collection_warning": null,
+          "manual_trial_nomination": null,
+          "manifest_path": "/Users/touko/work/helios-one/repos/coreweavehack/runs/demo-umc-umc-03-recovery1/manifest.json",
+          "manifest_sha256": "654e5a08409457680d1c5b7b4e95e8bf4f34300436ce12ccc3e1b5c96519f148",
+          "weave_recorded": true,
+          "weave_url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a0993e-4b93-7e35-bcad-00561ecea57c"
+        },
+        {
+          "job_id": "demo-umc-umc-03-recovery2",
+          "status": "incomplete",
+          "reason": "Fusion verification is incomplete or unknown; access/result needs resolving",
+          "collection_warning": null,
+          "manual_trial_nomination": null,
+          "manifest_path": "/Users/touko/work/helios-one/repos/coreweavehack/runs/demo-umc-umc-03-recovery2/manifest.json",
+          "manifest_sha256": "11749e2400d910ddd7e78a30e41fbb16efd14f3a792cc9a3d74ee5a566871292",
+          "weave_recorded": true,
+          "weave_url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a0993f-de62-7008-9d2d-705135453cfe"
+        },
+        {
+          "job_id": "demo-umc-umc-03-recovery3",
+          "status": "incomplete",
+          "reason": "Fusion verification is incomplete or unknown; access/result needs resolving",
+          "collection_warning": null,
+          "manual_trial_nomination": null,
+          "manifest_path": "/Users/touko/work/helios-one/repos/coreweavehack/runs/demo-umc-umc-03-recovery3/manifest.json",
+          "manifest_sha256": "0a5df75022e6d13d7769d389bacfd5eac49957799ff2f7fb65beea3e7ad919bb",
+          "weave_recorded": true,
+          "weave_url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a09941-e835-790e-a621-90b88da71aff"
+        },
+        {
+          "job_id": "demo-umc-umc-03-recovery4",
+          "status": "completed",
+          "reason": "Supervisor selected the best verified plan",
+          "collection_warning": null,
+          "manual_trial_nomination": null,
+          "manifest_path": "/Users/touko/work/helios-one/repos/coreweavehack/runs/demo-umc-umc-03-recovery4/manifest.json",
+          "manifest_sha256": "6a9041969de79fabe98485575c0dc630577291601f57c3f6fc1425092aa12832",
+          "weave_recorded": true,
+          "weave_url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a09a07-ab71-7563-9478-b601e3df3a02"
+        }
+      ],
+      "starting_versions": {
+        "checks": "0addb6e1d0747fa9bfd1366b291555f672618182d4b9cf78eb82a543a7c6f1be",
+        "main_prompt": "05e8cc6ca1cb6f7cdc8ba4f2a7dc9d489828f5140b11219c2c506dc0ad3bc881",
+        "verifier": "fusion-fixed-ui-stock-v3-indexed"
+      },
+      "ending_versions": {
+        "checks": "0addb6e1d0747fa9bfd1366b291555f672618182d4b9cf78eb82a543a7c6f1be",
+        "main_prompt": "fb6133ee810e74b475816582396a22710e5b0b04cad4db85c726c12802ae4f73",
+        "verifier": "fusion-fixed-ui-stock-v7-explicit-stock-regeneration"
+      },
+      "attempts": 9,
+      "simulation_passes": 5,
+      "simulation_failures": 0,
+      "verification_unknown": 4,
+      "collection_invalidated": 0,
+      "check_rejections": 0,
+      "verified_candidates": [
+        {
+          "job_id": "demo-umc-umc-03-recovery3",
+          "attempt": 1,
+          "at": "2026-09-13T05:35:21.042884+00:00",
+          "machining_seconds": 466.793213,
+          "candidate_digest": "c885410a4dbe2d0bea9dda18496900d85b6ea77b0b5ece3e77994d51120b6c7a",
+          "evidence_count": 43,
+          "manual_nomination": false
+        },
+        {
+          "job_id": "demo-umc-umc-03-recovery3",
+          "attempt": 2,
+          "at": "2026-09-13T05:38:20.577218+00:00",
+          "machining_seconds": 455.138987,
+          "candidate_digest": "214d1082f3662608b7eadeb031b9f70ba41c0a79512ed90205362c03c4c4cf4d",
+          "evidence_count": 44,
+          "manual_nomination": false
+        },
+        {
+          "job_id": "demo-umc-umc-03-recovery3",
+          "attempt": 3,
+          "at": "2026-09-13T05:41:18.915194+00:00",
+          "machining_seconds": 438.955225,
+          "candidate_digest": "5cf2d26451032a82452362ca6d40028e708d450a22225609eb0428f140b86900",
+          "evidence_count": 44,
+          "manual_nomination": false
+        },
+        {
+          "job_id": "demo-umc-umc-03-recovery4",
+          "attempt": 1,
+          "at": "2026-09-13T09:10:39.868756+00:00",
+          "machining_seconds": 438.955225,
+          "candidate_digest": "5cf2d26451032a82452362ca6d40028e708d450a22225609eb0428f140b86900",
+          "evidence_count": 59,
+          "manual_nomination": false
+        },
+        {
+          "job_id": "demo-umc-umc-03-recovery4",
+          "attempt": 2,
+          "at": "2026-09-13T09:13:03.235452+00:00",
+          "machining_seconds": 433.128113,
+          "candidate_digest": "a7df9ddc5bc7ed3597d270df65c72850054432525825a0b468eb21df23cab40c",
+          "evidence_count": 63,
+          "manual_nomination": false
+        }
+      ],
+      "learning_changes": [
+        {
+          "job_id": "demo-umc-umc-03-recovery3",
+          "at": "2026-09-13T05:42:03.216842+00:00",
+          "kind": "main_prompt",
+          "evaluation_performed": false,
+          "base_version": "05e8cc6ca1cb6f7cdc8ba4f2a7dc9d489828f5140b11219c2c506dc0ad3bc881",
+          "proposed_version": "fb6133ee810e74b475816582396a22710e5b0b04cad4db85c726c12802ae4f73"
+        }
+      ],
+      "first_verified_seconds": 466.793213,
+      "best_verified_seconds": 433.128113,
+      "same_part_improvement_percent": 7.211994318349268,
+      "has_verified_candidate": true,
+      "completed": true,
+      "job_runs": 5,
+      "incomplete_job_runs": 4
+    },
+    {
+      "drawing_identity": "908154f962908d911ed445bea9f23e98786a496e4753d94fcd44984a95435c1c",
+      "drawing_hashes": [
+        "7f9b18fcd3c4afd2336a7d0fd86613d65175c8fc83c5cb5e522f0fd131defe43"
+      ],
+      "jobs": [
+        {
+          "job_id": "demo-umc-umc-08",
+          "status": "completed",
+          "reason": "Supervisor selected the best verified plan",
+          "collection_warning": null,
+          "manual_trial_nomination": null,
+          "manifest_path": "/Users/touko/work/helios-one/repos/coreweavehack/runs/demo-umc-umc-08/manifest.json",
+          "manifest_sha256": "75a0a0920d3925ef59ac9443ad53a0c9536c5129e95ed6c090d87595abafc408",
+          "weave_recorded": true,
+          "weave_url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a0994c-1466-7e53-a374-44251ace1dda"
+        }
+      ],
+      "starting_versions": {
+        "checks": "0addb6e1d0747fa9bfd1366b291555f672618182d4b9cf78eb82a543a7c6f1be",
+        "main_prompt": "fb6133ee810e74b475816582396a22710e5b0b04cad4db85c726c12802ae4f73",
+        "verifier": "fusion-fixed-ui-stock-v3-indexed"
+      },
+      "ending_versions": {
+        "checks": "0addb6e1d0747fa9bfd1366b291555f672618182d4b9cf78eb82a543a7c6f1be",
+        "main_prompt": "fb6133ee810e74b475816582396a22710e5b0b04cad4db85c726c12802ae4f73",
+        "verifier": "fusion-fixed-ui-stock-v3-indexed"
+      },
+      "attempts": 4,
+      "simulation_passes": 3,
+      "simulation_failures": 1,
+      "verification_unknown": 0,
+      "collection_invalidated": 0,
+      "check_rejections": 0,
+      "verified_candidates": [
+        {
+          "job_id": "demo-umc-umc-08",
+          "attempt": 2,
+          "at": "2026-09-13T05:53:27.928784+00:00",
+          "machining_seconds": 1065.647591,
+          "candidate_digest": "cb080adf54fe56c45823da6b8552fd1534980fc41b2d8a46ad197abd0fcdd01e",
+          "evidence_count": 43,
+          "manual_nomination": false
+        },
+        {
+          "job_id": "demo-umc-umc-08",
+          "attempt": 3,
+          "at": "2026-09-13T05:56:10.128495+00:00",
+          "machining_seconds": 1042.339136,
+          "candidate_digest": "9058809340d2a163ed153163b07dbdfee694e79fcdcc5cf36e9740e7b29d359b",
+          "evidence_count": 51,
+          "manual_nomination": false
+        },
+        {
+          "job_id": "demo-umc-umc-08",
+          "attempt": 4,
+          "at": "2026-09-13T05:58:19.346693+00:00",
+          "machining_seconds": 1033.567006,
+          "candidate_digest": "fb3743bd843ac41cab80eb947a972756ac1db1fb220eccb3e04697070f596196",
+          "evidence_count": 44,
+          "manual_nomination": false
+        }
+      ],
+      "learning_changes": [],
+      "first_verified_seconds": 1065.647591,
+      "best_verified_seconds": 1033.567006,
+      "same_part_improvement_percent": 3.0104309596285597,
+      "has_verified_candidate": true,
+      "completed": true,
+      "job_runs": 1,
+      "incomplete_job_runs": 0
+    },
+    {
+      "drawing_identity": "e0ccb1c55bfb0a40a132216548f7f89b805b3e33d9a20693f6e812c4228f871e",
+      "drawing_hashes": [
+        "3e403164ec097eeb9d161cfdf2e6d167975bcbf08b2a35efc9c47475aedc28b8"
+      ],
+      "jobs": [
+        {
+          "job_id": "demo-umc-umc-04",
+          "status": "completed",
+          "reason": "Supervisor selected the best verified plan",
+          "collection_warning": null,
+          "manual_trial_nomination": null,
+          "manifest_path": "/Users/touko/work/helios-one/repos/coreweavehack/runs/demo-umc-umc-04/manifest.json",
+          "manifest_sha256": "ac9dc7470d7a1d5bedfca769c5bd0cf67db5d0ce46f954036b483870b4f34abe",
+          "weave_recorded": true,
+          "weave_url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a09958-cdd5-7e3f-8574-2fd3bab6f1ac"
+        }
+      ],
+      "starting_versions": {
+        "checks": "0addb6e1d0747fa9bfd1366b291555f672618182d4b9cf78eb82a543a7c6f1be",
+        "main_prompt": "fb6133ee810e74b475816582396a22710e5b0b04cad4db85c726c12802ae4f73",
+        "verifier": "fusion-fixed-ui-stock-v4-indexed-libigl"
+      },
+      "ending_versions": {
+        "checks": "0addb6e1d0747fa9bfd1366b291555f672618182d4b9cf78eb82a543a7c6f1be",
+        "main_prompt": "fb6133ee810e74b475816582396a22710e5b0b04cad4db85c726c12802ae4f73",
+        "verifier": "fusion-fixed-ui-stock-v4-indexed-libigl"
+      },
+      "attempts": 3,
+      "simulation_passes": 3,
+      "simulation_failures": 0,
+      "verification_unknown": 0,
+      "collection_invalidated": 0,
+      "check_rejections": 0,
+      "verified_candidates": [
+        {
+          "job_id": "demo-umc-umc-04",
+          "attempt": 1,
+          "at": "2026-09-13T06:05:07.652099+00:00",
+          "machining_seconds": 466.048718,
+          "candidate_digest": "96092dd166b2be08b3ff7090a1fd9fea51494460238c8bc1134213a823199526",
+          "evidence_count": 43,
+          "manual_nomination": false
+        },
+        {
+          "job_id": "demo-umc-umc-04",
+          "attempt": 2,
+          "at": "2026-09-13T06:07:17.754210+00:00",
+          "machining_seconds": 438.21071,
+          "candidate_digest": "8f450e931ff1a3e185dc6c05b53ff9afe0357d6cfe5b242eda68c1fb1cfa3dd0",
+          "evidence_count": 45,
+          "manual_nomination": false
+        },
+        {
+          "job_id": "demo-umc-umc-04",
+          "attempt": 3,
+          "at": "2026-09-13T06:09:37.997352+00:00",
+          "machining_seconds": 432.383597,
+          "candidate_digest": "bed5c40778f0cf81ed5ed287a8f0577810a23dad33ab0d3a54468409e04bb04d",
+          "evidence_count": 43,
+          "manual_nomination": false
+        }
+      ],
+      "learning_changes": [],
+      "first_verified_seconds": 466.048718,
+      "best_verified_seconds": 432.383597,
+      "same_part_improvement_percent": 7.223519709370812,
+      "has_verified_candidate": true,
+      "completed": true,
+      "job_runs": 1,
+      "incomplete_job_runs": 0
+    },
+    {
+      "drawing_identity": "3af452104c98120bf3d8f2c70cea4c4c7ddddc8f4f3e59707261d531cbb0fa8c",
+      "drawing_hashes": [
+        "b182e794482976275a55eda14fbf906b7ce24f1fd247163b96b1c143255c3e50"
+      ],
+      "jobs": [
+        {
+          "job_id": "demo-umc-umc-09",
+          "status": "completed",
+          "reason": "Supervisor selected the best verified plan",
+          "collection_warning": null,
+          "manual_trial_nomination": null,
+          "manifest_path": "/Users/touko/work/helios-one/repos/coreweavehack/runs/demo-umc-umc-09/manifest.json",
+          "manifest_sha256": "792aee196192e51e558de58ae78eead8322adfc7775c5a03ce88218f7b3e9d21",
+          "weave_recorded": true,
+          "weave_url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a09971-fad6-7f34-b26e-a38c95f24a4d"
+        }
+      ],
+      "starting_versions": {
+        "checks": "0addb6e1d0747fa9bfd1366b291555f672618182d4b9cf78eb82a543a7c6f1be",
+        "main_prompt": "fb6133ee810e74b475816582396a22710e5b0b04cad4db85c726c12802ae4f73",
+        "verifier": "fusion-fixed-ui-stock-v4-indexed-libigl"
+      },
+      "ending_versions": {
+        "checks": "0addb6e1d0747fa9bfd1366b291555f672618182d4b9cf78eb82a543a7c6f1be",
+        "main_prompt": "fb6133ee810e74b475816582396a22710e5b0b04cad4db85c726c12802ae4f73",
+        "verifier": "fusion-fixed-ui-stock-v4-indexed-libigl"
+      },
+      "attempts": 4,
+      "simulation_passes": 4,
+      "simulation_failures": 0,
+      "verification_unknown": 0,
+      "collection_invalidated": 0,
+      "check_rejections": 0,
+      "verified_candidates": [
+        {
+          "job_id": "demo-umc-umc-09",
+          "attempt": 1,
+          "at": "2026-09-13T06:30:45.265519+00:00",
+          "machining_seconds": 225.140233,
+          "candidate_digest": "a06f8d16056c26a270a2fa1f47c184bbd9094de84f5cf1dfb3f532a6c45ff45e",
+          "evidence_count": 44,
+          "manual_nomination": false
+        },
+        {
+          "job_id": "demo-umc-umc-09",
+          "attempt": 2,
+          "at": "2026-09-13T06:32:56.199343+00:00",
+          "machining_seconds": 218.719106,
+          "candidate_digest": "09232e57f9b4229f7f6e46030f124858d2e3ab2bb78d9180f292d0161df0cca3",
+          "evidence_count": 43,
+          "manual_nomination": false
+        },
+        {
+          "job_id": "demo-umc-umc-09",
+          "attempt": 3,
+          "at": "2026-09-13T06:35:12.839582+00:00",
+          "machining_seconds": 210.076281,
+          "candidate_digest": "e8359aa8064947b2cf73828a0cd93c6181a4d73dd31da404673073e281388607",
+          "evidence_count": 44,
+          "manual_nomination": false
+        },
+        {
+          "job_id": "demo-umc-umc-09",
+          "attempt": 4,
+          "at": "2026-09-13T06:37:15.193278+00:00",
+          "machining_seconds": 208.995927,
+          "candidate_digest": "2e4105b702d2abee667e2d157e88d81783b1cefeb83993a2ebe2ba9cf4ab2f88",
+          "evidence_count": 43,
+          "manual_nomination": false
+        }
+      ],
+      "learning_changes": [],
+      "first_verified_seconds": 225.140233,
+      "best_verified_seconds": 208.995927,
+      "same_part_improvement_percent": 7.170777868032144,
+      "has_verified_candidate": true,
+      "completed": true,
+      "job_runs": 1,
+      "incomplete_job_runs": 0
+    },
+    {
+      "drawing_identity": "58b1918201304eb07a831e99821e434eac219405d8db04392e0e9f582416690f",
+      "drawing_hashes": [
+        "b48eb0f15e15fe6d16d39950f6d679b1137c6bdbf5228508aaace294c16c97e6"
+      ],
+      "jobs": [
+        {
+          "job_id": "demo-umc-umc-05",
+          "status": "completed",
+          "reason": "Supervisor selected the best verified plan",
+          "collection_warning": null,
+          "manual_trial_nomination": null,
+          "manifest_path": "/Users/touko/work/helios-one/repos/coreweavehack/runs/demo-umc-umc-05/manifest.json",
+          "manifest_sha256": "070fd2cf915c8e985dfaf32954367d4daea0b845c9384719ed03ffdf4070fafd",
+          "weave_recorded": true,
+          "weave_url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a0997c-87a7-7713-bf74-c32254b0a0a8"
+        }
+      ],
+      "starting_versions": {
+        "checks": "0addb6e1d0747fa9bfd1366b291555f672618182d4b9cf78eb82a543a7c6f1be",
+        "main_prompt": "fb6133ee810e74b475816582396a22710e5b0b04cad4db85c726c12802ae4f73",
+        "verifier": "fusion-fixed-ui-stock-v4-indexed-libigl"
+      },
+      "ending_versions": {
+        "checks": "0addb6e1d0747fa9bfd1366b291555f672618182d4b9cf78eb82a543a7c6f1be",
+        "main_prompt": "fb6133ee810e74b475816582396a22710e5b0b04cad4db85c726c12802ae4f73",
+        "verifier": "fusion-fixed-ui-stock-v4-indexed-libigl"
+      },
+      "attempts": 4,
+      "simulation_passes": 4,
+      "simulation_failures": 0,
+      "verification_unknown": 0,
+      "collection_invalidated": 0,
+      "check_rejections": 0,
+      "verified_candidates": [
+        {
+          "job_id": "demo-umc-umc-05",
+          "attempt": 2,
+          "at": "2026-09-13T06:44:07.186956+00:00",
+          "machining_seconds": 767.855203,
+          "candidate_digest": "a9170233a8ed41e9686f92a212d7c9ef81af78175300a89f3740505b78c3d569",
+          "evidence_count": 43,
+          "manual_nomination": false
+        },
+        {
+          "job_id": "demo-umc-umc-05",
+          "attempt": 3,
+          "at": "2026-09-13T06:45:55.102732+00:00",
+          "machining_seconds": 756.200968,
+          "candidate_digest": "50ff53d244f016888bd1c3173fd40f571bb61659c7bc0ddf7030d0f7613f310d",
+          "evidence_count": 44,
+          "manual_nomination": false
+        },
+        {
+          "job_id": "demo-umc-umc-05",
+          "attempt": 4,
+          "at": "2026-09-13T06:48:00.985865+00:00",
+          "machining_seconds": 713.044475,
+          "candidate_digest": "997c3c3c20c8318484921b82d5a8269866c657116cebcbe9f3f9d6b1c668e583",
+          "evidence_count": 43,
+          "manual_nomination": false
+        },
+        {
+          "job_id": "demo-umc-umc-05",
+          "attempt": 5,
+          "at": "2026-09-13T06:50:13.370202+00:00",
+          "machining_seconds": 707.217362,
+          "candidate_digest": "3f73f27ef9550898b553cec42f96760f7fd3e9f6bf1b44d3a7bf77b45cc8ea4f",
+          "evidence_count": 43,
+          "manual_nomination": false
+        }
+      ],
+      "learning_changes": [],
+      "first_verified_seconds": 767.855203,
+      "best_verified_seconds": 707.217362,
+      "same_part_improvement_percent": 7.8970411039853285,
+      "has_verified_candidate": true,
+      "completed": true,
+      "job_runs": 1,
+      "incomplete_job_runs": 0
+    },
+    {
+      "drawing_identity": "476f1153078ced304d17c02031e49f7b51dbe003c0dd974868ece26d54d6801b",
+      "drawing_hashes": [
+        "acdab9fc6b2853c3688d9a3983490b56f4729e8ec95380c56149368e8a7aabd2"
+      ],
+      "jobs": [
+        {
+          "job_id": "demo-umc-umc-06",
+          "status": "incomplete",
+          "reason": "Fusion verification is incomplete or unknown; access/result needs resolving",
+          "collection_warning": null,
+          "manual_trial_nomination": null,
+          "manifest_path": "/Users/touko/work/helios-one/repos/coreweavehack/runs/demo-umc-umc-06/manifest.json",
+          "manifest_sha256": "1e1a82ccf93a40b37a7b5d3e930e8227e80c0666332423f090aa4eac2a81a031",
+          "weave_recorded": true,
+          "weave_url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a09988-6354-7096-a0e7-35fbc7da1dfa"
+        },
+        {
+          "job_id": "demo-umc-umc-06-recovery1",
+          "status": "incomplete",
+          "reason": "Fusion verification is incomplete or unknown; access/result needs resolving",
+          "collection_warning": null,
+          "manual_trial_nomination": null,
+          "manifest_path": "/Users/touko/work/helios-one/repos/coreweavehack/runs/demo-umc-umc-06-recovery1/manifest.json",
+          "manifest_sha256": "87c211c66e6f14fc3d76e573e026408a4458e5550d97a5d8f44758c82813f40b",
+          "weave_recorded": true,
+          "weave_url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a09994-747e-749d-b1f0-6fcc560a24ec"
+        },
+        {
+          "job_id": "demo-umc-umc-06-recovery2",
+          "status": "completed",
+          "reason": "Supervisor selected the best verified plan",
+          "collection_warning": null,
+          "manual_trial_nomination": null,
+          "manifest_path": "/Users/touko/work/helios-one/repos/coreweavehack/runs/demo-umc-umc-06-recovery2/manifest.json",
+          "manifest_sha256": "bb334c0498382a50fb4afc767429b0531371f68f643e25814c032e71b06ea994",
+          "weave_recorded": true,
+          "weave_url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a099a1-9645-71a4-8b91-8c3352acb9d3"
+        }
+      ],
+      "starting_versions": {
+        "checks": "0addb6e1d0747fa9bfd1366b291555f672618182d4b9cf78eb82a543a7c6f1be",
+        "main_prompt": "fb6133ee810e74b475816582396a22710e5b0b04cad4db85c726c12802ae4f73",
+        "verifier": "fusion-fixed-ui-stock-v4-indexed-libigl"
+      },
+      "ending_versions": {
+        "checks": "0addb6e1d0747fa9bfd1366b291555f672618182d4b9cf78eb82a543a7c6f1be",
+        "main_prompt": "fb6133ee810e74b475816582396a22710e5b0b04cad4db85c726c12802ae4f73",
+        "verifier": "fusion-fixed-ui-stock-v5-exact-collinear"
+      },
+      "attempts": 7,
+      "simulation_passes": 5,
+      "simulation_failures": 0,
+      "verification_unknown": 2,
+      "collection_invalidated": 0,
+      "check_rejections": 0,
+      "verified_candidates": [
+        {
+          "job_id": "demo-umc-umc-06-recovery2",
+          "attempt": 1,
+          "at": "2026-09-13T07:19:49.993660+00:00",
+          "machining_seconds": 560.900213,
+          "candidate_digest": "7c91b29a7a73dd49f9f8a594b37fdec67b2a03874bbd5e05776ff2b2d0bb220e",
+          "evidence_count": 43,
+          "manual_nomination": false
+        },
+        {
+          "job_id": "demo-umc-umc-06-recovery2",
+          "attempt": 2,
+          "at": "2026-09-13T07:22:28.295117+00:00",
+          "machining_seconds": 549.24599,
+          "candidate_digest": "4e910abdc1d9dd73921f1ed5be5409992df6a90307ac3020b5440c5d0af34597",
+          "evidence_count": 43,
+          "manual_nomination": false
+        },
+        {
+          "job_id": "demo-umc-umc-06-recovery2",
+          "attempt": 3,
+          "at": "2026-09-13T07:25:10.222599+00:00",
+          "machining_seconds": 517.035302,
+          "candidate_digest": "6135807fbacf89318353a966ab9df6f84ebad2b9f4d0d7425407d49adbc26f47",
+          "evidence_count": 43,
+          "manual_nomination": false
+        },
+        {
+          "job_id": "demo-umc-umc-06-recovery2",
+          "attempt": 4,
+          "at": "2026-09-13T07:27:54.682128+00:00",
+          "machining_seconds": 511.208189,
+          "candidate_digest": "7d45498b03ebe07c9a76e77b9a8ca59beb642c496f0bb22f4750658b6742232b",
+          "evidence_count": 43,
+          "manual_nomination": false
+        },
+        {
+          "job_id": "demo-umc-umc-06-recovery2",
+          "attempt": 5,
+          "at": "2026-09-13T07:33:29.214882+00:00",
+          "machining_seconds": 511.208189,
+          "candidate_digest": "9134dc31753571af3e5001d8c066c984a6b53ba6dbabad39cca42d7e77acfa29",
+          "evidence_count": 45,
+          "manual_nomination": false
+        }
+      ],
+      "learning_changes": [],
+      "first_verified_seconds": 560.900213,
+      "best_verified_seconds": 511.208189,
+      "same_part_improvement_percent": 8.859334129010216,
+      "has_verified_candidate": true,
+      "completed": true,
+      "job_runs": 3,
+      "incomplete_job_runs": 2
+    },
+    {
+      "drawing_identity": "a066218b572d5680df4c74fc52a3bbc2d6c463ea74eb40e8c8ce9fe9a6378299",
+      "drawing_hashes": [
+        "bf9d10c72c4b9d0ccfff069bf7c988a889335082623a756e37e5fb6aa516d274"
+      ],
+      "jobs": [
+        {
+          "job_id": "demo-umc-umc-11",
+          "status": "incomplete",
+          "reason": "ValueError: cam needs clarification: Provide a live pocket_clearing parameter catalogue, including linking and lead controls and allowed values. This is required to replace the unsupported doLeadIn setting and validate doLeadOut and keepToolDown without guessing or silently changing the indexed machining plan.",
+          "collection_warning": null,
+          "manual_trial_nomination": null,
+          "manifest_path": "/Users/touko/work/helios-one/repos/coreweavehack/runs/demo-umc-umc-11/manifest.json",
+          "manifest_sha256": "37d7910de647c39d03aaf1e7b77e5d7bc7f027a91c68ae100676a010a943a315",
+          "weave_recorded": true,
+          "weave_url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a099c2-55f6-7776-a541-54cfe4083ebe"
+        },
+        {
+          "job_id": "demo-umc-umc-11-recovery1",
+          "status": "incomplete",
+          "reason": "Operator stopped CAM repair after confirming stock export raced incomplete regeneration; verification attempts 1-3 are not reliable machining verdicts and require fresh collection.",
+          "collection_warning": "Operator stopped CAM repair after confirming stock export raced incomplete regeneration; verification attempts 1-3 are not reliable machining verdicts and require fresh collection.",
+          "manual_trial_nomination": null,
+          "manifest_path": "/Users/touko/work/helios-one/repos/coreweavehack/runs/demo-umc-umc-11-recovery1/manifest.json",
+          "manifest_sha256": "3d703faeb359401e2a3e841cbfc05325698be9decb5e503358f167e839578f04",
+          "weave_recorded": false,
+          "weave_url": null
+        },
+        {
+          "job_id": "demo-umc-umc-11-recovery2",
+          "status": "incomplete",
+          "reason": "Fusion verification is incomplete or unknown; access/result needs resolving",
+          "collection_warning": null,
+          "manual_trial_nomination": null,
+          "manifest_path": "/Users/touko/work/helios-one/repos/coreweavehack/runs/demo-umc-umc-11-recovery2/manifest.json",
+          "manifest_sha256": "9a6c4f4f35cb2b84c46717f36e7457605ad161d6515f7d375f967fdbf9937018",
+          "weave_recorded": true,
+          "weave_url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a099dc-cc6e-7b03-9005-141259aab1da"
+        },
+        {
+          "job_id": "demo-umc-umc-11-recovery3",
+          "status": "incomplete",
+          "reason": "ValueError: cam needs clarification: The requested prerequisite\u2014confirming every operation-3 ramp starts above actual remaining stock\u2014is not established by the inspected parameter evidence. Supply entry-by-entry toolpath and prior-removal evidence, or a controller verification of that prerequisite, before applying the clearance reduction.",
+          "collection_warning": null,
+          "manual_trial_nomination": null,
+          "manifest_path": "/Users/touko/work/helios-one/repos/coreweavehack/runs/demo-umc-umc-11-recovery3/manifest.json",
+          "manifest_sha256": "8107d90fb040447b6b8f3bee562493cf1fe341610f5eeb72cdd084895adbbeb0",
+          "weave_recorded": true,
+          "weave_url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a099fd-7d5f-7f72-b547-6529a0c95604"
+        },
+        {
+          "job_id": "demo-umc-umc-11-recovery4",
+          "status": "completed",
+          "reason": "Supervisor selected the best verified plan",
+          "collection_warning": null,
+          "manual_trial_nomination": null,
+          "manifest_path": "/Users/touko/work/helios-one/repos/coreweavehack/runs/demo-umc-umc-11-recovery4/manifest.json",
+          "manifest_sha256": "8bd1c837b45c57920968dc10e25690063e7517d9766a56429d25bda185e5c668",
+          "weave_recorded": true,
+          "weave_url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a09a02-d7f6-7a1d-866c-2e4190b2b1d3"
+        },
+        {
+          "job_id": "demo-umc-umc-11-recovery5",
+          "status": "completed",
+          "reason": "Supervisor selected the best verified plan",
+          "collection_warning": null,
+          "manual_trial_nomination": {
+            "event": "manual_trial_nomination",
+            "manual_nomination": true,
+            "source_manifest": "/Users/touko/work/helios-one/repos/coreweavehack/runs/demo-umc-umc-11-recovery1/manifest.json",
+            "source_manifest_sha256": "3d703faeb359401e2a3e841cbfc05325698be9decb5e503358f167e839578f04",
+            "source_job_id": "demo-umc-umc-11-recovery1",
+            "source_event_index": 8,
+            "candidate_id": "candidate-0002",
+            "candidate_digest": "a78edd3f6bdf5da79db90f04e8d05b753977c9734aa625bd065c61487ce547ec",
+            "input_digest": "444186f49beca7ffc18a5d482bfa00f9787ae73ad073e343d39379c280c4d3ff",
+            "target_digest": "cd203611b68a169a3e2056c9b858d553d563df9ce901b1bf38a335e12c07ed27",
+            "collection_warning": "Operator stopped CAM repair after confirming stock export raced incomplete regeneration; verification attempts 1-3 are not reliable machining verdicts and require fresh collection.",
+            "old_verdict_inherited": false,
+            "scope": "Manual retained-candidate hypothesis; not learned or supervisor-selected. requires current checks and fresh simulation before comparison."
+          },
+          "manifest_path": "/Users/touko/work/helios-one/repos/coreweavehack/runs/demo-umc-umc-11-recovery5/manifest.json",
+          "manifest_sha256": "1c7e141209d50109d6e6bd1c03b8ca313356db1569ba1bbfeeb66d17cd058ec5",
+          "weave_recorded": true,
+          "weave_url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a09a0b-c05f-7e08-a5ca-288f4b7dc19e"
+        }
+      ],
+      "starting_versions": {
+        "checks": "0addb6e1d0747fa9bfd1366b291555f672618182d4b9cf78eb82a543a7c6f1be",
+        "main_prompt": "fb6133ee810e74b475816582396a22710e5b0b04cad4db85c726c12802ae4f73",
+        "verifier": "fusion-fixed-ui-stock-v5-exact-collinear"
+      },
+      "ending_versions": {
+        "checks": "0addb6e1d0747fa9bfd1366b291555f672618182d4b9cf78eb82a543a7c6f1be",
+        "main_prompt": "fb6133ee810e74b475816582396a22710e5b0b04cad4db85c726c12802ae4f73",
+        "verifier": "fusion-fixed-ui-stock-v7-explicit-stock-regeneration"
+      },
+      "attempts": 7,
+      "simulation_passes": 3,
+      "simulation_failures": 0,
+      "verification_unknown": 4,
+      "collection_invalidated": 3,
+      "check_rejections": 0,
+      "verified_candidates": [
+        {
+          "job_id": "demo-umc-umc-11-recovery3",
+          "attempt": 1,
+          "at": "2026-09-13T09:01:04.121036+00:00",
+          "machining_seconds": 4242.119344,
+          "candidate_digest": "89922baa83f2191b8decea6b78acde3ad35930f2262fd007a4efde0722c8e31e",
+          "evidence_count": 100,
+          "manual_nomination": false
+        },
+        {
+          "job_id": "demo-umc-umc-11-recovery4",
+          "attempt": 1,
+          "at": "2026-09-13T09:06:56.146482+00:00",
+          "machining_seconds": 4242.119344,
+          "candidate_digest": "89922baa83f2191b8decea6b78acde3ad35930f2262fd007a4efde0722c8e31e",
+          "evidence_count": 106,
+          "manual_nomination": false
+        },
+        {
+          "job_id": "demo-umc-umc-11-recovery5",
+          "attempt": 1,
+          "at": "2026-09-13T09:16:17.802260+00:00",
+          "machining_seconds": 2357.727194,
+          "candidate_digest": "a78edd3f6bdf5da79db90f04e8d05b753977c9734aa625bd065c61487ce547ec",
+          "evidence_count": 109,
+          "manual_nomination": true
+        }
+      ],
+      "learning_changes": [],
+      "first_verified_seconds": 4242.119344,
+      "best_verified_seconds": 2357.727194,
+      "same_part_improvement_percent": 44.4210074538629,
+      "has_verified_candidate": true,
+      "completed": true,
+      "job_runs": 6,
+      "incomplete_job_runs": 4
+    },
+    {
+      "drawing_identity": "354cd0da9d00fbf0427507b231243423dcf4f9de09417d517a4c65ee31ddde55",
+      "drawing_hashes": [
+        "d0351e3f31d722f76ac684c46fd55a4d2aed862ddecac07f711f899f330287b3"
+      ],
+      "jobs": [
+        {
+          "job_id": "demo-umc-umc-12",
+          "status": "incomplete",
+          "reason": "ValueError: cad needs clarification: Confirm that the UMC12 PDF supersedes setup.stock.precondition and the incompatible setup.simulation_assumptions. The drawing specifies a 72 \u00d7 68 mm upper envelope, one 28 mm-wide \u00d7 24 mm-deep clevis channel, coaxial \u00d816 ear bores, a left \u00d822 \u00d7 3 mm counterbore, four 8 mm-deep side capsules, and two \u00d816 \u00d7 16 mm-deep end ports. The setup instead specifies a 64 \u00d7 72 mm upper support, three top channels, two side obrounds, and different feature depths. These instructions cannot both define the same target.",
+          "collection_warning": null,
+          "manual_trial_nomination": null,
+          "manifest_path": "/Users/touko/work/helios-one/repos/coreweavehack/runs/demo-umc-umc-12/manifest.json",
+          "manifest_sha256": "4747439727a71ad242b72324f7ed8cd132bcf11db3375c62eb444b68f458931b",
+          "weave_recorded": true,
+          "weave_url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a099e0-8f41-76fe-94d7-f6ecd5c92bba"
+        },
+        {
+          "job_id": "demo-umc-umc-12-recovery1",
+          "status": "completed",
+          "reason": "Supervisor selected the best verified plan",
+          "collection_warning": null,
+          "manual_trial_nomination": null,
+          "manifest_path": "/Users/touko/work/helios-one/repos/coreweavehack/runs/demo-umc-umc-12-recovery1/manifest.json",
+          "manifest_sha256": "8dba65b7949179e95c0df13914c6c9b60f75312f451cc7157666c2ed455bf938",
+          "weave_recorded": true,
+          "weave_url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a099e4-2c29-7281-b519-1ad9545f6003"
+        }
+      ],
+      "starting_versions": {
+        "checks": "0addb6e1d0747fa9bfd1366b291555f672618182d4b9cf78eb82a543a7c6f1be",
+        "main_prompt": "fb6133ee810e74b475816582396a22710e5b0b04cad4db85c726c12802ae4f73",
+        "verifier": "fusion-fixed-ui-stock-v6-stock-generation-ready"
+      },
+      "ending_versions": {
+        "checks": "0addb6e1d0747fa9bfd1366b291555f672618182d4b9cf78eb82a543a7c6f1be",
+        "main_prompt": "fb6133ee810e74b475816582396a22710e5b0b04cad4db85c726c12802ae4f73",
+        "verifier": "fusion-fixed-ui-stock-v6-stock-generation-ready"
+      },
+      "attempts": 3,
+      "simulation_passes": 3,
+      "simulation_failures": 0,
+      "verification_unknown": 0,
+      "collection_invalidated": 0,
+      "check_rejections": 0,
+      "verified_candidates": [
+        {
+          "job_id": "demo-umc-umc-12-recovery1",
+          "attempt": 2,
+          "at": "2026-09-13T08:38:47.700054+00:00",
+          "machining_seconds": 944.08957,
+          "candidate_digest": "b3309a7cebfa98c36790e485d60dbb0eb478f3b2ab7ac820e03f4c54ad68bbff",
+          "evidence_count": 61,
+          "manual_nomination": false
+        },
+        {
+          "job_id": "demo-umc-umc-12-recovery1",
+          "attempt": 3,
+          "at": "2026-09-13T08:41:23.495458+00:00",
+          "machining_seconds": 929.289544,
+          "candidate_digest": "34a780e660a7b5b2db005c6f6058618c95644aba8c139f00f7f235754a30fcdd",
+          "evidence_count": 64,
+          "manual_nomination": false
+        },
+        {
+          "job_id": "demo-umc-umc-12-recovery1",
+          "attempt": 4,
+          "at": "2026-09-13T08:43:58.566423+00:00",
+          "machining_seconds": 908.965929,
+          "candidate_digest": "66da8012cb2e77bdc51dc4c46a25b6b7a396bca6e9a6504638dfcc504a9b4595",
+          "evidence_count": 61,
+          "manual_nomination": false
+        }
+      ],
+      "learning_changes": [],
+      "first_verified_seconds": 944.08957,
+      "best_verified_seconds": 908.965929,
+      "same_part_improvement_percent": 3.7203716804116396,
+      "has_verified_candidate": true,
+      "completed": true,
+      "job_runs": 2,
+      "incomplete_job_runs": 1
+    }
+  ],
+  "recorded_version_reuse": [
+    {
+      "from_drawing": "ba76d8acac247295a15b9d9617bc59a3632e7aaafbc30d601793e8c25a488e6c",
+      "to_drawing": "772b16378f019d4a498fdd944ff3faff1f2f8a4ec2c03a078da8389e1cd5de54",
+      "kind": "main_prompt",
+      "version": "481a12b310d2bc21062918bc70b2154d6082b1e956bf6c62d1e3b32a7a2eb761",
+      "meaning": "Recorded next drawing starts with preceding ending version; not causal benefit"
+    },
+    {
+      "from_drawing": "772b16378f019d4a498fdd944ff3faff1f2f8a4ec2c03a078da8389e1cd5de54",
+      "to_drawing": "912534a78a0c383972345e041a1229d21af7fff30f24a77eb26e9d598101c10f",
+      "kind": "main_prompt",
+      "version": "481a12b310d2bc21062918bc70b2154d6082b1e956bf6c62d1e3b32a7a2eb761",
+      "meaning": "Recorded next drawing starts with preceding ending version; not causal benefit"
+    },
+    {
+      "from_drawing": "772b16378f019d4a498fdd944ff3faff1f2f8a4ec2c03a078da8389e1cd5de54",
+      "to_drawing": "912534a78a0c383972345e041a1229d21af7fff30f24a77eb26e9d598101c10f",
+      "kind": "checks",
+      "version": "0addb6e1d0747fa9bfd1366b291555f672618182d4b9cf78eb82a543a7c6f1be",
+      "meaning": "Recorded next drawing starts with preceding ending version; not causal benefit"
+    },
+    {
+      "from_drawing": "912534a78a0c383972345e041a1229d21af7fff30f24a77eb26e9d598101c10f",
+      "to_drawing": "20be53637f702d0a8397a4423ab90815a5b28359bbf183e8e11aac4d070250e8",
+      "kind": "main_prompt",
+      "version": "05e8cc6ca1cb6f7cdc8ba4f2a7dc9d489828f5140b11219c2c506dc0ad3bc881",
+      "meaning": "Recorded next drawing starts with preceding ending version; not causal benefit"
+    },
+    {
+      "from_drawing": "912534a78a0c383972345e041a1229d21af7fff30f24a77eb26e9d598101c10f",
+      "to_drawing": "20be53637f702d0a8397a4423ab90815a5b28359bbf183e8e11aac4d070250e8",
+      "kind": "checks",
+      "version": "0addb6e1d0747fa9bfd1366b291555f672618182d4b9cf78eb82a543a7c6f1be",
+      "meaning": "Recorded next drawing starts with preceding ending version; not causal benefit"
+    },
+    {
+      "from_drawing": "20be53637f702d0a8397a4423ab90815a5b28359bbf183e8e11aac4d070250e8",
+      "to_drawing": "f2ea02f21108299235602e2caf82b2e695b9a9f71e1897870c407f1354001cc8",
+      "kind": "main_prompt",
+      "version": "05e8cc6ca1cb6f7cdc8ba4f2a7dc9d489828f5140b11219c2c506dc0ad3bc881",
+      "meaning": "Recorded next drawing starts with preceding ending version; not causal benefit"
+    },
+    {
+      "from_drawing": "20be53637f702d0a8397a4423ab90815a5b28359bbf183e8e11aac4d070250e8",
+      "to_drawing": "f2ea02f21108299235602e2caf82b2e695b9a9f71e1897870c407f1354001cc8",
+      "kind": "checks",
+      "version": "0addb6e1d0747fa9bfd1366b291555f672618182d4b9cf78eb82a543a7c6f1be",
+      "meaning": "Recorded next drawing starts with preceding ending version; not causal benefit"
+    },
+    {
+      "from_drawing": "f2ea02f21108299235602e2caf82b2e695b9a9f71e1897870c407f1354001cc8",
+      "to_drawing": "b330612279075250e098a56ffd6180eed86d223d6c2a31fd294fb696b7ef8bec",
+      "kind": "main_prompt",
+      "version": "05e8cc6ca1cb6f7cdc8ba4f2a7dc9d489828f5140b11219c2c506dc0ad3bc881",
+      "meaning": "Recorded next drawing starts with preceding ending version; not causal benefit"
+    },
+    {
+      "from_drawing": "f2ea02f21108299235602e2caf82b2e695b9a9f71e1897870c407f1354001cc8",
+      "to_drawing": "b330612279075250e098a56ffd6180eed86d223d6c2a31fd294fb696b7ef8bec",
+      "kind": "checks",
+      "version": "0addb6e1d0747fa9bfd1366b291555f672618182d4b9cf78eb82a543a7c6f1be",
+      "meaning": "Recorded next drawing starts with preceding ending version; not causal benefit"
+    },
+    {
+      "from_drawing": "b330612279075250e098a56ffd6180eed86d223d6c2a31fd294fb696b7ef8bec",
+      "to_drawing": "65f7bb71ed791a763d5dda56dbd553bb369eb5a6799623d500c6330c20b39918",
+      "kind": "main_prompt",
+      "version": "05e8cc6ca1cb6f7cdc8ba4f2a7dc9d489828f5140b11219c2c506dc0ad3bc881",
+      "meaning": "Recorded next drawing starts with preceding ending version; not causal benefit"
+    },
+    {
+      "from_drawing": "b330612279075250e098a56ffd6180eed86d223d6c2a31fd294fb696b7ef8bec",
+      "to_drawing": "65f7bb71ed791a763d5dda56dbd553bb369eb5a6799623d500c6330c20b39918",
+      "kind": "checks",
+      "version": "0addb6e1d0747fa9bfd1366b291555f672618182d4b9cf78eb82a543a7c6f1be",
+      "meaning": "Recorded next drawing starts with preceding ending version; not causal benefit"
+    },
+    {
+      "from_drawing": "65f7bb71ed791a763d5dda56dbd553bb369eb5a6799623d500c6330c20b39918",
+      "to_drawing": "908154f962908d911ed445bea9f23e98786a496e4753d94fcd44984a95435c1c",
+      "kind": "main_prompt",
+      "version": "fb6133ee810e74b475816582396a22710e5b0b04cad4db85c726c12802ae4f73",
+      "meaning": "Recorded next drawing starts with preceding ending version; not causal benefit"
+    },
+    {
+      "from_drawing": "65f7bb71ed791a763d5dda56dbd553bb369eb5a6799623d500c6330c20b39918",
+      "to_drawing": "908154f962908d911ed445bea9f23e98786a496e4753d94fcd44984a95435c1c",
+      "kind": "checks",
+      "version": "0addb6e1d0747fa9bfd1366b291555f672618182d4b9cf78eb82a543a7c6f1be",
+      "meaning": "Recorded next drawing starts with preceding ending version; not causal benefit"
+    },
+    {
+      "from_drawing": "908154f962908d911ed445bea9f23e98786a496e4753d94fcd44984a95435c1c",
+      "to_drawing": "e0ccb1c55bfb0a40a132216548f7f89b805b3e33d9a20693f6e812c4228f871e",
+      "kind": "main_prompt",
+      "version": "fb6133ee810e74b475816582396a22710e5b0b04cad4db85c726c12802ae4f73",
+      "meaning": "Recorded next drawing starts with preceding ending version; not causal benefit"
+    },
+    {
+      "from_drawing": "908154f962908d911ed445bea9f23e98786a496e4753d94fcd44984a95435c1c",
+      "to_drawing": "e0ccb1c55bfb0a40a132216548f7f89b805b3e33d9a20693f6e812c4228f871e",
+      "kind": "checks",
+      "version": "0addb6e1d0747fa9bfd1366b291555f672618182d4b9cf78eb82a543a7c6f1be",
+      "meaning": "Recorded next drawing starts with preceding ending version; not causal benefit"
+    },
+    {
+      "from_drawing": "e0ccb1c55bfb0a40a132216548f7f89b805b3e33d9a20693f6e812c4228f871e",
+      "to_drawing": "3af452104c98120bf3d8f2c70cea4c4c7ddddc8f4f3e59707261d531cbb0fa8c",
+      "kind": "main_prompt",
+      "version": "fb6133ee810e74b475816582396a22710e5b0b04cad4db85c726c12802ae4f73",
+      "meaning": "Recorded next drawing starts with preceding ending version; not causal benefit"
+    },
+    {
+      "from_drawing": "e0ccb1c55bfb0a40a132216548f7f89b805b3e33d9a20693f6e812c4228f871e",
+      "to_drawing": "3af452104c98120bf3d8f2c70cea4c4c7ddddc8f4f3e59707261d531cbb0fa8c",
+      "kind": "checks",
+      "version": "0addb6e1d0747fa9bfd1366b291555f672618182d4b9cf78eb82a543a7c6f1be",
+      "meaning": "Recorded next drawing starts with preceding ending version; not causal benefit"
+    },
+    {
+      "from_drawing": "3af452104c98120bf3d8f2c70cea4c4c7ddddc8f4f3e59707261d531cbb0fa8c",
+      "to_drawing": "58b1918201304eb07a831e99821e434eac219405d8db04392e0e9f582416690f",
+      "kind": "main_prompt",
+      "version": "fb6133ee810e74b475816582396a22710e5b0b04cad4db85c726c12802ae4f73",
+      "meaning": "Recorded next drawing starts with preceding ending version; not causal benefit"
+    },
+    {
+      "from_drawing": "3af452104c98120bf3d8f2c70cea4c4c7ddddc8f4f3e59707261d531cbb0fa8c",
+      "to_drawing": "58b1918201304eb07a831e99821e434eac219405d8db04392e0e9f582416690f",
+      "kind": "checks",
+      "version": "0addb6e1d0747fa9bfd1366b291555f672618182d4b9cf78eb82a543a7c6f1be",
+      "meaning": "Recorded next drawing starts with preceding ending version; not causal benefit"
+    },
+    {
+      "from_drawing": "58b1918201304eb07a831e99821e434eac219405d8db04392e0e9f582416690f",
+      "to_drawing": "476f1153078ced304d17c02031e49f7b51dbe003c0dd974868ece26d54d6801b",
+      "kind": "main_prompt",
+      "version": "fb6133ee810e74b475816582396a22710e5b0b04cad4db85c726c12802ae4f73",
+      "meaning": "Recorded next drawing starts with preceding ending version; not causal benefit"
+    },
+    {
+      "from_drawing": "58b1918201304eb07a831e99821e434eac219405d8db04392e0e9f582416690f",
+      "to_drawing": "476f1153078ced304d17c02031e49f7b51dbe003c0dd974868ece26d54d6801b",
+      "kind": "checks",
+      "version": "0addb6e1d0747fa9bfd1366b291555f672618182d4b9cf78eb82a543a7c6f1be",
+      "meaning": "Recorded next drawing starts with preceding ending version; not causal benefit"
+    },
+    {
+      "from_drawing": "476f1153078ced304d17c02031e49f7b51dbe003c0dd974868ece26d54d6801b",
+      "to_drawing": "a066218b572d5680df4c74fc52a3bbc2d6c463ea74eb40e8c8ce9fe9a6378299",
+      "kind": "main_prompt",
+      "version": "fb6133ee810e74b475816582396a22710e5b0b04cad4db85c726c12802ae4f73",
+      "meaning": "Recorded next drawing starts with preceding ending version; not causal benefit"
+    },
+    {
+      "from_drawing": "476f1153078ced304d17c02031e49f7b51dbe003c0dd974868ece26d54d6801b",
+      "to_drawing": "a066218b572d5680df4c74fc52a3bbc2d6c463ea74eb40e8c8ce9fe9a6378299",
+      "kind": "checks",
+      "version": "0addb6e1d0747fa9bfd1366b291555f672618182d4b9cf78eb82a543a7c6f1be",
+      "meaning": "Recorded next drawing starts with preceding ending version; not causal benefit"
+    },
+    {
+      "from_drawing": "a066218b572d5680df4c74fc52a3bbc2d6c463ea74eb40e8c8ce9fe9a6378299",
+      "to_drawing": "354cd0da9d00fbf0427507b231243423dcf4f9de09417d517a4c65ee31ddde55",
+      "kind": "main_prompt",
+      "version": "fb6133ee810e74b475816582396a22710e5b0b04cad4db85c726c12802ae4f73",
+      "meaning": "Recorded next drawing starts with preceding ending version; not causal benefit"
+    },
+    {
+      "from_drawing": "a066218b572d5680df4c74fc52a3bbc2d6c463ea74eb40e8c8ce9fe9a6378299",
+      "to_drawing": "354cd0da9d00fbf0427507b231243423dcf4f9de09417d517a4c65ee31ddde55",
+      "kind": "checks",
+      "version": "0addb6e1d0747fa9bfd1366b291555f672618182d4b9cf78eb82a543a7c6f1be",
+      "meaning": "Recorded next drawing starts with preceding ending version; not causal benefit"
+    }
+  ],
+  "limitations": [
+    "Different drawings do not establish a causal learning curve.",
+    "Repeated verifications/recovery jobs are counted as work, never as additional parts.",
+    "First/best comparison uses recorded completed pass verdicts within one drawing; setup/verifier changes can confound optimization claims.",
+    "Same version reuse proves configuration continuity, not that a lesson caused improvement.",
+    "Manifest hashes snapshot report inputs; this report does not re-run geometry or refresh Weave."
+  ]
+}

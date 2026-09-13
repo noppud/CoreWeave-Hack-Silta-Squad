@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "status": "published",
+  "title": "Learned checks: retained-case replay",
+  "scope": "Historical Fusion labels, current isolated check replay, no promotion gate",
+  "dataset": {
+    "case_count": 6,
+    "valid_count": 4,
+    "invalid_count": 2,
+    "ref": "5e915c7ad2a8d3dd1a88e0a03770b35f9ac684d06c55cb60b738c2e200aa2569"
+  },
+  "variants": [
+    {
+      "name": "baseline",
+      "version": "ba1c38a3a7c8b6d63f1cde09c7b552f5a0cccbd19a40f71648932bcadca84752",
+      "caught_invalid": 0,
+      "false_rejections": 0,
+      "median_runtime_ms": 23.99902103934437,
+      "weave_url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a09919-b794-7d72-8a56-f8fe3c7fe91f"
+    },
+    {
+      "name": "learned",
+      "version": "a58a0fe0eba66ea111cb3f74259eebd8efdd3b5f8432001363e76ad311a560b1",
+      "caught_invalid": 2,
+      "false_rejections": 0,
+      "median_runtime_ms": 43.33339550066739,
+      "weave_url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a09919-c839-754e-b73f-6c17e0a4a7e7"
+    }
+  ],
+  "rows": [
+    {
+      "case_id": "learning-soft-jaw-a3-attempt-1",
+      "label": "invalid",
+      "baseline_passed": true,
+      "learned_passed": false,
+      "baseline_runtime_ms": 43.809458962641656,
+      "learned_runtime_ms": 44.90983299911022,
+      "issues": [
+        "nc-0 line 56: T1 cutter at G54 (75.141, 1.524, -6.668) mm intersects finished X max side beyond the linear tolerance under the pre-sized blank/internal-features-only contract; endpoint-only check."
+      ]
+    },
+    {
+      "case_id": "learning-part-b1-attempt-2",
+      "label": "invalid",
+      "baseline_passed": true,
+      "learned_passed": false,
+      "baseline_runtime_ms": 44.86187489237636,
+      "learned_runtime_ms": 44.38745800871402,
+      "issues": [
+        "nc-0 line 24: T1 cutter at G54 (-81.965, -2.000, -10.000) mm intersects finished X min side beyond the linear tolerance under the pre-sized blank/internal-features-only contract; endpoint-only check."
+      ]
+    },
+    {
+      "case_id": "learning-soft-jaw-a5-attempt-2",
+      "label": "valid",
+      "baseline_passed": true,
+      "learned_passed": true,
+      "baseline_runtime_ms": 23.978292010724545,
+      "learned_runtime_ms": 43.143499991856515,
+      "issues": []
+    },
+    {
+      "case_id": "learning-part-b2-attempt-1",
+      "label": "valid",
+      "baseline_passed": true,
+      "learned_passed": true,
+      "baseline_runtime_ms": 23.28141697216779,
+      "learned_runtime_ms": 43.035833979956806,
+      "issues": []
+    },
+    {
+      "case_id": "learning-part-c5-attempt-1",
+      "label": "valid",
+      "baseline_passed": true,
+      "learned_passed": true,
+      "baseline_runtime_ms": 23.56808295007795,
+      "learned_runtime_ms": 40.51462502684444,
+      "issues": []
+    },
+    {
+      "case_id": "learning-part-d1-attempt-2",
+      "label": "valid",
+      "baseline_passed": true,
+      "learned_passed": true,
+      "baseline_runtime_ms": 24.019750067964196,
+      "learned_runtime_ms": 43.52329100947827,
+      "issues": []
+    }
+  ],
+  "limitations": [
+    "Offline replay on six selected historical cases, not a held-out generalization test.",
+    "Labels come from retained completed Fusion verdicts and hashed evidence; historical verifier implementation bytes were not retained, so this is not a frozen-verifier benchmark or promotion gate.",
+    "Replay does not rerun Fusion. Timing includes isolated check execution and artifact preparation; it is not CNC machining time or measured end-to-end speedup.",
+    "Prompt evidence is historical within-part candidate improvement, not a controlled prompt-policy comparison.",
+    "Checks cover narrow three-axis fixture and finished-side conditions; they do not certify manufacturing or cover the indexed demo machine."
+  ],
+  "publication": {
+    "status": "published",
+    "dataset_uri": "weave:///silta/coreweave-hack-silta-squad/object/retained-fusion-checks-5e915c7ad2a8:QqH3DXPa7evyxWvqooj8SwOSnLwgIHDq6bwXB8ZIyu4",
+    "dataset_ref": "5e915c7ad2a8d3dd1a88e0a03770b35f9ac684d06c55cb60b738c2e200aa2569",
+    "result_digest": "9ba3e059f401f9b20ce407f58f7a3d762582525fe6fa7e880037a8bab95f0958",
+    "weave_refs": [
+      "weave:///silta/coreweave-hack-silta-squad/call/01a09919-b794-7d72-8a56-f8fe3c7fe91f",
+      "weave:///silta/coreweave-hack-silta-squad/call/01a09919-c839-754e-b73f-6c17e0a4a7e7"
+    ],
+    "baseline_ref": "ba1c38a3a7c8b6d63f1cde09c7b552f5a0cccbd19a40f71648932bcadca84752",
+    "proposed_ref": "a58a0fe0eba66ea111cb3f74259eebd8efdd3b5f8432001363e76ad311a560b1",
+    "readback_finalized": true
+  },
+  "check_source": {
+    "baseline": "\"\"\"Learned manufacturing checks. Initially there are none.\"\"\"\n\n\ndef check(data):\n    return {\"passed\": True, \"issues\": []}\n",
+    "learned": "\"\"\"Narrow cutter endpoint checks; no swept-volume or manufacturing certification.\n\nPreserves the prepared-parallel check and adds finished-side protection only\nfor the explicit pre-sized blank/internal-features-only setup contract.\nUnsupported NC modes or setups are outside coverage; passing is not approval.\n\"\"\"\nimport hashlib\nimport json\nimport math\nimport re\n\nFIXTURE = '95089aef15dd1e52bb91f9466723a1c00ed1716b00ed14fdb725a81c98a61936'\nPOST = '7793e1d36e12c63e61535f112fddb570076058820839b9459f736cf40e36c3c4'\nFRAME = 'G54 stock top center; fixture already positioned relative to accepted part. Import at identity, do not re-close or re-position individual jaw components.'\nINTERNAL_ONLY = 'Assume pre-sized AL6061 jaw blank meets finished outer dimensions and drawing tolerance before this job; mill internal obround features only. Deburring remains final manual step.'\nBOXES = [((-76.2, -25.4, -63.5), (76.2, -12.7, -25.4)),\n         ((-76.2, 12.7, -63.5), (76.2, 25.4, -25.4))]\nWORD = re.compile(r'([A-Z])([+-]?(?:\\d+(?:\\.\\d*)?|\\.\\d+))')\nEPS = 0.005\n\n\ndef read_artifact(ref):\n    with open(ref['path'], 'rb') as stream:\n        content = stream.read()\n    if hashlib.sha256(content).hexdigest() != ref['sha256']:\n        raise ValueError('artifact SHA256 mismatch')\n    return content\n\n\ndef endpoints(text):\n    # Validate the entire supported lexical/mode subset before yielding.\n    # No macros, cycles, subprograms, rotary axes, coordinate transforms,\n    # incremental moves or cutter compensation. G53 positions are discarded.\n    blocks = []\n    allowed_g = {0, 1, 2, 3, 17, 20, 21, 40, 43, 49, 53, 54, 90, 94}\n    allowed_m = {0, 1, 3, 4, 5, 6, 8, 9, 30}\n    for line_no, raw in enumerate(text.splitlines(), 1):\n        line = re.sub(r'\\([^()]*\\)', '', raw.upper()).split(';', 1)[0].strip()\n        if not line or line == '%':\n            continue\n        words = WORD.findall(line)\n        if WORD.sub('', line).strip():\n            return\n        block = {}\n        for letter, value in words:\n            if letter not in 'NGMXYZIJKRFSTHO':\n                return\n            value = float(value)\n            if not math.isfinite(value):\n                return\n            block.setdefault(letter, []).append(value)\n        if any(len(v) > 1 for k, v in block.items() if k not in ('G', 'M')):\n            return\n        if not set(block.get('G', [])).issubset(allowed_g):\n            return\n        if not set(block.get('M', [])).issubset(allowed_m):\n            return\n        gs = block.get('G', [])\n        if any(sum(g in group for g in gs) > 1 for group in\n               ({0, 1, 2, 3}, {20, 21}, {43, 49})):\n            return\n        blocks.append((line_no, block))\n    scale = None\n    absolute = False\n    plane = False\n    wcs = False\n    motion = None\n    pending_tool = None\n    tool = None\n    length_offset = None\n    pos = dict.fromkeys('XYZ')\n    for line_no, b in blocks:\n        gs = b.get('G', [])\n        ms = b.get('M', [])\n        if 90 in gs:\n            absolute = True\n        if 17 in gs:\n            plane = True\n        if 20 in gs or 21 in gs:\n            new_scale = 25.4 if 20 in gs else 1.0\n            if scale != new_scale:\n                pos = dict.fromkeys('XYZ')\n            scale = new_scale\n        if 54 in gs:\n            wcs = True\n        if 'T' in b:\n            pending_tool = b['T'][0]\n        if 6 in ms:\n            tool = pending_tool\n            length_offset = None\n            pos = dict.fromkeys('XYZ')\n        if 49 in gs:\n            length_offset = None\n            pos['Z'] = None\n        if 43 in gs:\n            length_offset = b.get('H', [None])[0]\n            pos['Z'] = None\n        elif 'H' in b:\n            return\n        for g in gs:\n            if g in (0, 1, 2, 3):\n                motion = g\n        if 53 in gs:\n            pos = dict.fromkeys('XYZ')\n            continue\n        if not (absolute and plane and wcs and scale is not None):\n            pos = dict.fromkeys('XYZ')\n            continue\n        for axis in 'XYZ':\n            if axis in b:\n                pos[axis] = b[axis][0] * scale\n        if (any(a in b for a in 'XYZ') and motion in (0, 1, 2, 3)\n                and tool is not None and length_offset == tool\n                and all(pos[a] is not None for a in 'XYZ')):\n            yield line_no, tool, tuple(pos[a] for a in 'XYZ')\n        if 30 in ms:\n            return\n\n\ndef finished_sides(setup, constraints):\n    stock = setup.get('stock', {})\n    if stock.get('precondition') != INTERNAL_ONLY:\n        return None\n    # This explicit scope is tied to the inspected blank and model orientation.\n    if (stock.get('local_min_mm') != [-76.2, -25.4, -25.4]\n            or stock.get('local_max_mm') != [76.2, 25.4, 0]\n            or stock.get('dimensions_mm') != [152.4, 50.8, 25.4]\n            or setup['work_coordinate_system'].get('axes') !=\n            'X along152.4mm length,Y along50.8mm width,Z upward; right handed'):\n        return None\n    tol = float(constraints['tolerances']['linear_plus_minus_mm'])\n    if not math.isfinite(tol) or tol < 0:\n        raise ValueError('invalid linear tolerance')\n    return stock['local_min_mm'], stock['local_max_mm'], tol\n\n\ndef side_overlap(x, y, z, radius, flute, scope):\n    lo, hi, tol = scope\n    # Require overlap well inside the stock's vertical interval. This avoids\n    # rejecting clearance moves, bottom breakthrough or top-face tangency.\n    if min(z + flute, hi[2] - tol) - max(z, lo[2] + tol) <= EPS:\n        return None\n    # Test a finite vertical side patch inset by the drawing tolerance.\n    # Finding the patch strictly inside the cutter proves intrusion beyond\n    # tolerance without interpreting arc sweeps or simulating stock removal.\n    for axis, c, along, lower, upper, a0, a1 in (\n            ('X', x, y, lo[0], hi[0], lo[1], hi[1]),\n            ('Y', y, x, lo[1], hi[1], lo[0], hi[0])):\n        if a1 - a0 <= 2 * tol or upper - lower <= 2 * tol:\n            continue\n        distance_along = max(a0 + tol - along, 0.0, along - (a1 - tol))\n        for label, nominal, inset in (\n                ('min', lower, lower + tol),\n                ('max', upper, upper - tol)):\n            # Both the nominal face and its tolerance-inset patch must be\n            # inside the cutter. An internal pocket near a side is allowed.\n            if (math.hypot(c - nominal, distance_along) < radius - EPS\n                    and math.hypot(c - inset, distance_along) < radius - EPS):\n                return axis + ' ' + label\n    return None\n\n\ndef check(data: dict):\n    issues = []\n    try:\n        constraints = data['constraints']\n        setup = constraints['setup']\n        fixture = setup.get('fixture', {})\n        wcs = setup.get('work_coordinate_system', {})\n        if (fixture.get('artifact', {}).get('sha256') != FIXTURE\n                or fixture.get('coordinate_frame') != FRAME\n                or wcs.get('name') != 'G54'\n                or wcs.get('origin') != 'center of blank top face'\n                or wcs.get('work_offset') != 1\n                or constraints['machine'].get('axes') != 3):\n            return {'passed': True, 'issues': []}\n        candidate = data['candidate']\n        artifacts = candidate['artifacts']\n        analysis = json.loads(read_artifact(artifacts['analysis']))\n        if analysis.get('input_digest') != data['input_digest']:\n            raise ValueError('analysis input binding mismatch')\n        if len(analysis.get('inspection', {}).get('setups', [])) != 1:\n            return {'passed': True, 'issues': []}\n        if analysis.get('postprocessor', {}).get('sha256') != POST:\n            return {'passed': True, 'issues': []}\n        scope = finished_sides(setup, constraints)\n        cutters = {}\n        ambiguous = set()\n        for op in analysis['inspection']['operations']:\n            t = op['tool']\n            if t.get('type') != 'flat end mill':\n                continue\n            unit = {'inches': 25.4, 'millimeters': 1.0}.get(t.get('unit'))\n            if unit is None:\n                continue\n            geometry = t['geometry']\n            if float(geometry.get('RE', 0)) != 0:\n                continue\n            number = t['post-process']['number']\n            shape = (float(geometry['DC']) * unit / 2,\n                     float(geometry['LCF']) * unit)\n            if not all(math.isfinite(v) and v > EPS for v in shape):\n                continue\n            if number in cutters and cutters[number] != shape:\n                ambiguous.add(number)\n            cutters[number] = shape\n        nc_refs = [(k, v) for k, v in artifacts.items() if k.startswith('nc-')]\n        if not nc_refs:\n            raise ValueError('posted NC artifact missing')\n        for name, ref in nc_refs:\n            text = read_artifact(ref).decode('ascii')\n            for line, tool, (x, y, z) in endpoints(text):\n                if tool not in cutters or tool in ambiguous:\n                    continue\n                radius, flute = cutters[tool]\n                prefix = (f'{name} line {line}: T{tool:g} cutter at '\n                          f'G54 ({x:.3f}, {y:.3f}, {z:.3f}) mm ')\n                for index, (lo, hi) in enumerate(BOXES, 1):\n                    overlap_z = min(z + flute, hi[2]) - max(z, lo[2])\n                    dx = max(lo[0] - x, 0.0, x - hi[0])\n                    dy = max(lo[1] - y, 0.0, y - hi[1])\n                    if overlap_z > EPS and math.hypot(dx, dy) < radius - EPS:\n                        issues.append(prefix + 'overlaps prepared solid parallel '\n                                      f'envelope {index}; endpoint-only check, '\n                                      'not full simulation.')\n                        break\n                if scope is not None:\n                    side = side_overlap(x, y, z, radius, flute, scope)\n                    if side is not None:\n                        issues.append(prefix + f'intersects finished {side} side '\n                                      'beyond the linear tolerance under the '\n                                      'pre-sized blank/internal-features-only '\n                                      'contract; endpoint-only check.')\n                if issues:\n                    break\n    except (OSError, ValueError, KeyError, TypeError, AttributeError, OverflowError) as exc:\n        issues.append('Cutter endpoint check unavailable: ' + str(exc))\n    return {'passed': not issues, 'issues': issues}\n"
+  },
+  "prompt_source": "You are the CAD/CAM planning agent. Read the supplied drawing/PDF and create\nits dimensioned solid CAD with the specified physical material. Once accepted,\nkeep that target fixed. Plan machining using the supplied machine, tools, stock,\nfixture and limits. Use simulation feedback to repair failures and the judge's\ninstructions to improve machining time and cost. Return the requested Fusion\nPython source; the application executes it and measures the result. Report\nmissing critical dimensions instead of inventing them.\n\nFor machining-time optimization, inspect feed-motion categories as well as\ncutting feed, rapid/linking motion and tool changes. When ramps dominate, compare\nthe assigned ramp feed with the supplied tool's applicable simulation preset and\nfixed limits, checking units. A bounded ramp-feed adjustment with unchanged\nengagement and path geometry is an optimization idea that requires fresh\nverification. In one verified comparison, this reduced estimated machining time\nwith unchanged path distances; that observation does not establish a universal\nfeed value or physical cutting recommendation. Retain the best verified candidate\nand compare using unchanged scoring assumptions. Report discrepancies between\nUI statistics and controller estimates without changing the scoring. Distinguish\ninternal CAM verification and stock conformity from posted-NC or cutting-physics\ncertification.\n\nFor profile ramps, inspect whether the maximum ramp Z-stepdown cap makes the\nactual descent shallower than the permitted ramp angle. Where supplied engagement\nlimits allow, relaxing that cap while preserving the permitted angle and feeds\nis an optimization idea requiring fresh machine and stock-conformity verification.\nIn one verified comparison, changing a counterbore cap from 1 mm to 2 mm at an\nunchanged 2-degree angle shortened feed travel and reduced estimated total time\nfrom 228.181869 s to 211.850339 s. These values are case-specific, not defaults.\nOnce the actual ramp follows the permitted angle, further cap increases have no\nsupported benefit from this mechanism.\n",
+  "prompt_evidence": [
+    {
+      "part": "A",
+      "before_seconds": 384.86,
+      "after_seconds": 211.037,
+      "scope": "Historical verified ramp-feed candidate change",
+      "weave_url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a098a9-7350-7b4b-adb4-e5d9c997f8c4"
+    },
+    {
+      "part": "C",
+      "before_seconds": 228.182,
+      "after_seconds": 211.85,
+      "scope": "Historical verified ramp-stepdown candidate change",
+      "weave_url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a098c9-7ed1-7b60-81e5-6f877aebfda8"
+    }
+  ]
+}

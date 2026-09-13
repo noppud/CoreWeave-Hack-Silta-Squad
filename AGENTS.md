@@ -13,7 +13,7 @@ Then use the source and evidence relevant to the task:
 Preserve these distinctions:
 
 - Two per-part feedback loops: simulation failures teach checks; the speed judge gives CAM improvement guidance. ARIA's “Loop 4” is a development review, not the runtime judge.
-- The 54-part timeline uses scripted data. Real manufacturing claims require matching run evidence and measurement definitions.
+- The 27-part timeline uses scripted data. Real manufacturing claims require matching run evidence and measurement definitions.
 - Current shared learning updates directly; Weave evaluation-gated promotion is a proposal, not an implemented default merely because evaluation code exists.
 - The current CLI requires drawing artifacts and manufacturing configuration; the demo's text-prompt input is broader product intent.
 - Accepted CAD and manufacturing constraints stay fixed during CAM optimization. Test-gate success does not replace simulation.

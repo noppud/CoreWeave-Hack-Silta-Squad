@@ -1,0 +1,51 @@
+{
+  "source_commit": "efda8d8622c16f86972adfc2daad7ae1a8d34bf0",
+  "files": [
+    {
+      "file": "media/cage-motion.mp4",
+      "bytes": 1709014,
+      "sha256": "a77fca9b830f4c6e8c4938b4e043d5f508f270bed723304ce429864f03fc03b8"
+    },
+    {
+      "file": "media/clevis-motion.mp4",
+      "bytes": 1675132,
+      "sha256": "3d5a5c58c2b1f18e36cf76d895d826867d10022b5a4a091211f8e382eb34c86d"
+    },
+    {
+      "file": "media/film-poster.png",
+      "bytes": 1410759,
+      "sha256": "9086fb7b7104df2ebe507ab3c99033f16d0e95c5678bcdca5083f6c7ebdb39d8"
+    },
+    {
+      "file": "media/octagon-drawing.pdf",
+      "bytes": 8944,
+      "sha256": "7f9b18fcd3c4afd2336a7d0fd86613d65175c8fc83c5cb5e522f0fd131defe43"
+    },
+    {
+      "file": "media/octagon-stage-cad.png",
+      "bytes": 447267,
+      "sha256": "e83b34d4446b0401cf4ae9f1b87979e9dec41a54b4097888842397c6a7b96e11"
+    },
+    {
+      "file": "media/silta-loop-demo.mp4",
+      "bytes": 17823489,
+      "sha256": "2c7c9192d3bfd386b4c785ae09e177c91718557ff78d43dbcfbd53b71669bf28"
+    }
+  ],
+  "clip_edits": {
+    "cage-motion.mp4": {
+      "motion_source": "output/video/umc11-close-capture-r3/machine-playback.mp4",
+      "start_seconds": 80,
+      "motion_duration_seconds": 12,
+      "finished_stock_source": "output/video/umc11-close-capture-r3/finished-stock-orbit.mp4",
+      "finished_stock_duration_seconds": 6
+    },
+    "clevis-motion.mp4": {
+      "motion_source": "output/video/umc12-close-capture/machine-playback.mp4",
+      "start_seconds": 40,
+      "motion_duration_seconds": 12,
+      "finished_stock_source": "output/video/umc12-close-capture/finished-stock-orbit.mp4",
+      "finished_stock_duration_seconds": 6
+    }
+  }
+}
