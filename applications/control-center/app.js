@@ -1,4 +1,4 @@
-let stagedSteps,sourceBlocks,stagedStepDuration;
+let stagedSteps,stagedStepDuration,streamedSource,demoPlaybackAction;
 import {buildWalkthrough,walkthroughOrder,walkthroughKnowledge} from '/walkthrough.mjs';
 import {historyOrder, historyMetrics, timelineSpans, timelinePosition, orderedMachiningTrend} from '/history.mjs';
 import {ARIA_URL, buildAriaPrompt} from '/aria.mjs';
@@ -497,106 +497,125 @@ $('#explorer-dialog').addEventListener('close',()=>{S.view='overview';});
 
 $('#demo-dialog').addEventListener('close',()=>{pauseDemo();demoTimers();});
 const D={index:0,steps:[],playing:false,live:false,session:null,detail:null,version:0};
-function pauseDemo(){$('#demo-scene video')?.pause();D.playing=false;clearTimeout(D.timer);clearInterval(D.blocksTimer);$('#demo-toggle').textContent='Play';}
-function demoTimers(){clearTimeout(D.timer);clearTimeout(D.pollTimer);clearTimeout(D.frameTimer);clearInterval(D.blocksTimer);}
+function pauseDemo(){$('#demo-scene video')?.pause();D.playing=false;clearTimeout(D.timer);clearInterval(D.blocksTimer);}
+function demoTimers(){clearTimeout(D.timer);clearTimeout(D.pollTimer);clearTimeout(D.frameTimer);clearTimeout(D.finishTimer);clearTimeout(D.resultTimer);clearInterval(D.blocksTimer);}
+function rememberDemo(){sessionStorage.setItem('silta-replay:'+D.intake.id,String(D.index));}
 async function beginDemo(resumeSession=null){
-  ({stagedSteps,sourceBlocks,stagedStepDuration}=await import('/staged-replay.mjs'));
-  stopReplay();demoTimers();D.version++;D.live=false;D.fallback=false;D.fallbackComplete=false;D.index=0;D.playing=!resumeSession;
+  ({stagedSteps,stagedStepDuration,streamedSource,demoPlaybackAction}=await import('/staged-replay.mjs'));
+  stopReplay();demoTimers();D.version++;D.live=false;D.fallback=false;D.liveRequested=false;D.reviewPending=false;D.index=0;D.playing=true;
   D.intake=resumeSession?{id:resumeSession.id,drawing:resumeSession.drawing,demo:{run_id:resumeSession.run_id}}:S.intake;
   D.session=resumeSession||await api('/api/demo/start',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:D.intake.id})});
   D.detail=await api('/api/jobs/'+encodeURIComponent(D.intake.demo.run_id));D.steps=stagedSteps(D.detail);
-  if(resumeSession)D.index=Math.max(0,D.steps.findIndex(s=>s.kind==='ready'));
+  const gate=Math.max(0,D.steps.findIndex(s=>s.kind==='ready'));
+  if(resumeSession){const saved=Number(sessionStorage.getItem('silta-replay:'+D.intake.id)||0);D.index=Math.max(0,Math.min(D.steps.length-1,saved));if(resumeSession.status==='playing'||resumeSession.status==='completed'&&D.index<=gate)D.index=gate;}
   history.replaceState(null,'','?replay='+encodeURIComponent(D.intake.id));
-  $('#upload-dialog').close();$('[data-action=demo-prev]').hidden=false;$('#demo-dialog').showModal();$('#demo-body').classList.remove('is-live');$('#demo-title').textContent=D.detail.label;
-  $('#demo-fallback').hidden=true;$('#demo-reset').hidden=true;$('#demo-next').hidden=false;$('#demo-toggle').hidden=false;
+  $('#upload-dialog').close();$('#demo-dialog').showModal();$('#demo-body').classList.remove('is-live');$('#demo-title').textContent=D.detail.label;
+  $('#demo-fallback').hidden=true;$('#demo-reset').hidden=true;
   $('#demo-part').src=D.detail.preview;$('#demo-pdf').removeAttribute('src');
   const version=D.version;api('/api/drawing?path='+encodeURIComponent(D.intake.drawing)+'&page=1').then(p=>{if(version===D.version)$('#demo-pdf').src=p.image;}).catch(()=>{});
   renderDemoStep();pollDemo();
-  if(resumeSession&&['playing','completed'].includes(resumeSession.status))showLiveDemo();
+}
+function showRecordedSimulation(){
+  if(!$('#demo-dialog').open||D.fallback)return;
+  pauseDemo();D.fallback=true;D.fallbackComplete=false;D.reviewPending=false;$('#demo-body').classList.add('is-live');
+  const film=D.detail?.media?.find(v=>v.kind==='machining');
+  if(!film){$('#demo-status').textContent='Simulation recording unavailable';return;}
+  $('#demo-mode').textContent='Fusion · simulation';
+  $('#demo-scene').innerHTML=`<video id="demo-recorded-simulation" autoplay muted playsinline src="${esc(film.url)}"></video>`;
+  $('#demo-fallback').hidden=true;$('#demo-reset').hidden=false;
+  $('#demo-recorded-simulation').addEventListener('ended',()=>{D.fallbackComplete=true;finishDemoSimulation();},{once:true});
 }
 function showLiveDemo(){
-  D.live=true;$('[data-action=demo-prev]').hidden=true;$('#demo-body').classList.add('is-live');$('#demo-mode').textContent='Starting Fusion simulation';
-  $('#demo-scene').innerHTML=empty('Opening live view…');
-  $('#demo-play').hidden=true;$('#demo-next').hidden=true;$('#demo-toggle').hidden=true;$('#demo-fallback').hidden=false;
+  pauseDemo();D.live=true;D.liveRequested=true;$('#demo-body').classList.add('is-live');$('#demo-mode').textContent='Starting Fusion simulation';
+  $('#demo-scene').innerHTML=empty('Opening live view…');$('#demo-fallback').hidden=false;
   demoFrame();
 }
+function advanceDemo(){if(!$('#demo-dialog').open)return;if(D.index<D.steps.length-1){D.index++;D.playing=true;renderDemoStep();}}
+function finishDemoSimulation(){
+  if(D.reviewPending)return;D.reviewPending=true;
+  const version=D.version;
+  D.finishTimer=setTimeout(()=>{if(version!==D.version||!$('#demo-dialog').open)return;D.live=false;D.fallback=false;clearTimeout(D.frameTimer);$('#demo-body').classList.remove('is-live');$('#demo-fallback').hidden=true;advanceDemo();},3500);
+}
+async function syncDemoPlayback(){
+  const action=demoPlaybackAction({kind:D.steps[D.index]?.kind,status:D.session?.status,live:D.live,requested:D.liveRequested,fallback:D.fallback});
+  if(action==='start'){
+    D.liveRequested=true;$('#demo-status').textContent='Starting Fusion simulation…';
+    showRecordedSimulation();
+  }else if(action==='watch')showRecordedSimulation();
+  else if(action==='review')finishDemoSimulation();
+}
 function renderDemoStep(){
-  clearTimeout(D.timer);clearInterval(D.blocksTimer);$('#demo-scene video')?.pause();const step=D.steps[D.index];if(!step)return;
-  $('#demo-mode').textContent='Replay';$('#demo-toggle').textContent=D.playing?'Pause':'Play';
+  clearTimeout(D.timer);clearTimeout(D.resultTimer);clearInterval(D.blocksTimer);$('#demo-scene video')?.pause();const step=D.steps[D.index];if(!step)return;rememberDemo();
+  $('#demo-mode').textContent='Replay';
   const stages=['input','cad','cam','checks','simulate','judge','output'],labels=['Drawing','CAD','CAM','Checks','Simulate','Judge','Output'];
   $('#demo-stages').innerHTML=stages.map((stage,i)=>`<span class="${stage===step.stage?'active':''}">${String(i+1).padStart(2,'0')} ${labels[i]}</span>`).join('');
-  $('#demo-part').hidden=D.index<1;$('#demo-play').hidden=step.kind!=='ready';$('#demo-next').textContent='Next →';$('#demo-next').hidden=['ready','result'].includes(step.kind);$('#demo-toggle').hidden=step.kind==='result';
-  const passes=D.steps.slice(0,D.index+1).filter(x=>x.kind==='verification'&&x.passed&&Number.isFinite(x.seconds));
-  $('#demo-estimates').innerHTML=passes.length?`<span>VERIFIED MACHINING ESTIMATE</span><div>${passes.map(x=>`<b>${(x.seconds/60).toFixed(2)}<small>min</small></b>`).join('<i>→</i>')}</div>`:'';
+  $('#demo-part').hidden=D.index<1;
+  const passes=D.steps.slice(0,D.index+(step.kind==='verification'?0:1)).filter(x=>x.kind==='verification'&&x.passed&&Number.isFinite(x.seconds));
+  const showEstimates=values=>{$('#demo-estimates').innerHTML=values.length?`<span>VERIFIED MACHINING ESTIMATE</span><div>${values.map(x=>`<b>${(x.seconds/60).toFixed(2)}<small>min</small></b>`).join('<i>→</i>')}</div>`:'';};showEstimates(passes);
   let body='';
-  if(step.kind==='code')body=`<div class="demo-source-name">${esc(step.source?.name||'Source unavailable')}</div><pre><code id="demo-code"></code></pre><button class="text-button" data-action="demo-source">Open full source ↗</button>`;
+  if(step.kind==='code')body=`<div class="demo-source-name">${esc(step.source?.name||'Source unavailable')}</div><pre class="streaming-source"><code id="demo-code"></code><span class="stream-caret" aria-hidden="true">▋</span></pre>`;
   else if(step.kind==='drawing')body=`<div class="demo-intro"><span>ENGINEERING DRAWING</span><strong>Ribbed clevis</strong><p>AL6061 · indexed machining · UMC750</p></div>`;
   else if(step.kind==='failure')body=`<div class="demo-verdict needs-repair">Needs repair</div><p>${esc(short(step.text,350))}</p>`;
-  else if(step.kind==='checks')body=`<div class="demo-verdict ${step.passed?'passed':'needs-repair'}">${step.passed?'Passed':'Failed'}</div>${step.issues.length?`<p>${esc(step.issues.join('\n'))}</p>`:'<p>Code checks complete.</p>'}`;
-  else if(step.kind==='verification')body=`${step.video?`<video controls autoplay muted playsinline src="${esc(step.video.url)}"></video>`:''}<div class="demo-verdict ${step.passed?'passed':'needs-repair'}">${step.passed?'Passed':'Not passed'}</div><p>Fusion machine verification + stock conformity</p>${Number.isFinite(step.seconds)?`<div class="demo-time">${(step.seconds/60).toFixed(2)} <small>min estimate</small></div>`:''}`;
-  else if(step.kind==='instruction')body=`<div class="demo-instruction">${esc((step.text||'').split('\n\n')[0])}</div>`;
-  else if(step.kind==='ready'){pauseDemo();body='<div class="demo-ready"><span>CAM + CHECKS COMPLETE</span><strong>Simulate this machining plan</strong><p>The judge reviews the simulation results next.</p></div>'; }
-  else if(step.kind==='result'){pauseDemo();body=`<div class="demo-ready"><span>VERIFIED PLAN</span><strong>${((step.before-step.after)/step.before*100).toFixed(2)}% less machining time</strong><p>${(step.before/60).toFixed(2)} → ${(step.after/60).toFixed(2)} min estimated</p><small>Best verified plan retained.</small></div>`;}
-  $('#demo-scene').innerHTML=`<div class="demo-scene-heading"><small>${step.attempt?'ATTEMPT '+step.attempt:'CLEVIS'}</small><h3>${esc(step.title)}</h3></div>${body}`;
+  else if(step.kind==='checks')body='<div class="demo-running"><i class="pulse"></i> Checking machining code…</div>';
+  else if(step.kind==='verification')body='<div class="demo-running"><i class="pulse"></i> Reviewing simulation evidence…</div>';
+  else if(step.kind==='instruction')body='<div class="demo-running"><i class="pulse"></i> Reviewing machining time…</div>';
+  else if(step.kind==='ready'){D.playing=false;body='<div class="demo-ready"><span>CAM + CHECKS COMPLETE</span><strong>Starting Fusion simulation</strong></div>';}
+  else if(step.kind==='result'){pauseDemo();body=`<div class="demo-ready"><span>VERIFIED PLAN</span><strong>${((step.before-step.after)/step.before*100).toFixed(2)}% less machining time</strong><p>${(step.before/60).toFixed(2)} → ${(step.after/60).toFixed(2)} min estimated</p></div>`;}
+  $('#demo-scene').innerHTML=`<div class="demo-scene-heading"><small>${step.attempt?'ATTEMPT '+step.attempt:'CLEVIS'}</small><h3>${esc(step.kind==='checks'?'Code checks':step.kind==='verification'?'Fusion simulation':step.kind==='instruction'?'Judge review':step.title)}</h3></div><div id="demo-step-content">${body}</div>`;
+  const duration=stagedStepDuration(step),version=D.version,index=D.index;
   if(step.kind==='code'){
-    const blocks=sourceBlocks(step.source?.content||'# No archived source'),limit=Math.min(4,blocks.length);let i=0;
-    const show=()=>{$('#demo-code').textContent=blocks[Math.floor(i*(blocks.length-1)/Math.max(1,limit-1))]||'';};show();
-    if(D.playing)D.blocksTimer=setInterval(()=>{if(++i>=limit){clearInterval(D.blocksTimer);return;}show();},5000);
+    const source=step.source?.content||'# Source unavailable',started=performance.now(),target=$('#demo-code'),pre=target.parentElement;
+    D.blocksTimer=setInterval(()=>{if(version!==D.version||index!==D.index)return;const following=pre.scrollHeight-pre.scrollTop-pre.clientHeight<70;target.textContent=streamedSource(source,performance.now()-started,duration-2000);if(following)pre.scrollTop=pre.scrollHeight;if(target.textContent.length===source.length){clearInterval(D.blocksTimer);$('.stream-caret',pre)?.remove();}},60);
+  }else if(['checks','verification','instruction'].includes(step.kind)){
+    D.resultTimer=setTimeout(()=>{if(version!==D.version||index!==D.index||!$('#demo-dialog').open)return;
+      let result='';
+      if(step.kind==='checks')result=`<div class="demo-verdict ${step.passed?'passed':'needs-repair'}">${step.passed?'Passed':'Failed'}</div>${step.issues.length?`<p>${esc(step.issues.join('\n'))}</p>`:''}`;
+      if(step.kind==='verification'){result=`<div class="demo-verdict ${step.passed?'passed':'needs-repair'}">${step.passed?'Passed':'Not passed'}</div><p>Fusion machine verification + stock conformity</p>${Number.isFinite(step.seconds)?`<div class="demo-time">${(step.seconds/60).toFixed(2)} <small>min estimate</small></div>`:''}`;if(step.passed&&Number.isFinite(step.seconds))showEstimates([...passes,step]);}
+      if(step.kind==='instruction')result=`<div class="demo-instruction">${esc((step.text||'').split('\n\n')[0])}</div>`;
+      $('#demo-step-content').innerHTML=result;
+    },Math.min(5500,duration*.55));
   }
-  renderDemoStatus();
-  if(D.playing)D.timer=setTimeout(()=>{if(D.index<D.steps.length-1){D.index++;renderDemoStep();}},stagedStepDuration(step));
+  renderDemoStatus();syncDemoPlayback();
+  if(D.playing)D.timer=setTimeout(advanceDemo,duration);
 }
 function renderDemoStatus(){
   if(D.fallback){$('#demo-status').textContent='Machining video';return;}
-  const s=D.session||{};$('#demo-status').textContent=s.error||({preparing:'Preparing Fusion',ready:'Fusion ready',playing:'Live simulation running',completed:'Simulation complete',error:'Simulation unavailable'}[s.status]||'Connecting to Fusion');
-  if(!D.live&&D.steps[D.index]?.kind==='ready'&&s.status==='completed'){$('#demo-play').hidden=true;$('#demo-next').hidden=false;$('#demo-next').textContent='Review results →';}
-  $('#demo-play').disabled=s.status!=='ready';$('#demo-play').textContent=s.status==='ready'?'Run live simulation →':'Preparing Fusion…';
+  const s=D.session||{},step=D.steps[D.index];
+  $('#demo-status').textContent=s.error||(D.live?({playing:'Live simulation running',completed:'Simulation complete'}[s.status]||'Connecting to Fusion'):step?.kind==='ready'?'Preparing Fusion':step?.kind==='result'?'Complete':`Attempt ${step?.attempt||1} · ${step?.stage==='cam'||step?.stage==='cad'?'Machining source':step?.stage==='judge'?'Judge review':step?.stage==='checks'?'Code checks':step?.stage==='simulate'?'Simulation evidence':'Drawing'}`);
   if(['ready','completed','error'].includes(s.status))$('#demo-reset').hidden=false;
-  if(s.status==='error')$('#demo-fallback').hidden=false;
-  if(s.status==='completed'&&D.live&&!D.fallback&&$('#demo-live-image')){$('#demo-mode').textContent='Live · complete';$('#demo-reset').hidden=false;$('#demo-next').hidden=false;$('#demo-next').textContent='Review results →';}
+  if(s.status==='error'&&step?.kind==='ready')$('#demo-fallback').hidden=false;
 }
 async function pollDemo(){
   if(!$('#demo-dialog').open||!D.session)return;
-  try{D.session=await api('/api/demo/'+encodeURIComponent(D.intake.id));renderDemoStatus();if(D.live&&!D.fallback&&!D.session.live)$('#demo-mode').textContent=D.session.phase==='milling'?'Fusion capture unavailable':'Preparing live simulation';}
+  const version=D.version;
+  try{const session=await api('/api/demo/'+encodeURIComponent(D.intake.id));if(version!==D.version||!$('#demo-dialog').open)return;D.session=session;renderDemoStatus();await syncDemoPlayback();if(D.live&&!D.fallback&&!D.session.live)$('#demo-mode').textContent=D.session.phase==='milling'?'Fusion capture unavailable':'Preparing live simulation';}
   catch(error){$('#demo-status').textContent=error.message;}
-  D.pollTimer=setTimeout(pollDemo,1000);
+  if(version===D.version&&$('#demo-dialog').open)D.pollTimer=setTimeout(pollDemo,1000);
 }
 async function demoFrame(){
   if(!$('#demo-dialog').open||!D.live||D.fallback)return;
+  const version=D.version;
   try{
     if(D.session?.live===true&&['playing','completed'].includes(D.session?.status)){
       const f=await api('/api/worker/frame',{method:'POST',body:'{}'});
-      if(!D.live||D.fallback)return;
+      if(version!==D.version||!D.live||D.fallback)return;
       if(!$('#demo-live-image'))$('#demo-scene').innerHTML='<img id="demo-live-image" alt="Live Fusion machining simulation">';
       $('#demo-live-image').src=f.url+'?at='+encodeURIComponent(f.at);
       $('#demo-mode').textContent=D.session.status==='completed'?'Live · complete':'Live';
     }
   }catch(error){$('#demo-status').textContent=error.message;$('#demo-fallback').hidden=false;}
-  D.frameTimer=setTimeout(demoFrame,300);
+  if(version===D.version)D.frameTimer=setTimeout(demoFrame,300);
 }
 async function demoAction(action,button){
   try{
     if(action==='start-demo'){button.disabled=true;button.textContent='Preparing…';await beginDemo();return;}
-    if(action==='demo-close'){pauseDemo();demoTimers();$('#demo-dialog').close();history.replaceState(null,'',location.pathname);return;}
-    if(action==='demo-toggle'){D.playing?pauseDemo():(D.playing=true,renderDemoStep());return;}
-    if(action==='demo-next'||action==='demo-prev'){if(D.live||D.fallback){if(D.session?.status!=='completed'&&!D.fallbackComplete)return;D.live=false;D.fallback=false;clearTimeout(D.frameTimer);$('#demo-body').classList.remove('is-live');$('[data-action=demo-prev]').hidden=false;$('#demo-toggle').hidden=false;$('#demo-fallback').hidden=true;}pauseDemo();D.index=Math.max(0,Math.min(D.steps.length-1,D.index+(action==='demo-next'?1:-1)));renderDemoStep();return;}
-    if(action==='demo-source'){pauseDemo();const source=D.steps[D.index]?.source;if(source)drawer('RECORDED SOURCE',source.name,code(source.content));return;}
-    if(action==='demo-play'){
-      pauseDemo();button.disabled=true;
-      D.session=await api('/api/demo/play',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:D.intake.id})});
-      showLiveDemo();return;
-    }
-    if(action==='demo-fallback'){
-      pauseDemo();D.fallback=true;clearTimeout(D.frameTimer);$('#demo-body').classList.add('is-live');
-      const film=D.detail.media.find(v=>v.kind==='machining');if(!film)throw new Error('No recording available');
-      $('#demo-mode').textContent='Recording';$('#demo-scene').innerHTML=`<video controls autoplay muted playsinline src="${esc(film.url)}"></video>`;
-      $('#demo-next').hidden=true;$('#demo-toggle').hidden=true;$('#demo-play').hidden=true;$('#demo-reset').hidden=false;$('#demo-scene video').addEventListener('ended',()=>{D.fallbackComplete=true;$('#demo-next').hidden=false;$('#demo-next').textContent='Review results →';},{once:true});return;
-    }
+    if(action==='demo-close'){pauseDemo();demoTimers();D.version++;$('#demo-dialog').close();history.replaceState(null,'',location.pathname);return;}
+    if(action==='demo-fallback'){showRecordedSimulation();return;}
     if(action==='demo-reset'){
-      pauseDemo();demoTimers();D.session=await api('/api/demo/reset',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:D.intake.id})});
-      D.live=false;D.fallback=false;D.index=0;$('#demo-dialog').close();history.replaceState(null,'',location.pathname);showUpload();return;
+      pauseDemo();demoTimers();D.version++;D.session=await api('/api/demo/reset',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:D.intake.id})});
+      sessionStorage.removeItem('silta-replay:'+D.intake.id);D.live=false;D.fallback=false;D.index=0;$('#demo-dialog').close();history.replaceState(null,'',location.pathname);showUpload();return;
     }
-  }catch(error){notify(error.message);if(button)button.disabled=false;}
+  }catch(error){notify(error.message);if(button){button.disabled=false;if(action==='start-demo'){button.textContent='Open run →';$('#upload-result').insertAdjacentHTML('beforeend',`<div class="error-box">${esc(error.message)}</div>`);}}}
 }
 
 await refresh(true);

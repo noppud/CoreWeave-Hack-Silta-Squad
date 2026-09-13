@@ -141,13 +141,13 @@ The exact `silta-clevis-demo.pdf` opens a separate **Replay** flow.
 `staged-replay.mjs` builds the sequence from archived clevis events and source.
 It preserves the first generation failure, repaired attempts and measured
 verification results; it invents no saved check or memory for this run.
-The overlay shows the uploaded PDF, source blocks, accepted CAD and estimates.
-An explicit **Run live simulation** cue calls the reserved demo playback
-endpoint; the picture receives a live label only with playback state and a
+The overlay shows the uploaded PDF, progressively revealed saved source, accepted CAD and estimates.
+The simulation stage automatically calls the reserved demo playback
+endpoint once Fusion is ready; the picture receives a live label only with playback state and a
 fresh native frame. Recorded fallback has its own label. Unknown PDFs retain
 the ordinary fresh-generation path. Backend matching/preparation/playback and
 rehearsal receipts are owned by the companion live-Fusion task.
 
 Two full uploaded-PDF rehearsals, fallback, Reset, and reload reconnection passed. See `docs/control-center-rehearsal.md` for measured timings and the presenter sequence. The main canvas time chart uses descending part estimates; recorded History remains chronological.
 
-The upload replay holds code for 22 seconds and simulation results and judge decisions for 14 seconds. Stages follow drawing → CAD/CAM → checks → simulation → judge → output. The final candidate pauses for live Fusion playback before its recorded verification and judge result; Review results continues after playback completes.
+The upload replay holds code for 22 seconds and simulation results and judge decisions for 14 seconds. Stages follow drawing → CAD/CAM → checks → simulation → judge → output. The final candidate waits for a recorded Fusion machining video presented as the active simulation before its recorded verification and judge result. Video completion advances automatically. The upload run has no Next, Previous, Pause, or manual simulation cue; historical timelines retain their navigation controls.

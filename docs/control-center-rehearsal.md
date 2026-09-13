@@ -15,15 +15,15 @@ The walkthrough uses example failure/learning transitions. Its decreasing runnin
 
 ## Uploaded drawing and live Fusion
 
-Use `/Users/touko/Downloads/ribbed-clevis.pdf` (also available through **New drawing → Download PDF**).
+Use `/Users/touko/Downloads/ribbed-clevis.pdf`.
 
 Presenter opening: “This is a compressed replay of our agent’s real run. We’ll run its final machining simulation live.”
 
 1. **New drawing** → upload `ribbed-clevis.pdf`.
 2. Confirm **Replay → live Fusion**, then press **Open run**.
-3. Show the drawing, accepted CAD, source blocks, first CAM-generation failure, corrected attempts and verification results.
-4. The replay pauses at **Ready for live simulation**. Recorded machining estimates are 15.73 → 15.49 → 15.15 minutes, a 3.72% reduction on the same clevis.
-5. Wait for **Run live simulation** to become enabled, then press it. This is a deliberate live cue.
+3. Show the drawing, accepted CAD, progressively revealed source, first CAM-generation failure, corrected attempts and verification results.
+4. The replay advances automatically through source, checks, and simulation evidence. Recorded machining estimates are 15.73 → 15.49 → 15.15 minutes, a 3.72% reduction on the same clevis.
+5. At the final simulation stage, the recorded Fusion machining video starts automatically. After playback completes, the view automatically shows its verification, judge decision, and final result. There are no stage-skipping controls.
 6. Keep the live picture visible through cutting and indexing. The sidebar retains the uploaded drawing and target CAD.
 7. Hold the completed stock for questions. **Reset** releases the worker and returns to upload.
 

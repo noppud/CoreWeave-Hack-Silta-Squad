@@ -37,3 +37,30 @@ test('each simulation precedes its judge and the live gate precedes final judgin
  assert.ok(stagedStepDuration({kind:'code'})>=20000);
  assert.ok(stagedStepDuration({kind:'instruction'})>=10000);
 });
+
+test('streaming reveals saved source monotonically and completely without changing it',async()=>{
+ const {streamedSource}=await import('../applications/control-center/staged-replay.mjs');
+ const source='def plan():\n    return "fixed CAD"\n'.repeat(100);
+ let previous='';
+ for(let elapsed=0;elapsed<=20000;elapsed+=100){const next=streamedSource(source,elapsed,20000);assert.ok(next.startsWith(previous));assert.ok(source.startsWith(next));previous=next;}
+ assert.equal(previous,source);
+ assert.equal(streamedSource(source,0,20000),'');
+});
+test('live playback starts once at its gate and judging waits for actual completion',async()=>{
+ const {demoPlaybackAction:action}=await import('../applications/control-center/staged-replay.mjs');
+ assert.equal(action({kind:'code',status:'ready'}),'none');
+ assert.equal(action({kind:'ready',status:'preparing'}),'none');
+ assert.equal(action({kind:'ready',status:'ready',requested:false}),'start');
+ assert.equal(action({kind:'ready',status:'ready',requested:true}),'none');
+ assert.equal(action({kind:'ready',status:'playing',live:true}),'none');
+ assert.equal(action({kind:'ready',status:'completed',live:true}),'review');
+ assert.equal(action({kind:'ready',status:'completed',live:false}),'watch');
+ assert.equal(action({kind:'ready',status:'completed',live:true,fallback:true}),'none');
+});
+test('uploaded-run controls cannot skip source, checks, or simulation',async()=>{
+ const {readFile}=await import('node:fs/promises');
+ const html=await readFile(new URL('../applications/control-center/index.html',import.meta.url),'utf8');
+ const dialog=html.split('<dialog id="demo-dialog"')[1].split('</dialog>')[0];
+ for(const control of ['demo-next','demo-prev','demo-toggle','demo-play'])assert.equal(dialog.includes(control),false);
+ assert.ok(dialog.includes('demo-reset'));
+});
