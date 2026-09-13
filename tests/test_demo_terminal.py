@@ -273,3 +273,42 @@ def test_explicit_job_uses_own_initial_versions_and_shadow_files(tmp_path):
     assert Path(source["path"]) == shadow / "checks.py"
     campaign_snapshot = viewer.load_snapshot(campaign_path)
     assert campaign_snapshot["sources"]["checks"]["initial"] != source["current"]
+
+
+def test_latest_created_candidate_pass_does_not_label_next_generation(tmp_path):
+    from silta.cnc.models import digest_json
+
+    campaign_path, path, manifest = fixture_campaign(tmp_path)
+    candidate = {
+        "id": "candidate-0005",
+        "target_digest": "target",
+        "artifacts": {"nc": {"sha256": "abc"}},
+        "parameters": {"estimated_metrics": {"machining_seconds": 1515.2}},
+    }
+    digest = digest_json(
+        {"target": "target", "artifacts": {"nc": "abc"}, "parameters": candidate["parameters"]}
+    )
+    verdict = {
+        "status": "passed",
+        "completed": True,
+        "candidate_digest": digest,
+        "evidence": [{"path": "receipt"}],
+        "issues": [],
+        "coverage": "actual",
+    }
+    events = [
+        {"event": "candidate_created", "attempt": 3, "candidate": candidate},
+        {"event": "verification_completed", "attempt": 3, "verification": verdict},
+        {"event": "candidate_generation_started", "attempt": 4},
+    ]
+    assert viewer.latest_candidate_verification(events, candidate) == verdict
+    events.append(
+        {
+            "event": "candidate_created",
+            "attempt": 4,
+            "candidate": {**candidate, "id": "candidate-0006"},
+        }
+    )
+    assert viewer.latest_candidate_verification(events, events[-1]["candidate"]) is None
+    events[1]["verification"] = {**verdict, "candidate_digest": "different"}
+    assert viewer.latest_candidate_verification(events[:3], candidate) is None

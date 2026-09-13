@@ -6,7 +6,7 @@ Show actual machining, three concrete parts, one learned check and one reused pl
 
 | Time | Show | Say |
 | --- | --- | --- |
-| 0:00–0:18 | Release the prepared live verification. Show the film's first eight seconds, then return to Fusion. | “We prepared this drawing's CAD and CAM before the talk. I’m starting its real Fusion verification now. Here is recorded machining from an earlier completed job: a Haas UMC-750, one cutter, indexed three-plus-two—not simultaneous five-axis.” |
+| 0:00–0:18 | Start the retained-plan recheck. Show the film's first eight seconds, then return to Fusion. | “We prepared this drawing's CAD and CAM before the talk. I’m starting its real Fusion verification now. Here is recorded machining from an earlier completed job: a Haas UMC-750, one cutter, indexed three-plus-two—not simultaneous five-axis.” |
 | 0:18–0:38 | CAD previews: UMC08 octagon, UMC09 fork, UMC05 manifold. | “These are three actual generated targets: an octagonal housing, a forked bracket, and a service manifold. Each has a completed, verified CAM plan. These images are CAD previews; the film ends with actual simulated stock from the cage and clevis.” |
 | 0:38–1:03 | Slide 1; point through the loop once. | “Astra keeps the CAD target fixed and revises the machining plan. Cheap checks catch known mistakes. Fusion verifies the motion and finished stock. Failures return for repair and can teach a new check. Only a pass reaches the supervisor, which decides whether another improvement is worth trying.” |
 | 1:03–1:28 | Slide 2: B → C. Then the indexed learning evidence at film 80–88 seconds, or its static frame. | “In our earlier three-axis experiment, a simulation failure became a check that caught the repeated mistake on another part in 51 milliseconds. For indexed machining, the transferred lesson was planning guidance: reduce air-ramp clearance when stock clearance allows it. Verified estimates improved about six percent on one fixed part, then three percent on the octagon.” |
@@ -20,10 +20,17 @@ If verification is still running, say: **“This run is still at [observed stage
 
 Use two screens: Fusion stays visible on the compute screen, owned by one worker; the presentation screen holds the film, selected CAD images, two slides and authenticated Weave tabs. Use large raw-terminal/editor text. No website tour or sign-in onstage.
 
-The provisional preferred live input is **UMC08, the octagonal part**. A fresh
-shadow-learning rehearsal, `stage-octagon08-r1`, is running; it is **not yet a
-validated live presentation**. Use its actual result and playback receipt before
-relying on it. The completed campaign UMC08 is separate recorded evidence.
+The preferred live input is **UMC08, the octagonal part**, resumed from the completed
+`stage-octagon08-r1-recovery1` run using the retained-live command below. All four
+fresh verifications passed and all four playbacks showed tool motion, successful
+SimulationStop and target restoration without cleanup errors. The supervisor stopped
+and retained candidate5 at1515.202754s after candidate6 provided no improvement.
+The same fixed CAD improved6.144% from original r1 candidate1 at1614.396515s.
+
+Original `stage-octagon08-r1` hit its attempt cap and had a playback cleanup failure
+requiring operator intervention. Those receipts remain separate; the later recovery's
+clean playback does not rewrite that history. Both learning files stayed unchanged.
+See [completed rehearsal evidence](reviews/live-rehearsal.md).
 
 The earlier finned rehearsal `stage-finned10-r1` remains completed: three verified
 candidates and observed motion in three playbacks,344.902176→338.612911 seconds
@@ -32,32 +39,9 @@ completion was not observed after the CAM repair. See the
 [collection diagnostic](reviews/finned-rehearsal-collection.md). UMC07 is an unrun
 alternative, not a rehearsed fallback.
 
-Only after the campaign releases Fusion, prepare one real UMC08 job from a terminal in the repository:
-
-```sh
-cd /Users/touko/work/helios-one/repos/coreweavehack
-export SILTA_STAGE_JOB="stage-octagon08-$(date -u +%Y%m%dT%H%M%SZ)"
-printf '%s\n' "$SILTA_STAGE_JOB"
-hsec exec --only COREWEAVE_WANDB_API_KEY -- .venv/bin/python scripts/demo/stage_fusion_demo.py config/demo-campaign/umc-08-job.json --prepare --show-playback --job-id "$SILTA_STAGE_JOB"
-```
-
-The helper generates CAD/CAM and runs checks, then prints **“Fusion verification has NOT run”** and waits for Enter. Press Enter at the talk's start. Preparation and live verification times are recorded separately. The helper copies learning into a shadow directory and never promotes changes to the campaign's learning. Use a fresh job ID on each attempt. UMC08 is a previously used campaign drawing, not a never-seen live input. Fresh rehearsal timing remains pending. For comparison only, the historical finned r1 rehearsal took 442.52 seconds to prepare CAD/CAM/checks, followed by a 41.79-second presenter pause; its first actual verification took 28.84 seconds. Those wall times are separate from the 344.90-second machining estimate. All playback receipts record target visibility restoration. The shadow checks/prompt ended with their original hashes and remain separate files from main learning. See the [rehearsal receipt](../runs/stage-finned10-r1-presentation.json).
-
-In a second terminal, substitute the exact job ID printed above:
-
-```sh
-cd /Users/touko/work/helios-one/repos/coreweavehack
-export SILTA_VIEW_JOB='paste-the-printed-job-id-here'
-.venv/bin/python scripts/demo/live_terminal.py --job "$SILTA_VIEW_JOB" --width 120 --height 40
-```
-
-This viewer is read-only. It shows the actual CAM/check source and recorded versions, candidate status, verification and recent events. For a stable plain snapshot:
-
-```sh
-.venv/bin/python scripts/demo/live_terminal.py --job "$SILTA_VIEW_JOB" --once
-```
-
-Before relying on the stage helper, inspect `runs/<job-id>-presentation.json`: its `verifications` must contain a completed `passed` verdict; its `playbacks` must report `tool_motion_observed: true`. `job_finished` alone does not prove either. `--show-playback` presents the already-verified candidate afterward; its presentation receipt does not supply the manufacturing verdict. Full rehearsal success must come from that actual receipt, not unit tests.
+Use the retained-live command below after Fusion is idle. This avoids fresh CAD/CAM
+preparation during the speech and copies learning into a new shadow directory.
+The terminal viewer is read-only and must name the exact new job ID.
 
 For campaign history rather than the staged job:
 
@@ -115,4 +99,51 @@ current totals into its old source-bound cards.
 
 ```sh
 .venv/bin/python scripts/demo/live_terminal.py --job demo-umc-umc-11-recovery5
+```
+
+## Preferred retained-octagon live command
+
+The source recovery is completed and its four clean playback receipts are retained.
+This command starts a new recheck of its saved best plan; it does not recreate the
+original drawing-to-CAD preparation. Future results must still be observed.
+
+Say: “This is a known part whose CAD and CAM were prepared earlier. We are rechecking
+the retained plan live; afterward Astra makes a fresh supervisor decision.” This is
+not an unseen drawing demonstration. The supervisor may immediately stop or may
+request further optimization; the latter is not guaranteed to finish during the talk.
+
+In an idle, unlocked Fusion session with Machine and Tool visible, use a fresh job ID
+and copy the rehearsal's learning state into a separate directory:
+
+```sh
+cd /Users/touko/work/helios-one/repos/coreweavehack
+SILTA_LIVE_JOB="stage-octagon08-live-$(date +%Y%m%d-%H%M%S)"
+SILTA_LIVE_SHADOW="runs/${SILTA_LIVE_JOB}-shadow-learning"
+mkdir "$SILTA_LIVE_SHADOW"
+cp runs/stage-octagon08-r1-shadow-learning/checks.py "$SILTA_LIVE_SHADOW/checks.py"
+cp runs/stage-octagon08-r1-shadow-learning/cad_cam.md "$SILTA_LIVE_SHADOW/cad_cam.md"
+hsec exec --only COREWEAVE_WANDB_API_KEY -- .venv/bin/python scripts/demo/resume_fusion_job.py \
+  runs/stage-octagon08-r1-recovery1/manifest.json \
+  config/demo-campaign/umc-08-job.json \
+  --job-id "$SILTA_LIVE_JOB" --max-attempts 6 \
+  --learning-directory "$SILTA_LIVE_SHADOW" \
+  --show-playback --playback-seconds 15
+```
+
+The resume retains the accepted target and selected CAM candidate, then performs
+fresh verification; any new CAM identities are allocated above retained IDs.
+Learning updates remain in this new shadow directory. Existing stage receipts are
+not rewritten. `run-receipt.json` records recovery/learning provenance and separate
+presentation receipts under `runs/<job>-playback/<candidate>/`.
+
+Inspect the verdict and playback separately: require a completed passed verification,
+observed tool motion, successful SimulationStop and restored target display with no
+cleanup errors. A moving tool alone is insufficient. Explicit playback lasts15s;
+observed total presentation work was about38s, including setup/cleanup, and is distinct
+from verification time. The outer traced call includes presentation delay.
+
+In a second terminal, use the printed job ID:
+
+```sh
+.venv/bin/python scripts/demo/live_terminal.py --job stage-octagon08-live-YYYYMMDD-HHMMSS
 ```

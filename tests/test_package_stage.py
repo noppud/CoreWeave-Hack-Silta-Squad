@@ -174,3 +174,57 @@ def test_second_recovery_preserves_two_hop_source_chain(tmp_path, monkeypatch):
     (next_run / "workspace/resume-provenance.json").write_text(json.dumps(provenance))
     rows = package.add_stage_recoveries(Inventory())
     assert [item["path"] for item in rows[1]["source_chain"]] == [str(source), str(origin)]
+
+
+def test_motion_does_not_hide_cleanup_failure():
+    summary = package.playback_summary(dict(
+        candidate_id="candidate-0001", status="tool_motion_observed",
+        tool_motion_observed=True, stop_error="menu missing",
+        simulation_stop_error="request timed out",
+    ))
+    assert summary["recorded_status"] == "tool_motion_observed"
+    assert summary["tool_motion_observed"] is True
+    assert summary["cleanup_completed"] is False
+    assert summary["cleanup_errors"]["stop_error"] == "menu missing"
+
+
+def test_recovery_retains_embedded_and_external_playbacks_with_cleanup(tmp_path, monkeypatch):
+    run, _ = recovery_fixture(tmp_path, monkeypatch)
+    clean = dict(
+        candidate_id="candidate-0003", status="tool_motion_observed",
+        tool_motion_observed=True,
+        simulation_stop=dict(status="ok", completed=True),
+        target_display_before=dict(states_before={"body": True}),
+        target_display_restore=dict(status="ok", completed=True,
+                                    result=dict(states_after={"body": True})),
+    )
+    (run / "run-receipt.json").write_text(json.dumps(dict(presentation_playbacks=[clean])))
+    external = tmp_path / "runs" / f"{run.name}-playback" / "candidate-0003"
+    (external / "ui").mkdir(parents=True)
+    (external / "presentation-playback.json").write_text(json.dumps(clean))
+    (external / "operator-cleanup.json").write_text('{"recorded": true}')
+    (external / "ui/001-inspect.json").write_text('{"actual": "snapshot"}')
+    inventory = Inventory()
+    row = package.add_stage_recoveries(inventory)[0]
+    playback = row["playback_evidence"]
+    assert playback["embedded_playbacks"][0]["cleanup_completed"] is True
+    assert playback["external_playbacks"][0]["cleanup_completed"] is True
+    assert playback["external_playbacks"][0]["candidate_id"] == "candidate-0003"
+    assert f"stage-recoveries/{run.name}/playback/candidate-0003/operator-cleanup.json" \
+        in inventory.files
+    assert f"stage-recoveries/{run.name}/playback/candidate-0003/ui/001-inspect.json" \
+        in inventory.files
+
+
+def test_external_playback_survives_before_final_run_receipt(tmp_path, monkeypatch):
+    run, _ = recovery_fixture(tmp_path, monkeypatch)
+    external = tmp_path / "runs" / f"{run.name}-playback" / "candidate-0001"
+    external.mkdir(parents=True)
+    (external / "presentation-playback.json").write_text(json.dumps(dict(
+        candidate_id="candidate-0001", status="presentation_failed",
+        tool_motion_observed=True, target_display_restore_error="not restored",
+    )))
+    row = package.add_stage_recoveries(Inventory())[0]
+    assert row["playback_evidence"]["embedded_playbacks"] == []
+    assert row["playback_evidence"]["external_playbacks"][0]["cleanup_completed"] is False
+    assert row["status"] == "incomplete"

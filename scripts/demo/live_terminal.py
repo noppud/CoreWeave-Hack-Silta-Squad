@@ -196,6 +196,42 @@ def event_text(event):
     return f"{timestamp} {label}{attempt}" + (f" | {detail}" if detail else "")
 
 
+def latest_candidate_verification(events, candidate):
+    """Bind a verdict to the latest created artifact identity and its local attempt."""
+    created = next(
+        (
+            i
+            for i in range(len(events) - 1, -1, -1)
+            if events[i].get("event") == "candidate_created"
+        ),
+        None,
+    )
+    if created is None or not candidate.get("id"):
+        return None
+    try:
+        content = {
+            "target": candidate["target_digest"],
+            "artifacts": {k: v["sha256"] for k, v in candidate["artifacts"].items()},
+            "parameters": candidate["parameters"],
+        }
+        digest = hashlib.sha256(
+            json.dumps(content, sort_keys=True, separators=(",", ":"), allow_nan=False).encode()
+        ).hexdigest()
+    except (KeyError, TypeError, ValueError):
+        return None
+    attempt = events[created].get("attempt")
+    return next(
+        (
+            event.get("verification")
+            for event in reversed(events[created + 1 :])
+            if event.get("event") == "verification_completed"
+            and event.get("attempt") == attempt
+            and event.get("verification", {}).get("candidate_digest") == digest
+        ),
+        None,
+    )
+
+
 def load_snapshot(campaign_path: Path, job=None):
     campaign, error = read_json(campaign_path)
     if error:
@@ -308,6 +344,7 @@ def load_snapshot(campaign_path: Path, job=None):
         "candidate": candidate,
         "best": best,
         "estimate": estimate,
+        "latest_verification": latest_candidate_verification(events, candidate),
         "nc_lines": nc_lines,
         "nc_path": nc.get("path", ""),
         "cam_lines": cam_lines,
@@ -349,7 +386,12 @@ def render(snapshot, width=120, height=40, color=False):
     metric = best.get("machining_seconds")
     verified = f"{metric:.2f}s" if accepted and finite_metric(metric) else "none yet"
     latest = snapshot.get("estimate")
-    estimate = f"{latest:.2f}s [UNVERIFIED estimate]" if finite_metric(latest) else "unavailable"
+    label = (
+        "VERIFIED CAM estimate"
+        if recorded_pass(snapshot.get("latest_verification"))
+        else "UNVERIFIED estimate"
+    )
+    estimate = f"{latest:.2f}s [{label}]" if finite_metric(latest) else "unavailable"
     add(f"Best verified time (recorded): {verified}  |  Latest CAM: {estimate}")
     latest_check = next(
         (e.get("result", {}) for e in reversed(events) if e.get("event") == "checks_completed"),

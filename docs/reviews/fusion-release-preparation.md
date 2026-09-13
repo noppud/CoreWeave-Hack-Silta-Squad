@@ -35,12 +35,17 @@ worker and were not fabricated or published by this sync.
 
 ## Validation and remaining release gates
 
-Previous full isolated suite:522 passed,1 skipped,7 upstream warnings. Since the
-latest bounded changes,17 report/package/film tests passed and root reports59
-stock/video/capture tests passed; scoped Ruff passed. Full final isolated checks
-are intentionally pending the final stage rehearsal so the result describes the
-actual final code. See JSON audit history for earlier complete checks.
+Final full isolated suite reported by root: **550 passed, 7 upstream warnings in5.50seconds**;
+no skipped tests reported. This audit did not rerun tests. Current selected source
+and release hashes were freshly reconciled:14 previously stale entries already
+matched byte-for-byte; the final viewer-label source/test update was then reconciled
+in the same way. No source was copied. All12 protected hashes remain
+unchanged; current source drift is empty. `git diff --check` passed in the release
+worktree. Earlier validation results and prior file hashes remain in JSON history.
 
-Next: finish and inspect the real capture/rehearsal; freeze final film provenance;
-run final source checks; build and inspect the portable evidence bundle. Publication
-and repository delivery remain separate from this local preparation.
+The114-second final film is complete with source-bound cage/clevis stock orbits;
+its decoded first104seconds remain unchanged. Live-stage status is documented in
+the current runbook and actual receipts, independently of that recorded film.
+Root owns completion of the fresh rehearsal, final evidence-package review and
+repository delivery. No Fusion actions, staging, commit or publication occurred
+in this audit.

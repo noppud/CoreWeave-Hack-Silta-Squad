@@ -153,6 +153,42 @@ def add_collection_capture_proofs(bundle):
 
 
 
+def playback_summary(record):
+    """Observed motion and successful cleanup are independent presentation facts."""
+    errors = {key: value for key, value in record.items()
+              if (key == "error" or key.endswith("_error")) and value}
+    stop = record.get("simulation_stop") or {}
+    restore = record.get("target_display_restore") or {}
+    before = (record.get("target_display_before") or {}).get("states_before")
+    cleanup = (not errors and stop.get("status") == "ok"
+               and stop.get("completed") is True and restore.get("status") == "ok"
+               and restore.get("completed") is True and bool(before)
+               and (restore.get("result") or {}).get("states_after") == before)
+    return {"candidate_id": record.get("candidate_id"),
+            "recorded_status": record.get("status"),
+            "tool_motion_observed": record.get("tool_motion_observed") is True,
+            "cleanup_completed": cleanup, "cleanup_errors": errors,
+            "simulation_stop": stop, "target_display_restore": restore}
+
+
+def add_stage_playback_evidence(bundle, job, base, embedded):
+    """Copy external raw receipts even before a resumed run emits its final receipt."""
+    root = ROOT / "runs" / f"{job}-playback"
+    external = []
+    for source in sorted(root.rglob("*")):
+        if source.is_file() and source.suffix.lower() in {".json", ".png", ".jpg", ".txt"}:
+            relative = base / "playback" / source.relative_to(root)
+            bundle.add(source, relative, job, expected=digest(source.read_bytes()))
+            if source.name == "presentation-playback.json":
+                external.append({"receipt_path": str(relative),
+                                 "source_sha256": digest(source.read_bytes()),
+                                 **playback_summary(read(source))})
+    return {"embedded_playbacks": [playback_summary(row) for row in embedded],
+            "external_playbacks": external,
+            "scope": "Presentation-only motion and cleanup; not manufacturing verdicts. "
+                     "Embedded and external observations are retained separately."}
+
+
 def add_stage_rehearsals(bundle):
     """Receipt-selected rehearsals remain separate from shared-learning campaign counts."""
     records = []
@@ -195,12 +231,9 @@ def add_stage_rehearsals(bundle):
             job,
             [20000],
         )
-        for source in sorted((ROOT / "runs" / f"{job}-playback").rglob("*")):
-            if source.is_file() and source.suffix in {".json", ".png", ".txt"}:
-                bundle.add(
-                    source,
-                    base / "playback" / source.relative_to(ROOT / "runs" / f"{job}-playback"),
-                )
+        playback_evidence = add_stage_playback_evidence(
+            bundle, job, base, receipt.get("playbacks", [])
+        )
         preparation = None
         if receipt.get("prepared_at"):
             preparation = (
@@ -221,6 +254,7 @@ def add_stage_rehearsals(bundle):
                 "verifications": receipt.get("verifications", []),
                 "best_estimated_machining_seconds": None if manifest.get("collection_warning")
                 else (manifest.get("best_verification") or {}).get("machining_seconds"),
+                "playback_evidence": playback_evidence,
                 "observed_motion_playbacks": sum(
                     p.get("tool_motion_observed") is True for p in receipt.get("playbacks", [])
                 ),
@@ -280,8 +314,13 @@ def add_stage_recoveries(bundle):
         bundle.add(provenance_path, base / "resume-provenance.json")
         bundle.add(manifest_path, base / "run-record.json")
         bundle.add(presentation, base / "original-presentation.json")
+        run_receipt = {}
         if (run / "run-receipt.json").is_file():
+            run_receipt = read(run / "run-receipt.json")
             bundle.add(run / "run-receipt.json", base / "weave-receipt.json")
+        playback_evidence = add_stage_playback_evidence(
+            bundle, run.name, base, run_receipt.get("presentation_playbacks", [])
+        )
         bundle.refs(chain, run.name, [30000])
         initial = learning["initial_file_sha256"]
         for name, kind in (("checks.py", "checks"), ("cad_cam.md", "main_prompt")):
@@ -306,6 +345,8 @@ def add_stage_recoveries(bundle):
                      "category": "stage_recovery_shadow_learning",
                      "counted_in_campaign_completed_drawings": False,
                      "fresh_preparation_or_presentation": False,
+                     "fresh_preparation": False,
+                     "playback_evidence": playback_evidence,
                      "record_path": str(base / "run-record.json"),
                      "resume_provenance": str(base / "resume-provenance.json"),
                      "source_chain": chain, "initial_learning_sha256": initial,
@@ -320,8 +361,8 @@ def add_stage_recoveries(bundle):
                      "collection_warning": manifest.get("collection_warning"),
                      "best_estimated_machining_seconds": (
                          best.get("machining_seconds") if valid else None),
-                     "scope": "Recovery of prepared rehearsal using separate shadow learning; "
-                              "no fresh live-presentation or playback claim"})
+                     "scope": "No fresh CAD/CAM preparation; any post-verification "
+                              "playback has separate recorded evidence."})
     return rows
 
 
@@ -456,6 +497,7 @@ def build(include_media):
         ROOT / "output/evaluation/replay-evidence.json",
         ROOT / "output/evaluation/learning-transfer.json",
         ROOT / "output/evaluation/fusion-campaign.json",
+        ROOT / "output/evaluation/stage-octagon-final.json",
         ROOT / "output/sponsors/aria-review.json",
         ROOT / "output/sponsors/aria-response.md",
         ROOT / "output/sponsors/weave-demo-links.md",
@@ -471,6 +513,7 @@ def build(include_media):
         ROOT / "docs/weave-evaluation-dashboard.md",
         ROOT / "docs/demo-runbook.md",
         ROOT / "docs/reviews/finned-rehearsal-collection.md",
+        ROOT / "docs/reviews/live-rehearsal.md",
         ROOT / "docs/verified-improvements.md",
         ROOT / "docs/slide-pdf.md",
         ROOT / "scripts/demo/plot_verified_improvements.py",
@@ -560,6 +603,9 @@ def build(include_media):
     collection_audit = ROOT / "output/evaluation/collection-invalidations.json"
     if collection_audit.is_file():
         bundle.refs(read(collection_audit), "collection-audit", [20000])
+    final_stage = ROOT / "output/evaluation/stage-octagon-final.json"
+    if final_stage.is_file():
+        bundle.refs(read(final_stage), "stage-octagon-final", [40000])
     add_collection_capture_proofs(bundle)
     rehearsals = add_stage_rehearsals(bundle)
     stage_recoveries = add_stage_recoveries(bundle)
@@ -666,6 +712,7 @@ def build(include_media):
         f'<li><a href="{html.escape(r["presentation_receipt"])}">'
         f"{html.escape(r['job_id'])}</a>: {html.escape(r['status'])}; "
         f"{r['observed_motion_playbacks']} observed-motion playbacks. "
+        "Cleanup results are separate in the retained playback evidence. "
         "Preparation, live verification and machining estimates "
         "are separate in the receipt.</li>"
         for r in rehearsals

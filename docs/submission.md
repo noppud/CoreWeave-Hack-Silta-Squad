@@ -48,6 +48,7 @@ The active learned state is two files: `learning/checks.py` and `learning/cad_ca
 | Published paired Weave replay | Empty checks caught 0/2 invalid plans; learned checks caught 2/2; both accepted 4/4 valid plans | Six retained cases, five original executions per case/variant; corrected summary republishes those observations |
 | Indexed UMC example | Real Fusion machining footage, indexed **3+2**, one **T1** tool | Actual machine animation; not continuous simultaneous five-axis motion |
 | Completed UMC03 optimization | Fresh v7 pair438.955225 → 433.128113 seconds, **1.33%** improvement | Same fixed target and verifier; broader historical comparison uses different verifier versions |
+| Completed UMC08 live recovery | Four fresh passes; best1515.202754s,6.144% below original prepared r1 candidate1 | Four clean motion/stop/restore playbacks; checks/prompt unchanged; original r1 cap/operator cleanup remains separate |
 | Completed UMC10 rehearsal | 344.902176 → 338.612911 seconds, **1.82%** improvement; third candidate tied | Three passes; shadow checks/prompt unchanged; real playback separately observed |
 | Completed complex UMC12 clevis | 944.089570 → 929.289544 → 908.965929 seconds, **3.72%** improvement | Three valid plans; main checks/prompt unchanged |
 | Completed complex UMC11 cage | Fresh v7 retest4242.119344 → 2357.727194 seconds, **44.42%** reduction | Operator nominated retained CAM after an export-race fix; normal verification passed and supervisor stopped. Not autonomous discovery or new learning |
@@ -98,12 +99,14 @@ uv run python scripts/demo/package_evidence.py
 
 Open the resulting `output/submission/silta-fusion-evidence-*/index.html`, or share its ZIP after review. It contains completed distinct-drawing results, separate failure/transfer proof, source hashes, STEP/NC, verification outputs, exact learning sources, published evaluation evidence and ARIA's response. Large native project archives remain source references. No upload happens by default.
 
-For the raw stage demo, show Fusion plus `live_terminal.py`. The actual UMC10
-rehearsal prepared CAD/CAM before release; its first verification took28.84s and
-presentation playback was separate. Full preparation and three-candidate optimization
-took about15minutes. Do not promise drawing-to-final optimization within the
-three-minute presentation. Establish visible Machine/Tool controls in Fusion before
-rehearsal; the verified pass is not inferred from moving playback.
+For the raw stage demo, show Fusion plus `live_terminal.py` using the completed
+retained UMC08 plan and the command in `docs/demo-runbook.md`. The recovery completed
+four fresh passed verifications and four automatic motion/stop/display-restoration
+playbacks. It retained candidate5 after candidate6 tied. This is known prepared CAD/CAM,
+not fresh drawing generation during the talk; both shadow learning files stayed unchanged.
+Original r1 required playback cleanup and hit its cap; finned r2/recoveries remain unknown.
+[Rehearsal trace](https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a09a51-6741-753f-ab92-d297767bbc73).
+The final package/upload must still be refreshed; existing v0 does not contain this result.
 
 Local presentation files: `output/presentation/silta-loop-demo.mp4` (under two minutes; exact duration in `film-evidence.json`), `output/presentation/slides.html` (two slides). The film uses retained historical and indexed Fusion footage; it is not a live capture of every campaign part.
 
