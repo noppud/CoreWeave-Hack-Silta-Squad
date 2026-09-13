@@ -6,6 +6,10 @@ Drawing/PDF + machine/tools → fixed CAD target → CAM → cheap learned check
 
 **Current state:** a real soft-jaw run completed three verified CAM candidates and stopped at an estimated 205.23 seconds. Direct learning is wired and tested with adapter doubles; learning transfer across real parts remains to be demonstrated.
 
+## Interactive demo
+
+The [learning-loop presentation](demo/README.md) animates 54 example parts, learned tests, judge feedback, and the improvement charts. Run `python -m http.server 8080 --bind 127.0.0.1` from this directory and open **http://127.0.0.1:8080/demo/**. The standalone page does not require Fusion.
+
 ## Learning
 
 Only two active learning files:
