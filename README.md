@@ -12,6 +12,8 @@ Repository: https://github.com/noppud/CoreWeave-Hack-Silta-Squad
 - [Sponsor setup and credits](docs/sponsors.md): W&B, TypeSafe credit activation, ARIA, MCP, and molab GPU access.
 - [Build plan](docs/plan.md): choose the problem and ship the first complete agent loop.
 - [Submission draft](docs/submission.md): fill this in as we build.
+- [Marimo slide deck](docs/slides.md): run `make slides` to present, or `make slides-edit`
+  to work on the first CNC project story and demo evidence slots.
 
 The supplied handbook requires W&B usage and emphasizes agents that improve through feedback. Keep the first demo focused on one useful task, a measurable failure, and a visible correction.
 

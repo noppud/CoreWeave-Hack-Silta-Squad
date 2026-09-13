@@ -1,0 +1,48 @@
+<style>
+/* Adapted from konsta-demo-hackathon's cream, charcoal and red slide identity. */
+html, body, #root, #App, .reveal-viewport { background: #f7f7f4 !important; }
+.silta-slide { box-sizing: border-box; height: 620px; padding: 0 12px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  color: #191919; text-align: left; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+.silta-slide * { box-sizing: border-box; }
+.silta-slide header, .silta-slide footer { display: flex; align-items: center;
+  justify-content: space-between; gap: 24px; color: #62625d; }
+.silta-slide header { height: 58px; border-bottom: 1px solid #d8d8d2;
+  font: 12px/1.5 'SFMono-Regular', Consolas, monospace; letter-spacing: .07em; }
+.silta-slide header strong { font: 700 25px/1 'Helvetica Neue', Helvetica, sans-serif;
+  letter-spacing: -.045em; color: #191919; }
+.silta-slide header strong span { font-weight: 400; color: #b52e36; }
+.silta-slide footer { min-height: 46px; border-top: 1px solid #d8d8d2; font-size: 12px; }
+.silta-slide footer > :last-child { color: #b52e36; white-space: nowrap; padding-right: 45px; }
+.silta-slide main { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+.silta-slide h1 { font-size: 46px; line-height: 1.06; font-weight: 600;
+  letter-spacing: -.045em; margin: 0 0 32px; color: #191919; text-transform: none; }
+.silta-slide.silta-hero h1 { font-size: 68px; line-height: 1.02; margin-bottom: 28px; }
+.silta-slide h2 { font-size: 29px; font-weight: 500; margin: 0 0 20px; color: #191919; }
+.silta-slide p { font-size: 23px; line-height: 1.45; margin: 0 0 24px; }
+.silta-slide p.lead { font-size: 27px; line-height: 1.4; }
+.silta-slide p.sub { font-size: 19px; color: #62625d; margin: 28px 0 0; }
+.silta-slide .accent { color: #b52e36; }
+.silta-slide .split { display: grid; grid-template-columns: 1fr 1.1fr; gap: 42px; align-items: center; }
+.silta-slide figure { margin: 0; }
+.silta-slide figure img { width: 100%; height: 300px; object-fit: contain; margin: 0; }
+.silta-slide figcaption { color: #62625d; font-size: 13px; margin-top: 12px; }
+.silta-slide .learning { grid-template-columns: 1fr 1fr; align-items: start; }
+.silta-slide .learning .learning-column + .learning-column { border-left: 1px solid #d8d8d2; padding-left: 36px; }
+.silta-slide .sequence { list-style: none; padding: 0; margin: 0; counter-reset: step; }
+.silta-slide .sequence li { display: grid; grid-template-columns: 40px 140px 1fr; gap: 12px;
+  padding: 19px 0; border-top: 1px solid #d8d8d2; font-size: 21px; line-height: 1.4; }
+.silta-slide .sequence li::before { counter-increment: step; content: '0' counter(step);
+  font: 17px/1.7 Consolas, monospace; color: #b52e36; }
+.silta-slide table { width: 100%; border-collapse: collapse; font-size: 21px; }
+.silta-slide th, .silta-slide td { padding: 17px 0; text-align: left; border-bottom: 1px solid #d8d8d2; }
+.silta-slide th { font-size: 16px; color: #62625d; font-weight: 400; }
+.silta-slide td:last-child { color: #62625d; }
+.reveal .controls, .reveal .progress { color: #b52e36 !important; }
+.reveal .mo-slide-content, .reveal .mo-slide-content div { min-width: 0; }
+</style>
+<style>
+.silta-slide .loop-diagram { width: 100%; min-height: 275px; }
+.silta-slide .loop-diagram svg { max-width: 100% !important; max-height: 330px; }
+.silta-slide p.loop-caption { font-size: 22px; color: #62625d; margin: 22px 0 0; }
+</style>

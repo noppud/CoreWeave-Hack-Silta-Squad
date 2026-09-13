@@ -1,4 +1,4 @@
-.PHONY: setup check doctor models trace demo notebook
+.PHONY: setup check doctor models trace demo notebook slides slides-edit slides-export
 
 setup:
 	python3 scripts/bootstrap.py
@@ -24,3 +24,16 @@ demo:
 # Optional sponsor notebook editor; no notebook or GPU allocation is created automatically.
 notebook:
 	uv run --with marimo marimo edit
+
+# Presentation commands need no credentials or agent service.
+SLIDES_PORT ?= 2740
+
+slides:
+	uv run --group slides marimo run notebooks/slides.py --host 127.0.0.1 --port $(SLIDES_PORT)
+
+slides-edit:
+	uv run --group slides marimo edit notebooks/slides.py --host 127.0.0.1 --port $(SLIDES_PORT)
+
+slides-export:
+	mkdir -p artifacts
+	uv run --group slides marimo export html notebooks/slides.py --no-include-code -o artifacts/slides.html -f

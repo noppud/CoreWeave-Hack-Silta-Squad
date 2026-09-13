@@ -28,4 +28,7 @@ node_modules/
 wandb/
 .weave/
 artifacts/
+output/playwright/
+.playwright-cli/
+__marimo__/
 data/local/
