@@ -85,14 +85,20 @@ for (let i = 1; i < parts.length; i++) {
 
 const timingSource = script.slice(script.indexOf(' function partDuration('), script.indexOf(' function header('));
 const animationSource = script.slice(script.indexOf(' function step('), script.indexOf(' function pause('));
-const partDuration = new Function('parts', timingSource + 'return partDuration;')(parts);
-assert.equal(partDuration(1), 6500);
-assert.equal(partDuration(2), 3500);
+const {partDuration, playbackTime} = new Function('parts', timingSource + 'return {partDuration, playbackTime};')(parts);
+assert.ok(Math.abs(partDuration(1)-6500)<500);
+assert.ok(Math.abs(partDuration(2)-3500)<500);
+assert.ok(Math.abs(partDuration(1)+partDuration(2)-10000)<500);
 const totalDuration = parts.reduce((sum, part) => sum + partDuration(part.x), 0);
 assert.ok(Math.abs(totalDuration - 24000) < 1e-6);
-for (let x = 3; x < 54; x++) {
+assert.equal(playbackTime(0), 0);
+for (let x = 1; x < 54; x++) {
   assert.ok(partDuration(x + 1) < partDuration(x));
-  assert.ok(Math.abs(partDuration(x + 1) / partDuration(x) - partDuration(4) / partDuration(3)) < 1e-10);
+  if(x>1)assert.ok(partDuration(x+1)/partDuration(x)>partDuration(x)/partDuration(x-1));
+  // No discontinuity in playback speed where one part becomes the next.
+  const left=(playbackTime(x)-playbackTime(x-.0001))/.0001;
+  const right=(playbackTime(x+.0001)-playbackTime(x))/.0001;
+  assert.ok(Math.abs(left-right)/left<.001);
 }
 
 // Exercise the actual animation scheduler at different refresh rates and after
@@ -124,4 +130,4 @@ for (const [interval, reducedMotion, initialDelay] of [[1000/60,false,0],[1000/3
   assert.ok(result.now >= 24000 && result.now < 24100, JSON.stringify(result));
 }
 
-console.log('Passed: loop/data checks and 24-second playback; first two parts 6.5s + 3.5s, exponential acceleration, no dropped feedback.');
+console.log('Passed: continuous pacing across parts and steps; 24-second playback, first two parts '+(partDuration(1)/1000).toFixed(2)+'s + '+(partDuration(2)/1000).toFixed(2)+'s; no dropped feedback.');

@@ -24,7 +24,7 @@ Use **Play demo**, **Next step**, or the completed-parts slider. The demo contai
 
 The outcomes are scripted presentation data and are independent of the real Fusion runs documented in the repository README.
 
-Playback budgets 6.5 seconds for the first part and 3.5 seconds for the second, then accelerates exponentially through the remaining 52 parts in 14 seconds: 24 seconds total while playing uninterrupted. Frame delays are carried forward rather than added to each step. Pausing intentionally extends the presentation; a suspended browser tab cannot guarantee a wall-clock finish.
+Playback follows one continuous curve across all 54 parts and their individual steps: `T(x) = 24000 * (1 - 1/sqrt(1 + 0.64*x)) / (1 - 1/sqrt(1 + 0.64*54))`, where `x` is fractional completed-part progress and `T` is elapsed milliseconds. The first parts take approximately 6.32, 3.42, 2.22, and 1.59 seconds, with no special timing switch after part 2. Total uninterrupted playback is 24 seconds. Frame delays are carried forward rather than added to each step. Pausing intentionally extends the presentation; a suspended browser tab cannot guarantee a wall-clock finish.
 
 ## Check the exported page
 
