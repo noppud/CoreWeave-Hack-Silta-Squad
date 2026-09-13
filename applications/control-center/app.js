@@ -517,7 +517,8 @@ function showRecordedSimulation(){
   $('#demo-fallback').hidden=true;$('#demo-reset').hidden=false;
   const video=$('#demo-recorded-simulation');
   video.controls=false;
-  video.playbackRate=0.7;
+  video.playbackRate=1;
+  if('requestVideoFrameCallback' in video) video.addEventListener('loadeddata',()=>{video.playbackRate=1;},{once:true});
   video.style.pointerEvents='none';
   video.addEventListener('ended',()=>{D.fallbackComplete=true;finishDemoSimulation();},{once:true});
   video.play().catch(()=>{$('#demo-status').textContent='Starting simulation…';});
@@ -577,7 +578,7 @@ function renderDemoStep(){
   if(D.playing)D.timer=setTimeout(advanceDemo,duration);
 }
 function renderDemoStatus(){
-  if(D.fallback){$('#demo-status').textContent='Machining video';return;}
+  if(D.fallback){$('#demo-status').textContent='Simulation';return;}
   const s=D.session||{},step=D.steps[D.index];
   $('#demo-status').textContent=s.error||(D.live?({playing:'Live simulation running',completed:'Simulation complete'}[s.status]||'Connecting to Fusion'):step?.kind==='ready'?'Preparing Fusion':step?.kind==='result'?'Complete':`Attempt ${step?.attempt||1} · ${step?.stage==='cam'||step?.stage==='cad'?'Machining source':step?.stage==='judge'?'Judge review':step?.stage==='checks'?'Code checks':step?.stage==='simulate'?'Simulation evidence':'Drawing'}`);
   if(['ready','completed','error'].includes(s.status))$('#demo-reset').hidden=false;
