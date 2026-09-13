@@ -11,7 +11,7 @@ from pathlib import Path
 from .agents import _GEOMETRY_SCRIPT
 from .cam_documents import open_snapshot
 from .models import Artifact, VerificationResult, digest_json
-from .simulation_report import parse_issues_ax
+from .simulation_report import parse_issues_ax, parse_issues_native
 from .ui_verifier import (
     _BINDING_SCRIPT,
     FusionUIVerifier,
@@ -19,22 +19,48 @@ from .ui_verifier import (
     validate_simulation_coverage,
 )
 
-VERIFIER_VERSION = "fusion-fixed-ui-v1"
+VERIFIER_VERSION = "fusion-fixed-ui-stock-v7-explicit-stock-regeneration"
 
 
 class FixedFusionVerifier:
-    def __init__(self, bridge, reader_factory=None, *, timeout=180, poll_seconds=1):
+    def __init__(
+        self, bridge, reader_factory=None, *, timeout=180, poll_seconds=1, stock_check=None
+    ):
         if reader_factory is None:
-            from .approvals import FusionAppApproval
-            from .fusion_reader import FusionUIReader
-
-            approval = FusionAppApproval()
+            from .native_reader import NativeFusionReader
 
             def reader_factory(directory):
-                return FusionUIReader(directory, app_approval=approval)
+                return NativeFusionReader(bridge, directory)
 
         self.bridge, self.reader_factory = bridge, reader_factory
         self.timeout, self.poll_seconds = timeout, poll_seconds
+        self.stock_check = stock_check or self._compare_stock
+
+    def _compare_stock(self, document, context, directory):
+        from .stock_comparison import compare_stock_to_step
+        from .stock_export import StockExporter
+
+        target_step = context.target.artifacts.get("step")
+        tolerance = context.inputs.tolerances.get("linear_plus_minus_mm")
+        if target_step is None or tolerance is None:
+            return {
+                "status": "unknown",
+                "issues": [],
+                "reason": "Target STEP and explicit linear_plus_minus_mm are required",
+            }
+        target_step.verify()
+        exporter = StockExporter(document, directory / "stock-export", bridge=self.bridge)
+        exported = exporter.export(directory / "finished-stock.stl")
+        if exported["geometry"].get("coordinate_units") != "mm":
+            raise ValueError("Fusion stock export did not confirm millimetre coordinates")
+        result = compare_stock_to_step(
+            Path(exported["path"]),
+            Path(target_step.path),
+            float(tolerance),
+            directory / "stock-comparison",
+        )
+        result["export"] = exported
+        return result
 
     def _request(self, action, payload=None):
         reply = self.bridge.request(action, payload)
@@ -48,6 +74,7 @@ class FixedFusionVerifier:
         evidence = []
         report = None
         configured_coverage = None
+        stock_comparison = None
 
         def save(name, value):
             evidence.append(_save(directory / name, value))
@@ -105,10 +132,13 @@ class FixedFusionVerifier:
                 },
             )
             configured_coverage = validate_simulation_coverage(binding)
-            save("configured-coverage.json", {
-                "configured_coverage": configured_coverage,
-                "meaning": "Configured verification scope, not a geometric verdict",
-            })
+            save(
+                "configured-coverage.json",
+                {
+                    "configured_coverage": configured_coverage,
+                    "meaning": "Configured verification scope, not a geometric verdict",
+                },
+            )
             # Open the reader before launching so consent failure cannot leave a
             # freshly launched simulation with no observer. No model turn runs.
             with self.reader_factory(directory) as reader:
@@ -129,14 +159,22 @@ class FixedFusionVerifier:
                 last_error = "No Issues summary observed"
                 index = 0
                 last_text = None
+                issues_recovery_saved = False
                 while time.monotonic() < deadline:
                     observation = reader.read()
+                    if observation.get("issues_panel_recovery") and not issues_recovery_saved:
+                        save("issues-panel-recovery.json", observation["issues_panel_recovery"])
+                        issues_recovery_saved = True
                     if observation["raw_text"] != last_text:
                         save(f"native-read-{index:04d}.json", observation)
                         index += 1
                         last_text = observation["raw_text"]
                     try:
-                        report = parse_issues_ax(observation["raw_text"])
+                        report = (
+                            parse_issues_native(observation["native_state"])
+                            if "native_state" in observation
+                            else parse_issues_ax(observation["raw_text"])
+                        )
                     except ValueError as error:
                         last_error = str(error)
                     else:
@@ -146,7 +184,23 @@ class FixedFusionVerifier:
                 else:
                     raise TimeoutError("Verification completion was not observed: " + last_error)
             save("issues-report.json", asdict(report))
-            save("simulation-dialog.json", self._request("simulation_dialog"))
+            dialog = self._request("simulation_dialog")
+            save("simulation-dialog.json", dialog)
+            if not report.errors and not report.process_errors and not report.warnings:
+                stock_comparison = self.stock_check(
+                    dialog.get("result", {}).get("document"), context, directory
+                )
+                save("stock-comparison-result.json", stock_comparison)
+                for folder in (directory / "stock-export", directory / "stock-comparison"):
+                    if folder.exists():
+                        for path in sorted(folder.iterdir()):
+                            if path.suffix in {".json", ".png", ".stl"}:
+                                evidence.append(Artifact.from_path(path))
+                stock_path = directory / "finished-stock.stl"
+                if stock_path.exists():
+                    evidence.append(Artifact.from_path(stock_path))
+                if stock_comparison.get("status") in {"passed", "failed"}:
+                    configured_coverage = {**configured_coverage, "target_stock_comparison": True}
             save(
                 "simulation-stop.json",
                 self._request("simulation_command", {"command_id": "SimulationStop"}),
@@ -173,7 +227,7 @@ class FixedFusionVerifier:
                 "metrics": timing.get("metrics", {}),
                 "cost_assumptions": context.inputs.cost_assumptions,
                 "details_may_be_partial": True,
-                "target_stock_comparison": "not_yet_collected",
+                "target_stock_comparison": stock_comparison,
                 "configured_coverage": configured_coverage,
                 "workspace": str(directory),
             }
@@ -199,6 +253,31 @@ class FixedFusionVerifier:
                 )
                 verdict.validate(candidate, context)
                 return verdict
+            stock_status = (stock_comparison or {}).get("status", "unknown")
+            if stock_status in {"passed", "failed"} and not report.warnings:
+                stock_issues = tuple(
+                    f"{issue['type']}: at least {issue['minimum_deviation_mm']:.4f} mm "
+                    f"at {issue['point_mm']}"
+                    for issue in stock_comparison.get("issues", [])
+                )
+                if stock_status == "failed" and not stock_issues:
+                    raise ValueError("Stock comparison failure requires localized evidence")
+                verdict = VerificationResult(
+                    stock_status,
+                    True,
+                    context.input_digest,
+                    candidate.digest,
+                    VERIFIER_VERSION,
+                    tuple(evidence),
+                    "Fusion internal CAM machine verification and bounded stock-to-target "
+                    "surface comparison; no posted-NC or cutting-physics certification",
+                    stock_issues,
+                    seconds,
+                    FusionUIVerifier._cost(seconds, context.inputs.cost_assumptions),
+                    feedback,
+                )
+                verdict.validate(candidate, context)
+                return verdict
             return VerificationResult(
                 "unknown",
                 False,
@@ -206,11 +285,14 @@ class FixedFusionVerifier:
                 candidate.digest,
                 VERIFIER_VERSION,
                 tuple(evidence),
-                "Fusion verification completed with configured checks; stock comparison unverified",
+                "Fusion verification completed; numerical stock conformity unresolved",
                 (
-                    "Deterministic target-stock comparison remains unverified",
-                    *([f"Fusion verification: {report.warnings} warnings"]
-                      if report.warnings else []),
+                    (stock_comparison or {}).get("reason", "Stock comparison is unresolved"),
+                    *(
+                        [f"Fusion verification: {report.warnings} warnings"]
+                        if report.warnings
+                        else []
+                    ),
                 ),
                 feedback=feedback,
             )
@@ -229,6 +311,7 @@ class FixedFusionVerifier:
                 feedback={
                     "workspace": str(directory),
                     "summary": asdict(report) if report else None,
+                    "target_stock_comparison": stock_comparison,
                     "configured_coverage": configured_coverage,
                 },
             )

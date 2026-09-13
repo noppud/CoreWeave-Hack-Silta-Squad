@@ -1,0 +1,62 @@
+[
+  {
+    "case": "02-hydraulic-manifold-0.708-0",
+    "movement_sha256": "abbbc942d4753e84640783267964392c5b85375d313b666d55d4addb8ebd89fe",
+    "moves": 330
+  },
+  {
+    "case": "02-hydraulic-manifold-0.708-1",
+    "movement_sha256": "33b31d4c5c747c3156063c9079fea0dfc1da6d78954e847a5331dda1cdba11fc",
+    "moves": 344
+  },
+  {
+    "case": "02-hydraulic-manifold-0.75-0",
+    "movement_sha256": "abbbc942d4753e84640783267964392c5b85375d313b666d55d4addb8ebd89fe",
+    "moves": 330
+  },
+  {
+    "case": "02-hydraulic-manifold-0.75-1",
+    "movement_sha256": "33b31d4c5c747c3156063c9079fea0dfc1da6d78954e847a5331dda1cdba11fc",
+    "moves": 344
+  },
+  {
+    "case": "02-hydraulic-manifold-0.95-0",
+    "movement_sha256": "abbbc942d4753e84640783267964392c5b85375d313b666d55d4addb8ebd89fe",
+    "moves": 330
+  },
+  {
+    "case": "02-hydraulic-manifold-0.95-1",
+    "movement_sha256": "33b31d4c5c747c3156063c9079fea0dfc1da6d78954e847a5331dda1cdba11fc",
+    "moves": 344
+  },
+  {
+    "case": "04-trunnion-cage-0.75-0",
+    "movement_sha256": "427dc318919593aa592856f0fcbc2a6d361199b198a8d5810d3e312b07592dcb",
+    "moves": 596
+  },
+  {
+    "case": "04-trunnion-cage-0.75-1",
+    "movement_sha256": "427dc318919593aa592856f0fcbc2a6d361199b198a8d5810d3e312b07592dcb",
+    "moves": 596
+  },
+  {
+    "case": "04-trunnion-cage-0.83-0",
+    "movement_sha256": "0d80c1e0df614b6c804a00a4faba14f660684c4e388d8617b83cb3732d9dfe80",
+    "moves": 596
+  },
+  {
+    "case": "04-trunnion-cage-0.83-1",
+    "movement_sha256": "0d80c1e0df614b6c804a00a4faba14f660684c4e388d8617b83cb3732d9dfe80",
+    "moves": 596
+  },
+  {
+    "case": "04-trunnion-cage-0.95-0",
+    "movement_sha256": "5e0aa0470de089ee486984305fdc9b78ab6264842721b142caeb4e183d665926",
+    "moves": 596
+  },
+  {
+    "case": "04-trunnion-cage-0.95-1",
+    "movement_sha256": "5e0aa0470de089ee486984305fdc9b78ab6264842721b142caeb4e183d665926",
+    "moves": 596
+  }
+]

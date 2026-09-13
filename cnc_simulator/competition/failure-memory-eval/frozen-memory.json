@@ -1,0 +1,33 @@
+{
+  "learned_checks": [
+    {
+      "id": "exact-91b3f012b50b",
+      "geometry_key": "91b3f012b50b55739922c2f91f855c13a8899bcf04c5fca297783a52115e1db3",
+      "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-loop-demo/runs/02-hydraulic-manifold/reference",
+      "issues": [
+        {
+          "code": "excess_material",
+          "certainty": "uncertain",
+          "moves": [],
+          "description": "Final stock has excess material beyond target tolerance. Resolution cannot establish a pass."
+        }
+      ],
+      "semantics": "Blocks only identical geometry/motion under matching implementation and fixed inputs. Feed-only changes do not change geometric validity."
+    }
+  ],
+  "repair_observations": [
+    {
+      "part": "02-hydraulic-manifold",
+      "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-loop-demo/runs/02-hydraulic-manifold/reference",
+      "issues": [
+        {
+          "code": "excess_material",
+          "certainty": "uncertain",
+          "moves": [],
+          "description": "Final stock has excess material beyond target tolerance. Resolution cannot establish a pass."
+        }
+      ],
+      "advisory": "Repair geometry before optimizing time. For excess material at intersecting pockets, consider junction_cleanup; any changed path must pass simulation."
+    }
+  ]
+}

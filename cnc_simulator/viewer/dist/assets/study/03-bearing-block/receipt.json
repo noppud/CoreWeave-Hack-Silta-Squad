@@ -1,0 +1,10 @@
+{
+  "part": "03-bearing-block",
+  "source_plan_sha256": "a9758675f7dd6d47db507ac8902bcb3969508fd4a298d6c4b9c7a4317216b01f",
+  "frames": 44,
+  "bytes": 1168440,
+  "final_display_volume_mm3": 128260.09478162056,
+  "within_verifier_bounds": true,
+  "passed": true,
+  "method": "Boolean subtraction of swept inscribed 64-sided cutters; display copy simplified <=0.005 mm. No target geometry used to construct stock."
+}

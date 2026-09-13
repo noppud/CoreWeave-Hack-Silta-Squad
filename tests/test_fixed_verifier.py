@@ -22,7 +22,8 @@ class FixedBridge(BridgeDouble):
         self.binding["expected_machine_coverage"] = scope
         self.binding["setups"][0]["machine_coverage"] = copy.deepcopy(scope)
         self.binding["operations"][0]["tool"] = {
-            "geometry": {"DC": 12.7}, "holder": {"segments": [{"height": 10}]}
+            "geometry": {"DC": 12.7},
+            "holder": {"segments": [{"height": 10}]},
         }
 
     def request(self, action, payload=None):
@@ -85,7 +86,7 @@ def test_clear_issues_retains_configured_scope_and_only_stock_comparison_gap(cas
     verifier = FixedFusionVerifier(FixedBridge(), lambda _: Reader([snapshot(errors=0)]))
     result = verifier.verify(*case)
     assert result.status == "unknown"
-    assert result.issues == ("Deterministic target-stock comparison remains unverified",)
+    assert result.issues == ("Target STEP and explicit linear_plus_minus_mm are required",)
     assert result.feedback["configured_coverage"]["axis_overtravel"] is True
     assert result.feedback["configured_coverage"]["target_stock_comparison"] is False
     evidence = {Path(a.path).name: json.loads(Path(a.path).read_text()) for a in result.evidence}
@@ -124,3 +125,62 @@ def test_changed_collision_scope_during_verification_cannot_be_accepted(case):  
     assert result.status == "unknown"
     assert "changed during verification" in result.issues[0]
     assert any(Path(a.path).name == "candidate-binding-after.json" for a in result.evidence)
+
+
+def test_stock_is_collected_before_simulation_stops_and_pass_reaches_metrics(case):  # noqa: F811
+    bridge = FixedBridge()
+
+    def stock_check(document, context, directory):
+        assert bridge.actions.count("simulation_command") == 2
+        return {"status": "passed", "issues": [], "method": "explicit contract double"}
+
+    result = FixedFusionVerifier(
+        bridge, lambda _: Reader([snapshot(errors=0)]), stock_check=stock_check
+    ).verify(*case)
+    assert result.status == "passed" and result.completed
+    assert result.machining_seconds == 360
+    assert result.feedback["configured_coverage"]["target_stock_comparison"] is True
+    assert bridge.actions.count("simulation_command") == 3
+
+
+def test_stock_mismatch_rejects_zero_collision_plan_and_returns_repair_coordinates(case):  # noqa: F811
+    result = FixedFusionVerifier(
+        FixedBridge(),
+        lambda _: Reader([snapshot(errors=0)]),
+        stock_check=lambda *args: {
+            "status": "failed",
+            "issues": [
+                {"type": "leftover_material", "minimum_deviation_mm": 0.2, "point_mm": [1, 2, 3]}
+            ],
+        },
+    ).verify(*case)
+    assert result.status == "failed" and result.completed
+    assert "leftover_material" in result.issues[0]
+    assert result.feedback["target_stock_comparison"]["issues"][0]["point_mm"] == [1, 2, 3]
+
+
+def test_stock_collection_failure_never_becomes_pass(case):  # noqa: F811
+    def failed_export(*args):
+        raise RuntimeError("Mac locked before export")
+
+    result = FixedFusionVerifier(
+        FixedBridge(), lambda _: Reader([snapshot(errors=0)]), stock_check=failed_export
+    ).verify(*case)
+    assert result.status == "unknown" and not result.completed
+    assert "Mac locked" in result.issues[0]
+
+
+def test_issues_recovery_is_bound_once_separately_from_raw_observations(case):  # noqa: F811
+    receipt = {"reason": "issues_panel_absent_after_three_reads", "simulation_restarted": False}
+
+    class RecoveryReader(Reader):
+        def read(self):
+            return {**super().read(), "issues_panel_recovery": receipt}
+
+    reader = RecoveryReader([snapshot(percent=30), snapshot()])
+    result = FixedFusionVerifier(FixedBridge(), lambda _: reader, poll_seconds=0).verify(*case)
+    artifacts = [a for a in result.evidence if Path(a.path).name == "issues-panel-recovery.json"]
+    assert len(artifacts) == 1
+    artifacts[0].verify()
+    assert json.loads(Path(artifacts[0].path).read_text()) == receipt
+    assert result.status == "failed"

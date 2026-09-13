@@ -1,0 +1,62 @@
+[
+  {
+    "case": "02-hydraulic-manifold-0.708-0",
+    "source_sha256": "38866955c86f088a6b69961603f8e9f1305d7cba3f3a72fd5f713f475fb5b6a9",
+    "resolution_mm": 0.5,
+    "wall_seconds": 0.004850864410400391,
+    "result": {
+      "validity": "invalid",
+      "passed": false,
+      "verification": "unresolved",
+      "issues": [
+        {
+          "code": "resource_limit",
+          "certainty": "uncertain",
+          "moves": [],
+          "description": "Geometry grid exceeds max_cells; reduce bounds or increase resolution_mm."
+        }
+      ],
+      "estimated_time_seconds": 116.08185407040168,
+      "time_breakdown": {
+        "cutting": 86.79867527785143,
+        "rapid": 9.28317879255024,
+        "dwell": 0.0,
+        "tool_changes": 0.0,
+        "indexing": 20.0
+      },
+      "timing_assumptions": "Constant commanded vector feed/rapid speed; no acceleration, jerk, lookahead, spindle ramp or controller blending. Cut includes air cutting and plunge/retract. Tool changes add fixed duration, with no implicit travel. Full submitted plan timed even if invalid. Indexed B/C rotation uses simultaneous constant angular speeds plus settle time. No cutting during indexing.",
+      "scope": "Indexed 3+2 only; table-attached stock and fixtures. Tool-section collision and configured axis limits; whole-machine self-collision is not certified. Gauge length is fixed across tools.",
+      "target_sha256": "b8e86d16d2df5e87cffda1ba1383fa4e1016dbecfde16271c9a3bff566bbcce4"
+    }
+  },
+  {
+    "case": "04-trunnion-cage-0.95-0",
+    "source_sha256": "7b7c37f4824db011cfcf73c7775ff74bf9e834c2cce8b7547db8afe76b45b30a",
+    "resolution_mm": 0.5,
+    "wall_seconds": 0.006583213806152344,
+    "result": {
+      "validity": "invalid",
+      "passed": false,
+      "verification": "unresolved",
+      "issues": [
+        {
+          "code": "resource_limit",
+          "certainty": "uncertain",
+          "moves": [],
+          "description": "Geometry grid exceeds max_cells; reduce bounds or increase resolution_mm."
+        }
+      ],
+      "estimated_time_seconds": 200.78243485882092,
+      "time_breakdown": {
+        "cutting": 165.620357497387,
+        "rapid": 12.162077361433914,
+        "dwell": 0.0,
+        "tool_changes": 0.0,
+        "indexing": 23.0
+      },
+      "timing_assumptions": "Constant commanded vector feed/rapid speed; no acceleration, jerk, lookahead, spindle ramp or controller blending. Cut includes air cutting and plunge/retract. Tool changes add fixed duration, with no implicit travel. Full submitted plan timed even if invalid. Indexed B/C rotation uses simultaneous constant angular speeds plus settle time. No cutting during indexing.",
+      "scope": "Indexed 3+2 only; table-attached stock and fixtures. Tool-section collision and configured axis limits; whole-machine self-collision is not certified. Gauge length is fixed across tools.",
+      "target_sha256": "9af44a8563fc15d661df6b14e17dca6ba2a3b9694519c3b5acb25eea419d5037"
+    }
+  }
+]

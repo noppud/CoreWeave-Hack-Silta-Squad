@@ -1,0 +1,109 @@
+{
+  "frames": 3479,
+  "seconds": 115.96000000000001,
+  "status": "Captioned evidence film; decoded and embedded captions read back successfully.",
+  "sources": [
+    "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/film/01-loop.png",
+    "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-complex-three/videos/13-twelve-window-carrier.webm",
+    "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/film/03-results.png",
+    "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-complex-three/videos/15-staggered-lattice-drum.webm",
+    "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/film/05-learning.png",
+    "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/film/weave-frame.png",
+    "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/film/aria-frame.png",
+    "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/film/transfer-overview.png",
+    "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-complex-three/videos/14-multi-gallery-manifold.webm",
+    "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/film/terminal/recorded-terminal.mp4",
+    "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/film/07-scope.png"
+  ],
+  "timeline": [
+    {
+      "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/film/01-loop.png",
+      "start_seconds": 0,
+      "duration_seconds": 8,
+      "source_offset_seconds": null
+    },
+    {
+      "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-complex-three/videos/13-twelve-window-carrier.webm",
+      "start_seconds": 8,
+      "duration_seconds": 15,
+      "source_offset_seconds": 14
+    },
+    {
+      "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/film/03-results.png",
+      "start_seconds": 23,
+      "duration_seconds": 12,
+      "source_offset_seconds": null
+    },
+    {
+      "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-complex-three/videos/15-staggered-lattice-drum.webm",
+      "start_seconds": 35,
+      "duration_seconds": 15,
+      "source_offset_seconds": 14
+    },
+    {
+      "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/film/05-learning.png",
+      "start_seconds": 50,
+      "duration_seconds": 12,
+      "source_offset_seconds": null
+    },
+    {
+      "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/film/weave-frame.png",
+      "start_seconds": 62,
+      "duration_seconds": 6,
+      "source_offset_seconds": null
+    },
+    {
+      "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/film/aria-frame.png",
+      "start_seconds": 68,
+      "duration_seconds": 6,
+      "source_offset_seconds": null
+    },
+    {
+      "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/film/transfer-overview.png",
+      "start_seconds": 74,
+      "duration_seconds": 8,
+      "source_offset_seconds": null
+    },
+    {
+      "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-complex-three/videos/14-multi-gallery-manifold.webm",
+      "start_seconds": 82,
+      "duration_seconds": 8,
+      "source_offset_seconds": 21
+    },
+    {
+      "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/film/terminal/recorded-terminal.mp4",
+      "start_seconds": 90,
+      "duration_seconds": 20,
+      "source_offset_seconds": 0
+    },
+    {
+      "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/film/07-scope.png",
+      "start_seconds": 110,
+      "duration_seconds": 6,
+      "source_offset_seconds": null
+    }
+  ],
+  "sha256": "4eee8f3a5de11f29351f6564ccf61250837dc6e570c90b950fdc2c58052f44cf",
+  "decode_check": "passed",
+  "audio": "silent; selectable embedded English captions and timed NARRATION.md",
+  "captions": {
+    "path": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/film/silta-demo.srt",
+    "sha256": "719ff4d4910da91d62ce7da97b81537a3256fab4a96f4744ef9bd94e586f5400",
+    "cues": 19,
+    "embedded_readback": true
+  },
+  "source_film_sha256": "61593806da7813852dd214cc48d942b3b2754b29d3f0df7062e0c90af72bef67",
+  "source_hashes": {
+    "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/film/01-loop.png": "787c7eecced698ee80471d6a51250ec8e56c2e8b80aaa70653a2cdde5b4de97c",
+    "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-complex-three/videos/13-twelve-window-carrier.webm": "e651ba02d84e89781517f9abb93f4b447440cf678f5328b9bda55f1daaa1fbd1",
+    "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/film/03-results.png": "d275e2c6bf666da05d63edfda524837b3865796da0c680de0604f7bafbd5341f",
+    "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-complex-three/videos/15-staggered-lattice-drum.webm": "67a13d2434cd1400bf918e159eeb6433561af2b6db5c25c65d182d4c4e2eec7f",
+    "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/film/05-learning.png": "ac64378e057227b4069d377e8071f4078cb46ae23736142170ec3d039b0b2cae",
+    "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/film/weave-frame.png": "6039e95e8dc0545b5be1360e3df10ebe143ce5903031f239fd4da66e11dc4c91",
+    "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/film/aria-frame.png": "8e81e740a506a7f371c7015721bb955ec9667b28879558e1e3c776b1181e3899",
+    "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/film/transfer-overview.png": "f99164614420c7c4a942c9e401fede978147f6d4eef539f32f56f80bc916d191",
+    "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-complex-three/videos/14-multi-gallery-manifold.webm": "c210810f02a7fd66fa90e2b2ef8bb2d8c972550946ebba5bf94bfbef6cb000c9",
+    "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/film/terminal/recorded-terminal.mp4": "cad4c215ae975eb20281f2e898fa973ae64fe1e1eae940a778772d44ee886f49",
+    "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/film/07-scope.png": "0b0c7e6de537e02f4670097803b7f50c72e04e7f791a9983932a5a90ae3cdb9c"
+  }
+}

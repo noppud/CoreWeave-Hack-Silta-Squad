@@ -1,0 +1,16 @@
+{
+  "dataset_uri": "weave:///silta/coreweave-hack-silta-squad/object/complex-indexed-three-part-outcomes:1Hc3YYzrVJEW339J01cYXAe7l62FSKPsCLTXKZWF6fU",
+  "evaluations": [
+    {
+      "arm": "reference",
+      "url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a09994-b421-7421-92da-b66c126e7e27",
+      "readback_complete": true
+    },
+    {
+      "arm": "best",
+      "url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a09994-c29e-79ba-aa64-284843aac3de",
+      "readback_complete": true
+    }
+  ],
+  "scope": "Retained stress-test outcomes, not new simulation or a controlled memory-transfer study. 1 mm cells / 3 mm demo tolerance."
+}

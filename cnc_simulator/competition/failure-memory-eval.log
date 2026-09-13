@@ -1,0 +1,11 @@
+SIMULATING original-failure
+original-failure valid False memory blocks True
+SIMULATING feed-only-repeat
+feed-only-repeat valid False memory blocks True
+SIMULATING corrected-junction
+corrected-junction valid True memory blocks False
+SIMULATING other-valid-part
+other-valid-part valid True memory blocks False
+SIMULATING changed-fixture-scope
+changed-fixture-scope valid False memory blocks False
+{"cases": 5, "invalid": 3, "valid": 2, "caught_invalid": 2, "false_rejections": 0, "scope_abstentions": 3, "avoided_full_simulations": 2}

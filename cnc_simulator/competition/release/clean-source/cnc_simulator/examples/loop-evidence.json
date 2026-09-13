@@ -1,0 +1,46 @@
+{
+  "runs": [
+    {
+      "run": "astra-cycle-a",
+      "status": "completed",
+      "model": "gpt-6-astra",
+      "loaded_knowledge_version": 0,
+      "first_attempt_stage": "simulated",
+      "first_valid_seconds": 3.5149643475119907,
+      "best_seconds": 3.3134298664321427,
+      "attempts": 8,
+      "learning": [
+        {
+          "kind": "check",
+          "promoted": true
+        },
+        {
+          "kind": "guidance",
+          "promoted": false
+        }
+      ]
+    },
+    {
+      "run": "astra-cycle-b",
+      "status": "completed",
+      "model": "gpt-6-astra",
+      "loaded_knowledge_version": 1,
+      "first_attempt_stage": "check_failed",
+      "first_valid_seconds": 4.222412122971902,
+      "best_seconds": 4.113327497956566,
+      "attempts": 8,
+      "learning": []
+    }
+  ],
+  "checks": {
+    "simulator_tests": 27,
+    "loop_tests": 12,
+    "python_lint": "passed",
+    "javascript_syntax": "passed",
+    "http_assets": "200",
+    "cross_origin_launch": "403",
+    "traversal": "404",
+    "browser_visual_qa": "not performed"
+  },
+  "scope": "Accepted pocket meshes; schematic machine visualization, not a port of the actual Haas model."
+}

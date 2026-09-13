@@ -1,0 +1,25 @@
+START 11-indexed-instrument-shell-r1-cold
+DONE 11-indexed-instrument-shell-r1-cold True
+START 11-indexed-instrument-shell-r1-warm
+DONE 11-indexed-instrument-shell-r1-warm True
+START 12-three-pocket-plate-r1-warm
+DONE 12-three-pocket-plate-r1-warm True
+START 12-three-pocket-plate-r1-cold
+DONE 12-three-pocket-plate-r1-cold True
+START 11-indexed-instrument-shell-r2-warm
+DONE 11-indexed-instrument-shell-r2-warm True
+START 11-indexed-instrument-shell-r2-cold
+DONE 11-indexed-instrument-shell-r2-cold True
+START 12-three-pocket-plate-r2-cold
+DONE 12-three-pocket-plate-r2-cold True
+START 12-three-pocket-plate-r2-warm
+DONE 12-three-pocket-plate-r2-warm True
+START 11-indexed-instrument-shell-r3-cold
+DONE 11-indexed-instrument-shell-r3-cold True
+START 11-indexed-instrument-shell-r3-warm
+DONE 11-indexed-instrument-shell-r3-warm True
+START 12-three-pocket-plate-r3-warm
+DONE 12-three-pocket-plate-r3-warm True
+START 12-three-pocket-plate-r3-cold
+DONE 12-three-pocket-plate-r3-cold True
+COMPLETE [{"part": "11-indexed-instrument-shell", "repetition": 1, "cold_passed": true, "warm_passed": true, "paired_coverage": true, "cold_seconds": 172.73831474821984, "warm_seconds": 172.86361986159383, "warm_minus_cold_seconds": 0.1253051133739973}, {"part": "11-indexed-instrument-shell", "repetition": 2, "cold_passed": true, "warm_passed": true, "paired_coverage": true, "cold_seconds": 172.8128796027751, "warm_seconds": 172.86361986159383, "warm_minus_cold_seconds": 0.050740258818734674}, {"part": "11-indexed-instrument-shell", "repetition": 3, "cold_passed": true, "warm_passed": true, "paired_coverage": true, "cold_seconds": 170.98404272929116, "warm_seconds": 172.86361986159383, "warm_minus_cold_seconds": 1.8795771323026713}, {"part": "12-three-pocket-plate", "repetition": 1, "cold_passed": true, "warm_passed": true, "paired_coverage": true, "cold_seconds": 34.676235952583234, "warm_seconds": 34.676235952583234, "warm_minus_cold_seconds": 0.0}, {"part": "12-three-pocket-plate", "repetition": 2, "cold_passed": true, "warm_passed": true, "paired_coverage": true, "cold_seconds": 34.676235952583234, "warm_seconds": 34.676235952583234, "warm_minus_cold_seconds": 0.0}, {"part": "12-three-pocket-plate", "repetition": 3, "cold_passed": true, "warm_passed": true, "paired_coverage": true, "cold_seconds": 34.68161321706444, "warm_seconds": 34.676235952583234, "warm_minus_cold_seconds": -0.005377264481204236}]

@@ -1,0 +1,26 @@
+{
+  "dataset_uri": "weave:///silta/coreweave-hack-silta-squad/object/programmatic-cam-five-part-evidence:tcBnFBfbWDcP7tEXblahHZCKjnfa3yHeaBlg1WVrEM0",
+  "scope": "Retained five-part indexed 3+2 evidence. Not new simulation. 1 mm cells / 3 mm tolerance. Four one-sample cold/warm comparisons; no generalization claim.",
+  "evaluations": [
+    {
+      "arm": "reference",
+      "url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a09946-9f30-7b13-bb9a-97f7a9ab0c93",
+      "readback_complete": true
+    },
+    {
+      "arm": "best",
+      "url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a09946-a67c-725a-a493-466e6a3905da",
+      "readback_complete": true
+    },
+    {
+      "arm": "cold",
+      "url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a09946-b020-7b68-b617-b38d4cedc239",
+      "readback_complete": true
+    },
+    {
+      "arm": "warm",
+      "url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a09946-b8dd-71c2-b957-fcc34c3de45f",
+      "readback_complete": true
+    }
+  ]
+}

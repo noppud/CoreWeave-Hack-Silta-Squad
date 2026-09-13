@@ -1,0 +1,715 @@
+{
+  "schema_version": 1,
+  "status": "ready",
+  "unresolved": [],
+  "drawings": [
+    {
+      "path": "/Users/touko/work/helios-one/repos/coreweavehack/output/pdf/umc-actuator-housing.pdf",
+      "sha256": "cb5d9af223ca5ec70529b59ab62f26d8d2bbc128b74a20ad5eeedbeab5a81672"
+    }
+  ],
+  "machine": {
+    "name": "Haas UMC-750 Reboot, indexed five-axis (3+2)",
+    "axes": 5,
+    "definition": {
+      "path": "/Users/touko/work/helios-one/repos/coreweavehack/config/haas-umc750-linked.mch",
+      "sha256": "0d783e3e333de99a21b7afcf83d0f2c0cd337cd33f1b6310095349f5ee25633b"
+    },
+    "simulation_geometry": {
+      "path": "/Users/touko/work/helios-one/repos/coreweavehack/research/five-axis/haas-umc750-reboot.f3d",
+      "sha256": "b33ed15419fdf3234f1a6269f86676ab5b2fda5b2e2044d460499192bba4f403"
+    },
+    "axis_travel_mm": {
+      "X": [
+        -762,
+        0
+      ],
+      "Y": [
+        -508,
+        0
+      ],
+      "Z": [
+        -508,
+        63.5
+      ]
+    },
+    "spindle_max_rpm": 8100,
+    "feed_max_mm_min": 16500,
+    "time_estimation": {
+      "feed_scale_percent": 100,
+      "rapid_feed_cm_s": 42.333333333333336,
+      "tool_change_seconds": 15
+    },
+    "time_estimation_provenance": {
+      "feed_scale_percent": "Fixed neutral 100% simulation assumption",
+      "rapid_feed_cm_s": "Haas published 25.4 m/min divided by 60, converted to cm/s; ignores acceleration",
+      "tool_change_seconds": "Autodesk machine definition toolChangeTime=15s; one enabled tool, no inter-operation switches."
+    },
+    "postprocessor": {
+      "path": "/Users/touko/work/helios-one/repos/coreweavehack/config/haas-next-generation.cps",
+      "sha256": "7793e1d36e12c63e61535f112fddb570076058820839b9459f736cf40e36c3c4",
+      "source_url": "https://cam.autodesk.com/posts/download.php?name=haas%20next%20generation",
+      "machine_source_reference": "system://haas next generation.cps",
+      "status": "downloaded_not_live_posted"
+    },
+    "tool_capacity": 30,
+    "specification_source": "https://www.haascnc.com/machines/vertical-mills/universal-machine/models/umc-750.html",
+    "applied_to_fusion": false,
+    "source_definition": {
+      "path": "/Users/touko/work/helios-one/repos/coreweavehack/research/five-axis/haas-umc750-reboot.mch",
+      "sha256": "ed825408f4d43ba7382da9863b8d1ef38e63f760dee26ac79fb7f2dc4e6b3f08"
+    },
+    "profile_status": "linked_model_imported; new setup simulation pending",
+    "profile_provenance": "Official Autodesk UMC-750 Reboot definition, cloud simulation geometry linked using MachineFromFileInput. Retains narrower B limits from this exact model.",
+    "library_url": "user://Silta UMC750 demo.mch",
+    "simulation_model_cloud": {
+      "data_file_id": "urn:adsk.wipprod:dm.lineage:07xIxOIIRTes4CWHH0lRDw",
+      "version_urn": "urn:adsk.wipprod:fs.file:vf.07xIxOIIRTes4CWHH0lRDw?version=1",
+      "project_name": "Silta CNC Hackathon",
+      "project_id": "a.YnVzaW5lc3M6aGVsaW9zb25lIzIwMjYwOTEyMTEzOTAzOTk4MQ"
+    },
+    "assignment_instruction": "Use CAMManager.get().libraryManager.machineLibrary.machineAtURL(URL.create(library_url)); actual linked library assignment succeeded. Preserve simulation model. Model visibility can be enabled with setup.visibilityManager.machineVisible. Live indexed API probe: use fresh axesZX orientation, Z from the actual planar pocket floor and X from a perpendicular construction axis. Assigning a BRepFace directly to surfaceNormalX surface-point selection produced missing references and Generation not started. Do not carry that unresolved reference into a replacement operation.",
+    "rotary_travel_degrees": {
+      "B": [
+        -35,
+        110
+      ],
+      "C": "continuous"
+    }
+  },
+  "tools": {
+    "library": {
+      "path": "/Users/touko/work/helios-one/repos/coreweavehack/config/starter-tools-assembled.json",
+      "sha256": "c160b1ec0ba216fa0fe8d1f69cf21dda5be50d1d2275514fc56001519711d155"
+    },
+    "holder_library": {
+      "path": "/Users/touko/work/helios-one/repos/coreweavehack/research/assets/selected/starter-holder-unmodified.json",
+      "sha256": "be4685322d44d6e2a4a0e65da9664b4e74ae4114ef192366e06301590473e1b5"
+    },
+    "entries": [
+      {
+        "number": 1,
+        "product_id": "03-0086",
+        "vendor": "Haas Automation",
+        "unit": "inches",
+        "geometry": {
+          "CSP": false,
+          "DC": 0.49999999999999994,
+          "HAND": true,
+          "LB": 1.2999999999999998,
+          "LCF": 0.9999999999999999,
+          "NOF": 3,
+          "NT": 1,
+          "OAL": 2.9999999999999996,
+          "RE": 0,
+          "SFDM": 0.49999999999999994,
+          "TA": 0,
+          "TP": 0,
+          "assemblyGaugeLength": 3.8,
+          "shoulder-diameter": 0.49999999999999994,
+          "shoulder-length": 0.9999999999999999,
+          "thread-profile-angle": 60,
+          "tip-diameter": 0.49999999999999994,
+          "tip-length": 0,
+          "tip-offset": 0
+        },
+        "type": "flat end mill",
+        "holder_product_id": "04-0010",
+        "assembled_gauge_length_mm": 96.52,
+        "collet_id": "ER32-0.5in-bore",
+        "cutting_limits": {
+          "spindle_rpm": 6000,
+          "feed_mm_min": 1371.6
+        },
+        "stickout_below_holder_mm": 33.019999999999996,
+        "assembly_provenance": "Actual Fusion2705.1.15 ToolLibrary import/export preserved the cutter and holder geometry, stickout and assembly gauge; operation assignment and motion simulation pending.",
+        "selected_preset_source": {
+          "guid": "73b44c93-8013-4b0a-824c-f4ba915a18ba",
+          "name": "N21-22 Non-Ferrous Slot Milling",
+          "original_rpm": 15278.874536821952,
+          "original_feed_in_min": 275.0197416627952,
+          "derivation": "RPM limited to6000; scale feed linearly with RPM to preserve chipload, then50% engineering derating. Assumed simulation envelope, not validated physical cutting recommendation."
+        },
+        "enabled": true,
+        "source_geometry": {
+          "CSP": false,
+          "DC": 0.5,
+          "HAND": true,
+          "LB": 1.3,
+          "LCF": 1,
+          "NOF": 3,
+          "OAL": 3,
+          "RE": 0,
+          "SFDM": 0.5,
+          "TP": 0,
+          "assemblyGaugeLength": 1.3,
+          "shoulder-diameter": 0.5,
+          "shoulder-length": 1
+        },
+        "holder": {
+          "description": "CT40 ER32 COLLET CHUCK X 2-1/2\" GAGE LENGTH, TSC",
+          "gaugeLength": 2.5,
+          "guid": "a9962fe4-c289-4a9c-9871-f5a2dc8bbfb8",
+          "product-id": "04-0010",
+          "product-link": "https://www.haascnc.com/haas-tooling/mill_toolholding/er_collet_chucks/04-0010.html",
+          "segments": [
+            {
+              "height": 0.0105511811023622,
+              "lower-diameter": 1.45385826771654,
+              "upper-diameter": 1.53259842519685
+            },
+            {
+              "height": 0.114448818897638,
+              "lower-diameter": 1.53259842519685,
+              "upper-diameter": 1.92913385826772
+            },
+            {
+              "height": 0.0340944881889764,
+              "lower-diameter": 1.92913385826772,
+              "upper-diameter": 1.96850393700787
+            },
+            {
+              "height": 0.785787401574803,
+              "lower-diameter": 1.96850393700787,
+              "upper-diameter": 1.96850393700787
+            },
+            {
+              "height": 0.262204724409449,
+              "lower-diameter": 1.5748031496063,
+              "upper-diameter": 1.5748031496063
+            },
+            {
+              "height": 0.0393700787401575,
+              "lower-diameter": 1.67125984251969,
+              "upper-diameter": 1.75
+            },
+            {
+              "height": 0.385433070866142,
+              "lower-diameter": 1.75,
+              "upper-diameter": 1.75
+            },
+            {
+              "height": 0.118110236220472,
+              "lower-diameter": 1.75,
+              "upper-diameter": 1.98622047244095
+            },
+            {
+              "height": 0.0393700787401575,
+              "lower-diameter": 2.42125984251969,
+              "upper-diameter": 2.5
+            },
+            {
+              "height": 0.12244094488189,
+              "lower-diameter": 2.5,
+              "upper-diameter": 2.5
+            },
+            {
+              "height": 0.0170472440944882,
+              "lower-diameter": 2.5,
+              "upper-diameter": 2.48031496062992
+            },
+            {
+              "height": 0.0571653543307087,
+              "lower-diameter": 2.48031496062992,
+              "upper-diameter": 2.28232283464567
+            },
+            {
+              "height": 0.151968503937008,
+              "lower-diameter": 2.21889763779528,
+              "upper-diameter": 2.21889763779528
+            },
+            {
+              "height": 0.0571653543307087,
+              "lower-diameter": 2.28232283464567,
+              "upper-diameter": 2.48031496062992
+            },
+            {
+              "height": 0.0170472440944882,
+              "lower-diameter": 2.48031496062992,
+              "upper-diameter": 2.5
+            },
+            {
+              "height": 0.123425196850394,
+              "lower-diameter": 2.5,
+              "upper-diameter": 2.5
+            },
+            {
+              "height": 0.0393700787401575,
+              "lower-diameter": 2.5,
+              "upper-diameter": 2.42125984251969
+            },
+            {
+              "height": 0.031496062992126,
+              "lower-diameter": 1.7755905511811,
+              "upper-diameter": 1.71259842519685
+            },
+            {
+              "height": 0.0617716535433071,
+              "lower-diameter": 1.71259842519685,
+              "upper-diameter": 1.71259842519685
+            },
+            {
+              "height": 0.0222834645669291,
+              "lower-diameter": 1.71259842519685,
+              "upper-diameter": 1.73106299212598
+            },
+            {
+              "height": 0.00948818897637795,
+              "lower-diameter": 1.73106299212598,
+              "upper-diameter": 1.75
+            },
+            {
+              "height": 2.65330708661417,
+              "lower-diameter": 1.75,
+              "upper-diameter": 0.976102362204724
+            },
+            {
+              "height": 0.0337007874015748,
+              "lower-diameter": 0.976102362204724,
+              "upper-diameter": 0.898188976377953
+            }
+          ],
+          "type": "holder",
+          "unit": "inches",
+          "vendor": "Haas Automation"
+        }
+      },
+      {
+        "number": 2,
+        "product_id": "03-0083",
+        "vendor": "Haas Automation",
+        "unit": "inches",
+        "geometry": {
+          "CSP": false,
+          "DC": 0.24999999999999997,
+          "HAND": true,
+          "LB": 1.0499999999999998,
+          "LCF": 0.7499999999999999,
+          "NOF": 3,
+          "NT": 1,
+          "OAL": 2.5,
+          "RE": 0,
+          "SFDM": 0.24999999999999997,
+          "TA": 0,
+          "TP": 0,
+          "assemblyGaugeLength": 3.5499999999999994,
+          "shoulder-diameter": 0.24999999999999997,
+          "shoulder-length": 0.7499999999999999,
+          "thread-profile-angle": 60,
+          "tip-diameter": 0.24999999999999997,
+          "tip-length": 0,
+          "tip-offset": 0
+        },
+        "type": "flat end mill",
+        "holder_product_id": "04-0010",
+        "assembled_gauge_length_mm": 90.17,
+        "collet_id": "ER32-0.25in-bore",
+        "cutting_limits": {
+          "spindle_rpm": 6000,
+          "feed_mm_min": 685.8
+        },
+        "stickout_below_holder_mm": 26.669999999999998,
+        "assembly_provenance": "Actual Fusion2705.1.15 ToolLibrary import/export preserved the cutter and holder geometry, stickout and assembly gauge; operation assignment and motion simulation pending.",
+        "selected_preset_source": {
+          "guid": "9dbdb400-ef7e-48de-b6af-7cef07dae036",
+          "name": "N21-22 Non-Ferrous Slot Milling",
+          "original_rpm": 30557.749073643907,
+          "original_feed_in_min": 275.0197416627952,
+          "derivation": "RPM limited to6000; scale feed linearly with RPM to preserve chipload, then50% engineering derating. Assumed simulation envelope, not validated physical cutting recommendation."
+        },
+        "enabled": false,
+        "source_geometry": {
+          "CSP": false,
+          "DC": 0.25,
+          "HAND": true,
+          "LB": 1.05,
+          "LCF": 0.75,
+          "NOF": 3,
+          "OAL": 2.5,
+          "RE": 0,
+          "SFDM": 0.25,
+          "TP": 0,
+          "assemblyGaugeLength": 1.05,
+          "shoulder-diameter": 0.25,
+          "shoulder-length": 0.75
+        },
+        "holder": {
+          "description": "CT40 ER32 COLLET CHUCK X 2-1/2\" GAGE LENGTH, TSC",
+          "gaugeLength": 2.5,
+          "guid": "a9962fe4-c289-4a9c-9871-f5a2dc8bbfb8",
+          "product-id": "04-0010",
+          "product-link": "https://www.haascnc.com/haas-tooling/mill_toolholding/er_collet_chucks/04-0010.html",
+          "segments": [
+            {
+              "height": 0.0105511811023622,
+              "lower-diameter": 1.45385826771654,
+              "upper-diameter": 1.53259842519685
+            },
+            {
+              "height": 0.114448818897638,
+              "lower-diameter": 1.53259842519685,
+              "upper-diameter": 1.92913385826772
+            },
+            {
+              "height": 0.0340944881889764,
+              "lower-diameter": 1.92913385826772,
+              "upper-diameter": 1.96850393700787
+            },
+            {
+              "height": 0.785787401574803,
+              "lower-diameter": 1.96850393700787,
+              "upper-diameter": 1.96850393700787
+            },
+            {
+              "height": 0.262204724409449,
+              "lower-diameter": 1.5748031496063,
+              "upper-diameter": 1.5748031496063
+            },
+            {
+              "height": 0.0393700787401575,
+              "lower-diameter": 1.67125984251969,
+              "upper-diameter": 1.75
+            },
+            {
+              "height": 0.385433070866142,
+              "lower-diameter": 1.75,
+              "upper-diameter": 1.75
+            },
+            {
+              "height": 0.118110236220472,
+              "lower-diameter": 1.75,
+              "upper-diameter": 1.98622047244095
+            },
+            {
+              "height": 0.0393700787401575,
+              "lower-diameter": 2.42125984251969,
+              "upper-diameter": 2.5
+            },
+            {
+              "height": 0.12244094488189,
+              "lower-diameter": 2.5,
+              "upper-diameter": 2.5
+            },
+            {
+              "height": 0.0170472440944882,
+              "lower-diameter": 2.5,
+              "upper-diameter": 2.48031496062992
+            },
+            {
+              "height": 0.0571653543307087,
+              "lower-diameter": 2.48031496062992,
+              "upper-diameter": 2.28232283464567
+            },
+            {
+              "height": 0.151968503937008,
+              "lower-diameter": 2.21889763779528,
+              "upper-diameter": 2.21889763779528
+            },
+            {
+              "height": 0.0571653543307087,
+              "lower-diameter": 2.28232283464567,
+              "upper-diameter": 2.48031496062992
+            },
+            {
+              "height": 0.0170472440944882,
+              "lower-diameter": 2.48031496062992,
+              "upper-diameter": 2.5
+            },
+            {
+              "height": 0.123425196850394,
+              "lower-diameter": 2.5,
+              "upper-diameter": 2.5
+            },
+            {
+              "height": 0.0393700787401575,
+              "lower-diameter": 2.5,
+              "upper-diameter": 2.42125984251969
+            },
+            {
+              "height": 0.031496062992126,
+              "lower-diameter": 1.7755905511811,
+              "upper-diameter": 1.71259842519685
+            },
+            {
+              "height": 0.0617716535433071,
+              "lower-diameter": 1.71259842519685,
+              "upper-diameter": 1.71259842519685
+            },
+            {
+              "height": 0.0222834645669291,
+              "lower-diameter": 1.71259842519685,
+              "upper-diameter": 1.73106299212598
+            },
+            {
+              "height": 0.00948818897637795,
+              "lower-diameter": 1.73106299212598,
+              "upper-diameter": 1.75
+            },
+            {
+              "height": 2.65330708661417,
+              "lower-diameter": 1.75,
+              "upper-diameter": 0.976102362204724
+            },
+            {
+              "height": 0.0337007874015748,
+              "lower-diameter": 0.976102362204724,
+              "upper-diameter": 0.898188976377953
+            }
+          ],
+          "type": "holder",
+          "unit": "inches",
+          "vendor": "Haas Automation"
+        },
+        "disabled_reason": "Single-tool five-axis demo: only T1 is enabled."
+      },
+      {
+        "number": 3,
+        "product_id": "03-0590",
+        "vendor": "Haas Automation",
+        "unit": "inches",
+        "geometry": {
+          "CSP": false,
+          "DC": 0.25,
+          "HAND": true,
+          "LB": 1.05,
+          "LCF": 0.75,
+          "NOF": 2,
+          "OAL": 2.5,
+          "RE": 0,
+          "SFDM": 0.25,
+          "TP": 0,
+          "assemblyGaugeLength": 1.05,
+          "shoulder-diameter": 0.25,
+          "shoulder-length": 0.75
+        },
+        "type": "ball end mill",
+        "holder_product_id": "04-0010",
+        "assembled_gauge_length_mm": 90.17,
+        "collet_id": "ER32-0.25in-bore",
+        "cutting_limits": null,
+        "stickout_below_holder_mm": 26.669999999999998,
+        "assembly_provenance": "Simulation assembly assumption: source cutter assemblyGaugeLength treated as stickout below 63.5mm holder; live verify placement/insertion",
+        "enabled": false,
+        "disabled_reason": "Single-tool five-axis demo: only T1 is enabled."
+      },
+      {
+        "number": 4,
+        "product_id": "03-2901",
+        "vendor": "Haas Automation",
+        "unit": "inches",
+        "geometry": {
+          "CSP": false,
+          "DC": 0.25,
+          "HAND": true,
+          "LB": 1.439,
+          "LCF": 1.339,
+          "NOF": 2,
+          "OAL": 3.11,
+          "SFDM": 0.25,
+          "SIG": 140,
+          "assemblyGaugeLength": 1.439,
+          "shoulder-length": 1.339
+        },
+        "type": "drill",
+        "holder_product_id": "04-0010",
+        "assembled_gauge_length_mm": 100.0506,
+        "collet_id": "ER32-0.25in-bore",
+        "cutting_limits": null,
+        "stickout_below_holder_mm": 36.5506,
+        "assembly_provenance": "Simulation assembly assumption: source cutter assemblyGaugeLength treated as stickout below 63.5mm holder; live verify placement/insertion",
+        "enabled": false,
+        "disabled_reason": "Single-tool five-axis demo: only T1 is enabled."
+      },
+      {
+        "number": 5,
+        "product_id": "03-2222",
+        "vendor": "Haas Automation",
+        "unit": "inches",
+        "geometry": {
+          "CSP": false,
+          "DC": 0.25,
+          "HAND": true,
+          "LB": 1.6,
+          "LCF": 0.043,
+          "NOF": 2,
+          "OAL": 2,
+          "SFDM": 0.25,
+          "SIG": 142,
+          "assemblyGaugeLength": 1.6,
+          "shoulder-length": 0.043,
+          "tip-diameter": 0
+        },
+        "type": "spot drill",
+        "holder_product_id": "04-0010",
+        "assembled_gauge_length_mm": 104.14,
+        "collet_id": "ER32-0.25in-bore",
+        "cutting_limits": null,
+        "stickout_below_holder_mm": 40.64,
+        "assembly_provenance": "Simulation assembly assumption: source cutter assemblyGaugeLength treated as stickout below 63.5mm holder; live verify placement/insertion",
+        "enabled": false,
+        "disabled_reason": "Single-tool five-axis demo: only T1 is enabled."
+      },
+      {
+        "number": 6,
+        "product_id": "03-0612",
+        "vendor": "Haas Automation",
+        "unit": "inches",
+        "geometry": {
+          "CSP": false,
+          "DC": 0.25,
+          "HAND": true,
+          "LB": 2,
+          "LCF": 0.125,
+          "NOF": 2,
+          "OAL": 2.5,
+          "SFDM": 0.25,
+          "TA": 45,
+          "assemblyGaugeLength": 2,
+          "shoulder-diameter": 0.25,
+          "shoulder-length": 2,
+          "tip-diameter": 0.01
+        },
+        "type": "chamfer mill",
+        "holder_product_id": "04-0010",
+        "assembled_gauge_length_mm": 114.3,
+        "collet_id": "ER32-0.25in-bore",
+        "cutting_limits": null,
+        "stickout_below_holder_mm": 50.8,
+        "assembly_provenance": "Simulation assembly assumption: source cutter assemblyGaugeLength treated as stickout below 63.5mm holder; live verify placement/insertion",
+        "enabled": false,
+        "disabled_reason": "Single-tool five-axis demo: only T1 is enabled."
+      }
+    ],
+    "status": "single T1 assembled cutter/holder; no tool switches",
+    "source_library": {
+      "path": "/Users/touko/work/helios-one/repos/coreweavehack/config/starter-tools-numbered.json",
+      "sha256": "594d776ee9860a762e5975abc4995100463abc34d6a6fae08d678b765f642904"
+    },
+    "assembly_report": {
+      "path": "/Users/touko/work/helios-one/repos/coreweavehack/config/tool-assembly-report.json",
+      "sha256": "b93e88f6dd033091980308842b33114f287223d0508a7de3c3e706975c9f5801"
+    }
+  },
+  "setup": {
+    "material": "AL6061",
+    "material_source": "DEMO-5X-001 Rev A",
+    "stock": {
+      "dimensions_mm": [
+        80,
+        80,
+        70
+      ],
+      "local_min_mm": [
+        -40,
+        -40,
+        -70
+      ],
+      "local_max_mm": [
+        40,
+        40,
+        0
+      ],
+      "precondition": "Pre-sized AL6061 80x80x70 blank. Exterior and bottom remain fixed; mill top and four side features. Blank is assumed attached from below to the pedestal before this job.",
+      "transform_machine_mm": null,
+      "api_parameters": {
+        "job_stockMode": "'fixedbox'",
+        "job_stockFixedX": "80 mm",
+        "job_stockFixedY": "80 mm",
+        "job_stockFixedZ": "70 mm",
+        "job_stockFixedXMode": "'center'",
+        "job_stockFixedYMode": "'center'",
+        "job_stockFixedZMode": "'top'",
+        "job_stockFixedZOffset": "0 mm"
+      }
+    },
+    "fixture": {
+      "artifact": {
+        "path": "/Users/touko/work/helios-one/repos/coreweavehack/config/umc-tall-pedestal-g54.f3d",
+        "sha256": "b64840531f39ffca6a49e715dc478ff56284c7f8b99ae6c97ace8b62cd7a3679"
+      },
+      "coordinate_frame": "G54 stock top center, fixture base bottom Z=-230 and top support Z=-70 mm",
+      "placement_rule": "Base bottom at machine table attachment Z0; stock top translated +230mm",
+      "physical_assumptions": "Demo bolted pedestal envelope: 130x130x10 base, 60x60x140 riser, 60x60x10 top. Blank attached from below; rigid mounting assumed, loads not certified.",
+      "geometry_status": "Fusion-created solid archive; collision verification pending"
+    },
+    "postprocessor": {
+      "path": "/Users/touko/work/helios-one/repos/coreweavehack/config/haas-next-generation.cps",
+      "sha256": "7793e1d36e12c63e61535f112fddb570076058820839b9459f736cf40e36c3c4",
+      "source_url": "https://cam.autodesk.com/posts/download.php?name=haas%20next%20generation",
+      "machine_source_reference": "system://haas next generation.cps",
+      "status": "downloaded_not_live_posted"
+    },
+    "unresolved": [],
+    "work_coordinate_system": {
+      "name": "G54",
+      "origin": "center of blank top face",
+      "axes": "X and Y along 80mm sides; Z upward. G54 remains fixed; operations use tool orientation for indexed faces.",
+      "api_parameters": {
+        "wcs_orientation_mode": "'modelOrientation'",
+        "wcs_origin_mode": "'modelOrigin'",
+        "job_workOffset": "1"
+      },
+      "work_offset": 1
+    },
+    "simulation_assumptions": [
+      "Single T1 flat endmill only; 25.4mm flute and 33.02mm stickout. Top deepest cut22mm; side pocket depth8mm.",
+      "Indexed 3+2 using B and C. Do not lock all operations to setup Z. Use verified installed operation tool-orientation controls and collision-safe links.",
+      "Pre-sized exterior unchanged. Machine can rotate to access top and four sides.",
+      "Rigid bolted pedestal assumed; no physical machine or cutting-force certification."
+    ],
+    "machine_position": {
+      "reference": "G54 blank top center, identical to finished model bounding-box top center",
+      "attachment": "configured machine table attachment frame at [0,0,0]mm",
+      "translation_mm": [
+        0,
+        0,
+        230
+      ],
+      "rotation": "identity relative to machine table X/Y/Z",
+      "basis": "Tall pedestal bottom -230mm placed on table attachment Z0; raises indexed side cuts clear of rotary table and spindle head.",
+      "api_parameters": [
+        "job_positionReference_origin_mode",
+        "job_positionReference_origin_boxPoint",
+        "job_positionXOffset",
+        "job_positionYOffset",
+        "job_positionZOffset"
+      ],
+      "status": "pending first UMC setup readback",
+      "reference_parameters": {
+        "job_positionReference_origin_mode": "'modelPoint'",
+        "job_positionReference_origin_boxPoint": "'top center'"
+      }
+    }
+  },
+  "tolerances": {
+    "drawing_unit": "mm",
+    "linear_plus_minus_in": 0.005,
+    "linear_plus_minus_mm": 0.127,
+    "source": "DEMO-5X-001 general tolerance",
+    "simulation_resolution_mm": 0.05,
+    "simulation_resolution_provenance": "Proposed numerical display/verification resolution below drawing0.127mm tolerance; verify Fusion settings support it, not certification."
+  },
+  "cost_assumptions": {
+    "currency": "USD",
+    "machine_rate_per_hour": 100,
+    "batch_size": 1,
+    "setup_seconds": 600,
+    "setup_rate_per_hour": 60,
+    "material_cost_per_part": 0,
+    "tool_wear_cost_per_part": 0,
+    "provenance": "Illustrative cost scenario, not a quote; stock/tooling costs excluded. Objective remains machining_seconds."
+  },
+  "objective": "machining_seconds",
+  "checks": {
+    "path": "/Users/touko/work/helios-one/repos/coreweavehack/checks/baseline.py",
+    "version": "baseline-v1",
+    "sha256": "42af41311d4d409953f47e5c566c40614ab963e29be1d06b755dcc123507ab5b"
+  },
+  "sources": {
+    "drawing_archive": "Project-authored demonstration drawing DEMO-5X-001 Rev A",
+    "machine": "https://cam.autodesk.com/machines/download.php?name=haas%20umc-750%20reboot.mch",
+    "tools": "https://cam.autodesk.com/tools/download.php?name=Haas%20Tooling/Haas%20Tooling",
+    "holders": "https://cam.autodesk.com/tools/download.php?name=Haas%20Tooling/Haas%20Holders"
+  },
+  "readiness_scope": "Input artifacts pinned. Linked UMC model hasSimulationModel true. First indexed CAM and full simulation still require live verification."
+}

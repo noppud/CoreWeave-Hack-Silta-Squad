@@ -1,0 +1,258 @@
+{
+  "jobs": [
+    {
+      "job": "14003f2fb9fd",
+      "name": "Bearing Pocket",
+      "loaded_version": 5,
+      "saved_version": 6,
+      "checks": {
+        "loaded_version_bytes": true,
+        "memory_reached_first_cam_request": true,
+        "saved_episode": true,
+        "saved_commit_readback": true,
+        "job_saved_snapshot": null
+      },
+      "sources": {
+        "loaded_version_bytes": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/memory/versions/0005.json",
+        "memory_reached_first_cam_request": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/14003f2fb9fd/evidence/indexed_planner-d6c3f321eeb3.request.json",
+        "saved_episode": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/memory/versions/0006.json",
+        "saved_commit_readback": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/memory/commit-0006.json",
+        "job_saved_snapshot": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/14003f2fb9fd/saved-memory.json"
+      },
+      "persistence_verified": true,
+      "fully_evidenced": false,
+      "best_seconds": 25.85223629498072
+    },
+    {
+      "job": "3dea6444a879",
+      "name": "Instrument Pocket",
+      "loaded_version": 6,
+      "saved_version": 7,
+      "checks": {
+        "loaded_version_bytes": true,
+        "memory_reached_first_cam_request": true,
+        "saved_episode": true,
+        "saved_commit_readback": true,
+        "job_saved_snapshot": null
+      },
+      "sources": {
+        "loaded_version_bytes": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/memory/versions/0006.json",
+        "memory_reached_first_cam_request": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/3dea6444a879/evidence/indexed_planner-6c126363a9bb.request.json",
+        "saved_episode": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/memory/versions/0007.json",
+        "saved_commit_readback": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/memory/commit-0007.json",
+        "job_saved_snapshot": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/3dea6444a879/saved-memory.json"
+      },
+      "persistence_verified": true,
+      "fully_evidenced": false,
+      "best_seconds": 27.263982725443416
+    },
+    {
+      "job": "3ef2fc936a92",
+      "name": "Bearing Pocket",
+      "loaded_version": 7,
+      "saved_version": 8,
+      "checks": {
+        "loaded_version_bytes": true,
+        "memory_reached_first_cam_request": true,
+        "saved_episode": true,
+        "saved_commit_readback": true,
+        "job_saved_snapshot": null
+      },
+      "sources": {
+        "loaded_version_bytes": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/memory/versions/0007.json",
+        "memory_reached_first_cam_request": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/3ef2fc936a92/evidence/indexed_planner-af31a4c06775.request.json",
+        "saved_episode": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/memory/versions/0008.json",
+        "saved_commit_readback": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/memory/commit-0008.json",
+        "job_saved_snapshot": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/3ef2fc936a92/saved-memory.json"
+      },
+      "persistence_verified": true,
+      "fully_evidenced": false,
+      "best_seconds": 25.852236294980724
+    },
+    {
+      "job": "02de8c83d5bd",
+      "name": "Bearing Pocket",
+      "loaded_version": 8,
+      "saved_version": 9,
+      "checks": {
+        "loaded_version_bytes": true,
+        "memory_reached_first_cam_request": true,
+        "saved_episode": true,
+        "saved_commit_readback": true,
+        "job_saved_snapshot": null
+      },
+      "sources": {
+        "loaded_version_bytes": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/memory/versions/0008.json",
+        "memory_reached_first_cam_request": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/02de8c83d5bd/evidence/indexed_planner-10c29b2378db.request.json",
+        "saved_episode": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/memory/versions/0009.json",
+        "saved_commit_readback": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/memory/commit-0009.json",
+        "job_saved_snapshot": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/02de8c83d5bd/saved-memory.json"
+      },
+      "persistence_verified": true,
+      "fully_evidenced": false,
+      "best_seconds": 25.85223629498072
+    },
+    {
+      "job": "a1b399e521ac",
+      "name": "Instrument Pocket",
+      "loaded_version": 9,
+      "saved_version": 10,
+      "checks": {
+        "loaded_version_bytes": true,
+        "memory_reached_first_cam_request": true,
+        "saved_episode": true,
+        "saved_commit_readback": true,
+        "job_saved_snapshot": null
+      },
+      "sources": {
+        "loaded_version_bytes": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/memory/versions/0009.json",
+        "memory_reached_first_cam_request": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/a1b399e521ac/evidence/indexed_planner-e5acfc0a3965.request.json",
+        "saved_episode": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/memory/versions/0010.json",
+        "saved_commit_readback": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/memory/commit-0010.json",
+        "job_saved_snapshot": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/a1b399e521ac/saved-memory.json"
+      },
+      "persistence_verified": true,
+      "fully_evidenced": false,
+      "best_seconds": 27.263982725443416
+    },
+    {
+      "job": "056866dee37c",
+      "name": "Instrument Pocket",
+      "loaded_version": 10,
+      "saved_version": 11,
+      "checks": {
+        "loaded_version_bytes": true,
+        "memory_reached_first_cam_request": true,
+        "saved_episode": true,
+        "saved_commit_readback": true,
+        "job_saved_snapshot": null
+      },
+      "sources": {
+        "loaded_version_bytes": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/memory/versions/0010.json",
+        "memory_reached_first_cam_request": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/056866dee37c/evidence/indexed_planner-43dfb903a52d.request.json",
+        "saved_episode": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/memory/versions/0011.json",
+        "saved_commit_readback": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/memory/commit-0011.json",
+        "job_saved_snapshot": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/056866dee37c/saved-memory.json"
+      },
+      "persistence_verified": true,
+      "fully_evidenced": false,
+      "best_seconds": 27.263982725443416
+    },
+    {
+      "job": "a2ff5d26d533",
+      "name": "Bearing Pocket",
+      "loaded_version": 11,
+      "saved_version": 12,
+      "checks": {
+        "loaded_version_bytes": true,
+        "memory_reached_first_cam_request": true,
+        "saved_episode": true,
+        "saved_commit_readback": true,
+        "job_saved_snapshot": null
+      },
+      "sources": {
+        "loaded_version_bytes": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/memory/versions/0011.json",
+        "memory_reached_first_cam_request": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/a2ff5d26d533/evidence/indexed_planner-b32155f85c6c.request.json",
+        "saved_episode": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/memory/versions/0012.json",
+        "saved_commit_readback": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/memory/commit-0012.json",
+        "job_saved_snapshot": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/a2ff5d26d533/saved-memory.json"
+      },
+      "persistence_verified": true,
+      "fully_evidenced": false,
+      "best_seconds": 25.852236294980724
+    },
+    {
+      "job": "3f1703103c1f",
+      "name": "Bearing Pocket",
+      "loaded_version": 12,
+      "saved_version": 13,
+      "checks": {
+        "loaded_version_bytes": true,
+        "memory_reached_first_cam_request": true,
+        "saved_episode": true,
+        "saved_commit_readback": true,
+        "job_saved_snapshot": true
+      },
+      "sources": {
+        "loaded_version_bytes": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/memory/versions/0012.json",
+        "memory_reached_first_cam_request": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/3f1703103c1f/evidence/indexed_planner-c7423a76bead.request.json",
+        "saved_episode": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/memory/versions/0013.json",
+        "saved_commit_readback": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/memory/commit-0013.json",
+        "job_saved_snapshot": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/3f1703103c1f/saved-memory.json"
+      },
+      "persistence_verified": true,
+      "fully_evidenced": true,
+      "best_seconds": 25.85223629498072
+    },
+    {
+      "job": "99006bbab905",
+      "name": "Instrument Pocket",
+      "loaded_version": 13,
+      "saved_version": 14,
+      "checks": {
+        "loaded_version_bytes": true,
+        "memory_reached_first_cam_request": true,
+        "saved_episode": true,
+        "saved_commit_readback": true,
+        "job_saved_snapshot": true
+      },
+      "sources": {
+        "loaded_version_bytes": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/memory/versions/0013.json",
+        "memory_reached_first_cam_request": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/99006bbab905/evidence/indexed_planner-248d9a6807b4.request.json",
+        "saved_episode": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/memory/versions/0014.json",
+        "saved_commit_readback": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/memory/commit-0014.json",
+        "job_saved_snapshot": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/99006bbab905/saved-memory.json"
+      },
+      "persistence_verified": true,
+      "fully_evidenced": true,
+      "best_seconds": 27.263982725443416
+    }
+  ],
+  "chain_links": [
+    {
+      "previous": "14003f2fb9fd",
+      "next": "3dea6444a879",
+      "verified": true
+    },
+    {
+      "previous": "3dea6444a879",
+      "next": "3ef2fc936a92",
+      "verified": true
+    },
+    {
+      "previous": "3ef2fc936a92",
+      "next": "02de8c83d5bd",
+      "verified": true
+    },
+    {
+      "previous": "02de8c83d5bd",
+      "next": "a1b399e521ac",
+      "verified": true
+    },
+    {
+      "previous": "a1b399e521ac",
+      "next": "056866dee37c",
+      "verified": true
+    },
+    {
+      "previous": "056866dee37c",
+      "next": "a2ff5d26d533",
+      "verified": true
+    },
+    {
+      "previous": "a2ff5d26d533",
+      "next": "3f1703103c1f",
+      "verified": true
+    },
+    {
+      "previous": "3f1703103c1f",
+      "next": "99006bbab905",
+      "verified": true
+    }
+  ],
+  "persistence_verified_jobs": 9,
+  "fully_evidenced_jobs": 2,
+  "missing_evidence": 7,
+  "failed_checks": 0,
+  "claim": "Verifies persistence and actual planner input, not a causal speed benefit from memory. Missing historical artifacts remain unverified."
+}

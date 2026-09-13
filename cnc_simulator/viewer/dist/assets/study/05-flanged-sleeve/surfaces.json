@@ -1,0 +1,344 @@
+{
+  "frames": [
+    {
+      "move": -1,
+      "elapsed_seconds": 0.0,
+      "volume_mm3": 108872.66415743664,
+      "offset": 0,
+      "vertex_values": 1152,
+      "index_values": 1140
+    },
+    {
+      "move": 2,
+      "elapsed_seconds": 6.486666666666667,
+      "volume_mm3": 106077.67521091203,
+      "offset": 13776,
+      "vertex_values": 1944,
+      "index_values": 1932
+    },
+    {
+      "move": 5,
+      "elapsed_seconds": 7.008771435674896,
+      "volume_mm3": 105143.62506361998,
+      "offset": 37056,
+      "vertex_values": 2196,
+      "index_values": 2184
+    },
+    {
+      "move": 8,
+      "elapsed_seconds": 7.530876204683124,
+      "volume_mm3": 104114.69878118516,
+      "offset": 63360,
+      "vertex_values": 2244,
+      "index_values": 2232
+    },
+    {
+      "move": 11,
+      "elapsed_seconds": 8.052980973691351,
+      "volume_mm3": 103085.15265014344,
+      "offset": 90240,
+      "vertex_values": 2280,
+      "index_values": 2268
+    },
+    {
+      "move": 14,
+      "elapsed_seconds": 8.57508574269958,
+      "volume_mm3": 102055.6064900369,
+      "offset": 117552,
+      "vertex_values": 2316,
+      "index_values": 2304
+    },
+    {
+      "move": 17,
+      "elapsed_seconds": 9.097190511707808,
+      "volume_mm3": 101026.06035899522,
+      "offset": 145296,
+      "vertex_values": 2352,
+      "index_values": 2340
+    },
+    {
+      "move": 20,
+      "elapsed_seconds": 9.619295280716036,
+      "volume_mm3": 100016.95088458317,
+      "offset": 173472,
+      "vertex_values": 2436,
+      "index_values": 2424
+    },
+    {
+      "move": 23,
+      "elapsed_seconds": 10.141400049724265,
+      "volume_mm3": 99376.06012662659,
+      "offset": 202656,
+      "vertex_values": 2340,
+      "index_values": 2328
+    },
+    {
+      "move": 26,
+      "elapsed_seconds": 10.663504818732493,
+      "volume_mm3": 99281.30602124221,
+      "offset": 230688,
+      "vertex_values": 2208,
+      "index_values": 2196
+    },
+    {
+      "move": 29,
+      "elapsed_seconds": 14.636838152065826,
+      "volume_mm3": 96719.23281990313,
+      "offset": 257136,
+      "vertex_values": 2976,
+      "index_values": 2964
+    },
+    {
+      "move": 32,
+      "elapsed_seconds": 15.158942921074054,
+      "volume_mm3": 95863.0201849187,
+      "offset": 292800,
+      "vertex_values": 3096,
+      "index_values": 3084
+    },
+    {
+      "move": 35,
+      "elapsed_seconds": 15.681047690082282,
+      "volume_mm3": 94919.83775943895,
+      "offset": 329904,
+      "vertex_values": 3012,
+      "index_values": 3000
+    },
+    {
+      "move": 38,
+      "elapsed_seconds": 16.20315245909051,
+      "volume_mm3": 93976.08713672543,
+      "offset": 366000,
+      "vertex_values": 2916,
+      "index_values": 2904
+    },
+    {
+      "move": 41,
+      "elapsed_seconds": 16.725257228098737,
+      "volume_mm3": 93032.33649007055,
+      "offset": 400944,
+      "vertex_values": 2820,
+      "index_values": 2808
+    },
+    {
+      "move": 44,
+      "elapsed_seconds": 17.247361997106964,
+      "volume_mm3": 92088.58586996957,
+      "offset": 434736,
+      "vertex_values": 2724,
+      "index_values": 2712
+    },
+    {
+      "move": 47,
+      "elapsed_seconds": 17.76946676611519,
+      "volume_mm3": 91163.5688520308,
+      "offset": 467376,
+      "vertex_values": 2676,
+      "index_values": 2664
+    },
+    {
+      "move": 50,
+      "elapsed_seconds": 18.291571535123417,
+      "volume_mm3": 90576.08565754711,
+      "offset": 499440,
+      "vertex_values": 2448,
+      "index_values": 2436
+    },
+    {
+      "move": 53,
+      "elapsed_seconds": 18.813676304131643,
+      "volume_mm3": 90489.2277294305,
+      "offset": 528768,
+      "vertex_values": 2208,
+      "index_values": 2196
+    },
+    {
+      "move": 56,
+      "elapsed_seconds": 22.05034297079831,
+      "volume_mm3": 90489.22772943048,
+      "offset": 555216,
+      "vertex_values": 2208,
+      "index_values": 2196
+    },
+    {
+      "move": 59,
+      "elapsed_seconds": 42.42295876015357,
+      "volume_mm3": 89987.37998909783,
+      "offset": 581664,
+      "vertex_values": 2976,
+      "index_values": 2964
+    },
+    {
+      "move": 62,
+      "elapsed_seconds": 47.902958760167465,
+      "volume_mm3": 89485.53222198715,
+      "offset": 617328,
+      "vertex_values": 3744,
+      "index_values": 3732
+    },
+    {
+      "move": 65,
+      "elapsed_seconds": 53.38295876016746,
+      "volume_mm3": 88983.68445748813,
+      "offset": 662208,
+      "vertex_values": 4512,
+      "index_values": 4500
+    },
+    {
+      "move": 68,
+      "elapsed_seconds": 58.86295876018136,
+      "volume_mm3": 88481.83672046615,
+      "offset": 716304,
+      "vertex_values": 5280,
+      "index_values": 5268
+    },
+    {
+      "move": 71,
+      "elapsed_seconds": 64.34295876019524,
+      "volume_mm3": 87979.98895335551,
+      "offset": 779616,
+      "vertex_values": 6048,
+      "index_values": 6036
+    },
+    {
+      "move": 74,
+      "elapsed_seconds": 69.82295876019525,
+      "volume_mm3": 87478.14118959037,
+      "offset": 852144,
+      "vertex_values": 6816,
+      "index_values": 6804
+    },
+    {
+      "move": 77,
+      "elapsed_seconds": 75.77557454955395,
+      "volume_mm3": 87478.14119038887,
+      "offset": 933888,
+      "vertex_values": 6816,
+      "index_values": 6804
+    },
+    {
+      "move": 80,
+      "elapsed_seconds": 81.50099044778581,
+      "volume_mm3": 86480.3280745456,
+      "offset": 1015632,
+      "vertex_values": 7395,
+      "index_values": 7518
+    },
+    {
+      "move": 83,
+      "elapsed_seconds": 81.60246409849594,
+      "volume_mm3": 86420.516329978,
+      "offset": 1104864,
+      "vertex_values": 7617,
+      "index_values": 7788
+    },
+    {
+      "move": 86,
+      "elapsed_seconds": 81.65467457774365,
+      "volume_mm3": 86404.78627391551,
+      "offset": 1196952,
+      "vertex_values": 7668,
+      "index_values": 7872
+    },
+    {
+      "move": 89,
+      "elapsed_seconds": 81.70688505133077,
+      "volume_mm3": 86379.46491443196,
+      "offset": 1289784,
+      "vertex_values": 7908,
+      "index_values": 7884
+    },
+    {
+      "move": 92,
+      "elapsed_seconds": 81.75909553057848,
+      "volume_mm3": 86357.83519734746,
+      "offset": 1384584,
+      "vertex_values": 7962,
+      "index_values": 7938
+    },
+    {
+      "move": 95,
+      "elapsed_seconds": 82.32723584299912,
+      "volume_mm3": 86243.81661261535,
+      "offset": 1480032,
+      "vertex_values": 7896,
+      "index_values": 7884
+    },
+    {
+      "move": 98,
+      "elapsed_seconds": 82.37944632224682,
+      "volume_mm3": 86208.82379588186,
+      "offset": 1574736,
+      "vertex_values": 7902,
+      "index_values": 7890
+    },
+    {
+      "move": 101,
+      "elapsed_seconds": 82.43165679583394,
+      "volume_mm3": 86174.21750831213,
+      "offset": 1669512,
+      "vertex_values": 7920,
+      "index_values": 7908
+    },
+    {
+      "move": 104,
+      "elapsed_seconds": 82.48386727508165,
+      "volume_mm3": 86147.15658892463,
+      "offset": 1764504,
+      "vertex_values": 7986,
+      "index_values": 7962
+    },
+    {
+      "move": 107,
+      "elapsed_seconds": 83.05200759245845,
+      "volume_mm3": 86095.85963682673,
+      "offset": 1860240,
+      "vertex_values": 7794,
+      "index_values": 7782
+    },
+    {
+      "move": 110,
+      "elapsed_seconds": 85.36157400724356,
+      "volume_mm3": 86095.85963682673,
+      "offset": 1953720,
+      "vertex_values": 7794,
+      "index_values": 7782
+    },
+    {
+      "move": 111,
+      "elapsed_seconds": 92.36157400724356,
+      "volume_mm3": 86095.85963682673,
+      "offset": 2047200,
+      "vertex_values": 7794,
+      "index_values": 7782
+    },
+    {
+      "move": 113,
+      "elapsed_seconds": 98.03458488919178,
+      "volume_mm3": 85497.21848823245,
+      "offset": 2140680,
+      "vertex_values": 8586,
+      "index_values": 8574
+    },
+    {
+      "move": 116,
+      "elapsed_seconds": 102.80759577114,
+      "volume_mm3": 85187.07196992946,
+      "offset": 2243664,
+      "vertex_values": 8637,
+      "index_values": 8640
+    },
+    {
+      "move": 117,
+      "elapsed_seconds": 109.80759577114,
+      "volume_mm3": 85187.07196992946,
+      "offset": 2347320,
+      "vertex_values": 8637,
+      "index_values": 8640
+    }
+  ],
+  "binary": "surfaces.bin",
+  "initial_volume_mm3": 108872.66415743664,
+  "source_plan_sha256": "d9b75e213e672f219bd746469f03736d32cff3bcdd8e167b8d2ac95aeb2b455d",
+  "display_tolerance_mm": 0.005
+}

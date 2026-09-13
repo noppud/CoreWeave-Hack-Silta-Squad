@@ -1,0 +1,203 @@
+JOB 056866dee37c
+REVIEWED {"name": "Instrument Pocket", "summary": "Pre-sized aluminium 6061 stock with one flat-bottom blind obround pocket; coarse simulation demonstration, not a production drawing.", "stock_kind": "box", "stock_dimensions_mm": [72, 56, 24], "drawing_tolerance_mm": 3, "blockers": [], "features": [{"name": "Blind obround pocket", "a": [-12, 0], "b": [12, 0], "radius_mm": 12, "floor_z_mm": 10, "evidence_quote": "One blind obround pocket: end centres A=(-12,0), B=(12,0).\nPocket radius 12; absolute floor Z=10; flat bottom."}]}
+
+SOURCE
+http://127.0.0.1:2744/api/jobs/056866dee37c · actual local job state
+
+STAGE
+building_cad · Building and freezing the reviewed target
+
+REVIEWED DIMENSIONS
+{
+  "name": "Instrument Pocket",
+  "summary": "Pre-sized aluminium 6061 stock with one flat-bottom blind obround pocket; coarse simulation demonstration, not a production drawing.",
+  "stock_kind": "box",
+  "stock_dimensions_mm": [
+    72,
+    56,
+    24
+  ],
+  "drawing_tolerance_mm": 3,
+  "blockers": [],
+  "features": [
+    {
+      "name": "Blind obround pocket",
+      "a": [
+        -12,
+        0
+      ],
+      "b": [
+        12,
+        0
+      ],
+      "radius_mm": 12,
+      "floor_z_mm": 10,
+      "evidence_quote": "One blind obround pocket: end centres A=(-12,0), B=(12,0).\nPocket radius 12; absolute floor Z=10; flat bottom."
+    }
+  ]
+}
+
+STAGE
+reference_simulation · Measuring the fixed reference CAM on this part
+
+MEMORY LOADED
+10
+
+STAGE
+cam_planning · Astra is writing CAM candidate 1
+
+STAGE
+simulating · Removing stock for candidate 1
+
+FROZEN TARGET
+e62d3e19bef2717f670beca00d0d5c729beb3dc8cf6c1f4500654ae0d4ff2119
+
+GENERATED CAM
+{
+  "summary": "Use the supplied same-target strategy that previously achieved 27.264 seconds: larger stepover, 7 mm depth layers, maximum permitted feeds, and clearance retracts. This candidate still requires current verification.",
+  "strategy": {
+    "stepover_fraction": 0.75,
+    "stepdown_mm": 7,
+    "cut_feed_mm_min": 900,
+    "plunge_feed_mm_min": 250,
+    "retract_feed_mm_min": 1200,
+    "segments_per_circle": 24,
+    "order": "tool",
+    "retract_mode": "clearance",
+    "shortest_c": true,
+    "junction_cleanup": false
+  }
+}
+
+STAGE
+judging · Timing judge is evaluating the passing plan
+
+VERIFICATION
+{
+  "candidate": 1,
+  "stage": "simulated",
+  "passed": true,
+  "issues": [],
+  "seconds": 27.263982725443416,
+  "artifact": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/056866dee37c/attempt-00"
+}
+
+STAGE
+cam_planning · Astra is writing CAM candidate 2
+
+TIMING JUDGE
+{
+  "action": "improve",
+  "reason": "Two attempts remain, and a single verified time of 27.264 seconds does not establish diminishing returns. Cutting accounts for 25.091 seconds of the total.",
+  "guidance_proposal": null
+}
+
+STAGE
+preparing_playback · Preparing actual stock-removal playback
+
+GENERATED CAM
+{
+  "summary": "Test 12 mm stepdown with the existing coverage settings and maximum feeds. This changes depth staging; improved time and validity require verification.",
+  "strategy": {
+    "stepover_fraction": 0.75,
+    "stepdown_mm": 12,
+    "cut_feed_mm_min": 900,
+    "plunge_feed_mm_min": 250,
+    "retract_feed_mm_min": 1200,
+    "segments_per_circle": 24,
+    "order": "tool",
+    "retract_mode": "clearance",
+    "shortest_c": true,
+    "junction_cleanup": false
+  }
+}
+
+VERIFICATION
+{
+  "candidate": 2,
+  "stage": "simulated",
+  "passed": true,
+  "issues": [],
+  "seconds": 27.26398272544342,
+  "artifact": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/056866dee37c/attempt-01"
+}
+
+STAGE
+judging · Timing judge is evaluating the passing plan
+
+STAGE
+cam_planning · Astra is writing CAM candidate 3
+
+TIMING JUDGE
+{
+  "action": "improve",
+  "reason": "One attempt remains. The two verified times are effectively identical at 27.264 seconds; cutting accounts for 25.091 seconds, leaving a final opportunity to reduce machining time.",
+  "guidance_proposal": null
+}
+
+STAGE
+simulating · Removing stock for candidate 3
+
+GENERATED CAM
+{
+  "summary": "Test 32 circle segments for a different compiled contour. Increasing stepdown already produced no time gain; this candidate requires verification and may not improve the 27.264-second best.",
+  "strategy": {
+    "stepover_fraction": 0.75,
+    "stepdown_mm": 12,
+    "cut_feed_mm_min": 900,
+    "plunge_feed_mm_min": 250,
+    "retract_feed_mm_min": 1200,
+    "segments_per_circle": 32,
+    "order": "tool",
+    "retract_mode": "clearance",
+    "shortest_c": true,
+    "junction_cleanup": false
+  }
+}
+
+STAGE
+preparing_playback · Preparing actual stock-removal playback
+
+VERIFICATION
+{
+  "candidate": 3,
+  "stage": "simulated",
+  "passed": true,
+  "issues": [],
+  "seconds": 27.27025452891024,
+  "artifact": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/056866dee37c/attempt-02"
+}
+
+STAGE
+judging · Timing judge is evaluating the passing plan
+
+STAGE
+completed · Timing judge accepted the verified plan.
+
+TIMING JUDGE
+{
+  "action": "stop",
+  "reason": "No attempts remain. The latest time is 0.00627 seconds slower than the best verified time of 27.26398 seconds, with no improvement across the history.",
+  "guidance_proposal": null
+}
+
+RESULT
+{
+  "status": "completed",
+  "memory_saved": 11,
+  "evidence": {
+    "baseline_seconds": 125.51800108171687,
+    "best_seconds": 27.263982725443416,
+    "baseline_savings_percent": 78.27882655038974,
+    "within_run_savings_percent": 0.0,
+    "attempts": 3,
+    "simulated_attempts": 3,
+    "failures": 0,
+    "loaded_memory_version": 10,
+    "saved_memory_version": 11,
+    "stop_reason": "Timing judge accepted the verified plan.",
+    "claim": "Baseline savings measure CAM optimization, not a causal memory benefit. Memory transfer still requires controlled evaluation."
+  },
+  "manifest": "/api/jobs/056866dee37c/manifest.json"
+}
+REHEARSAL VERIFIED

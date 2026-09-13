@@ -1,0 +1,53 @@
+{
+  "validity": "invalid",
+  "passed": false,
+  "verification": "unresolved",
+  "issues": [
+    {
+      "code": "excess_material",
+      "certainty": "uncertain",
+      "moves": [],
+      "description": "Final stock has excess material beyond target tolerance. Resolution cannot establish a pass."
+    }
+  ],
+  "estimated_time_seconds": 200.78243485882092,
+  "time_breakdown": {
+    "cutting": 165.620357497387,
+    "rapid": 12.162077361433914,
+    "dwell": 0.0,
+    "tool_changes": 0.0,
+    "indexing": 23.0
+  },
+  "timing_assumptions": "Constant commanded vector feed/rapid speed; no acceleration, jerk, lookahead, spindle ramp or controller blending. Cut includes air cutting and plunge/retract. Tool changes add fixed duration, with no implicit travel. Full submitted plan timed even if invalid. Indexed B/C rotation uses simultaneous constant angular speeds plus settle time. No cutting during indexing.",
+  "scope": "Indexed 3+2 only; table-attached stock and fixtures. Tool-section collision and configured axis limits; whole-machine self-collision is not certified. Gauge length is fixed across tools.",
+  "target_sha256": "9af44a8563fc15d661df6b14e17dca6ba2a3b9694519c3b5acb25eea419d5037",
+  "numerics": {
+    "resolution_mm": 0.5,
+    "cell_radius_mm": 0.4330128018922193,
+    "cells": 3466008,
+    "geometry_backend": "trimesh signed distance; double precision, not exact arithmetic"
+  },
+  "stock_metrics": {
+    "initial_nominal_volume_mm3": 181600.0,
+    "final_nominal_volume_mm3": 84712.0,
+    "removed_nominal_volume_mm3": 96888.0,
+    "removed_volume_bounds_mm3": [
+      90295.5,
+      116364.0
+    ],
+    "final_volume_bounds_mm3": [
+      73793.0,
+      96433.0
+    ]
+  },
+  "artifacts": {
+    "final_stock": "final_stock.ply",
+    "lower_stock": "final_stock_lower.ply",
+    "upper_stock": "final_stock_upper.ply",
+    "states": [
+      "states/00000.npz",
+      "states/00596.npz"
+    ],
+    "trajectory": "trajectory.json"
+  }
+}

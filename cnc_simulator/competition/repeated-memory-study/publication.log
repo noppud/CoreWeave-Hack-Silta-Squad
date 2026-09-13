@@ -1,0 +1,34 @@
+[36m[1mweave[0m: Logged in as Weights & Biases user: toukoursin.
+[36m[1mweave[0m: View Weave data at https://wandb.ai/silta/coreweave-hack-silta-squad/weave
+[36m[1mweave[0m: 📦 Published to https://wandb.ai/silta/coreweave-hack-silta-squad/weave/objects/repeated-cam-memory-six-pairs/versions/oIBrYFqewbHSwvyvmTK5OMrA6BufW1ufvDCjQKBBJf8
+[36m[1mweave[0m: 🍩 https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a09957-0623-74bb-a4f9-0454f87562da
+[36m[1mweave[0m: 🍩 https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a09957-0623-74bb-a4f9-0454f87562da
+[36m[1mweave[0m: 🍩 https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a09957-1147-79d2-98d6-6ccf6ee23aa2
+[36m[1mweave[0m: 🍩 https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a09957-1147-79d2-98d6-6ccf6ee23aa2
+{
+  "dataset_uri": "weave:///silta/coreweave-hack-silta-squad/object/repeated-cam-memory-six-pairs:oIBrYFqewbHSwvyvmTK5OMrA6BufW1ufvDCjQKBBJf8",
+  "protocol": {
+    "parts": [
+      "03-bearing-block",
+      "04-trunnion-cage"
+    ],
+    "repetitions": 3,
+    "order": "Alternating cold/warm within pair, reversed by part index",
+    "memory_sha256": "af724457b4be5d76f66e2af85a06088cab63534e7c7999ebd09bbcffac7a6083",
+    "scope": "New model proposals and simulations on two existing benchmark parts, frozen memory from actuator only. No within-study updates. Selected-part transfer experiment, not unseen-part or physical validation.",
+    "objective": "Machining seconds only among passing paired plans. All failures and inference errors retained."
+  },
+  "scope": "Publication scores retained files from fresh 12-proposal experiment; this evaluation runtime is not simulator runtime.",
+  "evaluations": [
+    {
+      "arm": "cold",
+      "url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a09957-0623-74bb-a4f9-0454f87562da",
+      "readback_complete": true
+    },
+    {
+      "arm": "warm",
+      "url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a09957-1147-79d2-98d6-6ccf6ee23aa2",
+      "readback_complete": true
+    }
+  ]
+}

@@ -1,0 +1,140 @@
+{
+  "files": [
+    {
+      "path": "film.mp4",
+      "bytes": 4520057,
+      "sha256": "4eee8f3a5de11f29351f6564ccf61250837dc6e570c90b950fdc2c58052f44cf"
+    },
+    {
+      "path": "judge-questions.md",
+      "bytes": 4333,
+      "sha256": "2ab62f10285825a985bcefe34a79fd282517f14bf61fc27a9c132941900c8ef7"
+    },
+    {
+      "path": "organizer-refresh.md",
+      "bytes": 1167,
+      "sha256": "f474fa402cdbb23aa891b398ad2ced842a3f68cab8bddffe264c56501ef005dc"
+    },
+    {
+      "path": "film-captions.srt",
+      "bytes": 1989,
+      "sha256": "719ff4d4910da91d62ce7da97b81537a3256fab4a96f4744ef9bd94e586f5400"
+    },
+    {
+      "path": "film-narration.md",
+      "bytes": 2270,
+      "sha256": "c53514506baf71c7460568f7824f60d5015925e16767282c7a8ad0d65b452c86"
+    },
+    {
+      "path": "complex-machining.mp4",
+      "bytes": 8174925,
+      "sha256": "ccd3548bb8c6ca038e53155b98b87cef16fb9b4d0356a07f7c31ee98b030f8e3"
+    },
+    {
+      "path": "source/simulator-source.tar.gz",
+      "bytes": 9507827,
+      "sha256": "ff9263b252c88bc17897b1d37d0affc78c4a6794f72a2b3848987b5d1d4acb14"
+    },
+    {
+      "path": "source/source-manifest.json",
+      "bytes": 13903,
+      "sha256": "16c7903199cd7ede971695649966ae6dc6b9711d3a98b9cae0e4164c98c3a840"
+    },
+    {
+      "path": "source/README.md",
+      "bytes": 3723,
+      "sha256": "282038c61398268a4fa2dcd956a9ac177c545bd58dc38e59d7c81bbcfb7a51ad"
+    },
+    {
+      "path": "source/live_terminal.py",
+      "bytes": 3205,
+      "sha256": "fac83fa6eaf26fa6d706d3c30f6be7b011c82a53259dc64f57d76409cfda65d6"
+    },
+    {
+      "path": "evidence/complex-results.json",
+      "bytes": 28879,
+      "sha256": "cb9bb84093ad11bc3edadec93d8d95a749cd6222dee5a310063424833c28280c"
+    },
+    {
+      "path": "evidence/complex-iterations.json",
+      "bytes": 2842,
+      "sha256": "855d93f8ed482f580e7c9bdd45346ce9118228fc6bf363dfb72e5e78ba4d0873"
+    },
+    {
+      "path": "evidence/complex-weave.json",
+      "bytes": 669,
+      "sha256": "20b9435ab03be0132f44ea1fb0826328d1851f0553332c52e16b54e3d6eaef04"
+    },
+    {
+      "path": "evidence/film-receipt.json",
+      "bytes": 6476,
+      "sha256": "d29e080fb48f1f948833078f8f4dd693d7b1ddb0006ab3f5ccf3c26873ae1661"
+    },
+    {
+      "path": "evidence/reel-receipt.json",
+      "bytes": 176,
+      "sha256": "9aa323d96f014cf2cc73df2eb3a27780b32bb541239772f5f363bdb1b22074ab"
+    },
+    {
+      "path": "evidence/memory-persistence.md",
+      "bytes": 1227,
+      "sha256": "7cf6619f783abfe6536e0bfd34111c95622579933e90ea45d8055863629a5796"
+    },
+    {
+      "path": "evidence/memory-persistence.json",
+      "bytes": 12214,
+      "sha256": "00deea90d0403f294797fe12a428438929563bfed961a79278acf1caa9ff3082"
+    },
+    {
+      "path": "evidence/repeated-memory-study.md",
+      "bytes": 1243,
+      "sha256": "92b1e54475d9867cfa7ed70d2602e8071a41bed34169c9a3012d1d2cafcaee67"
+    },
+    {
+      "path": "evidence/new-geometry-study.md",
+      "bytes": 1113,
+      "sha256": "858fabb20069f79d10ee02584d84c42c417294229a3837b7d2c5a25bf8262ce3"
+    },
+    {
+      "path": "evidence/resolution-refinement.md",
+      "bytes": 1651,
+      "sha256": "b6263f558edec5bbb798ed937f223a2b9c9a892c27ac302bd49b4c53f5a79a65"
+    },
+    {
+      "path": "evidence/failure-memory-eval.json",
+      "bytes": 5926,
+      "sha256": "69baf92af8089cad28c49834d40a7551da3460f3d153e5c6b4b9bfe85c4e88e4"
+    },
+    {
+      "path": "evidence/hosted-checks.json",
+      "bytes": 2710,
+      "sha256": "553895d9937cdb6d4d32700704f7a84f9bdb13ec27a4d0cbb55bca71e75d3d9d"
+    },
+    {
+      "path": "evidence/aria-ablation.json",
+      "bytes": 5325,
+      "sha256": "b81b64ae0b8b3e5df19dcded06b50010bb6329d4edd36464debf9d485981aaee"
+    },
+    {
+      "path": "evidence/aria-ablation-weave.json",
+      "bytes": 281,
+      "sha256": "828b8f0995ae38e418f4e5d421176e58b604f4973f42de950bede31785c6a52b"
+    },
+    {
+      "path": "evidence/aria-followup.txt",
+      "bytes": 15618,
+      "sha256": "835243285b2dbb91e5fe5b46585098f8d8b947398a60f896507793e874503f3b"
+    },
+    {
+      "path": "evidence/current-preflight.json",
+      "bytes": 2272,
+      "sha256": "c08ba95e427b8e2dc9441e79b34936d2095fb9f3f9fc820bb5b5b9edb55930cf"
+    },
+    {
+      "path": "START.md",
+      "bytes": 3338,
+      "sha256": "35e938a64eddcb1128e72017944532c9488c0fceff23a09fc114e5214903a1f7"
+    }
+  ],
+  "scope": "Portable selected evidence and source, not full histories or installed runtime"
+}

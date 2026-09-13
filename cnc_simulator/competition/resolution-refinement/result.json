@@ -1,0 +1,247 @@
+[
+  {
+    "case": "02-hydraulic-manifold-0.708-0",
+    "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/aria-ablation/02-hydraulic-manifold-0.708-0",
+    "source_plan_sha256": "38866955c86f088a6b69961603f8e9f1305d7cba3f3a72fd5f713f475fb5b6a9",
+    "refined_plan_sha256": "4a0767ccaf0364f0155d982d053b189fd9062fd534be901d9f884df45b9034c5",
+    "target_sha256": "b8e86d16d2df5e87cffda1ba1383fa4e1016dbecfde16271c9a3bff566bbcce4",
+    "original_result": {
+      "validity": "invalid",
+      "passed": false,
+      "verification": "unresolved",
+      "issues": [
+        {
+          "code": "excess_material",
+          "certainty": "uncertain",
+          "moves": [],
+          "description": "Final stock has excess material beyond target tolerance. Resolution cannot establish a pass."
+        }
+      ],
+      "estimated_time_seconds": 116.08185407040168,
+      "time_breakdown": {
+        "cutting": 86.79867527785143,
+        "rapid": 9.28317879255024,
+        "dwell": 0.0,
+        "tool_changes": 0.0,
+        "indexing": 20.0
+      },
+      "timing_assumptions": "Constant commanded vector feed/rapid speed; no acceleration, jerk, lookahead, spindle ramp or controller blending. Cut includes air cutting and plunge/retract. Tool changes add fixed duration, with no implicit travel. Full submitted plan timed even if invalid. Indexed B/C rotation uses simultaneous constant angular speeds plus settle time. No cutting during indexing.",
+      "scope": "Indexed 3+2 only; table-attached stock and fixtures. Tool-section collision and configured axis limits; whole-machine self-collision is not certified. Gauge length is fixed across tools.",
+      "target_sha256": "b8e86d16d2df5e87cffda1ba1383fa4e1016dbecfde16271c9a3bff566bbcce4",
+      "numerics": {
+        "resolution_mm": 1.0,
+        "cell_radius_mm": 0.8660255037844385,
+        "cells": 347072,
+        "geometry_backend": "trimesh signed distance; double precision, not exact arithmetic"
+      },
+      "stock_metrics": {
+        "initial_nominal_volume_mm3": 170016.0,
+        "final_nominal_volume_mm3": 130404.0,
+        "removed_nominal_volume_mm3": 39612.0,
+        "removed_volume_bounds_mm3": [
+          31836.0,
+          80970.0
+        ],
+        "final_volume_bounds_mm3": [
+          108342.0,
+          154684.0
+        ]
+      },
+      "artifacts": {
+        "final_stock": "final_stock.ply",
+        "lower_stock": "final_stock_lower.ply",
+        "upper_stock": "final_stock_upper.ply",
+        "states": [
+          "states/00000.npz",
+          "states/00027.npz",
+          "states/00054.npz",
+          "states/00081.npz",
+          "states/00108.npz",
+          "states/00135.npz",
+          "states/00162.npz",
+          "states/00189.npz",
+          "states/00216.npz",
+          "states/00243.npz",
+          "states/00270.npz",
+          "states/00297.npz",
+          "states/00324.npz",
+          "states/00330.npz"
+        ],
+        "trajectory": "trajectory.json"
+      }
+    },
+    "result": {
+      "validity": "valid",
+      "passed": true,
+      "verification": "verified",
+      "issues": [],
+      "estimated_time_seconds": 116.08185407040168,
+      "time_breakdown": {
+        "cutting": 86.79867527785143,
+        "rapid": 9.28317879255024,
+        "dwell": 0.0,
+        "tool_changes": 0.0,
+        "indexing": 20.0
+      },
+      "timing_assumptions": "Constant commanded vector feed/rapid speed; no acceleration, jerk, lookahead, spindle ramp or controller blending. Cut includes air cutting and plunge/retract. Tool changes add fixed duration, with no implicit travel. Full submitted plan timed even if invalid. Indexed B/C rotation uses simultaneous constant angular speeds plus settle time. No cutting during indexing.",
+      "scope": "Indexed 3+2 only; table-attached stock and fixtures. Tool-section collision and configured axis limits; whole-machine self-collision is not certified. Gauge length is fixed across tools.",
+      "target_sha256": "b8e86d16d2df5e87cffda1ba1383fa4e1016dbecfde16271c9a3bff566bbcce4",
+      "numerics": {
+        "resolution_mm": 0.5,
+        "cell_radius_mm": 0.4330128018922193,
+        "cells": 2658024,
+        "geometry_backend": "trimesh signed distance; double precision, not exact arithmetic"
+      },
+      "stock_metrics": {
+        "initial_nominal_volume_mm3": 170016.0,
+        "final_nominal_volume_mm3": 130630.0,
+        "removed_nominal_volume_mm3": 39386.0,
+        "removed_volume_bounds_mm3": [
+          35529.5,
+          60238.0
+        ],
+        "final_volume_bounds_mm3": [
+          119255.0,
+          142430.5
+        ]
+      },
+      "artifacts": {
+        "final_stock": "final_stock.ply",
+        "lower_stock": "final_stock_lower.ply",
+        "upper_stock": "final_stock_upper.ply",
+        "states": [
+          "states/00000.npz",
+          "states/00330.npz"
+        ],
+        "trajectory": "trajectory.json"
+      }
+    },
+    "wall_seconds": 183.0529839170631
+  },
+  {
+    "case": "04-trunnion-cage-0.95-0",
+    "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/aria-ablation/04-trunnion-cage-0.95-0",
+    "source_plan_sha256": "7b7c37f4824db011cfcf73c7775ff74bf9e834c2cce8b7547db8afe76b45b30a",
+    "refined_plan_sha256": "8d789c3abd805319a606bd23c43251ad68d2ed795814da4756dbc01e62a9962b",
+    "target_sha256": "9af44a8563fc15d661df6b14e17dca6ba2a3b9694519c3b5acb25eea419d5037",
+    "original_result": {
+      "validity": "invalid",
+      "passed": false,
+      "verification": "unresolved",
+      "issues": [
+        {
+          "code": "excess_material",
+          "certainty": "uncertain",
+          "moves": [],
+          "description": "Final stock has excess material beyond target tolerance. Resolution cannot establish a pass."
+        }
+      ],
+      "estimated_time_seconds": 200.78243485882092,
+      "time_breakdown": {
+        "cutting": 165.620357497387,
+        "rapid": 12.162077361433914,
+        "dwell": 0.0,
+        "tool_changes": 0.0,
+        "indexing": 23.0
+      },
+      "timing_assumptions": "Constant commanded vector feed/rapid speed; no acceleration, jerk, lookahead, spindle ramp or controller blending. Cut includes air cutting and plunge/retract. Tool changes add fixed duration, with no implicit travel. Full submitted plan timed even if invalid. Indexed B/C rotation uses simultaneous constant angular speeds plus settle time. No cutting during indexing.",
+      "scope": "Indexed 3+2 only; table-attached stock and fixtures. Tool-section collision and configured axis limits; whole-machine self-collision is not certified. Gauge length is fixed across tools.",
+      "target_sha256": "9af44a8563fc15d661df6b14e17dca6ba2a3b9694519c3b5acb25eea419d5037",
+      "numerics": {
+        "resolution_mm": 1.0,
+        "cell_radius_mm": 0.8660255037844385,
+        "cells": 450800,
+        "geometry_backend": "trimesh signed distance; double precision, not exact arithmetic"
+      },
+      "stock_metrics": {
+        "initial_nominal_volume_mm3": 182000.0,
+        "final_nominal_volume_mm3": 85256.0,
+        "removed_nominal_volume_mm3": 96744.0,
+        "removed_volume_bounds_mm3": [
+          83392.0,
+          136136.0
+        ],
+        "final_volume_bounds_mm3": [
+          63256.0,
+          109532.0
+        ]
+      },
+      "artifacts": {
+        "final_stock": "final_stock.ply",
+        "lower_stock": "final_stock_lower.ply",
+        "upper_stock": "final_stock_upper.ply",
+        "states": [
+          "states/00000.npz",
+          "states/00049.npz",
+          "states/00098.npz",
+          "states/00147.npz",
+          "states/00196.npz",
+          "states/00245.npz",
+          "states/00294.npz",
+          "states/00343.npz",
+          "states/00392.npz",
+          "states/00441.npz",
+          "states/00490.npz",
+          "states/00539.npz",
+          "states/00588.npz",
+          "states/00596.npz"
+        ],
+        "trajectory": "trajectory.json"
+      }
+    },
+    "result": {
+      "validity": "invalid",
+      "passed": false,
+      "verification": "unresolved",
+      "issues": [
+        {
+          "code": "excess_material",
+          "certainty": "uncertain",
+          "moves": [],
+          "description": "Final stock has excess material beyond target tolerance. Resolution cannot establish a pass."
+        }
+      ],
+      "estimated_time_seconds": 200.78243485882092,
+      "time_breakdown": {
+        "cutting": 165.620357497387,
+        "rapid": 12.162077361433914,
+        "dwell": 0.0,
+        "tool_changes": 0.0,
+        "indexing": 23.0
+      },
+      "timing_assumptions": "Constant commanded vector feed/rapid speed; no acceleration, jerk, lookahead, spindle ramp or controller blending. Cut includes air cutting and plunge/retract. Tool changes add fixed duration, with no implicit travel. Full submitted plan timed even if invalid. Indexed B/C rotation uses simultaneous constant angular speeds plus settle time. No cutting during indexing.",
+      "scope": "Indexed 3+2 only; table-attached stock and fixtures. Tool-section collision and configured axis limits; whole-machine self-collision is not certified. Gauge length is fixed across tools.",
+      "target_sha256": "9af44a8563fc15d661df6b14e17dca6ba2a3b9694519c3b5acb25eea419d5037",
+      "numerics": {
+        "resolution_mm": 0.5,
+        "cell_radius_mm": 0.4330128018922193,
+        "cells": 3466008,
+        "geometry_backend": "trimesh signed distance; double precision, not exact arithmetic"
+      },
+      "stock_metrics": {
+        "initial_nominal_volume_mm3": 181600.0,
+        "final_nominal_volume_mm3": 84712.0,
+        "removed_nominal_volume_mm3": 96888.0,
+        "removed_volume_bounds_mm3": [
+          90295.5,
+          116364.0
+        ],
+        "final_volume_bounds_mm3": [
+          73793.0,
+          96433.0
+        ]
+      },
+      "artifacts": {
+        "final_stock": "final_stock.ply",
+        "lower_stock": "final_stock_lower.ply",
+        "upper_stock": "final_stock_upper.ply",
+        "states": [
+          "states/00000.npz",
+          "states/00596.npz"
+        ],
+        "trajectory": "trajectory.json"
+      }
+    },
+    "wall_seconds": 362.9518329160055
+  }
+]

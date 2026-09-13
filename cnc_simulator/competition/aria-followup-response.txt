@@ -1,0 +1,349 @@
+Skip to main content
+silta
+Projects
+coreweave-hack-silta-squad
+Evaluations
+Ask ARIA
+Touko Ursin
+silta-org
+Project
+MODELS
+Workspace
+Runs
+More
+WEAVE
+Agents
+Traces
+Evals
+Playground
+More
+Feedback
+Evaluations
+Reset view
+Save view
+Compare
+Filter
+Visualize
+Columns
+inputs
+output
+agent_correctness
+cad_oracle_match
+first_plan_success
+verified
+Trace
+Feedback
+Status
+model
+self
+true_count
+true_fraction
+true_count
+true_fraction
+true_count
+aria-recommended-cleanup-ablation
+11a1
+fixed-cam-parameter-ablation:v0
+aria-cleanup-ablation-12-cases-evaluation:v0
+N/A
+N/A
+N/A
+N/A
+N/A
+fresh-failure-check-memory
+27e6
+memory:v0
+fresh-failure-memory-counterexamples-evaluation:v0
+N/A
+N/A
+N/A
+N/A
+N/A
+fresh-failure-check-cold
+b948
+cold:v1
+fresh-failure-memory-counterexamples-evaluation:v0
+N/A
+N/A
+N/A
+N/A
+N/A
+programmatic-cam-warm
+6b1e
+warm:v0
+programmatic-cam-five-part-evidence-evaluation:v0
+N/A
+N/A
+N/A
+N/A
+N/A
+programmatic-cam-cold
+8541
+cold:v0
+programmatic-cam-five-part-evidence-evaluation:v0
+N/A
+N/A
+N/A
+N/A
+N/A
+programmatic-cam-best
+b4c7
+best:v0
+programmatic-cam-five-part-evidence-evaluation:v0
+N/A
+N/A
+N/A
+N/A
+N/A
+programmatic-cam-reference
+f5b5
+reference:v0
+programmatic-cam-five-part-evidence-evaluation:v0
+N/A
+N/A
+N/A
+N/A
+N/A
+retained-checks-learned-a58a0fe0eba6
+a7e7
+checks-learned:v0
+retained-fusion-checks-5e915c7ad2a8-evaluation:v0
+N/A
+N/A
+N/A
+N/A
+N/A
+retained-checks-baseline-ba1c38a3a7c8
+e91f
+checks-baseline:v0
+retained-fusion-checks-5e915c7ad2a8-evaluation:v0
+N/A
+N/A
+N/A
+N/A
+N/A
+silta-multipart-warm
+b9ef
+recorded_warm_agent_job:v0
+silta-multipart-warm:v0
+20
+1
+20
+1
+20
+silta-multipart-cold
+cff1
+recorded_cold_agent_job:v0
+silta-multipart-cold:v0
+20
+1
+20
+1
+20
+silta-holdout-policy-v1
+6b8a
+silta-policy-v1:v0
+silta-holdout:v2
+N/A
+N/A
+N/A
+N/A
+N/A
+silta-holdout-policy-v0
+dd82
+silta-policy-v0:v0
+silta-holdout:v1
+N/A
+N/A
+N/A
+N/A
+N/A
+silta-development-policy-v1
+dbda
+silta-policy-v1:v0
+silta-development:v2
+N/A
+N/A
+N/A
+N/A
+N/A
+silta-development-policy-v0
+3432
+silta-policy-v0:v0
+silta-development:v1
+N/A
+N/A
+N/A
+N/A
+N/A
+Shortcuts
+Docs
+1-19
+of 19
+ARIA
+Review our actual programmatic CAM evidence as an outer development loop. Use only dataset programmatic-cam-five-part-evidence and evaluations programmatic-cam-reference, programmatic-cam-best, programmatic-cam-cold, programmatic-cam-warm in this project. These are retained five-part indexed 3+2 simulator results, not Fusion or the other catalog traces. Four one-sample cold/warm comparisons had 2 warm faster and 2 slower. Fixed geometry, 1 mm cells, 3 mm demo tolerance; machining seconds is the only objective, geometry/collisions pass/fail. Please query the records, report supported improvement versus reference separately from memory effects, identify the strongest failure-derived-check experiment we should execute next, and recommend concrete monitoring signals with false-positive counterexamples. Do not invent results or modify project configuration. Also diagnose whether W&B Serverless Sandboxes is enabled for this team: our isolated smoke creation returned project not found using entity silta and project coreweave-hack-silta-squad. Return a compact evidence-grounded review and explicit missing evidence.
+Show more
+Worked for 1 step
+
+I’ll isolate the named dataset and four evaluation cohorts, verify their indexed records and timing fields, then separate algorithmic gains from cold/warm variance. In parallel, I’ll check current Serverless Sandboxes enablement semantics so the smoke-test error is interpreted against documented behavior rather than guessed.
+
+Worked for 7 steps
+
+The documentation confirms Sandboxes is organization-scoped, not project-scoped, and does not define “project not found” as a definitive enablement signal. I’m now matching each requested evaluation to its exact dataset reference and drilling only into those small 3+2 records; this prevents similarly named Fusion/catalog traces from contaminating the comparison.
+
+Worked for 18 steps
+
+The retained records support a large paired speed reduction versus reference on the four parts where both plans pass, but they do not support a memory benefit: the four cold/warm signs split 2–2 and the warm aggregate is slightly slower. I’m doing the final integrity checks now—recomputing paired deltas, enumerating the failure-derived counterexamples, and verifying that the named W&B project is readable independently of Sandbox creation.
+
+Worked for 4 steps
+Evidence-grounded review
+
+Supported outer-loop improvement: programmatic-cam-best improves substantially over programmatic-cam-reference on this retained five-part dataset, while preserving or improving feasibility.
+
+Geometry pass rate: 5/5 best vs 4/5 reference.
+On the four parts where both pass, total machining time falls from 2,655.74 s to 690.67 s: −73.99%.
+Individual paired reductions: −61.5% to −78.8%; median −74.54%.
+The hydraulic manifold is not included in that timing comparison because its reference fails with excess_material / uncertain; best passes at 158.98 s. This supports failure recovery, not a reference-relative speedup measurement.
+All four named evaluations completed successfully and reference the exact requested dataset version: programmatic-cam-five-part-evidence:tcBn…EM0. No Fusion/catalog results were used.
+
+This is strong in-sample retained-simulator evidence, not held-out or manufacturing evidence.
+
+Memory effects: unsupported
+
+The four paired cold/warm observations are mixed:
+
+Part	Warm − cold
+Hydraulic manifold	−0.026 s
+Bearing block	+6.056 s
+Trunnion cage	−0.108 s
+Flanged sleeve	+7.518 s
+
+Thus, 2 warm faster and 2 slower. Aggregate warm time is 603.30 s vs 589.85 s cold, +2.28%, but four one-sample comparisons cannot establish memory harm or benefit. Strategy changes also confound attribution—for example, the flanged sleeve’s cold orientation-ordered plan beats the warm tool-ordered plan.
+
+Strongest next failure-derived-check experiment
+
+Test a geometry-conditioned residual-stock check, rather than a global parameter rule:
+
+On the hydraulic manifold, hold the best strategy fixed and ablate junction_cleanup while testing stepover around 0.708/0.75/0.95.
+On the trunnion cage, hold all other best settings fixed; cross stepover 0.75/0.83/0.95 with cleanup off/on.
+Run the same check on the actuator housing, bearing block, and flanged sleeve as negative controls.
+Gate every result on geometry and collisions; compare machining seconds only among passes.
+
+The hypothesis is that the check should identify a part-specific residual-stock risk and recommend cleanup or reduced stepover. It must not encode “high stepover is always unsafe”:
+
+False-positive counterexample: hydraulic and flanged-sleeve cold plans pass at stepover_fraction=0.95.
+False-positive counterexample: four best plans pass without junction_cleanup.
+Observed positive case: trunnion at 0.95, cleanup off, fails with uncertain excess material; 0.75, cleanup off, passes.
+Monitoring signals
+
+Feasibility gate: geometry_pass, collision pass, issue code, and issue certainty.
+Counterexample: excess_material marked uncertain at 1 mm resolution should trigger higher-resolution adjudication, not be treated automatically as a confirmed collision/defect.
+
+Paired objective improvement: per-part (candidate_seconds-reference_seconds)/reference_seconds, emitted only when both pass; accompany it with paired coverage.
+Counterexample: using the failed hydraulic reference’s 394.56 s would manufacture an invalid speedup.
+
+Memory effect: paired warm_seconds-cold_seconds, sign count, and strategy diff by part; require repeated randomized cold/warm ordering before alerting.
+Counterexample: the current aggregate says warm is 2.28% slower, while signs are exactly 2–2.
+
+Failure-check precision: check-trigger count, downstream confirmed failures caught, false-rejection rate, and uncertain rate.
+Counterexample: blanket alerts on stepover=0.95, tool ordering, or missing cleanup would reject existing passing plans.
+
+Evidence integrity: dataset digest, source/target hashes, simulator version, 1 mm cell size, 3 mm tolerance, strategy, and loaded/saved memory version. Treat deliberate version changes as new cohorts—not regressions.
+
+Serverless Sandboxes diagnosis
+
+Enablement is not established by the reported error. The project itself is readable at the supplied entity/project, so “project not found” is not evidence that this W&B project is absent. Current W&B documentation says Serverless Sandboxes is a public-preview, organization-scoped feature, and the minimal creation API does not take an entity or project:
+
+from wandb.sandbox import Sandbox
+with Sandbox.run() as sandbox:
+    sandbox.wait()
+
+A successful transition to RUNNING is the documented enablement test. If that minimal call fails, W&B Support must confirm organization-level access. If creation succeeds but code inside the sandbox cannot find the project, diagnose sandbox authentication separately—W&B/Weave access inside it needs WANDB_API_KEY passed through Secrets Manager. Sources: Sandboxes, Create a sandbox, Secrets.
+
+Explicit missing evidence
+Repeated or randomized cold/warm trials.
+A held-out part set or changed geometry.
+Finer-resolution adjudication of the two excess_material / uncertain failures.
+Isolated ablations attributing gains to individual strategy parameters.
+Physical machining, metrology, or real collision validation.
+Exact Sandbox smoke code, full error stage/response ID, organization identity, and outcome of parameter-free Sandbox.run().
+
+No project configuration or records were modified.
+
+We executed your12-case matched cleanup ablation. Query aria-cleanup-ablation-12-cases and aria-recommended-cleanup-ablation. Manifold cleanup off fails at .708/.75/.95; on passes158.98s at all three. Cage .75 passes196.77s,.83 passes198.38s,.95 fails, unchanged by cleanup. Cleanup is not universal. Fresh-failure-memory-counterexamples catches2 repeated failures, rejects neither valid control, abstains on changed-fixture invalid plan. Hosted checks really executed with network denied, no guest credentials: trace01a09937-99b3-7bbe-a02c-ccef3b06f806. Removing entity/project headers fixed sandbox creation. Fresh verification trace01a09938-8ffc-708d-a704-e1fa090912dd rechecked80.745s reference versus25.852s candidate. Verify records, critique the narrow advisory we can retain, and propose a useful signal separating unresolved numerical geometry from physical defects. Do not change configuration.
+Show more
+
+I’ll verify the exact 12-case dataset, its named evaluation, and both supplied trace roots, then reconcile the recorded outcomes against your summary. I’ll focus the critique on what the check may safely advise—not promote—and design a signal that preserves the distinction between simulator-resolution uncertainty and evidence of a physical defect.
+
+Worked for 4 steps
+
+The 12 dataset rows exactly reproduce the stated interaction: cleanup is necessary for all three manifold settings, irrelevant to the cage’s outcomes, and cannot rescue the cage at 0.95. The hosted-check trace also verifies an exact-membership check—not a learned geometric rule—so the main critique is how narrowly that evidence must be scoped.
+
+Worked for 3 steps
+Verified findings
+Dataset aria-cleanup-ablation-12-cases:egap…qoE contains exactly 12 matched rows.
+Evaluation aria-recommended-cleanup-ablation references that exact version and reports 7/12 passing, with 12 successful row evaluations and no execution errors.
+Manifold: cleanup off fails at 0.708/0.75/0.95 with excess_material, certainty="uncertain"; cleanup on passes at 158.9768 s at all three settings.
+Cage: 0.75 passes at 196.7727 s, 0.83 at 198.3766 s, and 0.95 fails; cleanup changes none of these outcomes or times.
+Hosted-check trace 01a09937… records 2 repeated invalids caught, 0/2 valid controls rejected, 2 simulations avoided, and abstention on the changed-fixture invalid case.
+Fresh-verification trace 01a09938… contains separate simulator child calls: both plans pass, 80.7454 → 25.8522 s (−67.98%, −54.8932 s), target unchanged, and zero uncertain issues. Most of the modeled gain is cutting time; rapid time is unchanged at 2.1733 s.
+Critique and retainable advisory
+
+Retain this only as an exact-scope failure-memory advisory:
+
+For the trusted manifold geometry/setup identity represented here, plans without junction cleanup repeatedly produce unresolved excess-material failures. Recommend enabling cleanup before full simulation. Abstain when geometry, fixture, setup, or applicability identity changes.
+
+Do not retain “cleanup is generally required” or “0.95 stepover is unsafe”:
+
+Cage behavior is completely cleanup-independent.
+The fresh candidate passes without cleanup.
+Cage 0.95 fails even with cleanup.
+Manifold stepover is not identified as causal: all three cleanup-on times are exactly identical, suggesting stepover is ineffective/quantized in that branch, the generated path is identical, or results were reused. Toolpath hashes would distinguish these explanations.
+The hosted check is exact applicability membership, not a learned geometric detector. Its 0 false rejections are over only two selected controls.
+Changed-fixture abstention is correct, but it also demonstrates that the check provides no protection outside its memorized scope.
+
+The evaluation verifies the retained result files, but its 44 ms runtime and lack of simulator children do not independently prove how those 12 simulations were produced. By contrast, the fresh-verification trace does expose separate simulator spans.
+
+Recommended geometry-evidence signal
+
+Replace a bare binary geometry_pass with an interval-based, three-level signal:
+
+geometry_evidence_class:
+  numerically_unresolved
+  simulator_confirmed_violation
+  physically_confirmed_defect
+
+For each excess-material/collision result, log a conservative violation interval relative to the 3 mm tolerance:
+
+violation_lower_mm
+violation_upper_mm
+cell_size_mm
+resolution_stable
+implicated_moves
+physical_confirmation_ref when available
+
+Classification:
+
+Numerically unresolved: interval crosses zero, e.g. lower ≤ 0 < upper. This fits the current failures: uncertain, “resolution cannot establish a pass,” and no implicated moves.
+Simulator-confirmed violation: lower > 0, preferably persistent after a finer-grid rerun such as 0.5 mm and tied to concrete moves/regions.
+Physically confirmed defect: requires external metrology, inspection, or machine evidence. Simulator persistence alone should not be labeled physical.
+
+A useful monitor is therefore:
+
+unresolved_geometry_rate =
+  numerically_unresolved / all geometry evaluations
+
+Alert on increases separately from simulator_confirmed_violation_rate. Route unresolved cases to resolution refinement; route confirmed simulator violations to plan correction; reserve physical-defect alerts for externally confirmed records.
+
+Remaining evidence gaps
+Residual-material magnitude/bounds and affected voxel regions are not logged.
+No 1 mm versus finer-resolution stability test exists for these five uncertain failures.
+No effective toolpath hashes show whether manifold stepover changes generated motion.
+The hosted trace records network denial and no guest credentials as scope/provenance claims, but contains no independent sandbox policy attestation or before/after header record; it therefore corroborates successful hosted execution, not conclusively the header-removal diagnosis.
+No physical metrology or machine evidence supports the label “physical defect.”
+
+No configuration was changed.
+
+coreweave-hack-silta-squad
+Ask ARIA
+﻿

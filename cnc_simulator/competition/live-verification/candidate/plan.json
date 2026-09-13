@@ -1,0 +1,662 @@
+{
+  "units": "mm",
+  "target": {
+    "type": "mesh",
+    "path": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/02de8c83d5bd/geometry/parts/02de8c83d5bd/target.stl"
+  },
+  "stock": {
+    "type": "mesh",
+    "path": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/02de8c83d5bd/geometry/parts/02de8c83d5bd/stock.stl"
+  },
+  "fixtures": [
+    {
+      "type": "box",
+      "min": [
+        -18,
+        -18,
+        -40
+      ],
+      "max": [
+        18,
+        18,
+        0
+      ]
+    }
+  ],
+  "tools": {
+    "T12": {
+      "diameter_mm": 12,
+      "flute_length_mm": 60,
+      "shaft_diameter_mm": 12,
+      "shaft_length_mm": 30,
+      "holder_diameter_mm": 40,
+      "holder_length_mm": 30
+    },
+    "T8": {
+      "diameter_mm": 8,
+      "flute_length_mm": 60,
+      "shaft_diameter_mm": 8,
+      "shaft_length_mm": 30,
+      "holder_diameter_mm": 40,
+      "holder_length_mm": 30
+    }
+  },
+  "travel_limits": {
+    "min": [
+      -762,
+      -508,
+      -508
+    ],
+    "max": [
+      0,
+      0,
+      63.5
+    ]
+  },
+  "initial_position": [
+    0,
+    0,
+    180
+  ],
+  "initial_tool": "T12",
+  "moves": [
+    {
+      "type": "rapid",
+      "to": [
+        -12.0,
+        0.0,
+        72.0
+      ]
+    },
+    {
+      "type": "cut",
+      "to": [
+        -12.0,
+        0.0,
+        56.0
+      ],
+      "feed_mm_per_min": 250
+    },
+    {
+      "type": "cut",
+      "to": [
+        12.0,
+        0.0,
+        56.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        12.0,
+        -4.0,
+        56.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        13.0352762,
+        -3.8637033,
+        56.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        14.0,
+        -3.4641016,
+        56.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        14.8284271,
+        -2.8284271,
+        56.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        15.4641016,
+        -2.0,
+        56.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        15.8637033,
+        -1.0352762,
+        56.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        16.0,
+        0.0,
+        56.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        15.8637033,
+        1.0352762,
+        56.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        15.4641016,
+        2.0,
+        56.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        14.8284271,
+        2.8284271,
+        56.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        14.0,
+        3.4641016,
+        56.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        13.0352762,
+        3.8637033,
+        56.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        12.0,
+        4.0,
+        56.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -12.0,
+        4.0,
+        56.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -13.0352762,
+        3.8637033,
+        56.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -14.0,
+        3.4641016,
+        56.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -14.8284271,
+        2.8284271,
+        56.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -15.4641016,
+        2.0,
+        56.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -15.8637033,
+        1.0352762,
+        56.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -16.0,
+        0.0,
+        56.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -15.8637033,
+        -1.0352762,
+        56.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -15.4641016,
+        -2.0,
+        56.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -14.8284271,
+        -2.8284271,
+        56.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -14.0,
+        -3.4641016,
+        56.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -13.0352762,
+        -3.8637033,
+        56.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -12.0,
+        -4.0,
+        56.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        12.0,
+        -4.0,
+        56.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -12.0,
+        0.0,
+        56.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -12.0,
+        0.0,
+        48.0
+      ],
+      "feed_mm_per_min": 250
+    },
+    {
+      "type": "cut",
+      "to": [
+        12.0,
+        0.0,
+        48.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        12.0,
+        -4.0,
+        48.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        13.0352762,
+        -3.8637033,
+        48.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        14.0,
+        -3.4641016,
+        48.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        14.8284271,
+        -2.8284271,
+        48.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        15.4641016,
+        -2.0,
+        48.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        15.8637033,
+        -1.0352762,
+        48.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        16.0,
+        0.0,
+        48.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        15.8637033,
+        1.0352762,
+        48.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        15.4641016,
+        2.0,
+        48.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        14.8284271,
+        2.8284271,
+        48.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        14.0,
+        3.4641016,
+        48.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        13.0352762,
+        3.8637033,
+        48.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        12.0,
+        4.0,
+        48.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -12.0,
+        4.0,
+        48.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -13.0352762,
+        3.8637033,
+        48.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -14.0,
+        3.4641016,
+        48.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -14.8284271,
+        2.8284271,
+        48.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -15.4641016,
+        2.0,
+        48.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -15.8637033,
+        1.0352762,
+        48.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -16.0,
+        0.0,
+        48.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -15.8637033,
+        -1.0352762,
+        48.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -15.4641016,
+        -2.0,
+        48.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -14.8284271,
+        -2.8284271,
+        48.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -14.0,
+        -3.4641016,
+        48.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -13.0352762,
+        -3.8637033,
+        48.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -12.0,
+        -4.0,
+        48.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        12.0,
+        -4.0,
+        48.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -12.0,
+        0.0,
+        48.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -12.0,
+        0.0,
+        72.0
+      ],
+      "feed_mm_per_min": 1200
+    },
+    {
+      "type": "rapid",
+      "to": [
+        0.0,
+        0.0,
+        180.0
+      ]
+    }
+  ],
+  "tolerance_mm": 3.0,
+  "resolution_mm": 1.0,
+  "max_cells": 2000000,
+  "rapid_mm_per_min": 6000,
+  "tool_change_seconds": 15,
+  "indexing": {
+    "pivot_mm": [
+      0,
+      -453.5294968,
+      50.8
+    ],
+    "work_offset_mm": [
+      0,
+      0,
+      40
+    ],
+    "initial_bc_degrees": [
+      0,
+      0
+    ],
+    "b_limits_degrees": [
+      -35,
+      110
+    ],
+    "degrees_per_second": 30,
+    "settle_seconds": 1,
+    "head_mount_mm": [
+      330,
+      254,
+      618.89
+    ],
+    "gauge_length_mm": 120
+  }
+}

@@ -1,0 +1,4 @@
+SIMULATING 02-hydraulic-manifold-0.708-0
+02-hydraulic-manifold-0.708-0 False [{'code': 'resource_limit', 'certainty': 'uncertain', 'moves': [], 'description': 'Geometry grid exceeds max_cells; reduce bounds or increase resolution_mm.'}]
+SIMULATING 04-trunnion-cage-0.95-0
+04-trunnion-cage-0.95-0 False [{'code': 'resource_limit', 'certainty': 'uncertain', 'moves': [], 'description': 'Geometry grid exceeds max_cells; reduce bounds or increase resolution_mm.'}]

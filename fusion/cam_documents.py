@@ -1,6 +1,8 @@
 """Version-pinned Fusion CAM documents retain the linked machine model."""
 
 import re
+import uuid
+from pathlib import Path
 
 
 def _text(payload, key):
@@ -67,10 +69,31 @@ def open_version(app, payload):
     if (data.versionId != version_id or data.id != reference["data_file_id"]
             or data.parentProject.id != reference["project_id"]):
         raise RuntimeError("Resolved CAM data file differs from its pinned reference")
+    recovered = []
+    # Fusion reuses an already-open document, including unsaved simulation/display
+    # changes. Preserve that state locally before reopening the pinned cloud version.
+    for existing in list(app.documents):
+        file = existing.dataFile
+        if (file is None or file.id != reference["data_file_id"]
+                or file.versionId != version_id or not existing.isModified):
+            continue
+        import adsk.fusion
+
+        existing.activate()
+        design = adsk.fusion.Design.cast(existing.products.itemByProductType('DesignProductType'))
+        folder = Path(__file__).resolve().parents[1] / '.private/fusion-document-recovery'
+        folder.mkdir(parents=True, exist_ok=True)
+        backup = folder / (uuid.uuid4().hex + '.f3d')
+        options = design.exportManager.createFusionArchiveExportOptions(str(backup))
+        if not design.exportManager.execute(options) or not backup.is_file():
+            raise RuntimeError('Could not preserve modified Fusion document before reopening')
+        recovered.append(str(backup))
+        if not existing.close(False):
+            raise RuntimeError('Could not close preserved local document to reopen pinned version')
     document = app.documents.open(data, True)
     if document is None or document.dataFile is None:
         raise RuntimeError("Fusion could not open the saved CAM version")
     if document.dataFile.versionId != version_id or document.isModified:
         raise RuntimeError("Opened CAM document is not the unmodified pinned version")
     return {"document_name": document.name, "version_id": version_id,
-            "data_file_id": document.dataFile.id}
+            "data_file_id": document.dataFile.id, "preserved_modified_archives": recovered}

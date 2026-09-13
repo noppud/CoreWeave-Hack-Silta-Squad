@@ -1,0 +1,35 @@
+{
+  "parts": [
+    {
+      "part": "11-indexed-instrument-shell",
+      "paired_passes": 3,
+      "median_warm_minus_cold_percent": 0.0725404283100942,
+      "warm_only_failures": 0,
+      "cold_unique_paths": 3,
+      "warm_unique_paths": 1
+    },
+    {
+      "part": "12-three-pocket-plate",
+      "paired_passes": 3,
+      "median_warm_minus_cold_percent": 0.0,
+      "warm_only_failures": 0,
+      "cold_unique_paths": 2,
+      "warm_unique_paths": 1
+    }
+  ],
+  "integrity_checked": [
+    "11-indexed-instrument-shell-r1-cold",
+    "11-indexed-instrument-shell-r1-warm",
+    "12-three-pocket-plate-r1-warm",
+    "12-three-pocket-plate-r1-cold",
+    "11-indexed-instrument-shell-r2-warm",
+    "11-indexed-instrument-shell-r2-cold",
+    "12-three-pocket-plate-r2-cold",
+    "12-three-pocket-plate-r2-warm",
+    "11-indexed-instrument-shell-r3-cold",
+    "11-indexed-instrument-shell-r3-warm",
+    "12-three-pocket-plate-r3-warm",
+    "12-three-pocket-plate-r3-cold"
+  ],
+  "conclusion": "No robust cross-part speed benefit established. Shell warm slower in every repeat; plate ties twice with a negligible warm gain once. No memory rule promoted."
+}

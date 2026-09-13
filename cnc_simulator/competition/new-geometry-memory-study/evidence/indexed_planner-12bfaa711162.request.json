@@ -1,0 +1,307 @@
+{
+  "role": "indexed_planner",
+  "context": {
+    "compiler_contract": "Return CAM parameters, not tool movements. A deterministic compiler creates movements before tests and simulation. It clears each capsule/circular feature in depth layers using a centerline and nested capsule contours, with radial track spacing diameter*stepover_fraction. It retracts with the cutter engaged to a common clearance plane 8 mm above the stock. Changing B/C or tools requires the fixed park. orientation order groups B/C then tool; tool order groups tool then B/C. shortest_c picks the equivalent C angle closest to the current C angle. Every plan ends at the same park and top orientation. Depth and stepover can change coverage certification. junction_cleanup=true adds safe smaller-tool plunge cleanup inside the union of overlapping pockets at common depths. Enable this when separate feature clearing leaves junction material. It adds actual cutting/tool-change time and is still fully simulated. More circle segments reduce chord error but increase move count, not a separate optimization cost. Simulation uses conservative voxel bounds. Never change geometry, resolution, tolerance, machine, tools or speed ceilings. Only estimated machining seconds of passing plans score. This is geometric/timing simulation; physical cutting forces and controller acceleration are not modeled.",
+    "part": {
+      "id": "11-indexed-instrument-shell",
+      "name": "Indexed instrument shell",
+      "stock": {
+        "kind": "cylinder",
+        "radius": 32,
+        "height": 44
+      },
+      "features": [
+        {
+          "name": "Interior seat",
+          "bc": [
+            0,
+            0
+          ],
+          "a": [
+            0,
+            0,
+            10
+          ],
+          "b": [
+            0,
+            0,
+            10
+          ],
+          "radius": 20,
+          "tool": "T12",
+          "surface_z": 84.0
+        },
+        {
+          "name": "Window 45",
+          "bc": [
+            90,
+            45
+          ],
+          "a": [
+            11.313708498984761,
+            11.31370849898476,
+            18.0
+          ],
+          "b": [
+            11.313708498984761,
+            11.31370849898476,
+            29.0
+          ],
+          "radius": 8,
+          "tool": "T12",
+          "surface_z": 82.8
+        },
+        {
+          "name": "Window 135",
+          "bc": [
+            90,
+            135
+          ],
+          "a": [
+            -11.31370849898476,
+            11.313708498984761,
+            18.0
+          ],
+          "b": [
+            -11.31370849898476,
+            11.313708498984761,
+            29.0
+          ],
+          "radius": 8,
+          "tool": "T12",
+          "surface_z": 82.8
+        },
+        {
+          "name": "Window 225",
+          "bc": [
+            90,
+            225
+          ],
+          "a": [
+            -11.313708498984763,
+            -11.31370849898476,
+            18.0
+          ],
+          "b": [
+            -11.313708498984763,
+            -11.31370849898476,
+            29.0
+          ],
+          "radius": 8,
+          "tool": "T12",
+          "surface_z": 82.8
+        },
+        {
+          "name": "Window 315",
+          "bc": [
+            90,
+            315
+          ],
+          "a": [
+            11.313708498984758,
+            -11.313708498984763,
+            18.0
+          ],
+          "b": [
+            11.313708498984758,
+            -11.313708498984763,
+            29.0
+          ],
+          "radius": 8,
+          "tool": "T12",
+          "surface_z": 82.8
+        },
+        {
+          "name": "Flange hole 1",
+          "bc": [
+            0,
+            0
+          ],
+          "a": [
+            26.0,
+            0.0,
+            34
+          ],
+          "b": [
+            26.0,
+            0.0,
+            34
+          ],
+          "radius": 4,
+          "tool": "T8",
+          "surface_z": 84.0
+        },
+        {
+          "name": "Flange hole 2",
+          "bc": [
+            0,
+            0
+          ],
+          "a": [
+            1.592040838891559e-15,
+            26.0,
+            34
+          ],
+          "b": [
+            1.592040838891559e-15,
+            26.0,
+            34
+          ],
+          "radius": 4,
+          "tool": "T8",
+          "surface_z": 84.0
+        },
+        {
+          "name": "Flange hole 3",
+          "bc": [
+            0,
+            0
+          ],
+          "a": [
+            -26.0,
+            3.184081677783118e-15,
+            34
+          ],
+          "b": [
+            -26.0,
+            3.184081677783118e-15,
+            34
+          ],
+          "radius": 4,
+          "tool": "T8",
+          "surface_z": 84.0
+        },
+        {
+          "name": "Flange hole 4",
+          "bc": [
+            0,
+            0
+          ],
+          "a": [
+            -4.776122516674677e-15,
+            -26.0,
+            34
+          ],
+          "b": [
+            -4.776122516674677e-15,
+            -26.0,
+            34
+          ],
+          "radius": 4,
+          "tool": "T8",
+          "surface_z": 84.0
+        }
+      ]
+    },
+    "fixed_tools": {
+      "T12": {
+        "diameter_mm": 12,
+        "flute_length_mm": 60,
+        "shaft_diameter_mm": 12,
+        "shaft_length_mm": 30,
+        "holder_diameter_mm": 40,
+        "holder_length_mm": 30
+      },
+      "T8": {
+        "diameter_mm": 8,
+        "flute_length_mm": 60,
+        "shaft_diameter_mm": 8,
+        "shaft_length_mm": 30,
+        "holder_diameter_mm": 40,
+        "holder_length_mm": 30
+      }
+    },
+    "fixed_limits": {
+      "cut_feed_mm_min": 900,
+      "plunge_feed_mm_min": 250,
+      "retract_feed_mm_min": 1200,
+      "max_stepdown_mm": 12
+    },
+    "resolution_mm": 1.0,
+    "tolerance_mm": 3.0,
+    "parameter_ranges": {
+      "stepover_fraction": [
+        0.15,
+        0.95
+      ],
+      "stepdown_mm": [
+        1,
+        12
+      ],
+      "segments_per_circle": [
+        24,
+        96
+      ]
+    },
+    "previous_strategy": {
+      "stepover_fraction": 0.35,
+      "stepdown_mm": 6,
+      "cut_feed_mm_min": 350,
+      "plunge_feed_mm_min": 120,
+      "retract_feed_mm_min": 700,
+      "segments_per_circle": 48,
+      "order": "orientation",
+      "retract_mode": "park",
+      "shortest_c": false
+    },
+    "feedback": {
+      "validity": "valid",
+      "passed": true,
+      "verification": "verified",
+      "issues": [],
+      "estimated_time_seconds": 599.5491780672953,
+      "time_breakdown": {
+        "cutting": 525.7891245344014,
+        "rapid": 16.260053532893917,
+        "dwell": 0.0,
+        "tool_changes": 30.0,
+        "indexing": 27.5
+      },
+      "timing_assumptions": "Constant commanded vector feed/rapid speed; no acceleration, jerk, lookahead, spindle ramp or controller blending. Cut includes air cutting and plunge/retract. Tool changes add fixed duration, with no implicit travel. Full submitted plan timed even if invalid. Indexed B/C rotation uses simultaneous constant angular speeds plus settle time. No cutting during indexing.",
+      "scope": "Indexed 3+2 only; table-attached stock and fixtures. Tool-section collision and configured axis limits; whole-machine self-collision is not certified. Gauge length is fixed across tools.",
+      "target_sha256": "346f0a92dae06fbf7f56828b43b8d41a658a60a6fac9eea5109afb198701dad6",
+      "numerics": {
+        "resolution_mm": 1.0,
+        "cell_radius_mm": 0.8660255037844385,
+        "cells": 374616,
+        "geometry_backend": "trimesh signed distance; double precision, not exact arithmetic"
+      },
+      "stock_metrics": {
+        "initial_nominal_volume_mm3": 142032.0,
+        "final_nominal_volume_mm3": 78436.0,
+        "removed_nominal_volume_mm3": 63596.0,
+        "removed_volume_bounds_mm3": [
+          53384.0,
+          96364.0
+        ],
+        "final_volume_bounds_mm3": [
+          59452.0,
+          97356.0
+        ]
+      },
+      "artifacts": {
+        "final_stock": "final_stock.ply",
+        "lower_stock": "final_stock_lower.ply",
+        "upper_stock": "final_stock_upper.ply",
+        "states": [
+          "states/00000.npz",
+          "states/00156.npz",
+          "states/00312.npz",
+          "states/00468.npz",
+          "states/00624.npz",
+          "states/00780.npz",
+          "states/00936.npz",
+          "states/01092.npz",
+          "states/01248.npz",
+          "states/01404.npz",
+          "states/01560.npz",
+          "states/01716.npz",
+          "states/01872.npz",
+          "states/01878.npz"
+        ],
+        "trajectory": "trajectory.json"
+      }
+    },
+    "retained_memory": null
+  }
+}

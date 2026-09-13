@@ -1,0 +1,71 @@
+[
+  {
+    "job": "a1b399e521ac",
+    "part": "Instrument Pocket",
+    "status": "completed",
+    "loop_evidence": {
+      "baseline_seconds": 125.51800108171687,
+      "best_seconds": 27.263982725443416,
+      "baseline_savings_percent": 78.27882655038974,
+      "within_run_savings_percent": 0.0,
+      "attempts": 2,
+      "simulated_attempts": 2,
+      "failures": 0,
+      "loaded_memory_version": 9,
+      "saved_memory_version": 10,
+      "stop_reason": "Timing judge accepted the verified plan.",
+      "claim": "Baseline savings measure CAM optimization, not a causal memory benefit. Memory transfer still requires controlled evaluation."
+    },
+    "trace": {
+      "enabled": true,
+      "url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a0993c-b389-7354-9903-8fb994b6912f",
+      "readback_complete": true
+    }
+  },
+  {
+    "job": "056866dee37c",
+    "part": "Instrument Pocket",
+    "status": "completed",
+    "loop_evidence": {
+      "baseline_seconds": 125.51800108171687,
+      "best_seconds": 27.263982725443416,
+      "baseline_savings_percent": 78.27882655038974,
+      "within_run_savings_percent": 0.0,
+      "attempts": 3,
+      "simulated_attempts": 3,
+      "failures": 0,
+      "loaded_memory_version": 10,
+      "saved_memory_version": 11,
+      "stop_reason": "Timing judge accepted the verified plan.",
+      "claim": "Baseline savings measure CAM optimization, not a causal memory benefit. Memory transfer still requires controlled evaluation."
+    },
+    "trace": {
+      "enabled": true,
+      "url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a09945-ada6-7888-b42d-02956b066251",
+      "readback_complete": true
+    }
+  },
+  {
+    "job": "a2ff5d26d533",
+    "part": "Bearing Pocket",
+    "status": "completed",
+    "loop_evidence": {
+      "baseline_seconds": 80.74544471125378,
+      "best_seconds": 25.852236294980724,
+      "baseline_savings_percent": 67.98304054497626,
+      "within_run_savings_percent": 0.0,
+      "attempts": 1,
+      "simulated_attempts": 1,
+      "failures": 0,
+      "loaded_memory_version": 11,
+      "saved_memory_version": 12,
+      "stop_reason": "CAM repeated an identical toolpath; retained the best verified result.",
+      "claim": "Baseline savings measure CAM optimization, not a causal memory benefit. Memory transfer still requires controlled evaluation."
+    },
+    "trace": {
+      "enabled": true,
+      "url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a0994a-e0d5-7563-a3d6-424c5de5e88b",
+      "readback_complete": true
+    }
+  }
+]

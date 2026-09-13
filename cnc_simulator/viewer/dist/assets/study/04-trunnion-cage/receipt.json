@@ -1,0 +1,10 @@
+{
+  "part": "04-trunnion-cage",
+  "source_plan_sha256": "37b9c591a68c91b4ab335b42e3c3ae5c204fbadd012f3dfb77cdde57dcc9ba9b",
+  "frames": 49,
+  "bytes": 2877240,
+  "final_display_volume_mm3": 84710.35525608061,
+  "within_verifier_bounds": true,
+  "passed": true,
+  "method": "Boolean subtraction of swept inscribed 64-sided cutters; display copy simplified <=0.005 mm. No target geometry used to construct stock."
+}

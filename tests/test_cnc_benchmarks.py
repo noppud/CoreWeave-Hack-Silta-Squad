@@ -180,6 +180,7 @@ def test_check_replay_does_not_call_simulation(recorded):
     results = runner("checks", context.versions["checks"], cases, context)
     assert [row["passed"] for row in results] == [False, True]
     assert all(row["runtime_ms"] == 10 for row in results)
+    assert all(row["runtime_samples_ms"] == [10] * 5 for row in results)
     assert all(row["version_ref"] == context.versions["checks"] for row in results)
 
 
@@ -269,3 +270,31 @@ def test_verifier_change_invalidates_replay(recorded):
         BenchmarkRunner(store, root / "benchmarks", None, None)(
             "checks", context.versions["checks"], cases, context
         )
+
+
+def test_captured_verification_timing_is_bound_to_source_events(recorded):
+    _, job, identity, _, _ = recorded
+    case = capture_case(job.manifest_path, 1, identity)
+    assert case["verification_timing"]["elapsed_ms"] > 0
+    case["verification_timing"]["elapsed_ms"] *= 100
+    with pytest.raises(ValueError, match="timing differs"):
+        validate_case(case)
+
+
+def test_nondeterministic_check_results_rejected(recorded):
+    store, job, identity, context, root = recorded
+    case = capture_case(job.manifest_path, 1, identity)
+
+    class ChangingChecks:
+        count = 0
+
+        def run(self, candidate, context):
+            self.count += 1
+            passed = self.count % 2 == 0
+            return CheckResult(
+                passed, () if passed else ("unstable",), 0.01, context.versions["checks"]
+            )
+
+    runner = BenchmarkRunner(store, root / "unstable", None, lambda version: ChangingChecks())
+    with pytest.raises(ValueError, match="changed between repetitions"):
+        runner("checks", context.versions["checks"], [case], context)

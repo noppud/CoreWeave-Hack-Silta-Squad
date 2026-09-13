@@ -1,0 +1,132 @@
+[
+  {
+    "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/aria-ablation/02-hydraulic-manifold-0.708-0",
+    "snapshot_sha256": "ae130dd8b41728ab9c0a8acc0af3d4ee66b7610056a0a52aa6dd58ae53325fcb",
+    "target_sha256": "b8e86d16d2df5e87cffda1ba1383fa4e1016dbecfde16271c9a3bff566bbcce4",
+    "original_passed": false,
+    "original_verification": "unresolved",
+    "resolution_mm": 1.0,
+    "tolerance_mm": 3.0,
+    "diagnostics": {
+      "excess_material": {
+        "deviation_mm": [
+          0.0,
+          3.768248418445924
+        ],
+        "relative_to_tolerance_mm": [
+          -3.0,
+          0.768248418445924
+        ]
+      },
+      "missing_material": {
+        "deviation_mm": [
+          0.0,
+          1.8579525197996785
+        ],
+        "relative_to_tolerance_mm": [
+          -3.0,
+          -1.1420474802003215
+        ]
+      }
+    },
+    "possible_excess_cells": 34,
+    "definite_excess_cells": 0,
+    "possible_excess_region_part_coordinates_mm": [
+      [
+        -1.0,
+        10.0,
+        30.0
+      ],
+      [
+        1.0,
+        11.0,
+        47.0
+      ]
+    ],
+    "implicated_moves": null,
+    "scope": "Post-run conservative cell-radius bounds using the existing floating-point signed-distance backend. No resolution refinement, physical measurement, changed verdict, or new failure-memory rule. Region is in original part coordinates; final stock alone cannot attribute moves."
+  },
+  {
+    "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/aria-ablation/02-hydraulic-manifold-0.708-1",
+    "snapshot_sha256": "c6f5d59fcadb72707be6c4a34ac3c37f4e1534ccb53c863bac3c179b3a81aaee",
+    "target_sha256": "b8e86d16d2df5e87cffda1ba1383fa4e1016dbecfde16271c9a3bff566bbcce4",
+    "original_passed": true,
+    "original_verification": "verified",
+    "resolution_mm": 1.0,
+    "tolerance_mm": 3.0,
+    "diagnostics": {
+      "excess_material": {
+        "deviation_mm": [
+          0.0,
+          1.944840039005065
+        ],
+        "relative_to_tolerance_mm": [
+          -3.0,
+          -1.055159960994935
+        ]
+      },
+      "missing_material": {
+        "deviation_mm": [
+          0.0,
+          1.8579525197996785
+        ],
+        "relative_to_tolerance_mm": [
+          -3.0,
+          -1.1420474802003215
+        ]
+      }
+    },
+    "possible_excess_cells": 0,
+    "definite_excess_cells": 0,
+    "possible_excess_region_part_coordinates_mm": null,
+    "implicated_moves": null,
+    "scope": "Post-run conservative cell-radius bounds using the existing floating-point signed-distance backend. No resolution refinement, physical measurement, changed verdict, or new failure-memory rule. Region is in original part coordinates; final stock alone cannot attribute moves."
+  },
+  {
+    "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/aria-ablation/04-trunnion-cage-0.95-0",
+    "snapshot_sha256": "3e384cb317ca08ce728bcc8f28d790e44df4160213aa799b695f960d2a842191",
+    "target_sha256": "9af44a8563fc15d661df6b14e17dca6ba2a3b9694519c3b5acb25eea419d5037",
+    "original_passed": false,
+    "original_verification": "unresolved",
+    "resolution_mm": 1.0,
+    "tolerance_mm": 3.0,
+    "diagnostics": {
+      "excess_material": {
+        "deviation_mm": [
+          0.0,
+          19.94644507191944
+        ],
+        "relative_to_tolerance_mm": [
+          -3.0,
+          16.94644507191944
+        ]
+      },
+      "missing_material": {
+        "deviation_mm": [
+          0.0,
+          1.7663639021098996
+        ],
+        "relative_to_tolerance_mm": [
+          -3.0,
+          -1.2336360978901004
+        ]
+      }
+    },
+    "possible_excess_cells": 1066,
+    "definite_excess_cells": 0,
+    "possible_excess_region_part_coordinates_mm": [
+      [
+        -6.0,
+        -6.0,
+        10.0
+      ],
+      [
+        3.0,
+        6.0,
+        51.0
+      ]
+    ],
+    "implicated_moves": null,
+    "scope": "Post-run conservative cell-radius bounds using the existing floating-point signed-distance backend. No resolution refinement, physical measurement, changed verdict, or new failure-memory rule. Region is in original part coordinates; final stock alone cannot attribute moves."
+  }
+]

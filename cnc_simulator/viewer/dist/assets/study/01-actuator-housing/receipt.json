@@ -1,0 +1,10 @@
+{
+  "part": "01-actuator-housing",
+  "source_plan_sha256": "a662f40a484159bc8383718faec44b1f62eaa4f30218a5d7e397403b44a89647",
+  "frames": 46,
+  "bytes": 2691360,
+  "final_display_volume_mm3": 110352.17555607871,
+  "within_verifier_bounds": true,
+  "passed": true,
+  "method": "Boolean subtraction of swept inscribed 64-sided cutters; display copy simplified <=0.005 mm. No target geometry used to construct stock."
+}

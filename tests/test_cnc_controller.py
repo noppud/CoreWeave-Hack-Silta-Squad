@@ -375,3 +375,175 @@ def test_faster_result_with_changed_verification_scope_cannot_replace_incumbent(
     assert result.best_verification.machining_seconds == 100
     assert len(supervisor.calls) == 1
     assert "not comparable" in result.reason
+
+
+def test_two_file_learning_applies_now_and_survives_next_part(tmp_path, inputs):
+    """Exercise direct learning with fake simulation, not manufacturing evidence."""
+    from silta.cnc.learning import BASIC_PROMPT, SharedLearning
+
+    learning = SharedLearning(tmp_path / "learning")
+    assert len(list(learning.root.iterdir())) == 2
+    initial = learning.active()
+    observed_prompts = []
+
+    class Main(MainDouble):
+        def propose(self, context, *args):
+            observed_prompts.append(learning.get(context.versions["main_prompt"])["content"])
+            return super().propose(context, *args)
+
+    class Learner:
+        def propose_checks(self, context, candidate, verification):
+            # Fixture-only rule: the next part's first candidate must be caught.
+            source = ('def check(data):\n'
+                      '    bad = data["candidate"]["parameters"]["attempt"] == 1\n'
+                      '    return {"passed": not bad, "issues": ["test issue"] if bad else []}\n')
+            ref = learning.put("checks", source)
+            return (ReusableProposal("learn-check", "checks", context.versions["checks"],
+                                     ref, "test-proposal", "test failure"),)
+
+    class Judge:
+        def __init__(self):
+            self.calls = 0
+
+        def decide(self, context, candidate, verification, history):
+            self.calls += 1
+            if self.calls > 1:
+                return SupervisorDecision("stop")
+            ref = learning.put("main_prompt", BASIC_PROMPT + "\nA reusable test lesson.\n")
+            return SupervisorDecision("improve", "test a shorter path", (
+                ReusableProposal("learn-prompt", "main_prompt", context.versions["main_prompt"],
+                                 ref, "test-proposal", "judge instruction"),
+            ))
+
+    def controller(outcomes, judge, learner=None):
+        return Controller(
+            Main(), learning.make_checks(learning.active()["checks"]),
+            FusionDouble(outcomes), judge, learner=learner, learning=learning,
+            check_runner_factory=learning.make_checks,
+        )
+
+    first = controller([("failed", 0), ("passed", 100), ("passed", 90)], Judge(), Learner()).run(
+        inputs, tmp_path / "jobs", "part-a", initial,
+    )
+    assert first.status == "completed", first.reason
+    assert observed_prompts[:2] == [BASIC_PROMPT, BASIC_PROMPT]
+    assert "reusable test lesson" in observed_prompts[2]
+    assert learning.active() != initial
+    manifest = json.loads(Path(first.manifest_path).read_text())
+    assert sum(e["event"] == "learning_change_saved" for e in manifest["events"]) == 2
+    assert not any(e["event"] == "promotion_evaluated" for e in manifest["events"])
+    # A later process can inspect exactly what changed without the in-memory store.
+    sources = manifest["learning_sources"]
+    assert len(sources) == 4
+    assert Path(sources[initial["main_prompt"]]["path"]).read_text() == BASIC_PROMPT
+    final_ref = manifest["current_versions"]["main_prompt"]
+    assert "reusable test lesson" in Path(sources[final_ref]["path"]).read_text()
+    for item in sources.values():
+        Artifact(item["path"], item["sha256"]).verify()
+
+    # Simulate a process restart: only the same two files provide learned state.
+    learning = SharedLearning(learning.root)
+    assert len(list(learning.root.iterdir())) == 2
+    second = controller([("passed", 80)], SupervisorDouble(["stop"])).run(
+        inputs, tmp_path / "jobs", "part-b", learning.active(),
+    )
+    assert second.status == "completed", second.reason
+    assert second.attempts == 2
+    assert second.simulations == 1  # learned check caught attempt 1 before simulation
+    assert "reusable test lesson" in observed_prompts[-1]
+    assert len(list(learning.root.iterdir())) == 2
+
+
+def test_completed_toolpath_failure_returns_to_main_without_simulation(tmp_path, inputs):
+    from silta.cnc.models import CandidateGenerationError
+
+    class Main(MainDouble):
+        def propose(self, context, previous, feedback, instructions, attempt):
+            if attempt == 1:
+                raise CandidateGenerationError({
+                    'stage': 'toolpath_generation', 'issues': ['empty toolpath'],
+                    'source': 'failed source',
+                })
+            assert feedback['stage'] == 'toolpath_generation'
+            assert feedback['source'] == 'failed source'
+            return super().propose(context, previous, feedback, instructions, attempt)
+
+    result = run(tmp_path, inputs, main=Main(), fusion=FusionDouble([('passed', 100)]))
+    assert result.status == 'completed'
+    assert result.attempts == 2 and result.simulations == 1
+
+
+def test_resume_retains_verified_incumbent_when_trial_is_slower(tmp_path, inputs):
+    first = Controller(MainDouble(), ChecksDouble(), FusionDouble([('passed', 100)]),
+                       SupervisorDouble(['stop'])).run(inputs, tmp_path, 'first', {})
+    judge = SupervisorDouble(['stop'])
+    result = Controller(MainDouble(), ChecksDouble(), FusionDouble([('passed', 120)]),
+                        judge).run(inputs, tmp_path, 'resumed', {},
+                                   verified_incumbent=(
+                                       first.best_candidate, first.best_verification,
+                                   ))
+    assert result.status == 'completed'
+    assert result.best_verification.machining_seconds == 100
+    assert result.simulations == 1
+    assert Path(result.best_candidate.artifacts['nc'].path).parent.name == 'attempt-0000'
+    manifest = json.loads(Path(result.manifest_path).read_text())
+    assert manifest['best_candidate'] == manifest['result']['best_candidate']
+    assert manifest['best_verification'] == manifest['result']['best_verification']
+    result.best_candidate.verify()
+    assert judge.calls[0].digest == first.best_candidate.digest
+
+
+def test_resume_rejects_mismatched_verification_before_new_candidate(tmp_path, inputs):
+    first = Controller(MainDouble(), ChecksDouble(), FusionDouble([('passed', 100)]),
+                       SupervisorDouble(['stop'])).run(inputs, tmp_path, 'first', {})
+    main = MainDouble()
+    result = Controller(main, ChecksDouble(), FusionDouble([]), SupervisorDouble([])).run(
+        inputs, tmp_path, 'resumed', {}, verified_incumbent=(
+            first.best_candidate, replace(first.best_verification, input_digest='other-setup'),
+        ),
+    )
+    assert result.status == 'incomplete'
+    assert 'does not match' in result.reason
+    assert not main.calls
+
+
+def test_unresolved_improvement_returns_verified_incumbent_to_supervisor(tmp_path, inputs):
+    from silta.cnc.models import CandidateProposalUnresolved
+
+    class Main(MainDouble):
+        def propose(self, context, previous, feedback, instructions, attempt):
+            if attempt == 2:
+                raise CandidateProposalUnresolved(['Entry stock clearance is not established'])
+            return super().propose(context, previous, feedback, instructions, attempt)
+
+    class Judge(SupervisorDouble):
+        def decide(self, context, candidate, verification, history):
+            if self.calls:
+                assert history[-1]['event'] == 'cam_proposal_unresolved'
+                assert 'Entry stock' in history[-1]['issues'][0]
+                assert candidate.digest == self.calls[0].digest
+                assert verification.status == 'passed' and verification.completed
+            return super().decide(context, candidate, verification, history)
+
+    fusion = FusionDouble([('passed', 100)])
+    judge = Judge(['improve', 'stop'])
+    result = run(tmp_path, inputs, main=Main(), fusion=fusion, supervisor=judge)
+    assert result.status == 'completed'
+    assert result.best_verification.machining_seconds == 100
+    assert result.attempts == 2 and result.simulations == 1
+    assert len(judge.calls) == 2 and len(fusion.calls) == 1
+    events = json.loads(Path(result.manifest_path).read_text())['events']
+    assert sum(e['event'] == 'candidate_created' for e in events) == 1
+
+
+def test_unresolved_first_cam_never_reaches_supervisor(tmp_path, inputs):
+    from silta.cnc.models import CandidateProposalUnresolved
+
+    class Main(MainDouble):
+        def propose(self, *args):
+            raise CandidateProposalUnresolved(['Required dimension is missing'])
+
+    judge, fusion = SupervisorDouble([]), FusionDouble([])
+    result = run(tmp_path, inputs, main=Main(), fusion=fusion, supervisor=judge)
+    assert result.status == 'incomplete' and result.best_candidate is None
+    assert not judge.calls and not fusion.calls

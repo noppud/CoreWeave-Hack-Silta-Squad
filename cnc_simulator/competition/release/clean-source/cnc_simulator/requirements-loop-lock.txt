@@ -1,0 +1,18 @@
+annotated-types==0.8.0
+-e .
+iniconfig==2.3.0
+manifold3d==3.5.3
+numpy==2.5.3
+openai-codex==0.154.0
+openai-codex-cli-bin==0.154.0
+packaging==26.3
+pluggy==1.6.0
+pydantic==2.13.5
+pydantic-core==2.46.5
+pygments==2.21.0
+pytest==9.1.1
+rtree==1.4.1
+scipy==1.18.1
+trimesh==4.12.2
+typing-extensions==4.16.0
+typing-inspection==0.4.4

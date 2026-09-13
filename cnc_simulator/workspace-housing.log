@@ -1,0 +1,45 @@
+Move -1 / 1428
+Move 194 / 1428
+Move 389 / 1428
+Move 583 / 1428
+Move 774 / 1428
+Move 966 / 1428
+Move 1133 / 1428
+Move 1265 / 1428
+Move 1399 / 1428
+{
+  "validity": "valid",
+  "passed": true,
+  "verification": "verified",
+  "issues": [],
+  "estimated_time_seconds": 1501.4480986454373,
+  "time_breakdown": {
+    "cutting": 1410.4512715632786,
+    "rapid": 42.996827082158646,
+    "dwell": 0.0,
+    "tool_changes": 15.0,
+    "indexing": 33.0
+  },
+  "timing_assumptions": "Constant commanded vector feed/rapid speed; no acceleration, jerk, lookahead, spindle ramp or controller blending. Cut includes air cutting and plunge/retract. Tool changes add fixed duration, with no implicit travel. Full submitted plan timed even if invalid. Indexed B/C rotation uses simultaneous constant angular speeds plus settle time. No cutting during indexing.",
+  "scope": "Indexed 3+2 only; table-attached stock and fixtures. Tool-section collision and configured axis limits; whole-machine self-collision is not certified. Gauge length is fixed across tools.",
+  "target_sha256": "42df2d5c59df28f3dfd8126302948241add4af9ce82ef917284d8d236a855e2b",
+  "numerics": {
+    "resolution_mm": 1.5,
+    "cell_radius_mm": 1.299038205676658,
+    "cells": 406700,
+    "geometry_backend": "trimesh signed distance; double precision, not exact arithmetic"
+  },
+  "stock_metrics": {
+    "initial_nominal_volume_mm3": 621054.0,
+    "final_nominal_volume_mm3": 270405.0,
+    "removed_nominal_volume_mm3": 350649.0,
+    "removed_volume_bounds_mm3": [
+      276925.5,
+      489159.0
+    ],
+    "final_volume_bounds_mm3": [
+      192375.0,
+      359518.5
+    ]
+  }
+}

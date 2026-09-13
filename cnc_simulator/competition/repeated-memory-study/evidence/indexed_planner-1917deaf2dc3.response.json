@@ -1,0 +1,23 @@
+{
+  "model": "gpt-6-astra",
+  "requested_service_tier": "fast",
+  "reasoning_effort": "low",
+  "role": "indexed_planner",
+  "value": {
+    "summary": "Candidate targeting shorter machining time with maximum feeds and stepdown, wider track spacing, and fewer tool changes. Requires verification on this part.",
+    "strategy": {
+      "stepover_fraction": 0.7083333333333334,
+      "stepdown_mm": 12,
+      "cut_feed_mm_min": 900,
+      "plunge_feed_mm_min": 250,
+      "retract_feed_mm_min": 1200,
+      "segments_per_circle": 24,
+      "order": "tool",
+      "retract_mode": "clearance",
+      "shortest_c": true,
+      "junction_cleanup": false
+    }
+  },
+  "thread_id": "01a09955-d63b-7d20-a897-6340ec61c4f4",
+  "turn_id": "01a09955-d67c-7330-9278-2ff76bead0f5"
+}

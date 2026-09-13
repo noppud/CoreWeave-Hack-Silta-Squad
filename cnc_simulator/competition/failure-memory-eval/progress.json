@@ -1,0 +1,146 @@
+{
+  "scope": "Fresh five-case fixed-verifier audit of exact failure memory; selected counterexamples, not broad generalization. Check abstention is not a geometry pass.",
+  "memory_sha256": "fbd3760e5540cb2b326af742503d8db2f2cc7d678b73b50ba7cbbb979e345df3",
+  "implementation": {
+    "camloop/indexed/cam.py": "9d5f5d8d009ccec57da01d62a274b0fe4970854bcd00f69b1d1e87a943da578a",
+    "camloop/indexed/learning.py": "5d716947ec7f3718b6631eb60043f90eb47f601e48cba5401f903bdc907c65ec",
+    "cncsim/simulator.py": "07973d45ea6c112b425fcd3d326d59fd3ec5bf2d4306429c0d8611a1d40bd133",
+    "cncsim/geometry.py": "a1ff934d2a8396570fcba9a2eadb530a9bdaf3b48ff99ee6af03191f134b8281",
+    "cncsim/indexing.py": "3a3952c5bd3229610ee0a80426d09752e0f959d917843521fa77b4b71684b338"
+  },
+  "cases": [
+    {
+      "name": "original-failure",
+      "contract_sha256": "15a27a6de1ffa588fcf7f405b5338615f8e8b0b3c2732e886b03239eb0c40c38",
+      "strategy": {
+        "stepover_fraction": 0.35,
+        "stepdown_mm": 6,
+        "cut_feed_mm_min": 350,
+        "plunge_feed_mm_min": 120,
+        "retract_feed_mm_min": 700,
+        "segments_per_circle": 48,
+        "order": "orientation",
+        "retract_mode": "park",
+        "shortest_c": false
+      },
+      "full_simulation_passed": false,
+      "issues": [
+        {
+          "code": "excess_material",
+          "certainty": "uncertain",
+          "moves": [],
+          "description": "Final stock has excess material beyond target tolerance. Resolution cannot establish a pass."
+        }
+      ],
+      "memory_rejects": true,
+      "cold_rejects": false,
+      "full_simulation_seconds": 29.998120000003837,
+      "check_seconds": 0.00020708295051008463,
+      "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/failure-memory-eval/original-failure/evaluation.json"
+    },
+    {
+      "name": "feed-only-repeat",
+      "contract_sha256": "15a27a6de1ffa588fcf7f405b5338615f8e8b0b3c2732e886b03239eb0c40c38",
+      "strategy": {
+        "stepover_fraction": 0.35,
+        "stepdown_mm": 6,
+        "cut_feed_mm_min": 385.00000000000006,
+        "plunge_feed_mm_min": 120,
+        "retract_feed_mm_min": 700,
+        "segments_per_circle": 48,
+        "order": "orientation",
+        "retract_mode": "park",
+        "shortest_c": false
+      },
+      "full_simulation_passed": false,
+      "issues": [
+        {
+          "code": "excess_material",
+          "certainty": "uncertain",
+          "moves": [],
+          "description": "Final stock has excess material beyond target tolerance. Resolution cannot establish a pass."
+        }
+      ],
+      "memory_rejects": true,
+      "cold_rejects": false,
+      "full_simulation_seconds": 10.912312124972232,
+      "check_seconds": 0.0001842499477788806,
+      "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/failure-memory-eval/feed-only-repeat/evaluation.json"
+    },
+    {
+      "name": "corrected-junction",
+      "contract_sha256": "15a27a6de1ffa588fcf7f405b5338615f8e8b0b3c2732e886b03239eb0c40c38",
+      "strategy": {
+        "stepover_fraction": 0.7083333333333334,
+        "stepdown_mm": 12,
+        "cut_feed_mm_min": 900,
+        "plunge_feed_mm_min": 250,
+        "retract_feed_mm_min": 1200,
+        "segments_per_circle": 24,
+        "order": "tool",
+        "retract_mode": "clearance",
+        "shortest_c": true,
+        "junction_cleanup": true
+      },
+      "full_simulation_passed": true,
+      "issues": [],
+      "memory_rejects": false,
+      "cold_rejects": false,
+      "full_simulation_seconds": 3.6829199590720236,
+      "check_seconds": 0.00019208400044590235,
+      "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/failure-memory-eval/corrected-junction/evaluation.json"
+    },
+    {
+      "name": "other-valid-part",
+      "contract_sha256": "b644b0420e85c68600492a34f03a0b6ecaf83895bcd420fa7660d6c07df8e8c4",
+      "strategy": {
+        "stepover_fraction": 0.75,
+        "stepdown_mm": 12,
+        "cut_feed_mm_min": 900,
+        "plunge_feed_mm_min": 250,
+        "retract_feed_mm_min": 1200,
+        "segments_per_circle": 24,
+        "order": "tool",
+        "retract_mode": "clearance",
+        "shortest_c": true,
+        "junction_cleanup": false
+      },
+      "full_simulation_passed": true,
+      "issues": [],
+      "memory_rejects": false,
+      "cold_rejects": false,
+      "full_simulation_seconds": 18.901309167034924,
+      "check_seconds": 0.0010903340298682451,
+      "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/failure-memory-eval/other-valid-part/evaluation.json"
+    },
+    {
+      "name": "changed-fixture-scope",
+      "contract_sha256": "00b6bc3f4c352922aedc85a6ac2f752058f2262164d7d5d27863431eee7c4b96",
+      "strategy": {
+        "stepover_fraction": 0.35,
+        "stepdown_mm": 6,
+        "cut_feed_mm_min": 350,
+        "plunge_feed_mm_min": 120,
+        "retract_feed_mm_min": 700,
+        "segments_per_circle": 48,
+        "order": "orientation",
+        "retract_mode": "park",
+        "shortest_c": false
+      },
+      "full_simulation_passed": false,
+      "issues": [
+        {
+          "code": "excess_material",
+          "certainty": "uncertain",
+          "moves": [],
+          "description": "Final stock has excess material beyond target tolerance. Resolution cannot establish a pass."
+        }
+      ],
+      "memory_rejects": false,
+      "cold_rejects": false,
+      "full_simulation_seconds": 216.5939889169531,
+      "check_seconds": 0.0007077499758452177,
+      "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/failure-memory-eval/changed-fixture-scope/evaluation.json"
+    }
+  ]
+}

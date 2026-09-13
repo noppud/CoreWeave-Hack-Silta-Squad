@@ -1,0 +1,145 @@
+[
+  {
+    "part": "02-hydraulic-manifold",
+    "stepover": 0.708,
+    "cleanup": false,
+    "passed": false,
+    "seconds": null,
+    "issues": [
+      {
+        "code": "excess_material",
+        "certainty": "uncertain",
+        "moves": [],
+        "description": "Final stock has excess material beyond target tolerance. Resolution cannot establish a pass."
+      }
+    ],
+    "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/aria-ablation/02-hydraulic-manifold-0.708-0/evaluation.json"
+  },
+  {
+    "part": "02-hydraulic-manifold",
+    "stepover": 0.708,
+    "cleanup": true,
+    "passed": true,
+    "seconds": 158.97681405483698,
+    "issues": [],
+    "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/aria-ablation/02-hydraulic-manifold-0.708-1/evaluation.json"
+  },
+  {
+    "part": "02-hydraulic-manifold",
+    "stepover": 0.75,
+    "cleanup": false,
+    "passed": false,
+    "seconds": null,
+    "issues": [
+      {
+        "code": "excess_material",
+        "certainty": "uncertain",
+        "moves": [],
+        "description": "Final stock has excess material beyond target tolerance. Resolution cannot establish a pass."
+      }
+    ],
+    "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/aria-ablation/02-hydraulic-manifold-0.75-0/evaluation.json"
+  },
+  {
+    "part": "02-hydraulic-manifold",
+    "stepover": 0.75,
+    "cleanup": true,
+    "passed": true,
+    "seconds": 158.97681405483698,
+    "issues": [],
+    "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/aria-ablation/02-hydraulic-manifold-0.75-1/evaluation.json"
+  },
+  {
+    "part": "02-hydraulic-manifold",
+    "stepover": 0.95,
+    "cleanup": false,
+    "passed": false,
+    "seconds": null,
+    "issues": [
+      {
+        "code": "excess_material",
+        "certainty": "uncertain",
+        "moves": [],
+        "description": "Final stock has excess material beyond target tolerance. Resolution cannot establish a pass."
+      }
+    ],
+    "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/aria-ablation/02-hydraulic-manifold-0.95-0/evaluation.json"
+  },
+  {
+    "part": "02-hydraulic-manifold",
+    "stepover": 0.95,
+    "cleanup": true,
+    "passed": true,
+    "seconds": 158.97681405483698,
+    "issues": [],
+    "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/aria-ablation/02-hydraulic-manifold-0.95-1/evaluation.json"
+  },
+  {
+    "part": "04-trunnion-cage",
+    "stepover": 0.75,
+    "cleanup": false,
+    "passed": true,
+    "seconds": 196.77267020109883,
+    "issues": [],
+    "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/aria-ablation/04-trunnion-cage-0.75-0/evaluation.json"
+  },
+  {
+    "part": "04-trunnion-cage",
+    "stepover": 0.75,
+    "cleanup": true,
+    "passed": true,
+    "seconds": 196.77267020109883,
+    "issues": [],
+    "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/aria-ablation/04-trunnion-cage-0.75-1/evaluation.json"
+  },
+  {
+    "part": "04-trunnion-cage",
+    "stepover": 0.83,
+    "cleanup": false,
+    "passed": true,
+    "seconds": 198.37657605919455,
+    "issues": [],
+    "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/aria-ablation/04-trunnion-cage-0.83-0/evaluation.json"
+  },
+  {
+    "part": "04-trunnion-cage",
+    "stepover": 0.83,
+    "cleanup": true,
+    "passed": true,
+    "seconds": 198.37657605919455,
+    "issues": [],
+    "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/aria-ablation/04-trunnion-cage-0.83-1/evaluation.json"
+  },
+  {
+    "part": "04-trunnion-cage",
+    "stepover": 0.95,
+    "cleanup": false,
+    "passed": false,
+    "seconds": null,
+    "issues": [
+      {
+        "code": "excess_material",
+        "certainty": "uncertain",
+        "moves": [],
+        "description": "Final stock has excess material beyond target tolerance. Resolution cannot establish a pass."
+      }
+    ],
+    "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/aria-ablation/04-trunnion-cage-0.95-0/evaluation.json"
+  },
+  {
+    "part": "04-trunnion-cage",
+    "stepover": 0.95,
+    "cleanup": true,
+    "passed": false,
+    "seconds": null,
+    "issues": [
+      {
+        "code": "excess_material",
+        "certainty": "uncertain",
+        "moves": [],
+        "description": "Final stock has excess material beyond target tolerance. Resolution cannot establish a pass."
+      }
+    ],
+    "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/aria-ablation/04-trunnion-cage-0.95-1/evaluation.json"
+  }
+]

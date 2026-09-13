@@ -1,0 +1,60 @@
+import * as THREE from 'three';
+import { OrbitControls } from '/vendor/OrbitControls.js';
+import { STLLoader } from '/vendor/STLLoader.js';
+
+export async function mountModel(container, url, isCurrent) {
+  const geometry = await new STLLoader().loadAsync(url);
+  if (!isCurrent()) { geometry.dispose(); return () => {}; }
+  geometry.computeVertexNormals();
+  geometry.center();
+  geometry.computeBoundingBox();
+  const size = geometry.boundingBox.getSize(new THREE.Vector3());
+  const scale = 3 / Math.max(size.x, size.y, size.z);
+  geometry.scale(scale, scale, scale);
+  geometry.rotateX(-Math.PI / 2);
+  geometry.computeBoundingBox();
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color('#e8ece3');
+  const camera = new THREE.PerspectiveCamera(33, container.clientWidth / container.clientHeight, .01, 100);
+  camera.position.set(5.8, 3.8, 5.8);
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  renderer.setSize(container.clientWidth, container.clientHeight);
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  renderer.domElement.setAttribute('aria-label', 'Interactive CAD model. Drag to rotate, scroll to zoom.');
+  renderer.domElement.setAttribute('role', 'img');
+  container.prepend(renderer.domElement);
+  const material = new THREE.MeshStandardMaterial({ color: '#b9c3b6', roughness: .42, metalness: .38 });
+  const part = new THREE.Mesh(geometry, material);
+  part.castShadow = true; part.receiveShadow = true;
+  scene.add(part);
+  const edges = new THREE.LineSegments(new THREE.EdgesGeometry(geometry, 35), new THREE.LineBasicMaterial({color: '#71806f', transparent: true, opacity: .28}));
+  scene.add(edges);
+  const ground = new THREE.Mesh(new THREE.PlaneGeometry(200, 200), new THREE.ShadowMaterial({opacity:.13}));
+  ground.rotation.x = -Math.PI / 2; ground.position.y = geometry.boundingBox.min.y - .015; ground.receiveShadow = true;
+  scene.add(ground);
+  scene.add(new THREE.HemisphereLight('#ffffff', '#777e69', 2.8));
+  const key = new THREE.DirectionalLight('#ffffff', 4);
+  key.position.set(4, 7, 5); key.castShadow = true; key.shadow.mapSize.set(2048, 2048);
+  key.shadow.camera.left = -5; key.shadow.camera.right = 5; key.shadow.camera.top = 5; key.shadow.camera.bottom = -5;
+  key.shadow.bias = -.0003; scene.add(key);
+  const rim = new THREE.DirectionalLight('#eef5fa', 1.8); rim.position.set(-3, 2, -4); scene.add(rim);
+  const controls = new OrbitControls(camera, renderer.domElement);
+  controls.enableDamping = true; controls.dampingFactor = .07;
+  controls.minDistance = 2; controls.maxDistance = 15; controls.maxPolarAngle = Math.PI * .86;
+  controls.target.set(0, 0, 0); controls.update();
+  let frame;
+  const draw = () => { frame = requestAnimationFrame(draw); controls.update(); renderer.render(scene, camera); };
+  draw();
+  const resize = new ResizeObserver(() => {
+    if (!container.clientHeight || !container.clientWidth) return;
+    camera.aspect = container.clientWidth / container.clientHeight; camera.updateProjectionMatrix();
+    renderer.setSize(container.clientWidth, container.clientHeight);
+  });
+  resize.observe(container);
+  return () => { cancelAnimationFrame(frame); resize.disconnect(); controls.dispose();
+    geometry.dispose(); material.dispose(); edges.geometry.dispose(); edges.material.dispose();
+    ground.geometry.dispose(); ground.material.dispose(); renderer.dispose(); renderer.domElement.remove(); };
+}

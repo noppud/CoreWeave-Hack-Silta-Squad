@@ -1,0 +1,92 @@
+{
+  "strategy": {
+    "stepover_fraction": 0.8,
+    "stepdown_mm": 12,
+    "cut_feed_mm_min": 900,
+    "plunge_feed_mm_min": 250,
+    "retract_feed_mm_min": 1200,
+    "segments_per_circle": 48,
+    "order": "orientation",
+    "retract_mode": "clearance",
+    "shortest_c": true,
+    "junction_cleanup": false
+  },
+  "path": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/repeated-memory-study/04-trunnion-cage-r3-cold",
+  "stage": "simulated",
+  "result": {
+    "validity": "valid",
+    "passed": true,
+    "verification": "verified",
+    "issues": [],
+    "estimated_time_seconds": 197.8848077125964,
+    "time_breakdown": {
+      "cutting": 162.72273035116248,
+      "rapid": 12.162077361433914,
+      "dwell": 0.0,
+      "tool_changes": 0.0,
+      "indexing": 23.0
+    },
+    "timing_assumptions": "Constant commanded vector feed/rapid speed; no acceleration, jerk, lookahead, spindle ramp or controller blending. Cut includes air cutting and plunge/retract. Tool changes add fixed duration, with no implicit travel. Full submitted plan timed even if invalid. Indexed B/C rotation uses simultaneous constant angular speeds plus settle time. No cutting during indexing.",
+    "scope": "Indexed 3+2 only; table-attached stock and fixtures. Tool-section collision and configured axis limits; whole-machine self-collision is not certified. Gauge length is fixed across tools.",
+    "target_sha256": "9af44a8563fc15d661df6b14e17dca6ba2a3b9694519c3b5acb25eea419d5037",
+    "numerics": {
+      "resolution_mm": 1.0,
+      "cell_radius_mm": 0.8660255037844385,
+      "cells": 450800,
+      "geometry_backend": "trimesh signed distance; double precision, not exact arithmetic"
+    },
+    "stock_metrics": {
+      "initial_nominal_volume_mm3": 182000.0,
+      "final_nominal_volume_mm3": 84792.0,
+      "removed_nominal_volume_mm3": 97208.0,
+      "removed_volume_bounds_mm3": [
+        84656.0,
+        136752.0
+      ],
+      "final_volume_bounds_mm3": [
+        62640.0,
+        108200.0
+      ]
+    },
+    "artifacts": {
+      "final_stock": "final_stock.ply",
+      "lower_stock": "final_stock_lower.ply",
+      "upper_stock": "final_stock_upper.ply",
+      "states": [
+        "states/00000.npz",
+        "states/00089.npz",
+        "states/00178.npz",
+        "states/00267.npz",
+        "states/00356.npz",
+        "states/00445.npz",
+        "states/00534.npz",
+        "states/00623.npz",
+        "states/00712.npz",
+        "states/00801.npz",
+        "states/00890.npz",
+        "states/00979.npz",
+        "states/01068.npz",
+        "states/01076.npz"
+      ],
+      "trajectory": "trajectory.json"
+    }
+  },
+  "moves": 1076,
+  "wall_seconds": 10.440433025360107,
+  "proposal": {
+    "summary": "Proposed faster strategy using maximum permitted feeds and stepdown, wider radial spacing, clearance retracts, and shortest C indexing. Requires verification.",
+    "strategy": {
+      "stepover_fraction": 0.8,
+      "stepdown_mm": 12,
+      "cut_feed_mm_min": 900,
+      "plunge_feed_mm_min": 250,
+      "retract_feed_mm_min": 1200,
+      "segments_per_circle": 48,
+      "order": "orientation",
+      "retract_mode": "clearance",
+      "shortest_c": true,
+      "junction_cleanup": false
+    }
+  },
+  "evidence": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/repeated-memory-study/evidence/indexed_planner-af1f1202d683.response.json"
+}

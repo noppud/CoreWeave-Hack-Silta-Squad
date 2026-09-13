@@ -1,0 +1,16 @@
+{
+  "dataset_uri": "weave:///silta/coreweave-hack-silta-squad/object/fresh-failure-memory-counterexamples:1F9f6r1W5IdbUitYvEWF3BTAqJTB1GN7smOAAyXmgYM",
+  "scope": "Fresh five-case fixed-verifier audit of exact failure memory; selected counterexamples, not broad generalization. Check abstention is not a geometry pass.",
+  "evaluations": [
+    {
+      "arm": "cold",
+      "url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a09947-1d20-7af6-b467-e5904ed56ea2",
+      "readback_complete": true
+    },
+    {
+      "arm": "memory",
+      "url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a09947-299f-70cd-bf7d-3236720f2c4a",
+      "readback_complete": true
+    }
+  ]
+}

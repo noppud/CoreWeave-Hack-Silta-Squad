@@ -50,12 +50,13 @@ def _inspect_machine_coverage(machine, cam):
             axis = part.axis
             if axis:
                 linear = cam.LinearMachineAxis.cast(axis)
+                rotary = None if linear else cam.RotaryMachineAxis.cast(axis)
                 bounds = axis.physicalRange
                 infinite = bool(bounds.isInfinite) if bounds else True
                 axes.append({
                     "part_id": part.id,
                     "name": axis.name,
-                    "kind": "linear" if linear else "nonlinear",
+                    "kind": "linear" if linear else "rotary" if rotary else "unknown",
                     "has_limits": bool(axis.hasLimits),
                     "infinite": infinite,
                     "units": "mm" if linear else "radians",
@@ -98,17 +99,27 @@ def validate_simulation_coverage(binding: dict) -> dict[str, bool]:
     if not required <= enabled_types:
         raise ValueError("Pinned machine is missing required collision pair categories")
     axes = expected.get("axes", [])
-    if len(axes) != 3 or len({a.get("part_id") for a in axes}) != 3:
-        raise ValueError("Expected three distinct machine axes")
+    if len(axes) not in (3, 4, 5) or len({a.get("part_id") for a in axes}) != len(axes):
+        raise ValueError("Expected three to five distinct machine axes")
     for axis in axes:
         low, high = axis.get("minimum"), axis.get("maximum")
-        if (
-            axis.get("kind") != "linear" or axis.get("units") != "mm"
-            or axis.get("has_limits") is not True or axis.get("infinite") is not False
-            or type(low) not in (int, float) or type(high) not in (int, float)
-            or not math.isfinite(low) or not math.isfinite(high) or low >= high
-        ):
+        finite = (type(low) in (int, float) and type(high) in (int, float)
+                  and math.isfinite(low) and math.isfinite(high) and low < high)
+        if axis.get("kind") == "rotary":
+            if axis.get("units") != "radians":
+                raise ValueError("Rotary axis limits require radians")
+            continuous = (axis.get("infinite") is True and axis.get("has_limits") is False
+                          and low is None and high is None)
+            bounded = (axis.get("infinite") is False and axis.get("has_limits") is True
+                       and finite)
+            if not (continuous or bounded):
+                raise ValueError("Rotary axis must retain bounded or explicit continuous limits")
+        elif (axis.get("kind") != "linear" or axis.get("units") != "mm"
+              or axis.get("has_limits") is not True or axis.get("infinite") is not False
+              or not finite):
             raise ValueError("Machine overtravel coverage requires finite linear axis limits")
+    if sum(a.get("kind") == "linear" for a in axes) != 3:
+        raise ValueError("Machine requires exactly three finite linear axes")
     setups = binding.get("setups", [])
     if not setups:
         raise ValueError("No simulation setup")

@@ -1,0 +1,105 @@
+{
+  "case": "12-three-pocket-plate-r2-warm",
+  "part": "12-three-pocket-plate",
+  "repetition": 2,
+  "arm": "warm",
+  "order": [
+    "cold",
+    "warm"
+  ],
+  "result": {
+    "strategy": {
+      "stepover_fraction": 0.7083333333333334,
+      "stepdown_mm": 12,
+      "cut_feed_mm_min": 900,
+      "plunge_feed_mm_min": 250,
+      "retract_feed_mm_min": 1200,
+      "segments_per_circle": 24,
+      "order": "orientation",
+      "retract_mode": "clearance",
+      "shortest_c": true,
+      "junction_cleanup": false
+    },
+    "path": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/new-geometry-memory-study/12-three-pocket-plate-r2-warm",
+    "stage": "simulated",
+    "result": {
+      "validity": "valid",
+      "passed": true,
+      "verification": "verified",
+      "issues": [],
+      "estimated_time_seconds": 34.676235952583234,
+      "time_breakdown": {
+        "cutting": 31.79420558859109,
+        "rapid": 2.8820303639921425,
+        "dwell": 0.0,
+        "tool_changes": 0.0,
+        "indexing": 0.0
+      },
+      "timing_assumptions": "Constant commanded vector feed/rapid speed; no acceleration, jerk, lookahead, spindle ramp or controller blending. Cut includes air cutting and plunge/retract. Tool changes add fixed duration, with no implicit travel. Full submitted plan timed even if invalid. Indexed B/C rotation uses simultaneous constant angular speeds plus settle time. No cutting during indexing.",
+      "scope": "Indexed 3+2 only; table-attached stock and fixtures. Tool-section collision and configured axis limits; whole-machine self-collision is not certified. Gauge length is fixed across tools.",
+      "target_sha256": "7d6885a2eab80ffcb33371a3525ab63991bcb85ee753b88c95ba417c1aded6b8",
+      "numerics": {
+        "resolution_mm": 1.0,
+        "cell_radius_mm": 0.8660255037844385,
+        "cells": 313896,
+        "geometry_backend": "trimesh signed distance; double precision, not exact arithmetic"
+      },
+      "stock_metrics": {
+        "initial_nominal_volume_mm3": 107520.0,
+        "final_nominal_volume_mm3": 96564.0,
+        "removed_nominal_volume_mm3": 10956.0,
+        "removed_volume_bounds_mm3": [
+          7568.0,
+          44144.0
+        ],
+        "final_volume_bounds_mm3": [
+          79512.0,
+          114848.0
+        ]
+      },
+      "artifacts": {
+        "final_stock": "final_stock.ply",
+        "lower_stock": "final_stock_lower.ply",
+        "upper_stock": "final_stock_upper.ply",
+        "states": [
+          "states/00000.npz",
+          "states/00012.npz",
+          "states/00024.npz",
+          "states/00036.npz",
+          "states/00048.npz",
+          "states/00060.npz",
+          "states/00072.npz",
+          "states/00084.npz",
+          "states/00096.npz",
+          "states/00108.npz",
+          "states/00120.npz",
+          "states/00132.npz",
+          "states/00144.npz",
+          "states/00154.npz"
+        ],
+        "trajectory": "trajectory.json"
+      }
+    },
+    "moves": 154,
+    "wall_seconds": 0.9658169746398926,
+    "proposal": {
+      "summary": "Candidate to reduce machining time using maximum permitted feeds and stepdown, clearance retracts, and 24-segment contours. Separate pockets need no junction cleanup. Requires verification on this part.",
+      "strategy": {
+        "stepover_fraction": 0.7083333333333334,
+        "stepdown_mm": 12,
+        "cut_feed_mm_min": 900,
+        "plunge_feed_mm_min": 250,
+        "retract_feed_mm_min": 1200,
+        "segments_per_circle": 24,
+        "order": "orientation",
+        "retract_mode": "clearance",
+        "shortest_c": true,
+        "junction_cleanup": false
+      }
+    },
+    "evidence": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/new-geometry-memory-study/evidence/indexed_planner-3679911e8c59.response.json"
+  },
+  "wall_seconds": 7.749607086181641,
+  "movement_sha256": "807abd7f9f7e6f9e52b66dfeb9ca49387bce1b307e47f818e950a4c5852ba90e",
+  "target_sha256": "7d6885a2eab80ffcb33371a3525ab63991bcb85ee753b88c95ba417c1aded6b8"
+}

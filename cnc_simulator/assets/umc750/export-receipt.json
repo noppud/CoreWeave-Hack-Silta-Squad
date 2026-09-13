@@ -1,0 +1,16 @@
+{
+  "path": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/assets/umc750/machine-raw.json",
+  "bodies": 58,
+  "triangles": 75125,
+  "groups": [
+    "Static:1",
+    "X-Axis:1",
+    "Y-Axis:1",
+    "Z-Axis:1",
+    "B-Axis:1",
+    "C-Axis:1",
+    "Spindle:1"
+  ],
+  "source_archive": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/assets/umc750/haas-umc750.f3d",
+  "active_document_restored": true
+}

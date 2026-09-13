@@ -1,0 +1,360 @@
+{
+  "frames": [
+    {
+      "move": -1,
+      "elapsed_seconds": 0.0,
+      "volume_mm3": 184512.0,
+      "offset": 0,
+      "vertex_values": 72,
+      "index_values": 36
+    },
+    {
+      "move": 7,
+      "elapsed_seconds": 7.02315715032757,
+      "volume_mm3": 180454.460492768,
+      "offset": 720,
+      "vertex_values": 1128,
+      "index_values": 1092
+    },
+    {
+      "move": 15,
+      "elapsed_seconds": 8.276208592428418,
+      "volume_mm3": 178095.4199416598,
+      "offset": 14112,
+      "vertex_values": 1224,
+      "index_values": 1188
+    },
+    {
+      "move": 23,
+      "elapsed_seconds": 9.52926003321532,
+      "volume_mm3": 176153.95012563153,
+      "offset": 28656,
+      "vertex_values": 1260,
+      "index_values": 1224
+    },
+    {
+      "move": 31,
+      "elapsed_seconds": 11.17080258745221,
+      "volume_mm3": 174776.8610924754,
+      "offset": 43632,
+      "vertex_values": 1380,
+      "index_values": 1332
+    },
+    {
+      "move": 39,
+      "elapsed_seconds": 12.980765785184929,
+      "volume_mm3": 173082.3203437101,
+      "offset": 60000,
+      "vertex_values": 1380,
+      "index_values": 1332
+    },
+    {
+      "move": 47,
+      "elapsed_seconds": 14.790728982917647,
+      "volume_mm3": 171387.74968476707,
+      "offset": 76368,
+      "vertex_values": 1392,
+      "index_values": 1344
+    },
+    {
+      "move": 55,
+      "elapsed_seconds": 20.199008677286297,
+      "volume_mm3": 168101.68008869453,
+      "offset": 92880,
+      "vertex_values": 2052,
+      "index_values": 2016
+    },
+    {
+      "move": 63,
+      "elapsed_seconds": 21.452060118073195,
+      "volume_mm3": 165759.15026611564,
+      "offset": 117360,
+      "vertex_values": 2232,
+      "index_values": 2196
+    },
+    {
+      "move": 71,
+      "elapsed_seconds": 22.705111558860093,
+      "volume_mm3": 163408.10252999363,
+      "offset": 144000,
+      "vertex_values": 2364,
+      "index_values": 2328
+    },
+    {
+      "move": 79,
+      "elapsed_seconds": 24.06819823703651,
+      "volume_mm3": 162108.27610625944,
+      "offset": 172224,
+      "vertex_values": 2412,
+      "index_values": 2364
+    },
+    {
+      "move": 87,
+      "elapsed_seconds": 25.878161434769222,
+      "volume_mm3": 160413.70544891723,
+      "offset": 200976,
+      "vertex_values": 2064,
+      "index_values": 2016
+    },
+    {
+      "move": 95,
+      "elapsed_seconds": 27.688124628991,
+      "volume_mm3": 158719.31184592893,
+      "offset": 225552,
+      "vertex_values": 1704,
+      "index_values": 1656
+    },
+    {
+      "move": 103,
+      "elapsed_seconds": 29.498087826723715,
+      "volume_mm3": 157480.40651389354,
+      "offset": 245808,
+      "vertex_values": 1128,
+      "index_values": 1092
+    },
+    {
+      "move": 111,
+      "elapsed_seconds": 34.62791164371795,
+      "volume_mm3": 153422.86701033058,
+      "offset": 259200,
+      "vertex_values": 2184,
+      "index_values": 2148
+    },
+    {
+      "move": 119,
+      "elapsed_seconds": 35.88096308581879,
+      "volume_mm3": 151063.82645873906,
+      "offset": 285264,
+      "vertex_values": 2280,
+      "index_values": 2244
+    },
+    {
+      "move": 127,
+      "elapsed_seconds": 37.13401452660569,
+      "volume_mm3": 149122.3566424772,
+      "offset": 312480,
+      "vertex_values": 2316,
+      "index_values": 2280
+    },
+    {
+      "move": 135,
+      "elapsed_seconds": 38.775557080842574,
+      "volume_mm3": 147745.26760442066,
+      "offset": 340128,
+      "vertex_values": 2232,
+      "index_values": 2184
+    },
+    {
+      "move": 143,
+      "elapsed_seconds": 40.58552027857529,
+      "volume_mm3": 146050.7268489577,
+      "offset": 366720,
+      "vertex_values": 1884,
+      "index_values": 1836
+    },
+    {
+      "move": 151,
+      "elapsed_seconds": 42.395483476308,
+      "volume_mm3": 144356.15619001468,
+      "offset": 389136,
+      "vertex_values": 1536,
+      "index_values": 1488
+    },
+    {
+      "move": 159,
+      "elapsed_seconds": 45.88376317067665,
+      "volume_mm3": 142999.76870309978,
+      "offset": 407376,
+      "vertex_values": 2052,
+      "index_values": 2016
+    },
+    {
+      "move": 167,
+      "elapsed_seconds": 47.13681461146355,
+      "volume_mm3": 142218.9254279893,
+      "offset": 431856,
+      "vertex_values": 2232,
+      "index_values": 2196
+    },
+    {
+      "move": 175,
+      "elapsed_seconds": 48.38986605225045,
+      "volume_mm3": 141435.24284991762,
+      "offset": 458496,
+      "vertex_values": 2364,
+      "index_values": 2328
+    },
+    {
+      "move": 183,
+      "elapsed_seconds": 49.75295273042686,
+      "volume_mm3": 141001.9673775928,
+      "offset": 486720,
+      "vertex_values": 2412,
+      "index_values": 2364
+    },
+    {
+      "move": 191,
+      "elapsed_seconds": 51.562915928159576,
+      "volume_mm3": 140437.110493105,
+      "offset": 515472,
+      "vertex_values": 2064,
+      "index_values": 2016
+    },
+    {
+      "move": 199,
+      "elapsed_seconds": 53.372879122381356,
+      "volume_mm3": 139872.31263085268,
+      "offset": 540048,
+      "vertex_values": 1704,
+      "index_values": 1656
+    },
+    {
+      "move": 207,
+      "elapsed_seconds": 55.18284232011407,
+      "volume_mm3": 139459.34418840258,
+      "offset": 560304,
+      "vertex_values": 1128,
+      "index_values": 1092
+    },
+    {
+      "move": 215,
+      "elapsed_seconds": 64.4760347061443,
+      "volume_mm3": 139459.34418840255,
+      "offset": 573696,
+      "vertex_values": 1128,
+      "index_values": 1092
+    },
+    {
+      "move": 223,
+      "elapsed_seconds": 65.72908614861808,
+      "volume_mm3": 139459.34418840255,
+      "offset": 587088,
+      "vertex_values": 1128,
+      "index_values": 1092
+    },
+    {
+      "move": 231,
+      "elapsed_seconds": 66.98213759109186,
+      "volume_mm3": 139459.34418840255,
+      "offset": 600480,
+      "vertex_values": 1128,
+      "index_values": 1092
+    },
+    {
+      "move": 239,
+      "elapsed_seconds": 69.14845189579292,
+      "volume_mm3": 137867.1058965156,
+      "offset": 613872,
+      "vertex_values": 1668,
+      "index_values": 1620
+    },
+    {
+      "move": 247,
+      "elapsed_seconds": 71.6545547914934,
+      "volume_mm3": 135189.90561963347,
+      "offset": 633696,
+      "vertex_values": 2028,
+      "index_values": 1980
+    },
+    {
+      "move": 255,
+      "elapsed_seconds": 74.1606576827924,
+      "volume_mm3": 132512.88605030507,
+      "offset": 657840,
+      "vertex_values": 2376,
+      "index_values": 2328
+    },
+    {
+      "move": 263,
+      "elapsed_seconds": 78.7669719931554,
+      "volume_mm3": 131427.81593905113,
+      "offset": 686160,
+      "vertex_values": 2184,
+      "index_values": 2148
+    },
+    {
+      "move": 264,
+      "elapsed_seconds": 82.7669719931554,
+      "volume_mm3": 131427.81593905113,
+      "offset": 712224,
+      "vertex_values": 2184,
+      "index_values": 2148
+    },
+    {
+      "move": 271,
+      "elapsed_seconds": 94.99671009575475,
+      "volume_mm3": 129218.65847616996,
+      "offset": 738288,
+      "vertex_values": 2976,
+      "index_values": 2940
+    },
+    {
+      "move": 279,
+      "elapsed_seconds": 115.84073959516138,
+      "volume_mm3": 128464.29265247642,
+      "offset": 773856,
+      "vertex_values": 3933,
+      "index_values": 3936
+    },
+    {
+      "move": 287,
+      "elapsed_seconds": 115.97996753203968,
+      "volume_mm3": 128351.65492960671,
+      "offset": 821064,
+      "vertex_values": 3948,
+      "index_values": 3942
+    },
+    {
+      "move": 295,
+      "elapsed_seconds": 116.11919546891798,
+      "volume_mm3": 128281.82868919382,
+      "offset": 868416,
+      "vertex_values": 3963,
+      "index_values": 3960
+    },
+    {
+      "move": 303,
+      "elapsed_seconds": 117.53954626058632,
+      "volume_mm3": 128267.31175506215,
+      "offset": 915960,
+      "vertex_values": 4653,
+      "index_values": 4620
+    },
+    {
+      "move": 311,
+      "elapsed_seconds": 117.67877420029491,
+      "volume_mm3": 128263.91382787912,
+      "offset": 971664,
+      "vertex_values": 4422,
+      "index_values": 4386
+    },
+    {
+      "move": 319,
+      "elapsed_seconds": 117.8180021400035,
+      "volume_mm3": 128260.73071047459,
+      "offset": 1024584,
+      "vertex_values": 4164,
+      "index_values": 4140
+    },
+    {
+      "move": 327,
+      "elapsed_seconds": 118.00649324904865,
+      "volume_mm3": 128260.09478162059,
+      "offset": 1074456,
+      "vertex_values": 3924,
+      "index_values": 3900
+    },
+    {
+      "move": 330,
+      "elapsed_seconds": 124.16424211299726,
+      "volume_mm3": 128260.09478162056,
+      "offset": 1121448,
+      "vertex_values": 3924,
+      "index_values": 3900
+    }
+  ],
+  "binary": "surfaces.bin",
+  "initial_volume_mm3": 184512.0,
+  "source_plan_sha256": "a9758675f7dd6d47db507ac8902bcb3969508fd4a298d6c4b9c7a4317216b01f",
+  "display_tolerance_mm": 0.005
+}

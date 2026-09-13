@@ -1,0 +1,23 @@
+{
+  "model": "gpt-6-astra",
+  "requested_service_tier": "fast",
+  "reasoning_effort": "low",
+  "role": "indexed_planner",
+  "value": {
+    "summary": "Candidate targeting lower machining time through maximum permitted feeds and stepdown, wider stepover, tool grouping, and clearance retracts. Requires verification on this part.",
+    "strategy": {
+      "stepover_fraction": 0.7083333333333334,
+      "stepdown_mm": 12,
+      "cut_feed_mm_min": 900,
+      "plunge_feed_mm_min": 250,
+      "retract_feed_mm_min": 1200,
+      "segments_per_circle": 24,
+      "order": "tool",
+      "retract_mode": "clearance",
+      "shortest_c": true,
+      "junction_cleanup": false
+    }
+  },
+  "thread_id": "01a09960-1a97-74c0-9929-7eadb1f67608",
+  "turn_id": "01a09960-1ad2-7bc3-a1f5-4cae00340e0d"
+}

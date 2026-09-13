@@ -1,0 +1,4937 @@
+{
+  "plan": {
+    "units": "mm",
+    "target": {
+      "type": "mesh",
+      "path": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-indexed-five/parts/05-flanged-sleeve/target.stl"
+    },
+    "stock": {
+      "type": "mesh",
+      "path": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-indexed-five/parts/05-flanged-sleeve/stock.stl"
+    },
+    "fixtures": [
+      {
+        "type": "box",
+        "min": [
+          -18,
+          -18,
+          -40
+        ],
+        "max": [
+          18,
+          18,
+          0
+        ]
+      }
+    ],
+    "tools": {
+      "T12": {
+        "diameter_mm": 12,
+        "flute_length_mm": 60,
+        "shaft_diameter_mm": 12,
+        "shaft_length_mm": 30,
+        "holder_diameter_mm": 40,
+        "holder_length_mm": 30
+      },
+      "T8": {
+        "diameter_mm": 8,
+        "flute_length_mm": 60,
+        "shaft_diameter_mm": 8,
+        "shaft_length_mm": 30,
+        "holder_diameter_mm": 40,
+        "holder_length_mm": 30
+      }
+    },
+    "travel_limits": {
+      "min": [
+        -762,
+        -508,
+        -508
+      ],
+      "max": [
+        0,
+        0,
+        63.5
+      ]
+    },
+    "initial_position": [
+      0,
+      0,
+      180
+    ],
+    "initial_tool": "T12",
+    "moves": [
+      {
+        "type": "rapid",
+        "to": [
+          0.0,
+          0.0,
+          78.0
+        ]
+      },
+      {
+        "type": "cut",
+        "to": [
+          0.0,
+          0.0,
+          58.0
+        ],
+        "feed_mm_per_min": 250
+      },
+      {
+        "type": "cut",
+        "to": [
+          10.0,
+          0.0,
+          58.0
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          9.6592583,
+          2.5881905,
+          58.0
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          8.660254,
+          5.0,
+          58.0
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          7.0710678,
+          7.0710678,
+          58.0
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          5.0,
+          8.660254,
+          58.0
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          2.5881905,
+          9.6592583,
+          58.0
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          0.0,
+          10.0,
+          58.0
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          -2.5881905,
+          9.6592583,
+          58.0
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          -5.0,
+          8.660254,
+          58.0
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          -7.0710678,
+          7.0710678,
+          58.0
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          -8.660254,
+          5.0,
+          58.0
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          -9.6592583,
+          2.5881905,
+          58.0
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          -10.0,
+          0.0,
+          58.0
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          -9.6592583,
+          -2.5881905,
+          58.0
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          -8.660254,
+          -5.0,
+          58.0
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          -7.0710678,
+          -7.0710678,
+          58.0
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          -5.0,
+          -8.660254,
+          58.0
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          -2.5881905,
+          -9.6592583,
+          58.0
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          -0.0,
+          -10.0,
+          58.0
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          2.5881905,
+          -9.6592583,
+          58.0
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          5.0,
+          -8.660254,
+          58.0
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          7.0710678,
+          -7.0710678,
+          58.0
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          8.660254,
+          -5.0,
+          58.0
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          9.6592583,
+          -2.5881905,
+          58.0
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          10.0,
+          -0.0,
+          58.0
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          0.0,
+          0.0,
+          58.0
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          0.0,
+          0.0,
+          47.0
+        ],
+        "feed_mm_per_min": 250
+      },
+      {
+        "type": "cut",
+        "to": [
+          10.0,
+          0.0,
+          47.0
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          9.6592583,
+          2.5881905,
+          47.0
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          8.660254,
+          5.0,
+          47.0
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          7.0710678,
+          7.0710678,
+          47.0
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          5.0,
+          8.660254,
+          47.0
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          2.5881905,
+          9.6592583,
+          47.0
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          0.0,
+          10.0,
+          47.0
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          -2.5881905,
+          9.6592583,
+          47.0
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          -5.0,
+          8.660254,
+          47.0
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          -7.0710678,
+          7.0710678,
+          47.0
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          -8.660254,
+          5.0,
+          47.0
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          -9.6592583,
+          2.5881905,
+          47.0
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          -10.0,
+          0.0,
+          47.0
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          -9.6592583,
+          -2.5881905,
+          47.0
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          -8.660254,
+          -5.0,
+          47.0
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          -7.0710678,
+          -7.0710678,
+          47.0
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          -5.0,
+          -8.660254,
+          47.0
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          -2.5881905,
+          -9.6592583,
+          47.0
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          -0.0,
+          -10.0,
+          47.0
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          2.5881905,
+          -9.6592583,
+          47.0
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          5.0,
+          -8.660254,
+          47.0
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          7.0710678,
+          -7.0710678,
+          47.0
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          8.660254,
+          -5.0,
+          47.0
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          9.6592583,
+          -2.5881905,
+          47.0
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          10.0,
+          -0.0,
+          47.0
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          0.0,
+          0.0,
+          47.0
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          0.0,
+          0.0,
+          78.0
+        ],
+        "feed_mm_per_min": 1200
+      },
+      {
+        "type": "rapid",
+        "to": [
+          0.0,
+          0.0,
+          180.0
+        ]
+      },
+      {
+        "type": "tool_change",
+        "tool": "T8"
+      },
+      {
+        "type": "rapid",
+        "to": [
+          26.0,
+          0.0,
+          78.0
+        ]
+      },
+      {
+        "type": "cut",
+        "to": [
+          26.0,
+          0.0,
+          60.0
+        ],
+        "feed_mm_per_min": 250
+      },
+      {
+        "type": "cut",
+        "to": [
+          26.0,
+          0.0,
+          78.0
+        ],
+        "feed_mm_per_min": 1200
+      },
+      {
+        "type": "rapid",
+        "to": [
+          13.0,
+          22.5166605,
+          78.0
+        ]
+      },
+      {
+        "type": "cut",
+        "to": [
+          13.0,
+          22.5166605,
+          60.0
+        ],
+        "feed_mm_per_min": 250
+      },
+      {
+        "type": "cut",
+        "to": [
+          13.0,
+          22.5166605,
+          78.0
+        ],
+        "feed_mm_per_min": 1200
+      },
+      {
+        "type": "rapid",
+        "to": [
+          -13.0,
+          22.5166605,
+          78.0
+        ]
+      },
+      {
+        "type": "cut",
+        "to": [
+          -13.0,
+          22.5166605,
+          60.0
+        ],
+        "feed_mm_per_min": 250
+      },
+      {
+        "type": "cut",
+        "to": [
+          -13.0,
+          22.5166605,
+          78.0
+        ],
+        "feed_mm_per_min": 1200
+      },
+      {
+        "type": "rapid",
+        "to": [
+          -26.0,
+          0.0,
+          78.0
+        ]
+      },
+      {
+        "type": "cut",
+        "to": [
+          -26.0,
+          0.0,
+          60.0
+        ],
+        "feed_mm_per_min": 250
+      },
+      {
+        "type": "cut",
+        "to": [
+          -26.0,
+          0.0,
+          78.0
+        ],
+        "feed_mm_per_min": 1200
+      },
+      {
+        "type": "rapid",
+        "to": [
+          -13.0,
+          -22.5166605,
+          78.0
+        ]
+      },
+      {
+        "type": "cut",
+        "to": [
+          -13.0,
+          -22.5166605,
+          60.0
+        ],
+        "feed_mm_per_min": 250
+      },
+      {
+        "type": "cut",
+        "to": [
+          -13.0,
+          -22.5166605,
+          78.0
+        ],
+        "feed_mm_per_min": 1200
+      },
+      {
+        "type": "rapid",
+        "to": [
+          13.0,
+          -22.5166605,
+          78.0
+        ]
+      },
+      {
+        "type": "cut",
+        "to": [
+          13.0,
+          -22.5166605,
+          60.0
+        ],
+        "feed_mm_per_min": 250
+      },
+      {
+        "type": "cut",
+        "to": [
+          13.0,
+          -22.5166605,
+          78.0
+        ],
+        "feed_mm_per_min": 1200
+      },
+      {
+        "type": "rapid",
+        "to": [
+          0.0,
+          0.0,
+          180.0
+        ]
+      },
+      {
+        "type": "index",
+        "b_degrees": 90.0,
+        "c_degrees": 0.0
+      },
+      {
+        "type": "rapid",
+        "to": [
+          -1.2,
+          0.0,
+          92.8
+        ]
+      },
+      {
+        "type": "cut",
+        "to": [
+          -1.2,
+          0.0,
+          74.8
+        ],
+        "feed_mm_per_min": 250
+      },
+      {
+        "type": "cut",
+        "to": [
+          -9.2,
+          0.0,
+          74.8
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          -9.2,
+          1.0,
+          74.8
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          -9.458819,
+          0.9659258,
+          74.8
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          -9.7,
+          0.8660254,
+          74.8
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          -9.9071068,
+          0.7071068,
+          74.8
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          -10.0660254,
+          0.5,
+          74.8
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          -10.1659258,
+          0.258819,
+          74.8
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          -10.2,
+          0.0,
+          74.8
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          -10.1659258,
+          -0.258819,
+          74.8
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          -10.0660254,
+          -0.5,
+          74.8
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          -9.9071068,
+          -0.7071068,
+          74.8
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          -9.7,
+          -0.8660254,
+          74.8
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          -9.458819,
+          -0.9659258,
+          74.8
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          -9.2,
+          -1.0,
+          74.8
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          -1.2,
+          -1.0,
+          74.8
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          -0.941181,
+          -0.9659258,
+          74.8
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          -0.7,
+          -0.8660254,
+          74.8
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          -0.4928932,
+          -0.7071068,
+          74.8
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          -0.3339746,
+          -0.5,
+          74.8
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          -0.2340742,
+          -0.258819,
+          74.8
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          -0.2,
+          -0.0,
+          74.8
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          -0.2340742,
+          0.258819,
+          74.8
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          -0.3339746,
+          0.5,
+          74.8
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          -0.4928932,
+          0.7071068,
+          74.8
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          -0.7,
+          0.8660254,
+          74.8
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          -0.941181,
+          0.9659258,
+          74.8
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          -1.2,
+          1.0,
+          74.8
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          -9.2,
+          1.0,
+          74.8
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          -1.2,
+          0.0,
+          74.8
+        ],
+        "feed_mm_per_min": 900
+      },
+      {
+        "type": "cut",
+        "to": [
+          -1.2,
+          0.0,
+          92.8
+        ],
+        "feed_mm_per_min": 1200
+      },
+      {
+        "type": "rapid",
+        "to": [
+          0.0,
+          0.0,
+          180.0
+        ]
+      },
+      {
+        "type": "index",
+        "b_degrees": 90.0,
+        "c_degrees": 180.0
+      },
+      {
+        "type": "rapid",
+        "to": [
+          -4.2,
+          0.0,
+          92.8
+        ]
+      },
+      {
+        "type": "cut",
+        "to": [
+          -4.2,
+          0.0,
+          72.8
+        ],
+        "feed_mm_per_min": 250
+      },
+      {
+        "type": "cut",
+        "to": [
+          -4.2,
+          0.0,
+          62.8
+        ],
+        "feed_mm_per_min": 250
+      },
+      {
+        "type": "cut",
+        "to": [
+          -4.2,
+          0.0,
+          92.8
+        ],
+        "feed_mm_per_min": 1200
+      },
+      {
+        "type": "rapid",
+        "to": [
+          0.0,
+          0.0,
+          180.0
+        ]
+      },
+      {
+        "type": "index",
+        "b_degrees": 0.0,
+        "c_degrees": 0.0
+      }
+    ],
+    "tolerance_mm": 3.0,
+    "resolution_mm": 1.0,
+    "max_cells": 2000000,
+    "rapid_mm_per_min": 6000,
+    "tool_change_seconds": 15,
+    "indexing": {
+      "pivot_mm": [
+        0,
+        -453.5294968,
+        50.8
+      ],
+      "work_offset_mm": [
+        0,
+        0,
+        40
+      ],
+      "initial_bc_degrees": [
+        0,
+        0
+      ],
+      "b_limits_degrees": [
+        -35,
+        110
+      ],
+      "degrees_per_second": 30,
+      "settle_seconds": 1,
+      "head_mount_mm": [
+        330,
+        254,
+        618.89
+      ],
+      "gauge_length_mm": 120
+    }
+  },
+  "result": {
+    "validity": "valid",
+    "passed": true,
+    "verification": "verified",
+    "issues": [],
+    "estimated_time_seconds": 109.80759577113994,
+    "time_breakdown": {
+      "cutting": 67.87217729869081,
+      "rapid": 8.935418472449134,
+      "dwell": 0.0,
+      "tool_changes": 15.0,
+      "indexing": 18.0
+    },
+    "timing_assumptions": "Constant commanded vector feed/rapid speed; no acceleration, jerk, lookahead, spindle ramp or controller blending. Cut includes air cutting and plunge/retract. Tool changes add fixed duration, with no implicit travel. Full submitted plan timed even if invalid. Indexed B/C rotation uses simultaneous constant angular speeds plus settle time. No cutting during indexing.",
+    "scope": "Indexed 3+2 only; table-attached stock and fixtures. Tool-section collision and configured axis limits; whole-machine self-collision is not certified. Gauge length is fixed across tools.",
+    "target_sha256": "c0ac069ae10514ee6ad6ff8c5bdee418a91e4fe3393b1d7d48171363fef634ee",
+    "numerics": {
+      "resolution_mm": 1.0,
+      "cell_radius_mm": 0.8660255037844385,
+      "cells": 352800,
+      "geometry_backend": "trimesh signed distance; double precision, not exact arithmetic"
+    },
+    "stock_metrics": {
+      "initial_nominal_volume_mm3": 109200.0,
+      "final_nominal_volume_mm3": 85220.0,
+      "removed_nominal_volume_mm3": 23980.0,
+      "removed_volume_bounds_mm3": [
+        17952.0,
+        54224.0
+      ],
+      "final_volume_bounds_mm3": [
+        68448.0,
+        102624.0
+      ]
+    },
+    "artifacts": {
+      "final_stock": "final_stock.ply",
+      "lower_stock": "final_stock_lower.ply",
+      "upper_stock": "final_stock_upper.ply",
+      "states": [
+        "states/00000.npz",
+        "states/00009.npz",
+        "states/00018.npz",
+        "states/00027.npz",
+        "states/00036.npz",
+        "states/00045.npz",
+        "states/00054.npz",
+        "states/00063.npz",
+        "states/00072.npz",
+        "states/00081.npz",
+        "states/00090.npz",
+        "states/00099.npz",
+        "states/00108.npz",
+        "states/00117.npz",
+        "states/00118.npz"
+      ],
+      "trajectory": "trajectory.json"
+    }
+  },
+  "design": {
+    "name": "Flanged instrument sleeve",
+    "phases": [
+      {
+        "move": 0,
+        "name": "Sleeve bore",
+        "feature": 0
+      },
+      {
+        "move": 56,
+        "name": "Flange hole 1",
+        "feature": 1
+      },
+      {
+        "move": 61,
+        "name": "Flange hole 2",
+        "feature": 2
+      },
+      {
+        "move": 64,
+        "name": "Flange hole 3",
+        "feature": 3
+      },
+      {
+        "move": 67,
+        "name": "Flange hole 4",
+        "feature": 4
+      },
+      {
+        "move": 70,
+        "name": "Flange hole 5",
+        "feature": 5
+      },
+      {
+        "move": 73,
+        "name": "Flange hole 6",
+        "feature": 6
+      },
+      {
+        "move": 76,
+        "name": "Radial keyway",
+        "feature": 7
+      },
+      {
+        "move": 110,
+        "name": "Lock port",
+        "feature": 8
+      }
+    ],
+    "stock_shape": {
+      "kind": "cylinder",
+      "radius": 34,
+      "height": 30
+    }
+  },
+  "trajectory": [
+    {
+      "move": -1,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        0.0,
+        0.0,
+        180.0
+      ],
+      "tool": "T12",
+      "elapsed_seconds": 0.0,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "initial",
+      "from": [
+        0.0,
+        0.0,
+        180.0
+      ]
+    },
+    {
+      "move": 0,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        0.0,
+        0.0,
+        78.0
+      ],
+      "tool": "T12",
+      "elapsed_seconds": 1.02,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "rapid",
+      "from": [
+        0.0,
+        0.0,
+        180.0
+      ]
+    },
+    {
+      "move": 1,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        0.0,
+        0.0,
+        58.0
+      ],
+      "tool": "T12",
+      "elapsed_seconds": 5.82,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        0.0,
+        0.0,
+        78.0
+      ]
+    },
+    {
+      "move": 2,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        10.0,
+        0.0,
+        58.0
+      ],
+      "tool": "T12",
+      "elapsed_seconds": 6.486666666666667,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        0.0,
+        0.0,
+        58.0
+      ]
+    },
+    {
+      "move": 3,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        9.6592583,
+        2.5881905,
+        58.0
+      ],
+      "tool": "T12",
+      "elapsed_seconds": 6.660701592540874,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        10.0,
+        0.0,
+        58.0
+      ]
+    },
+    {
+      "move": 4,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        8.660254,
+        5.0,
+        58.0
+      ],
+      "tool": "T12",
+      "elapsed_seconds": 6.834736514396725,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        9.6592583,
+        2.5881905,
+        58.0
+      ]
+    },
+    {
+      "move": 5,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        7.0710678,
+        7.0710678,
+        58.0
+      ],
+      "tool": "T12",
+      "elapsed_seconds": 7.008771435674896,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        8.660254,
+        5.0,
+        58.0
+      ]
+    },
+    {
+      "move": 6,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        5.0,
+        8.660254,
+        58.0
+      ],
+      "tool": "T12",
+      "elapsed_seconds": 7.1828063569530665,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        7.0710678,
+        7.0710678,
+        58.0
+      ]
+    },
+    {
+      "move": 7,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        2.5881905,
+        9.6592583,
+        58.0
+      ],
+      "tool": "T12",
+      "elapsed_seconds": 7.3568412788089175,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        5.0,
+        8.660254,
+        58.0
+      ]
+    },
+    {
+      "move": 8,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        0.0,
+        10.0,
+        58.0
+      ],
+      "tool": "T12",
+      "elapsed_seconds": 7.530876204683124,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        2.5881905,
+        9.6592583,
+        58.0
+      ]
+    },
+    {
+      "move": 9,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        -2.5881905,
+        9.6592583,
+        58.0
+      ],
+      "tool": "T12",
+      "elapsed_seconds": 7.70491113055733,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        0.0,
+        10.0,
+        58.0
+      ]
+    },
+    {
+      "move": 10,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        -5.0,
+        8.660254,
+        58.0
+      ],
+      "tool": "T12",
+      "elapsed_seconds": 7.878946052413181,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -2.5881905,
+        9.6592583,
+        58.0
+      ]
+    },
+    {
+      "move": 11,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        -7.0710678,
+        7.0710678,
+        58.0
+      ],
+      "tool": "T12",
+      "elapsed_seconds": 8.052980973691351,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -5.0,
+        8.660254,
+        58.0
+      ]
+    },
+    {
+      "move": 12,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        -8.660254,
+        5.0,
+        58.0
+      ],
+      "tool": "T12",
+      "elapsed_seconds": 8.227015894969522,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -7.0710678,
+        7.0710678,
+        58.0
+      ]
+    },
+    {
+      "move": 13,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        -9.6592583,
+        2.5881905,
+        58.0
+      ],
+      "tool": "T12",
+      "elapsed_seconds": 8.401050816825373,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -8.660254,
+        5.0,
+        58.0
+      ]
+    },
+    {
+      "move": 14,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        -10.0,
+        0.0,
+        58.0
+      ],
+      "tool": "T12",
+      "elapsed_seconds": 8.57508574269958,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -9.6592583,
+        2.5881905,
+        58.0
+      ]
+    },
+    {
+      "move": 15,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        -9.6592583,
+        -2.5881905,
+        58.0
+      ],
+      "tool": "T12",
+      "elapsed_seconds": 8.749120668573786,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -10.0,
+        0.0,
+        58.0
+      ]
+    },
+    {
+      "move": 16,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        -8.660254,
+        -5.0,
+        58.0
+      ],
+      "tool": "T12",
+      "elapsed_seconds": 8.923155590429637,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -9.6592583,
+        -2.5881905,
+        58.0
+      ]
+    },
+    {
+      "move": 17,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        -7.0710678,
+        -7.0710678,
+        58.0
+      ],
+      "tool": "T12",
+      "elapsed_seconds": 9.097190511707808,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -8.660254,
+        -5.0,
+        58.0
+      ]
+    },
+    {
+      "move": 18,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        -5.0,
+        -8.660254,
+        58.0
+      ],
+      "tool": "T12",
+      "elapsed_seconds": 9.271225432985979,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -7.0710678,
+        -7.0710678,
+        58.0
+      ]
+    },
+    {
+      "move": 19,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        -2.5881905,
+        -9.6592583,
+        58.0
+      ],
+      "tool": "T12",
+      "elapsed_seconds": 9.44526035484183,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -5.0,
+        -8.660254,
+        58.0
+      ]
+    },
+    {
+      "move": 20,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        -0.0,
+        -10.0,
+        58.0
+      ],
+      "tool": "T12",
+      "elapsed_seconds": 9.619295280716036,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -2.5881905,
+        -9.6592583,
+        58.0
+      ]
+    },
+    {
+      "move": 21,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        2.5881905,
+        -9.6592583,
+        58.0
+      ],
+      "tool": "T12",
+      "elapsed_seconds": 9.793330206590243,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -0.0,
+        -10.0,
+        58.0
+      ]
+    },
+    {
+      "move": 22,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        5.0,
+        -8.660254,
+        58.0
+      ],
+      "tool": "T12",
+      "elapsed_seconds": 9.967365128446094,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        2.5881905,
+        -9.6592583,
+        58.0
+      ]
+    },
+    {
+      "move": 23,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        7.0710678,
+        -7.0710678,
+        58.0
+      ],
+      "tool": "T12",
+      "elapsed_seconds": 10.141400049724265,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        5.0,
+        -8.660254,
+        58.0
+      ]
+    },
+    {
+      "move": 24,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        8.660254,
+        -5.0,
+        58.0
+      ],
+      "tool": "T12",
+      "elapsed_seconds": 10.315434971002436,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        7.0710678,
+        -7.0710678,
+        58.0
+      ]
+    },
+    {
+      "move": 25,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        9.6592583,
+        -2.5881905,
+        58.0
+      ],
+      "tool": "T12",
+      "elapsed_seconds": 10.489469892858287,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        8.660254,
+        -5.0,
+        58.0
+      ]
+    },
+    {
+      "move": 26,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        10.0,
+        -0.0,
+        58.0
+      ],
+      "tool": "T12",
+      "elapsed_seconds": 10.663504818732493,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        9.6592583,
+        -2.5881905,
+        58.0
+      ]
+    },
+    {
+      "move": 27,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        0.0,
+        0.0,
+        58.0
+      ],
+      "tool": "T12",
+      "elapsed_seconds": 11.330171485399159,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        10.0,
+        -0.0,
+        58.0
+      ]
+    },
+    {
+      "move": 28,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        0.0,
+        0.0,
+        47.0
+      ],
+      "tool": "T12",
+      "elapsed_seconds": 13.97017148539916,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        0.0,
+        0.0,
+        58.0
+      ]
+    },
+    {
+      "move": 29,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        10.0,
+        0.0,
+        47.0
+      ],
+      "tool": "T12",
+      "elapsed_seconds": 14.636838152065826,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        0.0,
+        0.0,
+        47.0
+      ]
+    },
+    {
+      "move": 30,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        9.6592583,
+        2.5881905,
+        47.0
+      ],
+      "tool": "T12",
+      "elapsed_seconds": 14.810873077940032,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        10.0,
+        0.0,
+        47.0
+      ]
+    },
+    {
+      "move": 31,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        8.660254,
+        5.0,
+        47.0
+      ],
+      "tool": "T12",
+      "elapsed_seconds": 14.984907999795883,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        9.6592583,
+        2.5881905,
+        47.0
+      ]
+    },
+    {
+      "move": 32,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        7.0710678,
+        7.0710678,
+        47.0
+      ],
+      "tool": "T12",
+      "elapsed_seconds": 15.158942921074054,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        8.660254,
+        5.0,
+        47.0
+      ]
+    },
+    {
+      "move": 33,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        5.0,
+        8.660254,
+        47.0
+      ],
+      "tool": "T12",
+      "elapsed_seconds": 15.332977842352225,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        7.0710678,
+        7.0710678,
+        47.0
+      ]
+    },
+    {
+      "move": 34,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        2.5881905,
+        9.6592583,
+        47.0
+      ],
+      "tool": "T12",
+      "elapsed_seconds": 15.507012764208076,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        5.0,
+        8.660254,
+        47.0
+      ]
+    },
+    {
+      "move": 35,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        0.0,
+        10.0,
+        47.0
+      ],
+      "tool": "T12",
+      "elapsed_seconds": 15.681047690082282,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        2.5881905,
+        9.6592583,
+        47.0
+      ]
+    },
+    {
+      "move": 36,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        -2.5881905,
+        9.6592583,
+        47.0
+      ],
+      "tool": "T12",
+      "elapsed_seconds": 15.855082615956489,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        0.0,
+        10.0,
+        47.0
+      ]
+    },
+    {
+      "move": 37,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        -5.0,
+        8.660254,
+        47.0
+      ],
+      "tool": "T12",
+      "elapsed_seconds": 16.02911753781234,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -2.5881905,
+        9.6592583,
+        47.0
+      ]
+    },
+    {
+      "move": 38,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        -7.0710678,
+        7.0710678,
+        47.0
+      ],
+      "tool": "T12",
+      "elapsed_seconds": 16.20315245909051,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -5.0,
+        8.660254,
+        47.0
+      ]
+    },
+    {
+      "move": 39,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        -8.660254,
+        5.0,
+        47.0
+      ],
+      "tool": "T12",
+      "elapsed_seconds": 16.37718738036868,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -7.0710678,
+        7.0710678,
+        47.0
+      ]
+    },
+    {
+      "move": 40,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        -9.6592583,
+        2.5881905,
+        47.0
+      ],
+      "tool": "T12",
+      "elapsed_seconds": 16.55122230222453,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -8.660254,
+        5.0,
+        47.0
+      ]
+    },
+    {
+      "move": 41,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        -10.0,
+        0.0,
+        47.0
+      ],
+      "tool": "T12",
+      "elapsed_seconds": 16.725257228098737,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -9.6592583,
+        2.5881905,
+        47.0
+      ]
+    },
+    {
+      "move": 42,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        -9.6592583,
+        -2.5881905,
+        47.0
+      ],
+      "tool": "T12",
+      "elapsed_seconds": 16.899292153972944,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -10.0,
+        0.0,
+        47.0
+      ]
+    },
+    {
+      "move": 43,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        -8.660254,
+        -5.0,
+        47.0
+      ],
+      "tool": "T12",
+      "elapsed_seconds": 17.073327075828793,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -9.6592583,
+        -2.5881905,
+        47.0
+      ]
+    },
+    {
+      "move": 44,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        -7.0710678,
+        -7.0710678,
+        47.0
+      ],
+      "tool": "T12",
+      "elapsed_seconds": 17.247361997106964,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -8.660254,
+        -5.0,
+        47.0
+      ]
+    },
+    {
+      "move": 45,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        -5.0,
+        -8.660254,
+        47.0
+      ],
+      "tool": "T12",
+      "elapsed_seconds": 17.421396918385135,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -7.0710678,
+        -7.0710678,
+        47.0
+      ]
+    },
+    {
+      "move": 46,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        -2.5881905,
+        -9.6592583,
+        47.0
+      ],
+      "tool": "T12",
+      "elapsed_seconds": 17.595431840240984,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -5.0,
+        -8.660254,
+        47.0
+      ]
+    },
+    {
+      "move": 47,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        -0.0,
+        -10.0,
+        47.0
+      ],
+      "tool": "T12",
+      "elapsed_seconds": 17.76946676611519,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -2.5881905,
+        -9.6592583,
+        47.0
+      ]
+    },
+    {
+      "move": 48,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        2.5881905,
+        -9.6592583,
+        47.0
+      ],
+      "tool": "T12",
+      "elapsed_seconds": 17.943501691989397,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -0.0,
+        -10.0,
+        47.0
+      ]
+    },
+    {
+      "move": 49,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        5.0,
+        -8.660254,
+        47.0
+      ],
+      "tool": "T12",
+      "elapsed_seconds": 18.117536613845246,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        2.5881905,
+        -9.6592583,
+        47.0
+      ]
+    },
+    {
+      "move": 50,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        7.0710678,
+        -7.0710678,
+        47.0
+      ],
+      "tool": "T12",
+      "elapsed_seconds": 18.291571535123417,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        5.0,
+        -8.660254,
+        47.0
+      ]
+    },
+    {
+      "move": 51,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        8.660254,
+        -5.0,
+        47.0
+      ],
+      "tool": "T12",
+      "elapsed_seconds": 18.465606456401588,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        7.0710678,
+        -7.0710678,
+        47.0
+      ]
+    },
+    {
+      "move": 52,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        9.6592583,
+        -2.5881905,
+        47.0
+      ],
+      "tool": "T12",
+      "elapsed_seconds": 18.639641378257437,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        8.660254,
+        -5.0,
+        47.0
+      ]
+    },
+    {
+      "move": 53,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        10.0,
+        -0.0,
+        47.0
+      ],
+      "tool": "T12",
+      "elapsed_seconds": 18.813676304131643,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        9.6592583,
+        -2.5881905,
+        47.0
+      ]
+    },
+    {
+      "move": 54,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        0.0,
+        0.0,
+        47.0
+      ],
+      "tool": "T12",
+      "elapsed_seconds": 19.48034297079831,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        10.0,
+        -0.0,
+        47.0
+      ]
+    },
+    {
+      "move": 55,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        0.0,
+        0.0,
+        78.0
+      ],
+      "tool": "T12",
+      "elapsed_seconds": 21.030342970798312,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        0.0,
+        0.0,
+        47.0
+      ]
+    },
+    {
+      "move": 56,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        0.0,
+        0.0,
+        180.0
+      ],
+      "tool": "T12",
+      "elapsed_seconds": 22.05034297079831,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "rapid",
+      "from": [
+        0.0,
+        0.0,
+        78.0
+      ]
+    },
+    {
+      "move": 57,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        0.0,
+        0.0,
+        180.0
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 37.05034297079831,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "tool_change",
+      "from": [
+        0.0,
+        0.0,
+        180.0
+      ]
+    },
+    {
+      "move": 58,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        26.0,
+        0.0,
+        78.0
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 38.10295876015357,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "rapid",
+      "from": [
+        0.0,
+        0.0,
+        180.0
+      ]
+    },
+    {
+      "move": 59,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        26.0,
+        0.0,
+        60.0
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 42.42295876015357,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        26.0,
+        0.0,
+        78.0
+      ]
+    },
+    {
+      "move": 60,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        26.0,
+        0.0,
+        78.0
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 43.32295876015357,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        26.0,
+        0.0,
+        60.0
+      ]
+    },
+    {
+      "move": 61,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        13.0,
+        22.5166605,
+        78.0
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 43.582958760167465,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "rapid",
+      "from": [
+        26.0,
+        0.0,
+        78.0
+      ]
+    },
+    {
+      "move": 62,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        13.0,
+        22.5166605,
+        60.0
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 47.902958760167465,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        13.0,
+        22.5166605,
+        78.0
+      ]
+    },
+    {
+      "move": 63,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        13.0,
+        22.5166605,
+        78.0
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 48.80295876016746,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        13.0,
+        22.5166605,
+        60.0
+      ]
+    },
+    {
+      "move": 64,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        -13.0,
+        22.5166605,
+        78.0
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 49.06295876016746,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "rapid",
+      "from": [
+        13.0,
+        22.5166605,
+        78.0
+      ]
+    },
+    {
+      "move": 65,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        -13.0,
+        22.5166605,
+        60.0
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 53.38295876016746,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -13.0,
+        22.5166605,
+        78.0
+      ]
+    },
+    {
+      "move": 66,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        -13.0,
+        22.5166605,
+        78.0
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 54.28295876016746,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -13.0,
+        22.5166605,
+        60.0
+      ]
+    },
+    {
+      "move": 67,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        -26.0,
+        0.0,
+        78.0
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 54.54295876018136,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "rapid",
+      "from": [
+        -13.0,
+        22.5166605,
+        78.0
+      ]
+    },
+    {
+      "move": 68,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        -26.0,
+        0.0,
+        60.0
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 58.86295876018136,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -26.0,
+        0.0,
+        78.0
+      ]
+    },
+    {
+      "move": 69,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        -26.0,
+        0.0,
+        78.0
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 59.762958760181355,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -26.0,
+        0.0,
+        60.0
+      ]
+    },
+    {
+      "move": 70,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        -13.0,
+        -22.5166605,
+        78.0
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 60.02295876019525,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "rapid",
+      "from": [
+        -26.0,
+        0.0,
+        78.0
+      ]
+    },
+    {
+      "move": 71,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        -13.0,
+        -22.5166605,
+        60.0
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 64.34295876019524,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -13.0,
+        -22.5166605,
+        78.0
+      ]
+    },
+    {
+      "move": 72,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        -13.0,
+        -22.5166605,
+        78.0
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 65.24295876019525,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -13.0,
+        -22.5166605,
+        60.0
+      ]
+    },
+    {
+      "move": 73,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        13.0,
+        -22.5166605,
+        78.0
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 65.50295876019526,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "rapid",
+      "from": [
+        -13.0,
+        -22.5166605,
+        78.0
+      ]
+    },
+    {
+      "move": 74,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        13.0,
+        -22.5166605,
+        60.0
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 69.82295876019525,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        13.0,
+        -22.5166605,
+        78.0
+      ]
+    },
+    {
+      "move": 75,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        13.0,
+        -22.5166605,
+        78.0
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 70.72295876019525,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        13.0,
+        -22.5166605,
+        60.0
+      ]
+    },
+    {
+      "move": 76,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        0.0,
+        0.0,
+        180.0
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 71.77557454955395,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "rapid",
+      "from": [
+        13.0,
+        -22.5166605,
+        78.0
+      ]
+    },
+    {
+      "move": 77,
+      "bc_degrees": [
+        90.0,
+        0.0
+      ],
+      "position": [
+        0.0,
+        0.0,
+        180.0
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 75.77557454955395,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "index",
+      "from": [
+        0.0,
+        0.0,
+        180.0
+      ]
+    },
+    {
+      "move": 78,
+      "bc_degrees": [
+        90.0,
+        0.0
+      ],
+      "position": [
+        -1.2,
+        0.0,
+        92.8
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 76.64765711445249,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "rapid",
+      "from": [
+        0.0,
+        0.0,
+        180.0
+      ]
+    },
+    {
+      "move": 79,
+      "bc_degrees": [
+        90.0,
+        0.0
+      ],
+      "position": [
+        -1.2,
+        0.0,
+        74.8
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 80.96765711445248,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -1.2,
+        0.0,
+        92.8
+      ]
+    },
+    {
+      "move": 80,
+      "bc_degrees": [
+        90.0,
+        0.0
+      ],
+      "position": [
+        -9.2,
+        0.0,
+        74.8
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 81.50099044778581,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -1.2,
+        0.0,
+        74.8
+      ]
+    },
+    {
+      "move": 81,
+      "bc_degrees": [
+        90.0,
+        0.0
+      ],
+      "position": [
+        -9.2,
+        1.0,
+        74.8
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 81.56765711445247,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -9.2,
+        0.0,
+        74.8
+      ]
+    },
+    {
+      "move": 82,
+      "bc_degrees": [
+        90.0,
+        0.0
+      ],
+      "position": [
+        -9.458819,
+        0.9659258,
+        74.8
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 81.58506060399613,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -9.2,
+        1.0,
+        74.8
+      ]
+    },
+    {
+      "move": 83,
+      "bc_degrees": [
+        90.0,
+        0.0
+      ],
+      "position": [
+        -9.7,
+        0.8660254,
+        74.8
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 81.60246409849594,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -9.458819,
+        0.9659258,
+        74.8
+      ]
+    },
+    {
+      "move": 84,
+      "bc_degrees": [
+        90.0,
+        0.0
+      ],
+      "position": [
+        -9.9071068,
+        0.7071068,
+        74.8
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 81.61986759086989,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -9.7,
+        0.8660254,
+        74.8
+      ]
+    },
+    {
+      "move": 85,
+      "bc_degrees": [
+        90.0,
+        0.0
+      ],
+      "position": [
+        -10.0660254,
+        0.5,
+        74.8
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 81.63727108324383,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -9.9071068,
+        0.7071068,
+        74.8
+      ]
+    },
+    {
+      "move": 86,
+      "bc_degrees": [
+        90.0,
+        0.0
+      ],
+      "position": [
+        -10.1659258,
+        0.258819,
+        74.8
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 81.65467457774365,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -10.0660254,
+        0.5,
+        74.8
+      ]
+    },
+    {
+      "move": 87,
+      "bc_degrees": [
+        90.0,
+        0.0
+      ],
+      "position": [
+        -10.2,
+        0.0,
+        74.8
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 81.6720780672873,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -10.1659258,
+        0.258819,
+        74.8
+      ]
+    },
+    {
+      "move": 88,
+      "bc_degrees": [
+        90.0,
+        0.0
+      ],
+      "position": [
+        -10.1659258,
+        -0.258819,
+        74.8
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 81.68948155683096,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -10.2,
+        0.0,
+        74.8
+      ]
+    },
+    {
+      "move": 89,
+      "bc_degrees": [
+        90.0,
+        0.0
+      ],
+      "position": [
+        -10.0660254,
+        -0.5,
+        74.8
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 81.70688505133077,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -10.1659258,
+        -0.258819,
+        74.8
+      ]
+    },
+    {
+      "move": 90,
+      "bc_degrees": [
+        90.0,
+        0.0
+      ],
+      "position": [
+        -9.9071068,
+        -0.7071068,
+        74.8
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 81.72428854370472,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -10.0660254,
+        -0.5,
+        74.8
+      ]
+    },
+    {
+      "move": 91,
+      "bc_degrees": [
+        90.0,
+        0.0
+      ],
+      "position": [
+        -9.7,
+        -0.8660254,
+        74.8
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 81.74169203607866,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -9.9071068,
+        -0.7071068,
+        74.8
+      ]
+    },
+    {
+      "move": 92,
+      "bc_degrees": [
+        90.0,
+        0.0
+      ],
+      "position": [
+        -9.458819,
+        -0.9659258,
+        74.8
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 81.75909553057848,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -9.7,
+        -0.8660254,
+        74.8
+      ]
+    },
+    {
+      "move": 93,
+      "bc_degrees": [
+        90.0,
+        0.0
+      ],
+      "position": [
+        -9.2,
+        -1.0,
+        74.8
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 81.77649902012213,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -9.458819,
+        -0.9659258,
+        74.8
+      ]
+    },
+    {
+      "move": 94,
+      "bc_degrees": [
+        90.0,
+        0.0
+      ],
+      "position": [
+        -1.2,
+        -1.0,
+        74.8
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 82.30983235345546,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -9.2,
+        -1.0,
+        74.8
+      ]
+    },
+    {
+      "move": 95,
+      "bc_degrees": [
+        90.0,
+        0.0
+      ],
+      "position": [
+        -0.941181,
+        -0.9659258,
+        74.8
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 82.32723584299912,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -1.2,
+        -1.0,
+        74.8
+      ]
+    },
+    {
+      "move": 96,
+      "bc_degrees": [
+        90.0,
+        0.0
+      ],
+      "position": [
+        -0.7,
+        -0.8660254,
+        74.8
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 82.34463933749893,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -0.941181,
+        -0.9659258,
+        74.8
+      ]
+    },
+    {
+      "move": 97,
+      "bc_degrees": [
+        90.0,
+        0.0
+      ],
+      "position": [
+        -0.4928932,
+        -0.7071068,
+        74.8
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 82.36204282987288,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -0.7,
+        -0.8660254,
+        74.8
+      ]
+    },
+    {
+      "move": 98,
+      "bc_degrees": [
+        90.0,
+        0.0
+      ],
+      "position": [
+        -0.3339746,
+        -0.5,
+        74.8
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 82.37944632224682,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -0.4928932,
+        -0.7071068,
+        74.8
+      ]
+    },
+    {
+      "move": 99,
+      "bc_degrees": [
+        90.0,
+        0.0
+      ],
+      "position": [
+        -0.2340742,
+        -0.258819,
+        74.8
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 82.39684981674664,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -0.3339746,
+        -0.5,
+        74.8
+      ]
+    },
+    {
+      "move": 100,
+      "bc_degrees": [
+        90.0,
+        0.0
+      ],
+      "position": [
+        -0.2,
+        -0.0,
+        74.8
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 82.41425330629029,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -0.2340742,
+        -0.258819,
+        74.8
+      ]
+    },
+    {
+      "move": 101,
+      "bc_degrees": [
+        90.0,
+        0.0
+      ],
+      "position": [
+        -0.2340742,
+        0.258819,
+        74.8
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 82.43165679583394,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -0.2,
+        -0.0,
+        74.8
+      ]
+    },
+    {
+      "move": 102,
+      "bc_degrees": [
+        90.0,
+        0.0
+      ],
+      "position": [
+        -0.3339746,
+        0.5,
+        74.8
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 82.44906029033376,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -0.2340742,
+        0.258819,
+        74.8
+      ]
+    },
+    {
+      "move": 103,
+      "bc_degrees": [
+        90.0,
+        0.0
+      ],
+      "position": [
+        -0.4928932,
+        0.7071068,
+        74.8
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 82.4664637827077,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -0.3339746,
+        0.5,
+        74.8
+      ]
+    },
+    {
+      "move": 104,
+      "bc_degrees": [
+        90.0,
+        0.0
+      ],
+      "position": [
+        -0.7,
+        0.8660254,
+        74.8
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 82.48386727508165,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -0.4928932,
+        0.7071068,
+        74.8
+      ]
+    },
+    {
+      "move": 105,
+      "bc_degrees": [
+        90.0,
+        0.0
+      ],
+      "position": [
+        -0.941181,
+        0.9659258,
+        74.8
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 82.50127076958147,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -0.7,
+        0.8660254,
+        74.8
+      ]
+    },
+    {
+      "move": 106,
+      "bc_degrees": [
+        90.0,
+        0.0
+      ],
+      "position": [
+        -1.2,
+        1.0,
+        74.8
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 82.51867425912512,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -0.941181,
+        0.9659258,
+        74.8
+      ]
+    },
+    {
+      "move": 107,
+      "bc_degrees": [
+        90.0,
+        0.0
+      ],
+      "position": [
+        -9.2,
+        1.0,
+        74.8
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 83.05200759245845,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -1.2,
+        1.0,
+        74.8
+      ]
+    },
+    {
+      "move": 108,
+      "bc_degrees": [
+        90.0,
+        0.0
+      ],
+      "position": [
+        -1.2,
+        0.0,
+        74.8
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 83.58949144234502,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -9.2,
+        1.0,
+        74.8
+      ]
+    },
+    {
+      "move": 109,
+      "bc_degrees": [
+        90.0,
+        0.0
+      ],
+      "position": [
+        -1.2,
+        0.0,
+        92.8
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 84.48949144234503,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -1.2,
+        0.0,
+        74.8
+      ]
+    },
+    {
+      "move": 110,
+      "bc_degrees": [
+        90.0,
+        0.0
+      ],
+      "position": [
+        0.0,
+        0.0,
+        180.0
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 85.36157400724356,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "rapid",
+      "from": [
+        -1.2,
+        0.0,
+        92.8
+      ]
+    },
+    {
+      "move": 111,
+      "bc_degrees": [
+        90.0,
+        180.0
+      ],
+      "position": [
+        0.0,
+        0.0,
+        180.0
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 92.36157400724356,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "index",
+      "from": [
+        0.0,
+        0.0,
+        180.0
+      ]
+    },
+    {
+      "move": 112,
+      "bc_degrees": [
+        90.0,
+        180.0
+      ],
+      "position": [
+        -4.2,
+        0.0,
+        92.8
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 93.23458488919178,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "rapid",
+      "from": [
+        0.0,
+        0.0,
+        180.0
+      ]
+    },
+    {
+      "move": 113,
+      "bc_degrees": [
+        90.0,
+        180.0
+      ],
+      "position": [
+        -4.2,
+        0.0,
+        72.8
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 98.03458488919178,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -4.2,
+        0.0,
+        92.8
+      ]
+    },
+    {
+      "move": 114,
+      "bc_degrees": [
+        90.0,
+        180.0
+      ],
+      "position": [
+        -4.2,
+        0.0,
+        62.8
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 100.43458488919178,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -4.2,
+        0.0,
+        72.8
+      ]
+    },
+    {
+      "move": 115,
+      "bc_degrees": [
+        90.0,
+        180.0
+      ],
+      "position": [
+        -4.2,
+        0.0,
+        92.8
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 101.93458488919178,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "cut",
+      "from": [
+        -4.2,
+        0.0,
+        62.8
+      ]
+    },
+    {
+      "move": 116,
+      "bc_degrees": [
+        90.0,
+        180.0
+      ],
+      "position": [
+        0.0,
+        0.0,
+        180.0
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 102.80759577114,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "rapid",
+      "from": [
+        -4.2,
+        0.0,
+        92.8
+      ]
+    },
+    {
+      "move": 117,
+      "bc_degrees": [
+        0.0,
+        0.0
+      ],
+      "position": [
+        0.0,
+        0.0,
+        180.0
+      ],
+      "tool": "T8",
+      "elapsed_seconds": 109.80759577114,
+      "origin": [
+        -35.0,
+        -35.0,
+        -41.0
+      ],
+      "pitch": 1.0,
+      "shape": [
+        70,
+        70,
+        72
+      ],
+      "type": "index",
+      "from": [
+        0.0,
+        0.0,
+        180.0
+      ]
+    }
+  ],
+  "duration": 109.80759577113994
+}

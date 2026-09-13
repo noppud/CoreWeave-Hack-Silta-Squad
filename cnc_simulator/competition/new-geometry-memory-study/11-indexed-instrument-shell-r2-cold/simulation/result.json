@@ -1,0 +1,58 @@
+{
+  "validity": "valid",
+  "passed": true,
+  "verification": "verified",
+  "issues": [],
+  "estimated_time_seconds": 172.8128796027751,
+  "time_breakdown": {
+    "cutting": 125.9553729697683,
+    "rapid": 11.85750663300679,
+    "dwell": 0.0,
+    "tool_changes": 15.0,
+    "indexing": 20.0
+  },
+  "timing_assumptions": "Constant commanded vector feed/rapid speed; no acceleration, jerk, lookahead, spindle ramp or controller blending. Cut includes air cutting and plunge/retract. Tool changes add fixed duration, with no implicit travel. Full submitted plan timed even if invalid. Indexed B/C rotation uses simultaneous constant angular speeds plus settle time. No cutting during indexing.",
+  "scope": "Indexed 3+2 only; table-attached stock and fixtures. Tool-section collision and configured axis limits; whole-machine self-collision is not certified. Gauge length is fixed across tools.",
+  "target_sha256": "346f0a92dae06fbf7f56828b43b8d41a658a60a6fac9eea5109afb198701dad6",
+  "numerics": {
+    "resolution_mm": 1.0,
+    "cell_radius_mm": 0.8660255037844385,
+    "cells": 374616,
+    "geometry_backend": "trimesh signed distance; double precision, not exact arithmetic"
+  },
+  "stock_metrics": {
+    "initial_nominal_volume_mm3": 142032.0,
+    "final_nominal_volume_mm3": 78436.0,
+    "removed_nominal_volume_mm3": 63596.0,
+    "removed_volume_bounds_mm3": [
+      53384.0,
+      96364.0
+    ],
+    "final_volume_bounds_mm3": [
+      59452.0,
+      97356.0
+    ]
+  },
+  "artifacts": {
+    "final_stock": "final_stock.ply",
+    "lower_stock": "final_stock_lower.ply",
+    "upper_stock": "final_stock_upper.ply",
+    "states": [
+      "states/00000.npz",
+      "states/00063.npz",
+      "states/00126.npz",
+      "states/00189.npz",
+      "states/00252.npz",
+      "states/00315.npz",
+      "states/00378.npz",
+      "states/00441.npz",
+      "states/00504.npz",
+      "states/00567.npz",
+      "states/00630.npz",
+      "states/00693.npz",
+      "states/00756.npz",
+      "states/00766.npz"
+    ],
+    "trajectory": "trajectory.json"
+  }
+}

@@ -1,0 +1,39 @@
+
+SOURCE
+http://127.0.0.1:2744/api/jobs/469436bb78a7 · actual local job state
+
+STAGE
+review · Review extracted dimensions before generating CAM
+
+REVIEWED DIMENSIONS
+{
+  "name": "Bearing Pocket",
+  "summary": "Pre-sized aluminium 6061 box with one flat-bottom blind obround pocket. Stock centered in X/Y, bottom Z=0 and top Z=24. Coarse simulation demonstration; not a production drawing.",
+  "stock_kind": "box",
+  "stock_dimensions_mm": [
+    64,
+    52,
+    24
+  ],
+  "drawing_tolerance_mm": 3,
+  "blockers": [],
+  "features": [
+    {
+      "name": "Blind obround pocket",
+      "a": [
+        -12,
+        0
+      ],
+      "b": [
+        12,
+        0
+      ],
+      "radius_mm": 10,
+      "floor_z_mm": 8,
+      "evidence_quote": "One blind obround pocket: end centres A=(-12,0), B=(12,0).\nPocket radius 10; absolute floor Z=8; flat bottom."
+    }
+  ]
+}
+
+ACTION
+Review and confirm dimensions in the application before CAM starts. This viewer cannot approve a drawing.

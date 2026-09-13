@@ -1,0 +1,298 @@
+{
+  "id": "11-indexed-instrument-shell",
+  "name": "Indexed instrument shell",
+  "split": "pre_registered_transfer",
+  "stock_shape": {
+    "kind": "cylinder",
+    "radius": 32,
+    "height": 44
+  },
+  "features": [
+    {
+      "name": "Interior seat",
+      "bc": [
+        0,
+        0
+      ],
+      "a": [
+        0,
+        0,
+        10
+      ],
+      "b": [
+        0,
+        0,
+        10
+      ],
+      "radius": 20,
+      "tool": "T12",
+      "surface_z": 84.0
+    },
+    {
+      "name": "Window 45",
+      "bc": [
+        90,
+        45
+      ],
+      "a": [
+        11.313708498984761,
+        11.31370849898476,
+        18.0
+      ],
+      "b": [
+        11.313708498984761,
+        11.31370849898476,
+        29.0
+      ],
+      "radius": 8,
+      "tool": "T12",
+      "surface_z": 82.8
+    },
+    {
+      "name": "Window 135",
+      "bc": [
+        90,
+        135
+      ],
+      "a": [
+        -11.31370849898476,
+        11.313708498984761,
+        18.0
+      ],
+      "b": [
+        -11.31370849898476,
+        11.313708498984761,
+        29.0
+      ],
+      "radius": 8,
+      "tool": "T12",
+      "surface_z": 82.8
+    },
+    {
+      "name": "Window 225",
+      "bc": [
+        90,
+        225
+      ],
+      "a": [
+        -11.313708498984763,
+        -11.31370849898476,
+        18.0
+      ],
+      "b": [
+        -11.313708498984763,
+        -11.31370849898476,
+        29.0
+      ],
+      "radius": 8,
+      "tool": "T12",
+      "surface_z": 82.8
+    },
+    {
+      "name": "Window 315",
+      "bc": [
+        90,
+        315
+      ],
+      "a": [
+        11.313708498984758,
+        -11.313708498984763,
+        18.0
+      ],
+      "b": [
+        11.313708498984758,
+        -11.313708498984763,
+        29.0
+      ],
+      "radius": 8,
+      "tool": "T12",
+      "surface_z": 82.8
+    },
+    {
+      "name": "Flange hole 1",
+      "bc": [
+        0,
+        0
+      ],
+      "a": [
+        26.0,
+        0.0,
+        34
+      ],
+      "b": [
+        26.0,
+        0.0,
+        34
+      ],
+      "radius": 4,
+      "tool": "T8",
+      "surface_z": 84.0
+    },
+    {
+      "name": "Flange hole 2",
+      "bc": [
+        0,
+        0
+      ],
+      "a": [
+        1.592040838891559e-15,
+        26.0,
+        34
+      ],
+      "b": [
+        1.592040838891559e-15,
+        26.0,
+        34
+      ],
+      "radius": 4,
+      "tool": "T8",
+      "surface_z": 84.0
+    },
+    {
+      "name": "Flange hole 3",
+      "bc": [
+        0,
+        0
+      ],
+      "a": [
+        -26.0,
+        3.184081677783118e-15,
+        34
+      ],
+      "b": [
+        -26.0,
+        3.184081677783118e-15,
+        34
+      ],
+      "radius": 4,
+      "tool": "T8",
+      "surface_z": 84.0
+    },
+    {
+      "name": "Flange hole 4",
+      "bc": [
+        0,
+        0
+      ],
+      "a": [
+        -4.776122516674677e-15,
+        -26.0,
+        34
+      ],
+      "b": [
+        -4.776122516674677e-15,
+        -26.0,
+        34
+      ],
+      "radius": 4,
+      "tool": "T8",
+      "surface_z": 84.0
+    }
+  ],
+  "plan": {
+    "units": "mm",
+    "target": {
+      "type": "mesh",
+      "path": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/new-geometry-memory-study/geometry/parts/11-indexed-instrument-shell/target.stl"
+    },
+    "stock": {
+      "type": "mesh",
+      "path": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/new-geometry-memory-study/geometry/parts/11-indexed-instrument-shell/stock.stl"
+    },
+    "fixtures": [
+      {
+        "type": "box",
+        "min": [
+          -18,
+          -18,
+          -40
+        ],
+        "max": [
+          18,
+          18,
+          0
+        ]
+      }
+    ],
+    "tools": {
+      "T12": {
+        "diameter_mm": 12,
+        "flute_length_mm": 60,
+        "shaft_diameter_mm": 12,
+        "shaft_length_mm": 30,
+        "holder_diameter_mm": 40,
+        "holder_length_mm": 30
+      },
+      "T8": {
+        "diameter_mm": 8,
+        "flute_length_mm": 60,
+        "shaft_diameter_mm": 8,
+        "shaft_length_mm": 30,
+        "holder_diameter_mm": 40,
+        "holder_length_mm": 30
+      }
+    },
+    "travel_limits": {
+      "min": [
+        -762,
+        -508,
+        -508
+      ],
+      "max": [
+        0,
+        0,
+        63.5
+      ]
+    },
+    "initial_position": [
+      0,
+      0,
+      180
+    ],
+    "initial_tool": "T12",
+    "moves": [],
+    "tolerance_mm": 3.0,
+    "resolution_mm": 1.0,
+    "max_cells": 2000000,
+    "rapid_mm_per_min": 6000,
+    "tool_change_seconds": 15,
+    "indexing": {
+      "pivot_mm": [
+        0,
+        -453.5294968,
+        50.8
+      ],
+      "work_offset_mm": [
+        0,
+        0,
+        40
+      ],
+      "initial_bc_degrees": [
+        0,
+        0
+      ],
+      "b_limits_degrees": [
+        -35,
+        110
+      ],
+      "degrees_per_second": 30,
+      "settle_seconds": 1,
+      "head_mount_mm": [
+        330,
+        254,
+        618.89
+      ],
+      "gauge_length_mm": 120
+    }
+  },
+  "target_sha256": "346f0a92dae06fbf7f56828b43b8d41a658a60a6fac9eea5109afb198701dad6",
+  "stock_sha256": "c9670761236a912980201f4dfc0c016d15add62ab77876d10c727e89530918c3",
+  "target_volume_mm3": 78418.26517600208,
+  "stock_volume_mm3": 141446.56274847966,
+  "limits": {
+    "cut_feed_mm_min": 900,
+    "plunge_feed_mm_min": 250,
+    "retract_feed_mm_min": 1200,
+    "max_stepdown_mm": 12
+  }
+}

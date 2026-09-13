@@ -1,0 +1,163 @@
+JOB 3f1703103c1f
+REVIEWED {"name": "Bearing Pocket", "summary": "Pre-sized aluminium 6061 box with one flat-bottom blind obround pocket. Stock origin is centred in X/Y at bottom Z=0; top Z=24. Coarse simulation demonstration, not a production drawing.", "stock_kind": "box", "stock_dimensions_mm": [64, 52, 24], "drawing_tolerance_mm": 3, "blockers": [], "features": [{"name": "Blind obround pocket", "a": [-12, 0], "b": [12, 0], "radius_mm": 10, "floor_z_mm": 8, "evidence_quote": "One blind obround pocket: end centres A=(-12,0), B=(12,0).\nPocket radius 10; absolute floor Z=8; flat bottom."}]}
+
+SOURCE
+http://127.0.0.1:2744/api/jobs/3f1703103c1f · actual local job state
+
+STAGE
+building_cad · Building and freezing the reviewed target
+
+REVIEWED DIMENSIONS
+{
+  "name": "Bearing Pocket",
+  "summary": "Pre-sized aluminium 6061 box with one flat-bottom blind obround pocket. Stock origin is centred in X/Y at bottom Z=0; top Z=24. Coarse simulation demonstration, not a production drawing.",
+  "stock_kind": "box",
+  "stock_dimensions_mm": [
+    64,
+    52,
+    24
+  ],
+  "drawing_tolerance_mm": 3,
+  "blockers": [],
+  "features": [
+    {
+      "name": "Blind obround pocket",
+      "a": [
+        -12,
+        0
+      ],
+      "b": [
+        12,
+        0
+      ],
+      "radius_mm": 10,
+      "floor_z_mm": 8,
+      "evidence_quote": "One blind obround pocket: end centres A=(-12,0), B=(12,0).\nPocket radius 10; absolute floor Z=8; flat bottom."
+    }
+  ]
+}
+
+STAGE
+reference_simulation · Measuring the fixed reference CAM on this part
+
+MEMORY LOADED
+12
+
+STAGE
+cam_planning · Astra is writing CAM candidate 1
+
+STAGE
+simulating · Removing stock for candidate 1
+
+FROZEN TARGET
+372e913269a7e1bea2fe978602f4e51a4b8858726355a7a39c2e51a3a6cdd917
+
+GENERATED CAM
+{
+  "summary": "Candidate uses maximum permitted feeds and stepdown, wider radial spacing, and clearance retracts to reduce reference machining time. Matches a supplied same-target prior strategy; this attempt still requires verification.",
+  "strategy": {
+    "stepover_fraction": 0.75,
+    "stepdown_mm": 12,
+    "cut_feed_mm_min": 900,
+    "plunge_feed_mm_min": 250,
+    "retract_feed_mm_min": 1200,
+    "segments_per_circle": 24,
+    "order": "tool",
+    "retract_mode": "clearance",
+    "shortest_c": true,
+    "junction_cleanup": false
+  }
+}
+
+STAGE
+preparing_playback · Preparing actual stock-removal playback
+
+VERIFICATION
+{
+  "candidate": 1,
+  "stage": "simulated",
+  "passed": true,
+  "issues": [],
+  "seconds": 25.852236294980724,
+  "artifact": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/3f1703103c1f/attempt-00"
+}
+
+STAGE
+judging · Timing judge is evaluating the passing plan
+
+STAGE
+cam_planning · Astra is writing CAM candidate 2
+
+TIMING JUDGE
+{
+  "action": "improve",
+  "reason": "Two attempts remain, and only one verified timing exists, so diminishing returns are not established. Further attempts may reduce the current best of 25.852 seconds.",
+  "guidance_proposal": null
+}
+
+STAGE
+simulating · Removing stock for candidate 2
+
+GENERATED CAM
+{
+  "summary": "Test 10 mm stepdown to change intermediate cutting depths while retaining maximum feeds. This candidate requires verification; the supplied evidence does not establish a time improvement over 25.852 seconds.",
+  "strategy": {
+    "stepover_fraction": 0.75,
+    "stepdown_mm": 10,
+    "cut_feed_mm_min": 900,
+    "plunge_feed_mm_min": 250,
+    "retract_feed_mm_min": 1200,
+    "segments_per_circle": 24,
+    "order": "tool",
+    "retract_mode": "clearance",
+    "shortest_c": true,
+    "junction_cleanup": false
+  }
+}
+
+STAGE
+preparing_playback · Preparing actual stock-removal playback
+
+VERIFICATION
+{
+  "candidate": 2,
+  "stage": "simulated",
+  "passed": true,
+  "issues": [],
+  "seconds": 25.85223629498072,
+  "artifact": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/3f1703103c1f/attempt-01"
+}
+
+STAGE
+judging · Timing judge is evaluating the passing plan
+
+STAGE
+completed · Timing judge accepted the verified plan.
+
+TIMING JUDGE
+{
+  "action": "stop",
+  "reason": "Both verified times are effectively identical at 25.8522 seconds, indicating diminishing returns with one attempt remaining.",
+  "guidance_proposal": null
+}
+
+RESULT
+{
+  "status": "completed",
+  "memory_saved": 13,
+  "evidence": {
+    "baseline_seconds": 80.74544471125378,
+    "best_seconds": 25.85223629498072,
+    "baseline_savings_percent": 67.98304054497628,
+    "within_run_savings_percent": 1.3742384365758986e-14,
+    "attempts": 2,
+    "simulated_attempts": 2,
+    "failures": 0,
+    "loaded_memory_version": 12,
+    "saved_memory_version": 13,
+    "stop_reason": "Timing judge accepted the verified plan.",
+    "claim": "Baseline savings measure CAM optimization, not a causal memory benefit. Memory transfer still requires controlled evaluation."
+  },
+  "manifest": "/api/jobs/3f1703103c1f/manifest.json"
+}
+REHEARSAL VERIFIED

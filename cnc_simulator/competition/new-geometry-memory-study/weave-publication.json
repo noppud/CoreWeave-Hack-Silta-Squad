@@ -1,0 +1,27 @@
+{
+  "dataset_uri": "weave:///silta/coreweave-hack-silta-squad/object/new-geometry-cam-memory-six-pairs:IFYP938IRlutBdn9mdVqYWcxdDPcAysziUCFfEIn7jU",
+  "protocol": {
+    "parts": [
+      "11-indexed-instrument-shell",
+      "12-three-pocket-plate"
+    ],
+    "repetitions": 3,
+    "order": "Alternating cold/warm within pair, reversed by part index",
+    "memory_sha256": "af724457b4be5d76f66e2af85a06088cab63534e7c7999ebd09bbcffac7a6083",
+    "scope": "Pre-registered new geometry applicability screen. Frozen actuator-only memory, no study updates. No exposed model sampling seed; ephemeral calls recorded. Not general manufacturing validation.",
+    "objective": "Machining seconds only among passing paired plans. All failures and inference errors retained."
+  },
+  "scope": "Publication scores retained files from fresh 12-proposal experiment; this evaluation runtime is not simulator runtime.",
+  "evaluations": [
+    {
+      "arm": "cold",
+      "url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a09961-b52b-7203-8e0b-53f19ffac526",
+      "readback_complete": true
+    },
+    {
+      "arm": "warm",
+      "url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a09961-be9a-7090-a59b-c244be4f6ac7",
+      "readback_complete": true
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "validity": "valid",
+  "passed": true,
+  "verification": "verified",
+  "issues": [],
+  "estimated_time_seconds": 130.22065744256136,
+  "time_breakdown": {
+    "cutting": 97.91542161206475,
+    "rapid": 5.305235830496608,
+    "dwell": 0.0,
+    "tool_changes": 15.0,
+    "indexing": 12.0
+  },
+  "timing_assumptions": "Constant commanded vector feed/rapid speed; no acceleration, jerk, lookahead, spindle ramp or controller blending. Cut includes air cutting and plunge/retract. Tool changes add fixed duration, with no implicit travel. Full submitted plan timed even if invalid. Indexed B/C rotation uses simultaneous constant angular speeds plus settle time. No cutting during indexing.",
+  "scope": "Indexed 3+2 only; table-attached stock and fixtures. Tool-section collision and configured axis limits; whole-machine self-collision is not certified. Gauge length is fixed across tools.",
+  "target_sha256": "f92bc8c52db4a9546317500ff3e6eb4804e2b32a6b39590aebad9f8b2fcb2f04",
+  "numerics": {
+    "resolution_mm": 1.0,
+    "cell_radius_mm": 0.8660255037844385,
+    "cells": 368640,
+    "geometry_backend": "trimesh signed distance; double precision, not exact arithmetic"
+  },
+  "stock_metrics": {
+    "initial_nominal_volume_mm3": 184512.0,
+    "final_nominal_volume_mm3": 128416.0,
+    "removed_nominal_volume_mm3": 56096.0,
+    "removed_volume_bounds_mm3": [
+      47488.0,
+      100640.0
+    ],
+    "final_volume_bounds_mm3": [
+      104160.0,
+      153524.0
+    ]
+  },
+  "artifacts": {
+    "final_stock": "final_stock.ply",
+    "lower_stock": "final_stock_lower.ply",
+    "upper_stock": "final_stock_upper.ply",
+    "states": [
+      "states/00000.npz",
+      "states/00029.npz",
+      "states/00058.npz",
+      "states/00087.npz",
+      "states/00116.npz",
+      "states/00145.npz",
+      "states/00174.npz",
+      "states/00203.npz",
+      "states/00232.npz",
+      "states/00261.npz",
+      "states/00290.npz",
+      "states/00319.npz",
+      "states/00348.npz",
+      "states/00356.npz"
+    ],
+    "trajectory": "trajectory.json"
+  }
+}

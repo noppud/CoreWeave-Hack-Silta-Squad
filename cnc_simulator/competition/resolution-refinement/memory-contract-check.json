@@ -1,0 +1,5 @@
+{
+  "original_contract_rejected": true,
+  "refined_contract_rejected": false,
+  "scope": "Saved check correctly abstains after resolution/cell-budget change. This does not determine the new simulation verdict."
+}

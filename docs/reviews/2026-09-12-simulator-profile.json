@@ -1,0 +1,29 @@
+[
+  {
+    "mode": "cold_compute_only",
+    "seconds": 20.545,
+    "passed": true,
+    "moves": 331,
+    "cells": 368640,
+    "resolution_mm": 1.0,
+    "tolerance_mm": 3.0
+  },
+  {
+    "mode": "warm_compute_only",
+    "seconds": 3.123,
+    "passed": true,
+    "moves": 331,
+    "cells": 368640,
+    "resolution_mm": 1.0,
+    "tolerance_mm": 3.0
+  },
+  {
+    "mode": "warm_with_exports",
+    "seconds": 3.803,
+    "passed": true,
+    "moves": 331,
+    "cells": 368640,
+    "resolution_mm": 1.0,
+    "tolerance_mm": 3.0
+  }
+]

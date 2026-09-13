@@ -1,0 +1,71 @@
+{
+  "ready": true,
+  "checks": [
+    {
+      "name": "Downloaded machine meshes",
+      "passed": true,
+      "detail": {
+        "meshes": 58,
+        "groups": [
+          "B-Axis:1",
+          "C-Axis:1",
+          "Spindle:1",
+          "Static:1",
+          "X-Axis:1",
+          "Y-Axis:1",
+          "Z-Axis:1"
+        ],
+        "sha256": "80832d98d84f810bbb75ae31b19cbe128d96407984f29392aa047bc6759e52d3",
+        "provenance": {
+          "source": "https://cam.autodesk.com/machineslist",
+          "definition_url": "https://cam.autodesk.com/machines/download.php?name=haas%20umc-750%20reboot.mch",
+          "model_url": "https://cam.autodesk.com/machines/machines/haas%20umc-750%20reboot.f3d",
+          "machine": "Haas UMC-750 Reboot",
+          "axes": [
+            "X",
+            "Y",
+            "Z",
+            "B",
+            "C"
+          ],
+          "conversion": "One-time Fusion tessellation; standalone simulator and viewer do not require Fusion",
+          "visual_mesh_tolerance_mm": 0.2,
+          "files": {
+            "export-receipt.json": "d8d73c6e2822bbde819dd9f1d4a44def7eae25d51210c4ca542eef362f487b7b",
+            "haas-umc750.mch": "ed825408f4d43ba7382da9863b8d1ef38e63f760dee26ac79fb7f2dc4e6b3f08",
+            "haas-umc750.f3d": "b33ed15419fdf3234f1a6269f86676ab5b2fda5b2e2044d460499192bba4f403",
+            "machine-raw.json": "fe2cea579bd7343c7fb232d180c4e392bdafd40f8e46782b6a3ddf0daa0f9a7d"
+          }
+        }
+      }
+    },
+    {
+      "name": "Completed job and frozen target",
+      "passed": true,
+      "detail": {
+        "job": "3f1703103c1f",
+        "seconds": 25.85223629498072,
+        "memory_version": 13,
+        "target_unchanged": true,
+        "trace_readback": true
+      }
+    },
+    {
+      "name": "Stock-removal playback buffers",
+      "passed": true,
+      "detail": {
+        "frames": 33,
+        "duration": 25.85223629498072
+      }
+    },
+    {
+      "name": "Under-two-minute verified film",
+      "passed": true,
+      "detail": {
+        "seconds": 115.96000000000001,
+        "sha256": "f9a8381b8543cc7e0e0bdb5293ba596766e70a009e509d64c26c898656b9620e"
+      }
+    }
+  ],
+  "scope": "Local artifact/readiness checks; not a new machining simulation or judge-access verification."
+}

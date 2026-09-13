@@ -1,0 +1,23 @@
+{
+  "model": "gpt-6-astra",
+  "requested_service_tier": "fast",
+  "reasoning_effort": "low",
+  "role": "indexed_planner",
+  "value": {
+    "summary": "Candidate reduces depth layers, contour passes, tool changes, and retract travel while using maximum permitted feeds. Requires compiler verification.",
+    "strategy": {
+      "stepover_fraction": 0.85,
+      "stepdown_mm": 12,
+      "cut_feed_mm_min": 900,
+      "plunge_feed_mm_min": 250,
+      "retract_feed_mm_min": 1200,
+      "segments_per_circle": 64,
+      "order": "tool",
+      "retract_mode": "clearance",
+      "shortest_c": true,
+      "junction_cleanup": false
+    }
+  },
+  "thread_id": "01a09955-83ae-7810-8e6b-7b1e17acbe44",
+  "turn_id": "01a09955-83e9-7eb3-9424-67379b47a082"
+}

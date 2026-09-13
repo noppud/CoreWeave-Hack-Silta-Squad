@@ -1,0 +1,10 @@
+{
+  "total_pairs": 6,
+  "passing_pairs": 6,
+  "warm_faster": 3,
+  "cold_faster": 2,
+  "ties": 1,
+  "median_warm_minus_cold_seconds": -0.501220597393413,
+  "cold_total_seconds": 1132.148598815425,
+  "warm_total_seconds": 974.9235676014165
+}

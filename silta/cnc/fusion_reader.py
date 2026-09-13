@@ -7,6 +7,8 @@ this reader observes the authorized app and provides fixed window-focus steps.
 from __future__ import annotations
 
 import json
+import re
+import uuid
 from pathlib import Path
 from typing import Any
 
@@ -28,34 +30,6 @@ _READ_SCREENSHOT = (
     "if (siltaObservation.screenshot) await nodeRepl.emitImage(siltaObservation.screenshot);"
 )
 _FOCUS_NEXT_PANEL = 'await siltaFusion.pressKey("ctrl+F6"); ' + _READ
-_BRING_TO_FRONT = r"""
-{
-    const findMenuIndex = (state, label) => {
-        const matches = state.split("\n").map(line =>
-            line.match(/^\s*(\d+)\s+(?:(?:menu item|menu)\s+)?(.+?)\s*$/)
-        ).filter(match => match &&
-            match[2].split(/, (?=ID:|Secondary Actions:)/, 1)[0] === label);
-        if (matches.length !== 1)
-            throw new Error("Expected one visible Fusion menu item: " + label);
-        return Number(matches[0][1]);
-    };
-    let before = null;
-    let menu = null;
-    try {
-        before = await siltaFusion.getAXState({disableDiffing: true, emit: false});
-        await siltaFusion.click(findMenuIndex(before, "Window"));
-        menu = await siltaFusion.getAXState({disableDiffing: true, emit: false});
-        await siltaFusion.click(findMenuIndex(menu, "Bring All to Front"));
-        nodeRepl.write("SILTA_FUSION_AX_JSON:" + JSON.stringify(
-            await siltaFusion.getAXState({disableDiffing: true, emit: false})));
-    } catch (error) {
-        nodeRepl.write("SILTA_FUSION_FOCUS_ERROR_JSON:" + JSON.stringify({
-            before, menu, error: String(error)
-        }));
-        throw error;
-    }
-}
-""".strip()
 
 
 class _McpReply(BaseModel):
@@ -138,8 +112,22 @@ class FusionUIReader:
         return self._snapshot(evidence)
 
     def bring_to_front(self) -> dict:
-        """Use observed Window > Bring All to Front labels; never guess indexes."""
-        return self._snapshot(self._call(_BRING_TO_FRONT))
+        """Activate the exact observed document with the proven native transport."""
+        from .stock_export import StockExporter
+
+        observation = self.read()
+        match = re.search(r'^Window:\s*"(.+?) - Autodesk Fusion', observation["raw_text"], re.M)
+        if match is None:
+            raise RuntimeError("Fusion focus requires the observed document title")
+        native = StockExporter(match.group(1), self.workspace / f"native-focus-{uuid.uuid4().hex}")
+        focused = native.ui("focus")
+        # Dismiss only an observed application menu left by an earlier attempt.
+        after = self.read()
+        if any(w["title"] == "Window" for w in focused["windows"]) or re.search(
+            r"(?m)^\s*\d+ Window, Secondary Actions: Cancel", after["raw_text"]
+        ):
+            focused = native.ui("key", "escape")
+        return {"native_focus": focused, "before": observation, **self.read()}
 
     def focus_next_panel(self) -> dict:
         """Advance native panel focus once and return its new full observation."""

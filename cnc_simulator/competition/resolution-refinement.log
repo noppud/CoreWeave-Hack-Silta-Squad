@@ -1,0 +1,17 @@
+START 02-hydraulic-manifold-0.708-0
+02-hydraulic-manifold-0.708-0 MOVE -1 / 330
+02-hydraulic-manifold-0.708-0 MOVE 99 / 330
+02-hydraulic-manifold-0.708-0 MOVE 199 / 330
+02-hydraulic-manifold-0.708-0 MOVE 271 / 330
+RESULT 02-hydraulic-manifold-0.708-0 True verified []
+START 04-trunnion-cage-0.95-0
+04-trunnion-cage-0.95-0 MOVE -1 / 596
+04-trunnion-cage-0.95-0 MOVE 170 / 596
+04-trunnion-cage-0.95-0 MOVE 220 / 596
+04-trunnion-cage-0.95-0 MOVE 300 / 596
+04-trunnion-cage-0.95-0 MOVE 383 / 596
+04-trunnion-cage-0.95-0 MOVE 462 / 596
+04-trunnion-cage-0.95-0 MOVE 531 / 596
+04-trunnion-cage-0.95-0 MOVE 595 / 596
+RESULT 04-trunnion-cage-0.95-0 False unresolved [{'code': 'excess_material', 'certainty': 'uncertain', 'moves': [], 'description': 'Final stock has excess material beyond target tolerance. Resolution cannot establish a pass.'}]
+COMPLETE

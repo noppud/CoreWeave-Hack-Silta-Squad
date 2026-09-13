@@ -1,0 +1,50 @@
+{
+  "machine": {
+    "path": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/assets/machine/machine-raw.json",
+    "bodies": 11,
+    "triangles": 6204,
+    "groups": [
+      "Static:1",
+      "X-Axis:1",
+      "Y-Axis:1",
+      "Z-Axis:1",
+      "Spindle:1"
+    ]
+  },
+  "fixture": {
+    "path": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/assets/machine/fixture-raw.json",
+    "bodies": 19,
+    "triangles": 10272,
+    "groups": [
+      "Component1:1",
+      "Component2:1",
+      "Component3:1",
+      "Component4:1",
+      "Component5:1",
+      "Component6:1",
+      "Component7:1",
+      "Component8:1",
+      "Component9:1",
+      "Component10:1",
+      "Component11:1",
+      "Component12:1",
+      "Component13:1",
+      "Component14:1",
+      "Component15:1",
+      "Component16:1",
+      "Component17:1",
+      "Haas 09-0108 parallel envelope 1:1",
+      "Haas 09-0108 parallel envelope 2:1"
+    ]
+  },
+  "target": {
+    "path": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/assets/machine/target-raw.json",
+    "bodies": 1,
+    "triangles": 292,
+    "groups": [
+      "root"
+    ]
+  },
+  "active_document_unchanged": true,
+  "active_command_unchanged": true
+}

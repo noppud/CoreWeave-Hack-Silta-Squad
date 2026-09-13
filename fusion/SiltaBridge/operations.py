@@ -91,6 +91,10 @@ def dispatch(app, action, payload):
         }
     if action == "inspect":
         return {"result": _inspect(app)}
+    if action == "presentation_camera":
+        from .presentation import frame
+        # Camera changes must not exit the active machine simulation.
+        return {"result": frame(app, payload), "coverage": ["presentation_camera_only"]}
     if action == "simulation_dialog":
         # Read the current dialog without ending simulation. This text-command
         # workaround is not a typed verification API; preserve raw evidence.

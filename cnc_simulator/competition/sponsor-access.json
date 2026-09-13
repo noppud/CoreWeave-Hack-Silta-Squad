@@ -1,0 +1,26 @@
+{
+  "checked_at": 1789276240.0723178,
+  "entity": "silta",
+  "project": "coreweave-hack-silta-squad",
+  "wandb": {
+    "accessible": true,
+    "recent_runs": [
+      {
+        "id": "3ewo9emy",
+        "state": "finished"
+      },
+      {
+        "id": "s6ya34ov",
+        "state": "finished"
+      },
+      {
+        "id": "lzc0tlhc",
+        "state": "crashed"
+      }
+    ]
+  },
+  "sandbox": {
+    "available": false,
+    "error": "Create sandbox failed: project not found"
+  }
+}

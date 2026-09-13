@@ -1,0 +1,8 @@
+{
+  "archive_sha256": "fbb3902ef1bb356e2c7ee54eacbe7a09743c584a9d2080525d80fe469519d39b",
+  "prepared_parts": 3,
+  "initial_memory_version": 0,
+  "no_runs_created": true,
+  "overwrite_refused": true,
+  "scope": "Extracted source CAD preparation and seed-free startup; no model or machining simulation in this check"
+}

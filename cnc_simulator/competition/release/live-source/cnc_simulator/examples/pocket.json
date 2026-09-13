@@ -1,0 +1,106 @@
+{
+  "units": "mm",
+  "target": {
+    "type": "mesh",
+    "path": "pocket_target.stl"
+  },
+  "stock": {
+    "type": "box",
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      12,
+      10,
+      6
+    ]
+  },
+  "tools": {
+    "T1": {
+      "diameter_mm": 4,
+      "flute_length_mm": 8,
+      "shaft_diameter_mm": 4,
+      "shaft_length_mm": 4,
+      "holder_diameter_mm": 6,
+      "holder_length_mm": 4
+    },
+    "T2": {
+      "diameter_mm": 4,
+      "flute_length_mm": 8,
+      "shaft_diameter_mm": 4,
+      "shaft_length_mm": 4,
+      "holder_diameter_mm": 6,
+      "holder_length_mm": 4
+    }
+  },
+  "fixtures": [],
+  "travel_limits": {
+    "min": [
+      -20,
+      -20,
+      0
+    ],
+    "max": [
+      30,
+      30,
+      30
+    ]
+  },
+  "initial_position": [
+    2,
+    5,
+    8
+  ],
+  "initial_tool": "T1",
+  "tolerance_mm": 0.6,
+  "resolution_mm": 0.2,
+  "rapid_mm_per_min": 600,
+  "tool_change_seconds": 4,
+  "moves": [
+    {
+      "type": "rapid",
+      "to": [
+        4,
+        5,
+        8
+      ]
+    },
+    {
+      "type": "tool_change",
+      "tool": "T2"
+    },
+    {
+      "type": "cut",
+      "to": [
+        4,
+        5,
+        3
+      ],
+      "feed_mm_per_min": 120
+    },
+    {
+      "type": "cut",
+      "to": [
+        8,
+        5,
+        3
+      ],
+      "feed_mm_per_min": 120
+    },
+    {
+      "type": "cut",
+      "to": [
+        8,
+        5,
+        8
+      ],
+      "feed_mm_per_min": 120
+    },
+    {
+      "type": "dwell",
+      "seconds": 1
+    }
+  ]
+}

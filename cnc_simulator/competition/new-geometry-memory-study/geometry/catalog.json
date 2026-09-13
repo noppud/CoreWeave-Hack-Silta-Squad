@@ -1,0 +1,19 @@
+{
+  "parts": [
+    {
+      "id": "11-indexed-instrument-shell",
+      "name": "Indexed instrument shell",
+      "split": "pre_registered_transfer",
+      "job": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/new-geometry-memory-study/geometry/parts/11-indexed-instrument-shell/job.json"
+    },
+    {
+      "id": "12-three-pocket-plate",
+      "name": "Three-pocket fixture plate",
+      "split": "pre_registered_transfer",
+      "job": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/new-geometry-memory-study/geometry/parts/12-three-pocket-plate/job.json"
+    }
+  ],
+  "objective": "estimated machining seconds; geometry and configured collisions are pass/fail",
+  "machine": "Haas UMC-750 Reboot; indexed 3+2",
+  "learning_split": "Two development parts; eight held-out geometries unseen by learning prompts before guidance freeze"
+}

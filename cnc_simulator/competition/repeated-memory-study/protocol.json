@@ -1,0 +1,11 @@
+{
+  "parts": [
+    "03-bearing-block",
+    "04-trunnion-cage"
+  ],
+  "repetitions": 3,
+  "order": "Alternating cold/warm within pair, reversed by part index",
+  "memory_sha256": "af724457b4be5d76f66e2af85a06088cab63534e7c7999ebd09bbcffac7a6083",
+  "scope": "New model proposals and simulations on two existing benchmark parts, frozen memory from actuator only. No within-study updates. Selected-part transfer experiment, not unseen-part or physical validation.",
+  "objective": "Machining seconds only among passing paired plans. All failures and inference errors retained."
+}

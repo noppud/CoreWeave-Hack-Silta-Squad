@@ -1,0 +1,23 @@
+{
+  "model": "gpt-6-astra",
+  "requested_service_tier": "fast",
+  "reasoning_effort": "low",
+  "role": "indexed_planner",
+  "value": {
+    "summary": "Candidate for verification: maximum permitted feeds and stepdown, 0.75 stepover for two cavity contours, clearance retracts, and shortest C indexing. Validity and timing require simulation.",
+    "strategy": {
+      "stepover_fraction": 0.75,
+      "stepdown_mm": 12,
+      "cut_feed_mm_min": 900,
+      "plunge_feed_mm_min": 250,
+      "retract_feed_mm_min": 1200,
+      "segments_per_circle": 24,
+      "order": "tool",
+      "retract_mode": "clearance",
+      "shortest_c": true,
+      "junction_cleanup": false
+    }
+  },
+  "thread_id": "01a09953-6414-7170-bc49-2fc4a0224494",
+  "turn_id": "01a09953-6456-7300-b5bf-f94e49b8beb1"
+}

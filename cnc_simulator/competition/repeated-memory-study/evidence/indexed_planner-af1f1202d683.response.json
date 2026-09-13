@@ -1,0 +1,23 @@
+{
+  "model": "gpt-6-astra",
+  "requested_service_tier": "fast",
+  "reasoning_effort": "low",
+  "role": "indexed_planner",
+  "value": {
+    "summary": "Proposed faster strategy using maximum permitted feeds and stepdown, wider radial spacing, clearance retracts, and shortest C indexing. Requires verification.",
+    "strategy": {
+      "stepover_fraction": 0.8,
+      "stepdown_mm": 12,
+      "cut_feed_mm_min": 900,
+      "plunge_feed_mm_min": 250,
+      "retract_feed_mm_min": 1200,
+      "segments_per_circle": 48,
+      "order": "orientation",
+      "retract_mode": "clearance",
+      "shortest_c": true,
+      "junction_cleanup": false
+    }
+  },
+  "thread_id": "01a09956-470d-7fa2-928e-c06d8279c9a7",
+  "turn_id": "01a09956-474a-7e91-b436-c05dea7fb4cf"
+}

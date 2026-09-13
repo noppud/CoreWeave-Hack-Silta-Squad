@@ -1,0 +1,10 @@
+{
+  "part": "05-flanged-sleeve",
+  "source_plan_sha256": "d9b75e213e672f219bd746469f03736d32cff3bcdd8e167b8d2ac95aeb2b455d",
+  "frames": 42,
+  "bytes": 2450976,
+  "final_display_volume_mm3": 85187.07196992946,
+  "within_verifier_bounds": true,
+  "passed": true,
+  "method": "Boolean subtraction of swept inscribed 64-sided cutters; display copy simplified <=0.005 mm. No target geometry used to construct stock."
+}

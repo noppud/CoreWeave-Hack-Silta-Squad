@@ -1,0 +1,181 @@
+{
+  "id": "12-three-pocket-plate",
+  "name": "Three-pocket fixture plate",
+  "split": "pre_registered_transfer",
+  "stock_shape": {
+    "kind": "box",
+    "size": [
+      80,
+      56,
+      24
+    ]
+  },
+  "features": [
+    {
+      "name": "Left recess",
+      "bc": [
+        0,
+        0
+      ],
+      "a": [
+        -25,
+        -9,
+        8
+      ],
+      "b": [
+        -16,
+        -9,
+        8
+      ],
+      "radius": 7,
+      "tool": "T12",
+      "surface_z": 64.0
+    },
+    {
+      "name": "Right recess",
+      "bc": [
+        0,
+        0
+      ],
+      "a": [
+        16,
+        -9,
+        10
+      ],
+      "b": [
+        25,
+        -9,
+        10
+      ],
+      "radius": 7,
+      "tool": "T12",
+      "surface_z": 64.0
+    },
+    {
+      "name": "Rear circular seat",
+      "bc": [
+        0,
+        0
+      ],
+      "a": [
+        0,
+        13,
+        12
+      ],
+      "b": [
+        0,
+        13,
+        12
+      ],
+      "radius": 8,
+      "tool": "T12",
+      "surface_z": 64.0
+    }
+  ],
+  "plan": {
+    "units": "mm",
+    "target": {
+      "type": "mesh",
+      "path": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/new-geometry-memory-study/geometry/parts/12-three-pocket-plate/target.stl"
+    },
+    "stock": {
+      "type": "mesh",
+      "path": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/new-geometry-memory-study/geometry/parts/12-three-pocket-plate/stock.stl"
+    },
+    "fixtures": [
+      {
+        "type": "box",
+        "min": [
+          -18,
+          -18,
+          -40
+        ],
+        "max": [
+          18,
+          18,
+          0
+        ]
+      }
+    ],
+    "tools": {
+      "T12": {
+        "diameter_mm": 12,
+        "flute_length_mm": 60,
+        "shaft_diameter_mm": 12,
+        "shaft_length_mm": 30,
+        "holder_diameter_mm": 40,
+        "holder_length_mm": 30
+      },
+      "T8": {
+        "diameter_mm": 8,
+        "flute_length_mm": 60,
+        "shaft_diameter_mm": 8,
+        "shaft_length_mm": 30,
+        "holder_diameter_mm": 40,
+        "holder_length_mm": 30
+      }
+    },
+    "travel_limits": {
+      "min": [
+        -762,
+        -508,
+        -508
+      ],
+      "max": [
+        0,
+        0,
+        63.5
+      ]
+    },
+    "initial_position": [
+      0,
+      0,
+      180
+    ],
+    "initial_tool": "T12",
+    "moves": [],
+    "tolerance_mm": 3.0,
+    "resolution_mm": 1.0,
+    "max_cells": 2000000,
+    "rapid_mm_per_min": 6000,
+    "tool_change_seconds": 15,
+    "indexing": {
+      "pivot_mm": [
+        0,
+        -453.5294968,
+        50.8
+      ],
+      "work_offset_mm": [
+        0,
+        0,
+        40
+      ],
+      "initial_bc_degrees": [
+        0,
+        0
+      ],
+      "b_limits_degrees": [
+        -35,
+        110
+      ],
+      "degrees_per_second": 30,
+      "settle_seconds": 1,
+      "head_mount_mm": [
+        330,
+        254,
+        618.89
+      ],
+      "gauge_length_mm": 120
+    }
+  },
+  "target_sha256": "7d6885a2eab80ffcb33371a3525ab63991bcb85ee753b88c95ba417c1aded6b8",
+  "stock_sha256": "79e3123578cfd2c79590132e219a5d676a830d7540ff55fc2833fee2f6785644",
+  "target_volume_mm3": 96720.40447810038,
+  "stock_volume_mm3": 107520.0,
+  "limits": {
+    "cut_feed_mm_min": 900,
+    "plunge_feed_mm_min": 250,
+    "retract_feed_mm_min": 1200,
+    "max_stepdown_mm": 12
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "name": "Eight-face actuator housing",
+  "stock_radius_mm": 50,
+  "stock_height_mm": 80,
+  "cavity_radius_mm": 34,
+  "cavity_floor_mm": 12,
+  "faces": 8,
+  "phases": [
+    {
+      "move": 0,
+      "name": "Open central cavity"
+    },
+    {
+      "move": 1129,
+      "name": "Index and machine face 1"
+    },
+    {
+      "move": 1163,
+      "name": "Index and machine face 2"
+    },
+    {
+      "move": 1197,
+      "name": "Index and machine face 3"
+    },
+    {
+      "move": 1231,
+      "name": "Index and machine face 4"
+    },
+    {
+      "move": 1265,
+      "name": "Index and machine face 5"
+    },
+    {
+      "move": 1299,
+      "name": "Index and machine face 6"
+    },
+    {
+      "move": 1333,
+      "name": "Index and machine face 7"
+    },
+    {
+      "move": 1367,
+      "name": "Index and machine face 8"
+    },
+    {
+      "move": 1401,
+      "name": "Index to top and machine flange holes"
+    }
+  ],
+  "target_volume_mm3": 279594.3545509194,
+  "stock_volume_mm3": 627870.0406093736,
+  "description": "Reference-inspired demonstration geometry, not a reproduction or production-qualified part."
+}

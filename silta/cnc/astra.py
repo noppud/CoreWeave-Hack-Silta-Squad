@@ -10,10 +10,13 @@ from pathlib import Path
 
 from openai_codex import ApprovalMode, Codex, CodexConfig, Sandbox, Thread
 from openai_codex.client import CodexClient
+from openai_codex.generated.v2_all import ReasoningEffort
 
 from .approvals import FusionAppApproval
 
 MODEL = "gpt-6-astra"
+REASONING_EFFORT = "low"
+SERVICE_TIER = "fast"
 DESKTOP_CODEX = "/Applications/ChatGPT.app/Contents/Resources/codex"
 
 
@@ -38,6 +41,10 @@ class AstraClient:
                 self.binary,
                 "-c",
                 f"features.plugins={'true' if self.computer_use else 'false'}",
+                "-c",
+                f'model_reasoning_effort="{REASONING_EFFORT}"',
+                "-c",
+                f'service_tier="{SERVICE_TIER}"',
                 "app-server",
                 "--listen",
                 "stdio://",
@@ -70,6 +77,7 @@ class AstraClient:
                 yield codex.thread_start(
                     model=MODEL,
                     model_provider="openai",
+                    service_tier=SERVICE_TIER,
                     cwd=str(workspace.resolve()),
                     ephemeral=True,
                     approval_mode=ApprovalMode.deny_all,
@@ -91,6 +99,7 @@ class AstraClient:
                 {
                     "model": MODEL,
                     "modelProvider": "openai",
+                    "serviceTier": SERVICE_TIER,
                     "cwd": str(workspace.resolve()),
                     "ephemeral": True,
                     "approvalPolicy": "on-request",
@@ -118,7 +127,12 @@ class AstraClient:
             )
         )
         with self._thread(workspace, instructions) as thread:
-            result = thread.run(prompt, output_schema=schema)
+            result = thread.run(
+                prompt,
+                output_schema=schema,
+                effort=ReasoningEffort.low,
+                service_tier=SERVICE_TIER,
+            )
             if result.status.value != "completed" or not result.final_response:
                 raise RuntimeError("Astra turn did not complete; no fallback or automatic retry")
             value = json.loads(result.final_response)
@@ -137,6 +151,8 @@ class AstraClient:
                 json.dumps(
                     {
                         "model": MODEL,
+                        "requested_reasoning_effort": REASONING_EFFORT,
+                        "requested_service_tier": SERVICE_TIER,
                         "turn_id": result.id,
                         "thread_id": str(thread.id),
                         "items": evidence_items,

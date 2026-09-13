@@ -1,0 +1,17 @@
+{
+  "url": "https://app.agihouse.org/events/coreweave-hacks-agent-loops-hackathon-with-weights",
+  "observed_title": "CoreWeave Hacks: Agent Loops Hackathon (@ CoreWeave Office)",
+  "observed_event_date": "September 12, 2026",
+  "authenticated": false,
+  "login_methods": [
+    "email magic link",
+    "Google"
+  ],
+  "submission_fields_visible": false,
+  "account_search": "Bitwarden unlocked; no AGI House match",
+  "action_taken": "Read public event and sign-in form only; no login link requested, registration or submission performed",
+  "missing_input": [
+    "existing AGI House account email",
+    "final team roster"
+  ]
+}

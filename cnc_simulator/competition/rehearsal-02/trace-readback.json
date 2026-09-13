@@ -1,0 +1,642 @@
+{
+  "url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a09945-ada6-7888-b42d-02956b066251",
+  "root_output": {
+    "status": "completed",
+    "loop_evidence": {
+      "baseline_seconds": 125.51800108171687,
+      "best_seconds": 27.263982725443416,
+      "baseline_savings_percent": 78.27882655038974,
+      "within_run_savings_percent": 0.0,
+      "attempts": 3,
+      "simulated_attempts": 3,
+      "failures": 0,
+      "loaded_memory_version": 10,
+      "saved_memory_version": 11,
+      "stop_reason": "Timing judge accepted the verified plan.",
+      "claim": "Baseline savings measure CAM optimization, not a causal memory benefit. Memory transfer still requires controlled evaluation."
+    },
+    "paired_signals": {
+      "paired_coverage": true,
+      "improvement_percent": 78.27882655038974
+    },
+    "target_sha256": "e62d3e19bef2717f670beca00d0d5c729beb3dc8cf6c1f4500654ae0d4ff2119",
+    "stop_reason": "Timing judge accepted the verified plan.",
+    "error": null
+  },
+  "stages": [
+    {
+      "id": "01a09945-ada7-7677-9bc2-eaa170c3c90c",
+      "op": "weave:///silta/coreweave-hack-silta-squad/op/programmatic_reference_simulation:6jAV4T6F42RKlabeB2RO0BXkbFFPrKyU2yyQedpotB8",
+      "ended": true,
+      "output": {
+        "stage": "reference_simulation",
+        "attempts_completed": 0,
+        "reference": {
+          "strategy": {
+            "stepover_fraction": 0.35,
+            "stepdown_mm": 6,
+            "cut_feed_mm_min": 350,
+            "plunge_feed_mm_min": 120,
+            "retract_feed_mm_min": 700,
+            "segments_per_circle": 48,
+            "order": "orientation",
+            "retract_mode": "park",
+            "shortest_c": false
+          },
+          "path": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/056866dee37c/reference",
+          "stage": "simulated",
+          "result": {
+            "validity": "valid",
+            "passed": true,
+            "verification": "verified",
+            "issues": [],
+            "estimated_time_seconds": 125.51800108171687,
+            "time_breakdown": {
+              "cutting": 123.3447086485639,
+              "rapid": 2.1732924331529797,
+              "dwell": 0.0,
+              "tool_changes": 0.0,
+              "indexing": 0.0
+            },
+            "timing_assumptions": "Constant commanded vector feed/rapid speed; no acceleration, jerk, lookahead, spindle ramp or controller blending. Cut includes air cutting and plunge/retract. Tool changes add fixed duration, with no implicit travel. Full submitted plan timed even if invalid. Indexed B/C rotation uses simultaneous constant angular speeds plus settle time. No cutting during indexing.",
+            "scope": "Indexed 3+2 only; table-attached stock and fixtures. Tool-section collision and configured axis limits; whole-machine self-collision is not certified. Gauge length is fixed across tools.",
+            "target_sha256": "e62d3e19bef2717f670beca00d0d5c729beb3dc8cf6c1f4500654ae0d4ff2119",
+            "numerics": {
+              "resolution_mm": 1.0,
+              "cell_radius_mm": 0.8660255037844385,
+              "cells": 283272,
+              "geometry_backend": "trimesh signed distance; double precision, not exact arithmetic"
+            },
+            "stock_metrics": {
+              "initial_nominal_volume_mm3": 96768.0,
+              "final_nominal_volume_mm3": 82432.0,
+              "removed_nominal_volume_mm3": 14336.0,
+              "removed_volume_bounds_mm3": [
+                11040.0,
+                44504.0
+              ],
+              "final_volume_bounds_mm3": [
+                67088.0,
+                98712.0
+              ]
+            },
+            "artifacts": {
+              "final_stock": "final_stock.ply",
+              "lower_stock": "final_stock_lower.ply",
+              "upper_stock": "final_stock_upper.ply",
+              "states": [
+                "states/00000.npz",
+                "states/00026.npz",
+                "states/00052.npz",
+                "states/00078.npz",
+                "states/00104.npz",
+                "states/00130.npz",
+                "states/00156.npz",
+                "states/00182.npz",
+                "states/00208.npz",
+                "states/00234.npz",
+                "states/00260.npz",
+                "states/00286.npz",
+                "states/00312.npz",
+                "states/00318.npz"
+              ],
+              "trajectory": "trajectory.json"
+            }
+          },
+          "moves": 318,
+          "wall_seconds": 9.02170991897583
+        }
+      }
+    },
+    {
+      "id": "01a09945-d0e7-764a-b5ee-048d6ca8288b",
+      "op": "weave:///silta/coreweave-hack-silta-squad/op/programmatic_cam_planning:6jAV4T6F42RKlabeB2RO0BXkbFFPrKyU2yyQedpotB8",
+      "ended": true,
+      "output": {
+        "stage": "cam_planning",
+        "attempts_completed": 0,
+        "proposal": {
+          "index": 0,
+          "proposal": {
+            "summary": "Use the supplied same-target strategy that previously achieved 27.264 seconds: larger stepover, 7 mm depth layers, maximum permitted feeds, and clearance retracts. This candidate still requires current verification.",
+            "strategy": {
+              "stepover_fraction": 0.75,
+              "stepdown_mm": 7,
+              "cut_feed_mm_min": 900,
+              "plunge_feed_mm_min": 250,
+              "retract_feed_mm_min": 1200,
+              "segments_per_circle": 24,
+              "order": "tool",
+              "retract_mode": "clearance",
+              "shortest_c": true,
+              "junction_cleanup": false
+            }
+          },
+          "evidence": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/056866dee37c/evidence/indexed_planner-43dfb903a52d.response.json",
+          "move_count": 63
+        }
+      }
+    },
+    {
+      "id": "01a09945-e8dd-704b-b96e-033e0a4916dd",
+      "op": "weave:///silta/coreweave-hack-silta-squad/op/programmatic_checks:6jAV4T6F42RKlabeB2RO0BXkbFFPrKyU2yyQedpotB8",
+      "ended": true,
+      "output": {
+        "stage": "checks",
+        "attempts_completed": 0
+      }
+    },
+    {
+      "id": "01a09945-e8e0-7fcb-b5df-53afb42e50d5",
+      "op": "weave:///silta/coreweave-hack-silta-squad/op/programmatic_simulating:6jAV4T6F42RKlabeB2RO0BXkbFFPrKyU2yyQedpotB8",
+      "ended": true,
+      "output": {
+        "stage": "simulating",
+        "attempts_completed": 1,
+        "candidate_index": 0,
+        "result": {
+          "validity": "valid",
+          "passed": true,
+          "verification": "verified",
+          "issues": [],
+          "estimated_time_seconds": 27.263982725443416,
+          "time_breakdown": {
+            "cutting": 25.090690292290436,
+            "rapid": 2.1732924331529797,
+            "dwell": 0.0,
+            "tool_changes": 0.0,
+            "indexing": 0.0
+          },
+          "timing_assumptions": "Constant commanded vector feed/rapid speed; no acceleration, jerk, lookahead, spindle ramp or controller blending. Cut includes air cutting and plunge/retract. Tool changes add fixed duration, with no implicit travel. Full submitted plan timed even if invalid. Indexed B/C rotation uses simultaneous constant angular speeds plus settle time. No cutting during indexing.",
+          "scope": "Indexed 3+2 only; table-attached stock and fixtures. Tool-section collision and configured axis limits; whole-machine self-collision is not certified. Gauge length is fixed across tools.",
+          "target_sha256": "e62d3e19bef2717f670beca00d0d5c729beb3dc8cf6c1f4500654ae0d4ff2119",
+          "numerics": {
+            "resolution_mm": 1.0,
+            "cell_radius_mm": 0.8660255037844385,
+            "cells": 283272,
+            "geometry_backend": "trimesh signed distance; double precision, not exact arithmetic"
+          },
+          "stock_metrics": {
+            "initial_nominal_volume_mm3": 96768.0,
+            "final_nominal_volume_mm3": 82432.0,
+            "removed_nominal_volume_mm3": 14336.0,
+            "removed_volume_bounds_mm3": [
+              11040.0,
+              44504.0
+            ],
+            "final_volume_bounds_mm3": [
+              67088.0,
+              98712.0
+            ]
+          },
+          "artifacts": {
+            "final_stock": "final_stock.ply",
+            "lower_stock": "final_stock_lower.ply",
+            "upper_stock": "final_stock_upper.ply",
+            "states": [
+              "states/00000.npz",
+              "states/00002.npz",
+              "states/00004.npz",
+              "states/00006.npz",
+              "states/00008.npz",
+              "states/00010.npz",
+              "states/00012.npz",
+              "states/00014.npz",
+              "states/00016.npz",
+              "states/00018.npz",
+              "states/00020.npz",
+              "states/00022.npz",
+              "states/00024.npz",
+              "states/00026.npz",
+              "states/00028.npz",
+              "states/00030.npz",
+              "states/00032.npz",
+              "states/00034.npz",
+              "states/00036.npz",
+              "states/00038.npz",
+              "states/00040.npz",
+              "states/00042.npz",
+              "states/00044.npz",
+              "states/00046.npz",
+              "states/00048.npz",
+              "states/00050.npz",
+              "states/00052.npz",
+              "states/00054.npz",
+              "states/00056.npz",
+              "states/00058.npz",
+              "states/00060.npz",
+              "states/00062.npz",
+              "states/00063.npz"
+            ],
+            "trajectory": "trajectory.json"
+          }
+        },
+        "signals": {
+          "geometry_pass": true,
+          "requires_review": false,
+          "numerical_uncertainty_count": 0,
+          "issue_codes": [],
+          "physical_defect_confirmed": false
+        }
+      }
+    },
+    {
+      "id": "01a09945-ea66-7394-a8f3-1c10dd711972",
+      "op": "weave:///silta/coreweave-hack-silta-squad/op/programmatic_simulation_pass:6jAV4T6F42RKlabeB2RO0BXkbFFPrKyU2yyQedpotB8",
+      "ended": true,
+      "output": {
+        "stage": "simulation_pass",
+        "attempts_completed": 1
+      }
+    },
+    {
+      "id": "01a09945-ea68-7b34-9ac7-dcc355a93c00",
+      "op": "weave:///silta/coreweave-hack-silta-squad/op/programmatic_preparing_playback:6jAV4T6F42RKlabeB2RO0BXkbFFPrKyU2yyQedpotB8",
+      "ended": true,
+      "output": {
+        "stage": "preparing_playback",
+        "attempts_completed": 1
+      }
+    },
+    {
+      "id": "01a09945-eba7-78a5-aa27-76a64ee5ec6d",
+      "op": "weave:///silta/coreweave-hack-silta-squad/op/programmatic_judging:6jAV4T6F42RKlabeB2RO0BXkbFFPrKyU2yyQedpotB8",
+      "ended": true,
+      "output": {
+        "stage": "judging",
+        "attempts_completed": 1,
+        "candidate_index": 0,
+        "judge": {
+          "value": {
+            "action": "improve",
+            "reason": "Two attempts remain, and a single verified time of 27.264 seconds does not establish diminishing returns. Cutting accounts for 25.091 seconds of the total.",
+            "guidance_proposal": null
+          },
+          "evidence": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/056866dee37c/evidence/supervisor-4422bd109c39.response.json"
+        }
+      }
+    },
+    {
+      "id": "01a09945-ff1d-7c9f-8faf-90c834d788a0",
+      "op": "weave:///silta/coreweave-hack-silta-squad/op/programmatic_memory_updated:6jAV4T6F42RKlabeB2RO0BXkbFFPrKyU2yyQedpotB8",
+      "ended": true,
+      "output": {
+        "stage": "memory_updated",
+        "attempts_completed": 1
+      }
+    },
+    {
+      "id": "01a09945-ff1f-7b26-a3a8-3665d8034306",
+      "op": "weave:///silta/coreweave-hack-silta-squad/op/programmatic_cam_planning:6jAV4T6F42RKlabeB2RO0BXkbFFPrKyU2yyQedpotB8",
+      "ended": true,
+      "output": {
+        "stage": "cam_planning",
+        "attempts_completed": 1,
+        "proposal": {
+          "index": 1,
+          "proposal": {
+            "summary": "Test 12 mm stepdown with the existing coverage settings and maximum feeds. This changes depth staging; improved time and validity require verification.",
+            "strategy": {
+              "stepover_fraction": 0.75,
+              "stepdown_mm": 12,
+              "cut_feed_mm_min": 900,
+              "plunge_feed_mm_min": 250,
+              "retract_feed_mm_min": 1200,
+              "segments_per_circle": 24,
+              "order": "tool",
+              "retract_mode": "clearance",
+              "shortest_c": true,
+              "junction_cleanup": false
+            }
+          },
+          "evidence": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/056866dee37c/evidence/indexed_planner-5788d521192d.response.json",
+          "move_count": 63
+        }
+      }
+    },
+    {
+      "id": "01a09946-317d-7830-ac58-3da60ccd6d4d",
+      "op": "weave:///silta/coreweave-hack-silta-squad/op/programmatic_checks:6jAV4T6F42RKlabeB2RO0BXkbFFPrKyU2yyQedpotB8",
+      "ended": true,
+      "output": {
+        "stage": "checks",
+        "attempts_completed": 1
+      }
+    },
+    {
+      "id": "01a09946-3182-74b9-92b1-633420e13fd0",
+      "op": "weave:///silta/coreweave-hack-silta-squad/op/programmatic_simulating:6jAV4T6F42RKlabeB2RO0BXkbFFPrKyU2yyQedpotB8",
+      "ended": true,
+      "output": {
+        "stage": "simulating",
+        "attempts_completed": 2,
+        "candidate_index": 1,
+        "result": {
+          "validity": "valid",
+          "passed": true,
+          "verification": "verified",
+          "issues": [],
+          "estimated_time_seconds": 27.26398272544342,
+          "time_breakdown": {
+            "cutting": 25.09069029229044,
+            "rapid": 2.1732924331529797,
+            "dwell": 0.0,
+            "tool_changes": 0.0,
+            "indexing": 0.0
+          },
+          "timing_assumptions": "Constant commanded vector feed/rapid speed; no acceleration, jerk, lookahead, spindle ramp or controller blending. Cut includes air cutting and plunge/retract. Tool changes add fixed duration, with no implicit travel. Full submitted plan timed even if invalid. Indexed B/C rotation uses simultaneous constant angular speeds plus settle time. No cutting during indexing.",
+          "scope": "Indexed 3+2 only; table-attached stock and fixtures. Tool-section collision and configured axis limits; whole-machine self-collision is not certified. Gauge length is fixed across tools.",
+          "target_sha256": "e62d3e19bef2717f670beca00d0d5c729beb3dc8cf6c1f4500654ae0d4ff2119",
+          "numerics": {
+            "resolution_mm": 1.0,
+            "cell_radius_mm": 0.8660255037844385,
+            "cells": 283272,
+            "geometry_backend": "trimesh signed distance; double precision, not exact arithmetic"
+          },
+          "stock_metrics": {
+            "initial_nominal_volume_mm3": 96768.0,
+            "final_nominal_volume_mm3": 82432.0,
+            "removed_nominal_volume_mm3": 14336.0,
+            "removed_volume_bounds_mm3": [
+              11040.0,
+              44504.0
+            ],
+            "final_volume_bounds_mm3": [
+              67088.0,
+              98712.0
+            ]
+          },
+          "artifacts": {
+            "final_stock": "final_stock.ply",
+            "lower_stock": "final_stock_lower.ply",
+            "upper_stock": "final_stock_upper.ply",
+            "states": [
+              "states/00000.npz",
+              "states/00002.npz",
+              "states/00004.npz",
+              "states/00006.npz",
+              "states/00008.npz",
+              "states/00010.npz",
+              "states/00012.npz",
+              "states/00014.npz",
+              "states/00016.npz",
+              "states/00018.npz",
+              "states/00020.npz",
+              "states/00022.npz",
+              "states/00024.npz",
+              "states/00026.npz",
+              "states/00028.npz",
+              "states/00030.npz",
+              "states/00032.npz",
+              "states/00034.npz",
+              "states/00036.npz",
+              "states/00038.npz",
+              "states/00040.npz",
+              "states/00042.npz",
+              "states/00044.npz",
+              "states/00046.npz",
+              "states/00048.npz",
+              "states/00050.npz",
+              "states/00052.npz",
+              "states/00054.npz",
+              "states/00056.npz",
+              "states/00058.npz",
+              "states/00060.npz",
+              "states/00062.npz",
+              "states/00063.npz"
+            ],
+            "trajectory": "trajectory.json"
+          }
+        },
+        "signals": {
+          "geometry_pass": true,
+          "requires_review": false,
+          "numerical_uncertainty_count": 0,
+          "issue_codes": [],
+          "physical_defect_confirmed": false
+        }
+      }
+    },
+    {
+      "id": "01a09946-3302-7623-aa3c-213e45f6a4d1",
+      "op": "weave:///silta/coreweave-hack-silta-squad/op/programmatic_simulation_pass:6jAV4T6F42RKlabeB2RO0BXkbFFPrKyU2yyQedpotB8",
+      "ended": true,
+      "output": {
+        "stage": "simulation_pass",
+        "attempts_completed": 2
+      }
+    },
+    {
+      "id": "01a09946-3304-7831-a03a-25c48cb7f0c9",
+      "op": "weave:///silta/coreweave-hack-silta-squad/op/programmatic_preparing_playback:6jAV4T6F42RKlabeB2RO0BXkbFFPrKyU2yyQedpotB8",
+      "ended": true,
+      "output": {
+        "stage": "preparing_playback",
+        "attempts_completed": 2
+      }
+    },
+    {
+      "id": "01a09946-343b-70af-8bbf-a5c5d5ed6409",
+      "op": "weave:///silta/coreweave-hack-silta-squad/op/programmatic_judging:6jAV4T6F42RKlabeB2RO0BXkbFFPrKyU2yyQedpotB8",
+      "ended": true,
+      "output": {
+        "stage": "judging",
+        "attempts_completed": 2,
+        "candidate_index": 1,
+        "judge": {
+          "value": {
+            "action": "improve",
+            "reason": "One attempt remains. The two verified times are effectively identical at 27.264 seconds; cutting accounts for 25.091 seconds, leaving a final opportunity to reduce machining time.",
+            "guidance_proposal": null
+          },
+          "evidence": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/056866dee37c/evidence/supervisor-2ff7d904cb0c.response.json"
+        }
+      }
+    },
+    {
+      "id": "01a09946-46ed-77fb-833b-f398dbde67d9",
+      "op": "weave:///silta/coreweave-hack-silta-squad/op/programmatic_memory_updated:6jAV4T6F42RKlabeB2RO0BXkbFFPrKyU2yyQedpotB8",
+      "ended": true,
+      "output": {
+        "stage": "memory_updated",
+        "attempts_completed": 2
+      }
+    },
+    {
+      "id": "01a09946-46f0-7bf6-b9c0-a23c266982d6",
+      "op": "weave:///silta/coreweave-hack-silta-squad/op/programmatic_cam_planning:6jAV4T6F42RKlabeB2RO0BXkbFFPrKyU2yyQedpotB8",
+      "ended": true,
+      "output": {
+        "stage": "cam_planning",
+        "attempts_completed": 2,
+        "proposal": {
+          "index": 2,
+          "proposal": {
+            "summary": "Test 32 circle segments for a different compiled contour. Increasing stepdown already produced no time gain; this candidate requires verification and may not improve the 27.264-second best.",
+            "strategy": {
+              "stepover_fraction": 0.75,
+              "stepdown_mm": 12,
+              "cut_feed_mm_min": 900,
+              "plunge_feed_mm_min": 250,
+              "retract_feed_mm_min": 1200,
+              "segments_per_circle": 32,
+              "order": "tool",
+              "retract_mode": "clearance",
+              "shortest_c": true,
+              "junction_cleanup": false
+            }
+          },
+          "evidence": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/056866dee37c/evidence/indexed_planner-da60d0b9c6dd.response.json",
+          "move_count": 79
+        }
+      }
+    },
+    {
+      "id": "01a09946-8412-79d2-a7ce-c8198478b8c2",
+      "op": "weave:///silta/coreweave-hack-silta-squad/op/programmatic_checks:6jAV4T6F42RKlabeB2RO0BXkbFFPrKyU2yyQedpotB8",
+      "ended": true,
+      "output": {
+        "stage": "checks",
+        "attempts_completed": 2
+      }
+    },
+    {
+      "id": "01a09946-8416-7583-bc9e-422d209dc962",
+      "op": "weave:///silta/coreweave-hack-silta-squad/op/programmatic_simulating:6jAV4T6F42RKlabeB2RO0BXkbFFPrKyU2yyQedpotB8",
+      "ended": true,
+      "output": {
+        "stage": "simulating",
+        "attempts_completed": 3,
+        "candidate_index": 2,
+        "result": {
+          "validity": "valid",
+          "passed": true,
+          "verification": "verified",
+          "issues": [],
+          "estimated_time_seconds": 27.27025452891024,
+          "time_breakdown": {
+            "cutting": 25.09696209575726,
+            "rapid": 2.1732924331529797,
+            "dwell": 0.0,
+            "tool_changes": 0.0,
+            "indexing": 0.0
+          },
+          "timing_assumptions": "Constant commanded vector feed/rapid speed; no acceleration, jerk, lookahead, spindle ramp or controller blending. Cut includes air cutting and plunge/retract. Tool changes add fixed duration, with no implicit travel. Full submitted plan timed even if invalid. Indexed B/C rotation uses simultaneous constant angular speeds plus settle time. No cutting during indexing.",
+          "scope": "Indexed 3+2 only; table-attached stock and fixtures. Tool-section collision and configured axis limits; whole-machine self-collision is not certified. Gauge length is fixed across tools.",
+          "target_sha256": "e62d3e19bef2717f670beca00d0d5c729beb3dc8cf6c1f4500654ae0d4ff2119",
+          "numerics": {
+            "resolution_mm": 1.0,
+            "cell_radius_mm": 0.8660255037844385,
+            "cells": 283272,
+            "geometry_backend": "trimesh signed distance; double precision, not exact arithmetic"
+          },
+          "stock_metrics": {
+            "initial_nominal_volume_mm3": 96768.0,
+            "final_nominal_volume_mm3": 82432.0,
+            "removed_nominal_volume_mm3": 14336.0,
+            "removed_volume_bounds_mm3": [
+              11040.0,
+              44504.0
+            ],
+            "final_volume_bounds_mm3": [
+              67088.0,
+              98712.0
+            ]
+          },
+          "artifacts": {
+            "final_stock": "final_stock.ply",
+            "lower_stock": "final_stock_lower.ply",
+            "upper_stock": "final_stock_upper.ply",
+            "states": [
+              "states/00000.npz",
+              "states/00002.npz",
+              "states/00004.npz",
+              "states/00006.npz",
+              "states/00008.npz",
+              "states/00010.npz",
+              "states/00012.npz",
+              "states/00014.npz",
+              "states/00016.npz",
+              "states/00018.npz",
+              "states/00020.npz",
+              "states/00022.npz",
+              "states/00024.npz",
+              "states/00026.npz",
+              "states/00028.npz",
+              "states/00030.npz",
+              "states/00032.npz",
+              "states/00034.npz",
+              "states/00036.npz",
+              "states/00038.npz",
+              "states/00040.npz",
+              "states/00042.npz",
+              "states/00044.npz",
+              "states/00046.npz",
+              "states/00048.npz",
+              "states/00050.npz",
+              "states/00052.npz",
+              "states/00054.npz",
+              "states/00056.npz",
+              "states/00058.npz",
+              "states/00060.npz",
+              "states/00062.npz",
+              "states/00064.npz",
+              "states/00066.npz",
+              "states/00068.npz",
+              "states/00070.npz",
+              "states/00072.npz",
+              "states/00074.npz",
+              "states/00076.npz",
+              "states/00078.npz",
+              "states/00079.npz"
+            ],
+            "trajectory": "trajectory.json"
+          }
+        },
+        "signals": {
+          "geometry_pass": true,
+          "requires_review": false,
+          "numerical_uncertainty_count": 0,
+          "issue_codes": [],
+          "physical_defect_confirmed": false
+        }
+      }
+    },
+    {
+      "id": "01a09946-85de-7f13-9c3d-30d1be740b3f",
+      "op": "weave:///silta/coreweave-hack-silta-squad/op/programmatic_simulation_pass:6jAV4T6F42RKlabeB2RO0BXkbFFPrKyU2yyQedpotB8",
+      "ended": true,
+      "output": {
+        "stage": "simulation_pass",
+        "attempts_completed": 3
+      }
+    },
+    {
+      "id": "01a09946-85e1-70c3-9c15-83b872aeb545",
+      "op": "weave:///silta/coreweave-hack-silta-squad/op/programmatic_preparing_playback:6jAV4T6F42RKlabeB2RO0BXkbFFPrKyU2yyQedpotB8",
+      "ended": true,
+      "output": {
+        "stage": "preparing_playback",
+        "attempts_completed": 3
+      }
+    },
+    {
+      "id": "01a09946-8796-74e5-b368-49f73db85744",
+      "op": "weave:///silta/coreweave-hack-silta-squad/op/programmatic_judging:6jAV4T6F42RKlabeB2RO0BXkbFFPrKyU2yyQedpotB8",
+      "ended": true,
+      "output": {
+        "stage": "judging",
+        "attempts_completed": 3,
+        "candidate_index": 2,
+        "judge": {
+          "value": {
+            "action": "stop",
+            "reason": "No attempts remain. The latest time is 0.00627 seconds slower than the best verified time of 27.26398 seconds, with no improvement across the history.",
+            "guidance_proposal": null
+          },
+          "evidence": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/056866dee37c/evidence/supervisor-443359dc2a36.response.json"
+        }
+      }
+    }
+  ]
+}

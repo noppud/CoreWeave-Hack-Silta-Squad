@@ -1,0 +1,76 @@
+1
+00:00:00,000 --> 00:00:04,000
+The part stays fixed. The agent changes the machining plan.
+
+2
+00:00:04,000 --> 00:00:08,000
+Checks → stock-removal simulation → timing judge → CAM feedback.
+
+3
+00:00:08,000 --> 00:00:15,000
+Actual indexed machining replay, driven by the submitted movements.
+
+4
+00:00:15,000 --> 00:00:23,000
+The table reorients between cuts. Stock is removed along cutter sweeps.
+
+5
+00:00:23,000 --> 00:00:29,000
+Three new complex parts: 75.8 → 20.8 estimated minutes.
+
+6
+00:00:29,000 --> 00:00:35,000
+72.5% below reference. The carrier improved another 6.4% after judge feedback.
+
+7
+00:00:35,000 --> 00:00:42,000
+This staggered drum uses 17 indexed orientations and 26 features.
+
+8
+00:00:42,000 --> 00:00:50,000
+The drum’s next proposal was slower. The loop kept its earlier passing plan.
+
+9
+00:00:50,000 --> 00:00:56,000
+The manifold reference fails. Astra receives the diagnosis and revises CAM.
+
+10
+00:00:56,000 --> 00:01:02,000
+The repair passes. A saved exact-match check catches repeated failures.
+
+11
+00:01:02,000 --> 00:01:08,000
+Weave scores retained records: geometry gates and machining-time metrics.
+
+12
+00:01:08,000 --> 00:01:14,000
+ARIA suggested an experiment. We ran 12 cases and scoped its advice.
+
+13
+00:01:14,000 --> 00:01:18,000
+24 fresh plans across four parts: memory transfer is mixed.
+
+14
+00:01:18,000 --> 00:01:22,000
+New geometries show no useful general speed benefit from memory.
+
+15
+00:01:22,000 --> 00:01:30,000
+Three chambers, cross-ports and registers: actual manifold cutter movements.
+
+16
+00:01:30,000 --> 00:01:36,000
+Recorded fresh PDF job: reviewed drawing → CAM → checks → simulation.
+
+17
+00:01:36,000 --> 00:01:43,000
+These are actual saved events and artifacts. Waiting time is compressed.
+
+18
+00:01:43,000 --> 00:01:50,000
+Timing feedback and memory are retained for inspection and later proposals.
+
+19
+00:01:50,000 --> 00:01:55,900
+Prototype: indexed 3+2, 1 mm cells, 3 mm tolerance. Not production verification.
+

@@ -1,0 +1,23 @@
+{
+  "model": "gpt-6-astra",
+  "requested_service_tier": "fast",
+  "reasoning_effort": "low",
+  "role": "indexed_planner",
+  "value": {
+    "summary": "Candidate for simulation: maximize permitted feeds and stepdown, use 9 mm radial spacing, clearance retracts, and shortest C indexing. Validity and timing remain unverified.",
+    "strategy": {
+      "stepover_fraction": 0.75,
+      "stepdown_mm": 12,
+      "cut_feed_mm_min": 900,
+      "plunge_feed_mm_min": 250,
+      "retract_feed_mm_min": 1200,
+      "segments_per_circle": 24,
+      "order": "orientation",
+      "retract_mode": "clearance",
+      "shortest_c": true,
+      "junction_cleanup": false
+    }
+  },
+  "thread_id": "01a09955-434a-7011-bfb4-6459876b8c78",
+  "turn_id": "01a09955-4388-75a1-85e0-06c6142900dd"
+}

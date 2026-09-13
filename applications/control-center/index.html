@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light"><title>SILTA — Shop control</title>
+  <link rel="stylesheet" href="/style.css">
+  <script type="importmap">{"imports":{"three":"/vendor/three.module.js"}}</script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="Silta home"><svg viewBox="0 0 30 30" aria-hidden="true"><path d="M3 25V11L15 4l12 7v14M3 16l12-7 12 7M10 25V15m10 10V15"/></svg>SILTA<span>SHOP CONTROL</span></a>
+    <div class="topright"><span class="connection"><i id="connection-dot"></i><span id="connection-label">Connecting</span></span><button class="avatar" data-action="worker" aria-label="Worker connection">S</button></div>
+  </header>
+  <main>
+    <section class="pagehead"><div><h1 id="page-title">Drawing to part</h1><p id="page-subtitle" hidden></p></div><button class="primary" data-action="upload"><span>＋</span> New drawing</button></section>
+    <div id="live-strip" class="live-strip" hidden></div>
+    <section id="overview-view" class="view">
+      <section class="loop-panel" aria-label="Interactive learning loop">
+        <div class="canvas-toolbar"><button class="canvas-job" data-view="parts"><span class="dot"></span><span id="canvas-job-title">Loading parts…</span><span class="subtle">⌄</span></button><div class="canvas-actions"><button class="aria-launch" data-action="aria">Ask ARIA</button><button class="replay-launch" data-action="play-loop">Play loop</button><button data-view="timeline">History</button><button data-view="parts">Parts <span id="stat-parts">—</span></button><button data-view="learning">Learnings <span class="count" id="nav-learning">—</span></button></div></div>
+        <div class="flow-scroll"><div class="flow">
+          <svg class="routes" viewBox="0 0 1200 700" preserveAspectRatio="none" aria-hidden="true"><defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1L9 5L1 9" fill="none" stroke="currentColor" stroke-width="1.4"/></marker></defs>
+            <g class="forward"><path id="route-input-cam" d="M113 155 C130 155 145 155 165 155"/><path id="route-cam-checks" d="M300 260 C290 350 335 395 397 420"/><path id="route-checks-fusion" d="M520 490 C600 520 650 560 725 560"/><path id="route-fusion-judge" d="M850 468 C1040 470 1100 282 1000 230"/><path id="route-judge-output" d="M1025 245 C1180 325 1150 535 1102 556"/></g>
+            <g class="feedback"><path id="route-checks-cam" d="M365 420 C180 398 134 318 210 260"/><path id="route-fusion-checks" d="M815 468 C750 387 603 381 504 420"/><path id="route-judge-cam" d="M807 175 C715 62 501 24 317 95"/></g>
+            <text x="275" y="354">NC code</text><text x="615" y="512">pass</text><text x="1035" y="376">results</text><text x="1130" y="423">accept</text>
+            <text class="route-note" x="160" y="350">fail → new code</text><text class="route-note" x="635" y="392">fail → new check</text><text class="route-note" x="540" y="72">faster plan + memory</text>
+          </svg>
+          <div class="nodes">
+            <button class="node node-input" data-stage="input"><span class="document-icon">PDF</span><span id="input-foot">Drawing</span></button>
+            <div class="node node-cam"><button class="node-main" data-stage="cam"><span class="node-top">ASTRA <span>↗</span></span><strong>CAD / CAM agent</strong><span class="agent-geometry" aria-hidden="true"><svg viewBox="0 0 100 64"><path d="M16 23 50 5l34 18v26L50 64 16 46zM16 23l34 18 34-18M50 41v23M33 14l34 18v25M33 33 67 15"/></svg></span><span class="node-foot" id="cam-count">Generated code</span></button><button class="node-memory-link" data-action="memories"><span>✳</span> <span id="memory-count">Planning memories</span> ↗</button></div>
+            <button class="node node-checks" data-stage="checks"><span class="node-top">PRE-SIMULATION <span>↗</span></span><strong>Checks</strong><span class="node-description check-lines"><span>Fixture clearance</span><span>Finished-side protection</span></span><span class="node-foot orange" id="checks-foot">2 learned checks</span></button>
+            <button class="node node-fusion" data-stage="fusion"><span class="node-top">AUTODESK FUSION <span>↗</span></span><strong>Simulation</strong><span class="node-description">Machine + finished stock</span><span class="node-foot" id="fusion-foot">Verification</span></button>
+            <button class="node node-judge" data-stage="judge"><span class="node-top">JUDGE <span>↗</span></span><strong>Review results</strong><span class="node-description">Improve or finish</span><span class="node-foot" id="judge-foot">Select verified plan</span></button>
+            <button class="node node-output" data-action="open-part"><span class="node-top">OUTPUT <span>↗</span></span><img id="output-preview" alt="Selected part CAD preview"><span class="output-label" id="output-label">Part + NC</span></button>
+          </div>
+          <section id="canvas-proof" class="canvas-proof" aria-label="Part evidence"></section>
+          <div id="replay-token" hidden><img alt="Part moving through recorded stages"><span>PDF</span></div>
+          <section id="replay-evidence" class="replay-evidence" hidden aria-live="polite"></section>
+
+        </div></div>
+        <div class="loop-bottom"><span id="last-event"></span><div><button class="text-button" data-action="live-from-loop">Live Fusion ↗</button><button class="text-button" data-action="slides">Diagram ↗</button></div></div>
+        <section id="history-graphs" aria-label="Learning across parts"></section>
+        <div id="history-parts" hidden aria-label="Parts in the learning sequence"></div><section id="replay-controls" hidden><div class="replay-control-head"><span class="replay-mode">RECORDED REPLAY</span><strong id="replay-part-title"></strong><span id="replay-position"></span><div><button data-action="replay-prev" aria-label="Previous timeline step">‹</button><button data-action="replay-pause" id="replay-pause">Pause</button><button data-action="replay-next" aria-label="Next timeline step">›</button><button data-action="replay-next-part">Next part →</button><button data-action="replay-stop" aria-label="Close replay">×</button></div></div><input type="range" min="0" value="0" id="replay-scrub" aria-label="Full parts timeline"><div id="timeline-segments" aria-label="Part boundaries"></div><div class="replay-control-foot"><span id="replay-event"></span><span>Recorded events · compressed time</span></div></section>
+      </section>
+    </section>
+
+  </main>
+  <dialog id="explorer-dialog"><div class="dialog-head"><h2 id="explorer-title">History</h2><button class="icon-button" data-action="close-explorer" aria-label="Close explorer">×</button></div><div class="explorer-content">    <section id="timeline-view" class="view" hidden><div class="toolbar"><div class="segmented" id="timeline-filters"><button class="active" data-filter="all">All activity</button><button data-filter="learning">New learnings</button><button data-filter="checks">Checks</button><button data-filter="judge">Judge decisions</button></div><input id="timeline-search" placeholder="Search parts or events…" aria-label="Search timeline"></div><div id="timeline-content"></div></section>
+    <section id="parts-view" class="view" hidden><div class="toolbar"><span id="library-count"></span><input id="part-search" placeholder="Find a part…" aria-label="Find a part"></div><div id="parts-grid" class="parts-grid"></div></section>
+    <section id="learning-view" class="view" hidden><div id="learning-content"></div></section>
+</div></dialog>
+  <dialog id="workbench-dialog" class="focused-media"><div class="focused-head"><div><h2 id="selected-title"></h2><span id="media-caption"></span></div><button class="icon-button" data-action="close-workbench" aria-label="Close view">×</button></div><div id="media" class="media-stage"></div></dialog>
+  <dialog id="demo-dialog" aria-labelledby="demo-title"><header class="demo-head"><div><span id="demo-mode">Replay</span><h2 id="demo-title">Clevis</h2></div><button class="icon-button" data-action="demo-close" aria-label="Close run">×</button></header><nav id="demo-stages" aria-label="Run stages"></nav><div id="demo-body"><aside class="demo-drawing"><span>UPLOADED DRAWING</span><img id="demo-pdf" alt="Uploaded clevis drawing"><img id="demo-part" alt="Accepted clevis CAD" hidden><div id="demo-estimates"></div></aside><section id="demo-scene"></section></div><footer class="demo-controls"><span id="demo-status" role="status"></span><div><button data-action="demo-prev" aria-label="Previous step">‹</button><button data-action="demo-toggle" id="demo-toggle">Pause</button><button data-action="demo-next" id="demo-next">Next →</button><button data-action="demo-play" class="primary" id="demo-play" hidden>Run live simulation →</button><button data-action="demo-fallback" id="demo-fallback" hidden>Video fallback</button><button data-action="demo-reset" id="demo-reset" hidden>Reset</button></div></footer></dialog>
+  <dialog id="aria-panel" aria-labelledby="aria-title"><div class="aria-head"><div><span class="aria-emblem">✳</span><h2 id="aria-title">ARIA</h2><span>W&B research assistant</span></div><button class="icon-button" data-action="close-aria" aria-label="Close ARIA">×</button></div><div id="aria-content"></div></dialog>
+  <dialog id="drawer"><div class="dialog-head"><div><p class="eyebrow" id="drawer-kicker"></p><h2 id="drawer-title"></h2></div><button class="icon-button" data-action="close" aria-label="Close details">×</button></div><div id="drawer-body"></div></dialog>
+  <dialog id="upload-dialog"><div class="dialog-head"><div><p class="eyebrow">PDF INTAKE</p><h2>New drawing</h2></div><button class="icon-button" data-action="close-upload" aria-label="Close upload">×</button></div><div class="upload-body"><label class="dropzone" id="dropzone"><span class="upload-icon">↥</span><strong>Drop a PDF drawing here</strong><span>or click to choose a file · up to 25 MB</span><input type="file" id="pdf-file" accept="application/pdf,.pdf"></label><div id="upload-result"></div></div></dialog>
+  <div id="toast" role="status" hidden></div>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>

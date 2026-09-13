@@ -1,0 +1,240 @@
+[
+  {
+    "run": "learning-soft-jaw-a5",
+    "source": "runs/learning-soft-jaw-a5/manifest.json",
+    "events": [
+      {
+        "event": "target_accepted",
+        "seconds_since_previous_event": 0.025,
+        "attempt": null
+      },
+      {
+        "event": "candidate_created",
+        "seconds_since_previous_event": 0.011,
+        "attempt": 1
+      },
+      {
+        "event": "checks_completed",
+        "seconds_since_previous_event": 0.033,
+        "attempt": 1
+      },
+      {
+        "event": "verification_started",
+        "seconds_since_previous_event": 0.002,
+        "attempt": 1
+      },
+      {
+        "event": "verification_completed",
+        "seconds_since_previous_event": 44.253,
+        "attempt": 1
+      },
+      {
+        "event": "incumbent_updated",
+        "seconds_since_previous_event": 0.001,
+        "attempt": null
+      },
+      {
+        "event": "supervisor_decision",
+        "seconds_since_previous_event": 25.697,
+        "attempt": null
+      },
+      {
+        "event": "candidate_created",
+        "seconds_since_previous_event": 35.054,
+        "attempt": 2
+      },
+      {
+        "event": "checks_completed",
+        "seconds_since_previous_event": 0.044,
+        "attempt": 2
+      },
+      {
+        "event": "verification_started",
+        "seconds_since_previous_event": 0.003,
+        "attempt": 2
+      },
+      {
+        "event": "verification_completed",
+        "seconds_since_previous_event": 44.206,
+        "attempt": 2
+      },
+      {
+        "event": "incumbent_updated",
+        "seconds_since_previous_event": 0.002,
+        "attempt": null
+      },
+      {
+        "event": "supervisor_decision",
+        "seconds_since_previous_event": 24.67,
+        "attempt": null
+      },
+      {
+        "event": "reusable_change_proposed",
+        "seconds_since_previous_event": 0.003,
+        "attempt": null
+      },
+      {
+        "event": "learning_change_saved",
+        "seconds_since_previous_event": 0.003,
+        "attempt": null
+      },
+      {
+        "event": "promoted_change_applied",
+        "seconds_since_previous_event": 0.002,
+        "attempt": null
+      }
+    ],
+    "elapsed_seconds": 174.01
+  },
+  {
+    "run": "learning-part-b2",
+    "source": "runs/learning-part-b2/manifest.json",
+    "events": [
+      {
+        "event": "target_accepted",
+        "seconds_since_previous_event": 0.024,
+        "attempt": null
+      },
+      {
+        "event": "candidate_created",
+        "seconds_since_previous_event": 0.011,
+        "attempt": 1
+      },
+      {
+        "event": "checks_completed",
+        "seconds_since_previous_event": 0.056,
+        "attempt": 1
+      },
+      {
+        "event": "verification_started",
+        "seconds_since_previous_event": 0.003,
+        "attempt": 1
+      },
+      {
+        "event": "verification_completed",
+        "seconds_since_previous_event": 46.069,
+        "attempt": 1
+      },
+      {
+        "event": "incumbent_updated",
+        "seconds_since_previous_event": 0.001,
+        "attempt": null
+      },
+      {
+        "event": "supervisor_decision",
+        "seconds_since_previous_event": 20.357,
+        "attempt": null
+      }
+    ],
+    "elapsed_seconds": 66.52
+  },
+  {
+    "run": "learning-part-c5",
+    "source": "runs/learning-part-c5/manifest.json",
+    "events": [
+      {
+        "event": "target_accepted",
+        "seconds_since_previous_event": 0.025,
+        "attempt": null
+      },
+      {
+        "event": "verified_incumbent_resumed",
+        "seconds_since_previous_event": 0.047,
+        "attempt": null
+      },
+      {
+        "event": "candidate_created",
+        "seconds_since_previous_event": 0.011,
+        "attempt": 1
+      },
+      {
+        "event": "checks_completed",
+        "seconds_since_previous_event": 0.056,
+        "attempt": 1
+      },
+      {
+        "event": "verification_started",
+        "seconds_since_previous_event": 0.003,
+        "attempt": 1
+      },
+      {
+        "event": "verification_completed",
+        "seconds_since_previous_event": 143.026,
+        "attempt": 1
+      },
+      {
+        "event": "incumbent_updated",
+        "seconds_since_previous_event": 0.001,
+        "attempt": null
+      },
+      {
+        "event": "supervisor_decision",
+        "seconds_since_previous_event": 42.505,
+        "attempt": null
+      },
+      {
+        "event": "reusable_change_proposed",
+        "seconds_since_previous_event": 0.002,
+        "attempt": null
+      },
+      {
+        "event": "learning_change_saved",
+        "seconds_since_previous_event": 0.002,
+        "attempt": null
+      },
+      {
+        "event": "promoted_change_applied",
+        "seconds_since_previous_event": 0.001,
+        "attempt": null
+      }
+    ],
+    "elapsed_seconds": 185.68
+  },
+  {
+    "run": "learning-part-d1",
+    "source": "runs/learning-part-d1/manifest.json",
+    "events": [
+      {
+        "event": "target_accepted",
+        "seconds_since_previous_event": 124.628,
+        "attempt": null
+      },
+      {
+        "event": "cam_generation_failed",
+        "seconds_since_previous_event": 86.017,
+        "attempt": 1
+      },
+      {
+        "event": "candidate_created",
+        "seconds_since_previous_event": 73.235,
+        "attempt": 2
+      },
+      {
+        "event": "checks_completed",
+        "seconds_since_previous_event": 0.061,
+        "attempt": 2
+      },
+      {
+        "event": "verification_started",
+        "seconds_since_previous_event": 0.003,
+        "attempt": 2
+      },
+      {
+        "event": "verification_completed",
+        "seconds_since_previous_event": 40.357,
+        "attempt": 2
+      },
+      {
+        "event": "incumbent_updated",
+        "seconds_since_previous_event": 0.002,
+        "attempt": null
+      },
+      {
+        "event": "supervisor_decision",
+        "seconds_since_previous_event": 21.38,
+        "attempt": null
+      }
+    ],
+    "elapsed_seconds": 345.683
+  }
+]

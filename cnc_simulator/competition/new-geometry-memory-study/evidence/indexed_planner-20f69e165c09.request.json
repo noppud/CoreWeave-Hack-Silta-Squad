@@ -1,0 +1,190 @@
+{
+  "role": "indexed_planner",
+  "context": {
+    "compiler_contract": "Return CAM parameters, not tool movements. A deterministic compiler creates movements before tests and simulation. It clears each capsule/circular feature in depth layers using a centerline and nested capsule contours, with radial track spacing diameter*stepover_fraction. It retracts with the cutter engaged to a common clearance plane 8 mm above the stock. Changing B/C or tools requires the fixed park. orientation order groups B/C then tool; tool order groups tool then B/C. shortest_c picks the equivalent C angle closest to the current C angle. Every plan ends at the same park and top orientation. Depth and stepover can change coverage certification. junction_cleanup=true adds safe smaller-tool plunge cleanup inside the union of overlapping pockets at common depths. Enable this when separate feature clearing leaves junction material. It adds actual cutting/tool-change time and is still fully simulated. More circle segments reduce chord error but increase move count, not a separate optimization cost. Simulation uses conservative voxel bounds. Never change geometry, resolution, tolerance, machine, tools or speed ceilings. Only estimated machining seconds of passing plans score. This is geometric/timing simulation; physical cutting forces and controller acceleration are not modeled.",
+    "part": {
+      "id": "12-three-pocket-plate",
+      "name": "Three-pocket fixture plate",
+      "stock": {
+        "kind": "box",
+        "size": [
+          80,
+          56,
+          24
+        ]
+      },
+      "features": [
+        {
+          "name": "Left recess",
+          "bc": [
+            0,
+            0
+          ],
+          "a": [
+            -25,
+            -9,
+            8
+          ],
+          "b": [
+            -16,
+            -9,
+            8
+          ],
+          "radius": 7,
+          "tool": "T12",
+          "surface_z": 64.0
+        },
+        {
+          "name": "Right recess",
+          "bc": [
+            0,
+            0
+          ],
+          "a": [
+            16,
+            -9,
+            10
+          ],
+          "b": [
+            25,
+            -9,
+            10
+          ],
+          "radius": 7,
+          "tool": "T12",
+          "surface_z": 64.0
+        },
+        {
+          "name": "Rear circular seat",
+          "bc": [
+            0,
+            0
+          ],
+          "a": [
+            0,
+            13,
+            12
+          ],
+          "b": [
+            0,
+            13,
+            12
+          ],
+          "radius": 8,
+          "tool": "T12",
+          "surface_z": 64.0
+        }
+      ]
+    },
+    "fixed_tools": {
+      "T12": {
+        "diameter_mm": 12,
+        "flute_length_mm": 60,
+        "shaft_diameter_mm": 12,
+        "shaft_length_mm": 30,
+        "holder_diameter_mm": 40,
+        "holder_length_mm": 30
+      },
+      "T8": {
+        "diameter_mm": 8,
+        "flute_length_mm": 60,
+        "shaft_diameter_mm": 8,
+        "shaft_length_mm": 30,
+        "holder_diameter_mm": 40,
+        "holder_length_mm": 30
+      }
+    },
+    "fixed_limits": {
+      "cut_feed_mm_min": 900,
+      "plunge_feed_mm_min": 250,
+      "retract_feed_mm_min": 1200,
+      "max_stepdown_mm": 12
+    },
+    "resolution_mm": 1.0,
+    "tolerance_mm": 3.0,
+    "parameter_ranges": {
+      "stepover_fraction": [
+        0.15,
+        0.95
+      ],
+      "stepdown_mm": [
+        1,
+        12
+      ],
+      "segments_per_circle": [
+        24,
+        96
+      ]
+    },
+    "previous_strategy": {
+      "stepover_fraction": 0.35,
+      "stepdown_mm": 6,
+      "cut_feed_mm_min": 350,
+      "plunge_feed_mm_min": 120,
+      "retract_feed_mm_min": 700,
+      "segments_per_circle": 48,
+      "order": "orientation",
+      "retract_mode": "park",
+      "shortest_c": false
+    },
+    "feedback": {
+      "validity": "valid",
+      "passed": true,
+      "verification": "verified",
+      "issues": [],
+      "estimated_time_seconds": 95.49715165210439,
+      "time_breakdown": {
+        "cutting": 88.90616822925767,
+        "rapid": 6.590983422846714,
+        "dwell": 0.0,
+        "tool_changes": 0.0,
+        "indexing": 0.0
+      },
+      "timing_assumptions": "Constant commanded vector feed/rapid speed; no acceleration, jerk, lookahead, spindle ramp or controller blending. Cut includes air cutting and plunge/retract. Tool changes add fixed duration, with no implicit travel. Full submitted plan timed even if invalid. Indexed B/C rotation uses simultaneous constant angular speeds plus settle time. No cutting during indexing.",
+      "scope": "Indexed 3+2 only; table-attached stock and fixtures. Tool-section collision and configured axis limits; whole-machine self-collision is not certified. Gauge length is fixed across tools.",
+      "target_sha256": "7d6885a2eab80ffcb33371a3525ab63991bcb85ee753b88c95ba417c1aded6b8",
+      "numerics": {
+        "resolution_mm": 1.0,
+        "cell_radius_mm": 0.8660255037844385,
+        "cells": 313896,
+        "geometry_backend": "trimesh signed distance; double precision, not exact arithmetic"
+      },
+      "stock_metrics": {
+        "initial_nominal_volume_mm3": 107520.0,
+        "final_nominal_volume_mm3": 96564.0,
+        "removed_nominal_volume_mm3": 10956.0,
+        "removed_volume_bounds_mm3": [
+          7568.0,
+          44144.0
+        ],
+        "final_volume_bounds_mm3": [
+          79512.0,
+          114848.0
+        ]
+      },
+      "artifacts": {
+        "final_stock": "final_stock.ply",
+        "lower_stock": "final_stock_lower.ply",
+        "upper_stock": "final_stock_upper.ply",
+        "states": [
+          "states/00000.npz",
+          "states/00036.npz",
+          "states/00072.npz",
+          "states/00108.npz",
+          "states/00144.npz",
+          "states/00180.npz",
+          "states/00216.npz",
+          "states/00252.npz",
+          "states/00288.npz",
+          "states/00324.npz",
+          "states/00360.npz",
+          "states/00396.npz",
+          "states/00432.npz",
+          "states/00435.npz"
+        ],
+        "trajectory": "trajectory.json"
+      }
+    },
+    "retained_memory": null
+  }
+}

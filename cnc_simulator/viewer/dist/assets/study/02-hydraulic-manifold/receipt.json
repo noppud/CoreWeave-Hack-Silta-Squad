@@ -1,0 +1,11 @@
+{
+  "part": "02-hydraulic-manifold",
+  "source_plan_sha256": "d4d10043c3b155146ab1b0909ca23824512583571668c5df2f9addcd4cba934a",
+  "frames": 46,
+  "bytes": 1906896,
+  "final_display_volume_mm3": 130667.80754409653,
+  "within_verifier_bounds": true,
+  "passed": false,
+  "selection": "last failed simulated attempt",
+  "method": "Boolean subtraction of swept inscribed 64-sided cutters; display copy simplified <=0.005 mm. No target geometry used to construct stock."
+}

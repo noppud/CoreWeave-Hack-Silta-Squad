@@ -1,0 +1,34 @@
+{
+  "verified_now": {
+    "film": true,
+    "78_tests": true,
+    "fresh_live_run": true,
+    "latest_preflight": true,
+    "complex_evaluations": true,
+    "portable_kit": true,
+    "isolated_commit": true
+  },
+  "unfinished": [
+    {
+      "requirement": "Public source delivery",
+      "state": "approval_pending",
+      "action": "Push a054a16 on codex/programmatic-cnc-demo to noppud/CoreWeave-Hack-Silta-Squad and open draft PR"
+    },
+    {
+      "requirement": "Native Weave Signals",
+      "state": "runtime_choice_pending",
+      "detail": "Current exposed integration does not offer requested Astra runtime; diagnostic outputs are not native Signals"
+    },
+    {
+      "requirement": "Actual event submission",
+      "state": "team_information_and_final_submission_unverified",
+      "detail": "Roster, participant completion, final track and judge access are not established by local evidence"
+    }
+  ],
+  "limits": [
+    "Indexed 3+2, not simultaneous five-axis cutting",
+    "1 mm cells / 3 mm demo tolerance; no production certification",
+    "No useful general memory-speed benefit established by controlled transfer study"
+  ],
+  "completion_proven": false
+}

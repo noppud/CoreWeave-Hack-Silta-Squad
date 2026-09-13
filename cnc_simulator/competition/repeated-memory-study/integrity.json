@@ -1,0 +1,20 @@
+{
+  "checked_cases": [
+    "03-bearing-block-r1-cold",
+    "03-bearing-block-r1-warm",
+    "04-trunnion-cage-r1-warm",
+    "04-trunnion-cage-r1-cold",
+    "03-bearing-block-r2-warm",
+    "03-bearing-block-r2-cold",
+    "04-trunnion-cage-r2-cold",
+    "04-trunnion-cage-r2-warm",
+    "03-bearing-block-r3-cold",
+    "03-bearing-block-r3-warm",
+    "04-trunnion-cage-r3-warm",
+    "04-trunnion-cage-r3-cold"
+  ],
+  "count": 12,
+  "targets_unchanged": true,
+  "models_verified": true,
+  "unique_compiled_paths": 8
+}

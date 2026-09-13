@@ -1,0 +1,18 @@
+{
+  "job": "d6c0b4356c2b",
+  "status": "completed",
+  "reference_seconds": 80.74544471125378,
+  "best_seconds": 25.852236294980724,
+  "memory_before": 0,
+  "memory_after": 1,
+  "source_files_verified": 79,
+  "archive_sha256": "33477567bf9f5771b118d57de0aa7ea4b06e90232d4d35f0b052172336e50e0f",
+  "target_unchanged": true,
+  "served_playback_bytes": {
+    "playback.json": 44715,
+    "surfaces.json": 6572,
+    "surfaces.bin": 567504
+  },
+  "trace_enabled": false,
+  "scope": "Fresh dependency environment and extracted source. Real Astra PDF/CAM run and deterministic verification; not a controlled memory-transfer experiment. Weave intentionally unconfigured for this clean install."
+}

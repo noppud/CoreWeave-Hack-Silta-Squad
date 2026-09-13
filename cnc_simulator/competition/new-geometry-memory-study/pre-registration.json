@@ -1,0 +1,254 @@
+{
+  "parts": [
+    {
+      "id": "11-indexed-instrument-shell",
+      "name": "Indexed instrument shell",
+      "split": "pre_registered_transfer",
+      "stock_shape": {
+        "kind": "cylinder",
+        "radius": 32,
+        "height": 44
+      },
+      "features": [
+        {
+          "name": "Interior seat",
+          "bc": [
+            0,
+            0
+          ],
+          "a": [
+            0,
+            0,
+            10
+          ],
+          "b": [
+            0,
+            0,
+            10
+          ],
+          "radius": 20
+        },
+        {
+          "name": "Window 45",
+          "bc": [
+            90,
+            45
+          ],
+          "a": [
+            11.313708498984761,
+            11.31370849898476,
+            18.0
+          ],
+          "b": [
+            11.313708498984761,
+            11.31370849898476,
+            29.0
+          ],
+          "radius": 8
+        },
+        {
+          "name": "Window 135",
+          "bc": [
+            90,
+            135
+          ],
+          "a": [
+            -11.31370849898476,
+            11.313708498984761,
+            18.0
+          ],
+          "b": [
+            -11.31370849898476,
+            11.313708498984761,
+            29.0
+          ],
+          "radius": 8
+        },
+        {
+          "name": "Window 225",
+          "bc": [
+            90,
+            225
+          ],
+          "a": [
+            -11.313708498984763,
+            -11.31370849898476,
+            18.0
+          ],
+          "b": [
+            -11.313708498984763,
+            -11.31370849898476,
+            29.0
+          ],
+          "radius": 8
+        },
+        {
+          "name": "Window 315",
+          "bc": [
+            90,
+            315
+          ],
+          "a": [
+            11.313708498984758,
+            -11.313708498984763,
+            18.0
+          ],
+          "b": [
+            11.313708498984758,
+            -11.313708498984763,
+            29.0
+          ],
+          "radius": 8
+        },
+        {
+          "name": "Flange hole 1",
+          "bc": [
+            0,
+            0
+          ],
+          "a": [
+            26.0,
+            0.0,
+            34
+          ],
+          "b": [
+            26.0,
+            0.0,
+            34
+          ],
+          "radius": 4
+        },
+        {
+          "name": "Flange hole 2",
+          "bc": [
+            0,
+            0
+          ],
+          "a": [
+            1.592040838891559e-15,
+            26.0,
+            34
+          ],
+          "b": [
+            1.592040838891559e-15,
+            26.0,
+            34
+          ],
+          "radius": 4
+        },
+        {
+          "name": "Flange hole 3",
+          "bc": [
+            0,
+            0
+          ],
+          "a": [
+            -26.0,
+            3.184081677783118e-15,
+            34
+          ],
+          "b": [
+            -26.0,
+            3.184081677783118e-15,
+            34
+          ],
+          "radius": 4
+        },
+        {
+          "name": "Flange hole 4",
+          "bc": [
+            0,
+            0
+          ],
+          "a": [
+            -4.776122516674677e-15,
+            -26.0,
+            34
+          ],
+          "b": [
+            -4.776122516674677e-15,
+            -26.0,
+            34
+          ],
+          "radius": 4
+        }
+      ]
+    },
+    {
+      "id": "12-three-pocket-plate",
+      "name": "Three-pocket fixture plate",
+      "split": "pre_registered_transfer",
+      "stock_shape": {
+        "kind": "box",
+        "size": [
+          80,
+          56,
+          24
+        ]
+      },
+      "features": [
+        {
+          "name": "Left recess",
+          "bc": [
+            0,
+            0
+          ],
+          "a": [
+            -25,
+            -9,
+            8
+          ],
+          "b": [
+            -16,
+            -9,
+            8
+          ],
+          "radius": 7
+        },
+        {
+          "name": "Right recess",
+          "bc": [
+            0,
+            0
+          ],
+          "a": [
+            16,
+            -9,
+            10
+          ],
+          "b": [
+            25,
+            -9,
+            10
+          ],
+          "radius": 7
+        },
+        {
+          "name": "Rear circular seat",
+          "bc": [
+            0,
+            0
+          ],
+          "a": [
+            0,
+            13,
+            12
+          ],
+          "b": [
+            0,
+            13,
+            12
+          ],
+          "radius": 8
+        }
+      ]
+    }
+  ],
+  "selection": "Geometry-only: cylinder with indexed side windows and flange holes resembles source actuator; low rectangular three-pocket top-only plate is deliberately dissimilar. Definitions frozen before any model proposal or timing.",
+  "memory_sha256": "af724457b4be5d76f66e2af85a06088cab63534e7c7999ebd09bbcffac7a6083",
+  "repetitions": 3,
+  "proposal_random_seed": null,
+  "seed_limitation": "Codex transport exposes no sampling seed. Independent ephemeral calls are recorded; do not claim paired or reproducible seeds.",
+  "primary": "Per-part median of passing paired warm-minus-cold percentage; report all feasibility differences separately. Warm-only failure defeats an applicability claim. Opposite signs indicate mixed transfer. No automated promotion.",
+  "sensitivity": "Report all pair deltas and effect after removing the largest absolute delta; repeated movement hashes count once for strategy diversity."
+}

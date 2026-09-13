@@ -135,3 +135,28 @@ def test_missing_holder_geometry_cannot_claim_holder_coverage(binding):
     binding["operations"][0]["tool"].pop("holder")
     with pytest.raises(ValueError, match="cutter and holder"):
         validate_simulation_coverage(binding)
+
+
+def _add_rotary_axes(binding):
+    binding['expected_machine_coverage']['axes'].extend([
+        {'part_id': 'B', 'name': 'B', 'kind': 'rotary', 'units': 'radians',
+         'minimum': -0.61, 'maximum': 1.92, 'has_limits': True, 'infinite': False},
+        {'part_id': 'C', 'name': 'C', 'kind': 'rotary', 'units': 'radians',
+         'minimum': None, 'maximum': None, 'has_limits': False, 'infinite': True},
+    ])
+    binding['setups'][0]['machine_coverage'] = deepcopy(binding['expected_machine_coverage'])
+
+
+def test_indexed_machine_keeps_b_limits_and_continuous_c(binding):
+    _add_rotary_axes(binding)
+    assert validate_simulation_coverage(binding)['axis_overtravel'] is True
+    binding['setups'][0]['machine_coverage']['axes'][-2]['maximum'] = 2.5
+    with pytest.raises(ValueError, match='pinned machine coverage'):
+        validate_simulation_coverage(binding)
+
+
+def test_rotary_missing_limits_cannot_be_treated_as_continuous(binding):
+    _add_rotary_axes(binding)
+    binding['expected_machine_coverage']['axes'][-2]['minimum'] = None
+    with pytest.raises(ValueError, match='Rotary axis must retain'):
+        validate_simulation_coverage(binding)

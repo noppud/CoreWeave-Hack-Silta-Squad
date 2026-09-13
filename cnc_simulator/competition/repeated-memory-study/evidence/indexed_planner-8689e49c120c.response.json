@@ -1,0 +1,23 @@
+{
+  "model": "gpt-6-astra",
+  "requested_service_tier": "fast",
+  "reasoning_effort": "low",
+  "role": "indexed_planner",
+  "value": {
+    "summary": "Increase feeds to their fixed ceilings, use clearance retracts and shortest C indexing, and retain the verified depth and contour spacing. Revised timing and validity require simulation.",
+    "strategy": {
+      "stepover_fraction": 0.35,
+      "stepdown_mm": 6,
+      "cut_feed_mm_min": 900,
+      "plunge_feed_mm_min": 250,
+      "retract_feed_mm_min": 1200,
+      "segments_per_circle": 48,
+      "order": "orientation",
+      "retract_mode": "clearance",
+      "shortest_c": true,
+      "junction_cleanup": false
+    }
+  },
+  "thread_id": "01a09954-3717-75b1-bef5-e3bf7bd68901",
+  "turn_id": "01a09954-3754-7d62-93e4-76513de6d589"
+}

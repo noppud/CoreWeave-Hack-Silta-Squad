@@ -1,0 +1,60 @@
+{
+  "version": 1,
+  "episodes": [
+    {
+      "part": "01-actuator-housing",
+      "target_sha256": "4df37fccdc203318dfea04a823ad0b75e121ab6e0418f35902dd17d3b88215c4",
+      "status": "completed",
+      "attempts": 2,
+      "passed_attempts": 2,
+      "failed_attempts": 0,
+      "source_manifest": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-loop-demo/runs/01-actuator-housing/manifest.json",
+      "saved_at": 1789272420.5544,
+      "best_seconds": 259.9269851280209,
+      "best_strategy": {
+        "stepover_fraction": 0.7083333333333334,
+        "stepdown_mm": 12,
+        "cut_feed_mm_min": 900,
+        "plunge_feed_mm_min": 250,
+        "retract_feed_mm_min": 1200,
+        "segments_per_circle": 24,
+        "order": "tool",
+        "retract_mode": "clearance",
+        "shortest_c": true,
+        "junction_cleanup": false
+      },
+      "failures": [],
+      "proposed_note": {
+        "guidance": "Use the observed best strategy as a candidate starting point: 0.7083 stepover fraction, 12 mm stepdown, 900/250/1200 mm/min cut/plunge/retract feeds, 24 segments per circle, tool ordering, clearance retracts, shortest C enabled, and junction cleanup disabled. Apply only within the next part\u2019s fixed constraints; its validity and timing remain unknown.",
+        "reason": "Both observed attempts passed; the best recorded time was 259.927 seconds. Two attempts on one part do not establish which settings helped or whether this strategy transfers to the next part."
+      },
+      "evidence": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-loop-demo/memory/evidence/01-actuator-housing/indexed_learner-8e6f35e2dc01.response.json",
+      "note_status": "unvalidated suggestion; future candidates still require checks and simulation"
+    }
+  ],
+  "strategy_prior": {
+    "stepover_fraction": 0.7083333333333334,
+    "stepdown_mm": 12,
+    "cut_feed_mm_min": 900,
+    "plunge_feed_mm_min": 250,
+    "retract_feed_mm_min": 1200,
+    "segments_per_circle": 24,
+    "order": "tool",
+    "retract_mode": "clearance",
+    "shortest_c": true,
+    "junction_cleanup": false
+  },
+  "prior_source_part": "01-actuator-housing",
+  "guidance": "These are observed prior runs, not proof of validity on new geometry. Use the most recent passing strategy only as a starting candidate; adapt it and repeat checks and simulation.",
+  "semantics": "Episodic memory persistence. No claim that notes or strategy transfer are generally valid.",
+  "learned_checks": [],
+  "repair_observations": [],
+  "speed_guidance": [
+    {
+      "part": "01-actuator-housing",
+      "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-loop-demo/runs/01-actuator-housing/evidence/supervisor-46ec3286b58d.response.json",
+      "seconds": 259.9603998485483,
+      "text": "The timing judge requested a faster verified plan. Two attempts remain, and one verified time does not establish diminishing returns. Cutting accounts for 212.61 of 259.96 seconds, leaving substantial time to target for improvement."
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "strategy": {
+    "stepover_fraction": 0.75,
+    "stepdown_mm": 8,
+    "cut_feed_mm_min": 900,
+    "plunge_feed_mm_min": 250,
+    "retract_feed_mm_min": 1200,
+    "segments_per_circle": 24,
+    "order": "tool",
+    "retract_mode": "clearance",
+    "shortest_c": true,
+    "junction_cleanup": false
+  },
+  "path": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/live-verification/candidate",
+  "stage": "simulated",
+  "result": {
+    "validity": "valid",
+    "passed": true,
+    "verification": "verified",
+    "issues": [],
+    "estimated_time_seconds": 25.85223629498072,
+    "time_breakdown": {
+      "cutting": 23.67894386182774,
+      "rapid": 2.1732924331529797,
+      "dwell": 0.0,
+      "tool_changes": 0.0,
+      "indexing": 0.0
+    },
+    "timing_assumptions": "Constant commanded vector feed/rapid speed; no acceleration, jerk, lookahead, spindle ramp or controller blending. Cut includes air cutting and plunge/retract. Tool changes add fixed duration, with no implicit travel. Full submitted plan timed even if invalid. Indexed B/C rotation uses simultaneous constant angular speeds plus settle time. No cutting during indexing.",
+    "scope": "Indexed 3+2 only; table-attached stock and fixtures. Tool-section collision and configured axis limits; whole-machine self-collision is not certified. Gauge length is fixed across tools.",
+    "target_sha256": "372e913269a7e1bea2fe978602f4e51a4b8858726355a7a39c2e51a3a6cdd917",
+    "numerics": {
+      "resolution_mm": 1.0,
+      "cell_radius_mm": 0.8660255037844385,
+      "cells": 235224,
+      "geometry_backend": "trimesh signed distance; double precision, not exact arithmetic"
+    },
+    "stock_metrics": {
+      "initial_nominal_volume_mm3": 79872.0,
+      "final_nominal_volume_mm3": 67136.0,
+      "removed_nominal_volume_mm3": 12736.0,
+      "removed_volume_bounds_mm3": [
+        9632.0,
+        38928.0
+      ],
+      "final_volume_bounds_mm3": [
+        53736.0,
+        81656.0
+      ]
+    },
+    "artifacts": {
+      "final_stock": "final_stock.ply",
+      "lower_stock": "final_stock_lower.ply",
+      "upper_stock": "final_stock_upper.ply",
+      "states": [
+        "states/00000.npz",
+        "states/00005.npz",
+        "states/00010.npz",
+        "states/00015.npz",
+        "states/00020.npz",
+        "states/00025.npz",
+        "states/00030.npz",
+        "states/00035.npz",
+        "states/00040.npz",
+        "states/00045.npz",
+        "states/00050.npz",
+        "states/00055.npz",
+        "states/00060.npz",
+        "states/00063.npz"
+      ],
+      "trajectory": "trajectory.json"
+    }
+  },
+  "moves": 63,
+  "wall_seconds": 0.2925739288330078
+}

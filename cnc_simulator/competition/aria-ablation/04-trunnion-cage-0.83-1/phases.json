@@ -1,0 +1,37 @@
+[
+  {
+    "move": 0,
+    "name": "Cage cavity",
+    "feature": 0
+  },
+  {
+    "move": 210,
+    "name": "Cage window 0",
+    "feature": 1
+  },
+  {
+    "move": 274,
+    "name": "Cage window 60",
+    "feature": 2
+  },
+  {
+    "move": 338,
+    "name": "Cage window 120",
+    "feature": 3
+  },
+  {
+    "move": 402,
+    "name": "Cage window 180",
+    "feature": 4
+  },
+  {
+    "move": 466,
+    "name": "Cage window 240",
+    "feature": 5
+  },
+  {
+    "move": 530,
+    "name": "Cage window 300",
+    "feature": 6
+  }
+]

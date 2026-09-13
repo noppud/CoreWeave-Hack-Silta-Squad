@@ -1,0 +1,267 @@
+{
+  "role": "indexed_planner",
+  "context": {
+    "compiler_contract": "Return CAM parameters, not tool movements. A deterministic compiler creates movements before tests and simulation. It clears each capsule/circular feature in depth layers using a centerline and nested capsule contours, with radial track spacing diameter*stepover_fraction. It retracts with the cutter engaged to a common clearance plane 8 mm above the stock. Changing B/C or tools requires the fixed park. orientation order groups B/C then tool; tool order groups tool then B/C. shortest_c picks the equivalent C angle closest to the current C angle. Every plan ends at the same park and top orientation. Depth and stepover can change coverage certification. junction_cleanup=true adds safe smaller-tool plunge cleanup inside the union of overlapping pockets at common depths. Enable this when separate feature clearing leaves junction material. It adds actual cutting/tool-change time and is still fully simulated. More circle segments reduce chord error but increase move count, not a separate optimization cost. Simulation uses conservative voxel bounds. Never change geometry, resolution, tolerance, machine, tools or speed ceilings. Only estimated machining seconds of passing plans score. This is geometric/timing simulation; physical cutting forces and controller acceleration are not modeled.",
+    "part": {
+      "id": "04-trunnion-cage",
+      "name": "Six-window trunnion cage",
+      "stock": {
+        "kind": "cylinder",
+        "radius": 34,
+        "height": 50
+      },
+      "features": [
+        {
+          "name": "Cage cavity",
+          "bc": [
+            0,
+            0
+          ],
+          "a": [
+            0,
+            0,
+            8
+          ],
+          "b": [
+            0,
+            0,
+            8
+          ],
+          "radius": 24,
+          "tool": "T12",
+          "surface_z": 90.0
+        },
+        {
+          "name": "Cage window 0",
+          "bc": [
+            90,
+            0
+          ],
+          "a": [
+            18.0,
+            0.0,
+            20.0
+          ],
+          "b": [
+            18.0,
+            0.0,
+            34.0
+          ],
+          "radius": 7,
+          "tool": "T12",
+          "surface_z": 84.8
+        },
+        {
+          "name": "Cage window 60",
+          "bc": [
+            90,
+            60
+          ],
+          "a": [
+            9.000000000000002,
+            15.588457268119894,
+            20.0
+          ],
+          "b": [
+            9.000000000000002,
+            15.588457268119894,
+            34.0
+          ],
+          "radius": 7,
+          "tool": "T12",
+          "surface_z": 84.8
+        },
+        {
+          "name": "Cage window 120",
+          "bc": [
+            90,
+            120
+          ],
+          "a": [
+            -8.999999999999996,
+            15.588457268119896,
+            20.0
+          ],
+          "b": [
+            -8.999999999999996,
+            15.588457268119896,
+            34.0
+          ],
+          "radius": 7,
+          "tool": "T12",
+          "surface_z": 84.8
+        },
+        {
+          "name": "Cage window 180",
+          "bc": [
+            90,
+            180
+          ],
+          "a": [
+            -18.0,
+            2.204364238465236e-15,
+            20.0
+          ],
+          "b": [
+            -18.0,
+            2.204364238465236e-15,
+            34.0
+          ],
+          "radius": 7,
+          "tool": "T12",
+          "surface_z": 84.8
+        },
+        {
+          "name": "Cage window 240",
+          "bc": [
+            90,
+            240
+          ],
+          "a": [
+            -9.000000000000007,
+            -15.58845726811989,
+            20.0
+          ],
+          "b": [
+            -9.000000000000007,
+            -15.58845726811989,
+            34.0
+          ],
+          "radius": 7,
+          "tool": "T12",
+          "surface_z": 84.8
+        },
+        {
+          "name": "Cage window 300",
+          "bc": [
+            90,
+            300
+          ],
+          "a": [
+            9.000000000000002,
+            -15.588457268119894,
+            20.0
+          ],
+          "b": [
+            9.000000000000002,
+            -15.588457268119894,
+            34.0
+          ],
+          "radius": 7,
+          "tool": "T12",
+          "surface_z": 84.8
+        }
+      ]
+    },
+    "fixed_tools": {
+      "T12": {
+        "diameter_mm": 12,
+        "flute_length_mm": 60,
+        "shaft_diameter_mm": 12,
+        "shaft_length_mm": 30,
+        "holder_diameter_mm": 40,
+        "holder_length_mm": 30
+      },
+      "T8": {
+        "diameter_mm": 8,
+        "flute_length_mm": 60,
+        "shaft_diameter_mm": 8,
+        "shaft_length_mm": 30,
+        "holder_diameter_mm": 40,
+        "holder_length_mm": 30
+      }
+    },
+    "fixed_limits": {
+      "cut_feed_mm_min": 900,
+      "plunge_feed_mm_min": 250,
+      "retract_feed_mm_min": 1200,
+      "max_stepdown_mm": 12
+    },
+    "resolution_mm": 1.0,
+    "tolerance_mm": 3.0,
+    "parameter_ranges": {
+      "stepover_fraction": [
+        0.15,
+        0.95
+      ],
+      "stepdown_mm": [
+        1,
+        12
+      ],
+      "segments_per_circle": [
+        24,
+        96
+      ]
+    },
+    "previous_strategy": {
+      "stepover_fraction": 0.35,
+      "stepdown_mm": 6,
+      "cut_feed_mm_min": 350,
+      "plunge_feed_mm_min": 120,
+      "retract_feed_mm_min": 700,
+      "segments_per_circle": 48,
+      "order": "orientation",
+      "retract_mode": "park",
+      "shortest_c": false
+    },
+    "feedback": {
+      "validity": "valid",
+      "passed": true,
+      "verification": "verified",
+      "issues": [],
+      "estimated_time_seconds": 846.427131520309,
+      "time_breakdown": {
+        "cutting": 804.265054158875,
+        "rapid": 12.162077361433914,
+        "dwell": 0.0,
+        "tool_changes": 0.0,
+        "indexing": 30.0
+      },
+      "timing_assumptions": "Constant commanded vector feed/rapid speed; no acceleration, jerk, lookahead, spindle ramp or controller blending. Cut includes air cutting and plunge/retract. Tool changes add fixed duration, with no implicit travel. Full submitted plan timed even if invalid. Indexed B/C rotation uses simultaneous constant angular speeds plus settle time. No cutting during indexing.",
+      "scope": "Indexed 3+2 only; table-attached stock and fixtures. Tool-section collision and configured axis limits; whole-machine self-collision is not certified. Gauge length is fixed across tools.",
+      "target_sha256": "9af44a8563fc15d661df6b14e17dca6ba2a3b9694519c3b5acb25eea419d5037",
+      "numerics": {
+        "resolution_mm": 1.0,
+        "cell_radius_mm": 0.8660255037844385,
+        "cells": 450800,
+        "geometry_backend": "trimesh signed distance; double precision, not exact arithmetic"
+      },
+      "stock_metrics": {
+        "initial_nominal_volume_mm3": 182000.0,
+        "final_nominal_volume_mm3": 84792.0,
+        "removed_nominal_volume_mm3": 97208.0,
+        "removed_volume_bounds_mm3": [
+          84656.0,
+          136752.0
+        ],
+        "final_volume_bounds_mm3": [
+          62640.0,
+          108200.0
+        ]
+      },
+      "artifacts": {
+        "final_stock": "final_stock.ply",
+        "lower_stock": "final_stock_lower.ply",
+        "upper_stock": "final_stock_upper.ply",
+        "states": [
+          "states/00000.npz",
+          "states/00227.npz",
+          "states/00454.npz",
+          "states/00681.npz",
+          "states/00908.npz",
+          "states/01135.npz",
+          "states/01362.npz",
+          "states/01589.npz",
+          "states/01816.npz",
+          "states/02043.npz",
+          "states/02270.npz",
+          "states/02497.npz",
+          "states/02724.npz",
+          "states/02729.npz"
+        ],
+        "trajectory": "trajectory.json"
+      }
+    },
+    "retained_memory": null
+  }
+}

@@ -1,0 +1,432 @@
+{
+  "archive": "simulator-source.tar.gz",
+  "sha256": "ff9263b252c88bc17897b1d37d0affc78c4a6794f72a2b3848987b5d1d4acb14",
+  "files": [
+    {
+      "path": "DEMO.md",
+      "bytes": 4521,
+      "sha256": "6730afcd63abec3b12bef8dca1f41d5b514993ce017ba08a94b4c67f36847064"
+    },
+    {
+      "path": "HANDOFF.md",
+      "bytes": 3723,
+      "sha256": "282038c61398268a4fa2dcd956a9ac177c545bd58dc38e59d7c81bbcfb7a51ad"
+    },
+    {
+      "path": "INDEXED-MACHINING.md",
+      "bytes": 5085,
+      "sha256": "d32910cd1c645c3b71f450951047928717db2fe9427d663e8849f9a9780b49e1"
+    },
+    {
+      "path": "INDEXED.md",
+      "bytes": 5420,
+      "sha256": "96410a4174946166742ad45f1695a81df69b7954f97cbbeb78b2f6a347d3654e"
+    },
+    {
+      "path": "JUDGING.md",
+      "bytes": 3760,
+      "sha256": "043d323c11bda3ebbacbe2ec4f648e5fba3080d645035b8a04f4bfa9dd6b994f"
+    },
+    {
+      "path": "LIVE.md",
+      "bytes": 3428,
+      "sha256": "72131baa6a4a5742b9fba2daa4f31080e90a29e80ed5ac4078261e6d5e402cd3"
+    },
+    {
+      "path": "LOOP-CONTRACT.md",
+      "bytes": 2536,
+      "sha256": "6d019302b81182a22c636c2589e56d9814e1e941535b684c601905b01dcdba92"
+    },
+    {
+      "path": "LOOPS.md",
+      "bytes": 10382,
+      "sha256": "275b3354eb33b3ba9c94bb02daf0edef8ad07470bd73f464457771e3ef506814"
+    },
+    {
+      "path": "README.md",
+      "bytes": 12451,
+      "sha256": "d2bb0016330c6890d9c5cbfdbe3fe08a05d752c84dbff00924f80e8b86e820a7"
+    },
+    {
+      "path": "assets/umc750/export-receipt.json",
+      "bytes": 430,
+      "sha256": "d8d73c6e2822bbde819dd9f1d4a44def7eae25d51210c4ca542eef362f487b7b"
+    },
+    {
+      "path": "assets/umc750/haas-umc750.f3d",
+      "bytes": 6568341,
+      "sha256": "b33ed15419fdf3234f1a6269f86676ab5b2fda5b2e2044d460499192bba4f403"
+    },
+    {
+      "path": "assets/umc750/haas-umc750.mch",
+      "bytes": 41859,
+      "sha256": "ed825408f4d43ba7382da9863b8d1ef38e63f760dee26ac79fb7f2dc4e6b3f08"
+    },
+    {
+      "path": "assets/umc750/machine-raw.json",
+      "bytes": 5824363,
+      "sha256": "fe2cea579bd7343c7fb232d180c4e392bdafd40f8e46782b6a3ddf0daa0f9a7d"
+    },
+    {
+      "path": "assets/umc750/provenance.json",
+      "bytes": 868,
+      "sha256": "b3c9d94a71621318487276163ff30005ae4c726069fa2afe8682373e5df033cb"
+    },
+    {
+      "path": "camloop/__init__.py",
+      "bytes": 83,
+      "sha256": "9e6ab13d3af1b55b0f3fc170055b71a92b791b45d8e1264509017050362b2010"
+    },
+    {
+      "path": "camloop/__main__.py",
+      "bytes": 3242,
+      "sha256": "efd29879c42f12763382c82fd1a1274ea8e9824347f3ecaeeb7abc041d2902d6"
+    },
+    {
+      "path": "camloop/astra.py",
+      "bytes": 9292,
+      "sha256": "679c9ebdf3988a6600ccf892dde9dfff44f1ee1e83a1b51130bb895b2c365754"
+    },
+    {
+      "path": "camloop/benchmark.py",
+      "bytes": 11917,
+      "sha256": "5b16c0b9006b864679b76a77f7d59174e1aed008671533aa4a8fe5c47334ec3b"
+    },
+    {
+      "path": "camloop/common.py",
+      "bytes": 8867,
+      "sha256": "a820abf8149e72262b47c3ffe830d1b74f22f9402d10203bbc4233519aa61a9e"
+    },
+    {
+      "path": "camloop/controller.py",
+      "bytes": 10718,
+      "sha256": "e7c81b2b6c41298df24aecf3b825addc9a22dade19145acb9cd953bcf1f23bc9"
+    },
+    {
+      "path": "camloop/demo.py",
+      "bytes": 5257,
+      "sha256": "1d208e8f14d6e6450eb956d5ead4fe26d30c04b787c654f7af0c72b155b164bc"
+    },
+    {
+      "path": "camloop/indexed/__init__.py",
+      "bytes": 81,
+      "sha256": "abe9e5c9b72890c890e64bc4159db1fc9c171c9cacd87e8b0480fbdf7491a089"
+    },
+    {
+      "path": "camloop/indexed/__main__.py",
+      "bytes": 699,
+      "sha256": "6b4bd079ceec77f8ce5970723086c2f75068268da1897fda84a14a483aed3eaf"
+    },
+    {
+      "path": "camloop/indexed/artifacts.py",
+      "bytes": 5161,
+      "sha256": "df67d6639b5f14212d6b0c3b02f0af3accb616c6a4761b39cfd83a2537468a5b"
+    },
+    {
+      "path": "camloop/indexed/cam.py",
+      "bytes": 9149,
+      "sha256": "9d5f5d8d009ccec57da01d62a274b0fe4970854bcd00f69b1d1e87a943da578a"
+    },
+    {
+      "path": "camloop/indexed/learning.py",
+      "bytes": 2392,
+      "sha256": "5d716947ec7f3718b6631eb60043f90eb47f601e48cba5401f903bdc907c65ec"
+    },
+    {
+      "path": "camloop/indexed/parts.py",
+      "bytes": 8418,
+      "sha256": "20acdc4f16c81aaf049da3fe6eca63e2fa17d1cd3b6e89054b05c74308afb19f"
+    },
+    {
+      "path": "camloop/indexed/report.py",
+      "bytes": 4244,
+      "sha256": "72974685927108d931a4513591a4c187a4f759b2b44f61b6fd8f280c878c5e06"
+    },
+    {
+      "path": "camloop/indexed/runner.py",
+      "bytes": 11901,
+      "sha256": "9bb0211f25710f06b64cb5b75d02e2d504e82b8234fb1ca64f0a042900057be8"
+    },
+    {
+      "path": "camloop/indexed/sequential.py",
+      "bytes": 4676,
+      "sha256": "ee0943c4d2dbe813299199233c4fab58948610501fbbe202e2ed059f53aa88e6"
+    },
+    {
+      "path": "camloop/inspect_job.py",
+      "bytes": 2355,
+      "sha256": "8f52159b2b630493ae7c4cc1e7d1f62f42f487397bdff7f8700a067002b49e41"
+    },
+    {
+      "path": "camloop/learning.py",
+      "bytes": 10027,
+      "sha256": "eed2c292239b28c3faf369478a832d2e038528a4e142a3b7237010351b008ff7"
+    },
+    {
+      "path": "camloop/live.py",
+      "bytes": 17663,
+      "sha256": "5fb787926106ae0e3aa8201735b90f3172e3e8cf528173b974132a792131db14"
+    },
+    {
+      "path": "camloop/live_evidence.py",
+      "bytes": 1636,
+      "sha256": "aaca6c57c3f0a64845cec1fb1fac23e5103e2196c70e38c56bd1c42926c03c60"
+    },
+    {
+      "path": "camloop/playback.py",
+      "bytes": 4275,
+      "sha256": "aeec05addf207b95ea3f86ff791fc674a61d7408f156ae333d05a47107cf1b7c"
+    },
+    {
+      "path": "camloop/rehearsal.py",
+      "bytes": 1814,
+      "sha256": "e1a3f4888b8a2c5b4f1a53833acc737859fe3504f4130ee1ba387dd52ab29168"
+    },
+    {
+      "path": "camloop/server.py",
+      "bytes": 5800,
+      "sha256": "41c61e42ec526ecd7fe37e557282ddd209d6ee7c58be5ec19a9344aa6cd15e2b"
+    },
+    {
+      "path": "camloop/signals.py",
+      "bytes": 843,
+      "sha256": "09ac26f240194ee1e747fe6f3b05928b50e1aa4cb3c72bf9084145380658bbad"
+    },
+    {
+      "path": "camloop/telemetry.py",
+      "bytes": 2742,
+      "sha256": "2955a9e79cd4abd7457227e2bcb7b38ca4261166c2e36b313d3c63d90ebd27c3"
+    },
+    {
+      "path": "cncsim/__init__.py",
+      "bytes": 103,
+      "sha256": "14c084de47f26af83e662f88efb9ff048762a99d60578af8df1ccbb4858797a0"
+    },
+    {
+      "path": "cncsim/__main__.py",
+      "bytes": 1221,
+      "sha256": "8e6ee492152b7b0a7bb8564a5f8e0b07c5752a4824b32bb0bca19e8187213548"
+    },
+    {
+      "path": "cncsim/geometry.py",
+      "bytes": 7542,
+      "sha256": "a1ff934d2a8396570fcba9a2eadb530a9bdaf3b48ff99ee6af03191f134b8281"
+    },
+    {
+      "path": "cncsim/indexing.py",
+      "bytes": 2548,
+      "sha256": "3a3952c5bd3229610ee0a80426d09752e0f959d917843521fa77b4b71684b338"
+    },
+    {
+      "path": "cncsim/simulator.py",
+      "bytes": 20865,
+      "sha256": "07973d45ea6c112b425fcd3d326d59fd3ec5bf2d4306429c0d8611a1d40bd133"
+    },
+    {
+      "path": "competition/live_terminal.py",
+      "bytes": 3205,
+      "sha256": "fac83fa6eaf26fa6d706d3c30f6be7b011c82a53259dc64f57d76409cfda65d6"
+    },
+    {
+      "path": "competition/run_complex_parts.py",
+      "bytes": 4312,
+      "sha256": "ff532c85efd4862e94097732f1491adc56ead97521e6e2412778e6bc389a9c08"
+    },
+    {
+      "path": "examples/indexed-housing/design.json",
+      "bytes": 1116,
+      "sha256": "acafcb1aa0b7be5107f168aba9a2efd39c8ed8b6cb1ca762b1718a759fae4a52"
+    },
+    {
+      "path": "examples/indexed-housing/plan.json",
+      "bytes": 188566,
+      "sha256": "480881546fc1150f1697b99d59108027889d0b78382b5c7808623a05bc44e0a8"
+    },
+    {
+      "path": "examples/indexed-housing/stock.stl",
+      "bytes": 19284,
+      "sha256": "2b06d1aac5923a4a4ca8308c8aafd3dac6d5168fe35e712b651fb6bbb385e088"
+    },
+    {
+      "path": "examples/indexed-housing/target.stl",
+      "bytes": 831084,
+      "sha256": "42df2d5c59df28f3dfd8126302948241add4af9ce82ef917284d8d236a855e2b"
+    },
+    {
+      "path": "examples/loop-evidence.json",
+      "bytes": 1173,
+      "sha256": "90a2e5ab836311577b950d9213856c3c5d4e7b8853cfc75296289415921cb6c6"
+    },
+    {
+      "path": "examples/make_example.py",
+      "bytes": 1737,
+      "sha256": "d7400883a61399c0e5caead20660f4f93f46090cb917db21012d868f3c7b09d4"
+    },
+    {
+      "path": "examples/pocket.json",
+      "bytes": 1508,
+      "sha256": "b7fede03ef0d24e937a901a5a9569d8c0d17b5ab230ba9137bac31260bfd2882"
+    },
+    {
+      "path": "examples/pocket_target.stl",
+      "bytes": 26684,
+      "sha256": "0c247557a48e741889b0dbd20cdfd40265ba675c8fb67232b226aa86f651009b"
+    },
+    {
+      "path": "pyproject.toml",
+      "bytes": 790,
+      "sha256": "5be3c3def417aecfb561c4e87b5a08e23b5020071c7a5b322df0ac3ac96c5914"
+    },
+    {
+      "path": "requirements-lock.txt",
+      "bytes": 173,
+      "sha256": "86cd1be33c5fb0ab0bb96168323d423033a6996642baf5818b121b97efa25fdc"
+    },
+    {
+      "path": "requirements-loop-lock.txt",
+      "bytes": 322,
+      "sha256": "287ebf864b1818a4f5bfa6e785800bb8b18c38e55b7d197f3ef3998bbb346565"
+    },
+    {
+      "path": "scripts/encode_indexed_videos.py",
+      "bytes": 3215,
+      "sha256": "22b8467c5a5e5513c596ab832b8376cecdd5d5c64285829aaf6e1b29aae19f53"
+    },
+    {
+      "path": "scripts/serve_indexed.py",
+      "bytes": 3873,
+      "sha256": "18ee1449c23eff444ea8a003bf9bbd29261593d743b93daf94285bca0d28dc97"
+    },
+    {
+      "path": "tests/test_benchmark.py",
+      "bytes": 1907,
+      "sha256": "838916a7bec6e7e41219d508b003adc8ee282174169373c4075d605b2c44f745"
+    },
+    {
+      "path": "tests/test_indexed_loop.py",
+      "bytes": 5637,
+      "sha256": "45e6f13b47b093aae7b87683ae56f2a195f1c51f20cfd65f6a2ad2a3a2b1d4f5"
+    },
+    {
+      "path": "tests/test_indexing.py",
+      "bytes": 4112,
+      "sha256": "9dd9d15a93fbaa1a9ca5aa85a1228adfdb6bbd3da62b757342d1d2a4975c88a1"
+    },
+    {
+      "path": "tests/test_inspect_job.py",
+      "bytes": 1081,
+      "sha256": "cad206d5a735b2a29744c1604b9192d68c939b5671a80320bae979d372c050ba"
+    },
+    {
+      "path": "tests/test_live.py",
+      "bytes": 2237,
+      "sha256": "8b550298781cbc1608f6af18abe77a6f0215fe929950877e2a7f41916dc88751"
+    },
+    {
+      "path": "tests/test_live_recovery.py",
+      "bytes": 4261,
+      "sha256": "52f29f86c9987d35bcb09313d3619172cc7e7acf6e2d6756c8ed2d447051450a"
+    },
+    {
+      "path": "tests/test_loop.py",
+      "bytes": 8043,
+      "sha256": "7a431d613ee6ebcf37e4552717e3b550bdc3888d0b7cadf541b98ba2245b0ad4"
+    },
+    {
+      "path": "tests/test_signals.py",
+      "bytes": 707,
+      "sha256": "1701303700a3052568cf1a8f7d8aa05ca0b4acdb3ba4308fb7bb4789bfa432c3"
+    },
+    {
+      "path": "tests/test_simulator.py",
+      "bytes": 9218,
+      "sha256": "864cdc67d6be0c9cb4ee4dd07e101d915f0f287698e30f5881fb06bda22a9ff5"
+    },
+    {
+      "path": "tests/test_telemetry.py",
+      "bytes": 1328,
+      "sha256": "2989c52af8807f04dc25c54d8d4db3c8209486c587ce51dd43c094ffc043fb7d"
+    },
+    {
+      "path": "tests/test_terminal_monitor.py",
+      "bytes": 1464,
+      "sha256": "5416313f662e83d7e5cd6a2f4e737ddd3ad8d05202fb3de715437135a2e33728"
+    },
+    {
+      "path": "viewer/dist/assets/umc750.json",
+      "bytes": 5852177,
+      "sha256": "80832d98d84f810bbb75ae31b19cbe128d96407984f29392aa047bc6759e52d3"
+    },
+    {
+      "path": "viewer/dist/examples/bearing-pocket.pdf",
+      "bytes": 2135,
+      "sha256": "b81a2e7cd0633606c83d4e06ec67b016f9817c40434b740b6dc40a07f0cdea92"
+    },
+    {
+      "path": "viewer/dist/housing.html",
+      "bytes": 4147,
+      "sha256": "c6571c84c65a1e7ea526fea45038189d399e432c02a954c83613d61c35991a71"
+    },
+    {
+      "path": "viewer/dist/housing.js",
+      "bytes": 13402,
+      "sha256": "ba0e8ded1b86d13227226557d50890cdbc37948a13e986135ea308923f8afea6"
+    },
+    {
+      "path": "viewer/dist/study.html",
+      "bytes": 3904,
+      "sha256": "f3e994f4f8096626d9ea8fa144345ea5ec3907583f511988c36a7f404411b72e"
+    },
+    {
+      "path": "viewer/dist/study.js",
+      "bytes": 6556,
+      "sha256": "e6854d79e1f17449f67a10872498a154ad36625a0d24251bb44e68b545122ce9"
+    },
+    {
+      "path": "viewer/dist/vendor/MarchingCubes.js",
+      "bytes": 40408,
+      "sha256": "fe9c6ace2c079bf540befd164ce492de98c820d8b86a722b1060833d42ad9c80"
+    },
+    {
+      "path": "viewer/dist/vendor/OrbitControls.js",
+      "bytes": 38703,
+      "sha256": "b97879c748170baadeb3fb84cea1ffdf4674e283dc06042f34e2acb95a76042c"
+    },
+    {
+      "path": "viewer/dist/vendor/PLYLoader.js",
+      "bytes": 17700,
+      "sha256": "b824a6dda90cbfb37cabf8e5462ed1673e7693852bc1a6a7bab0465d7b634dfb"
+    },
+    {
+      "path": "viewer/dist/vendor/RoomEnvironment.js",
+      "bytes": 4899,
+      "sha256": "c20f0b4677f6128a138d7152b85cbef9091f4f45cdfa05adca04d40c1697c7ae"
+    },
+    {
+      "path": "viewer/dist/vendor/three.core.js",
+      "bytes": 1403455,
+      "sha256": "eb077d2417f61d3e6d9264c317cabc4ea35769ed6b0ab533067292a550784c20"
+    },
+    {
+      "path": "viewer/dist/vendor/three.module.js",
+      "bytes": 603113,
+      "sha256": "c8211c69345d2e9949dc7a8ac969380497aa0600a5a8ac6a459c8cd02dd9cb8a"
+    },
+    {
+      "path": "viewer/dist/workspace.css",
+      "bytes": 5084,
+      "sha256": "89de9444e02b7a2ecb1115afc282a03bc4e078b59bb24ae9ce44c69e63cf2f5c"
+    },
+    {
+      "path": "viewer/dist/workspace.html",
+      "bytes": 2331,
+      "sha256": "a2eab3a228a751cb6b5f55db8a4c793455a74058c7b96acdce0e44aa4641dcfe"
+    },
+    {
+      "path": "viewer/dist/workspace.js",
+      "bytes": 10887,
+      "sha256": "613f38ad2b4f535e0032e6cf1b81fe66e68f9aec96381d56fd3c913f73a95db7"
+    }
+  ],
+  "scope": "Core engine, CAM orchestration, live viewer, UMC machine assets, tests and example CAD. Recorded studies, credentials and environments excluded. Legacy VF2/Fusion provenance test module is excluded; it requires separate parent-repository assets and is not a UMC engine test."
+}

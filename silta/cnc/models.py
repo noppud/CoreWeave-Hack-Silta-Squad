@@ -11,6 +11,22 @@ from pathlib import Path
 from typing import Any, Literal
 
 
+class CandidateGenerationError(RuntimeError):
+    """Completed CAM generation failed; send the observed details back for repair."""
+
+    def __init__(self, feedback: dict):
+        self.feedback = feedback
+        super().__init__("Fusion did not generate usable toolpaths")
+
+
+class CandidateProposalUnresolved(ValueError):
+    """The planner declined a CAM proposal before executing its source."""
+
+    def __init__(self, issues: list[str]):
+        self.issues = list(issues)
+        super().__init__("cam needs clarification: " + "; ".join(issues))
+
+
 def digest_json(value: Any) -> str:
     return hashlib.sha256(
         json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False).encode()

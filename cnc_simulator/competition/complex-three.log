@@ -1,0 +1,44 @@
+Frozen 13-twelve-window-carrier
+Frozen 14-multi-gallery-manifold
+Frozen 15-staggered-lattice-drum
+PART 13-twelve-window-carrier FEATURES 26
+13-twelve-window-carrier reference_simulation
+13-twelve-window-carrier cam_planning
+13-twelve-window-carrier simulation_pass
+13-twelve-window-carrier best_updated
+13-twelve-window-carrier timing_judge
+13-twelve-window-carrier judge_to_cam_memory
+13-twelve-window-carrier cam_planning
+13-twelve-window-carrier simulation_pass
+13-twelve-window-carrier best_updated
+13-twelve-window-carrier timing_judge
+13-twelve-window-carrier run_completed
+Display exported 13-twelve-window-carrier 56 frames 10174488 bytes
+FINISHED 13-twelve-window-carrier completed
+PART 14-multi-gallery-manifold FEATURES 19
+14-multi-gallery-manifold reference_simulation
+14-multi-gallery-manifold cam_planning
+14-multi-gallery-manifold simulation_pass
+14-multi-gallery-manifold best_updated
+14-multi-gallery-manifold timing_judge
+14-multi-gallery-manifold judge_to_cam_memory
+14-multi-gallery-manifold cam_planning
+14-multi-gallery-manifold simulation_pass
+14-multi-gallery-manifold timing_judge
+14-multi-gallery-manifold run_completed
+Display exported 14-multi-gallery-manifold 46 frames 2525496 bytes
+FINISHED 14-multi-gallery-manifold completed
+PART 15-staggered-lattice-drum FEATURES 26
+15-staggered-lattice-drum reference_simulation
+15-staggered-lattice-drum cam_planning
+15-staggered-lattice-drum simulation_pass
+15-staggered-lattice-drum best_updated
+15-staggered-lattice-drum timing_judge
+15-staggered-lattice-drum judge_to_cam_memory
+15-staggered-lattice-drum cam_planning
+15-staggered-lattice-drum simulation_pass
+15-staggered-lattice-drum timing_judge
+15-staggered-lattice-drum run_completed
+Display exported 15-staggered-lattice-drum 60 frames 10497888 bytes
+FINISHED 15-staggered-lattice-drum completed
+ALL THREE FINISHED

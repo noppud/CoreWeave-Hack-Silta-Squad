@@ -1,0 +1,23 @@
+{
+  "model": "gpt-6-astra",
+  "requested_service_tier": "fast",
+  "reasoning_effort": "low",
+  "role": "indexed_planner",
+  "value": {
+    "summary": "Candidate reduces depth layers, uses maximum permitted feeds and clearance retracts. Separate pockets need no junction cleanup. Verification is required.",
+    "strategy": {
+      "stepover_fraction": 0.7083333333333334,
+      "stepdown_mm": 12,
+      "cut_feed_mm_min": 900,
+      "plunge_feed_mm_min": 250,
+      "retract_feed_mm_min": 1200,
+      "segments_per_circle": 24,
+      "order": "orientation",
+      "retract_mode": "clearance",
+      "shortest_c": true,
+      "junction_cleanup": false
+    }
+  },
+  "thread_id": "01a0995e-d19c-7100-bf35-b6ea0a7948db",
+  "turn_id": "01a0995e-d1d8-77a1-8f95-c8892b828911"
+}

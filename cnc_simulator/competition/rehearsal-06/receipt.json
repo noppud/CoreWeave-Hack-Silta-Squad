@@ -1,0 +1,50 @@
+{
+  "job": "469436bb78a7",
+  "status": "completed",
+  "baseline_seconds": 80.74544471125378,
+  "best_seconds": 25.85223629498072,
+  "attempts": [
+    true,
+    true
+  ],
+  "memory_loaded": 14,
+  "memory_saved": 15,
+  "trace": {
+    "enabled": true,
+    "url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a099a7-6579-768b-b80c-a3e300aa3ce5",
+    "readback_complete": true
+  },
+  "browser_checked": [
+    "reviewed PDF dimensions",
+    "generated CAM projection",
+    "running stock replay",
+    "finished stock"
+  ],
+  "model_execution_records": [
+    {
+      "model": "gpt-6-astra",
+      "service_tier": "fast",
+      "reasoning_effort": "low",
+      "role": "supervisor"
+    },
+    {
+      "model": "gpt-6-astra",
+      "service_tier": "fast",
+      "reasoning_effort": "low",
+      "role": "indexed_planner"
+    },
+    {
+      "model": "gpt-6-astra",
+      "service_tier": "fast",
+      "reasoning_effort": "low",
+      "role": "indexed_planner"
+    },
+    {
+      "model": "gpt-6-astra",
+      "service_tier": "fast",
+      "reasoning_effort": "low",
+      "role": "supervisor"
+    }
+  ],
+  "scope": "Fresh browser-started main demo run, separate from the complex-study memory branch; no within-run speed improvement claimed"
+}

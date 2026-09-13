@@ -1,0 +1,17 @@
+[
+  {
+    "move": 0,
+    "name": "Left recess",
+    "feature": 0
+  },
+  {
+    "move": 110,
+    "name": "Right recess",
+    "feature": 1
+  },
+  {
+    "move": 220,
+    "name": "Rear circular seat",
+    "feature": 2
+  }
+]

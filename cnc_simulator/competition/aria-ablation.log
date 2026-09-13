@@ -1,0 +1,24 @@
+EVALUATING 02-hydraulic-manifold-0.708-0
+02-hydraulic-manifold-0.708-0 False None
+EVALUATING 02-hydraulic-manifold-0.708-1
+02-hydraulic-manifold-0.708-1 True 158.97681405483698
+EVALUATING 02-hydraulic-manifold-0.75-0
+02-hydraulic-manifold-0.75-0 False None
+EVALUATING 02-hydraulic-manifold-0.75-1
+02-hydraulic-manifold-0.75-1 True 158.97681405483698
+EVALUATING 02-hydraulic-manifold-0.95-0
+02-hydraulic-manifold-0.95-0 False None
+EVALUATING 02-hydraulic-manifold-0.95-1
+02-hydraulic-manifold-0.95-1 True 158.97681405483698
+EVALUATING 04-trunnion-cage-0.75-0
+04-trunnion-cage-0.75-0 True 196.77267020109883
+EVALUATING 04-trunnion-cage-0.75-1
+04-trunnion-cage-0.75-1 True 196.77267020109883
+EVALUATING 04-trunnion-cage-0.83-0
+04-trunnion-cage-0.83-0 True 198.37657605919455
+EVALUATING 04-trunnion-cage-0.83-1
+04-trunnion-cage-0.83-1 True 198.37657605919455
+EVALUATING 04-trunnion-cage-0.95-0
+04-trunnion-cage-0.95-0 False None
+EVALUATING 04-trunnion-cage-0.95-1
+04-trunnion-cage-0.95-1 False None

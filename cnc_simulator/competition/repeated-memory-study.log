@@ -1,0 +1,25 @@
+START 03-bearing-block-r1-cold
+DONE 03-bearing-block-r1-cold True
+START 03-bearing-block-r1-warm
+DONE 03-bearing-block-r1-warm True
+START 04-trunnion-cage-r1-warm
+DONE 04-trunnion-cage-r1-warm True
+START 04-trunnion-cage-r1-cold
+DONE 04-trunnion-cage-r1-cold True
+START 03-bearing-block-r2-warm
+DONE 03-bearing-block-r2-warm True
+START 03-bearing-block-r2-cold
+DONE 03-bearing-block-r2-cold True
+START 04-trunnion-cage-r2-cold
+DONE 04-trunnion-cage-r2-cold True
+START 04-trunnion-cage-r2-warm
+DONE 04-trunnion-cage-r2-warm True
+START 03-bearing-block-r3-cold
+DONE 03-bearing-block-r3-cold True
+START 03-bearing-block-r3-warm
+DONE 03-bearing-block-r3-warm True
+START 04-trunnion-cage-r3-warm
+DONE 04-trunnion-cage-r3-warm True
+START 04-trunnion-cage-r3-cold
+DONE 04-trunnion-cage-r3-cold True
+COMPLETE [{"part": "03-bearing-block", "repetition": 1, "cold_passed": true, "warm_passed": true, "paired_coverage": true, "cold_seconds": 124.16424211299727, "warm_seconds": 124.16424211299727, "warm_minus_cold_seconds": 0.0}, {"part": "03-bearing-block", "repetition": 2, "cold_passed": true, "warm_passed": true, "paired_coverage": true, "cold_seconds": 125.52483906044645, "warm_seconds": 130.22065744256136, "warm_minus_cold_seconds": 4.695818382114908}, {"part": "03-bearing-block", "repetition": 3, "cold_passed": true, "warm_passed": true, "paired_coverage": true, "cold_seconds": 126.79666677694384, "warm_seconds": 130.22065744256136, "warm_minus_cold_seconds": 3.4239906656175236}, {"part": "04-trunnion-cage", "repetition": 1, "cold_passed": true, "warm_passed": true, "paired_coverage": true, "cold_seconds": 360.0029317565553, "warm_seconds": 196.77267020109883, "warm_minus_cold_seconds": -163.23026155545648}, {"part": "04-trunnion-cage", "repetition": 2, "cold_passed": true, "warm_passed": true, "paired_coverage": true, "cold_seconds": 197.77511139588566, "warm_seconds": 196.77267020109883, "warm_minus_cold_seconds": -1.002441194786826}, {"part": "04-trunnion-cage", "repetition": 3, "cold_passed": true, "warm_passed": true, "paired_coverage": true, "cold_seconds": 197.8848077125964, "warm_seconds": 196.77267020109883, "warm_minus_cold_seconds": -1.112137511497565}]

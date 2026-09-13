@@ -1,0 +1,42 @@
+{
+  "result": {
+    "reference": {
+      "passed": true,
+      "issues": [],
+      "seconds": 80.74544471125378,
+      "time_breakdown": {
+        "cutting": 78.5721522781008,
+        "rapid": 2.1732924331529797,
+        "dwell": 0.0,
+        "tool_changes": 0.0,
+        "indexing": 0.0
+      },
+      "stage": "simulated",
+      "artifact": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/live-verification/reference/evaluation.json"
+    },
+    "candidate": {
+      "passed": true,
+      "issues": [],
+      "seconds": 25.85223629498072,
+      "time_breakdown": {
+        "cutting": 23.67894386182774,
+        "rapid": 2.1732924331529797,
+        "dwell": 0.0,
+        "tool_changes": 0.0,
+        "indexing": 0.0
+      },
+      "stage": "simulated",
+      "artifact": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/live-verification/candidate/evaluation.json"
+    },
+    "signals": {
+      "geometry_pass": true,
+      "paired_coverage": true,
+      "paired_reduction_percent": 67.98304054497628,
+      "uncertain_issue_count": 0,
+      "target_unchanged": true
+    },
+    "scope": "Fresh simulations of retained Astra-generated strategy and fixed reference; no new model proposal. 1 mm cells, 3 mm tolerance."
+  },
+  "trace_url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a09938-8ffc-708d-a704-e1fa090912dd",
+  "readback_complete": true
+}

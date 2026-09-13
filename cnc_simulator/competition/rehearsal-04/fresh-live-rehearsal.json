@@ -1,0 +1,2003 @@
+{
+  "id": "3f1703103c1f",
+  "filename": "bearing-pocket.pdf",
+  "status": "completed",
+  "message": "Timing judge accepted the verified plan.",
+  "created_at": 1789278546.915339,
+  "updated_at": 1789278592.760393,
+  "extracted_text": "Bearing Pocket\nDimensioned test drawing. All dimensions in millimetres.\nPre-sized box stock: 64 X x 52 Y x 24 Z.\nCoordinate origin: stock centre in X/Y; stock bottom Z=0; top Z=24.\nOne blind obround pocket: end centres A=(-12,0), B=(12,0).\nPocket radius 10; absolute floor Z=8; flat bottom.\nNo other features, holes, chamfers, fillets or islands.\nGeneral geometric tolerance: 3 mm. Coarse simulation demonstration.\nMaterial: aluminium 6061. Not a production drawing.\nTop view (schematic); dimensions above define the target.\n",
+  "spec": {
+    "name": "Bearing Pocket",
+    "summary": "Pre-sized aluminium 6061 box with one flat-bottom blind obround pocket. Stock origin is centred in X/Y at bottom Z=0; top Z=24. Coarse simulation demonstration, not a production drawing.",
+    "stock_kind": "box",
+    "stock_dimensions_mm": [
+      64,
+      52,
+      24
+    ],
+    "drawing_tolerance_mm": 3,
+    "blockers": [],
+    "features": [
+      {
+        "name": "Blind obround pocket",
+        "a": [
+          -12,
+          0
+        ],
+        "b": [
+          12,
+          0
+        ],
+        "radius_mm": 10,
+        "floor_z_mm": 8,
+        "evidence_quote": "One blind obround pocket: end centres A=(-12,0), B=(12,0).\nPocket radius 10; absolute floor Z=8; flat bottom."
+      }
+    ]
+  },
+  "intake_evidence": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/3f1703103c1f/intake-evidence/drawing_intake-b9565d6fc65f.response.json",
+  "weave_trace_url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a09950-08eb-78f2-886c-22c645c1774a",
+  "manifest": {
+    "id": "3f1703103c1f",
+    "name": "Bearing Pocket",
+    "split": "live",
+    "status": "completed",
+    "started_at": 1789278552.969138,
+    "loaded_memory": {
+      "version": 12,
+      "episodes": [
+        {
+          "part": "01-actuator-housing",
+          "target_sha256": "4df37fccdc203318dfea04a823ad0b75e121ab6e0418f35902dd17d3b88215c4",
+          "status": "completed",
+          "attempts": 2,
+          "passed_attempts": 2,
+          "failed_attempts": 0,
+          "source_manifest": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-loop-demo/runs/01-actuator-housing/manifest.json",
+          "saved_at": 1789272420.5544,
+          "best_seconds": 259.9269851280209,
+          "best_strategy": {
+            "stepover_fraction": 0.7083333333333334,
+            "stepdown_mm": 12,
+            "cut_feed_mm_min": 900,
+            "plunge_feed_mm_min": 250,
+            "retract_feed_mm_min": 1200,
+            "segments_per_circle": 24,
+            "order": "tool",
+            "retract_mode": "clearance",
+            "shortest_c": true,
+            "junction_cleanup": false
+          },
+          "failures": [],
+          "proposed_note": {
+            "guidance": "Use the observed best strategy as a candidate starting point: 0.7083 stepover fraction, 12 mm stepdown, 900/250/1200 mm/min cut/plunge/retract feeds, 24 segments per circle, tool ordering, clearance retracts, shortest C enabled, and junction cleanup disabled. Apply only within the next part\u2019s fixed constraints; its validity and timing remain unknown.",
+            "reason": "Both observed attempts passed; the best recorded time was 259.927 seconds. Two attempts on one part do not establish which settings helped or whether this strategy transfers to the next part."
+          },
+          "evidence": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-loop-demo/memory/evidence/01-actuator-housing/indexed_learner-8e6f35e2dc01.response.json",
+          "note_status": "unvalidated suggestion; future candidates still require checks and simulation"
+        },
+        {
+          "part": "02-hydraulic-manifold",
+          "target_sha256": "b8e86d16d2df5e87cffda1ba1383fa4e1016dbecfde16271c9a3bff566bbcce4",
+          "status": "completed",
+          "attempts": 3,
+          "passed_attempts": 3,
+          "failed_attempts": 0,
+          "source_manifest": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-loop-demo/runs/02-hydraulic-manifold/manifest.json",
+          "saved_at": 1789272530.885489,
+          "best_seconds": 158.97681405483698,
+          "best_strategy": {
+            "stepover_fraction": 0.7083333333333334,
+            "stepdown_mm": 12,
+            "cut_feed_mm_min": 900,
+            "plunge_feed_mm_min": 250,
+            "retract_feed_mm_min": 1200,
+            "segments_per_circle": 24,
+            "order": "tool",
+            "retract_mode": "clearance",
+            "shortest_c": true,
+            "junction_cleanup": true
+          },
+          "failures": [],
+          "proposed_note": {
+            "guidance": "Use the observed best strategy as a candidate starting point: 0.7083 stepover fraction, 12 mm stepdown, 900/250/1200 mm/min cut/plunge/retract feeds, 24 segments per circle, tool ordering, clearance retracts, shortest C, and junction cleanup, subject to the next part\u2019s fixed constraints. Transferability is uncertain; the evidence does not isolate which settings helped.",
+            "reason": "The supplied episode reports three passing attempts and a best time of 158.98 seconds. No comparison timings establish an improvement or predict performance on the next part."
+          },
+          "evidence": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-loop-demo/memory/evidence/02-hydraulic-manifold/indexed_learner-d92b45a80f50.response.json",
+          "note_status": "unvalidated suggestion; future candidates still require checks and simulation"
+        },
+        {
+          "part": "03-bearing-block",
+          "target_sha256": "f92bc8c52db4a9546317500ff3e6eb4804e2b32a6b39590aebad9f8b2fcb2f04",
+          "status": "completed",
+          "attempts": 3,
+          "passed_attempts": 3,
+          "failed_attempts": 0,
+          "source_manifest": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-loop-demo/runs/03-bearing-block/manifest.json",
+          "saved_at": 1789272658.824367,
+          "best_seconds": 124.16424211299727,
+          "best_strategy": {
+            "stepover_fraction": 0.75,
+            "stepdown_mm": 12,
+            "cut_feed_mm_min": 900,
+            "plunge_feed_mm_min": 250,
+            "retract_feed_mm_min": 1200,
+            "segments_per_circle": 24,
+            "order": "tool",
+            "retract_mode": "clearance",
+            "shortest_c": true,
+            "junction_cleanup": false
+          },
+          "failures": [],
+          "proposed_note": {
+            "guidance": "Use the observed best strategy as a candidate for the next part: 0.75 stepover, 12 mm stepdown, feeds of 900/250/1200 mm/min for cutting/plunging/retracting, 24 circle segments, tool ordering, clearance retracts, shortest C enabled, and junction cleanup disabled. Apply only where compatible with the next part\u2019s fixed constraints; its validity and timing remain unknown.",
+            "reason": "The supplied episode reports three passing attempts and a best time of 124.164 seconds. It provides no alternative timings or failures, so it does not establish which settings helped or whether this strategy will improve another part."
+          },
+          "evidence": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-loop-demo/memory/evidence/03-bearing-block/indexed_learner-b4b6222ccc3d.response.json",
+          "note_status": "unvalidated suggestion; future candidates still require checks and simulation"
+        },
+        {
+          "part": "04-trunnion-cage",
+          "target_sha256": "9af44a8563fc15d661df6b14e17dca6ba2a3b9694519c3b5acb25eea419d5037",
+          "status": "completed",
+          "attempts": 3,
+          "passed_attempts": 2,
+          "failed_attempts": 1,
+          "source_manifest": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-loop-demo/runs/04-trunnion-cage/manifest.json",
+          "saved_at": 1789272869.384353,
+          "best_seconds": 196.77267020109883,
+          "best_strategy": {
+            "stepover_fraction": 0.75,
+            "stepdown_mm": 12,
+            "cut_feed_mm_min": 900,
+            "plunge_feed_mm_min": 250,
+            "retract_feed_mm_min": 1200,
+            "segments_per_circle": 24,
+            "order": "tool",
+            "retract_mode": "clearance",
+            "shortest_c": true,
+            "junction_cleanup": false
+          },
+          "failures": [
+            {
+              "strategy": {
+                "stepover_fraction": 0.95,
+                "stepdown_mm": 12,
+                "cut_feed_mm_min": 900,
+                "plunge_feed_mm_min": 250,
+                "retract_feed_mm_min": 1200,
+                "segments_per_circle": 24,
+                "order": "tool",
+                "retract_mode": "clearance",
+                "shortest_c": true,
+                "junction_cleanup": false
+              },
+              "issues": [
+                {
+                  "code": "excess_material",
+                  "certainty": "uncertain",
+                  "moves": [],
+                  "description": "Final stock has excess material beyond target tolerance. Resolution cannot establish a pass."
+                }
+              ]
+            }
+          ],
+          "proposed_note": {
+            "guidance": "Use 0.75 stepover as a starting candidate for the next part; do not assume 0.95 preserves sufficient coverage. Verify each new plan against the fixed constraints; an uncertain result does not qualify as valid.",
+            "reason": "The observed best passing strategy used 0.75 stepover and took 196.773 seconds. The otherwise identical 0.95 strategy returned uncertain excess material because resolution could not establish a pass. This supports caution about larger stepovers, but establishes neither an optimal stepover nor validity or a timing improvement on the next part."
+          },
+          "evidence": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-loop-demo/memory/evidence/04-trunnion-cage/indexed_learner-7bced71f0542.response.json",
+          "note_status": "unvalidated suggestion; future candidates still require checks and simulation"
+        },
+        {
+          "part": "05-flanged-sleeve",
+          "target_sha256": "c0ac069ae10514ee6ad6ff8c5bdee418a91e4fe3393b1d7d48171363fef634ee",
+          "status": "completed",
+          "attempts": 3,
+          "passed_attempts": 3,
+          "failed_attempts": 0,
+          "source_manifest": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-loop-demo/runs/05-flanged-sleeve/manifest.json",
+          "saved_at": 1789272982.900769,
+          "best_seconds": 109.80759577113994,
+          "best_strategy": {
+            "stepover_fraction": 0.8333333333333334,
+            "stepdown_mm": 12,
+            "cut_feed_mm_min": 900,
+            "plunge_feed_mm_min": 250,
+            "retract_feed_mm_min": 1200,
+            "segments_per_circle": 24,
+            "order": "tool",
+            "retract_mode": "clearance",
+            "shortest_c": true,
+            "junction_cleanup": false
+          },
+          "failures": [],
+          "proposed_note": {
+            "guidance": "Use the observed best strategy as a candidate for the next part: stepover 0.8333, stepdown 12 mm, cut/plunge/retract feeds 900/250/1200 mm/min, 24 segments per circle, tool ordering, clearance retracts, shortest C enabled, and junction cleanup disabled. Apply only where the next part's fixed constraints permit; its validity and timing remain unknown.",
+            "reason": "All three supplied attempts passed; the best recorded time was 109.8076 seconds. No per-attempt comparison was supplied, so the evidence does not isolate which parameters helped or establish an improvement transferable to another part."
+          },
+          "evidence": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-loop-demo/memory/evidence/05-flanged-sleeve/indexed_learner-89dc00a8fb82.response.json",
+          "note_status": "unvalidated suggestion; future candidates still require checks and simulation"
+        },
+        {
+          "part": "14003f2fb9fd",
+          "target_sha256": "372e913269a7e1bea2fe978602f4e51a4b8858726355a7a39c2e51a3a6cdd917",
+          "status": "completed",
+          "attempts": 3,
+          "passed_attempts": 3,
+          "failed_attempts": 0,
+          "source_manifest": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/14003f2fb9fd/manifest.json",
+          "saved_at": 1789274386.139416,
+          "best_seconds": 25.85223629498072,
+          "best_strategy": {
+            "stepover_fraction": 0.75,
+            "stepdown_mm": 8,
+            "cut_feed_mm_min": 900,
+            "plunge_feed_mm_min": 250,
+            "retract_feed_mm_min": 1200,
+            "segments_per_circle": 24,
+            "order": "tool",
+            "retract_mode": "clearance",
+            "shortest_c": true,
+            "junction_cleanup": false
+          },
+          "failures": []
+        },
+        {
+          "part": "3dea6444a879",
+          "target_sha256": "e62d3e19bef2717f670beca00d0d5c729beb3dc8cf6c1f4500654ae0d4ff2119",
+          "status": "completed",
+          "attempts": 2,
+          "passed_attempts": 2,
+          "failed_attempts": 0,
+          "source_manifest": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/3dea6444a879/manifest.json",
+          "saved_at": 1789274418.3326411,
+          "best_seconds": 27.263982725443416,
+          "best_strategy": {
+            "stepover_fraction": 0.75,
+            "stepdown_mm": 7,
+            "cut_feed_mm_min": 900,
+            "plunge_feed_mm_min": 250,
+            "retract_feed_mm_min": 1200,
+            "segments_per_circle": 24,
+            "order": "tool",
+            "retract_mode": "clearance",
+            "shortest_c": true,
+            "junction_cleanup": false
+          },
+          "failures": []
+        },
+        {
+          "part": "3ef2fc936a92",
+          "target_sha256": "372e913269a7e1bea2fe978602f4e51a4b8858726355a7a39c2e51a3a6cdd917",
+          "status": "completed",
+          "attempts": 3,
+          "passed_attempts": 3,
+          "failed_attempts": 0,
+          "source_manifest": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/3ef2fc936a92/manifest.json",
+          "saved_at": 1789275079.737656,
+          "best_seconds": 25.852236294980724,
+          "best_strategy": {
+            "stepover_fraction": 0.75,
+            "stepdown_mm": 12,
+            "cut_feed_mm_min": 900,
+            "plunge_feed_mm_min": 250,
+            "retract_feed_mm_min": 1200,
+            "segments_per_circle": 24,
+            "order": "tool",
+            "retract_mode": "clearance",
+            "shortest_c": true,
+            "junction_cleanup": false
+          },
+          "failures": []
+        },
+        {
+          "part": "02de8c83d5bd",
+          "target_sha256": "372e913269a7e1bea2fe978602f4e51a4b8858726355a7a39c2e51a3a6cdd917",
+          "status": "completed",
+          "attempts": 2,
+          "passed_attempts": 2,
+          "failed_attempts": 0,
+          "source_manifest": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/02de8c83d5bd/manifest.json",
+          "saved_at": 1789275482.670558,
+          "best_seconds": 25.85223629498072,
+          "best_strategy": {
+            "stepover_fraction": 0.75,
+            "stepdown_mm": 8,
+            "cut_feed_mm_min": 900,
+            "plunge_feed_mm_min": 250,
+            "retract_feed_mm_min": 1200,
+            "segments_per_circle": 24,
+            "order": "tool",
+            "retract_mode": "clearance",
+            "shortest_c": true,
+            "junction_cleanup": false
+          },
+          "failures": []
+        },
+        {
+          "part": "a1b399e521ac",
+          "target_sha256": "e62d3e19bef2717f670beca00d0d5c729beb3dc8cf6c1f4500654ae0d4ff2119",
+          "status": "completed",
+          "attempts": 2,
+          "passed_attempts": 2,
+          "failed_attempts": 0,
+          "source_manifest": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/a1b399e521ac/manifest.json",
+          "saved_at": 1789277327.10548,
+          "best_seconds": 27.263982725443416,
+          "best_strategy": {
+            "stepover_fraction": 0.75,
+            "stepdown_mm": 7,
+            "cut_feed_mm_min": 900,
+            "plunge_feed_mm_min": 250,
+            "retract_feed_mm_min": 1200,
+            "segments_per_circle": 24,
+            "order": "tool",
+            "retract_mode": "clearance",
+            "shortest_c": true,
+            "junction_cleanup": false
+          },
+          "failures": []
+        },
+        {
+          "part": "056866dee37c",
+          "target_sha256": "e62d3e19bef2717f670beca00d0d5c729beb3dc8cf6c1f4500654ae0d4ff2119",
+          "status": "completed",
+          "attempts": 3,
+          "passed_attempts": 3,
+          "failed_attempts": 0,
+          "source_manifest": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/056866dee37c/manifest.json",
+          "saved_at": 1789277935.447202,
+          "best_seconds": 27.263982725443416,
+          "best_strategy": {
+            "stepover_fraction": 0.75,
+            "stepdown_mm": 7,
+            "cut_feed_mm_min": 900,
+            "plunge_feed_mm_min": 250,
+            "retract_feed_mm_min": 1200,
+            "segments_per_circle": 24,
+            "order": "tool",
+            "retract_mode": "clearance",
+            "shortest_c": true,
+            "junction_cleanup": false
+          },
+          "failures": []
+        },
+        {
+          "part": "a2ff5d26d533",
+          "target_sha256": "372e913269a7e1bea2fe978602f4e51a4b8858726355a7a39c2e51a3a6cdd917",
+          "status": "completed",
+          "attempts": 1,
+          "passed_attempts": 1,
+          "failed_attempts": 0,
+          "source_manifest": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/a2ff5d26d533/manifest.json",
+          "saved_at": 1789278254.864696,
+          "best_seconds": 25.852236294980724,
+          "best_strategy": {
+            "stepover_fraction": 0.75,
+            "stepdown_mm": 12,
+            "cut_feed_mm_min": 900,
+            "plunge_feed_mm_min": 250,
+            "retract_feed_mm_min": 1200,
+            "segments_per_circle": 24,
+            "order": "tool",
+            "retract_mode": "clearance",
+            "shortest_c": true,
+            "junction_cleanup": false
+          },
+          "failures": []
+        }
+      ],
+      "strategy_prior": {
+        "stepover_fraction": 0.75,
+        "stepdown_mm": 12,
+        "cut_feed_mm_min": 900,
+        "plunge_feed_mm_min": 250,
+        "retract_feed_mm_min": 1200,
+        "segments_per_circle": 24,
+        "order": "tool",
+        "retract_mode": "clearance",
+        "shortest_c": true,
+        "junction_cleanup": false
+      },
+      "prior_source_part": "a2ff5d26d533",
+      "guidance": "These are observed prior runs, not proof of validity on new geometry. Use the most recent passing strategy only as a starting candidate; adapt it and repeat checks and simulation.",
+      "semantics": "Episodic memory persistence. No claim that notes or strategy transfer are generally valid.",
+      "learned_checks": [
+        {
+          "id": "exact-29302d9c5b1c",
+          "geometry_key": "29302d9c5b1c019c9d57443d54ccd82a36577bdb5228fb44bab9b53ad3686d54",
+          "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-loop-demo/runs/02-hydraulic-manifold/reference",
+          "issues": [
+            {
+              "code": "excess_material",
+              "certainty": "uncertain",
+              "moves": [],
+              "description": "Final stock has excess material beyond target tolerance. Resolution cannot establish a pass."
+            }
+          ],
+          "semantics": "Blocks only identical geometry/motion under matching implementation and fixed inputs. Feed-only changes do not change geometric validity."
+        },
+        {
+          "id": "exact-ff5d79c56d2f",
+          "geometry_key": "ff5d79c56d2ff5ef7eba7240eed42ee7109cabd0b2882496c229f5736e830224",
+          "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-loop-demo/runs/04-trunnion-cage/attempt-01",
+          "issues": [
+            {
+              "code": "excess_material",
+              "certainty": "uncertain",
+              "moves": [],
+              "description": "Final stock has excess material beyond target tolerance. Resolution cannot establish a pass."
+            }
+          ],
+          "semantics": "Blocks only identical geometry/motion under matching implementation and fixed inputs. Feed-only changes do not change geometric validity."
+        }
+      ],
+      "repair_observations": [
+        {
+          "part": "02-hydraulic-manifold",
+          "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-loop-demo/runs/02-hydraulic-manifold/reference",
+          "issues": [
+            {
+              "code": "excess_material",
+              "certainty": "uncertain",
+              "moves": [],
+              "description": "Final stock has excess material beyond target tolerance. Resolution cannot establish a pass."
+            }
+          ],
+          "advisory": "Repair geometry before optimizing time. For excess material at intersecting pockets, consider junction_cleanup; any changed path must pass simulation."
+        },
+        {
+          "part": "04-trunnion-cage",
+          "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-loop-demo/runs/04-trunnion-cage/attempt-01",
+          "issues": [
+            {
+              "code": "excess_material",
+              "certainty": "uncertain",
+              "moves": [],
+              "description": "Final stock has excess material beyond target tolerance. Resolution cannot establish a pass."
+            }
+          ],
+          "advisory": "Repair geometry before optimizing time. For excess material at intersecting pockets, consider junction_cleanup; any changed path must pass simulation."
+        }
+      ],
+      "speed_guidance": [
+        {
+          "part": "01-actuator-housing",
+          "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-loop-demo/runs/01-actuator-housing/evidence/supervisor-46ec3286b58d.response.json",
+          "seconds": 259.9603998485483,
+          "text": "The timing judge requested a faster verified plan. Two attempts remain, and one verified time does not establish diminishing returns. Cutting accounts for 212.61 of 259.96 seconds, leaving substantial time to target for improvement."
+        },
+        {
+          "part": "02-hydraulic-manifold",
+          "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-loop-demo/runs/02-hydraulic-manifold/evidence/supervisor-44265f38ccfa.response.json",
+          "seconds": 158.97681405483698,
+          "text": "The timing judge requested a faster verified plan. Two attempts remain, and only one verified time is available, so diminishing returns are not established. Further attempts may reduce the current best of 158.98 seconds."
+        },
+        {
+          "part": "02-hydraulic-manifold",
+          "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-loop-demo/runs/02-hydraulic-manifold/evidence/supervisor-d82820f5281b.response.json",
+          "seconds": 158.97681405483698,
+          "text": "The timing judge requested a faster verified plan. One attempt remains. Two identical verified times of 158.977 seconds show no gain yet, but provide limited evidence of diminishing returns."
+        },
+        {
+          "part": "03-bearing-block",
+          "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-loop-demo/runs/03-bearing-block/evidence/supervisor-6cb7c4179ff7.response.json",
+          "seconds": 130.22065744256136,
+          "text": "The timing judge requested a faster verified plan. Two attempts remain, and only one verified time is available, so diminishing returns are not established. Further improvement could reduce the current 130.22 seconds."
+        },
+        {
+          "part": "03-bearing-block",
+          "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-loop-demo/runs/03-bearing-block/evidence/supervisor-9281e23bdc74.response.json",
+          "seconds": 124.16424211299727,
+          "text": "The timing judge requested a faster verified plan. The latest verified time improved by 6.06 seconds (4.65%), so diminishing returns are not yet established. Use the remaining attempt to seek a lower machining time."
+        },
+        {
+          "part": "04-trunnion-cage",
+          "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-loop-demo/runs/04-trunnion-cage/evidence/supervisor-ce2f9d68f97b.response.json",
+          "seconds": 196.77267020109883,
+          "text": "The timing judge requested a faster verified plan. Two attempts remain and only one verified time is available, so diminishing returns are not established. Further improvement on 196.773 seconds is worth pursuing."
+        },
+        {
+          "part": "05-flanged-sleeve",
+          "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-loop-demo/runs/05-flanged-sleeve/evidence/supervisor-93355fd78126.response.json",
+          "seconds": 117.32590441848927,
+          "text": "The timing judge requested a faster verified plan. Only one verified time is available, so diminishing returns are not established. Two attempts remain to improve on 117.326 seconds."
+        },
+        {
+          "part": "05-flanged-sleeve",
+          "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-loop-demo/runs/05-flanged-sleeve/evidence/supervisor-0de7c48bffe6.response.json",
+          "seconds": 109.80759577113994,
+          "text": "The timing judge requested a faster verified plan. The latest verified time improved by 7.52 seconds (6.4%), with no demonstrated plateau. One attempt remains to reduce machining time further."
+        },
+        {
+          "part": "14003f2fb9fd",
+          "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/14003f2fb9fd/evidence/supervisor-1b4815b9d13c.response.json",
+          "seconds": 25.852236294980724,
+          "text": "The timing judge requested a faster verified plan. Two attempts remain and only one verified time is available, so diminishing returns are not established. Cutting accounts for 23.68 of 25.85 seconds."
+        },
+        {
+          "part": "14003f2fb9fd",
+          "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/14003f2fb9fd/evidence/supervisor-3538b602ced1.response.json",
+          "seconds": 25.852236294980724,
+          "text": "The timing judge requested a faster verified plan. One attempt remains. Two identical verified times show no improvement yet, but a final attempt could reduce the current best of 25.852 seconds."
+        },
+        {
+          "part": "3dea6444a879",
+          "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/3dea6444a879/evidence/supervisor-1cc6df93df28.response.json",
+          "seconds": 27.26398272544342,
+          "text": "The timing judge requested a faster verified plan. Two attempts remain, and only one verified time is available. Cutting accounts for 25.09 of 27.26 seconds; diminishing returns are not yet established."
+        },
+        {
+          "part": "3ef2fc936a92",
+          "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/3ef2fc936a92/evidence/supervisor-1d250e2ef053.response.json",
+          "seconds": 25.852236294980724,
+          "text": "The timing judge requested a faster verified plan. Two attempts remain, and only one verified time is available, so diminishing returns are not established. Further attempts may improve the current best of 25.852 seconds."
+        },
+        {
+          "part": "3ef2fc936a92",
+          "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/3ef2fc936a92/evidence/supervisor-d618e492b948.response.json",
+          "seconds": 25.852236294980724,
+          "text": "The timing judge requested a faster verified plan. One attempt remains. Two identical verified times suggest diminishing returns, but one final attempt may reduce the current best of 25.852 seconds."
+        },
+        {
+          "part": "02de8c83d5bd",
+          "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/02de8c83d5bd/evidence/supervisor-517316bfe0cb.response.json",
+          "seconds": 25.852236294980724,
+          "text": "The timing judge requested a faster verified plan. Two attempts remain and only one verified time is available, so diminishing returns are not established. Cutting accounts for 23.68 of 25.85 seconds, leaving reason to seek a faster passing plan."
+        },
+        {
+          "part": "a1b399e521ac",
+          "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/a1b399e521ac/evidence/supervisor-8719c11e352d.response.json",
+          "seconds": 27.263982725443416,
+          "text": "The timing judge requested a faster verified plan. Two attempts remain, and only one verified time is available, so diminishing returns are not established. Cutting accounts for 25.09 of 27.26 seconds, leaving reason to pursue a lower total time."
+        },
+        {
+          "part": "056866dee37c",
+          "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/056866dee37c/evidence/supervisor-4422bd109c39.response.json",
+          "seconds": 27.263982725443416,
+          "text": "The timing judge requested a faster verified plan. Two attempts remain, and a single verified time of 27.264 seconds does not establish diminishing returns. Cutting accounts for 25.091 seconds of the total."
+        },
+        {
+          "part": "056866dee37c",
+          "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/056866dee37c/evidence/supervisor-2ff7d904cb0c.response.json",
+          "seconds": 27.26398272544342,
+          "text": "The timing judge requested a faster verified plan. One attempt remains. The two verified times are effectively identical at 27.264 seconds; cutting accounts for 25.091 seconds, leaving a final opportunity to reduce machining time."
+        },
+        {
+          "part": "a2ff5d26d533",
+          "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/a2ff5d26d533/evidence/supervisor-fb0d5538e1d0.response.json",
+          "seconds": 25.852236294980724,
+          "text": "The timing judge requested a faster verified plan. Two attempts remain, and one verified time provides no evidence of diminishing returns. Cutting accounts for 23.68 of 25.85 seconds, leaving reason to seek a faster passing plan."
+        }
+      ]
+    },
+    "loaded_memory_version": 12,
+    "loaded_memory_sha256": "2183f8fcb0b370e7972fe13c952d25345fc4370503920aa0ebfcfd22f34be0f5",
+    "target_sha256": "372e913269a7e1bea2fe978602f4e51a4b8858726355a7a39c2e51a3a6cdd917",
+    "attempts": [
+      {
+        "path": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/3f1703103c1f/attempt-00",
+        "strategy": {
+          "stepover_fraction": 0.75,
+          "stepdown_mm": 12,
+          "cut_feed_mm_min": 900,
+          "plunge_feed_mm_min": 250,
+          "retract_feed_mm_min": 1200,
+          "segments_per_circle": 24,
+          "order": "tool",
+          "retract_mode": "clearance",
+          "shortest_c": true,
+          "junction_cleanup": false
+        },
+        "proposal": {
+          "summary": "Candidate uses maximum permitted feeds and stepdown, wider radial spacing, and clearance retracts to reduce reference machining time. Matches a supplied same-target prior strategy; this attempt still requires verification.",
+          "strategy": {
+            "stepover_fraction": 0.75,
+            "stepdown_mm": 12,
+            "cut_feed_mm_min": 900,
+            "plunge_feed_mm_min": 250,
+            "retract_feed_mm_min": 1200,
+            "segments_per_circle": 24,
+            "order": "tool",
+            "retract_mode": "clearance",
+            "shortest_c": true,
+            "junction_cleanup": false
+          }
+        },
+        "evidence": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/3f1703103c1f/evidence/indexed_planner-c7423a76bead.response.json",
+        "index": 0,
+        "stage": "simulated",
+        "result": {
+          "validity": "valid",
+          "passed": true,
+          "verification": "verified",
+          "issues": [],
+          "estimated_time_seconds": 25.852236294980724,
+          "time_breakdown": {
+            "cutting": 23.678943861827744,
+            "rapid": 2.1732924331529797,
+            "dwell": 0.0,
+            "tool_changes": 0.0,
+            "indexing": 0.0
+          },
+          "timing_assumptions": "Constant commanded vector feed/rapid speed; no acceleration, jerk, lookahead, spindle ramp or controller blending. Cut includes air cutting and plunge/retract. Tool changes add fixed duration, with no implicit travel. Full submitted plan timed even if invalid. Indexed B/C rotation uses simultaneous constant angular speeds plus settle time. No cutting during indexing.",
+          "scope": "Indexed 3+2 only; table-attached stock and fixtures. Tool-section collision and configured axis limits; whole-machine self-collision is not certified. Gauge length is fixed across tools.",
+          "target_sha256": "372e913269a7e1bea2fe978602f4e51a4b8858726355a7a39c2e51a3a6cdd917",
+          "numerics": {
+            "resolution_mm": 1.0,
+            "cell_radius_mm": 0.8660255037844385,
+            "cells": 235224,
+            "geometry_backend": "trimesh signed distance; double precision, not exact arithmetic"
+          },
+          "stock_metrics": {
+            "initial_nominal_volume_mm3": 79872.0,
+            "final_nominal_volume_mm3": 67136.0,
+            "removed_nominal_volume_mm3": 12736.0,
+            "removed_volume_bounds_mm3": [
+              9632.0,
+              38928.0
+            ],
+            "final_volume_bounds_mm3": [
+              53736.0,
+              81656.0
+            ]
+          },
+          "artifacts": {
+            "final_stock": "final_stock.ply",
+            "lower_stock": "final_stock_lower.ply",
+            "upper_stock": "final_stock_upper.ply",
+            "states": [
+              "states/00000.npz",
+              "states/00002.npz",
+              "states/00004.npz",
+              "states/00006.npz",
+              "states/00008.npz",
+              "states/00010.npz",
+              "states/00012.npz",
+              "states/00014.npz",
+              "states/00016.npz",
+              "states/00018.npz",
+              "states/00020.npz",
+              "states/00022.npz",
+              "states/00024.npz",
+              "states/00026.npz",
+              "states/00028.npz",
+              "states/00030.npz",
+              "states/00032.npz",
+              "states/00034.npz",
+              "states/00036.npz",
+              "states/00038.npz",
+              "states/00040.npz",
+              "states/00042.npz",
+              "states/00044.npz",
+              "states/00046.npz",
+              "states/00048.npz",
+              "states/00050.npz",
+              "states/00052.npz",
+              "states/00054.npz",
+              "states/00056.npz",
+              "states/00058.npz",
+              "states/00060.npz",
+              "states/00062.npz",
+              "states/00063.npz"
+            ],
+            "trajectory": "trajectory.json"
+          }
+        },
+        "judge": {
+          "value": {
+            "action": "improve",
+            "reason": "Two attempts remain, and only one verified timing exists, so diminishing returns are not established. Further attempts may reduce the current best of 25.852 seconds.",
+            "guidance_proposal": null
+          },
+          "evidence": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/3f1703103c1f/evidence/supervisor-eb2bc65085af.response.json"
+        }
+      },
+      {
+        "path": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/3f1703103c1f/attempt-01",
+        "strategy": {
+          "stepover_fraction": 0.75,
+          "stepdown_mm": 10,
+          "cut_feed_mm_min": 900,
+          "plunge_feed_mm_min": 250,
+          "retract_feed_mm_min": 1200,
+          "segments_per_circle": 24,
+          "order": "tool",
+          "retract_mode": "clearance",
+          "shortest_c": true,
+          "junction_cleanup": false
+        },
+        "proposal": {
+          "summary": "Test 10 mm stepdown to change intermediate cutting depths while retaining maximum feeds. This candidate requires verification; the supplied evidence does not establish a time improvement over 25.852 seconds.",
+          "strategy": {
+            "stepover_fraction": 0.75,
+            "stepdown_mm": 10,
+            "cut_feed_mm_min": 900,
+            "plunge_feed_mm_min": 250,
+            "retract_feed_mm_min": 1200,
+            "segments_per_circle": 24,
+            "order": "tool",
+            "retract_mode": "clearance",
+            "shortest_c": true,
+            "junction_cleanup": false
+          }
+        },
+        "evidence": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/3f1703103c1f/evidence/indexed_planner-74b708070487.response.json",
+        "index": 1,
+        "stage": "simulated",
+        "result": {
+          "validity": "valid",
+          "passed": true,
+          "verification": "verified",
+          "issues": [],
+          "estimated_time_seconds": 25.85223629498072,
+          "time_breakdown": {
+            "cutting": 23.67894386182774,
+            "rapid": 2.1732924331529797,
+            "dwell": 0.0,
+            "tool_changes": 0.0,
+            "indexing": 0.0
+          },
+          "timing_assumptions": "Constant commanded vector feed/rapid speed; no acceleration, jerk, lookahead, spindle ramp or controller blending. Cut includes air cutting and plunge/retract. Tool changes add fixed duration, with no implicit travel. Full submitted plan timed even if invalid. Indexed B/C rotation uses simultaneous constant angular speeds plus settle time. No cutting during indexing.",
+          "scope": "Indexed 3+2 only; table-attached stock and fixtures. Tool-section collision and configured axis limits; whole-machine self-collision is not certified. Gauge length is fixed across tools.",
+          "target_sha256": "372e913269a7e1bea2fe978602f4e51a4b8858726355a7a39c2e51a3a6cdd917",
+          "numerics": {
+            "resolution_mm": 1.0,
+            "cell_radius_mm": 0.8660255037844385,
+            "cells": 235224,
+            "geometry_backend": "trimesh signed distance; double precision, not exact arithmetic"
+          },
+          "stock_metrics": {
+            "initial_nominal_volume_mm3": 79872.0,
+            "final_nominal_volume_mm3": 67136.0,
+            "removed_nominal_volume_mm3": 12736.0,
+            "removed_volume_bounds_mm3": [
+              9632.0,
+              38928.0
+            ],
+            "final_volume_bounds_mm3": [
+              53736.0,
+              81656.0
+            ]
+          },
+          "artifacts": {
+            "final_stock": "final_stock.ply",
+            "lower_stock": "final_stock_lower.ply",
+            "upper_stock": "final_stock_upper.ply",
+            "states": [
+              "states/00000.npz",
+              "states/00002.npz",
+              "states/00004.npz",
+              "states/00006.npz",
+              "states/00008.npz",
+              "states/00010.npz",
+              "states/00012.npz",
+              "states/00014.npz",
+              "states/00016.npz",
+              "states/00018.npz",
+              "states/00020.npz",
+              "states/00022.npz",
+              "states/00024.npz",
+              "states/00026.npz",
+              "states/00028.npz",
+              "states/00030.npz",
+              "states/00032.npz",
+              "states/00034.npz",
+              "states/00036.npz",
+              "states/00038.npz",
+              "states/00040.npz",
+              "states/00042.npz",
+              "states/00044.npz",
+              "states/00046.npz",
+              "states/00048.npz",
+              "states/00050.npz",
+              "states/00052.npz",
+              "states/00054.npz",
+              "states/00056.npz",
+              "states/00058.npz",
+              "states/00060.npz",
+              "states/00062.npz",
+              "states/00063.npz"
+            ],
+            "trajectory": "trajectory.json"
+          }
+        },
+        "judge": {
+          "value": {
+            "action": "stop",
+            "reason": "Both verified times are effectively identical at 25.8522 seconds, indicating diminishing returns with one attempt remaining.",
+            "guidance_proposal": null
+          },
+          "evidence": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/3f1703103c1f/evidence/supervisor-6fc6abd4e719.response.json"
+        }
+      }
+    ],
+    "reference": {
+      "strategy": {
+        "stepover_fraction": 0.35,
+        "stepdown_mm": 6,
+        "cut_feed_mm_min": 350,
+        "plunge_feed_mm_min": 120,
+        "retract_feed_mm_min": 700,
+        "segments_per_circle": 48,
+        "order": "orientation",
+        "retract_mode": "park",
+        "shortest_c": false
+      },
+      "path": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/3f1703103c1f/reference",
+      "stage": "simulated",
+      "result": {
+        "validity": "valid",
+        "passed": true,
+        "verification": "verified",
+        "issues": [],
+        "estimated_time_seconds": 80.74544471125378,
+        "time_breakdown": {
+          "cutting": 78.5721522781008,
+          "rapid": 2.1732924331529797,
+          "dwell": 0.0,
+          "tool_changes": 0.0,
+          "indexing": 0.0
+        },
+        "timing_assumptions": "Constant commanded vector feed/rapid speed; no acceleration, jerk, lookahead, spindle ramp or controller blending. Cut includes air cutting and plunge/retract. Tool changes add fixed duration, with no implicit travel. Full submitted plan timed even if invalid. Indexed B/C rotation uses simultaneous constant angular speeds plus settle time. No cutting during indexing.",
+        "scope": "Indexed 3+2 only; table-attached stock and fixtures. Tool-section collision and configured axis limits; whole-machine self-collision is not certified. Gauge length is fixed across tools.",
+        "target_sha256": "372e913269a7e1bea2fe978602f4e51a4b8858726355a7a39c2e51a3a6cdd917",
+        "numerics": {
+          "resolution_mm": 1.0,
+          "cell_radius_mm": 0.8660255037844385,
+          "cells": 235224,
+          "geometry_backend": "trimesh signed distance; double precision, not exact arithmetic"
+        },
+        "stock_metrics": {
+          "initial_nominal_volume_mm3": 79872.0,
+          "final_nominal_volume_mm3": 67136.0,
+          "removed_nominal_volume_mm3": 12736.0,
+          "removed_volume_bounds_mm3": [
+            9632.0,
+            38928.0
+          ],
+          "final_volume_bounds_mm3": [
+            53736.0,
+            81656.0
+          ]
+        },
+        "artifacts": {
+          "final_stock": "final_stock.ply",
+          "lower_stock": "final_stock_lower.ply",
+          "upper_stock": "final_stock_upper.ply",
+          "states": [
+            "states/00000.npz",
+            "states/00013.npz",
+            "states/00026.npz",
+            "states/00039.npz",
+            "states/00052.npz",
+            "states/00065.npz",
+            "states/00078.npz",
+            "states/00091.npz",
+            "states/00104.npz",
+            "states/00117.npz",
+            "states/00130.npz",
+            "states/00143.npz",
+            "states/00156.npz",
+            "states/00165.npz"
+          ],
+          "trajectory": "trajectory.json"
+        }
+      },
+      "moves": 165,
+      "wall_seconds": 6.761728048324585
+    },
+    "best": {
+      "path": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/3f1703103c1f/attempt-01",
+      "strategy": {
+        "stepover_fraction": 0.75,
+        "stepdown_mm": 10,
+        "cut_feed_mm_min": 900,
+        "plunge_feed_mm_min": 250,
+        "retract_feed_mm_min": 1200,
+        "segments_per_circle": 24,
+        "order": "tool",
+        "retract_mode": "clearance",
+        "shortest_c": true,
+        "junction_cleanup": false
+      },
+      "proposal": {
+        "summary": "Test 10 mm stepdown to change intermediate cutting depths while retaining maximum feeds. This candidate requires verification; the supplied evidence does not establish a time improvement over 25.852 seconds.",
+        "strategy": {
+          "stepover_fraction": 0.75,
+          "stepdown_mm": 10,
+          "cut_feed_mm_min": 900,
+          "plunge_feed_mm_min": 250,
+          "retract_feed_mm_min": 1200,
+          "segments_per_circle": 24,
+          "order": "tool",
+          "retract_mode": "clearance",
+          "shortest_c": true,
+          "junction_cleanup": false
+        }
+      },
+      "evidence": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/3f1703103c1f/evidence/indexed_planner-74b708070487.response.json",
+      "index": 1,
+      "stage": "simulated",
+      "result": {
+        "validity": "valid",
+        "passed": true,
+        "verification": "verified",
+        "issues": [],
+        "estimated_time_seconds": 25.85223629498072,
+        "time_breakdown": {
+          "cutting": 23.67894386182774,
+          "rapid": 2.1732924331529797,
+          "dwell": 0.0,
+          "tool_changes": 0.0,
+          "indexing": 0.0
+        },
+        "timing_assumptions": "Constant commanded vector feed/rapid speed; no acceleration, jerk, lookahead, spindle ramp or controller blending. Cut includes air cutting and plunge/retract. Tool changes add fixed duration, with no implicit travel. Full submitted plan timed even if invalid. Indexed B/C rotation uses simultaneous constant angular speeds plus settle time. No cutting during indexing.",
+        "scope": "Indexed 3+2 only; table-attached stock and fixtures. Tool-section collision and configured axis limits; whole-machine self-collision is not certified. Gauge length is fixed across tools.",
+        "target_sha256": "372e913269a7e1bea2fe978602f4e51a4b8858726355a7a39c2e51a3a6cdd917",
+        "numerics": {
+          "resolution_mm": 1.0,
+          "cell_radius_mm": 0.8660255037844385,
+          "cells": 235224,
+          "geometry_backend": "trimesh signed distance; double precision, not exact arithmetic"
+        },
+        "stock_metrics": {
+          "initial_nominal_volume_mm3": 79872.0,
+          "final_nominal_volume_mm3": 67136.0,
+          "removed_nominal_volume_mm3": 12736.0,
+          "removed_volume_bounds_mm3": [
+            9632.0,
+            38928.0
+          ],
+          "final_volume_bounds_mm3": [
+            53736.0,
+            81656.0
+          ]
+        },
+        "artifacts": {
+          "final_stock": "final_stock.ply",
+          "lower_stock": "final_stock_lower.ply",
+          "upper_stock": "final_stock_upper.ply",
+          "states": [
+            "states/00000.npz",
+            "states/00002.npz",
+            "states/00004.npz",
+            "states/00006.npz",
+            "states/00008.npz",
+            "states/00010.npz",
+            "states/00012.npz",
+            "states/00014.npz",
+            "states/00016.npz",
+            "states/00018.npz",
+            "states/00020.npz",
+            "states/00022.npz",
+            "states/00024.npz",
+            "states/00026.npz",
+            "states/00028.npz",
+            "states/00030.npz",
+            "states/00032.npz",
+            "states/00034.npz",
+            "states/00036.npz",
+            "states/00038.npz",
+            "states/00040.npz",
+            "states/00042.npz",
+            "states/00044.npz",
+            "states/00046.npz",
+            "states/00048.npz",
+            "states/00050.npz",
+            "states/00052.npz",
+            "states/00054.npz",
+            "states/00056.npz",
+            "states/00058.npz",
+            "states/00060.npz",
+            "states/00062.npz",
+            "states/00063.npz"
+          ],
+          "trajectory": "trajectory.json"
+        }
+      },
+      "judge": {
+        "value": {
+          "action": "stop",
+          "reason": "Both verified times are effectively identical at 25.8522 seconds, indicating diminishing returns with one attempt remaining.",
+          "guidance_proposal": null
+        },
+        "evidence": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/3f1703103c1f/evidence/supervisor-6fc6abd4e719.response.json"
+      }
+    },
+    "events": [
+      {
+        "type": "reference_simulation",
+        "time": 1789278554.349223,
+        "message": "Measuring the fixed reference CAM on this part"
+      },
+      {
+        "type": "cam_planning",
+        "time": 1789278561.117236,
+        "message": "Astra is writing CAM candidate 1"
+      },
+      {
+        "type": "checks",
+        "time": 1789278566.633176,
+        "message": "Checking 63 generated movements"
+      },
+      {
+        "type": "simulating",
+        "time": 1789278566.637502,
+        "message": "Removing stock for candidate 1"
+      },
+      {
+        "type": "simulation_pass",
+        "time": 1789278566.967544,
+        "message": "Geometry passes"
+      },
+      {
+        "type": "preparing_playback",
+        "time": 1789278566.9693482,
+        "message": "Preparing actual stock-removal playback"
+      },
+      {
+        "type": "judging",
+        "time": 1789278567.283264,
+        "message": "Timing judge is evaluating the passing plan"
+      },
+      {
+        "type": "memory_updated",
+        "time": 1789278571.246654,
+        "message": "Feedback saved before the next CAM candidate"
+      },
+      {
+        "type": "cam_planning",
+        "time": 1789278571.249357,
+        "message": "Astra is writing CAM candidate 2"
+      },
+      {
+        "type": "checks",
+        "time": 1789278585.9928331,
+        "message": "Checking 63 generated movements"
+      },
+      {
+        "type": "simulating",
+        "time": 1789278585.996759,
+        "message": "Removing stock for candidate 2"
+      },
+      {
+        "type": "simulation_pass",
+        "time": 1789278586.325192,
+        "message": "Geometry passes"
+      },
+      {
+        "type": "preparing_playback",
+        "time": 1789278586.327189,
+        "message": "Preparing actual stock-removal playback"
+      },
+      {
+        "type": "judging",
+        "time": 1789278586.642236,
+        "message": "Timing judge is evaluating the passing plan"
+      }
+    ],
+    "feedback_memory": {
+      "version": 12,
+      "episodes": [
+        {
+          "part": "01-actuator-housing",
+          "target_sha256": "4df37fccdc203318dfea04a823ad0b75e121ab6e0418f35902dd17d3b88215c4",
+          "status": "completed",
+          "attempts": 2,
+          "passed_attempts": 2,
+          "failed_attempts": 0,
+          "source_manifest": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-loop-demo/runs/01-actuator-housing/manifest.json",
+          "saved_at": 1789272420.5544,
+          "best_seconds": 259.9269851280209,
+          "best_strategy": {
+            "stepover_fraction": 0.7083333333333334,
+            "stepdown_mm": 12,
+            "cut_feed_mm_min": 900,
+            "plunge_feed_mm_min": 250,
+            "retract_feed_mm_min": 1200,
+            "segments_per_circle": 24,
+            "order": "tool",
+            "retract_mode": "clearance",
+            "shortest_c": true,
+            "junction_cleanup": false
+          },
+          "failures": [],
+          "proposed_note": {
+            "guidance": "Use the observed best strategy as a candidate starting point: 0.7083 stepover fraction, 12 mm stepdown, 900/250/1200 mm/min cut/plunge/retract feeds, 24 segments per circle, tool ordering, clearance retracts, shortest C enabled, and junction cleanup disabled. Apply only within the next part\u2019s fixed constraints; its validity and timing remain unknown.",
+            "reason": "Both observed attempts passed; the best recorded time was 259.927 seconds. Two attempts on one part do not establish which settings helped or whether this strategy transfers to the next part."
+          },
+          "evidence": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-loop-demo/memory/evidence/01-actuator-housing/indexed_learner-8e6f35e2dc01.response.json",
+          "note_status": "unvalidated suggestion; future candidates still require checks and simulation"
+        },
+        {
+          "part": "02-hydraulic-manifold",
+          "target_sha256": "b8e86d16d2df5e87cffda1ba1383fa4e1016dbecfde16271c9a3bff566bbcce4",
+          "status": "completed",
+          "attempts": 3,
+          "passed_attempts": 3,
+          "failed_attempts": 0,
+          "source_manifest": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-loop-demo/runs/02-hydraulic-manifold/manifest.json",
+          "saved_at": 1789272530.885489,
+          "best_seconds": 158.97681405483698,
+          "best_strategy": {
+            "stepover_fraction": 0.7083333333333334,
+            "stepdown_mm": 12,
+            "cut_feed_mm_min": 900,
+            "plunge_feed_mm_min": 250,
+            "retract_feed_mm_min": 1200,
+            "segments_per_circle": 24,
+            "order": "tool",
+            "retract_mode": "clearance",
+            "shortest_c": true,
+            "junction_cleanup": true
+          },
+          "failures": [],
+          "proposed_note": {
+            "guidance": "Use the observed best strategy as a candidate starting point: 0.7083 stepover fraction, 12 mm stepdown, 900/250/1200 mm/min cut/plunge/retract feeds, 24 segments per circle, tool ordering, clearance retracts, shortest C, and junction cleanup, subject to the next part\u2019s fixed constraints. Transferability is uncertain; the evidence does not isolate which settings helped.",
+            "reason": "The supplied episode reports three passing attempts and a best time of 158.98 seconds. No comparison timings establish an improvement or predict performance on the next part."
+          },
+          "evidence": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-loop-demo/memory/evidence/02-hydraulic-manifold/indexed_learner-d92b45a80f50.response.json",
+          "note_status": "unvalidated suggestion; future candidates still require checks and simulation"
+        },
+        {
+          "part": "03-bearing-block",
+          "target_sha256": "f92bc8c52db4a9546317500ff3e6eb4804e2b32a6b39590aebad9f8b2fcb2f04",
+          "status": "completed",
+          "attempts": 3,
+          "passed_attempts": 3,
+          "failed_attempts": 0,
+          "source_manifest": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-loop-demo/runs/03-bearing-block/manifest.json",
+          "saved_at": 1789272658.824367,
+          "best_seconds": 124.16424211299727,
+          "best_strategy": {
+            "stepover_fraction": 0.75,
+            "stepdown_mm": 12,
+            "cut_feed_mm_min": 900,
+            "plunge_feed_mm_min": 250,
+            "retract_feed_mm_min": 1200,
+            "segments_per_circle": 24,
+            "order": "tool",
+            "retract_mode": "clearance",
+            "shortest_c": true,
+            "junction_cleanup": false
+          },
+          "failures": [],
+          "proposed_note": {
+            "guidance": "Use the observed best strategy as a candidate for the next part: 0.75 stepover, 12 mm stepdown, feeds of 900/250/1200 mm/min for cutting/plunging/retracting, 24 circle segments, tool ordering, clearance retracts, shortest C enabled, and junction cleanup disabled. Apply only where compatible with the next part\u2019s fixed constraints; its validity and timing remain unknown.",
+            "reason": "The supplied episode reports three passing attempts and a best time of 124.164 seconds. It provides no alternative timings or failures, so it does not establish which settings helped or whether this strategy will improve another part."
+          },
+          "evidence": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-loop-demo/memory/evidence/03-bearing-block/indexed_learner-b4b6222ccc3d.response.json",
+          "note_status": "unvalidated suggestion; future candidates still require checks and simulation"
+        },
+        {
+          "part": "04-trunnion-cage",
+          "target_sha256": "9af44a8563fc15d661df6b14e17dca6ba2a3b9694519c3b5acb25eea419d5037",
+          "status": "completed",
+          "attempts": 3,
+          "passed_attempts": 2,
+          "failed_attempts": 1,
+          "source_manifest": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-loop-demo/runs/04-trunnion-cage/manifest.json",
+          "saved_at": 1789272869.384353,
+          "best_seconds": 196.77267020109883,
+          "best_strategy": {
+            "stepover_fraction": 0.75,
+            "stepdown_mm": 12,
+            "cut_feed_mm_min": 900,
+            "plunge_feed_mm_min": 250,
+            "retract_feed_mm_min": 1200,
+            "segments_per_circle": 24,
+            "order": "tool",
+            "retract_mode": "clearance",
+            "shortest_c": true,
+            "junction_cleanup": false
+          },
+          "failures": [
+            {
+              "strategy": {
+                "stepover_fraction": 0.95,
+                "stepdown_mm": 12,
+                "cut_feed_mm_min": 900,
+                "plunge_feed_mm_min": 250,
+                "retract_feed_mm_min": 1200,
+                "segments_per_circle": 24,
+                "order": "tool",
+                "retract_mode": "clearance",
+                "shortest_c": true,
+                "junction_cleanup": false
+              },
+              "issues": [
+                {
+                  "code": "excess_material",
+                  "certainty": "uncertain",
+                  "moves": [],
+                  "description": "Final stock has excess material beyond target tolerance. Resolution cannot establish a pass."
+                }
+              ]
+            }
+          ],
+          "proposed_note": {
+            "guidance": "Use 0.75 stepover as a starting candidate for the next part; do not assume 0.95 preserves sufficient coverage. Verify each new plan against the fixed constraints; an uncertain result does not qualify as valid.",
+            "reason": "The observed best passing strategy used 0.75 stepover and took 196.773 seconds. The otherwise identical 0.95 strategy returned uncertain excess material because resolution could not establish a pass. This supports caution about larger stepovers, but establishes neither an optimal stepover nor validity or a timing improvement on the next part."
+          },
+          "evidence": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-loop-demo/memory/evidence/04-trunnion-cage/indexed_learner-7bced71f0542.response.json",
+          "note_status": "unvalidated suggestion; future candidates still require checks and simulation"
+        },
+        {
+          "part": "05-flanged-sleeve",
+          "target_sha256": "c0ac069ae10514ee6ad6ff8c5bdee418a91e4fe3393b1d7d48171363fef634ee",
+          "status": "completed",
+          "attempts": 3,
+          "passed_attempts": 3,
+          "failed_attempts": 0,
+          "source_manifest": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-loop-demo/runs/05-flanged-sleeve/manifest.json",
+          "saved_at": 1789272982.900769,
+          "best_seconds": 109.80759577113994,
+          "best_strategy": {
+            "stepover_fraction": 0.8333333333333334,
+            "stepdown_mm": 12,
+            "cut_feed_mm_min": 900,
+            "plunge_feed_mm_min": 250,
+            "retract_feed_mm_min": 1200,
+            "segments_per_circle": 24,
+            "order": "tool",
+            "retract_mode": "clearance",
+            "shortest_c": true,
+            "junction_cleanup": false
+          },
+          "failures": [],
+          "proposed_note": {
+            "guidance": "Use the observed best strategy as a candidate for the next part: stepover 0.8333, stepdown 12 mm, cut/plunge/retract feeds 900/250/1200 mm/min, 24 segments per circle, tool ordering, clearance retracts, shortest C enabled, and junction cleanup disabled. Apply only where the next part's fixed constraints permit; its validity and timing remain unknown.",
+            "reason": "All three supplied attempts passed; the best recorded time was 109.8076 seconds. No per-attempt comparison was supplied, so the evidence does not isolate which parameters helped or establish an improvement transferable to another part."
+          },
+          "evidence": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-loop-demo/memory/evidence/05-flanged-sleeve/indexed_learner-89dc00a8fb82.response.json",
+          "note_status": "unvalidated suggestion; future candidates still require checks and simulation"
+        },
+        {
+          "part": "14003f2fb9fd",
+          "target_sha256": "372e913269a7e1bea2fe978602f4e51a4b8858726355a7a39c2e51a3a6cdd917",
+          "status": "completed",
+          "attempts": 3,
+          "passed_attempts": 3,
+          "failed_attempts": 0,
+          "source_manifest": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/14003f2fb9fd/manifest.json",
+          "saved_at": 1789274386.139416,
+          "best_seconds": 25.85223629498072,
+          "best_strategy": {
+            "stepover_fraction": 0.75,
+            "stepdown_mm": 8,
+            "cut_feed_mm_min": 900,
+            "plunge_feed_mm_min": 250,
+            "retract_feed_mm_min": 1200,
+            "segments_per_circle": 24,
+            "order": "tool",
+            "retract_mode": "clearance",
+            "shortest_c": true,
+            "junction_cleanup": false
+          },
+          "failures": []
+        },
+        {
+          "part": "3dea6444a879",
+          "target_sha256": "e62d3e19bef2717f670beca00d0d5c729beb3dc8cf6c1f4500654ae0d4ff2119",
+          "status": "completed",
+          "attempts": 2,
+          "passed_attempts": 2,
+          "failed_attempts": 0,
+          "source_manifest": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/3dea6444a879/manifest.json",
+          "saved_at": 1789274418.3326411,
+          "best_seconds": 27.263982725443416,
+          "best_strategy": {
+            "stepover_fraction": 0.75,
+            "stepdown_mm": 7,
+            "cut_feed_mm_min": 900,
+            "plunge_feed_mm_min": 250,
+            "retract_feed_mm_min": 1200,
+            "segments_per_circle": 24,
+            "order": "tool",
+            "retract_mode": "clearance",
+            "shortest_c": true,
+            "junction_cleanup": false
+          },
+          "failures": []
+        },
+        {
+          "part": "3ef2fc936a92",
+          "target_sha256": "372e913269a7e1bea2fe978602f4e51a4b8858726355a7a39c2e51a3a6cdd917",
+          "status": "completed",
+          "attempts": 3,
+          "passed_attempts": 3,
+          "failed_attempts": 0,
+          "source_manifest": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/3ef2fc936a92/manifest.json",
+          "saved_at": 1789275079.737656,
+          "best_seconds": 25.852236294980724,
+          "best_strategy": {
+            "stepover_fraction": 0.75,
+            "stepdown_mm": 12,
+            "cut_feed_mm_min": 900,
+            "plunge_feed_mm_min": 250,
+            "retract_feed_mm_min": 1200,
+            "segments_per_circle": 24,
+            "order": "tool",
+            "retract_mode": "clearance",
+            "shortest_c": true,
+            "junction_cleanup": false
+          },
+          "failures": []
+        },
+        {
+          "part": "02de8c83d5bd",
+          "target_sha256": "372e913269a7e1bea2fe978602f4e51a4b8858726355a7a39c2e51a3a6cdd917",
+          "status": "completed",
+          "attempts": 2,
+          "passed_attempts": 2,
+          "failed_attempts": 0,
+          "source_manifest": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/02de8c83d5bd/manifest.json",
+          "saved_at": 1789275482.670558,
+          "best_seconds": 25.85223629498072,
+          "best_strategy": {
+            "stepover_fraction": 0.75,
+            "stepdown_mm": 8,
+            "cut_feed_mm_min": 900,
+            "plunge_feed_mm_min": 250,
+            "retract_feed_mm_min": 1200,
+            "segments_per_circle": 24,
+            "order": "tool",
+            "retract_mode": "clearance",
+            "shortest_c": true,
+            "junction_cleanup": false
+          },
+          "failures": []
+        },
+        {
+          "part": "a1b399e521ac",
+          "target_sha256": "e62d3e19bef2717f670beca00d0d5c729beb3dc8cf6c1f4500654ae0d4ff2119",
+          "status": "completed",
+          "attempts": 2,
+          "passed_attempts": 2,
+          "failed_attempts": 0,
+          "source_manifest": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/a1b399e521ac/manifest.json",
+          "saved_at": 1789277327.10548,
+          "best_seconds": 27.263982725443416,
+          "best_strategy": {
+            "stepover_fraction": 0.75,
+            "stepdown_mm": 7,
+            "cut_feed_mm_min": 900,
+            "plunge_feed_mm_min": 250,
+            "retract_feed_mm_min": 1200,
+            "segments_per_circle": 24,
+            "order": "tool",
+            "retract_mode": "clearance",
+            "shortest_c": true,
+            "junction_cleanup": false
+          },
+          "failures": []
+        },
+        {
+          "part": "056866dee37c",
+          "target_sha256": "e62d3e19bef2717f670beca00d0d5c729beb3dc8cf6c1f4500654ae0d4ff2119",
+          "status": "completed",
+          "attempts": 3,
+          "passed_attempts": 3,
+          "failed_attempts": 0,
+          "source_manifest": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/056866dee37c/manifest.json",
+          "saved_at": 1789277935.447202,
+          "best_seconds": 27.263982725443416,
+          "best_strategy": {
+            "stepover_fraction": 0.75,
+            "stepdown_mm": 7,
+            "cut_feed_mm_min": 900,
+            "plunge_feed_mm_min": 250,
+            "retract_feed_mm_min": 1200,
+            "segments_per_circle": 24,
+            "order": "tool",
+            "retract_mode": "clearance",
+            "shortest_c": true,
+            "junction_cleanup": false
+          },
+          "failures": []
+        },
+        {
+          "part": "a2ff5d26d533",
+          "target_sha256": "372e913269a7e1bea2fe978602f4e51a4b8858726355a7a39c2e51a3a6cdd917",
+          "status": "completed",
+          "attempts": 1,
+          "passed_attempts": 1,
+          "failed_attempts": 0,
+          "source_manifest": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/a2ff5d26d533/manifest.json",
+          "saved_at": 1789278254.864696,
+          "best_seconds": 25.852236294980724,
+          "best_strategy": {
+            "stepover_fraction": 0.75,
+            "stepdown_mm": 12,
+            "cut_feed_mm_min": 900,
+            "plunge_feed_mm_min": 250,
+            "retract_feed_mm_min": 1200,
+            "segments_per_circle": 24,
+            "order": "tool",
+            "retract_mode": "clearance",
+            "shortest_c": true,
+            "junction_cleanup": false
+          },
+          "failures": []
+        }
+      ],
+      "strategy_prior": {
+        "stepover_fraction": 0.75,
+        "stepdown_mm": 12,
+        "cut_feed_mm_min": 900,
+        "plunge_feed_mm_min": 250,
+        "retract_feed_mm_min": 1200,
+        "segments_per_circle": 24,
+        "order": "tool",
+        "retract_mode": "clearance",
+        "shortest_c": true,
+        "junction_cleanup": false
+      },
+      "prior_source_part": "a2ff5d26d533",
+      "guidance": "These are observed prior runs, not proof of validity on new geometry. Use the most recent passing strategy only as a starting candidate; adapt it and repeat checks and simulation.",
+      "semantics": "Episodic memory persistence. No claim that notes or strategy transfer are generally valid.",
+      "learned_checks": [
+        {
+          "id": "exact-29302d9c5b1c",
+          "geometry_key": "29302d9c5b1c019c9d57443d54ccd82a36577bdb5228fb44bab9b53ad3686d54",
+          "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-loop-demo/runs/02-hydraulic-manifold/reference",
+          "issues": [
+            {
+              "code": "excess_material",
+              "certainty": "uncertain",
+              "moves": [],
+              "description": "Final stock has excess material beyond target tolerance. Resolution cannot establish a pass."
+            }
+          ],
+          "semantics": "Blocks only identical geometry/motion under matching implementation and fixed inputs. Feed-only changes do not change geometric validity."
+        },
+        {
+          "id": "exact-ff5d79c56d2f",
+          "geometry_key": "ff5d79c56d2ff5ef7eba7240eed42ee7109cabd0b2882496c229f5736e830224",
+          "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-loop-demo/runs/04-trunnion-cage/attempt-01",
+          "issues": [
+            {
+              "code": "excess_material",
+              "certainty": "uncertain",
+              "moves": [],
+              "description": "Final stock has excess material beyond target tolerance. Resolution cannot establish a pass."
+            }
+          ],
+          "semantics": "Blocks only identical geometry/motion under matching implementation and fixed inputs. Feed-only changes do not change geometric validity."
+        }
+      ],
+      "repair_observations": [
+        {
+          "part": "02-hydraulic-manifold",
+          "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-loop-demo/runs/02-hydraulic-manifold/reference",
+          "issues": [
+            {
+              "code": "excess_material",
+              "certainty": "uncertain",
+              "moves": [],
+              "description": "Final stock has excess material beyond target tolerance. Resolution cannot establish a pass."
+            }
+          ],
+          "advisory": "Repair geometry before optimizing time. For excess material at intersecting pockets, consider junction_cleanup; any changed path must pass simulation."
+        },
+        {
+          "part": "04-trunnion-cage",
+          "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-loop-demo/runs/04-trunnion-cage/attempt-01",
+          "issues": [
+            {
+              "code": "excess_material",
+              "certainty": "uncertain",
+              "moves": [],
+              "description": "Final stock has excess material beyond target tolerance. Resolution cannot establish a pass."
+            }
+          ],
+          "advisory": "Repair geometry before optimizing time. For excess material at intersecting pockets, consider junction_cleanup; any changed path must pass simulation."
+        }
+      ],
+      "speed_guidance": [
+        {
+          "part": "01-actuator-housing",
+          "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-loop-demo/runs/01-actuator-housing/evidence/supervisor-46ec3286b58d.response.json",
+          "seconds": 259.9603998485483,
+          "text": "The timing judge requested a faster verified plan. Two attempts remain, and one verified time does not establish diminishing returns. Cutting accounts for 212.61 of 259.96 seconds, leaving substantial time to target for improvement."
+        },
+        {
+          "part": "02-hydraulic-manifold",
+          "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-loop-demo/runs/02-hydraulic-manifold/evidence/supervisor-44265f38ccfa.response.json",
+          "seconds": 158.97681405483698,
+          "text": "The timing judge requested a faster verified plan. Two attempts remain, and only one verified time is available, so diminishing returns are not established. Further attempts may reduce the current best of 158.98 seconds."
+        },
+        {
+          "part": "02-hydraulic-manifold",
+          "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-loop-demo/runs/02-hydraulic-manifold/evidence/supervisor-d82820f5281b.response.json",
+          "seconds": 158.97681405483698,
+          "text": "The timing judge requested a faster verified plan. One attempt remains. Two identical verified times of 158.977 seconds show no gain yet, but provide limited evidence of diminishing returns."
+        },
+        {
+          "part": "03-bearing-block",
+          "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-loop-demo/runs/03-bearing-block/evidence/supervisor-6cb7c4179ff7.response.json",
+          "seconds": 130.22065744256136,
+          "text": "The timing judge requested a faster verified plan. Two attempts remain, and only one verified time is available, so diminishing returns are not established. Further improvement could reduce the current 130.22 seconds."
+        },
+        {
+          "part": "03-bearing-block",
+          "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-loop-demo/runs/03-bearing-block/evidence/supervisor-9281e23bdc74.response.json",
+          "seconds": 124.16424211299727,
+          "text": "The timing judge requested a faster verified plan. The latest verified time improved by 6.06 seconds (4.65%), so diminishing returns are not yet established. Use the remaining attempt to seek a lower machining time."
+        },
+        {
+          "part": "04-trunnion-cage",
+          "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-loop-demo/runs/04-trunnion-cage/evidence/supervisor-ce2f9d68f97b.response.json",
+          "seconds": 196.77267020109883,
+          "text": "The timing judge requested a faster verified plan. Two attempts remain and only one verified time is available, so diminishing returns are not established. Further improvement on 196.773 seconds is worth pursuing."
+        },
+        {
+          "part": "05-flanged-sleeve",
+          "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-loop-demo/runs/05-flanged-sleeve/evidence/supervisor-93355fd78126.response.json",
+          "seconds": 117.32590441848927,
+          "text": "The timing judge requested a faster verified plan. Only one verified time is available, so diminishing returns are not established. Two attempts remain to improve on 117.326 seconds."
+        },
+        {
+          "part": "05-flanged-sleeve",
+          "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-loop-demo/runs/05-flanged-sleeve/evidence/supervisor-0de7c48bffe6.response.json",
+          "seconds": 109.80759577113994,
+          "text": "The timing judge requested a faster verified plan. The latest verified time improved by 7.52 seconds (6.4%), with no demonstrated plateau. One attempt remains to reduce machining time further."
+        },
+        {
+          "part": "14003f2fb9fd",
+          "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/14003f2fb9fd/evidence/supervisor-1b4815b9d13c.response.json",
+          "seconds": 25.852236294980724,
+          "text": "The timing judge requested a faster verified plan. Two attempts remain and only one verified time is available, so diminishing returns are not established. Cutting accounts for 23.68 of 25.85 seconds."
+        },
+        {
+          "part": "14003f2fb9fd",
+          "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/14003f2fb9fd/evidence/supervisor-3538b602ced1.response.json",
+          "seconds": 25.852236294980724,
+          "text": "The timing judge requested a faster verified plan. One attempt remains. Two identical verified times show no improvement yet, but a final attempt could reduce the current best of 25.852 seconds."
+        },
+        {
+          "part": "3dea6444a879",
+          "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/3dea6444a879/evidence/supervisor-1cc6df93df28.response.json",
+          "seconds": 27.26398272544342,
+          "text": "The timing judge requested a faster verified plan. Two attempts remain, and only one verified time is available. Cutting accounts for 25.09 of 27.26 seconds; diminishing returns are not yet established."
+        },
+        {
+          "part": "3ef2fc936a92",
+          "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/3ef2fc936a92/evidence/supervisor-1d250e2ef053.response.json",
+          "seconds": 25.852236294980724,
+          "text": "The timing judge requested a faster verified plan. Two attempts remain, and only one verified time is available, so diminishing returns are not established. Further attempts may improve the current best of 25.852 seconds."
+        },
+        {
+          "part": "3ef2fc936a92",
+          "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/3ef2fc936a92/evidence/supervisor-d618e492b948.response.json",
+          "seconds": 25.852236294980724,
+          "text": "The timing judge requested a faster verified plan. One attempt remains. Two identical verified times suggest diminishing returns, but one final attempt may reduce the current best of 25.852 seconds."
+        },
+        {
+          "part": "02de8c83d5bd",
+          "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/02de8c83d5bd/evidence/supervisor-517316bfe0cb.response.json",
+          "seconds": 25.852236294980724,
+          "text": "The timing judge requested a faster verified plan. Two attempts remain and only one verified time is available, so diminishing returns are not established. Cutting accounts for 23.68 of 25.85 seconds, leaving reason to seek a faster passing plan."
+        },
+        {
+          "part": "a1b399e521ac",
+          "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/a1b399e521ac/evidence/supervisor-8719c11e352d.response.json",
+          "seconds": 27.263982725443416,
+          "text": "The timing judge requested a faster verified plan. Two attempts remain, and only one verified time is available, so diminishing returns are not established. Cutting accounts for 25.09 of 27.26 seconds, leaving reason to pursue a lower total time."
+        },
+        {
+          "part": "056866dee37c",
+          "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/056866dee37c/evidence/supervisor-4422bd109c39.response.json",
+          "seconds": 27.263982725443416,
+          "text": "The timing judge requested a faster verified plan. Two attempts remain, and a single verified time of 27.264 seconds does not establish diminishing returns. Cutting accounts for 25.091 seconds of the total."
+        },
+        {
+          "part": "056866dee37c",
+          "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/056866dee37c/evidence/supervisor-2ff7d904cb0c.response.json",
+          "seconds": 27.26398272544342,
+          "text": "The timing judge requested a faster verified plan. One attempt remains. The two verified times are effectively identical at 27.264 seconds; cutting accounts for 25.091 seconds, leaving a final opportunity to reduce machining time."
+        },
+        {
+          "part": "a2ff5d26d533",
+          "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/a2ff5d26d533/evidence/supervisor-fb0d5538e1d0.response.json",
+          "seconds": 25.852236294980724,
+          "text": "The timing judge requested a faster verified plan. Two attempts remain, and one verified time provides no evidence of diminishing returns. Cutting accounts for 23.68 of 25.85 seconds, leaving reason to seek a faster passing plan."
+        },
+        {
+          "part": "3f1703103c1f",
+          "source": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/3f1703103c1f/evidence/supervisor-eb2bc65085af.response.json",
+          "seconds": 25.852236294980724,
+          "text": "The timing judge requested a faster verified plan. Two attempts remain, and only one verified timing exists, so diminishing returns are not established. Further attempts may reduce the current best of 25.852 seconds."
+        }
+      ]
+    },
+    "current_candidate": {
+      "index": 1,
+      "proposal": {
+        "summary": "Test 10 mm stepdown to change intermediate cutting depths while retaining maximum feeds. This candidate requires verification; the supplied evidence does not establish a time improvement over 25.852 seconds.",
+        "strategy": {
+          "stepover_fraction": 0.75,
+          "stepdown_mm": 10,
+          "cut_feed_mm_min": 900,
+          "plunge_feed_mm_min": 250,
+          "retract_feed_mm_min": 1200,
+          "segments_per_circle": 24,
+          "order": "tool",
+          "retract_mode": "clearance",
+          "shortest_c": true,
+          "junction_cleanup": false
+        }
+      },
+      "evidence": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/workspace-live/runs/3f1703103c1f/evidence/indexed_planner-74b708070487.response.json",
+      "move_count": 63
+    },
+    "stop_reason": "Timing judge accepted the verified plan.",
+    "finished_at": 1789278590.520391,
+    "saved_memory_version": 13,
+    "loop_evidence": {
+      "baseline_seconds": 80.74544471125378,
+      "best_seconds": 25.85223629498072,
+      "baseline_savings_percent": 67.98304054497628,
+      "within_run_savings_percent": 1.3742384365758986e-14,
+      "attempts": 2,
+      "simulated_attempts": 2,
+      "failures": 0,
+      "loaded_memory_version": 12,
+      "saved_memory_version": 13,
+      "stop_reason": "Timing judge accepted the verified plan.",
+      "claim": "Baseline savings measure CAM optimization, not a causal memory benefit. Memory transfer still requires controlled evaluation."
+    },
+    "telemetry": {
+      "enabled": true,
+      "url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a09950-08eb-78f2-886c-22c645c1774a",
+      "readback_complete": true
+    }
+  },
+  "proposal": {
+    "summary": "Test 10 mm stepdown to change intermediate cutting depths while retaining maximum feeds. This candidate requires verification; the supplied evidence does not establish a time improvement over 25.852 seconds.",
+    "strategy": {
+      "stepover_fraction": 0.75,
+      "stepdown_mm": 10,
+      "cut_feed_mm_min": 900,
+      "plunge_feed_mm_min": 250,
+      "retract_feed_mm_min": 1200,
+      "segments_per_circle": 24,
+      "order": "tool",
+      "retract_mode": "clearance",
+      "shortest_c": true,
+      "junction_cleanup": false
+    }
+  },
+  "move_count": 63,
+  "path_preview": [
+    [
+      -12.0,
+      0.0,
+      72.0
+    ],
+    [
+      -12.0,
+      0.0,
+      54.0
+    ],
+    [
+      12.0,
+      0.0,
+      54.0
+    ],
+    [
+      12.0,
+      -4.0,
+      54.0
+    ],
+    [
+      13.0352762,
+      -3.8637033,
+      54.0
+    ],
+    [
+      14.0,
+      -3.4641016,
+      54.0
+    ],
+    [
+      14.8284271,
+      -2.8284271,
+      54.0
+    ],
+    [
+      15.4641016,
+      -2.0,
+      54.0
+    ],
+    [
+      15.8637033,
+      -1.0352762,
+      54.0
+    ],
+    [
+      16.0,
+      0.0,
+      54.0
+    ],
+    [
+      15.8637033,
+      1.0352762,
+      54.0
+    ],
+    [
+      15.4641016,
+      2.0,
+      54.0
+    ],
+    [
+      14.8284271,
+      2.8284271,
+      54.0
+    ],
+    [
+      14.0,
+      3.4641016,
+      54.0
+    ],
+    [
+      13.0352762,
+      3.8637033,
+      54.0
+    ],
+    [
+      12.0,
+      4.0,
+      54.0
+    ],
+    [
+      -12.0,
+      4.0,
+      54.0
+    ],
+    [
+      -13.0352762,
+      3.8637033,
+      54.0
+    ],
+    [
+      -14.0,
+      3.4641016,
+      54.0
+    ],
+    [
+      -14.8284271,
+      2.8284271,
+      54.0
+    ],
+    [
+      -15.4641016,
+      2.0,
+      54.0
+    ],
+    [
+      -15.8637033,
+      1.0352762,
+      54.0
+    ],
+    [
+      -16.0,
+      0.0,
+      54.0
+    ],
+    [
+      -15.8637033,
+      -1.0352762,
+      54.0
+    ],
+    [
+      -15.4641016,
+      -2.0,
+      54.0
+    ],
+    [
+      -14.8284271,
+      -2.8284271,
+      54.0
+    ],
+    [
+      -14.0,
+      -3.4641016,
+      54.0
+    ],
+    [
+      -13.0352762,
+      -3.8637033,
+      54.0
+    ],
+    [
+      -12.0,
+      -4.0,
+      54.0
+    ],
+    [
+      12.0,
+      -4.0,
+      54.0
+    ],
+    [
+      -12.0,
+      0.0,
+      54.0
+    ],
+    [
+      -12.0,
+      0.0,
+      48.0
+    ],
+    [
+      12.0,
+      0.0,
+      48.0
+    ],
+    [
+      12.0,
+      -4.0,
+      48.0
+    ],
+    [
+      13.0352762,
+      -3.8637033,
+      48.0
+    ],
+    [
+      14.0,
+      -3.4641016,
+      48.0
+    ],
+    [
+      14.8284271,
+      -2.8284271,
+      48.0
+    ],
+    [
+      15.4641016,
+      -2.0,
+      48.0
+    ],
+    [
+      15.8637033,
+      -1.0352762,
+      48.0
+    ],
+    [
+      16.0,
+      0.0,
+      48.0
+    ],
+    [
+      15.8637033,
+      1.0352762,
+      48.0
+    ],
+    [
+      15.4641016,
+      2.0,
+      48.0
+    ],
+    [
+      14.8284271,
+      2.8284271,
+      48.0
+    ],
+    [
+      14.0,
+      3.4641016,
+      48.0
+    ],
+    [
+      13.0352762,
+      3.8637033,
+      48.0
+    ],
+    [
+      12.0,
+      4.0,
+      48.0
+    ],
+    [
+      -12.0,
+      4.0,
+      48.0
+    ],
+    [
+      -13.0352762,
+      3.8637033,
+      48.0
+    ],
+    [
+      -14.0,
+      3.4641016,
+      48.0
+    ],
+    [
+      -14.8284271,
+      2.8284271,
+      48.0
+    ],
+    [
+      -15.4641016,
+      2.0,
+      48.0
+    ],
+    [
+      -15.8637033,
+      1.0352762,
+      48.0
+    ],
+    [
+      -16.0,
+      0.0,
+      48.0
+    ],
+    [
+      -15.8637033,
+      -1.0352762,
+      48.0
+    ],
+    [
+      -15.4641016,
+      -2.0,
+      48.0
+    ],
+    [
+      -14.8284271,
+      -2.8284271,
+      48.0
+    ],
+    [
+      -14.0,
+      -3.4641016,
+      48.0
+    ],
+    [
+      -13.0352762,
+      -3.8637033,
+      48.0
+    ],
+    [
+      -12.0,
+      -4.0,
+      48.0
+    ],
+    [
+      12.0,
+      -4.0,
+      48.0
+    ],
+    [
+      -12.0,
+      0.0,
+      48.0
+    ],
+    [
+      -12.0,
+      0.0,
+      72.0
+    ],
+    [
+      0.0,
+      0.0,
+      180.0
+    ]
+  ],
+  "target_sha256": "372e913269a7e1bea2fe978602f4e51a4b8858726355a7a39c2e51a3a6cdd917",
+  "simulation_progress": {
+    "move": -1,
+    "total_moves": 63,
+    "tool": "T12",
+    "position": [
+      0.0,
+      0.0,
+      180.0
+    ]
+  },
+  "playback": "housing.html?part=3f1703103c1f&study=workspace-live&embed=1",
+  "memory_version": 13
+}

@@ -1,0 +1,10 @@
+{
+  "source_files_verified": 83,
+  "archive_sha256": "fbb3902ef1bb356e2c7ee54eacbe7a09743c584a9d2080525d80fe469519d39b",
+  "pocket": {
+    "passed": true,
+    "seconds": 12.2,
+    "imported_from_extracted_archive": true
+  },
+  "scope": "Extracted core engine smoke test using existing dependency environment; not an isolated dependency install or full live-demo deployment."
+}

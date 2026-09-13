@@ -1,0 +1,22 @@
+[
+  {
+    "move": 0,
+    "name": "Bearing seat",
+    "feature": 0
+  },
+  {
+    "move": 210,
+    "name": "Counterbore",
+    "feature": 1
+  },
+  {
+    "move": 263,
+    "name": "Mounting slot",
+    "feature": 3
+  },
+  {
+    "move": 270,
+    "name": "Side oil passage",
+    "feature": 2
+  }
+]

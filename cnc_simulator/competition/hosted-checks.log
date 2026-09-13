@@ -1,0 +1,79 @@
+[36m[1mweave[0m: Logged in as Weights & Biases user: toukoursin.
+[36m[1mweave[0m: View Weave data at https://wandb.ai/silta/coreweave-hack-silta-squad/weave
+[36m[1mweave[0m: 🍩 https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a09937-99b3-7bbe-a02c-ccef3b06f806
+{
+  "result": {
+    "cases": [
+      {
+        "name": "original-failure",
+        "rejected": true,
+        "full_simulation_passed": false
+      },
+      {
+        "name": "feed-only-repeat",
+        "rejected": true,
+        "full_simulation_passed": false
+      },
+      {
+        "name": "corrected-junction",
+        "rejected": false,
+        "full_simulation_passed": true
+      },
+      {
+        "name": "other-valid-part",
+        "rejected": false,
+        "full_simulation_passed": true
+      },
+      {
+        "name": "changed-fixture-scope",
+        "rejected": false,
+        "full_simulation_passed": false
+      }
+    ],
+    "signals": {
+      "false_rejections": 0,
+      "caught_invalid": 2,
+      "full_simulations_avoided": 2
+    },
+    "scope": "Actual hosted execution of exact applicability membership. Geometry identity computed by trusted host; no guest credentials; no generalization claim."
+  },
+  "inputs": {
+    "check_sha256": "f6e787c6fbe76c319b74c2eea15301589ececdfba417d2596a547c38846e6529",
+    "memory_sha256": "fbd3760e5540cb2b326af742503d8db2f2cc7d678b73b50ba7cbbb979e345df3",
+    "cases": [
+      {
+        "name": "original-failure",
+        "geometry_key": "91b3f012b50b55739922c2f91f855c13a8899bcf04c5fca297783a52115e1db3",
+        "full_simulation_passed": false,
+        "plan_sha256": "d2a60d05ad25039b0a914cff0c1a04503a2ab4a259aa297561a8e48e7a55b34c"
+      },
+      {
+        "name": "feed-only-repeat",
+        "geometry_key": "91b3f012b50b55739922c2f91f855c13a8899bcf04c5fca297783a52115e1db3",
+        "full_simulation_passed": false,
+        "plan_sha256": "6a9fcf4904505644c046ebade33b7558ce83bbf26b3c687a57395b715193f0d4"
+      },
+      {
+        "name": "corrected-junction",
+        "geometry_key": "921cc49175aa2dbc47864824cf44cb2da4a1cc9b6fca760e69681e82285e7a19",
+        "full_simulation_passed": true,
+        "plan_sha256": "b298bc7414d72c09421a1875302545e11c49f13044ac5e6861f50222061ee264"
+      },
+      {
+        "name": "other-valid-part",
+        "geometry_key": "128c15f979171fe59e628f55edbefb81120f13da9c87bc41e3489a3b34534134",
+        "full_simulation_passed": true,
+        "plan_sha256": "7e45a2fca1f6e4e339a3ea92d1030d6374943a57f1c1e122b67fede34f82b4dc"
+      },
+      {
+        "name": "changed-fixture-scope",
+        "geometry_key": "0dc8970a971919bdc1c25c518c77a34babd7ce5755c9a01f74a73b83b9a7d408",
+        "full_simulation_passed": false,
+        "plan_sha256": "b1deae9c6aa7be8f9c0b2396e89958e80767c017f307a5c7498b300944c99c16"
+      }
+    ],
+    "network": "deny ingress and egress"
+  },
+  "trace_url": "https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a09937-99b3-7bbe-a02c-ccef3b06f806",
+  "readback_complete": true
+}

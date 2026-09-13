@@ -1,0 +1,26 @@
+[
+  {
+    "part": "11-indexed-instrument-shell",
+    "source_plan_sha256": "f20340d09a8cb077d38fa0cd925073eae3c7ce504bd8bc55d519f87c44a86a61",
+    "frames": 48,
+    "bytes": 4293240,
+    "final_display_volume_mm3": 78577.644716709,
+    "within_verifier_bounds": true,
+    "passed": true,
+    "selection": "attempt-0",
+    "method": "Boolean subtraction of swept inscribed 64-sided cutters; display copy simplified <=0.005 mm. No target geometry used to construct stock.",
+    "selection_semantics": "Preselected first warm trial; no best-of-study selection"
+  },
+  {
+    "part": "12-three-pocket-plate",
+    "source_plan_sha256": "e1fc6caf1f9fb9f809fc586e64cda896215ccaea36d25ebc7fc7ddd52d585ea6",
+    "frames": 40,
+    "bytes": 894648,
+    "final_display_volume_mm3": 96726.0653225896,
+    "within_verifier_bounds": true,
+    "passed": true,
+    "selection": "attempt-0",
+    "method": "Boolean subtraction of swept inscribed 64-sided cutters; display copy simplified <=0.005 mm. No target geometry used to construct stock.",
+    "selection_semantics": "Preselected first warm trial; no best-of-study selection"
+  }
+]

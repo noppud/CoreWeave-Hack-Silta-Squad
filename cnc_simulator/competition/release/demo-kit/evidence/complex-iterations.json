@@ -1,0 +1,71 @@
+{
+  "scope": "Retained artifact audit, not a new simulation or causal memory evaluation",
+  "parts": [
+    {
+      "part": "Twelve-window carrier",
+      "attempt_seconds": [
+        531.0382669852204,
+        496.78819415850325
+      ],
+      "selected_seconds": 496.78819415850325,
+      "first_judge": {
+        "action": "improve",
+        "reason": "One attempt remains, and a single verified time does not establish diminishing returns. Cutting accounts for 462.08 of 531.04 seconds, leaving substantial time potentially reducible.",
+        "guidance_proposal": null
+      },
+      "last_judge": {
+        "action": "stop",
+        "reason": "No attempts remain. The best verified time is 496.788 seconds, a 34.250-second improvement over the previous plan.",
+        "guidance_proposal": null
+      },
+      "manifest_sha256": "06851d8d3fd26cf206e3d7b5cad71f8e638af524328d00fabf546053433bbc34",
+      "frozen_target_consistent": true,
+      "best_preserved": true,
+      "judge_design_proposals": false
+    },
+    {
+      "part": "Multi-gallery manifold",
+      "attempt_seconds": [
+        309.3678463769729,
+        309.3678463769729
+      ],
+      "selected_seconds": 309.3678463769729,
+      "first_judge": {
+        "action": "improve",
+        "reason": "One attempt remains, and only one verified time is available, so diminishing returns are not established. Seek a reduction from 309.368 seconds; cutting accounts for 259.872 seconds.",
+        "guidance_proposal": null
+      },
+      "last_judge": {
+        "action": "stop",
+        "reason": "No attempts remain. Both verified times are identical at 309.3678463769729 seconds, with no observed improvement.",
+        "guidance_proposal": null
+      },
+      "manifest_sha256": "4fa0786508bc969fec087947e7e4e7fde902c45ca981ec1238cd22d92eb0abf0",
+      "frozen_target_consistent": true,
+      "best_preserved": true,
+      "judge_design_proposals": false
+    },
+    {
+      "part": "Staggered lattice drum",
+      "attempt_seconds": [
+        444.0995518057565,
+        450.3648090298985
+      ],
+      "selected_seconds": 444.0995518057565,
+      "first_judge": {
+        "action": "improve",
+        "reason": "One attempt remains, and a single verified time provides no evidence of diminishing returns. Cutting accounts for 363.54 of 444.10 seconds, leaving potential for a lower total time.",
+        "guidance_proposal": null
+      },
+      "last_judge": {
+        "action": "stop",
+        "reason": "No attempts remain. The latest time is 6.265 seconds slower than the best verified time of 444.100 seconds.",
+        "guidance_proposal": null
+      },
+      "manifest_sha256": "f13fe6b352dd8ded429d8c4e864c83d775ab9e2b2bd009b929bc4f468042319b",
+      "frozen_target_consistent": true,
+      "best_preserved": true,
+      "judge_design_proposals": false
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "parts": [
+    "11-indexed-instrument-shell",
+    "12-three-pocket-plate"
+  ],
+  "repetitions": 3,
+  "order": "Alternating cold/warm within pair, reversed by part index",
+  "memory_sha256": "af724457b4be5d76f66e2af85a06088cab63534e7c7999ebd09bbcffac7a6083",
+  "scope": "Pre-registered new geometry applicability screen. Frozen actuator-only memory, no study updates. No exposed model sampling seed; ephemeral calls recorded. Not general manufacturing validation.",
+  "objective": "Machining seconds only among passing paired plans. All failures and inference errors retained."
+}

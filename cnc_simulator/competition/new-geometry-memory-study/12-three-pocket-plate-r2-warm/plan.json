@@ -1,0 +1,1479 @@
+{
+  "units": "mm",
+  "target": {
+    "type": "mesh",
+    "path": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/new-geometry-memory-study/geometry/parts/12-three-pocket-plate/target.stl"
+  },
+  "stock": {
+    "type": "mesh",
+    "path": "/Users/touko/work/helios-one/repos/coreweavehack/cnc_simulator/competition/new-geometry-memory-study/geometry/parts/12-three-pocket-plate/stock.stl"
+  },
+  "fixtures": [
+    {
+      "type": "box",
+      "min": [
+        -18,
+        -18,
+        -40
+      ],
+      "max": [
+        18,
+        18,
+        0
+      ]
+    }
+  ],
+  "tools": {
+    "T12": {
+      "diameter_mm": 12,
+      "flute_length_mm": 60,
+      "shaft_diameter_mm": 12,
+      "shaft_length_mm": 30,
+      "holder_diameter_mm": 40,
+      "holder_length_mm": 30
+    },
+    "T8": {
+      "diameter_mm": 8,
+      "flute_length_mm": 60,
+      "shaft_diameter_mm": 8,
+      "shaft_length_mm": 30,
+      "holder_diameter_mm": 40,
+      "holder_length_mm": 30
+    }
+  },
+  "travel_limits": {
+    "min": [
+      -762,
+      -508,
+      -508
+    ],
+    "max": [
+      0,
+      0,
+      63.5
+    ]
+  },
+  "initial_position": [
+    0,
+    0,
+    180
+  ],
+  "initial_tool": "T12",
+  "moves": [
+    {
+      "type": "rapid",
+      "to": [
+        -25.0,
+        -9.0,
+        72.0
+      ]
+    },
+    {
+      "type": "cut",
+      "to": [
+        -25.0,
+        -9.0,
+        52.0
+      ],
+      "feed_mm_per_min": 250
+    },
+    {
+      "type": "cut",
+      "to": [
+        -16.0,
+        -9.0,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -16.0,
+        -10.0,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -15.741181,
+        -9.9659258,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -15.5,
+        -9.8660254,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -15.2928932,
+        -9.7071068,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -15.1339746,
+        -9.5,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -15.0340742,
+        -9.258819,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -15.0,
+        -9.0,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -15.0340742,
+        -8.741181,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -15.1339746,
+        -8.5,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -15.2928932,
+        -8.2928932,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -15.5,
+        -8.1339746,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -15.741181,
+        -8.0340742,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -16.0,
+        -8.0,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -25.0,
+        -8.0,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -25.258819,
+        -8.0340742,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -25.5,
+        -8.1339746,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -25.7071068,
+        -8.2928932,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -25.8660254,
+        -8.5,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -25.9659258,
+        -8.741181,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -26.0,
+        -9.0,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -25.9659258,
+        -9.258819,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -25.8660254,
+        -9.5,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -25.7071068,
+        -9.7071068,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -25.5,
+        -9.8660254,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -25.258819,
+        -9.9659258,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -25.0,
+        -10.0,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -16.0,
+        -10.0,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -25.0,
+        -9.0,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -25.0,
+        -9.0,
+        48.0
+      ],
+      "feed_mm_per_min": 250
+    },
+    {
+      "type": "cut",
+      "to": [
+        -16.0,
+        -9.0,
+        48.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -16.0,
+        -10.0,
+        48.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -15.741181,
+        -9.9659258,
+        48.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -15.5,
+        -9.8660254,
+        48.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -15.2928932,
+        -9.7071068,
+        48.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -15.1339746,
+        -9.5,
+        48.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -15.0340742,
+        -9.258819,
+        48.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -15.0,
+        -9.0,
+        48.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -15.0340742,
+        -8.741181,
+        48.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -15.1339746,
+        -8.5,
+        48.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -15.2928932,
+        -8.2928932,
+        48.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -15.5,
+        -8.1339746,
+        48.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -15.741181,
+        -8.0340742,
+        48.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -16.0,
+        -8.0,
+        48.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -25.0,
+        -8.0,
+        48.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -25.258819,
+        -8.0340742,
+        48.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -25.5,
+        -8.1339746,
+        48.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -25.7071068,
+        -8.2928932,
+        48.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -25.8660254,
+        -8.5,
+        48.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -25.9659258,
+        -8.741181,
+        48.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -26.0,
+        -9.0,
+        48.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -25.9659258,
+        -9.258819,
+        48.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -25.8660254,
+        -9.5,
+        48.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -25.7071068,
+        -9.7071068,
+        48.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -25.5,
+        -9.8660254,
+        48.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -25.258819,
+        -9.9659258,
+        48.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -25.0,
+        -10.0,
+        48.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -16.0,
+        -10.0,
+        48.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -25.0,
+        -9.0,
+        48.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -25.0,
+        -9.0,
+        72.0
+      ],
+      "feed_mm_per_min": 1200
+    },
+    {
+      "type": "rapid",
+      "to": [
+        16.0,
+        -9.0,
+        72.0
+      ]
+    },
+    {
+      "type": "cut",
+      "to": [
+        16.0,
+        -9.0,
+        52.0
+      ],
+      "feed_mm_per_min": 250
+    },
+    {
+      "type": "cut",
+      "to": [
+        25.0,
+        -9.0,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        25.0,
+        -10.0,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        25.258819,
+        -9.9659258,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        25.5,
+        -9.8660254,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        25.7071068,
+        -9.7071068,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        25.8660254,
+        -9.5,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        25.9659258,
+        -9.258819,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        26.0,
+        -9.0,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        25.9659258,
+        -8.741181,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        25.8660254,
+        -8.5,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        25.7071068,
+        -8.2928932,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        25.5,
+        -8.1339746,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        25.258819,
+        -8.0340742,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        25.0,
+        -8.0,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        16.0,
+        -8.0,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        15.741181,
+        -8.0340742,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        15.5,
+        -8.1339746,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        15.2928932,
+        -8.2928932,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        15.1339746,
+        -8.5,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        15.0340742,
+        -8.741181,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        15.0,
+        -9.0,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        15.0340742,
+        -9.258819,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        15.1339746,
+        -9.5,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        15.2928932,
+        -9.7071068,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        15.5,
+        -9.8660254,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        15.741181,
+        -9.9659258,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        16.0,
+        -10.0,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        25.0,
+        -10.0,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        16.0,
+        -9.0,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        16.0,
+        -9.0,
+        50.0
+      ],
+      "feed_mm_per_min": 250
+    },
+    {
+      "type": "cut",
+      "to": [
+        25.0,
+        -9.0,
+        50.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        25.0,
+        -10.0,
+        50.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        25.258819,
+        -9.9659258,
+        50.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        25.5,
+        -9.8660254,
+        50.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        25.7071068,
+        -9.7071068,
+        50.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        25.8660254,
+        -9.5,
+        50.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        25.9659258,
+        -9.258819,
+        50.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        26.0,
+        -9.0,
+        50.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        25.9659258,
+        -8.741181,
+        50.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        25.8660254,
+        -8.5,
+        50.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        25.7071068,
+        -8.2928932,
+        50.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        25.5,
+        -8.1339746,
+        50.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        25.258819,
+        -8.0340742,
+        50.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        25.0,
+        -8.0,
+        50.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        16.0,
+        -8.0,
+        50.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        15.741181,
+        -8.0340742,
+        50.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        15.5,
+        -8.1339746,
+        50.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        15.2928932,
+        -8.2928932,
+        50.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        15.1339746,
+        -8.5,
+        50.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        15.0340742,
+        -8.741181,
+        50.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        15.0,
+        -9.0,
+        50.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        15.0340742,
+        -9.258819,
+        50.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        15.1339746,
+        -9.5,
+        50.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        15.2928932,
+        -9.7071068,
+        50.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        15.5,
+        -9.8660254,
+        50.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        15.741181,
+        -9.9659258,
+        50.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        16.0,
+        -10.0,
+        50.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        25.0,
+        -10.0,
+        50.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        16.0,
+        -9.0,
+        50.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        16.0,
+        -9.0,
+        72.0
+      ],
+      "feed_mm_per_min": 1200
+    },
+    {
+      "type": "rapid",
+      "to": [
+        0.0,
+        13.0,
+        72.0
+      ]
+    },
+    {
+      "type": "cut",
+      "to": [
+        0.0,
+        13.0,
+        52.0
+      ],
+      "feed_mm_per_min": 250
+    },
+    {
+      "type": "cut",
+      "to": [
+        2.0,
+        13.0,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        1.9318517,
+        13.5176381,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        1.7320508,
+        14.0,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        1.4142136,
+        14.4142136,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        1.0,
+        14.7320508,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        0.5176381,
+        14.9318517,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        0.0,
+        15.0,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -0.5176381,
+        14.9318517,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -1.0,
+        14.7320508,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -1.4142136,
+        14.4142136,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -1.7320508,
+        14.0,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -1.9318517,
+        13.5176381,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -2.0,
+        13.0,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -1.9318517,
+        12.4823619,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -1.7320508,
+        12.0,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -1.4142136,
+        11.5857864,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -1.0,
+        11.2679492,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -0.5176381,
+        11.0681483,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        -0.0,
+        11.0,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        0.5176381,
+        11.0681483,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        1.0,
+        11.2679492,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        1.4142136,
+        11.5857864,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        1.7320508,
+        12.0,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        1.9318517,
+        12.4823619,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        2.0,
+        13.0,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        0.0,
+        13.0,
+        52.0
+      ],
+      "feed_mm_per_min": 900
+    },
+    {
+      "type": "cut",
+      "to": [
+        0.0,
+        13.0,
+        72.0
+      ],
+      "feed_mm_per_min": 1200
+    },
+    {
+      "type": "rapid",
+      "to": [
+        0.0,
+        0.0,
+        180.0
+      ]
+    }
+  ],
+  "tolerance_mm": 3.0,
+  "resolution_mm": 1.0,
+  "max_cells": 2000000,
+  "rapid_mm_per_min": 6000,
+  "tool_change_seconds": 15,
+  "indexing": {
+    "pivot_mm": [
+      0,
+      -453.5294968,
+      50.8
+    ],
+    "work_offset_mm": [
+      0,
+      0,
+      40
+    ],
+    "initial_bc_degrees": [
+      0,
+      0
+    ],
+    "b_limits_degrees": [
+      -35,
+      110
+    ],
+    "degrees_per_second": 30,
+    "settle_seconds": 1,
+    "head_mount_mm": [
+      330,
+      254,
+      618.89
+    ],
+    "gauge_length_mm": 120
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "job": "3f1703103c1f",
+  "exact_instructions_recorded": true,
+  "model": {
+    "model": "gpt-6-astra",
+    "service_tier": "fast",
+    "reasoning_effort": "low",
+    "role": "indexed_planner"
+  },
+  "memory_loaded": 12,
+  "memory_saved": 13,
+  "checks_passed": true,
+  "simulation_passed": true
+}

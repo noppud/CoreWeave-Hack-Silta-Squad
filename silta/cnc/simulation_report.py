@@ -62,3 +62,34 @@ def parse_issues_ax(text: str) -> IssuesReport:
     if not 0 <= report.percent <= 100:
         raise ValueError("Invalid verification percentage")
     return report
+
+
+def parse_issues_native(state: dict) -> IssuesReport:
+    """Parse actual AXIdentifier/AXValue rows; OCR is not used for a pass."""
+    if not state.get("foreground") or not state.get("document"):
+        raise ValueError("Expected foreground Fusion document observation")
+    rows = state.get("elements", [])
+    summaries = [
+        row
+        for row in rows
+        if row.get("AXIdentifier", "").endswith(".SimulationIssuesWidget.verificationLabel")
+    ]
+    if len(summaries) != 1:
+        raise ValueError("Expected exactly one native Fusion Issues summary")
+    value = str(summaries[0].get("AXValue") or summaries[0].get("AXTitle") or "")
+    match = _SUMMARY.fullmatch(value.strip())
+    if match is None:
+        raise ValueError("Fusion native Issues summary format is unrecognized")
+    percent, errors, warnings, process = match.groups()
+    details = tuple(
+        dict.fromkeys(
+            str(row.get("AXValue") or row.get("AXTitle"))
+            for row in rows
+            if ".SimulationIssuesWidget.SimulationIssuesTreeView" in row.get("AXIdentifier", "")
+            and (row.get("AXValue") or row.get("AXTitle"))
+        )
+    )
+    report = IssuesReport(float(percent), int(errors), int(warnings), int(process), details)
+    if not 0 <= report.percent <= 100:
+        raise ValueError("Invalid verification percentage")
+    return report

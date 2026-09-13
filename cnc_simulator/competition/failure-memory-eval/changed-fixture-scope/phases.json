@@ -1,0 +1,32 @@
+[
+  {
+    "move": 0,
+    "name": "Main gallery",
+    "feature": 0
+  },
+  {
+    "move": 633,
+    "name": "Control port",
+    "feature": 1
+  },
+  {
+    "move": 640,
+    "name": "Cross port 0",
+    "feature": 2
+  },
+  {
+    "move": 848,
+    "name": "Cross port 90",
+    "feature": 3
+  },
+  {
+    "move": 1056,
+    "name": "Cross port 180",
+    "feature": 4
+  },
+  {
+    "move": 1264,
+    "name": "Cross port 270",
+    "feature": 5
+  }
+]

@@ -1,0 +1,47 @@
+[
+  {
+    "move": 0,
+    "name": "Interior seat",
+    "feature": 0
+  },
+  {
+    "move": 1191,
+    "name": "Flange hole 1",
+    "feature": 5
+  },
+  {
+    "move": 1197,
+    "name": "Flange hole 2",
+    "feature": 6
+  },
+  {
+    "move": 1202,
+    "name": "Flange hole 3",
+    "feature": 7
+  },
+  {
+    "move": 1207,
+    "name": "Flange hole 4",
+    "feature": 8
+  },
+  {
+    "move": 1212,
+    "name": "Window 45",
+    "feature": 1
+  },
+  {
+    "move": 1379,
+    "name": "Window 135",
+    "feature": 2
+  },
+  {
+    "move": 1545,
+    "name": "Window 225",
+    "feature": 3
+  },
+  {
+    "move": 1711,
+    "name": "Window 315",
+    "feature": 4
+  }
+]

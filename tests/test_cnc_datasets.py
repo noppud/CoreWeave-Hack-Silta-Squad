@@ -69,7 +69,13 @@ def source(tmp_path):
                     "candidate_digest": candidate.digest,
                 },
                 {
+                    "event": "verification_started",
+                    "attempt": attempt,
+                    "at": f"2026-09-12T00:0{attempt}:00+00:00",
+                },
+                {
                     "event": "verification_completed",
+                    "at": f"2026-09-12T00:0{attempt}:10+00:00",
                     "attempt": attempt,
                     "verification": asdict(verification),
                 },
@@ -141,7 +147,8 @@ def test_capture_will_not_overwrite_existing_case(source, capsys):
 def test_unknown_verification_cannot_be_captured(source):
     _, _, manifest = source
     data = json.loads(manifest.read_text())
-    data["events"][1]["verification"].update(status="unknown", completed=False)
+    event = next(e for e in data["events"] if e["event"] == "verification_completed")
+    event["verification"].update(status="unknown", completed=False)
     manifest.write_text(json.dumps(data))
     code, output = capture(source, 1)
     assert code == 1

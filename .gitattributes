@@ -1,0 +1,4 @@
+# Preserve pinned manufacturing artifact bytes across platforms.
+*.pdf binary
+*.f3d binary
+*.mch -text whitespace=-blank-at-eof,cr-at-eol
