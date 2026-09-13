@@ -48,3 +48,7 @@ versions/
 # Required packaged Fusion viewer modules (not generated project build output).
 !/applications/control-center/vendor/build/
 !/applications/control-center/vendor/build/*.js
+
+# Downloaded full-demo release metadata
+/demo-materials-origin.json
+/demo-downloads/
