@@ -105,6 +105,43 @@ ARIA completed the third question and proposed the following migration:
 
 This is more than adding logging: it changes the runtime's learning policy and storage design. It should be implemented as a separate reviewed change, not presented as already deployed by this documentation update. ARIA's strict “no regression in any metric” suggestion also needs an explicit product decision: preserve hard verification constraints, but choose an economic objective and allowable efficiency tradeoffs rather than treating every diagnostic metric as an independent business objective.
 
+## Loop 4: ARIA architecture review
+
+Loop 4 is the outer development feedback loop. It reviews the whole approach, from a new part's input through CAM generation, checks, simulation, judge feedback, and the final result. ARIA brings W&B project context and guidance on Weave tracing and evaluation to that review.
+
+This loop belongs in the architectural story and pitch. It is documented here only; it is not added to the agent-loops timeline or wired into each part's runtime.
+
+```mermaid
+flowchart LR
+    A[Current architecture and product assumptions] --> B[Part inputs through final results]
+    B --> C[W&B traces, evaluation results and code]
+    C --> D[ARIA reviews the whole system]
+    D --> E[Team selects design and evaluation changes]
+    E --> F[Implement and validate changes]
+    F --> A
+```
+
+The feedback returns to the design of the system: what we measure, how we test learning, when we keep a lesson, and how we judge business value. The intended development cadence is to revisit ARIA after meaningful design changes or new evidence, carrying the updated context into the next review.
+
+### What ARIA did for this project
+
+| Review input | ARIA contribution | Recorded outcome |
+| --- | --- | --- |
+| Latest demo, both feedback loops, and pinned source commit | Reviewed the architecture and corrected its earlier assumptions about the verifier | Current-code review and the remaining risks are recorded above. |
+| Shared checks and speed instructions carried across parts | Identified unevaluated shared updates as a source of regressions | Proposed separating local repairs from evaluated reusable lessons. |
+| W&B project results and the new-part business use case | Questioned ambiguous cost metrics and the gap between simulation success and production readiness | Proposed clearer metric definitions and explicit verification scope. |
+| Existing Weave code and our implementation questions | Proposed separate check/prompt datasets, paired evaluations, version references, and additional traces | File-by-file implementation advice is recorded above for follow-up work. |
+
+The review and documented recommendations have happened. Implementing those recommendations, validating their effect, and returning new results to ARIA are the next steps that would complete another turn of this outer loop. No continuous autonomous monitoring or automatic architectural changes have been implemented.
+
+### Pitch deck wording
+
+**Loop 4 — Improve the system itself**
+
+“We used ARIA as a development reviewer across our manufacturing workflow. We shared the demo, code, and W&B project context; ARIA challenged how we measure improvement and helped shape our Weave evaluation plan. Its feedback feeds the next design iteration.”
+
+Suggested slide flow: **System results → ARIA review → Design changes → Validation → Next iteration**. Show one concrete example: **Immediate shared-rule updates → ARIA flags regression risk → Paired old/new evaluations proposed**. Label the evaluation migration as planned until it is implemented and tested.
+
 ## References
 
 - Current direct-update behavior: `silta/cnc/learning.py`, `silta/cnc/controller.py`, `docs/implementation-plan.md`.
