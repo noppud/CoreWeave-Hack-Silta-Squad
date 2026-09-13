@@ -1,5 +1,13 @@
 # Interactive learning-loop demo
 
+## Pitch deck
+
+[slides.html](slides.html) is the six-slide SILTA CAD pitch, with [presenter notes](guide.html). Open **http://127.0.0.1:8080/demo/slides.html** using the server below. The interactive demo and video areas are placeholders until the final presentation media is selected. Weave integration and ARIA's proposed evaluations are explicitly marked as unfinished.
+
+Edit `scripts/pitch_template.html` and `docs/demo-3min.md`, then run `python scripts/build_demo_slides.py` (requires Python Markdown) to rebuild the deck. The team photo is embedded for standalone viewing.
+
+## Interactive demo
+
 [index.html](index.html) is the standalone export of the presentation demo.
 
 From the repository root:
