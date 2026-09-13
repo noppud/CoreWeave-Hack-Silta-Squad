@@ -1,6 +1,6 @@
 # Silta — a CNC agent that learns from machining failures
 
-**Submission draft; not submitted.** The portable bundle's `manifest.json` is the authority for its completed-part count. Later challenge results must be incorporated into a fresh bundle; the uploaded v0 is an older partial snapshot.
+**Submission draft; not submitted.** The [final W&B evidence artifact](https://wandb.ai/silta/coreweave-hack-silta-squad/runs/cuto4ljg) contains 13 completed campaign drawings, separate rehearsal evidence and the final film. Its file digests have been read back and matched. The older v0 remains a historical partial snapshot.
 
 ## Submission fields
 
@@ -106,14 +106,16 @@ playbacks. It retained candidate5 after candidate6 tied. This is known prepared 
 not fresh drawing generation during the talk; both shadow learning files stayed unchanged.
 Original r1 required playback cleanup and hit its cap; finned r2/recoveries remain unknown.
 [Rehearsal trace](https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a09a51-6741-753f-ab92-d297767bbc73).
-The final package/upload must still be refreshed; existing v0 does not contain this result.
+This completed rehearsal is included in the final v1 evidence artifact; v0 remains a historical snapshot.
 
 Local presentation files: `output/presentation/silta-loop-demo.mp4` (under two minutes; exact duration in `film-evidence.json`), `output/presentation/slides.html` (two slides). The film uses retained historical and indexed Fusion footage; it is not a live capture of every campaign part.
 
-The first [W&B evidence artifact upload](https://wandb.ai/silta/coreweave-hack-silta-squad/runs/43m1kgqx) is `silta-fusion-judge-evidence:v0`: a six-completed-drawing snapshot, with 519 uploaded entries checked against local file digests. Later local results are not included in that version. See `output/sponsors/fusion-artifact-receipt.json`; publish a new version after the final campaign and film are reviewed.
+The first [W&B evidence artifact upload](https://wandb.ai/silta/coreweave-hack-silta-squad/runs/43m1kgqx) is `silta-fusion-judge-evidence:v0`: a six-completed-drawing snapshot, with 519 uploaded entries checked against local file digests. Later local results are not included in that version. Its receipt remains `output/sponsors/fusion-artifact-receipt.json`. The reviewed final campaign and film are published separately as v1 below.
 
 ## Build provenance and remaining submission work
 
 New repository work includes the Fusion bridge and deterministic verifier, Astra loop and supervisor, persistent learned checks/guidance, Weave instrumentation/evaluations, campaign orchestration and evidence presentation. Autodesk Fusion, its machine models/postprocessors, Astra/Codex, Weave/ARIA, marimo and geometry libraries are existing components. Imported machine/tool/drawing assets retain their source references. Team members should confirm the exact hackathon-time contribution boundary before submitting.
 
-Concrete remaining delivery work: confirm roster/socials and each participant survey in the live form; rebuild the final local package with the completed campaign, separate stage-rehearsal statuses and final cage/clevis film provenance; review its film and links; publish/read back the intended final artifact version (v1 is not yet published); establish judge access to the private W&B project or provide the portable package; then complete the event form and retain its submission receipt. The W&B snapshot above is uploaded; event submission has not been performed. See `docs/reviews/current-event-verification.md` for the current organizer listing and remaining form questions.
+Concrete remaining delivery work: confirm roster/socials and each participant survey in the live form; establish judge access to the private W&B project or provide the portable package; then complete the event form and retain its submission receipt. The final evidence archive is published and verified. Event submission has not been performed. See `docs/reviews/current-event-verification.md` for organizer details.
+
+Final publication: [silta/coreweave-hack-silta-squad/silta-fusion-judge-evidence:v1](https://wandb.ai/silta/coreweave-hack-silta-squad/runs/cuto4ljg); 2588 entries read back, all local/remote file digests match. Receipt: `output/sponsors/fusion-artifact-receipt-v1.json`.

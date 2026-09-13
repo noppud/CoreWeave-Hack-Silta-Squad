@@ -2472,36 +2472,20 @@
   "final_verified_at": "2026-09-13T10:49:45.103893+00:00",
   "latest_validation": {
     "pytest": {
-      "passed": 550,
+      "passed": 552,
       "warnings": 7,
       "skipped": 0,
-      "seconds": 5.5,
-      "evidence_source": "Root final full-suite report; audit worker did not rerun tests"
+      "seconds": 6.26,
+      "command": ".venv/bin/python -m pytest -q",
+      "evidence_source": "Root executed the complete working-checkout suite after final package-link changes"
     },
-    "git_diff_check": "passed in isolated release during this audit",
+    "git_diff_check": "passed in isolated release",
     "protected_remote_files": {
       "checked": 12,
       "unchanged": 12
     },
-    "source_audit": {
-      "selected_files": 180,
-      "reconciled_matching_entries": 2,
-      "current_source_drift": []
-    },
-    "scope": "Final isolated suite as reported by root; current source/release hashes freshly reconciled without runtime or source edits",
-    "recorded_at": "2026-09-13T10:41:29.213142+00:00",
-    "post_suite_allowlist_check": {
-      "at": "2026-09-13T10:43:38.734858+00:00",
-      "pytest_passed": 11,
-      "ruff": "passed",
-      "scope": "Only final rehearsal fixed-list/source-reference inclusion changed; full550suite not rerun as requested"
-    },
-    "post_suite_package_link_check": {
-      "pytest_passed": 13,
-      "ruff": "passed",
-      "at": "2026-09-13T10:49:45.103893+00:00",
-      "scope": "Real dedup regression and new isolated shadow provenance; full suite not rerun"
-    }
+    "scope": "Final full suite; code changes are copied to the isolated release. Detailed prior source audits retained separately.",
+    "recorded_at": "2026-09-13T10:51:48.756198+00:00"
   },
   "latest_source_sync": {
     "at": "2026-09-13T10:41:29.213142+00:00",
@@ -2551,6 +2535,39 @@
         },
         "scope": "Final isolated suite as reported by root; current source/release hashes freshly reconciled without runtime or source edits",
         "recorded_at": "2026-09-13T10:39:24.362082+00:00"
+      }
+    },
+    {
+      "pytest": {
+        "passed": 550,
+        "warnings": 7,
+        "skipped": 0,
+        "seconds": 5.5,
+        "evidence_source": "Root final full-suite report; audit worker did not rerun tests"
+      },
+      "git_diff_check": "passed in isolated release during this audit",
+      "protected_remote_files": {
+        "checked": 12,
+        "unchanged": 12
+      },
+      "source_audit": {
+        "selected_files": 180,
+        "reconciled_matching_entries": 2,
+        "current_source_drift": []
+      },
+      "scope": "Final isolated suite as reported by root; current source/release hashes freshly reconciled without runtime or source edits",
+      "recorded_at": "2026-09-13T10:41:29.213142+00:00",
+      "post_suite_allowlist_check": {
+        "at": "2026-09-13T10:43:38.734858+00:00",
+        "pytest_passed": 11,
+        "ruff": "passed",
+        "scope": "Only final rehearsal fixed-list/source-reference inclusion changed; full550suite not rerun as requested"
+      },
+      "post_suite_package_link_check": {
+        "pytest_passed": 13,
+        "ruff": "passed",
+        "at": "2026-09-13T10:49:45.103893+00:00",
+        "scope": "Real dedup regression and new isolated shadow provenance; full suite not rerun"
       }
     }
   ]
