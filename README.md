@@ -19,6 +19,8 @@ Only two active learning files:
 
 Updates apply to the next attempt and survive for subsequent parts. Weave records traces but does not evaluate or gate updates. Video recording is deferred until learning works. See the [current plan](docs/implementation-plan.md).
 
+The [ARIA loop review](docs/aria-loop-review.md) records the business and learning risks, our questions to ARIA, and a proposed Weave evaluation plan. It is a review, not an implemented change to the runtime.
+
 ## Run
 
 ```sh
@@ -31,7 +33,7 @@ uv run marimo run notebooks/cnc_app.py --host 127.0.0.1 --port 2720
 
 Reuse the default `learning` directory for sequential parts, or select it with `--learning-directory`. Each job saves its attempts and verification evidence under `runs/`.
 
-All agent roles use **GPT-6 Astra, low reasoning and fast mode**, through the local Codex SDK and ChatGPT subscription login. No weaker-model or API-credit fallback. ARIA is deferred.
+All agent roles use **GPT-6 Astra, low reasoning and fast mode**, through the local Codex SDK and ChatGPT subscription login. No weaker-model or API-credit fallback. ARIA has been used for an advisory review; it is not part of the runtime loop.
 
 The [Fusion bridge](fusion/README.md) must be running. The fixed native UI runner needs unlocked foreground Fusion during simulation collection. Setup, CAM generation and postprocessing use Fusion APIs. Routine simulation collection does not require Astra clicking. No physical-machine commands are sent.
 
