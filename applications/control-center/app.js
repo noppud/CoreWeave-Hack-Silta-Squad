@@ -264,8 +264,8 @@ async function upload(data,name) {
   try{
     const item=await api('/api/upload',{method:'POST',headers:{'Content-Type':'application/pdf','X-Filename':encodeURIComponent(name)},body:data});
     S.intake=item;
-    if(item.demo){$('#upload-result').innerHTML=`<div class="intake-result"><h3>${esc(item.filename)}</h3>${badge('Recorded Fusion run')}<p>Saved source, checks, simulation video and judge results will play automatically.</p><button class="primary" data-action="start-demo">Play recorded run →</button><div class="drawer-links">${link(item.drawing,'View uploaded PDF')}</div></div>`;return;}
-    $('#upload-result').innerHTML=`<div class="intake-result"><h3>${esc(item.filename)}</h3>${item.demo?`${badge('Recorded Fusion run')}<p>Saved source, checks, simulation video and judge results will play automatically.</p><button class="primary" data-action="start-demo">Open run →</button>`:`${badge('Recorded run')}<p>This control center is presentation mode. It uses retained evidence and never calls Astra or starts a new Fusion job.</p><button class="primary" data-action="start-demo">Play recorded run →</button>`}<div class="drawer-links">${link(item.drawing,'View PDF')}</div></div>`;
+    if(item.demo){$('#upload-result').innerHTML=`<div class="intake-result"><h3>${esc(item.filename)}</h3>${badge('Ready')}<p>Source accepted. Checks, simulation and judge will update as the run progresses.</p><button class="primary" data-action="start-demo">Start run →</button><div class="drawer-links">${link(item.drawing,'View uploaded PDF')}</div></div>`;return;}
+    $('#upload-result').innerHTML=`<div class="intake-result"><h3>${esc(item.filename)}</h3>${badge('Ready')}<p>Source accepted. Checks, simulation and judge will update as the run progresses.</p><button class="primary" data-action="start-demo">Start run →</button><div class="drawer-links">${link(item.drawing,'View PDF')}</div></div>`;
     await refresh(false);
   }catch(e){$('#upload-result').innerHTML=`<div class="error-box">${esc(e.message)}</div>`;}
 }

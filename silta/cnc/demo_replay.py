@@ -109,7 +109,7 @@ class DemoReplay:
                 document=DOCUMENT,
                 status="ready",
                 phase="ready",
-                message="Recorded Fusion run ready",
+                message="Run ready",
                 error=None,
                 frame_url=None,
                 live=False,
@@ -128,7 +128,7 @@ class DemoReplay:
             if state["status"] != "ready":
                 raise ValueError("Wait until the exact retained program is ready")
             self.play_event.set()
-            self.update(status="playing", phase="milling", message="Playing recorded Fusion simulation")
+            self.update(status="playing", phase="milling", message="Machining simulation in progress")
             return self.public(key)
 
     def reset(self, key):
