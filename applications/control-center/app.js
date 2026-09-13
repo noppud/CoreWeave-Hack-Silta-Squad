@@ -264,8 +264,8 @@ async function upload(data,name) {
   try{
     const item=await api('/api/upload',{method:'POST',headers:{'Content-Type':'application/pdf','X-Filename':encodeURIComponent(name)},body:data});
     S.intake=item;
-    if(item.demo){$('#upload-result').innerHTML=`<div class="intake-result"><h3>Ribbed clevis</h3><span class="badge">Replay → live Fusion</span><p>Clevis · AL6061 · 80 × 80 × 70 mm stock</p><button class="primary" data-action="start-demo">Open run →</button><div class="drawer-links">${link(item.drawing,'View uploaded PDF')}</div></div>`;return;}
-    $('#upload-result').innerHTML=`<div class="intake-result"><h3>${esc(item.filename)}</h3>${badge(item.profile?.known_drawing?'Drawing matched to its shop setup':'New drawing · Astra will read the PDF')}<p>${item.status==='ready'?esc(item.profile.machine):'Drawing received. This PDF needs its own machine, stock, material, tooling and fixture configuration before generation can start.'}</p>${item.status==='ready'?`<p><b>${esc(item.profile.material)} · ${esc(item.profile.stock?.join(' × '))} mm stock</b></p><details class="raw-details"><summary>Shop setup & assumptions</summary><p>${item.profile.assumptions.map(esc).join('<br><br>')}</p></details><p class="small-note">Up to 3 attempts · run-scoped learning</p><button class="primary" data-action="start-job" ${!S.data.enable_runs?'disabled':''}>${S.data.enable_runs?'Start in Fusion →':'Review-only server'}</button>`:''}<div class="drawer-links">${link(item.drawing,'View PDF')}</div></div>`;
+    if(item.demo){$('#upload-result').innerHTML=`<div class="intake-result"><h3>${esc(item.filename)}</h3>${badge('Recorded Fusion run')}<p>Saved source, checks, simulation video and judge results will play automatically.</p><button class="primary" data-action="start-demo">Play recorded run →</button><div class="drawer-links">${link(item.drawing,'View uploaded PDF')}</div></div>`;return;}
+    $('#upload-result').innerHTML=`<div class="intake-result"><h3>${esc(item.filename)}</h3>${item.demo?`${badge('Recorded Fusion run')}<p>Saved source, checks, simulation video and judge results will play automatically.</p><button class="primary" data-action="start-demo">Open run →</button>`:`${badge('Recorded run')}<p>This control center is presentation mode. It uses retained evidence and never calls Astra or starts a new Fusion job.</p><button class="primary" data-action="start-demo">Play recorded run →</button>`}<div class="drawer-links">${link(item.drawing,'View PDF')}</div></div>`;
     await refresh(false);
   }catch(e){$('#upload-result').innerHTML=`<div class="error-box">${esc(e.message)}</div>`;}
 }
@@ -336,10 +336,6 @@ document.addEventListener('click',async event=>{
   else if(action==='replay-next-part'){await nextReplayPart();}
   else if(action==='replay-evidence'){pauseReplay();const step=R.steps[R.index];if(step?.source)drawer('RECORDED SOURCE',step.source.name,code(step.source.content)+`<div class="drawer-links">${link(step.source.url,'Source artifact')}</div>`);else if(step)openEvent(step.event);}
   else if(action==='close-explorer')$('#explorer-dialog').close();
-  else if(action==='live-from-loop'){
-    const session=D.session?.id?await api('/api/demo/'+D.session.id).catch(()=>null):null;
-    if(session&&session.status!=='reset')await beginDemo(session);else await openWorkbench('live');
-  }
   else if(action==='open-part'){await openWorkbench('output');}
   else if(action==='close-workbench')$('#workbench-dialog').close();
   else if(action==='memories')openMemories();
@@ -354,13 +350,9 @@ document.addEventListener('click',async event=>{
   else if(action==='aria')openAria();
   else if(action==='close-aria')$('#aria-panel').close();
   else if(action==='worker'){
-    drawer('LOCAL FUSION WORKER','Fusion worker',`<p class="drawer-copy">${esc(S.data.worker.label)}. The browser follows job events while the local Fusion worker generates and verifies the plan.</p><p class="small-note">Fusion needs an unlocked, dedicated desktop during verification. Live Fusion uses the companion window feed.</p><div class="drawer-links"><button class="primary" data-action="check-worker">Check Fusion connection</button></div><div id="worker-result"></div>`);
+    drawer('RECORDED PLAYBACK SOURCE','Presentation source',`<p class="drawer-copy">This control center uses retained code, checks, simulation footage and judge evidence. Nothing is sent to Astra and no Fusion job is started.</p><p class="small-note">The recorded Fusion view opens automatically when the run reaches simulation.</p>`);
   }else if(action==='check-worker'){
     b.disabled=true;b.textContent='Checking…';try{const r=await api('/api/worker/check',{method:'POST',body:'{}'});$('#worker-result').textContent=r.label;await refresh();}catch(e){notify(e.message);}finally{b.disabled=false;b.textContent='Check Fusion connection';}
-  }else if(action==='start-job'){
-    b.disabled=true;b.textContent='Connecting to Fusion…';
-    try{stopReplay();const r=await api('/api/start',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:S.intake.id})});$('#upload-dialog').close();notify('Fusion job started. Follow its actual progress in the workspace.');await refresh();await selectPart(r.job);await openWorkbench('code');}
-    catch(e){$('#upload-result').insertAdjacentHTML('beforeend',`<div class="error-box">${esc(e.message)}</div>`);b.disabled=false;b.textContent='Start in Fusion →';}
   }
 });
 $('#media').addEventListener('change',e=>{if(e.target.matches('.source-select')){S.sourceIndex=Number(e.target.value);renderMedia();}});

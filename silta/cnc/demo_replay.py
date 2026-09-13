@@ -1,4 +1,9 @@
-"""Bounded archived clevis replay with explicitly cued live Fusion playback."""
+"""Bounded archived replay for the presentation control center.
+
+The presentation path is deliberately offline: it validates retained asset
+hashes and serves the recorded Fusion footage, but never opens Fusion, starts
+simulation, invokes Astra, or dispatches a new model job.
+"""
 
 from __future__ import annotations
 
@@ -19,11 +24,12 @@ DOCUMENT = "Silta CAM 4-1d539c135f80"
 
 
 def demo_match(digest):
-    return (
-        dict(mode="replay", run_id=RUN, candidate_id="candidate-0004")
-        if digest == PDF_HASH
-        else None
-    )
+    # Presentation mode uses the retained run for every uploaded PDF.  The
+    # uploaded drawing is still shown as the source artifact, while the
+    # generated code, checks, simulation and judge evidence come from this
+    # deterministic recording.  No digest gate means a fresh upload can be
+    # rehearsed without pretending it was previously seen.
+    return dict(mode="replay", run_id=RUN, candidate_id="candidate-0004")
 
 
 class DemoReplay:
@@ -44,12 +50,10 @@ class DemoReplay:
             if not self.session or self.session["id"] != key:
                 raise ValueError("Unknown demo session")
             state = copy.deepcopy(self.session)
-            state["live"] = (
-                state["status"] in {"playing", "completed"}
-                and state.get("phase") in {"milling", "finished"}
-                and self._capture_fresh()
-            )
-            state["frame_url"] = "/api/worker/frame" if state["live"] else None
+            # Never consult the native Fusion window in presentation mode.
+            # The browser plays the retained machining video instead.
+            state["live"] = False
+            state["frame_url"] = None
             return state
 
     def _capture_fresh(self):
@@ -77,11 +81,9 @@ class DemoReplay:
     def start(self, item):
         if not re.fullmatch(r"drawing-[a-f0-9]{12}", item.get("id", "")):
             raise ValueError("Unknown drawing")
-        if not demo_match(item.get("sha256")):
-            raise ValueError("This PDF does not match the staged clevis demo")
         drawing = Path(item["drawing"])
-        if hashlib.sha256(drawing.read_bytes()).hexdigest() != PDF_HASH:
-            raise ValueError("Uploaded demo PDF has changed")
+        if not drawing.is_file() or not drawing.read_bytes().startswith(b"%PDF-"):
+            raise ValueError("Uploaded demo PDF is unavailable")
         with self.lock:
             if self.busy:
                 if self.session["id"] == item["id"]:
@@ -105,9 +107,9 @@ class DemoReplay:
                 job=RUN,
                 candidate_id="candidate-0004",
                 document=DOCUMENT,
-                status="preparing",
-                phase="prepare",
-                message="Preparing the retained clevis in Fusion",
+                status="ready",
+                phase="ready",
+                message="Recorded Fusion run ready",
                 error=None,
                 frame_url=None,
                 live=False,
@@ -116,8 +118,6 @@ class DemoReplay:
                 fallback_url=self.catalog.asset(bundle["assets"]["recorded_milling"]["path"]),
                 drawing=self.catalog.asset(drawing),
             )
-            self.thread = threading.Thread(target=self._run, daemon=True)
-            self.thread.start()
             return self.public(item["id"])
 
     def play(self, key):
@@ -127,8 +127,8 @@ class DemoReplay:
                 return state  # Idempotent; never toggle a moving player.
             if state["status"] != "ready":
                 raise ValueError("Wait until the exact retained program is ready")
-            self.update(status="playing", phase="launch", message="Starting live Fusion simulation")
             self.play_event.set()
+            self.update(status="playing", phase="milling", message="Playing recorded Fusion simulation")
             return self.public(key)
 
     def reset(self, key):

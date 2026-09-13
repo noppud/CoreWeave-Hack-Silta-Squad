@@ -30,3 +30,17 @@ export function sourceBlocks(text,lines=18){
   const rows=(text||'').split('\n');
   return Array.from({length:Math.ceil(rows.length/lines)},(_,i)=>rows.slice(i*lines,(i+1)*lines).join('\n'));
 }
+
+// Presentation pacing only: the source and outcomes remain from the retained run.
+export function streamedSource(source,elapsed,duration){
+  const t=Math.max(0,Math.min(1,elapsed/duration));
+  const progress=t-Math.sin(t*Math.PI*4)/(Math.PI*18);
+  return source.slice(0,t===1?source.length:Math.floor(source.length*progress));
+}
+export function demoPlaybackAction({kind,status,live,requested,fallback}){
+  if(kind!=='ready'||fallback)return 'none';
+  if(status==='completed')return live?'review':'watch';
+  if(status==='playing')return 'none';
+  if(status==='ready'&&!requested)return 'start';
+  return 'none';
+}

@@ -512,10 +512,13 @@ class Center:
             drawing=str(path),
             profile=None,
         )
-        from .demo_replay import demo_match
+        from .demo_replay import PDF_HASH, demo_match
 
-        item["demo"] = demo_match(digest)
-        if item["demo"]:
+        matched_demo = demo_match(digest)
+        # Every upload can use the deterministic presentation playback, but
+        # profile selection still respects known drawing hashes.
+        item["demo"] = matched_demo
+        if digest == PDF_HASH:
             profile = self.root / "config/demo-campaign/umc-12-job.json"
             config = read_json(profile)
         elif matches:
@@ -585,8 +588,7 @@ class Center:
         return detail
 
     def start(self, key):
-        if not self.enable_runs:
-            raise ValueError("This server is in review-only mode")
+        raise ValueError("Presentation mode uses retained evidence; live Astra jobs are disabled")
         if not re.fullmatch(r"drawing-[a-f0-9]{12}", key):
             raise ValueError("Unknown drawing")
         with self.lock:
@@ -645,8 +647,6 @@ class Center:
             return dict(job=job, status="starting")
 
     def start_demo(self, key):
-        if not self.enable_runs:
-            raise ValueError("This server is in review-only mode")
         if not re.fullmatch(r"drawing-[a-f0-9]{12}", key):
             raise ValueError("Unknown drawing")
         with self.lock:
