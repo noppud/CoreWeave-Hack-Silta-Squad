@@ -83,7 +83,10 @@ def test_presentation_binding_failure_never_starts_simulation(tmp_path):
 
 
 @pytest.mark.parametrize("read_fails", [False, True])
-def test_playback_observes_motion_and_stops_on_read_failure(tmp_path, monkeypatch, read_fails):
+@pytest.mark.parametrize("stop_fails", [False, True])
+def test_playback_observes_motion_and_stops_on_read_failure(
+    tmp_path, monkeypatch, read_fails, stop_fails
+):
     import json
     import runpy
 
@@ -142,6 +145,8 @@ def test_playback_observes_motion_and_stops_on_read_failure(tmp_path, monkeypatc
 
         def stop(self):
             commands.append("stop")
+            if stop_fails:
+                raise RuntimeError("stop failed")
 
     result = show(
         candidate, Bridge(), tmp_path / "evidence", playback_factory=Playback, wait=lambda _: None
@@ -151,7 +156,7 @@ def test_playback_observes_motion_and_stops_on_read_failure(tmp_path, monkeypatc
     assert commands[:3] == ["inspect", "hide", "IronMachineSimulation"]
     assert commands[-3:] == ["stop", "SimulationStop", "restore"]
     assert result["target_display_restore"]["result"]["states_after"] == {"target": True}
-    if read_fails:
+    if read_fails or stop_fails:
         assert result["status"] == "presentation_failed"
 
 
@@ -333,3 +338,24 @@ def test_display_restoration_attempted_when_presentation_fails(tmp_path, failure
         assert "target_display_restore_error" in row
     else:
         assert row["target_display_restore"]["result"]["states_after"] == {"target": True}
+
+
+@pytest.mark.parametrize("has_menu", [True, False])
+def test_stop_cleanup_escape_only_for_observed_menu(has_menu):
+    import runpy
+
+    helper = runpy.run_path(
+        str(Path(__file__).resolve().parents[1] / "scripts/demo/stage_playback.py")
+    )["dismiss_observed_marking_menu"]
+    calls = []
+
+    class Native:
+        def ui(self, *args):
+            calls.append(args)
+            return {"windows": [{"title": "Marking Menu"}] if has_menu and len(calls) == 1 else []}
+
+    receipt = helper(Native())
+    assert receipt["escape_sent"] is has_menu
+    assert (("key", "escape") in calls) is has_menu
+    if has_menu:
+        assert receipt["menu_still_open"] is False

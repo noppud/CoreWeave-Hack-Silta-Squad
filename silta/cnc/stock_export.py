@@ -276,6 +276,12 @@ class StockExporter:
         self.ui("inspect")  # Discard a stale frame of a menu fading after selection.
         _, _, width, height = self.state["window_bounds"]
         for _attempt in range(2):
+            if any(w["title"] == "Marking Menu" for w in self.state["windows"]):
+                # During playback, moving geometry can spoil OCR of End of
+                # Toolpath while Pause remains readable. The native menu window
+                # establishes that it is open; each caller still locates its own
+                # exact control before clicking.
+                return
             try:
                 find_text(self.state, "End of Toolpath")
                 return
@@ -283,8 +289,7 @@ class StockExporter:
                 # Some Fusion sessions expose the menu as an untitled window.
                 # Its observed unique control is sufficient; do not toggle an
                 # already open menu merely because the window lacks a title.
-                if any(w["title"] == "Marking Menu" for w in self.state["windows"]):
-                    raise
+                pass
             self.ui("click", width * 0.55, height * 0.42, "right")
         find_text(self.state, "End of Toolpath")
 

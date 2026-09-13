@@ -71,6 +71,26 @@ result = {'document':doc.name, 'scope':'accepted target body display only; fixtu
 )
 
 
+def dismiss_observed_marking_menu(native):
+    """Dismiss only an actually observed native menu; never send blind Escape."""
+    before = native.ui("inspect")
+    observed = any(w.get("title") == "Marking Menu" for w in before.get("windows", []))
+    evidence = {
+        "menu_observed": observed,
+        "escape_sent": False,
+        "windows_before": before.get("windows", []),
+    }
+    if observed:
+        evidence["escape_sent"] = True
+        native.ui("key", "escape")
+        after = native.ui("inspect")
+        evidence["windows_after"] = after.get("windows", [])
+        evidence["menu_still_open"] = any(
+            w.get("title") == "Marking Menu" for w in after.get("windows", [])
+        )
+    return evidence
+
+
 def show(candidate, bridge, directory, seconds=15, *, playback_factory=None, wait=time.sleep):
     from silta.cnc.simulation_video import FusionPlayback, playback_position
 
@@ -181,6 +201,10 @@ def show(candidate, bridge, directory, seconds=15, *, playback_factory=None, wai
                 playback.stop()
             except Exception as exc:
                 row["stop_error"] = str(exc)
+                try:
+                    row["stop_menu_cleanup"] = dismiss_observed_marking_menu(playback.native)
+                except Exception as cleanup_error:
+                    row["stop_menu_cleanup_error"] = str(cleanup_error)
         if launched:
             try:
                 row["simulation_stop"] = bridge.request(
@@ -209,6 +233,12 @@ def show(candidate, bridge, directory, seconds=15, *, playback_factory=None, wai
             except Exception as exc:
                 row["target_display_restore_error"] = str(exc)
                 row["status"] = "presentation_failed"
+        if (
+            row.get("stop_error")
+            or row.get("simulation_stop_error")
+            or row.get("simulation_stop", {}).get("status", "ok") != "ok"
+        ):
+            row["status"] = "presentation_failed"
         row["presentation_wall_seconds"] = time.monotonic() - started
         (directory / "presentation-playback.json").write_text(json.dumps(row, indent=2))
     return row
