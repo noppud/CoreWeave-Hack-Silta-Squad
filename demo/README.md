@@ -1,5 +1,7 @@
 # Interactive learning-loop demo
 
+The latest imported demo/pitch app is in [pitch-app](pitch-app/README.md), exported on September 13. Its live-demo embed points to the timeline in this repository.
+
 For the agreed loop behavior, final visual decisions, metric definitions, and the distinction between this scripted artifact and the real product, read the [project context](../docs/project-context.md).
 
 ## Pitch deck

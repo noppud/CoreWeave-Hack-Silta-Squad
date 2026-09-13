@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js" defer></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500&family=IBM+Plex+Mono:wght@400;450&display=swap">
+<style>
+  body { margin: 0; background: #0d0d0d; }
+  a { color: #fff; }
+  a:hover { color: #b9b9b9; }
+  @keyframes siltaPulse { 0%,100% { opacity: .35 } 50% { opacity: 1 } }
+</style>
+</helmet>
+<x-import component-from-global-scope="deck-stage" from="./deck-stage.js" width="1920" height="1080" hint-size="100%,100%" data-uneditable="">
+
+<section data-label="Cover" data-screen-label="01" data-speaker-notes="SILTA helps a shop work out how to manufacture a new part, before committing to the job." style="background:#0d0d0d;color:#ffffff;font-family:'IBM Plex Mono',ui-monospace,Menlo,monospace;padding:72px 96px 80px;display:flex;flex-direction:column;overflow:hidden" data-om-slide-id="da2da49f">
+  <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:80px;padding-bottom:28px;border-bottom:1px solid rgba(255,255,255,0.22)">
+    <span style="font-size:26px;letter-spacing:0.01em;color:#ffffff">13.09.2026</span>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:56px;min-height:0">
+    <div style="display:flex;align-items:center;gap:44px">
+      <div style="display:flex;align-items:center;gap:8px">
+        <div style="width:48px;height:96px;border-radius:96px 0 0 96px;background:#ffffff"></div>
+        <div style="width:96px;height:96px;border-radius:50%;background:#ffffff"></div>
+        <div style="width:48px;height:96px;border-radius:0 96px 96px 0;background:#ffffff"></div>
+      </div>
+      <span style="font-family:'Space Grotesk',Helvetica,sans-serif;font-size:190px;line-height:0.9;letter-spacing:-0.05em;font-weight:400">SILTA</span>
+    </div>
+    <span style="font-size:38px;line-height:1.35;color:#a3a3a3;max-width:1180px">An agent loop for CNC machining plans.</span>
+  </div>
+  <div style="display:flex;justify-content:space-between;font-size:24px;color:#8d8d8d;border-top:1px solid rgba(255,255,255,0.18);padding-top:24px">
+    <span>01 / 07</span>
+  </div>
+</section>
+
+<section data-label="The decision" data-screen-label="02" data-speaker-notes="The shop receives a drawing. It needs a process that works with its machines and tools, and an estimate of the machining time." style="background:#0d0d0d;color:#ffffff;font-family:'IBM Plex Mono',ui-monospace,Menlo,monospace;padding:72px 96px 80px;display:flex;flex-direction:column;overflow:hidden" data-om-slide-id="0fd506f3">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:26px;border-bottom:1px solid rgba(255,255,255,0.22)">
+    <div style="display:flex;align-items:center;gap:14px">
+      <div style="display:flex;align-items:center;gap:2px">
+        <div style="width:8px;height:16px;border-radius:16px 0 0 16px;background:#ffffff"></div>
+        <div style="width:16px;height:16px;border-radius:50%;background:#ffffff"></div>
+        <div style="width:8px;height:16px;border-radius:0 16px 16px 0;background:#ffffff"></div>
+      </div>
+      <span style="font-family:'Space Grotesk',Helvetica,sans-serif;font-size:26px;letter-spacing:0.01em;color:#ffffff">SILTA</span>
+    </div>
+    <span style="font-size:24px;color:#8d8d8d">02 / 07</span>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;padding-top:86px;min-height:0">
+    <h2 style="margin:0;font-family:'Space Grotesk',Helvetica,sans-serif;font-size:76px;line-height:1.06;letter-spacing:-0.035em;font-weight:400;max-width:1420px">A shop receives a new part drawing</h2>
+    <p style="margin:40px 0 0;font-size:30px;line-height:1.45;color:#a3a3a3;max-width:1120px">Before quoting the job, the estimator has to answer three questions with the machines and tooling actually on the floor.</p>
+    <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:92px;border-top:1px solid rgba(255,255,255,0.22)">
+      <div style="padding:34px 56px 0 0;display:flex;flex-direction:column;gap:20px">
+        <span style="font-size:24px;color:#8d8d8d">01</span>
+        <h3 style="margin:0;font-family:'Space Grotesk',Helvetica,sans-serif;font-size:36px;font-weight:400;letter-spacing:-0.02em">Can we make it?</h3>
+        <p style="margin:0;font-size:28px;line-height:1.45;color:#a3a3a3">Check the part against available machines, tools, stock and fixtures.</p>
+      </div>
+      <div style="padding:34px 56px 0;border-left:1px solid rgba(255,255,255,0.18);display:flex;flex-direction:column;gap:20px">
+        <span style="font-size:24px;color:#8d8d8d">02</span>
+        <h3 style="margin:0;font-family:'Space Grotesk',Helvetica,sans-serif;font-size:36px;font-weight:400;letter-spacing:-0.02em">How do we make it?</h3>
+        <p style="margin:0;font-size:28px;line-height:1.45;color:#a3a3a3">Choose the operations and toolpaths, then simulate the cut.</p>
+      </div>
+      <div style="padding:34px 0 0 56px;border-left:1px solid rgba(255,255,255,0.18);display:flex;flex-direction:column;gap:20px">
+        <span style="font-size:24px;color:#8d8d8d">03</span>
+        <h3 style="margin:0;font-family:'Space Grotesk',Helvetica,sans-serif;font-size:36px;font-weight:400;letter-spacing:-0.02em">What will it take?</h3>
+        <p style="margin:0;font-size:28px;line-height:1.45;color:#a3a3a3">Estimate machining time to judge whether the job is worth taking.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+<section data-label="Live demo" data-screen-label="03" data-speaker-notes="Press Load to embed the running demo. 54 varied inputs, two feedback routes, learned checks and speed instructions. These outcomes are scripted presentation data, not measured Fusion runs." style="background:#0d0d0d;color:#ffffff;font-family:'IBM Plex Mono',ui-monospace,Menlo,monospace;padding:72px 96px 60px;display:flex;flex-direction:column;overflow:hidden" data-om-slide-id="ab49fa33">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:26px;border-bottom:1px solid rgba(255,255,255,0.22)">
+    <div style="display:flex;align-items:center;gap:14px">
+      <div style="display:flex;align-items:center;gap:2px">
+        <div style="width:8px;height:16px;border-radius:16px 0 0 16px;background:#ffffff"></div>
+        <div style="width:16px;height:16px;border-radius:50%;background:#ffffff"></div>
+        <div style="width:8px;height:16px;border-radius:0 16px 16px 0;background:#ffffff"></div>
+      </div>
+      <span style="font-family:'Space Grotesk',Helvetica,sans-serif;font-size:26px;letter-spacing:0.01em;color:#ffffff">SILTA</span>
+    </div>
+    <span style="font-size:24px;color:#8d8d8d">03 / 07</span>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;padding-top:44px;min-height:0">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:60px">
+      <h2 style="margin:0;font-family:'Space Grotesk',Helvetica,sans-serif;font-size:60px;line-height:1.06;letter-spacing:-0.035em;font-weight:400">54 parts through the loop</h2>
+      <button type="button" onClick="{{ toggleDemo }}" style="background:transparent;color:#ffffff;border:1px solid rgba(255,255,255,0.35);font:inherit;font-size:24px;padding:14px 28px;cursor:pointer">{{ demoButtonLabel }}</button>
+    </div>
+    <div style="flex:1;margin-top:34px;min-height:0;border:1px solid rgba(255,255,255,0.22);background:#111111;position:relative;overflow:hidden">
+      <sc-if value="{{ demoLoaded }}" hint-placeholder-val="{{ false }}">
+        <iframe src="{{ demoSrc }}" title="SILTA 54-part learning loop demo" style="position:absolute;inset:0;width:100%;height:100%;border:0;background:#ffffff"></iframe>
+      </sc-if>
+      <sc-if value="{{ demoIdle }}" hint-placeholder-val="{{ true }}">
+        <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;background:repeating-linear-gradient(135deg,#141414 0 14px,#101010 14px 28px)">
+          <span style="font-size:30px;color:#cfcfcf">Interactive loop demo</span>
+          <span style="font-family:ui-monospace,Menlo,Consolas,monospace;font-size:24px;color:#7a7a7a">{{ demoSrc }}</span>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+</section>
+
+<section data-label="Loop 4 / ARIA" data-screen-label="04" data-speaker-notes="Loop 4 is the outer development loop. The whole system's traces and outcomes go to ARIA; its recommendations come back into the design. We ran one completed advisory review: it flagged that we promote a learned rule globally before showing it helps another part, and helped shape a paired old-versus-new evaluation plan. Planned, not deployed." style="background:#0d0d0d;color:#ffffff;font-family:'IBM Plex Mono',ui-monospace,Menlo,monospace;padding:72px 96px 80px;display:flex;flex-direction:column;overflow:hidden" data-om-slide-id="b5652de9">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:26px;border-bottom:1px solid rgba(255,255,255,0.22)">
+    <div style="display:flex;align-items:center;gap:14px">
+      <div style="display:flex;align-items:center;gap:2px">
+        <div style="width:8px;height:16px;border-radius:16px 0 0 16px;background:#ffffff"></div>
+        <div style="width:16px;height:16px;border-radius:50%;background:#ffffff"></div>
+        <div style="width:8px;height:16px;border-radius:0 16px 16px 0;background:#ffffff"></div>
+      </div>
+      <span style="font-family:'Space Grotesk',Helvetica,sans-serif;font-size:26px;letter-spacing:0.01em;color:#ffffff">SILTA</span>
+    </div>
+    <span style="font-size:24px;color:#8d8d8d">04 / 07</span>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;padding-top:52px;min-height:0">
+    <div style="display:flex;align-items:baseline;gap:28px">
+      <h2 style="margin:0;font-family:'Space Grotesk',Helvetica,sans-serif;font-size:64px;line-height:1.06;letter-spacing:-0.035em;font-weight:400">A loop around the whole system</h2>
+
+    </div>
+    <div style="position:relative;height:430px;margin-top:44px">
+      <div style="position:absolute;left:0;top:65px;width:800px;height:300px;border:1px solid rgba(255,255,255,0.22);background:#111111;overflow:hidden">
+        <sc-if value="{{ demoLoaded }}" hint-placeholder-val="{{ false }}">
+          <iframe src="{{ demoSrc }}" title="SILTA loop demo, half size" style="position:absolute;left:0;top:0;width:1600px;height:600px;border:0;background:#ffffff;transform:scale(0.5);transform-origin:top left"></iframe>
+        </sc-if>
+        <sc-if value="{{ demoIdle }}" hint-placeholder-val="{{ true }}">
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:repeating-linear-gradient(135deg,#141414 0 14px,#101010 14px 28px)">
+            <span style="font-size:26px;color:#a3a3a3">The whole agent system</span>
+          </div>
+        </sc-if>
+      </div>
+      <div style="position:absolute;left:1320px;top:125px;width:340px;height:180px;border:1px solid rgba(255,255,255,0.35);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:#0d0d0d">
+        <span style="font-family:'Space Grotesk',Helvetica,sans-serif;font-size:38px;font-weight:400;letter-spacing:-0.02em">ARIA</span>
+        <span style="font-size:26px;color:#a3a3a3">Reviews the system</span>
+      </div>
+      <svg viewBox="0 0 1728 430" role="img" aria-label="System traces and outcomes go to ARIA; recommendations return to the system" style="position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none">
+        <defs>
+          <marker id="siltaHead" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M1 1L9 5L1 9" fill="none" stroke="#ffffff" stroke-width="1.6"></path>
+          </marker>
+        </defs>
+        <path d="M400 65 C400 -12 1490 -12 1490 118" fill="none" stroke="#ffffff" stroke-width="1.6" marker-end="url(#siltaHead)"></path>
+        <path d="M1490 305 C1490 420 400 420 400 368" fill="none" stroke="#ffffff" stroke-width="1.6" marker-end="url(#siltaHead)"></path>
+        <text x="945" y="14" fill="#a3a3a3" font-family="IBM Plex Mono, monospace" font-size="24" text-anchor="middle" paint-order="stroke" stroke="#0d0d0d" stroke-width="10" stroke-linejoin="round">Traces and outcomes</text>
+        <text x="945" y="418" fill="#a3a3a3" font-family="IBM Plex Mono, monospace" font-size="24" text-anchor="middle" paint-order="stroke" stroke="#0d0d0d" stroke-width="10" stroke-linejoin="round">Recommendations</text>
+      </svg>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:72px;margin-top:44px">
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <span style="font-size:26px;color:#8d8d8d">What we did</span>
+        <p style="margin:0;font-size:28px;line-height:1.4;color:#ffffff">Shared the demo, the pinned commit and our W&amp;B project with ARIA.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <span style="font-size:26px;color:#8d8d8d">What it found</span>
+        <p style="margin:0;font-size:28px;line-height:1.4;color:#ffffff">We promote a learned rule globally before showing it helps another part.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <span style="font-size:26px;color:#8d8d8d">What changes next</span>
+        <p style="margin:0;font-size:28px;line-height:1.4;color:#ffffff">Replay old and new checks on the same unseen parts before sharing them.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section data-label="Part 55" data-screen-label="05" data-speaker-notes="This is the product itself: part 55, planned by the system after 54 parts of learned checks and speed instructions. First the input and CAD/CAM generation, then simulation and revision." style="background:#0d0d0d;color:#ffffff;font-family:'IBM Plex Mono',ui-monospace,Menlo,monospace;display:flex;flex-direction:column;overflow:hidden" data-om-slide-id="fec06293">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;padding:72px 96px 26px;border-bottom:1px solid rgba(255,255,255,0.22)">
+    <div style="display:flex;align-items:center;gap:14px">
+      <div style="display:flex;align-items:center;gap:2px">
+        <div style="width:8px;height:16px;border-radius:16px 0 0 16px;background:#ffffff"></div>
+        <div style="width:16px;height:16px;border-radius:50%;background:#ffffff"></div>
+        <div style="width:8px;height:16px;border-radius:0 16px 16px 0;background:#ffffff"></div>
+      </div>
+      <span style="font-family:'Space Grotesk',Helvetica,sans-serif;font-size:26px;letter-spacing:0.01em;color:#ffffff">SILTA</span>
+    </div>
+    <span style="font-size:24px;color:#8d8d8d">05 / 07</span>
+  </div>
+  <div style="flex:1;position:relative;min-height:0;background:repeating-linear-gradient(135deg,#151515 0 16px,#101010 16px 32px)">
+    <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center">
+      <span style="font-family:ui-monospace,Menlo,Consolas,monospace;font-size:26px;color:#8d8d8d;letter-spacing:0.04em">product recording · part 55 · drop video here</span>
+    </div>
+    <div style="position:absolute;left:0;right:0;bottom:0;padding:96px 96px 56px;background:linear-gradient(to top,rgba(13,13,13,0.96) 0%,rgba(13,13,13,0.8) 45%,rgba(13,13,13,0) 100%);display:flex;flex-direction:column;gap:24px">
+      <span style="font-size:26px;color:#cfcfcf;letter-spacing:0.02em">Live demo</span>
+      <h2 style="margin:0;font-family:'Space Grotesk',Helvetica,sans-serif;font-size:72px;line-height:1.06;letter-spacing:-0.035em;font-weight:400;max-width:1480px"></h2>
+
+    </div>
+  </div>
+</section>
+
+<section data-label="Verified result" data-screen-label="06" data-speaker-notes="Part A, the original soft jaw. The judge saved a ramp-feed lesson; the verified plan came down from 384.9 to 211.0 seconds of estimated machining time. Fusion API estimate, within the recorded verification scope." style="background:#0d0d0d;color:#ffffff;font-family:'IBM Plex Mono',ui-monospace,Menlo,monospace;padding:72px 96px 80px;display:flex;flex-direction:column;overflow:hidden" data-om-slide-id="6caed2e7">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:26px;border-bottom:1px solid rgba(255,255,255,0.22)">
+    <div style="display:flex;align-items:center;gap:14px">
+      <div style="display:flex;align-items:center;gap:2px">
+        <div style="width:8px;height:16px;border-radius:16px 0 0 16px;background:#ffffff"></div>
+        <div style="width:16px;height:16px;border-radius:50%;background:#ffffff"></div>
+        <div style="width:8px;height:16px;border-radius:0 16px 16px 0;background:#ffffff"></div>
+      </div>
+      <span style="font-family:'Space Grotesk',Helvetica,sans-serif;font-size:26px;letter-spacing:0.01em;color:#ffffff">SILTA</span>
+    </div>
+    <span style="font-size:24px;color:#8d8d8d">06 / 07</span>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;padding-top:86px;min-height:0">
+    <h2 style="margin:0;font-family:'Space Grotesk',Helvetica,sans-serif;font-size:76px;line-height:1.06;letter-spacing:-0.035em;font-weight:400">One verified part, measured twice</h2>
+    <div style="display:grid;grid-template-columns:1.15fr 1fr;gap:96px;margin-top:90px;align-items:start">
+      <div style="display:flex;flex-direction:column;gap:18px">
+        <span style="font-family:'Space Grotesk',Helvetica,sans-serif;font-size:180px;line-height:0.88;letter-spacing:-0.05em;font-weight:400">45.2%</span>
+        <span style="font-size:32px;line-height:1.4;color:#a3a3a3">lower estimated machining time on the first verified plan for Part A</span>
+      </div>
+      <div style="display:flex;flex-direction:column;border-top:1px solid rgba(255,255,255,0.22)">
+        <div style="display:flex;justify-content:space-between;gap:40px;padding:28px 0;border-bottom:1px solid rgba(255,255,255,0.18);font-size:30px">
+          <span style="color:#8d8d8d">First verified plan</span>
+          <span style="font-variant-numeric:tabular-nums">384.860 s</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;gap:40px;padding:28px 0;border-bottom:1px solid rgba(255,255,255,0.18);font-size:30px">
+          <span style="color:#8d8d8d">After judge feedback</span>
+          <span style="font-variant-numeric:tabular-nums">211.037 s</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;gap:40px;padding:28px 0;border-bottom:1px solid rgba(255,255,255,0.18);font-size:30px">
+          <span style="color:#8d8d8d">Lesson saved</span>
+          <span>Ramp-feed optimization</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;gap:40px;padding:28px 0;font-size:30px">
+          <span style="color:#8d8d8d">Reused on</span>
+          <span>Part B's first plan</span>
+        </div>
+      </div>
+    </div>
+    <p style="margin:76px 0 0;font-size:30px;line-height:1.45;color:#a3a3a3;max-width:1340px">The check written from Part B's failure later rejected a bad candidate for Part C in 51 milliseconds, before any simulation was spent on it.</p>
+  </div>
+</section>
+
+<section data-label="Architecture" data-screen-label="07" data-speaker-notes="The application runs the loop. Astra generates and revises, Fusion decides what is true, Weave records what happened. Weave does not approve learned updates." style="background:#0d0d0d;color:#ffffff;font-family:'IBM Plex Mono',ui-monospace,Menlo,monospace;padding:72px 96px 80px;display:flex;flex-direction:column;overflow:hidden" data-om-slide-id="3a0e7570">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:26px;border-bottom:1px solid rgba(255,255,255,0.22)">
+    <div style="display:flex;align-items:center;gap:14px">
+      <div style="display:flex;align-items:center;gap:2px">
+        <div style="width:8px;height:16px;border-radius:16px 0 0 16px;background:#ffffff"></div>
+        <div style="width:16px;height:16px;border-radius:50%;background:#ffffff"></div>
+        <div style="width:8px;height:16px;border-radius:0 16px 16px 0;background:#ffffff"></div>
+      </div>
+      <span style="font-family:'Space Grotesk',Helvetica,sans-serif;font-size:26px;letter-spacing:0.01em;color:#ffffff">SILTA</span>
+    </div>
+    <span style="font-size:24px;color:#8d8d8d">07 / 07</span>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;padding-top:86px;min-height:0">
+    <h2 style="margin:0;font-family:'Space Grotesk',Helvetica,sans-serif;font-size:76px;line-height:1.06;letter-spacing:-0.035em;font-weight:400;max-width:1420px">The application runs the loop. Weave records it.</h2>
+    <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:96px;border-top:1px solid rgba(255,255,255,0.22)">
+      <div style="padding:36px 56px 0 0;display:flex;flex-direction:column;gap:22px">
+        <div style="width:40px;height:40px;border-radius:50%;background:#ffffff"></div>
+        <h3 style="margin:0;font-family:'Space Grotesk',Helvetica,sans-serif;font-size:38px;font-weight:400;letter-spacing:-0.02em">Astra</h3>
+        <p style="margin:0;font-size:28px;line-height:1.45;color:#a3a3a3">Generates CAD and CAM, repairs failures, writes the checks and the speed instructions.</p>
+      </div>
+      <div style="padding:36px 56px 0;border-left:1px solid rgba(255,255,255,0.18);display:flex;flex-direction:column;gap:22px">
+        <div style="width:40px;height:40px;border-radius:50% 0 0 50%;background:#ffffff"></div>
+        <h3 style="margin:0;font-family:'Space Grotesk',Helvetica,sans-serif;font-size:38px;font-weight:400;letter-spacing:-0.02em">Fusion</h3>
+        <p style="margin:0;font-size:28px;line-height:1.45;color:#a3a3a3">Runs the machining simulation and compares finished stock against the accepted CAD.</p>
+      </div>
+      <div style="padding:36px 0 0 56px;border-left:1px solid rgba(255,255,255,0.18);display:flex;flex-direction:column;gap:22px">
+        <div style="width:40px;height:40px;border-radius:50%;border:1px solid #ffffff;background:transparent"></div>
+        <h3 style="margin:0;font-family:'Space Grotesk',Helvetica,sans-serif;font-size:38px;font-weight:400;letter-spacing:-0.02em">Weave</h3>
+        <p style="margin:0;font-size:28px;line-height:1.45;color:#a3a3a3">Traces every attempt: input, feedback, revision, and which lesson version was active.</p>
+      </div>
+    </div>
+    <p style="margin:76px 0 0;font-size:29px;line-height:1.45;color:#a3a3a3;max-width:1340px">Manufacturing truth stays with the simulator. Weave records evidence; it does not gate the loop.</p>
+  </div>
+</section>
+
+
+
+
+
+</x-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;demoUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;../index.html&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Live demo&quot;}}">
+class Component extends DCLogic {
+  state = { demoLoaded: true };
+  renderVals() {
+    const demoSrc = this.props.demoUrl ?? "../index.html";
+    return {
+      demoSrc,
+      demoLoaded: this.state.demoLoaded,
+      demoIdle: !this.state.demoLoaded,
+      demoButtonLabel: this.state.demoLoaded ? "Unload demo" : "Load live demo",
+      toggleDemo: () => this.setState(s => ({ demoLoaded: !s.demoLoaded }))
+    };
+  }
+}
+</script>
+</body>
+</html>
