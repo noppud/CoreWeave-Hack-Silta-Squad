@@ -1,5 +1,5 @@
 // Archived attempts retain their simulation → judge → repair ordering.
-export function stagedSteps(detail){
+export function stagedSteps(detail,{presentation=false}={}){
   const source=name=>detail.sources.find(s=>s.name===name);
   const steps=[{stage:'input',title:'Drawing received',kind:'drawing'}];
   const finalVerification=detail.events.findLast(e=>e.event==='verification_completed'&&e.raw.verification?.status==='passed');
@@ -18,6 +18,16 @@ export function stagedSteps(detail){
       steps.push({...base,stage:'simulate',title:verification?.status==='passed'?'Fusion simulation passed':'Fusion simulation '+verification?.status,kind:'verification',passed:verification?.status==='passed',seconds:event.seconds,video:event===finalVerification?null:video});
     }
     if(event.event==='supervisor_decision')steps.push({...base,stage:'judge',title:event.raw.decision?.action==='improve'?'Judge: improve machining time':'Judge: retain best plan',kind:'instruction',text:event.raw.decision?.instructions});
+  }
+  if(presentation&&finalVerification){
+    const failedIndex=steps.findIndex(s=>s.kind==='verification'&&!s.passed);
+    if(failedIndex>=0){
+      const firstFailureAttempt=steps[failedIndex].attempt;
+      steps.splice(failedIndex+1,steps.length,
+        ...steps.slice(failedIndex+1).filter(s=>s.attempt===finalVerification.attempt||s.kind==='result'));
+      // Keep the repair cue once, then jump to the successful final attempt.
+      steps.splice(failedIndex+1,0,{stage:'judge',title:'Judge: improve machining time',kind:'instruction',text:'Add the learned planning guidance and regenerate the same CAD.'});
+    }
   }
   const passes=steps.filter(s=>s.kind==='verification'&&s.passed&&Number.isFinite(s.seconds));
   if(passes.length)steps.push({stage:'output',title:'Final machining plan',kind:'result',before:passes[0].seconds,after:passes.at(-1).seconds});

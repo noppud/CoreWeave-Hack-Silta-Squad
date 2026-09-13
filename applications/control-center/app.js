@@ -497,7 +497,7 @@ async function beginDemo(resumeSession=null){
   stopReplay();demoTimers();D.version++;D.live=false;D.fallback=false;D.liveRequested=false;D.reviewPending=false;D.index=0;D.playing=true;
   D.intake=resumeSession?{id:resumeSession.id,drawing:resumeSession.drawing,demo:{run_id:resumeSession.run_id}}:S.intake;
   D.session=resumeSession||await api('/api/demo/start',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:D.intake.id})});
-  D.detail=await api('/api/jobs/'+encodeURIComponent(D.intake.demo.run_id));D.steps=stagedSteps(D.detail);
+  D.detail=await api('/api/jobs/'+encodeURIComponent(D.intake.demo.run_id));D.steps=stagedSteps(D.detail,{presentation:true});
   const gate=Math.max(0,D.steps.findIndex(s=>s.kind==='ready'));
   if(resumeSession){const saved=Number(sessionStorage.getItem('silta-replay:'+D.intake.id)||0);D.index=Math.max(0,Math.min(D.steps.length-1,saved));if(resumeSession.status==='playing'||resumeSession.status==='completed'&&D.index<=gate)D.index=gate;}
   history.replaceState(null,'','?replay='+encodeURIComponent(D.intake.id));
