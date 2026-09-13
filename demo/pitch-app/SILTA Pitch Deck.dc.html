@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js" defer></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500&family=IBM+Plex+Mono:wght@400;450&display=swap">
+<style>
+  body { margin: 0; background: #0d0d0d; }
+  a { color: #fff; }
+  a:hover { color: #b9b9b9; }
+  @keyframes siltaPulse { 0%,100% { opacity: .35 } 50% { opacity: 1 } }
+</style>
+</helmet>
+<x-import component-from-global-scope="deck-stage" from="./deck-stage.js" width="1920" height="1080" hint-size="100%,100%" data-uneditable="">
+
+<section data-label="Cover" data-screen-label="01" data-speaker-notes="SILTA helps a shop work out how to manufacture a new part, before committing to the job." style="background:#0d0d0d;color:#ffffff;font-family:'IBM Plex Mono',ui-monospace,Menlo,monospace;padding:72px 96px 80px;display:flex;flex-direction:column;overflow:hidden" data-om-slide-id="da2da49f">
+  <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:80px;padding-bottom:28px;border-bottom:1px solid rgba(255,255,255,0.22)">
+    <span style="font-size:26px;letter-spacing:0.01em;color:#ffffff">13.09.2026</span>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:56px;min-height:0">
+    <div style="display:flex;align-items:center;gap:44px">
+      <div style="display:flex;align-items:center;gap:8px">
+        <div style="width:48px;height:96px;border-radius:96px 0 0 96px;background:#ffffff"></div>
+        <div style="width:96px;height:96px;border-radius:50%;background:#ffffff"></div>
+        <div style="width:48px;height:96px;border-radius:0 96px 96px 0;background:#ffffff"></div>
+      </div>
+      <span style="font-family:'Space Grotesk',Helvetica,sans-serif;font-size:190px;line-height:0.9;letter-spacing:-0.05em;font-weight:400">SILTA</span>
+    </div>
+    <span style="font-size:38px;line-height:1.35;color:#a3a3a3;max-width:1180px">An agent loop for CNC machining plans.</span>
+  </div>
+  <div style="display:flex;justify-content:space-between;font-size:24px;color:#8d8d8d;border-top:1px solid rgba(255,255,255,0.18);padding-top:24px">
+    <span>01 / 11</span>
+  </div>
+</section>
+
+<section data-label="The decision" data-screen-label="02" data-speaker-notes="The shop receives a drawing. It needs a process that works with its machines and tools, and an estimate of the machining time." style="background:#0d0d0d;color:#ffffff;font-family:'IBM Plex Mono',ui-monospace,Menlo,monospace;padding:72px 96px 80px;display:flex;flex-direction:column;overflow:hidden" data-om-slide-id="0fd506f3">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:26px;border-bottom:1px solid rgba(255,255,255,0.22)">
+    <div style="display:flex;align-items:center;gap:14px">
+      <div style="display:flex;align-items:center;gap:2px">
+        <div style="width:8px;height:16px;border-radius:16px 0 0 16px;background:#ffffff"></div>
+        <div style="width:16px;height:16px;border-radius:50%;background:#ffffff"></div>
+        <div style="width:8px;height:16px;border-radius:0 16px 16px 0;background:#ffffff"></div>
+      </div>
+      <span style="font-family:'Space Grotesk',Helvetica,sans-serif;font-size:26px;letter-spacing:0.01em;color:#ffffff">SILTA</span>
+    </div>
+    <span style="font-size:24px;color:#8d8d8d">02 / 11</span>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;padding-top:86px;min-height:0">
+    <h2 style="margin:0;font-family:'Space Grotesk',Helvetica,sans-serif;font-size:76px;line-height:1.06;letter-spacing:-0.035em;font-weight:400;max-width:1420px">A shop receives a new part drawing</h2>
+    <p style="margin:40px 0 0;font-size:30px;line-height:1.45;color:#a3a3a3;max-width:1120px">Before quoting the job, the estimator has to answer three questions with the machines and tooling actually on the floor.</p>
+    <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:92px;border-top:1px solid rgba(255,255,255,0.22)">
+      <div style="padding:34px 56px 0 0;display:flex;flex-direction:column;gap:20px">
+        <span style="font-size:24px;color:#8d8d8d">01</span>
+        <h3 style="margin:0;font-family:'Space Grotesk',Helvetica,sans-serif;font-size:36px;font-weight:400;letter-spacing:-0.02em">Can we make it?</h3>
+        <p style="margin:0;font-size:28px;line-height:1.45;color:#a3a3a3">Check the part against available machines, tools, stock and fixtures.</p>
+      </div>
+      <div style="padding:34px 56px 0;border-left:1px solid rgba(255,255,255,0.18);display:flex;flex-direction:column;gap:20px">
+        <span style="font-size:24px;color:#8d8d8d">02</span>
+        <h3 style="margin:0;font-family:'Space Grotesk',Helvetica,sans-serif;font-size:36px;font-weight:400;letter-spacing:-0.02em">How do we make it?</h3>
+        <p style="margin:0;font-size:28px;line-height:1.45;color:#a3a3a3">Choose the operations and toolpaths, then simulate the cut.</p>
+      </div>
+      <div style="padding:34px 0 0 56px;border-left:1px solid rgba(255,255,255,0.18);display:flex;flex-direction:column;gap:20px">
+        <span style="font-size:24px;color:#8d8d8d">03</span>
+        <h3 style="margin:0;font-family:'Space Grotesk',Helvetica,sans-serif;font-size:36px;font-weight:400;letter-spacing:-0.02em">What will it take?</h3>
+        <p style="margin:0;font-size:28px;line-height:1.45;color:#a3a3a3">Estimate machining time to judge whether the job is worth taking.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+<section data-label="Live demo" data-screen-label="03" data-speaker-notes="Press Load to embed the running demo. 27 varied inputs, two feedback routes, learned checks and speed instructions. These outcomes are scripted presentation data, not measured Fusion runs." style="background:#0d0d0d;color:#ffffff;font-family:'IBM Plex Mono',ui-monospace,Menlo,monospace;padding:72px 96px 60px;display:flex;flex-direction:column;overflow:hidden" data-om-slide-id="ab49fa33">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:26px;border-bottom:1px solid rgba(255,255,255,0.22)">
+    <div style="display:flex;align-items:center;gap:14px">
+      <div style="display:flex;align-items:center;gap:2px">
+        <div style="width:8px;height:16px;border-radius:16px 0 0 16px;background:#ffffff"></div>
+        <div style="width:16px;height:16px;border-radius:50%;background:#ffffff"></div>
+        <div style="width:8px;height:16px;border-radius:0 16px 16px 0;background:#ffffff"></div>
+      </div>
+      <span style="font-family:'Space Grotesk',Helvetica,sans-serif;font-size:26px;letter-spacing:0.01em;color:#ffffff">SILTA</span>
+    </div>
+    <span style="font-size:24px;color:#8d8d8d">03 / 11</span>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;padding-top:44px;min-height:0">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:60px">
+      <h2 style="margin:0;font-family:'Space Grotesk',Helvetica,sans-serif;font-size:60px;line-height:1.06;letter-spacing:-0.035em;font-weight:400">27 parts. Two ways to get better.</h2>
+      <button type="button" onClick="{{ toggleDemo }}" style="background:transparent;color:#ffffff;border:1px solid rgba(255,255,255,0.35);font:inherit;font-size:24px;padding:14px 28px;cursor:pointer">{{ demoButtonLabel }}</button>
+    </div>
+    <div style="flex:1;margin-top:34px;min-height:0;border:1px solid rgba(255,255,255,0.22);background:#111111;position:relative;overflow:hidden">
+      <sc-if value="{{ demoLoaded }}" hint-placeholder-val="{{ false }}">
+        <iframe src="{{ demoSrc }}" title="SILTA 27-part illustrative learning loop demo" style="position:absolute;inset:0;width:100%;height:100%;border:0;background:#ffffff"></iframe>
+      </sc-if>
+      <sc-if value="{{ demoIdle }}" hint-placeholder-val="{{ true }}">
+        <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;background:repeating-linear-gradient(135deg,#141414 0 14px,#101010 14px 28px)">
+          <span style="font-size:30px;color:#cfcfcf">Interactive loop demo</span>
+          <span style="font-family:ui-monospace,Menlo,Consolas,monospace;font-size:24px;color:#7a7a7a">{{ demoSrc }}</span>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+</section>
+
+<section data-label="Loop 4 / ARIA" data-screen-label="04" data-speaker-notes="Loop 4 is the outer development loop. The whole system's traces and outcomes go to ARIA; its recommendations come back into the design. We ran one completed advisory review: it flagged that we promote a learned rule globally before showing it helps another part, and helped shape a paired old-versus-new evaluation plan. Planned, not deployed." style="background:#0d0d0d;color:#ffffff;font-family:'IBM Plex Mono',ui-monospace,Menlo,monospace;padding:72px 96px 80px;display:flex;flex-direction:column;overflow:hidden" data-om-slide-id="b5652de9">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:26px;border-bottom:1px solid rgba(255,255,255,0.22)">
+    <div style="display:flex;align-items:center;gap:14px">
+      <div style="display:flex;align-items:center;gap:2px">
+        <div style="width:8px;height:16px;border-radius:16px 0 0 16px;background:#ffffff"></div>
+        <div style="width:16px;height:16px;border-radius:50%;background:#ffffff"></div>
+        <div style="width:8px;height:16px;border-radius:0 16px 16px 0;background:#ffffff"></div>
+      </div>
+      <span style="font-family:'Space Grotesk',Helvetica,sans-serif;font-size:26px;letter-spacing:0.01em;color:#ffffff">SILTA</span>
+    </div>
+    <span style="font-size:24px;color:#8d8d8d">04 / 11</span>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;padding-top:52px;min-height:0">
+    <div style="display:flex;align-items:baseline;gap:28px">
+      <h2 style="margin:0;font-family:'Space Grotesk',Helvetica,sans-serif;font-size:64px;line-height:1.06;letter-spacing:-0.035em;font-weight:400">A loop around the whole system</h2>
+
+    </div>
+    <div style="position:relative;height:430px;margin-top:44px">
+      <div style="position:absolute;left:0;top:65px;width:800px;height:300px;border:1px solid rgba(255,255,255,0.22);background:#111111;overflow:hidden">
+        <sc-if value="{{ demoLoaded }}" hint-placeholder-val="{{ false }}">
+          <iframe src="{{ demoSrc }}" title="SILTA loop demo, half size" style="position:absolute;left:0;top:0;width:1600px;height:600px;border:0;background:#ffffff;transform:scale(0.5);transform-origin:top left"></iframe>
+        </sc-if>
+        <sc-if value="{{ demoIdle }}" hint-placeholder-val="{{ true }}">
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:repeating-linear-gradient(135deg,#141414 0 14px,#101010 14px 28px)">
+            <span style="font-size:26px;color:#a3a3a3">The whole agent system</span>
+          </div>
+        </sc-if>
+      </div>
+      <div style="position:absolute;left:1320px;top:125px;width:340px;height:180px;border:1px solid rgba(255,255,255,0.35);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:#0d0d0d">
+        <span style="font-family:'Space Grotesk',Helvetica,sans-serif;font-size:38px;font-weight:400;letter-spacing:-0.02em">ARIA</span>
+        <span style="font-size:26px;color:#a3a3a3">Reviews the system</span>
+      </div>
+      <svg viewBox="0 0 1728 430" role="img" aria-label="System traces and outcomes go to ARIA; recommendations return to the system" style="position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none">
+        <defs>
+          <marker id="siltaHead" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M1 1L9 5L1 9" fill="none" stroke="#ffffff" stroke-width="1.6"></path>
+          </marker>
+        </defs>
+        <path d="M400 65 C400 -12 1490 -12 1490 118" fill="none" stroke="#ffffff" stroke-width="1.6" marker-end="url(#siltaHead)"></path>
+        <path d="M1490 305 C1490 420 400 420 400 368" fill="none" stroke="#ffffff" stroke-width="1.6" marker-end="url(#siltaHead)"></path>
+        <text x="945" y="14" fill="#a3a3a3" font-family="IBM Plex Mono, monospace" font-size="24" text-anchor="middle" paint-order="stroke" stroke="#0d0d0d" stroke-width="10" stroke-linejoin="round">Traces and outcomes</text>
+        <text x="945" y="418" fill="#a3a3a3" font-family="IBM Plex Mono, monospace" font-size="24" text-anchor="middle" paint-order="stroke" stroke="#0d0d0d" stroke-width="10" stroke-linejoin="round">Recommendations</text>
+      </svg>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:72px;margin-top:44px">
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <span style="font-size:26px;color:#8d8d8d">What we did</span>
+        <p style="margin:0;font-size:28px;line-height:1.4;color:#ffffff">Shared the demo, the pinned commit and our W&amp;B project with ARIA. Completed advisory review.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <span style="font-size:26px;color:#8d8d8d">What it found</span>
+        <p style="margin:0;font-size:28px;line-height:1.4;color:#ffffff">We promote a learned rule globally before showing it helps another part.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <span style="font-size:26px;color:#8d8d8d">What changes next</span>
+        <p style="margin:0;font-size:28px;line-height:1.4;color:#ffffff">Next: unseen-part evaluation before promotion. Already run: a paired replay on six retained cases.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section data-label="Product recording" data-speaker-notes="Film chapters: 0–30s octagon motion and loop; 30–42s soft-jaw optimization; 42–56s check transfer; 56–70s evaluation; 70–80s ARIA; 80–88s indexed lesson; 88–104s motion; 104–114s cage and clevis finished stock. The CAD inset and following measured curve use the latest stage target; the movie uses the earlier campaign target from the same input drawing. Do not describe this as a 28th measured part." style="background:#0d0d0d;color:white;font-family:'IBM Plex Mono',monospace;padding:60px 86px 58px;display:flex;flex-direction:column;overflow:hidden">
+ <div style="display:flex;justify-content:space-between;border-bottom:1px solid #444;padding-bottom:24px;font-size:24px"><span>SILTA</span><span class="evidence-slide-number" style="color:#888">05 / 11</span></div>
+ <h2 style="font-family:'Space Grotesk',Arial,sans-serif;font-size:66px;font-weight:400;line-height:1.05;letter-spacing:-2px;margin:42px 0 30px">From drawing to verified motion.</h2>
+ <div style="display:grid;grid-template-columns:1fr 360px;gap:30px;flex:1;min-height:0">
+ <video controls="{{ true }}" playsinline="" preload="metadata" poster="./media/film-poster.png" src="./media/silta-loop-demo.mp4" style="width:100%;height:100%;max-height:690px;object-fit:contain;background:#000"></video>
+ <div style="display:flex;flex-direction:column;gap:24px;font-size:24px;line-height:1.45">
+ <p style="margin:0;color:#aaa">114 seconds of real Fusion recordings and recorded learning results.</p>
+ <img src="./media/octagon-stage-cad.png" style="width:100%;height:250px;object-fit:contain;background:#222" alt="Exact accepted CAD: octagonal housing with stepped central pocket and eight side pockets">
+ <div>Octagonal housing<br><span style="color:#aaa">Stepped center pocket. Eight indexed side faces.</span></div>
+ <a href="./media/octagon-drawing.pdf" target="_blank" style="font-size:22px">Open the actual input drawing ↗</a>
+ <p style="margin:0;font-size:19px;color:#999">Inset: current stage CAD. Film: earlier UMC08 campaign plus cage and clevis. Separate generated targets.</p>
+ </div></div></section>
+
+<section data-label="Verified result" data-screen-label="06" data-speaker-notes="Part A, the original soft jaw. The judge saved a ramp-feed lesson; the verified plan came down from 384.9 to 211.0 seconds of estimated machining time. Fusion API estimate, within the recorded verification scope." style="background:#0d0d0d;color:#ffffff;font-family:'IBM Plex Mono',ui-monospace,Menlo,monospace;padding:72px 96px 80px;display:flex;flex-direction:column;overflow:hidden" data-om-slide-id="6caed2e7">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:26px;border-bottom:1px solid rgba(255,255,255,0.22)">
+    <div style="display:flex;align-items:center;gap:14px">
+      <div style="display:flex;align-items:center;gap:2px">
+        <div style="width:8px;height:16px;border-radius:16px 0 0 16px;background:#ffffff"></div>
+        <div style="width:16px;height:16px;border-radius:50%;background:#ffffff"></div>
+        <div style="width:8px;height:16px;border-radius:0 16px 16px 0;background:#ffffff"></div>
+      </div>
+      <span style="font-family:'Space Grotesk',Helvetica,sans-serif;font-size:26px;letter-spacing:0.01em;color:#ffffff">SILTA</span>
+    </div>
+    <span style="font-size:24px;color:#8d8d8d">06 / 11</span>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;padding-top:86px;min-height:0">
+    <h2 style="margin:0;font-family:'Space Grotesk',Helvetica,sans-serif;font-size:76px;line-height:1.06;letter-spacing:-0.035em;font-weight:400">One verified part, measured twice</h2>
+    <div style="display:grid;grid-template-columns:1.15fr 1fr;gap:96px;margin-top:90px;align-items:start">
+      <div style="display:flex;flex-direction:column;gap:18px">
+        <span style="font-family:'Space Grotesk',Helvetica,sans-serif;font-size:180px;line-height:0.88;letter-spacing:-0.05em;font-weight:400">45.2%</span>
+        <span style="font-size:32px;line-height:1.4;color:#a3a3a3">lower estimated machining time than the first verified plan for Part A</span>
+      </div>
+      <div style="display:flex;flex-direction:column;border-top:1px solid rgba(255,255,255,0.22)">
+        <div style="display:flex;justify-content:space-between;gap:40px;padding:28px 0;border-bottom:1px solid rgba(255,255,255,0.18);font-size:30px">
+          <span style="color:#8d8d8d">First verified plan</span>
+          <span style="font-variant-numeric:tabular-nums">384.860 s</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;gap:40px;padding:28px 0;border-bottom:1px solid rgba(255,255,255,0.18);font-size:30px">
+          <span style="color:#8d8d8d">After judge feedback</span>
+          <span style="font-variant-numeric:tabular-nums">211.037 s</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;gap:40px;padding:28px 0;border-bottom:1px solid rgba(255,255,255,0.18);font-size:30px">
+          <span style="color:#8d8d8d">Lesson saved</span>
+          <span>Ramp-feed optimization</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;gap:40px;padding:28px 0;font-size:30px">
+          <span style="color:#8d8d8d">Reused on</span>
+          <span>Part B's first plan</span>
+        </div>
+      </div>
+    </div>
+    <p style="margin:76px 0 0;font-size:30px;line-height:1.45;color:#a3a3a3;max-width:1340px">The check written from Part B's failure later rejected a bad candidate for Part C in 51 milliseconds, before any simulation was spent on it.</p>
+  </div>
+</section>
+
+<section data-label="Measured improvement" data-speaker-notes="These are measured plans for the exact CAD inset, not a 27-part generalization benchmark. Includes the original prepared run and fresh recovery verifications. Candidate 5 retained after candidate 6 tied. No new persistent lesson in this run. Source: evidence/stage-octagon-final.json." style="background:#0d0d0d;color:white;font-family:'IBM Plex Mono',monospace;padding:60px 86px 58px;display:flex;flex-direction:column;overflow:hidden">
+ <div style="display:flex;justify-content:space-between;border-bottom:1px solid #444;padding-bottom:24px;font-size:24px"><span>SILTA</span><span class="evidence-slide-number" style="color:#888">07 / 11</span></div>
+ <h2 style="font-family:'Space Grotesk',Arial,sans-serif;font-size:66px;font-weight:400;line-height:1.05;letter-spacing:-2px;margin:42px 0 30px">A real improvement curve. Same fixed part.</h2>
+ <div style="display:grid;grid-template-columns:1fr 365px;gap:38px;flex:1;align-items:center">
+ <div><p style="font-size:23px;color:#999">Fusion estimated machining time · seconds · zero baseline</p><svg viewBox="0 0 1250 550" role="img" aria-label="Measured estimated machining time: 1614.397, 1591.868, 1561.445, 1515.203, 1515.203 seconds; same fixed octagonal CAD" style="width:100%;height:520px"><path d="M100 470.0 H1170" stroke="#333"/><text x="85" y="477.0" fill="#999" text-anchor="end" font-size="21">0</text><path d="M100 340.0 H1170" stroke="#333"/><text x="85" y="347.0" fill="#999" text-anchor="end" font-size="21">600</text><path d="M100 210.0 H1170" stroke="#333"/><text x="85" y="217.0" fill="#999" text-anchor="end" font-size="21">1200</text><path d="M100 80.0 H1170" stroke="#333"/><text x="85" y="87.0" fill="#999" text-anchor="end" font-size="21">1800</text><polyline points="120,120.21 370,125.10 620,131.69 870,141.71 1120,141.71" fill="none" stroke="#ff8c42" stroke-width="5"/><circle cx="120" cy="120.2140884166667" r="8" fill="#ff8c42"/><text x="145" y="96.2140884166667" fill="white" text-anchor="middle" font-size="23">1614.4</text><text x="120" y="510" fill="#aaa" text-anchor="middle" font-size="20">Initial</text><circle cx="370" cy="125.09527923333332" r="8" fill="#ff8c42"/><text x="370" y="101.09527923333332" fill="white" text-anchor="middle" font-size="23">1591.9</text><text x="370" y="510" fill="#aaa" text-anchor="middle" font-size="20">Trial 1</text><circle cx="620" cy="131.68686054999995" r="8" fill="#ff8c42"/><text x="620" y="107.68686054999995" fill="white" text-anchor="middle" font-size="23">1561.4</text><text x="620" y="510" fill="#aaa" text-anchor="middle" font-size="20">Trial 2</text><circle cx="870" cy="141.7060699666667" r="8" fill="#ff8c42"/><text x="870" y="117.70606996666669" fill="white" text-anchor="middle" font-size="23">1515.2</text><text x="870" y="510" fill="#aaa" text-anchor="middle" font-size="20">Best</text><circle cx="1120" cy="141.7060699666667" r="8" fill="#ff8c42"/><text x="1120" y="117.70606996666669" fill="white" text-anchor="middle" font-size="23">1515.2</text><text x="1120" y="510" fill="#aaa" text-anchor="middle" font-size="20">Stop · tied</text></svg>
+ <p style="font-size:23px;color:#aaa;line-height:1.5">1614.397 → 1515.203 seconds. Four fresh verification passes in the recovery run. Stop when the next plan ties the incumbent.</p></div>
+ <div><div style="font-family:'Space Grotesk',Arial;font-size:132px;letter-spacing:-6px;color:#ff8c42">−6.14%</div><p style="font-size:27px;line-height:1.4">99.2 seconds less estimated machining time.</p><p style="font-size:23px;color:#aaa;line-height:1.5">One T1 Ø12.7 mm cutter.<br>Haas UMC750.<br>Indexed 3+2 machining.</p><a href="https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a09a51-6741-753f-ab92-d297767bbc73" target="_blank" style="font-size:22px">Open this Weave trace ↗</a></div></div>
+ <p style="font-size:20px;color:#888;margin:10px 0 0">Within-part optimization across a prepared run and recovery; the learned files stayed unchanged during this run.</p></section>
+<section data-label="Learned checks" data-speaker-notes="Part B stock-conformity failure led to finished-side protection. C candidate-0002 rejected in 51.271ms with no same-attempt simulation. The other persistent check protects the prepared support parallels. There are two narrow checks, not eight deployed checks. Six-case replay is retrospective; it does not prove unseen-part generalization. Source files are included under evidence/." style="background:#0d0d0d;color:white;font-family:'IBM Plex Mono',monospace;padding:60px 86px 58px;display:flex;flex-direction:column;overflow:hidden">
+ <div style="display:flex;justify-content:space-between;border-bottom:1px solid #444;padding-bottom:24px;font-size:24px"><span>SILTA</span><span class="evidence-slide-number" style="color:#888">08 / 11</span></div>
+ <h2 style="font-family:'Space Grotesk',Arial,sans-serif;font-size:66px;font-weight:400;line-height:1.05;letter-spacing:-2px;margin:42px 0 30px">A mistake on Part B becomes a 51 ms check on C.</h2>
+ <div style="display:grid;grid-template-columns:1.13fr 1fr;gap:70px;flex:1;margin-top:16px">
+ <div><div style="font-size:23px;color:#ff8c42">FAILURE → PYTHON CHECK → LATER PART</div>
+ <h3 style="font:400 43px 'Space Grotesk',Arial;margin:24px 0">Protect finished outer walls</h3>
+ <p style="font-size:27px;line-height:1.45;color:#bbb">B’s cutter enters a finished side of a pre-sized blank. The learned check later rejects C’s candidate before simulation.</p>
+ <pre style="font-size:21px;line-height:1.65;background:#181818;border:1px solid #444;padding:26px;white-space:pre-wrap;color:#eee"># Actual persisted decision, abridged
+side = side_overlap(x, y, z,
+                    radius, flute, scope)
+if side is not None:
+    issues.append(...)</pre>
+ <p style="font-size:20px;color:#999;line-height:1.5">Applicability: the recorded 3-axis fixture, G54 frame, post, and pre-sized-blank contract. Endpoint check; Fusion still verifies the repaired plan.</p>
+ <a href="./evidence/checks.py" target="_blank" style="font-size:21px">Inspect the saved check ↗</a></div>
+ <div><div style="font:400 116px 'Space Grotesk',Arial;letter-spacing:-4px">51 ms</div><p style="font-size:26px;color:#aaa">C’s rejected candidate never reaches simulation.</p>
+ <div style="border-top:1px solid #555;margin-top:36px;padding-top:28px;font-size:24px;line-height:1.7">Six retained CAM cases, replayed<br><span style="color:#aaa">Baseline catches:</span> 0 / 2 failures<br><span style="color:#ff8c42">Learned catches: 2 / 2 failures</span><br><span style="color:#aaa">False rejects:</span> 0 / 4 valid plans</div>
+ <p style="font-size:20px;color:#999">Historical replay, with the same cases for both versions.</p>
+ <a href="https://wandb.ai/silta/coreweave-hack-silta-squad/r/call/01a0997e-c591-7d3f-984c-4d661ab3d124" target="_blank" style="font-size:21px">Open paired Weave evaluation ↗</a>
+ </div></div></section>
+<section data-label="Learned speed instructions" data-speaker-notes="These are actual persistent prompt additions. Reuse is observed, but a controlled old-versus-new prompt evaluation on unseen parts has not been run. No model weight training. Indexed guidance often needed a judge suggestion before reuse." style="background:#0d0d0d;color:white;font-family:'IBM Plex Mono',monospace;padding:60px 86px 58px;display:flex;flex-direction:column;overflow:hidden">
+ <div style="display:flex;justify-content:space-between;border-bottom:1px solid #444;padding-bottom:24px;font-size:24px"><span>SILTA</span><span class="evidence-slide-number" style="color:#888">09 / 11</span></div>
+ <h2 style="font-family:'Space Grotesk',Arial,sans-serif;font-size:66px;font-weight:400;line-height:1.05;letter-spacing:-2px;margin:42px 0 30px">Three concrete lessons the next job can read.</h2>
+ <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:48px;margin-top:28px;flex:1">
+ <div style="border-top:2px solid #ff8c42;padding-top:30px"><span style="font-size:22px;color:#aaa">01 · SOFT JAW A</span><h3 style="font:400 42px 'Space Grotesk',Arial">Inspect ramp feed</h3><p style="font:400 74px 'Space Grotesk',Arial;margin:28px 0;color:#ff8c42">−45.2%</p><p style="font-size:25px;line-height:1.55;color:#bbb">384.860 → 211.037 s.<br>Inspect ramp motion separately from cutting feed. Compare with the tool’s permitted preset.</p><p style="font-size:22px;line-height:1.5;color:#999">Guidance saved; B’s first plan used the applicable ramp-feed preset.</p></div>
+ <div style="border-top:2px solid #ff8c42;padding-top:30px"><span style="font-size:22px;color:#aaa">02 · COUNTERBORE C</span><h3 style="font:400 42px 'Space Grotesk',Arial">Remove a ramp cap</h3><p style="font:400 74px 'Space Grotesk',Arial;margin:28px 0;color:#ff8c42">−7.2%</p><p style="font-size:25px;line-height:1.55;color:#bbb">228.182 → 211.850 s.<br>1 → 2 mm maximum ramp Z stepdown, with the same 2° angle and feeds.</p><p style="font-size:22px;line-height:1.5;color:#999">Guidance saved; D used the ramp-planning approach.</p></div>
+ <div style="border-top:2px solid #ff8c42;padding-top:30px"><span style="font-size:22px;color:#aaa">03 · INDEXED UMC03</span><h3 style="font:400 42px 'Space Grotesk',Arial">Cut less air</h3><p style="font:400 74px 'Space Grotesk',Arial;margin:28px 0;color:#ff8c42">−27.8 s</p><p style="font-size:25px;line-height:1.55;color:#bbb">1 → 0.2 mm ramp clearance.<br>Four top holes: −11.65 s.<br>Four side pockets: −16.18 s.</p><p style="font-size:22px;line-height:1.5;color:#999">Reduce clearance only where prior stock removal supports it.</p></div></div>
+ <p style="font-size:21px;color:#999;margin:22px 0 0">Saved in <a href="./evidence/cad_cam.md" target="_blank">cad_cam.md ↗</a>. Case-specific ideas; each revised CAM plan goes through fresh verification.</p></section>
+<section data-label="More geometry" data-speaker-notes="Each 18-second clip joins 12 seconds of recorded motion and 6 seconds of finished-stock orbit at original speed. Cage source: umc11-close-capture-r3; clevis source: umc12-close-capture. Clevis capture needed one operator rewind, recorded in its receipt. Do not call these simultaneous 5-axis toolpaths or physical machining." style="background:#0d0d0d;color:white;font-family:'IBM Plex Mono',monospace;padding:60px 86px 58px;display:flex;flex-direction:column;overflow:hidden">
+ <div style="display:flex;justify-content:space-between;border-bottom:1px solid #444;padding-bottom:24px;font-size:24px"><span>SILTA</span><span class="evidence-slide-number" style="color:#888">10 / 11</span></div>
+ <h2 style="font-family:'Space Grotesk',Arial,sans-serif;font-size:66px;font-weight:400;line-height:1.05;letter-spacing:-2px;margin:42px 0 30px">Same workflow. More demanding geometry.</h2>
+ <div style="display:grid;grid-template-columns:1fr 1fr;gap:46px;flex:1;min-height:0">
+ <div><video controls="{{ true }}" muted="{{ true }}" playsinline="" loop="{{ true }}" preload="metadata" src="./media/cage-motion.mp4" style="width:100%;height:485px;object-fit:contain;background:#111"></video><h3 style="font:400 40px 'Space Grotesk',Arial;margin:24px 0 12px">Cage · indexed side access</h3><p style="font-size:24px;color:#bbb;line-height:1.45">Retained verified plan: 2357.727 s.<br>Agent-generated CAM, manually nominated for this final retest.</p></div>
+ <div><video controls="{{ true }}" muted="{{ true }}" playsinline="" loop="{{ true }}" preload="metadata" src="./media/clevis-motion.mp4" style="width:100%;height:485px;object-fit:contain;background:#111"></video><h3 style="font:400 40px 'Space Grotesk',Arial;margin:24px 0 12px">Clevis · forked workpiece</h3><p style="font-size:24px;color:#bbb;line-height:1.45">944.090 → 908.966 s · 3.72% lower.<br>Autonomous within-part CAM improvement.</p></div></div>
+ <p style="font-size:21px;color:#999;margin:20px 0 0">Each clip: 12 seconds of machining motion → 6 seconds of the finished stock. Indexed 3+2, one cutter.</p></section>
+<section data-label="Architecture" data-screen-label="11" data-speaker-notes="The application runs the loop. Astra generates and revises, Fusion decides what is true, Weave records what happened. Weave does not approve learned updates." style="background:#0d0d0d;color:#ffffff;font-family:'IBM Plex Mono',ui-monospace,Menlo,monospace;padding:72px 96px 80px;display:flex;flex-direction:column;overflow:hidden" data-om-slide-id="3a0e7570">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:26px;border-bottom:1px solid rgba(255,255,255,0.22)">
+    <div style="display:flex;align-items:center;gap:14px">
+      <div style="display:flex;align-items:center;gap:2px">
+        <div style="width:8px;height:16px;border-radius:16px 0 0 16px;background:#ffffff"></div>
+        <div style="width:16px;height:16px;border-radius:50%;background:#ffffff"></div>
+        <div style="width:8px;height:16px;border-radius:0 16px 16px 0;background:#ffffff"></div>
+      </div>
+      <span style="font-family:'Space Grotesk',Helvetica,sans-serif;font-size:26px;letter-spacing:0.01em;color:#ffffff">SILTA</span>
+    </div>
+    <span style="font-size:24px;color:#8d8d8d">11 / 11</span>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;padding-top:86px;min-height:0">
+    <h2 style="margin:0;font-family:'Space Grotesk',Helvetica,sans-serif;font-size:76px;line-height:1.06;letter-spacing:-0.035em;font-weight:400;max-width:1420px">The application runs the loop. Weave records it.</h2>
+    <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:96px;border-top:1px solid rgba(255,255,255,0.22)">
+      <div style="padding:36px 56px 0 0;display:flex;flex-direction:column;gap:22px">
+        <div style="width:40px;height:40px;border-radius:50%;background:#ffffff"></div>
+        <h3 style="margin:0;font-family:'Space Grotesk',Helvetica,sans-serif;font-size:38px;font-weight:400;letter-spacing:-0.02em">Astra</h3>
+        <p style="margin:0;font-size:28px;line-height:1.45;color:#a3a3a3">Generates CAD and CAM, repairs failures, writes the checks and the speed instructions.</p>
+      </div>
+      <div style="padding:36px 56px 0;border-left:1px solid rgba(255,255,255,0.18);display:flex;flex-direction:column;gap:22px">
+        <div style="width:40px;height:40px;border-radius:50% 0 0 50%;background:#ffffff"></div>
+        <h3 style="margin:0;font-family:'Space Grotesk',Helvetica,sans-serif;font-size:38px;font-weight:400;letter-spacing:-0.02em">Fusion</h3>
+        <p style="margin:0;font-size:28px;line-height:1.45;color:#a3a3a3">Runs the machining simulation and compares finished stock against the accepted CAD.</p>
+      </div>
+      <div style="padding:36px 0 0 56px;border-left:1px solid rgba(255,255,255,0.18);display:flex;flex-direction:column;gap:22px">
+        <div style="width:40px;height:40px;border-radius:50%;border:1px solid #ffffff;background:transparent"></div>
+        <h3 style="margin:0;font-family:'Space Grotesk',Helvetica,sans-serif;font-size:38px;font-weight:400;letter-spacing:-0.02em">Weave</h3>
+        <p style="margin:0;font-size:28px;line-height:1.45;color:#a3a3a3">Traces every attempt: input, feedback, revision, and which lesson version was active.</p>
+      </div>
+    </div>
+    <p style="margin:76px 0 0;font-size:29px;line-height:1.45;color:#a3a3a3;max-width:1340px">Manufacturing truth stays with the simulator. Weave records evidence; it does not gate the loop.</p>
+  </div>
+</section>
+
+
+
+
+
+</x-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;demoUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;../index.html&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Live demo&quot;}}">
+class Component extends DCLogic {
+  state = { demoLoaded: true };
+  renderVals() {
+    const demoSrc = this.props.demoUrl ?? "../index.html";
+    return {
+      demoSrc,
+      demoLoaded: this.state.demoLoaded,
+      demoIdle: !this.state.demoLoaded,
+      demoButtonLabel: this.state.demoLoaded ? "Unload demo" : "Load live demo",
+      toggleDemo: () => this.setState(s => ({ demoLoaded: !s.demoLoaded }))
+    };
+  }
+}
+</script>
+<script>
+// Stop a recording when the presenter moves to another slide.
+document.addEventListener('slidechange', function(event) {
+  const previous = event.detail && event.detail.previousSlide;
+  if (previous) previous.querySelectorAll('video').forEach(function(video) { video.pause(); });
+});
+</script>
+</body>
+</html>

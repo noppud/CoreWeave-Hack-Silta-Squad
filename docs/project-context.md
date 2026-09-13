@@ -72,7 +72,7 @@ Joel's instruction in this chat was to log Loop 4 rather than add it to the stan
 | Check execution | Local Python subprocess with limits; not a security sandbox. |
 | Weave | Application-stage traces are wired. Existing paired evaluation code is not a default prerequisite for saving shared learning. |
 | ARIA | Completed source/product/evaluation review; proposed migration documented, not implemented by this chat. |
-| 54-part timeline | Standalone scripted presentation artifact, independent of real Fusion runs. |
+| 27-part timeline | Standalone scripted presentation artifact, independent of real Fusion runs. |
 | Cross-part generalization | Product goal with repository-reported examples of reuse; no broad causal claim established by the animation or a raw cross-part average. |
 | Production qualification | Simulation evidence within recorded scope; no claim of physical-machine or first-article qualification. |
 
@@ -82,16 +82,16 @@ Authoritative implementation entry points: [CLI](../silta/cnc/cli.py), [controll
 
 The artifact is [demo/index.html](../demo/index.html), with [run and verification instructions](../demo/README.md). The numbered moving ball represents the part being manufactured, not a model token or separate agent.
 
-- Exactly 54 varied example inputs; controls allow 0 through 54 completed parts, play/pause, and stepping. Show different drawings and occasional short text prompts. Name the first box **Input**, not “Assembly Nest.”
+- Exactly 27 varied example inputs; controls allow 0 through 27 completed parts, play/pause, and stepping. Show different drawings and occasional short text prompts. Name the first box **Input**, not “Assembly Nest.”
 - Use equal-sized boxes, restrained typography, light/neutral surfaces, clear contrast, and orange learning highlights. The reference was a minimal, spacious industrial website design.
 - Make route direction unambiguous with rounded curves and arrowheads. The requested test-to-simulation connection arches above the boxes; simulation failure returns directly to the test gate. Judge feedback returns directly to the CAM-writing LLM without an oversized arc.
 - The moving part marker must be opaque, with a clearly visible number, and travel continuously over box content between arrow ports within the same part. After the judge accepts a part, teleport the next numbered part to Input: it is a new input, not the previous part travelling backward. Remove the top-left part label and top-right acceleration label. This supersedes the earlier continuous return-to-Input design.
 - Keep learned tests inside the test gate. Do not reintroduce a separate test-library or judge-memory box.
-- The final test display is distinct numbered rows/lines for learned tests, rather than a uniform grid implying every test is the same. The current demo illustrates eight learned tests; eight is not a product limit.
+- The final test display is distinct numbered rows/lines for learned tests, rather than a uniform grid implying every test is the same. The current demo illustrates seven learned tests; seven is not a product limit.
 - The LLM box contains initially empty, plain-language speed instructions. Remove “70 criteria” and arbitrary counts/categories. Show new instructions when judge feedback teaches them; allow the full list to be inspected when the box cannot fit it.
 - Earlier gray/orange square-grid designs were superseded by readable test rows and instructions. Do not restore them merely because they appear earlier in the conversation.
 - Put the evolving charts in the same artifact, beside the loop. All y-axes start at zero.
-- Latest pacing decision: use one smooth mathematical timing curve across every part and step, replacing the abrupt switch after part 2. The first parts take approximately 6.32, 3.42, 2.22, and 1.59 seconds, then continue accelerating smoothly. Total uninterrupted playback is 24 seconds, within the requested 25-second ceiling. The first two are intentionally approximate so the transition stays smooth. This is demo pacing, not evidence that real inference or Fusion execution has that speed curve.
+- Latest pacing decision: use one smooth mathematical timing curve across every part and step, replacing the abrupt switch after part 2. The first parts take approximately 6.86, 3.72, 2.41, and 1.73 seconds, then continue accelerating smoothly. Total uninterrupted playback is 24 seconds, within the requested 25-second ceiling. The first two are intentionally approximate so the transition stays smooth. This is demo pacing, not evidence that real inference or Fusion execution has that speed curve.
 - Failure and judge-rejection events should look irregular, with fewer later mistakes in the illustrative sequence. Avoid alternating every-other-part patterns at either the judge or gate. Shuffle input variety; do not cherry-pick part order to manufacture measured improvement.
 - Keep the interface concise. Removed copy includes “Manufacturing Intelligence Live Demo,” “learned checks + verified cases,” verbose accept/save/next-input labels, generic judging-category lists, and cumulative “time saved against each part's original valid CAM.” Do not restore explanatory filler or promotional claims the presenter can explain aloud.
 
@@ -132,7 +132,7 @@ For economics, assess estimated manufacturing cost and planning effort against b
 
 [Implementation-plan checkpoints](implementation-plan.md) report measured within-part improvements, persisted lessons, and a later part reusing guidance. Those entries are chronological; early statements such as “Part B has not run” are followed by later completion reports. Do not treat each historical checkpoint as the latest status or compare unrelated part times as proof of learning.
 
-These reports were not rerun for this context update. Before using any quantitative pitch claim, locate the matching run evidence, commit, setup, verifier scope, and measurement definition. Check for newer results. Software tests with adapters, historical recorded evaluations, the 54-part animation, and real Fusion runs are separate evidence categories.
+These reports were not rerun for this context update. Before using any quantitative pitch claim, locate the matching run evidence, commit, setup, verifier scope, and measurement definition. Check for newer results. Software tests with adapters, historical recorded evaluations, the 27-part animation, and real Fusion runs are separate evidence categories.
 
 The pitch should make the mechanism obvious: **new part → failed attempt → new check → revised CAM → speed feedback → verified plan → relevant lesson reused on another part**. Add real product footage and a real Weave trace when available. Explain ARIA with a concrete contribution, such as identifying unsafe shared-rule promotion and shaping a paired evaluation plan. Claim implementation or measured impact only when it exists.
 
@@ -155,3 +155,7 @@ The current deck and speaking notes are maintained separately in [demo-3min.md](
 - [Standalone timeline and presentation files](../demo/README.md).
 - [Pitch notes](demo-3min.md).
 - [Deferred evaluation contract](evaluation-contract.md): historical/proposed evaluation detail, not default runtime behavior.
+
+## Pitch evidence update, 2026-09-13
+
+The timeline now contains 27 scripted parts at Touko’s request. Its curves remain illustrative and visibly labeled. The pitch app preserves the seven original story beats and adds four evidence slides: measured fixed-CAD optimization, a real learned check with paired replay, three saved prompt lessons, and cage/clevis recordings. The exact stage drawing and CAD match the measured curve; the movie identifies its separate earlier campaign target. See `demo/pitch-app/evidence/README.md` for provenance.
